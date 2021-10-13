@@ -1,6 +1,8 @@
 baseURL = "/"
 title = "Goldydocs"
 
+publishDir = 'docs'
+
 enableRobotsTXT = true
 
 # Hugo allows theme composition (and inheritance). The precedence is from left to right.
