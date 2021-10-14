@@ -1,7 +1,7 @@
 baseURL = "/"
 title = "Goldydocs"
 
-publishDir = 'docs'
+publishDir = "docs"
 
 enableRobotsTXT = true
 
