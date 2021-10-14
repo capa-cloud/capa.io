@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://reactivegroup.github.io/capa.io/"
 title = "Goldydocs"
 
 publishDir = "docs"

@@ -2,21 +2,21 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <sitemap>
-    <loc>/fa/sitemap.xml</loc>
+    <loc>https://reactivegroup.github.io/capa.io/en/sitemap.xml</loc>
     
       <lastmod>2021-10-13T18:46:31+08:00</lastmod>
     
   </sitemap>
   
   <sitemap>
-    <loc>/no/sitemap.xml</loc>
+    <loc>https://reactivegroup.github.io/capa.io/fa/sitemap.xml</loc>
     
       <lastmod>2021-10-13T18:46:31+08:00</lastmod>
     
   </sitemap>
   
   <sitemap>
-    <loc>/en/sitemap.xml</loc>
+    <loc>https://reactivegroup.github.io/capa.io/no/sitemap.xml</loc>
     
       <lastmod>2021-10-13T18:46:31+08:00</lastmod>
     

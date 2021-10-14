@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Goldydocs – Komplett API-referance</title>
-    <link>/no/docs/api-reference/</link>
+    <link>https://reactivegroup.github.io/capa.io/no/docs/api-reference/</link>
     <description>Recent content in Komplett API-referance on Goldydocs</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 02 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="/no/docs/api-reference/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://reactivegroup.github.io/capa.io/no/docs/api-reference/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: Praktiske eksempler</title>
-      <link>/no/docs/api-reference/examples/</link>
+      <link>https://reactivegroup.github.io/capa.io/no/docs/api-reference/examples/</link>
       <pubDate>Tue, 03 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/no/docs/api-reference/examples/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/no/docs/api-reference/examples/</guid>
       <description>
         
         
@@ -35,10 +35,10 @@
     
     <item>
       <title>Docs: Matten til monolitter: Detaljert spesifikasjon</title>
-      <link>/no/docs/api-reference/the-math-of-monoliths-detailed-spec/</link>
+      <link>https://reactivegroup.github.io/capa.io/no/docs/api-reference/the-math-of-monoliths-detailed-spec/</link>
       <pubDate>Tue, 03 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/no/docs/api-reference/the-math-of-monoliths-detailed-spec/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/no/docs/api-reference/the-math-of-monoliths-detailed-spec/</guid>
       <description>
         
         
@@ -341,10 +341,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Innsiden av Java: Drivverket</title>
-      <link>/no/docs/api-reference/the-inside-of-java-the-inner-workings/</link>
+      <link>https://reactivegroup.github.io/capa.io/no/docs/api-reference/the-inside-of-java-the-inner-workings/</link>
       <pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/no/docs/api-reference/the-inside-of-java-the-inner-workings/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/no/docs/api-reference/the-inside-of-java-the-inner-workings/</guid>
       <description>
         
         
