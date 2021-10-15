@@ -11,6 +11,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/about/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="fa"
                 href="https://reactivegroup.github.io/capa.io/fa/about/"
                 />
@@ -24,6 +29,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/blog/news/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="fa"
                 href="https://reactivegroup.github.io/capa.io/fa/blog/news/"
                 />
@@ -34,6 +44,11 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://reactivegroup.github.io/capa.io/docs/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -55,6 +70,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/blog/releases/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="fa"
                 href="https://reactivegroup.github.io/capa.io/fa/blog/releases/"
                 />
@@ -68,6 +88,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/blog/2018/10/06/easy-documentation-with-docsy/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="fa"
                 href="https://reactivegroup.github.io/capa.io/fa/blog/2018/10/06/%D9%85%D8%B3%D8%AA%D8%AF%D8%A7%D8%AA-%D8%B1%D8%A7%D8%AD%D8%AA-%D8%A8%D8%A7-%D8%AF%D8%A7%DA%A9%D8%B3%DB%8C/"
                 />
@@ -77,6 +102,11 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://reactivegroup.github.io/capa.io/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -94,6 +124,11 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://reactivegroup.github.io/capa.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -115,6 +150,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="no"
                 href="https://reactivegroup.github.io/capa.io/no/"
                 />
@@ -133,6 +173,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/community/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="fa"
                 href="https://reactivegroup.github.io/capa.io/fa/community/"
                 />
@@ -146,6 +191,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="fa"
                 href="https://reactivegroup.github.io/capa.io/fa/blog/"
                 />
@@ -156,6 +206,11 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://reactivegroup.github.io/capa.io/search/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/search/"
                 />
     <xhtml:link
                 rel="alternate"

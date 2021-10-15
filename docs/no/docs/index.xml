@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Goldydocs – TechOS-Dokumentasjon</title>
+    <title>Capa – TechOS-Dokumentasjon</title>
     <link>https://reactivegroup.github.io/capa.io/no/docs/</link>
-    <description>Recent content in TechOS-Dokumentasjon on Goldydocs</description>
+    <description>Recent content in TechOS-Dokumentasjon on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
 	  <atom:link href="https://reactivegroup.github.io/capa.io/no/docs/index.xml" rel="self" type="application/rss+xml" />
