@@ -557,7 +557,7 @@ if (!doNotTrack) {
 <p>在部署到不同的环境时，装载抽象SDK的不同实现到应用程序中，当调用统一的编程API时，底层适配到不同的具体实现。</p>
 <p>所以应用程序不管将来要运行在哪里，只需要依赖一套统一的SDK就可以了。</p>
 <p><strong>参考资料：</strong> <a href="https://github.com/dapr/dapr/issues/3261">https://github.com/dapr/dapr/issues/3261</a></p>
-<h3 id="why-not-dapr">Why not DAPR</h3>
+<h3 id="why-not-dapr">Why not Dapr</h3>
 <p>设计思想和Dapr等项目是相同的，但是Dapr等项目走的非常靠前，其逻辑依赖于独立部署的dapr-sidecar来实现。</p>
 <p>这就要求从最底层的基础设施层进行支持，但很多时候，我们并不能一步到位的切换到sidecar的模式。</p>
 <p>故Capa将sidecar中的逻辑移植到SDK中，应用无需依赖sidecar，引入SDK即可。</p>
