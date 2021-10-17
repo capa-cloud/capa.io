@@ -146,10 +146,6 @@ if (!doNotTrack) {
 	
 	<a class="dropdown-item" href="/capa.io/docs/">English</a>
 	
-	<a class="dropdown-item" href="/capa.io/no/docs/">Norsk</a>
-	
-	<a class="dropdown-item" href="/capa.io/fa/docs/">فارسی</a>
-	
 </div>
 			</li>
 			
@@ -557,7 +553,7 @@ if (!doNotTrack) {
 <p>在部署到不同的环境时，装载抽象SDK的不同实现到应用程序中，当调用统一的编程API时，底层适配到不同的具体实现。</p>
 <p>所以应用程序不管将来要运行在哪里，只需要依赖一套统一的SDK就可以了。</p>
 <p><strong>参考资料：</strong> <a href="https://github.com/dapr/dapr/issues/3261">https://github.com/dapr/dapr/issues/3261</a></p>
-<h3 id="why-not-dapr">Why not Dapr</h3>
+<h3 id="why-not-dapr">Why not DAPR</h3>
 <p>设计思想和Dapr等项目是相同的，但是Dapr等项目走的非常靠前，其逻辑依赖于独立部署的dapr-sidecar来实现。</p>
 <p>这就要求从最底层的基础设施层进行支持，但很多时候，我们并不能一步到位的切换到sidecar的模式。</p>
 <p>故Capa将sidecar中的逻辑移植到SDK中，应用无需依赖sidecar，引入SDK即可。</p>
@@ -3141,18 +3137,6 @@ changes up to your fork, and create a pull request.</p>
     </a>
   </li>
   
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Twitter" aria-label="Twitter">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="Twitter">
-      <i class="fab fa-twitter"></i>
-    </a>
-  </li>
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Stack Overflow" aria-label="Stack Overflow">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="Stack Overflow">
-      <i class="fab fa-stack-overflow"></i>
-    </a>
-  </li>
-  
 </ul>
 
         
@@ -3167,18 +3151,6 @@ changes up to your fork, and create a pull request.</p>
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
     <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
       <i class="fab fa-github"></i>
-    </a>
-  </li>
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Slack" aria-label="Slack">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="Slack">
-      <i class="fab fa-slack"></i>
-    </a>
-  </li>
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Developer mailing list" aria-label="Developer mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="Developer mailing list">
-      <i class="fa fa-envelope"></i>
     </a>
   </li>
   
