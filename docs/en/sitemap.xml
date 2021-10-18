@@ -2,157 +2,159 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_1_overview/</loc>
+    <loc>https://reactivegroup.github.io/capa.io/docs/overview/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_1_overview/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/overview/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_1_overview/"
+                href="https://reactivegroup.github.io/capa.io/docs/overview/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_5_tasks/beds/</loc>
+    <loc>https://reactivegroup.github.io/capa.io/docs/tasks/beds/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/tasks/beds/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/docs/tasks/beds/"
+                />
+  </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/configuring-ponycopters/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/configuring-ponycopters/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/configuring-ponycopters/"
+                />
+  </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/docs/gettingstarted/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/beds/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_5_tasks/beds/"
+                href="https://reactivegroup.github.io/capa.io/docs/gettingstarted/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_5_tasks/ponycopters/configuring-ponycopters/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/examples/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/ponycopters/configuring-ponycopters/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/examples/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_5_tasks/ponycopters/configuring-ponycopters/"
+                href="https://reactivegroup.github.io/capa.io/docs/examples/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_2_gettingstarted/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/launching-ponycopters/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/launching-ponycopters/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_2_gettingstarted/"
+                href="https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/launching-ponycopters/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_3_examples/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/tasks/porridge/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/tasks/porridge/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_3_examples/"
+                href="https://reactivegroup.github.io/capa.io/docs/tasks/porridge/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_5_tasks/ponycopters/launching-ponycopters/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/concepts/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/ponycopters/launching-ponycopters/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/concepts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_5_tasks/ponycopters/launching-ponycopters/"
+                href="https://reactivegroup.github.io/capa.io/docs/concepts/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_5_tasks/porridge/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/tasks/task/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/porridge/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/tasks/task/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_5_tasks/porridge/"
+                href="https://reactivegroup.github.io/capa.io/docs/tasks/task/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_4_concepts/</loc>
+    <loc>https://reactivegroup.github.io/capa.io/docs/tasks/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/tasks/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_4_concepts/"
+                href="https://reactivegroup.github.io/capa.io/docs/tasks/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_5_tasks/task/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/reference/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/task/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/reference/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_5_tasks/task/"
+                href="https://reactivegroup.github.io/capa.io/docs/reference/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_5_tasks/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_5_tasks/"
-                />
-  </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_7_reference/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_7_reference/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_7_reference/"
-                />
-  </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_6_contributionguidelines/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_6_contributionguidelines/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_6_contributionguidelines/"
+                href="https://reactivegroup.github.io/capa.io/docs/contributionguidelines/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/docs/</loc>
@@ -259,23 +261,23 @@
                 href="https://reactivegroup.github.io/capa.io/tags/docs/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_2_gettingstarted/example-page/</loc>
+    <loc>https://reactivegroup.github.io/capa.io/docs/gettingstarted/example-page/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/categories/examples/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_7_reference/parameter-reference/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/reference/parameter-reference/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_7_reference/parameter-reference/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/reference/parameter-reference/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_7_reference/parameter-reference/"
+                href="https://reactivegroup.github.io/capa.io/docs/reference/parameter-reference/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/tags/sample/</loc>
@@ -307,17 +309,17 @@
     <loc>https://reactivegroup.github.io/capa.io/tags/test/</loc>
     <lastmod>2017-01-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/docs/_5_tasks/ponycopters/</loc>
-    <lastmod>2017-01-05T00:00:00+00:00</lastmod>
+    <loc>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/</loc>
+    <lastmod>2021-10-18T11:46:30+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/ponycopters/"
+                href="https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/docs/_5_tasks/ponycopters/"
+                href="https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/about/</loc>

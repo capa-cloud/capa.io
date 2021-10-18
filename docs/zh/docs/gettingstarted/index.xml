@@ -1,0 +1,60 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – 快速开始</title>
+    <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/</link>
+    <description>Recent content in 快速开始 on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 15 Oct 2021 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: 使用Configuration API</title>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: 使用RPC API</title>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
