@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: 快速开始</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/</guid>
       <description>
         
         
@@ -37,10 +37,10 @@
     
     <item>
       <title>Docs: Configuration AWS-App Config示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-aws-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-aws-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</guid>
       <description>
         
         
@@ -58,10 +58,10 @@
     
     <item>
       <title>Docs: Configuration Ctrip-Qconfig示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-ctrip-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-ctrip-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</guid>
       <description>
         
         
@@ -79,10 +79,10 @@
     
     <item>
       <title>Docs: RPC AWS-App Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-aws-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-aws-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</guid>
       <description>
         
         
@@ -100,10 +100,10 @@
     
     <item>
       <title>Docs: RPC Ctrip-Service Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-ctrip-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-ctrip-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</guid>
       <description>
         
         
@@ -121,10 +121,10 @@
     
     <item>
       <title>Docs: RPC设计文档</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</guid>
       <description>
         
         
@@ -142,10 +142,10 @@
     
     <item>
       <title>Docs: 使用Configuration API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</guid>
       <description>
         
         
@@ -163,10 +163,10 @@
     
     <item>
       <title>Docs: 使用RPC API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</guid>
       <description>
         
         

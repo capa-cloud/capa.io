@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Bed and Chair Metrics</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/beds/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/beds/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/beds/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/beds/</guid>
       <description>
         
         
@@ -328,10 +328,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuring Ponycopters</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/ponycopters/configuring-ponycopters/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/configuring-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/ponycopters/configuring-ponycopters/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/configuring-ponycopters/</guid>
       <description>
         
         
@@ -641,10 +641,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Launching Ponycopters</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/ponycopters/launching-ponycopters/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/launching-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/ponycopters/launching-ponycopters/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/launching-ponycopters/</guid>
       <description>
         
         
@@ -954,10 +954,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Porridge Assessment</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/porridge/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/porridge/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/porridge/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/porridge/</guid>
       <description>
         
         
@@ -1267,10 +1267,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Another Task</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/task/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/task/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_5_tasks/task/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/task/</guid>
       <description>
         
         
@@ -1580,10 +1580,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuration AWS-App Config示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-aws-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-aws-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</guid>
       <description>
         
         
@@ -1601,10 +1601,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuration Ctrip-Qconfig示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-ctrip-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/configuration/configuration-ctrip-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</guid>
       <description>
         
         
@@ -1622,10 +1622,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: RPC AWS-App Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-aws-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-aws-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</guid>
       <description>
         
         
@@ -1643,10 +1643,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: RPC Ctrip-Service Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-ctrip-example/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_3_examples/rpc/rpc-ctrip-example/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</guid>
       <description>
         
         
@@ -1664,10 +1664,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: RPC设计文档</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</guid>
       <description>
         
         
@@ -1685,10 +1685,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: 使用Configuration API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</guid>
       <description>
         
         
@@ -1706,10 +1706,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: 使用RPC API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</guid>
       <description>
         
         
@@ -1727,10 +1727,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Parameter Reference</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_7_reference/parameter-reference/</link>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/reference/parameter-reference/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_7_reference/parameter-reference/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/reference/parameter-reference/</guid>
       <description>
         
         
