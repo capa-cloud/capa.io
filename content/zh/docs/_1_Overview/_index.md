@@ -2,6 +2,7 @@
 title: "简介"
 linkTitle: "简介"
 weight: 1
+aliases: /zh/docs/_1_Overview
 description: >
   Capa(cloud application api): To be the high-level api layer for all application runtime.
 ---

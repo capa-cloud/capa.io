@@ -2,6 +2,7 @@
 title: "参考手册"
 linkTitle: "参考手册"
 weight: 9
+aliases: /zh/docs/_7_Reference
 description: >
   Low level reference docs for your project.
 ---

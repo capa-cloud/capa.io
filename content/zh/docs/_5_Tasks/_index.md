@@ -4,6 +4,7 @@ title: "开发指南"
 linkTitle: "开发指南"
 weight: 6
 date: 2017-01-05
+aliases: /zh/docs/_5_Tasks
 description: >
   What can your user do with your project?
 ---

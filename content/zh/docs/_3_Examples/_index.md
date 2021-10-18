@@ -4,6 +4,7 @@ title: "Demo示例"
 linkTitle: "Demo示例"
 weight: 3
 date: 2017-01-05
+aliases: /zh/docs/_3_Examples
 description: >
   See your project in action!
 ---
