@@ -17,7 +17,7 @@
     <item>
       <title>Docs: 快速开始</title>
       <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/</link>
-      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/</guid>
       <description>
@@ -104,27 +104,6 @@
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</guid>
-      <description>
-        
-        
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;TODO&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: RPC设计文档</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</link>
-      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</guid>
       <description>
         
         
