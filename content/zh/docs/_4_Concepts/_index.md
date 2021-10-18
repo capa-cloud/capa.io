@@ -2,6 +2,7 @@
 title: "设计文档"
 linkTitle: "设计文档"
 weight: 4
+aliases: /zh/docs/_4_Concepts
 description: >
   What does your user need to understand about your project in order to use it - or potentially contribute to it? 
 ---

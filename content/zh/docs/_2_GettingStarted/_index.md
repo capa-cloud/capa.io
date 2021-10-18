@@ -3,6 +3,7 @@ categories: ["Getting Started", "Placeholders"]
 tags: ["sample","docs"] 
 title: "快速开始"
 linkTitle: "快速开始"
+aliases: /zh/docs/_2_GettingStarted
 weight: 2
 description: >
   快速开始使用.

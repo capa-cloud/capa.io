@@ -2,6 +2,7 @@
 title: "参与贡献"
 linkTitle: "参与贡献"
 weight: 10
+aliases: /zh/docs/_6_ContributionGuidelines
 description: >
   How to contribute to the docs
 ---

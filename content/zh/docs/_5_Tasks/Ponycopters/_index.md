@@ -3,6 +3,7 @@
 title: "Working with Ponycopters"
 linkTitle: "Working with Ponycopters"
 date: 2017-01-05
+aliases: /zh/docs/_5_Tasks/Ponycopters
 description: >
   A short lead description about this section page. Text here can also be **bold** or _italic_ and can even be split over multiple paragraphs.
 ---
