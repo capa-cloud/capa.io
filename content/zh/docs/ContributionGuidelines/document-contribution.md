@@ -38,10 +38,10 @@ Capa 文档库使用 Hugo 的 Docsy 主题构建。
 
 文档中统一使用全路径来引用图片。
 
-例如，引入下图的图片（contribution_image.png），Markdown写法如下：
+例如，引入下图的图片（contribution_file.png），Markdown写法如下：
 
 ```markdown
- ![Architecture](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png)
+ ![Architecture](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png)
 ```
 其中， master 表示分支名
 
