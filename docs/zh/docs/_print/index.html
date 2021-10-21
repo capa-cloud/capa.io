@@ -487,6 +487,22 @@ if (!doNotTrack) {
   
 
   
+    
+    
+	
+<li>7.1: <a href="#pg-dd778ea062db959bce838ad2e89143ac">贡献者指南</a></li>
+
+
+    
+  
+    
+    
+	
+<li>7.2: <a href="#pg-e519388d5187a287f631485af8566faa">文档贡献指南</a></li>
+
+
+    
+  
 
     </ul>
     
@@ -3023,78 +3039,14 @@ bar := &quot;foo&quot;;
 <div class="td-content" style="page-break-before: always">
     
 	<h1 id="pg-a9bd77fc51277439bcf597eff30a8983">7 - 参与贡献</h1>
-    <div class="lead">How to contribute to the docs</div>
+    <div class="lead">如何参与贡献</div>
 	
 
 <div class="pageinfo pageinfo-primary">
-<p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &ldquo;as is&rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. <a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow</a> has a great example.</p>
-<p>Don&rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.</p>
+<p>感谢您对Capa的支持！</p>
 
 </div>
 
-<p>We use <a href="https://gohugo.io/">Hugo</a> to format and generate our website, the
-<a href="https://github.com/google/docsy">Docsy</a> theme for styling and site structure, 
-and <a href="https://www.netlify.com/">Netlify</a> to manage the deployment of the site. 
-Hugo is an open-source static site generator that provides us with templates, 
-content organisation in a standard directory structure, and a website generation 
-engine. You write the pages in Markdown (or HTML if you want), and Hugo wraps them up into a website.</p>
-<p>All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-<a href="https://help.github.com/articles/about-pull-requests/">GitHub Help</a> for more
-information on using pull requests.</p>
-<h2 id="quick-start-with-netlify">Quick start with Netlify</h2>
-<p>Here&rsquo;s a quick guide to updating the docs. It assumes you&rsquo;re familiar with the
-GitHub workflow and you&rsquo;re happy to use the automated preview of your doc
-updates:</p>
-<ol>
-<li>Fork the <a href="https://github.com/google/docsy-example">Goldydocs repo</a> on GitHub.</li>
-<li>Make your changes and send a pull request (PR).</li>
-<li>If you&rsquo;re not yet ready for a review, add &ldquo;WIP&rdquo; to the PR name to indicate 
-it&rsquo;s a work in progress. (<strong>Don&rsquo;t</strong> add the Hugo property 
-&ldquo;draft = true&rdquo; to the page front matter, because that prevents the 
-auto-deployment of the content preview described in the next point.)</li>
-<li>Wait for the automated PR workflow to do some checks. When it&rsquo;s ready,
-you should see a comment like this: <strong>deploy/netlify — Deploy preview ready!</strong></li>
-<li>Click <strong>Details</strong> to the right of &ldquo;Deploy preview ready&rdquo; to see a preview
-of your updates.</li>
-<li>Continue updating your doc and pushing your changes until you&rsquo;re happy with 
-the content.</li>
-<li>When you&rsquo;re ready for a review, add a comment to the PR, and remove any
-&ldquo;WIP&rdquo; markers.</li>
-</ol>
-<h2 id="updating-a-single-page">Updating a single page</h2>
-<p>If you&rsquo;ve just spotted something you&rsquo;d like to change while using the docs, Docsy has a shortcut for you:</p>
-<ol>
-<li>Click <strong>Edit this page</strong> in the top right hand corner of the page.</li>
-<li>If you don&rsquo;t already have an up to date fork of the project repo, you are prompted to get one - click <strong>Fork this repository and propose changes</strong> or <strong>Update your Fork</strong> to get an up to date version of the project to edit. The appropriate page in your fork is displayed in edit mode.</li>
-<li>Follow the rest of the <a href="#quick-start-with-netlify">Quick start with Netlify</a> process above to make, preview, and propose your changes.</li>
-</ol>
-<h2 id="previewing-your-changes-locally">Previewing your changes locally</h2>
-<p>If you want to run your own local Hugo server to preview your changes as you work:</p>
-<ol>
-<li>
-<p>Follow the instructions in <a href="/docs/getting-started">Getting started</a> to install Hugo and any other tools you need. You&rsquo;ll need at least <strong>Hugo version 0.45</strong> (we recommend using the most recent available version), and it must be the <strong>extended</strong> version, which supports SCSS.</p>
-</li>
-<li>
-<p>Fork the <a href="https://github.com/google/docsy-example">Goldydocs repo</a> repo into your own project, then create a local copy using <code>git clone</code>. Don’t forget to use <code>--recurse-submodules</code> or you won’t pull down some of the code you need to generate a working site.</p>
-<pre tabindex="0"><code>git clone --recurse-submodules --depth 1 https://github.com/google/docsy-example.git
-</code></pre></li>
-<li>
-<p>Run <code>hugo server</code> in the site root directory. By default your site will be available at http://localhost:1313/. Now that you&rsquo;re serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.</p>
-</li>
-<li>
-<p>Continue with the usual GitHub workflow to edit files, commit them, push the
-changes up to your fork, and create a pull request.</p>
-</li>
-</ol>
-<h2 id="creating-an-issue">Creating an issue</h2>
-<p>If you&rsquo;ve found a problem in the docs, but you&rsquo;re not sure how to fix it yourself, please create an issue in the <a href="https://github.com/google/docsy-example/issues">Goldydocs repo</a>. You can also create an issue about a specific page by clicking the <strong>Create Issue</strong> button in the top right hand corner of the page.</p>
-<h2 id="useful-resources">Useful resources</h2>
-<ul>
-<li><a href="https://www.docsy.dev/docs/">Docsy user guide</a>: All about Docsy, including how it manages navigation, look and feel, and multi-language support.</li>
-<li><a href="https://gohugo.io/documentation/">Hugo documentation</a>: Comprehensive reference for Hugo.</li>
-<li><a href="https://guides.github.com/activities/hello-world/">Github Hello World!</a>: A basic introduction to GitHub concepts and workflow.</li>
-</ul>
 
 </div>
 
@@ -3110,6 +3062,149 @@ changes up to your fork, and create a pull request.</p>
   
   
 
+  
+    
+    
+	
+    
+
+<div class="td-content" style="">
+    
+	<h1 id="pg-dd778ea062db959bce838ad2e89143ac">7.1 - 贡献者指南</h1>
+    <div class="lead">为任何Capa项目资源库做出贡献的通用指南</div>
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本文档描述了如何使用 Github Issue 和 Pull Request 对Capa做出贡献。</p>
+
+</div>
+
+<h2 id="issues-约定">Issues 约定</h2>
+<ol>
+<li>Question: 提出一个关于 Capa 的问题</li>
+<li>Feature Request: 提出一个关于 Capa 新功能的请求</li>
+<li>Bug Report: 提出一个 Bug 的报告</li>
+<li>Discussion: 对 Capa 的讨论</li>
+<li>Proposal: 对 Capa 的提案</li>
+</ol>
+<h2 id="编码规范约定">编码规范约定</h2>
+<ol>
+<li>提交的代码一律要添加 Apache License（可以通过checkstyle插件来检测）</li>
+<li>每次只允许提交一个 Commit，如果有多个在本地 Rebase 成一个 Commit</li>
+<li>建议一个 Commit 只解决一个 Issue</li>
+<li>Commit 中要有详细的说明，且一律使用英文来描述</li>
+<li>CI Pipeline 构建失败的代码不会进入 Code Review 环节</li>
+<li>代码仓库有且仅有一个主干分支（master分支）</li>
+<li>主干分支上的代码只能通过 Merge PR（MR）向前推进</li>
+<li>所有实现的 Feature 都要有完善使用说明文档</li>
+<li>仅在 UT 中引用到的 Package 的 Scope 必须是 test</li>
+<li>每个问题都要先提交一个Issue</li>
+</ol>
+<h2 id="单测规范约定">单测规范约定</h2>
+<ol>
+<li>单元测试统一用 junit 和 mockito</li>
+<li>遵守AIR原则
+<ul>
+<li>Automatic（自动化）。单元测试应该是全自动执行的，并且非交互式的。测试用例通常是被定期执行的，执行过程必须完全自动化。</li>
+<li>Independent（独立性）。保持单元测试的独立性。为了保证单元测试稳定可靠且便于维护，单元测试用例之间决不能互相调用，也不能依赖执行的先后次序。</li>
+<li>Repeatable（可重复）。单元测试是可以重复执行的，不能受到外界环境的影响。</li>
+</ul>
+</li>
+<li>保持单元测试用例的运行速度，不要将大的集成用例放在单元测试中</li>
+<li>UT类命名规范 BeTestedClassTest</li>
+</ol>
+<pre tabindex="0"><code>   范例：
+   源类的全限定名为 com.api.Matching
+   源文件路径 src/main/java/com/api/Matching.java
+   UT文件路径 src/test/java/com/api/MatchingTest.java
+</code></pre><ol start="6">
+<li>UT方法命名规范</li>
+</ol>
+<pre tabindex="0"><code>   范例：
+   源方法名为 matching()
+   UT方法命名为 testMatching_Success()/testMatching_SuccessWhenResultGreaterThanZero()/testMatching_FailWhenThrowException()
+</code></pre><h2 id="commit-约定">Commit 约定</h2>
+<ol>
+<li>Commit style</li>
+</ol>
+<pre tabindex="0"><code> &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+ &lt;BLANK LINE&gt;
+ &lt;body&gt;
+ &lt;BLANK LINE&gt;
+ &lt;footer&gt;
+</code></pre><ol start="2">
+<li>Commit type
+<ul>
+<li>feat: 新增 feature</li>
+<li>fix：修复 bug</li>
+<li>docs：仅仅修改了文档，比如 README, CHANGELOG, CONTRIBUTE等等</li>
+<li>style：仅仅修改了空格、格式缩进、逗号等等，不改变代码逻辑</li>
+<li>refactor：代码重构，没有加新功能或者修复 bug</li>
+<li>perf：优化相关，比如提升性能、体验</li>
+<li>test：测试用例，包括单元测试、集成测试等</li>
+<li>chore：改变构建流程、或者增加依赖库、工具等</li>
+<li>revert：回滚到上一个版本</li>
+</ul>
+</li>
+<li>Commit scope: 提交代码适用的范围（选填）</li>
+<li>Commit subject：50个字符以内，描述主要变更内容（必填）</li>
+<li>Commit body：更详细的说明文本，建议72个字符以内（必填）</li>
+<li>Commit footer：如果需要的化可以添加一个链接到issue地址或者其它文档，或者关闭某个issue（选填）</li>
+</ol>
+
+</div>
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-e519388d5187a287f631485af8566faa">7.2 - 文档贡献指南</h1>
+    <div class="lead">为Capa文档贡献的指南</div>
+	
+
+<div class="pageinfo pageinfo-primary">
+<p>本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 <a href="https://github.com/reactivegroup/capa.io">reactivegroup/capa.io</a>。</p>
+
+</div>
+
+<h2 id="先决条件">先决条件</h2>
+<p>Capa 文档库使用 Hugo 的 Docsy 主题构建。</p>
+<p><a href="https://github.com/reactivegroup/capa.io/issues/3">文档搭建步骤</a></p>
+<p><a href="https://github.com/reactivegroup/capa.io/issues/4">文档开发步骤</a></p>
+<h2 id="规范约定">规范约定</h2>
+<ol>
+<li>确保你所贡献文件在层次结构中的位置是正确的。</li>
+<li>确保你所贡献内容在名称、参数、术语方面保持一致。</li>
+<li>确保任何贡献内容在 Web 站点可以构建成功。</li>
+<li>确保读者能够理解为什么他们应该关注贡献内容，以及能够为他们解决什么问题。</li>
+</ol>
+<h2 id="文档路径说明">文档路径说明</h2>
+<h3 id="文件路径说明">文件路径说明</h3>
+<p>文件统一放在 content/ 目录下，其中中文文档存放于 content/zh ，英文文档存放于 content/en。</p>
+<p>如果需要新增文档，需要按照目录结构新增文件夹和.md文件。
+<img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt=""></p>
+<h3 id="图片路径说明">图片路径说明</h3>
+<p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。</p>
+<p>文档中统一使用全路径来引用图片。</p>
+<p>例如，引入下图的图片，Markdown写法如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"> ![<span style="color:#204a87;font-weight:bold">Architecture</span>](<span style="color:#c4a000">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png</span>)
+</code></pre></div><p>其中， master 表示分支名</p>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt=""></p>
+
+</div>
+
+
+
+    
+	
   
 
     
