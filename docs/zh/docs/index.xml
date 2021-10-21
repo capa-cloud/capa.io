@@ -14,6 +14,141 @@
     
     
     <item>
+      <title>Docs: 贡献者指南</title>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/contributor-guide/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/contributor-guide/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本文档描述了如何使用 Github Issue 和 Pull Request 对Capa做出贡献。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;issues-约定&#34;&gt;Issues 约定&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Question: 提出一个关于 Capa 的问题&lt;/li&gt;
+&lt;li&gt;Feature Request: 提出一个关于 Capa 新功能的请求&lt;/li&gt;
+&lt;li&gt;Bug Report: 提出一个 Bug 的报告&lt;/li&gt;
+&lt;li&gt;Discussion: 对 Capa 的讨论&lt;/li&gt;
+&lt;li&gt;Proposal: 对 Capa 的提案&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;编码规范约定&#34;&gt;编码规范约定&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;提交的代码一律要添加 Apache License（可以通过checkstyle插件来检测）&lt;/li&gt;
+&lt;li&gt;每次只允许提交一个 Commit，如果有多个在本地 Rebase 成一个 Commit&lt;/li&gt;
+&lt;li&gt;建议一个 Commit 只解决一个 Issue&lt;/li&gt;
+&lt;li&gt;Commit 中要有详细的说明，且一律使用英文来描述&lt;/li&gt;
+&lt;li&gt;CI Pipeline 构建失败的代码不会进入 Code Review 环节&lt;/li&gt;
+&lt;li&gt;代码仓库有且仅有一个主干分支（master分支）&lt;/li&gt;
+&lt;li&gt;主干分支上的代码只能通过 Merge PR（MR）向前推进&lt;/li&gt;
+&lt;li&gt;所有实现的 Feature 都要有完善使用说明文档&lt;/li&gt;
+&lt;li&gt;仅在 UT 中引用到的 Package 的 Scope 必须是 test&lt;/li&gt;
+&lt;li&gt;每个问题都要先提交一个Issue&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;单测规范约定&#34;&gt;单测规范约定&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;单元测试统一用 junit 和 mockito&lt;/li&gt;
+&lt;li&gt;遵守AIR原则
+&lt;ul&gt;
+&lt;li&gt;Automatic（自动化）。单元测试应该是全自动执行的，并且非交互式的。测试用例通常是被定期执行的，执行过程必须完全自动化。&lt;/li&gt;
+&lt;li&gt;Independent（独立性）。保持单元测试的独立性。为了保证单元测试稳定可靠且便于维护，单元测试用例之间决不能互相调用，也不能依赖执行的先后次序。&lt;/li&gt;
+&lt;li&gt;Repeatable（可重复）。单元测试是可以重复执行的，不能受到外界环境的影响。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;保持单元测试用例的运行速度，不要将大的集成用例放在单元测试中&lt;/li&gt;
+&lt;li&gt;UT类命名规范 BeTestedClassTest&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;   范例：
+   源类的全限定名为 com.api.Matching
+   源文件路径 src/main/java/com/api/Matching.java
+   UT文件路径 src/test/java/com/api/MatchingTest.java
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;UT方法命名规范&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;   范例：
+   源方法名为 matching()
+   UT方法命名为 testMatching_Success()/testMatching_SuccessWhenResultGreaterThanZero()/testMatching_FailWhenThrowException()
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;commit-约定&#34;&gt;Commit 约定&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Commit style&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;
+ &amp;lt;BLANK LINE&amp;gt;
+ &amp;lt;body&amp;gt;
+ &amp;lt;BLANK LINE&amp;gt;
+ &amp;lt;footer&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Commit type
+&lt;ul&gt;
+&lt;li&gt;feat: 新增 feature&lt;/li&gt;
+&lt;li&gt;fix：修复 bug&lt;/li&gt;
+&lt;li&gt;docs：仅仅修改了文档，比如 README, CHANGELOG, CONTRIBUTE等等&lt;/li&gt;
+&lt;li&gt;style：仅仅修改了空格、格式缩进、逗号等等，不改变代码逻辑&lt;/li&gt;
+&lt;li&gt;refactor：代码重构，没有加新功能或者修复 bug&lt;/li&gt;
+&lt;li&gt;perf：优化相关，比如提升性能、体验&lt;/li&gt;
+&lt;li&gt;test：测试用例，包括单元测试、集成测试等&lt;/li&gt;
+&lt;li&gt;chore：改变构建流程、或者增加依赖库、工具等&lt;/li&gt;
+&lt;li&gt;revert：回滚到上一个版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Commit scope: 提交代码适用的范围（选填）&lt;/li&gt;
+&lt;li&gt;Commit subject：50个字符以内，描述主要变更内容（必填）&lt;/li&gt;
+&lt;li&gt;Commit body：更详细的说明文本，建议72个字符以内（必填）&lt;/li&gt;
+&lt;li&gt;Commit footer：如果需要的化可以添加一个链接到issue地址或者其它文档，或者关闭某个issue（选填）&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: 文档贡献指南</title>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 &lt;a href=&#34;https://github.com/reactivegroup/capa.io&#34;&gt;reactivegroup/capa.io&lt;/a&gt;。&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;先决条件&#34;&gt;先决条件&lt;/h2&gt;
+&lt;p&gt;Capa 文档库使用 Hugo 的 Docsy 主题构建。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa.io/issues/3&#34;&gt;文档搭建步骤&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa.io/issues/4&#34;&gt;文档开发步骤&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;规范约定&#34;&gt;规范约定&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;确保你所贡献文件在层次结构中的位置是正确的。&lt;/li&gt;
+&lt;li&gt;确保你所贡献内容在名称、参数、术语方面保持一致。&lt;/li&gt;
+&lt;li&gt;确保任何贡献内容在 Web 站点可以构建成功。&lt;/li&gt;
+&lt;li&gt;确保读者能够理解为什么他们应该关注贡献内容，以及能够为他们解决什么问题。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;文档路径说明&#34;&gt;文档路径说明&lt;/h2&gt;
+&lt;h3 id=&#34;文件路径说明&#34;&gt;文件路径说明&lt;/h3&gt;
+&lt;p&gt;文件统一放在 content/ 目录下，其中中文文档存放于 content/zh ，英文文档存放于 content/en。&lt;/p&gt;
+&lt;p&gt;如果需要新增文档，需要按照目录结构新增文件夹和.md文件。
+&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;图片路径说明&#34;&gt;图片路径说明&lt;/h3&gt;
+&lt;p&gt;图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。&lt;/p&gt;
+&lt;p&gt;文档中统一使用全路径来引用图片。&lt;/p&gt;
+&lt;p&gt;例如，引入下图的图片，Markdown写法如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt; ![&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;Architecture&lt;/span&gt;](&lt;span style=&#34;color:#c4a000&#34;&gt;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中， master 表示分支名&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Bed and Chair Metrics</title>
       <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/beds/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>

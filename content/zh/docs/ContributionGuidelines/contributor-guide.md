@@ -2,12 +2,13 @@
 title: "贡献者指南"
 linkTitle: "贡献者指南"
 date: 2021-10-20
+weight: 1
 description: >
   为任何Capa项目资源库做出贡献的通用指南
 ---
 
 {{% pageinfo %}}
-Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本文档提供了如何使用 Github Issue 和 Pull Request 对Capa做出贡献。
+Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本文档描述了如何使用 Github Issue 和 Pull Request 对Capa做出贡献。
 {{% /pageinfo %}}
 
 ## Issues 约定
@@ -29,6 +30,27 @@ Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本
 8. 所有实现的 Feature 都要有完善使用说明文档
 9. 仅在 UT 中引用到的 Package 的 Scope 必须是 test
 10. 每个问题都要先提交一个Issue
+
+## 单测规范约定
+1. 单元测试统一用 junit 和 mockito
+2. 遵守AIR原则
+   * Automatic（自动化）。单元测试应该是全自动执行的，并且非交互式的。测试用例通常是被定期执行的，执行过程必须完全自动化。
+   * Independent（独立性）。保持单元测试的独立性。为了保证单元测试稳定可靠且便于维护，单元测试用例之间决不能互相调用，也不能依赖执行的先后次序。
+   * Repeatable（可重复）。单元测试是可以重复执行的，不能受到外界环境的影响。
+3. 保持单元测试用例的运行速度，不要将大的集成用例放在单元测试中
+4. UT类命名规范 BeTestedClassTest
+```
+   范例：
+   源类的全限定名为 com.api.Matching
+   源文件路径 src/main/java/com/api/Matching.java
+   UT文件路径 src/test/java/com/api/MatchingTest.java
+```
+6. UT方法命名规范
+```
+   范例：
+   源方法名为 matching()
+   UT方法命名为 testMatching_Success()/testMatching_SuccessWhenResultGreaterThanZero()/testMatching_FailWhenThrowException()
+```
 
 ## Commit 约定
 1. Commit style
@@ -53,4 +75,3 @@ Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本
 4. Commit subject：50个字符以内，描述主要变更内容（必填）
 5. Commit body：更详细的说明文本，建议72个字符以内（必填）
 6. Commit footer：如果需要的化可以添加一个链接到issue地址或者其它文档，或者关闭某个issue（选填）
-
