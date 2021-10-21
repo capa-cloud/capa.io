@@ -135,12 +135,12 @@
 &lt;h2 id=&#34;文档路径说明&#34;&gt;文档路径说明&lt;/h2&gt;
 &lt;h3 id=&#34;文件路径说明&#34;&gt;文件路径说明&lt;/h3&gt;
 &lt;p&gt;文件统一放在 content/ 目录下，其中中文文档存放于 content/zh ，英文文档存放于 content/en。&lt;/p&gt;
-&lt;p&gt;如果需要新增文档，需要按照目录结构新增文件夹和.md文件。
-&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果需要新增文档，需要按照目录结构新增文件夹和.md文件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;图片路径说明&#34;&gt;图片路径说明&lt;/h3&gt;
-&lt;p&gt;图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。&lt;/p&gt;
+&lt;p&gt;图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。&lt;/p&gt;
 &lt;p&gt;文档中统一使用全路径来引用图片。&lt;/p&gt;
-&lt;p&gt;例如，引入下图的图片，Markdown写法如下：&lt;/p&gt;
+&lt;p&gt;例如，引入下图的图片（contribution_image.png），Markdown写法如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt; ![&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;Architecture&lt;/span&gt;](&lt;span style=&#34;color:#c4a000&#34;&gt;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中， master 表示分支名&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
