@@ -5,6 +5,9 @@
     <loc>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/contributor-guide/</loc>
     <lastmod>2021-10-21T20:32:21+08:00</lastmod>
   </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</loc>
+    <lastmod>2021-10-18T12:05:48+08:00</lastmod>
+  </url><url>
     <loc>https://reactivegroup.github.io/capa.io/zh/docs/overview/</loc>
     <lastmod>2021-10-18T12:05:48+08:00</lastmod>
     <xhtml:link
@@ -19,7 +22,10 @@
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/</loc>
-    <lastmod>2021-10-21T21:24:11+08:00</lastmod>
+    <lastmod>2021-10-21T21:36:15+08:00</lastmod>
+  </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</loc>
+    <lastmod>2021-10-18T12:05:48+08:00</lastmod>
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/zh/docs/tasks/beds/</loc>
     <lastmod>2021-10-18T12:05:48+08:00</lastmod>
@@ -270,12 +276,6 @@
                 href="https://reactivegroup.github.io/capa.io/zh/tags/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</loc>
-    <lastmod>2021-10-18T12:05:48+08:00</lastmod>
-  </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</loc>
-    <lastmod>2021-10-18T12:05:48+08:00</lastmod>
-  </url><url>
     <loc>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc/rpc-design/</loc>
     <lastmod>2021-10-18T16:11:17+08:00</lastmod>
   </url><url>
@@ -364,19 +364,6 @@
                 rel="alternate"
                 hreflang="zh"
                 href="https://reactivegroup.github.io/capa.io/zh/"
-                />
-  </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/zh/categories/placeholders/</loc>
-    <lastmod>2021-10-18T12:05:48+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/categories/placeholders/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/zh/categories/placeholders/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/zh/search/</loc>
