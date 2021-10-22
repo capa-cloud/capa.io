@@ -234,7 +234,7 @@ if (!doNotTrack) {
     
     
 	
-<li>2.1: <a href="#pg-ddad2409a54422bdd1d4fcbe7deac64a">使用Configuration API</a></li>
+<li>2.1: <a href="#pg-c0e7e60120879b149b7a44c21f0cd940">使用RPC API</a></li>
 
 
     
@@ -242,7 +242,7 @@ if (!doNotTrack) {
     
     
 	
-<li>2.2: <a href="#pg-c0e7e60120879b149b7a44c21f0cd940">使用RPC API</a></li>
+<li>2.2: <a href="#pg-ddad2409a54422bdd1d4fcbe7deac64a">使用Configuration API</a></li>
 
 
     
@@ -689,11 +689,10 @@ if (!doNotTrack) {
 	
 
 <div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page that shows you how to use this template site.</p>
+<p>感谢您对Capa的支持！</p>
 
 </div>
 
-<p>TODO</p>
 
 </div>
 
@@ -717,16 +716,32 @@ if (!doNotTrack) {
 
 <div class="td-content" style="">
     
-	<h1 id="pg-ddad2409a54422bdd1d4fcbe7deac64a">2.1 - 使用Configuration API</h1>
-    <div class="lead">使用Configuration API进行应用级配置管理.</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page. Replace it with your own content.</p>
-
-</div>
-
-<p>TODO</p>
+	<h1 id="pg-c0e7e60120879b149b7a44c21f0cd940">2.1 - 使用RPC API</h1>
+    <div class="lead">使用RPC API进行远程调用.</div>
+	<h2 id="步骤">步骤</h2>
+<p><a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">示例</a></p>
+<ol>
+<li>构建 RPC Client</li>
+</ol>
+<pre tabindex="0"><code>CapaRpcClient capaRpcClient = new CapaRpcClientBuilder().build();
+</code></pre><ol start="2">
+<li>调用请求</li>
+</ol>
+<pre tabindex="0"><code>  Mono&lt;byte[]&gt; responseMono = capaRpcClient.invokeMethod(SERVICE_APP_ID,
+        &quot;hello&quot;,
+        &quot;hello&quot;,
+        HttpExtension.POST,
+        null,
+        TypeRef.BYTE_ARRAY);
+</code></pre><ol start="3">
+<li>获取调用结果</li>
+</ol>
+<pre tabindex="0"><code>byte[] response = responseMono.block();
+</code></pre><h2 id="解释">解释</h2>
+<ol>
+<li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 <a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">DemoCapaHttp</a> 。</li>
+<li>实现后的DemoCapaHttp，需要在 <a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">capa-component.properties</a> 中进行配置，通过SPI机制实现加载。</li>
+</ol>
 
 </div>
 
@@ -742,8 +757,8 @@ if (!doNotTrack) {
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-c0e7e60120879b149b7a44c21f0cd940">2.2 - 使用RPC API</h1>
-    <div class="lead">使用RPC API进行远程调用.</div>
+	<h1 id="pg-ddad2409a54422bdd1d4fcbe7deac64a">2.2 - 使用Configuration API</h1>
+    <div class="lead">使用Configuration API进行应用级配置管理.</div>
 	
 
 <div class="pageinfo pageinfo-primary">
@@ -3312,10 +3327,13 @@ bar := &quot;foo&quot;;
 <p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt=""></p>
 <h3 id="图片路径说明">图片路径说明</h3>
 <p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。</p>
-<p>文档中统一使用全路径来引用图片。</p>
+<p>文档中统一使用全路径来引用图片，Url前缀 <a href="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images</a> 。</p>
 <p>例如，引入下图的图片（contribution_file.png），Markdown写法如下：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"> ![<span style="color:#204a87;font-weight:bold">Architecture</span>](<span style="color:#c4a000">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png</span>)
-</code></pre></div><p>其中， master 表示分支名</p>
+</code></pre></div><ul>
+<li>master 表示分支名</li>
+<li>content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径</li>
+</ul>
 <p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt=""></p>
 
 </div>

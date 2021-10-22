@@ -28,13 +28,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2021-10-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-10-21T21:24:11+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2021-10-21T21:36:15+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="文档贡献指南">
 <meta itemprop="description" content="为Capa文档贡献的指南
 "><meta itemprop="datePublished" content="2021-10-20T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-10-21T21:24:11+08:00" />
-<meta itemprop="wordCount" content="43">
+<meta itemprop="dateModified" content="2021-10-21T21:36:15+08:00" />
+<meta itemprop="wordCount" content="46">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="文档贡献指南"/>
 <meta name="twitter:description" content="为Capa文档贡献的指南
@@ -192,10 +192,10 @@ if (!doNotTrack) {
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiozhdocsgettingstarted-li">
   <a href="/capa.io/zh/docs/gettingstarted/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiozhdocsgettingstarted"><span class="">快速开始</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiozhdocsgettingstartedconfiguration-usage-li">
-  <a href="/capa.io/zh/docs/gettingstarted/configuration-usage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiozhdocsgettingstartedconfiguration-usage"><span class="">使用Configuration API</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiozhdocsgettingstartedrpc-usage-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiozhdocsgettingstartedrpc-usage-li">
   <a href="/capa.io/zh/docs/gettingstarted/rpc-usage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiozhdocsgettingstartedrpc-usage"><span class="">使用RPC API</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiozhdocsgettingstartedconfiguration-usage-li">
+  <a href="/capa.io/zh/docs/gettingstarted/configuration-usage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiozhdocsgettingstartedconfiguration-usage"><span class="">使用Configuration API</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiozhdocsexamples-li">
@@ -349,9 +349,9 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/zh/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">7</span></a></li>
+          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/zh/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">5</span></a></li>
         
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/zh/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">7</span></a></li>
+          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/zh/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">5</span></a></li>
         
       </ul>
     </div>
@@ -373,9 +373,7 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/zh/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span><span class="taxonomy-count">7</span></a></li>
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/zh/categories/placeholders/" data-taxonomy-term="placeholders"><span class="taxonomy-label">Placeholders</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/zh/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span><span class="taxonomy-count">5</span></a></li>
         
       </ul>
     </div>
@@ -466,10 +464,13 @@ if (!doNotTrack) {
 <p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt=""></p>
 <h3 id="图片路径说明">图片路径说明</h3>
 <p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。</p>
-<p>文档中统一使用全路径来引用图片。</p>
+<p>文档中统一使用全路径来引用图片，Url前缀 <a href="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images</a> 。</p>
 <p>例如，引入下图的图片（contribution_file.png），Markdown写法如下：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"> ![<span style="color:#204a87;font-weight:bold">Architecture</span>](<span style="color:#c4a000">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png</span>)
-</code></pre></div><p>其中， master 表示分支名</p>
+</code></pre></div><ul>
+<li>master 表示分支名</li>
+<li>content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径</li>
+</ul>
 <p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt=""></p>
 
 	
@@ -537,7 +538,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  最后修改 21.10.2021: <a href="https://github.com/google/docsy-example/commit/cbccfa444f4ce9aad294f34f857b438a1455f01b">fix image type in document-contributuin (cbccfa4)</a>
+  最后修改 21.10.2021: <a href="https://github.com/google/docsy-example/commit/bafc56558c9b02cd980fba1c3aab5683584f7d3c">match the picture and text (bafc565)</a>
 </div>
 
 </div>

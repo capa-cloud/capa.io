@@ -36,13 +36,14 @@ Capa 文档库使用 Hugo 的 Docsy 主题构建。
 ### 图片路径说明
 图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。
 
-文档中统一使用全路径来引用图片。
+文档中统一使用全路径来引用图片，Url前缀 https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images 。
 
 例如，引入下图的图片（contribution_file.png），Markdown写法如下：
 
 ```markdown
  ![Architecture](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png)
 ```
-其中， master 表示分支名
+* master 表示分支名
+* content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径
 
 ![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png)
