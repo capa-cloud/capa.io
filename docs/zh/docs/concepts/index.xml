@@ -15,14 +15,73 @@
     
     <item>
       <title>Docs: RPC服务调用</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc/</link>
-      <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
+      <link>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</guid>
       <description>
         
         
-        
+        &lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;通过服务调用，应用程序可以使用 &lt;a href=&#34;https://www.w3.org/Protocols/&#34;&gt;HTTP&lt;/a&gt; 这样的标准协议来发现并可靠地与其他应用程序通信。&lt;/p&gt;
+&lt;h2 id=&#34;调用逻辑&#34;&gt;调用逻辑&lt;/h2&gt;
+&lt;p&gt;下图为 Capa 的 RPC 服务调用逻辑&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Service A 为服务调用方， Service B 为服务被调用方&lt;/li&gt;
+&lt;li&gt;Service A 通过 Capa SDK 发起对 Service B 的服务调用&lt;/li&gt;
+&lt;li&gt;Capa RPC API 是统一的 API 规范&lt;/li&gt;
+&lt;li&gt;RPC Call 为 Service B 所支持的 RPC SDK ，例如 AWS App Mesh Api&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api-设计&#34;&gt;API 设计&lt;/h2&gt;
+&lt;p&gt;Capa的 api 设计参照了社区的规范&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto&#34;&gt;Dapr API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto&#34;&gt;Layotto API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java&#34;&gt;Capa API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;具体参数含义如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;appId&lt;/td&gt;
+&lt;td&gt;同一命名空间内的服务唯一ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;methodName&lt;/td&gt;
+&lt;td&gt;被调用服务的方法名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;request&lt;/td&gt;
+&lt;td&gt;要发送调用的服务请求&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;httpExtension&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java&#34;&gt;HTTP请求方式&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;metadata&lt;/td&gt;
+&lt;td&gt;发送请求的元数据（GRPC）或者请求头（HTTP）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;clazz&lt;/td&gt;
+&lt;td&gt;请求响应的类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;type&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java&#34;&gt;请求响应的类型&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invokeMethodRequest&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java&#34;&gt;请求对象&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
       </description>
     </item>
     

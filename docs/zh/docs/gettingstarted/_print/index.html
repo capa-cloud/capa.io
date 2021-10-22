@@ -22,19 +22,19 @@
 <title>快速开始 | Capa</title>
 
 
-  <meta name="description" content="快速开始使用.
+  <meta name="description" content="快速开始使用
 ">
 <meta property="og:title" content="快速开始" />
-<meta property="og:description" content="快速开始使用.
+<meta property="og:description" content="快速开始使用
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="快速开始">
-<meta itemprop="description" content="快速开始使用.
+<meta itemprop="description" content="快速开始使用
 "><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="快速开始"/>
-<meta name="twitter:description" content="快速开始使用.
+<meta name="twitter:description" content="快速开始使用
 "/>
 
 
@@ -179,7 +179,7 @@ if (!doNotTrack) {
 
 
 <h1 class="title">快速开始</h1>
-<div class="lead">快速开始使用.</div>
+<div class="lead">快速开始使用</div>
 
 
 
@@ -248,21 +248,21 @@ if (!doNotTrack) {
 <ol>
 <li>构建 RPC Client</li>
 </ol>
-<pre tabindex="0"><code>CapaRpcClient capaRpcClient = new CapaRpcClientBuilder().build();
-</code></pre><ol start="2">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">CapaRpcClient</span> <span style="color:#000">capaRpcClient</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">CapaRpcClientBuilder</span><span style="color:#ce5c00;font-weight:bold">().</span><span style="color:#c4a000">build</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><ol start="2">
 <li>调用请求</li>
 </ol>
-<pre tabindex="0"><code>  Mono&lt;byte[]&gt; responseMono = capaRpcClient.invokeMethod(SERVICE_APP_ID,
-        &quot;hello&quot;,
-        &quot;hello&quot;,
-        HttpExtension.POST,
-        null,
-        TypeRef.BYTE_ARRAY);
-</code></pre><ol start="3">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]&gt;</span> <span style="color:#000">responseMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">BYTE_ARRAY</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</code></pre></div><ol start="3">
 <li>获取调用结果</li>
 </ol>
-<pre tabindex="0"><code>byte[] response = responseMono.block();
-</code></pre><h2 id="解释">解释</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]</span> <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">responseMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><h2 id="解释">解释</h2>
 <ol>
 <li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 <a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">DemoCapaHttp</a> 。</li>
 <li>实现后的DemoCapaHttp，需要在 <a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">capa-component.properties</a> 中进行配置，通过SPI机制实现加载。</li>

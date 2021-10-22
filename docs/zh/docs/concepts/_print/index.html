@@ -22,19 +22,19 @@
 <title>设计文档 | Capa</title>
 
 
-  <meta name="description" content="What does your user need to understand about your project in order to use it - or potentially contribute to it? 
+  <meta name="description" content="如何设计Capa 
 ">
 <meta property="og:title" content="设计文档" />
-<meta property="og:description" content="What does your user need to understand about your project in order to use it - or potentially contribute to it? 
+<meta property="og:description" content="如何设计Capa 
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/zh/docs/concepts/" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="设计文档">
-<meta itemprop="description" content="What does your user need to understand about your project in order to use it - or potentially contribute to it? 
+<meta itemprop="description" content="如何设计Capa 
 "><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="设计文档"/>
-<meta name="twitter:description" content="What does your user need to understand about your project in order to use it - or potentially contribute to it? 
+<meta name="twitter:description" content="如何设计Capa 
 "/>
 
 
@@ -179,7 +179,7 @@ if (!doNotTrack) {
 
 
 <h1 class="title">设计文档</h1>
-<div class="lead">What does your user need to understand about your project in order to use it - or potentially contribute to it?</div>
+<div class="lead">如何设计Capa</div>
 
 
 
@@ -195,28 +195,9 @@ if (!doNotTrack) {
     
     
 	
-<li>1: <a href="#pg-a1ed055c045af43597ae4a91771b1392">RPC服务调用</a></li>
+<li>1: <a href="#pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">RPC服务调用</a></li>
 
 
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-<li>1.1: <a href="#pg-9aeba04d08fcdb6b6e760f10e3c2a0e7">概述</a></li>
-
-
-    
-  
-
-    </ul>
     
   
 
@@ -227,42 +208,15 @@ if (!doNotTrack) {
       
 
 <div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page that shows you how to use this template site.</p>
+<p>感谢您对Capa的支持！</p>
 
 </div>
 
-<p>For many projects, users may not need much information beyond the information in the <a href="/docs/overview/">Overview</a>, so this section is <strong>optional</strong>. However if there are areas where your users will need a more detailed understanding of a given term or feature in order to do anything useful with your project (or to not make mistakes when using it) put that information in this section. For example, you may want to add some conceptual pages if you have a large project with many components and a complex architecture.</p>
-<p>Remember to focus on what the user needs to know, not just what you think is interesting about your project! If they don’t need to understand your original design decisions to use or contribute to the project, don’t put them in, or include your design docs in your repo and link to them. Similarly, most users will probably need to know more about how features work when in use rather than how they are implemented. Consider a separate architecture page for more detailed implementation and system design information that potential project contributors can consult.</p>
 
 </div>
 </div>
 
 
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-a1ed055c045af43597ae4a91771b1392">1 - RPC服务调用</h1>
-    <div class="lead">执行直接、安全、服务到服务的方法调用。</div>
-	
-</div>
-
-
-
-    
-      
   
   
   
@@ -279,95 +233,71 @@ if (!doNotTrack) {
 
 <div class="td-content" style="">
     
-	<h1 id="pg-9aeba04d08fcdb6b6e760f10e3c2a0e7">1.1 - 概述</h1>
-    <div class="lead">服务调用构建块概述</div>
+	<h1 id="pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">1 - RPC服务调用</h1>
+    <div class="lead">执行直接、安全、服务到服务的方法调用</div>
 	<h2 id="介绍">介绍</h2>
-<h2 id="服务调用">服务调用</h2>
-<h3 id="服务调用api定义---protobuf">服务调用API定义 - protobuf</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-protobuf" data-lang="protobuf"><span style="color:#204a87;font-weight:bold">service</span> <span style="color:#000">Dapr</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// Invokes a method on a remote Dapr app.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#204a87;font-weight:bold">rpc</span> <span style="color:#000">InvokeService</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">InvokeServiceRequest</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">returns</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">common.v1.InvokeResponse</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{}</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span><span style="color:#000;font-weight:bold">}</span>  <span style="color:#a40000">
-</span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-protobuf" data-lang="protobuf"><span style="color:#8f5902;font-style:italic">// InvokeServiceRequest represents the request message for Service invocation.
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">message</span> <span style="color:#000">InvokeServiceRequest</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// Required. Callee&#39;s app id.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000">id</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// Required. message which will be delivered to callee.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000">common.v1.InvokeRequest</span> <span style="color:#204a87;font-weight:bold">message</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span><span style="color:#000;font-weight:bold">}</span><span style="color:#a40000">
-</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic">// InvokeRequest is the message to invoke a method with the data.
-</span><span style="color:#8f5902;font-style:italic">// This message is used in InvokeService of Dapr gRPC Service and OnInvoke
-</span><span style="color:#8f5902;font-style:italic">// of AppCallback gRPC service.
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">message</span> <span style="color:#000">InvokeRequest</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// Required. method is a method name which will be invoked by caller.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000">method</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// Required. Bytes value or Protobuf message which caller sent.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">// Dapr treats Any.value as bytes type if Any.type_url is unset.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000">google.protobuf.Any</span> <span style="color:#000">data</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// The type of data content.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">//
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">// This field is required if data delivers http request body
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">// Otherwise, this is optional.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000">content_type</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// HTTP specific fields if request conveys http-compatible request.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">//
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">// This field is required for http-compatible request. Otherwise,
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">// this field is optional.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000">HTTPExtension</span> <span style="color:#000">http_extension</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">4</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span><span style="color:#000;font-weight:bold">}</span><span style="color:#a40000">
-</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic">// InvokeResponse is the response message inclduing data and its content type
-</span><span style="color:#8f5902;font-style:italic">// from app callback.
-</span><span style="color:#8f5902;font-style:italic">// This message is used in InvokeService of Dapr gRPC Service and OnInvoke
-</span><span style="color:#8f5902;font-style:italic">// of AppCallback gRPC service.
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">message</span> <span style="color:#000">InvokeResponse</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// Required. The content body of InvokeService response.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000">google.protobuf.Any</span> <span style="color:#000">data</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span>  <span style="color:#8f5902;font-style:italic">// Required. The type of data content.
-</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000">content_type</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">;</span><span style="color:#a40000">
-</span><span style="color:#a40000"></span><span style="color:#000;font-weight:bold">}</span><span style="color:#a40000">
-</span></code></pre></div><h3 id="服务调用api定义---jvm">服务调用API定义 - JVM</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#8f5902;font-style:italic">/**
-</span><span style="color:#8f5902;font-style:italic">     * Invoke a service method.
-</span><span style="color:#8f5902;font-style:italic">     *
-</span><span style="color:#8f5902;font-style:italic">     * @param invokeMethodRequest Request object.
-</span><span style="color:#8f5902;font-style:italic">     * @param type                The Type needed as return for the call.
-</span><span style="color:#8f5902;font-style:italic">     * @param &lt;T&gt;                 The Type of the return, use byte[] to skip serialization.
-</span><span style="color:#8f5902;font-style:italic">     * @return A Mono Plan of type T.
-</span><span style="color:#8f5902;font-style:italic">     */</span>
-    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">InvokeMethodRequest</span> <span style="color:#000">invokeMethodRequest</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
-</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">InvokeMethodRequest</span> <span style="color:#ce5c00;font-weight:bold">{</span>
-
-  <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">;</span>
-
-  <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">String</span> <span style="color:#000">method</span><span style="color:#ce5c00;font-weight:bold">;</span>
-
-  <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">Object</span> <span style="color:#000">body</span><span style="color:#ce5c00;font-weight:bold">;</span>
-
-  <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">rxcloud</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">cloudruntimes</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">domain</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">core</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invocation</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">;</span>
-
-  <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">String</span> <span style="color:#000">contentType</span><span style="color:#ce5c00;font-weight:bold">;</span>
-
-  <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">;</span>
-<span style="color:#ce5c00;font-weight:bold">}</span>
-</code></pre></div><h2 id="特征">特征</h2>
-<h3 id="命名空间范围">命名空间范围</h3>
-<p>使用应用ID来调用相同命名空间内的服务：</p>
-<p><code>appId</code>: 同一命名空间内的服务唯一ID</p>
+<p>通过服务调用，应用程序可以使用 <a href="https://www.w3.org/Protocols/">HTTP</a> 这样的标准协议来发现并可靠地与其他应用程序通信。</p>
+<h2 id="调用逻辑">调用逻辑</h2>
+<p>下图为 Capa 的 RPC 服务调用逻辑</p>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
+<ul>
+<li>Service A 为服务调用方， Service B 为服务被调用方</li>
+<li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
+<li>Capa RPC API 是统一的 API 规范</li>
+<li>RPC Call 为 Service B 所支持的 RPC SDK ，例如 AWS App Mesh Api</li>
+</ul>
+<h2 id="api-设计">API 设计</h2>
+<p>Capa的 api 设计参照了社区的规范</p>
+<p><a href="https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto">Dapr API</a></p>
+<p><a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API</a></p>
+<p><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
+<p>具体参数含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appId</td>
+<td>同一命名空间内的服务唯一ID</td>
+</tr>
+<tr>
+<td>methodName</td>
+<td>被调用服务的方法名</td>
+</tr>
+<tr>
+<td>request</td>
+<td>要发送调用的服务请求</td>
+</tr>
+<tr>
+<td>httpExtension</td>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>发送请求的元数据（GRPC）或者请求头（HTTP）</td>
+</tr>
+<tr>
+<td>clazz</td>
+<td>请求响应的类型</td>
+</tr>
+<tr>
+<td>type</td>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
+</tr>
+<tr>
+<td>invokeMethodRequest</td>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
+</tr>
+</tbody>
+</table>
 
 </div>
 
 
-
-    
-	
-  
 
     
 	
