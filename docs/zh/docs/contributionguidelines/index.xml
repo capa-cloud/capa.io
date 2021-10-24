@@ -63,21 +63,21 @@
 &lt;li&gt;保持单元测试用例的运行速度，不要将大的集成用例放在单元测试中&lt;/li&gt;
 &lt;li&gt;UT类命名规范 BeTestedClassTest&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;   范例：
+&lt;pre&gt;&lt;code&gt;   范例：
    源类的全限定名为 com.api.Matching
    源文件路径 src/main/java/com/api/Matching.java
    UT文件路径 src/test/java/com/api/MatchingTest.java
 &lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;6&#34;&gt;
 &lt;li&gt;UT方法命名规范&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;   范例：
+&lt;pre&gt;&lt;code&gt;   范例：
    源方法名为 matching()
    UT方法命名为 testMatching_Success()/testMatching_SuccessWhenResultGreaterThanZero()/testMatching_FailWhenThrowException()
 &lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;commit-约定&#34;&gt;Commit 约定&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Commit style&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;
+&lt;pre&gt;&lt;code&gt; &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;
  &amp;lt;BLANK LINE&amp;gt;
  &amp;lt;body&amp;gt;
  &amp;lt;BLANK LINE&amp;gt;
@@ -141,7 +141,7 @@
 &lt;p&gt;图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。&lt;/p&gt;
 &lt;p&gt;文档中统一使用全路径来引用图片，Url前缀 &lt;a href=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images&#34;&gt;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images&lt;/a&gt; 。&lt;/p&gt;
 &lt;p&gt;例如，引入下图的图片（contribution_file.png），Markdown写法如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt; ![&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;Architecture&lt;/span&gt;](&lt;span style=&#34;color:#c4a000&#34;&gt;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt; ![&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;Architecture&lt;/span&gt;](&lt;span style=&#34;color:#c4a000&#34;&gt;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;master 表示分支名&lt;/li&gt;
 &lt;li&gt;content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径&lt;/li&gt;

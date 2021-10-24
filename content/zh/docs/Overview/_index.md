@@ -36,7 +36,7 @@ This is the Capa SDK for Java, including the following features:
 
 **参考资料：** https://github.com/dapr/dapr/issues/3261
 
-### Why not DAPR
+### Why not Dapr
 
 设计思想和Dapr等项目是相同的，但是Dapr等项目走的非常靠前，其逻辑依赖于独立部署的dapr-sidecar来实现。
 

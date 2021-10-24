@@ -1,17 +1,105 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Capa – Contribution Guidelines</title>
-    <link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/</link>
-    <description>Recent content in Contribution Guidelines on Capa</description>
-    <generator>Hugo -- gohugo.io</generator>
-    
-	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/contributionguidelines/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-  </channel>
-</rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Capa – 参与贡献</title><link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/</link><description>Recent content in 参与贡献 on Capa</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://reactivegroup.github.io/capa.io/docs/contributionguidelines/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 贡献者指南</title><link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/contributor-guide/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/contributor-guide/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本文档描述了如何使用 Github Issue 和 Pull Request 对Capa做出贡献。&lt;/p>
+&lt;/div>
+&lt;h2 id="issues-约定">Issues 约定&lt;/h2>
+&lt;ol>
+&lt;li>Question: 提出一个关于 Capa 的问题&lt;/li>
+&lt;li>Feature Request: 提出一个关于 Capa 新功能的请求&lt;/li>
+&lt;li>Bug Report: 提出一个 Bug 的报告&lt;/li>
+&lt;li>Discussion: 对 Capa 的讨论&lt;/li>
+&lt;li>Proposal: 对 Capa 的提案&lt;/li>
+&lt;/ol>
+&lt;h2 id="编码规范约定">编码规范约定&lt;/h2>
+&lt;ol>
+&lt;li>提交的代码一律要添加 Apache License（可以通过checkstyle插件来检测）&lt;/li>
+&lt;li>每次只允许提交一个 Commit，如果有多个在本地 Rebase 成一个 Commit&lt;/li>
+&lt;li>建议一个 Commit 只解决一个 Issue&lt;/li>
+&lt;li>Commit 中要有详细的说明，且一律使用英文来描述&lt;/li>
+&lt;li>CI Pipeline 构建失败的代码不会进入 Code Review 环节&lt;/li>
+&lt;li>代码仓库有且仅有一个主干分支（master分支）&lt;/li>
+&lt;li>主干分支上的代码只能通过 Merge PR（MR）向前推进&lt;/li>
+&lt;li>所有实现的 Feature 都要有完善使用说明文档&lt;/li>
+&lt;li>仅在 UT 中引用到的 Package 的 Scope 必须是 test&lt;/li>
+&lt;li>每个问题都要先提交一个Issue&lt;/li>
+&lt;/ol>
+&lt;h2 id="单测规范约定">单测规范约定&lt;/h2>
+&lt;ol>
+&lt;li>单元测试统一用 junit 和 mockito&lt;/li>
+&lt;li>遵守AIR原则
+&lt;ul>
+&lt;li>Automatic（自动化）。单元测试应该是全自动执行的，并且非交互式的。测试用例通常是被定期执行的，执行过程必须完全自动化。&lt;/li>
+&lt;li>Independent（独立性）。保持单元测试的独立性。为了保证单元测试稳定可靠且便于维护，单元测试用例之间决不能互相调用，也不能依赖执行的先后次序。&lt;/li>
+&lt;li>Repeatable（可重复）。单元测试是可以重复执行的，不能受到外界环境的影响。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>保持单元测试用例的运行速度，不要将大的集成用例放在单元测试中&lt;/li>
+&lt;li>UT类命名规范 BeTestedClassTest&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code> 范例：
+源类的全限定名为 com.api.Matching
+源文件路径 src/main/java/com/api/Matching.java
+UT文件路径 src/test/java/com/api/MatchingTest.java
+&lt;/code>&lt;/pre>&lt;ol start="6">
+&lt;li>UT方法命名规范&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code> 范例：
+源方法名为 matching()
+UT方法命名为 testMatching_Success()/testMatching_SuccessWhenResultGreaterThanZero()/testMatching_FailWhenThrowException()
+&lt;/code>&lt;/pre>&lt;h2 id="commit-约定">Commit 约定&lt;/h2>
+&lt;ol>
+&lt;li>Commit style&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code> &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;
+&amp;lt;BLANK LINE&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;BLANK LINE&amp;gt;
+&amp;lt;footer&amp;gt;
+&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;li>Commit type
+&lt;ul>
+&lt;li>feat: 新增 feature&lt;/li>
+&lt;li>fix：修复 bug&lt;/li>
+&lt;li>docs：仅仅修改了文档，比如 README, CHANGELOG, CONTRIBUTE等等&lt;/li>
+&lt;li>style：仅仅修改了空格、格式缩进、逗号等等，不改变代码逻辑&lt;/li>
+&lt;li>refactor：代码重构，没有加新功能或者修复 bug&lt;/li>
+&lt;li>perf：优化相关，比如提升性能、体验&lt;/li>
+&lt;li>test：测试用例，包括单元测试、集成测试等&lt;/li>
+&lt;li>chore：改变构建流程、或者增加依赖库、工具等&lt;/li>
+&lt;li>revert：回滚到上一个版本&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Commit scope: 提交代码适用的范围（选填）&lt;/li>
+&lt;li>Commit subject：50个字符以内，描述主要变更内容（必填）&lt;/li>
+&lt;li>Commit body：更详细的说明文本，建议72个字符以内（必填）&lt;/li>
+&lt;li>Commit footer：如果需要的化可以添加一个链接到issue地址或者其它文档，或者关闭某个issue（选填）&lt;/li>
+&lt;/ol></description></item><item><title>Docs: 文档贡献指南</title><link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/document-contribution/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/document-contribution/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 &lt;a href="https://github.com/reactivegroup/capa.io">reactivegroup/capa.io&lt;/a>。&lt;/p>
+&lt;/div>
+&lt;h2 id="先决条件">先决条件&lt;/h2>
+&lt;p>Capa 文档库使用 Hugo 的 Docsy 主题构建。&lt;/p>
+&lt;p>&lt;a href="https://github.com/reactivegroup/capa.io/issues/3">文档搭建步骤&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/reactivegroup/capa.io/issues/4">文档开发步骤&lt;/a>&lt;/p>
+&lt;h2 id="规范约定">规范约定&lt;/h2>
+&lt;ol>
+&lt;li>确保你所贡献文件在层次结构中的位置是正确的。&lt;/li>
+&lt;li>确保你所贡献内容在名称、参数、术语方面保持一致。&lt;/li>
+&lt;li>确保任何贡献内容在 Web 站点可以构建成功。&lt;/li>
+&lt;li>确保读者能够理解为什么他们应该关注贡献内容，以及能够为他们解决什么问题。&lt;/li>
+&lt;/ol>
+&lt;h2 id="文档路径说明">文档路径说明&lt;/h2>
+&lt;h3 id="文件路径说明">文件路径说明&lt;/h3>
+&lt;p>文件统一放在 content/ 目录下，其中中文文档存放于 content/zh ，英文文档存放于 content/en。&lt;/p>
+&lt;p>如果需要新增文档，需要按照目录结构新增文件夹和.md文件。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt="">&lt;/p>
+&lt;h3 id="图片路径说明">图片路径说明&lt;/h3>
+&lt;p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。&lt;/p>
+&lt;p>文档中统一使用全路径来引用图片，Url前缀 &lt;a href="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images&lt;/a> 。&lt;/p>
+&lt;p>例如，引入下图的图片（contribution_file.png），Markdown写法如下：&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-markdown" data-lang="markdown"> ![&lt;span style="color:#204a87;font-weight:bold">Architecture&lt;/span>](&lt;span style="color:#c4a000">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&lt;/span>)
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>master 表示分支名&lt;/li>
+&lt;li>content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt="">&lt;/p></description></item></channel></rss>
