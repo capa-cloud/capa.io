@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/zh/docs/overview/">
+<meta name="generator" content="Hugo 0.83.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/zh/docs/overview/">
 <link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/zh/docs/overview/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -40,8 +40,8 @@
 
 
 
-<link rel="preload" href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" as="style">
-<link href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/capa.io/scss/main.min.fc772cda7b2f36c33aace594196159bf170a54e1c5ef5d872213e30171818ee3.css" as="style">
+<link href="/capa.io/scss/main.min.fc772cda7b2f36c33aace594196159bf170a54e1c5ef5d872213e30171818ee3.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -247,7 +247,7 @@ if (!doNotTrack) {
 <h2 id="getting-started">Getting Started</h2>
 <h4 id="importing-capas-java-sdk">Importing Capa&rsquo;s Java SDK</h4>
 <p>For a Maven project, add the following to your pom.xml file:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
   ...
   <span style="color:#204a87;font-weight:bold">&lt;dependencies&gt;</span>
     ...
@@ -262,7 +262,7 @@ if (!doNotTrack) {
   ...
 <span style="color:#204a87;font-weight:bold">&lt;/project&gt;</span>
 </code></pre></div><p>Sample implementation library:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
   ...
   <span style="color:#204a87;font-weight:bold">&lt;dependencies&gt;</span>
     ...
@@ -286,9 +286,9 @@ if (!doNotTrack) {
 <h4 id="reactor-api">Reactor API</h4>
 <p>The Java SDK for Capa is built using <a href="https://projectreactor.io/">Project Reactor</a>. It provides an asynchronous API for Java. When consuming a result is consumed synchronously, as in the examples referenced above, the <code>block()</code> method is used.</p>
 <p>The code below does not make any API call, it simply returns the <a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html">Mono</a> publisher object. Nothing happens until the application subscribes or blocks on the result:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
 </code></pre></div><p>To start execution and receive the result object synchronously, use <code>block()</code>. The code below shows how to execute the call and consume an empty response:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
 <span style="color:#000">String</span> <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">result</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
 </code></pre></div><h4 id="exception-handling">Exception handling</h4>
 <p>Most exceptions thrown from the SDK are instances of <code>CapaException</code>. <code>CapaException</code> extends from <code>RuntimeException</code>, making it compatible with Project Reactor.</p>

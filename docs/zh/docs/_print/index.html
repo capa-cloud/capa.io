@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/zh/docs/">
+<meta name="generator" content="Hugo 0.83.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/zh/docs/">
 <link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/zh/docs/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -45,8 +45,8 @@
 
 
 
-<link rel="preload" href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" as="style">
-<link href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/capa.io/scss/main.min.fc772cda7b2f36c33aace594196159bf170a54e1c5ef5d872213e30171818ee3.css" as="style">
+<link href="/capa.io/scss/main.min.fc772cda7b2f36c33aace594196159bf170a54e1c5ef5d872213e30171818ee3.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -593,7 +593,7 @@ if (!doNotTrack) {
 <h2 id="getting-started">Getting Started</h2>
 <h4 id="importing-capas-java-sdk">Importing Capa&rsquo;s Java SDK</h4>
 <p>For a Maven project, add the following to your pom.xml file:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
   ...
   <span style="color:#204a87;font-weight:bold">&lt;dependencies&gt;</span>
     ...
@@ -608,7 +608,7 @@ if (!doNotTrack) {
   ...
 <span style="color:#204a87;font-weight:bold">&lt;/project&gt;</span>
 </code></pre></div><p>Sample implementation library:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;project&gt;</span>
   ...
   <span style="color:#204a87;font-weight:bold">&lt;dependencies&gt;</span>
     ...
@@ -632,9 +632,9 @@ if (!doNotTrack) {
 <h4 id="reactor-api">Reactor API</h4>
 <p>The Java SDK for Capa is built using <a href="https://projectreactor.io/">Project Reactor</a>. It provides an asynchronous API for Java. When consuming a result is consumed synchronously, as in the examples referenced above, the <code>block()</code> method is used.</p>
 <p>The code below does not make any API call, it simply returns the <a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html">Mono</a> publisher object. Nothing happens until the application subscribes or blocks on the result:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
 </code></pre></div><p>To start execution and receive the result object synchronously, use <code>block()</code>. The code below shows how to execute the call and consume an empty response:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;say&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">STRING</span><span style="color:#ce5c00;font-weight:bold">);</span>
 <span style="color:#000">String</span> <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">result</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
 </code></pre></div><h4 id="exception-handling">Exception handling</h4>
 <p>Most exceptions thrown from the SDK are instances of <code>CapaException</code>. <code>CapaException</code> extends from <code>RuntimeException</code>, making it compatible with Project Reactor.</p>
@@ -704,11 +704,11 @@ if (!doNotTrack) {
 <ol>
 <li>构建 RPC Client</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">CapaRpcClient</span> <span style="color:#000">capaRpcClient</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">CapaRpcClientBuilder</span><span style="color:#ce5c00;font-weight:bold">().</span><span style="color:#c4a000">build</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">CapaRpcClient</span> <span style="color:#000">capaRpcClient</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">CapaRpcClientBuilder</span><span style="color:#ce5c00;font-weight:bold">().</span><span style="color:#c4a000">build</span><span style="color:#ce5c00;font-weight:bold">();</span>
 </code></pre></div><ol start="2">
 <li>调用请求</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]&gt;</span> <span style="color:#000">responseMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]&gt;</span> <span style="color:#000">responseMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">capaRpcClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
         <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
         <span style="color:#4e9a06">&#34;hello&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
         <span style="color:#000">HttpExtension</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">POST</span><span style="color:#ce5c00;font-weight:bold">,</span>
@@ -717,7 +717,7 @@ if (!doNotTrack) {
 </code></pre></div><ol start="3">
 <li>获取调用结果</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]</span> <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">responseMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]</span> <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">responseMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
 </code></pre></div><h2 id="解释">解释</h2>
 <ol>
 <li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 <a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">DemoCapaHttp</a> 。</li>
@@ -1158,7 +1158,7 @@ if (!doNotTrack) {
 <p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
 </blockquote>
 <h3 id="header-3">Header 3</h3>
-<pre tabindex="0"><code>This is a code block following a header.
+<pre><code>This is a code block following a header.
 </code></pre><p>Next level leggings before they sold out, PBR&amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.</p>
 <h4 id="header-4">Header 4</h4>
 <ul>
@@ -1324,10 +1324,10 @@ if (!doNotTrack) {
 <p>Code snippets like <code>var foo = &quot;bar&quot;;</code> can be shown inline.</p>
 <p>Also, <code>this should vertically align</code> <del><code>with this</code></del> <del>and this</del>.</p>
 <p>Code can also be shown in a block element.</p>
-<pre tabindex="0"><code>foo := &quot;bar&quot;;
+<pre><code>foo := &quot;bar&quot;;
 bar := &quot;foo&quot;;
 </code></pre><p>Code can also use syntax highlighting.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
   <span style="color:#000">input</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#4e9a06">`var foo = &#34;bar&#34;;`</span>
 
   <span style="color:#000">lexer</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">lexers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Get</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;javascript&#34;</span><span style="color:#000;font-weight:bold">)</span>
@@ -1340,7 +1340,7 @@ bar := &quot;foo&quot;;
 
   <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">buff</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><pre tabindex="0"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</code></pre></div><pre><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 </code></pre><p>Inline code inside table cells should still be distinguishable.</p>
 <table>
 <thead>
@@ -1432,7 +1432,7 @@ bar := &quot;foo&quot;;
 <p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.</p>
 <h3 id="external-links">External Links</h3>
 <p>Stumptown PBR&amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.</p>
-<pre tabindex="0"><code>This is the final element on the page and there should be no margin below this.
+<pre><code>This is the final element on the page and there should be no margin below this.
 </code></pre>
 </div>
 
@@ -1475,7 +1475,7 @@ bar := &quot;foo&quot;;
 <p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
 </blockquote>
 <h3 id="header-3">Header 3</h3>
-<pre tabindex="0"><code>This is a code block following a header.
+<pre><code>This is a code block following a header.
 </code></pre><p>Next level leggings before they sold out, PBR&amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.</p>
 <h4 id="header-4">Header 4</h4>
 <ul>
@@ -1641,10 +1641,10 @@ bar := &quot;foo&quot;;
 <p>Code snippets like <code>var foo = &quot;bar&quot;;</code> can be shown inline.</p>
 <p>Also, <code>this should vertically align</code> <del><code>with this</code></del> <del>and this</del>.</p>
 <p>Code can also be shown in a block element.</p>
-<pre tabindex="0"><code>foo := &quot;bar&quot;;
+<pre><code>foo := &quot;bar&quot;;
 bar := &quot;foo&quot;;
 </code></pre><p>Code can also use syntax highlighting.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
   <span style="color:#000">input</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#4e9a06">`var foo = &#34;bar&#34;;`</span>
 
   <span style="color:#000">lexer</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">lexers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Get</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;javascript&#34;</span><span style="color:#000;font-weight:bold">)</span>
@@ -1657,7 +1657,7 @@ bar := &quot;foo&quot;;
 
   <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">buff</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><pre tabindex="0"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</code></pre></div><pre><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 </code></pre><p>Inline code inside table cells should still be distinguishable.</p>
 <table>
 <thead>
@@ -1749,7 +1749,7 @@ bar := &quot;foo&quot;;
 <p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.</p>
 <h3 id="external-links">External Links</h3>
 <p>Stumptown PBR&amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.</p>
-<pre tabindex="0"><code>This is the final element on the page and there should be no margin below this.
+<pre><code>This is the final element on the page and there should be no margin below this.
 </code></pre>
 </div>
 
@@ -1792,7 +1792,7 @@ bar := &quot;foo&quot;;
 <p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
 </blockquote>
 <h3 id="header-3">Header 3</h3>
-<pre tabindex="0"><code>This is a code block following a header.
+<pre><code>This is a code block following a header.
 </code></pre><p>Next level leggings before they sold out, PBR&amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.</p>
 <h4 id="header-4">Header 4</h4>
 <ul>
@@ -1958,10 +1958,10 @@ bar := &quot;foo&quot;;
 <p>Code snippets like <code>var foo = &quot;bar&quot;;</code> can be shown inline.</p>
 <p>Also, <code>this should vertically align</code> <del><code>with this</code></del> <del>and this</del>.</p>
 <p>Code can also be shown in a block element.</p>
-<pre tabindex="0"><code>foo := &quot;bar&quot;;
+<pre><code>foo := &quot;bar&quot;;
 bar := &quot;foo&quot;;
 </code></pre><p>Code can also use syntax highlighting.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
   <span style="color:#000">input</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#4e9a06">`var foo = &#34;bar&#34;;`</span>
 
   <span style="color:#000">lexer</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">lexers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Get</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;javascript&#34;</span><span style="color:#000;font-weight:bold">)</span>
@@ -1974,7 +1974,7 @@ bar := &quot;foo&quot;;
 
   <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">buff</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><pre tabindex="0"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</code></pre></div><pre><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 </code></pre><p>Inline code inside table cells should still be distinguishable.</p>
 <table>
 <thead>
@@ -2066,7 +2066,7 @@ bar := &quot;foo&quot;;
 <p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.</p>
 <h3 id="external-links">External Links</h3>
 <p>Stumptown PBR&amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.</p>
-<pre tabindex="0"><code>This is the final element on the page and there should be no margin below this.
+<pre><code>This is the final element on the page and there should be no margin below this.
 </code></pre>
 </div>
 
@@ -2142,7 +2142,7 @@ bar := &quot;foo&quot;;
 <p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
 </blockquote>
 <h3 id="header-3">Header 3</h3>
-<pre tabindex="0"><code>This is a code block following a header.
+<pre><code>This is a code block following a header.
 </code></pre><p>Next level leggings before they sold out, PBR&amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.</p>
 <h4 id="header-4">Header 4</h4>
 <ul>
@@ -2308,10 +2308,10 @@ bar := &quot;foo&quot;;
 <p>Code snippets like <code>var foo = &quot;bar&quot;;</code> can be shown inline.</p>
 <p>Also, <code>this should vertically align</code> <del><code>with this</code></del> <del>and this</del>.</p>
 <p>Code can also be shown in a block element.</p>
-<pre tabindex="0"><code>foo := &quot;bar&quot;;
+<pre><code>foo := &quot;bar&quot;;
 bar := &quot;foo&quot;;
 </code></pre><p>Code can also use syntax highlighting.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
   <span style="color:#000">input</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#4e9a06">`var foo = &#34;bar&#34;;`</span>
 
   <span style="color:#000">lexer</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">lexers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Get</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;javascript&#34;</span><span style="color:#000;font-weight:bold">)</span>
@@ -2324,7 +2324,7 @@ bar := &quot;foo&quot;;
 
   <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">buff</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><pre tabindex="0"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</code></pre></div><pre><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 </code></pre><p>Inline code inside table cells should still be distinguishable.</p>
 <table>
 <thead>
@@ -2416,7 +2416,7 @@ bar := &quot;foo&quot;;
 <p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.</p>
 <h3 id="external-links">External Links</h3>
 <p>Stumptown PBR&amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.</p>
-<pre tabindex="0"><code>This is the final element on the page and there should be no margin below this.
+<pre><code>This is the final element on the page and there should be no margin below this.
 </code></pre>
 </div>
 
@@ -2459,7 +2459,7 @@ bar := &quot;foo&quot;;
 <p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
 </blockquote>
 <h3 id="header-3">Header 3</h3>
-<pre tabindex="0"><code>This is a code block following a header.
+<pre><code>This is a code block following a header.
 </code></pre><p>Next level leggings before they sold out, PBR&amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.</p>
 <h4 id="header-4">Header 4</h4>
 <ul>
@@ -2625,10 +2625,10 @@ bar := &quot;foo&quot;;
 <p>Code snippets like <code>var foo = &quot;bar&quot;;</code> can be shown inline.</p>
 <p>Also, <code>this should vertically align</code> <del><code>with this</code></del> <del>and this</del>.</p>
 <p>Code can also be shown in a block element.</p>
-<pre tabindex="0"><code>foo := &quot;bar&quot;;
+<pre><code>foo := &quot;bar&quot;;
 bar := &quot;foo&quot;;
 </code></pre><p>Code can also use syntax highlighting.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
   <span style="color:#000">input</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#4e9a06">`var foo = &#34;bar&#34;;`</span>
 
   <span style="color:#000">lexer</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">lexers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Get</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;javascript&#34;</span><span style="color:#000;font-weight:bold">)</span>
@@ -2641,7 +2641,7 @@ bar := &quot;foo&quot;;
 
   <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">buff</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><pre tabindex="0"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</code></pre></div><pre><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 </code></pre><p>Inline code inside table cells should still be distinguishable.</p>
 <table>
 <thead>
@@ -2733,7 +2733,7 @@ bar := &quot;foo&quot;;
 <p>Plaid hell of cred microdosing, succulents tilde pour-over. Offal shabby chic 3 wolf moon blue bottle raw denim normcore poutine pork belly.</p>
 <h3 id="external-links">External Links</h3>
 <p>Stumptown PBR&amp;B keytar plaid street art, forage XOXO pitchfork selvage affogato green juice listicle pickled everyday carry hashtag. Organic sustainable letterpress sartorial scenester intelligentsia swag bushwick. Put a bird on it stumptown neutra locavore. IPhone typewriter messenger bag narwhal. Ennui cold-pressed seitan flannel keytar, single-origin coffee adaptogen occupy yuccie williamsburg chillwave shoreditch forage waistcoat.</p>
-<pre tabindex="0"><code>This is the final element on the page and there should be no margin below this.
+<pre><code>This is the final element on the page and there should be no margin below this.
 </code></pre>
 </div>
 
@@ -2818,7 +2818,7 @@ Javadoc, or other doc generation tools by putting them in your <code>static/</co
 <p>This is a blockquote following a header. Bacon ipsum dolor sit amet t-bone doner shank drumstick, pork belly porchetta chuck sausage brisket ham hock rump pig. Chuck kielbasa leberkas, pork bresaola ham hock filet mignon cow shoulder short ribs biltong.</p>
 </blockquote>
 <h3 id="header-3">Header 3</h3>
-<pre tabindex="0"><code>This is a code block following a header.
+<pre><code>This is a code block following a header.
 </code></pre><p>Next level leggings before they sold out, PBR&amp;B church-key shaman echo park. Kale chips occupy godard whatever pop-up freegan pork belly selfies. Gastropub Belinda subway tile woke post-ironic seitan. Shabby chic man bun semiotics vape, chia messenger bag plaid cardigan.</p>
 <h4 id="header-4">Header 4</h4>
 <ul>
@@ -2984,10 +2984,10 @@ Javadoc, or other doc generation tools by putting them in your <code>static/</co
 <p>Code snippets like <code>var foo = &quot;bar&quot;;</code> can be shown inline.</p>
 <p>Also, <code>this should vertically align</code> <del><code>with this</code></del> <del>and this</del>.</p>
 <p>Code can also be shown in a block element.</p>
-<pre tabindex="0"><code>foo := &quot;bar&quot;;
+<pre><code>foo := &quot;bar&quot;;
 bar := &quot;foo&quot;;
 </code></pre><p>Code can also use syntax highlighting.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
   <span style="color:#000">input</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#4e9a06">`var foo = &#34;bar&#34;;`</span>
 
   <span style="color:#000">lexer</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">lexers</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Get</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;javascript&#34;</span><span style="color:#000;font-weight:bold">)</span>
@@ -3000,7 +3000,7 @@ bar := &quot;foo&quot;;
 
   <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">buff</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><pre tabindex="0"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</code></pre></div><pre><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
 </code></pre><p>Inline code inside table cells should still be distinguishable.</p>
 <table>
 <thead>
@@ -3177,21 +3177,21 @@ bar := &quot;foo&quot;;
 <li>保持单元测试用例的运行速度，不要将大的集成用例放在单元测试中</li>
 <li>UT类命名规范 BeTestedClassTest</li>
 </ol>
-<pre tabindex="0"><code>   范例：
+<pre><code>   范例：
    源类的全限定名为 com.api.Matching
    源文件路径 src/main/java/com/api/Matching.java
    UT文件路径 src/test/java/com/api/MatchingTest.java
 </code></pre><ol start="6">
 <li>UT方法命名规范</li>
 </ol>
-<pre tabindex="0"><code>   范例：
+<pre><code>   范例：
    源方法名为 matching()
    UT方法命名为 testMatching_Success()/testMatching_SuccessWhenResultGreaterThanZero()/testMatching_FailWhenThrowException()
 </code></pre><h2 id="commit-约定">Commit 约定</h2>
 <ol>
 <li>Commit style</li>
 </ol>
-<pre tabindex="0"><code> &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+<pre><code> &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
  &lt;BLANK LINE&gt;
  &lt;body&gt;
  &lt;BLANK LINE&gt;
@@ -3259,7 +3259,7 @@ bar := &quot;foo&quot;;
 <p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。</p>
 <p>文档中统一使用全路径来引用图片，Url前缀 <a href="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images</a> 。</p>
 <p>例如，引入下图的图片（contribution_file.png），Markdown写法如下：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"> ![<span style="color:#204a87;font-weight:bold">Architecture</span>](<span style="color:#c4a000">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png</span>)
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"> ![<span style="color:#204a87;font-weight:bold">Architecture</span>](<span style="color:#c4a000">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png</span>)
 </code></pre></div><ul>
 <li>master 表示分支名</li>
 <li>content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径</li>
