@@ -1,9 +1,78 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Capa – RPC API示例</title><link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/</link><description>Recent content in RPC API示例 on Capa</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://reactivegroup.github.io/capa.io/docs/examples/rpc/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: RPC AWS-App Mesh示例</title><link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-&lt;/div>
-&lt;p>TODO&lt;/p></description></item><item><title>Docs: RPC Ctrip-Service Mesh示例</title><link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-&lt;/div>
-&lt;p>TODO&lt;/p></description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – RPC API示例</title>
+    <link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/</link>
+    <description>Recent content in RPC API示例 on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/examples/rpc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: RPC AWS-App Mesh示例</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: RPC Ctrip-Service Mesh示例</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;调用逻辑&#34;&gt;调用逻辑&lt;/h2&gt;
+&lt;p&gt;下图为 Capa 的 RPC 在携程的 Service Mesh 服务调用逻辑&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/RPC/rpc_invoke_in_ctrip.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Service A 为服务调用方， Service B 为服务被调用方&lt;/li&gt;
+&lt;li&gt;Service A 通过 Capa SDK 发起对 Service B 的服务调用&lt;/li&gt;
+&lt;li&gt;Capa RPC API 是统一的 API 规范&lt;/li&gt;
+&lt;li&gt;Ctrip RPC Call 是 携程 Service Mesh 支持的 RPC 调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实现步骤&#34;&gt;实现步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;实现 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java&#34;&gt;RpcServiceOptions&lt;/a&gt; （实际 RPC 调用需要的参数） 和 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java&#34;&gt;CtripSpiOptionsLoader&lt;/a&gt; （加载 RpcServiceOptions 的实现类） 接口。&lt;/p&gt;
+&lt;p&gt;例如 CtripRpcServiceOptions 和 CtripSpiOptionsLoader&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;继承 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java&#34;&gt;CapaSerializeHttpSpi&lt;/a&gt; ， 实现在携程 Service Mesh 的 RPC 调用。&lt;/p&gt;
+&lt;p&gt;例如 CtripCapaHttp&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;构建 capa-component.properties 文件，添加 group.rxcloud.capa.component.http.CapaHttp 和 group.rxcloud.capa.spi.config.CapaSpiOptionsLoader 对应的类的路径，以支持 SPI 方式加载对应的类。&lt;/p&gt;
+&lt;p&gt;例如:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; group.rxcloud.capa.component.http.CapaHttp=com.ctrip.ibu.capa.spi.ctrip.http.CtripCapaHttp
+ group.rxcloud.capa.spi.config.CapaSpiOptionsLoader=com.ctrip.ibu.capa.spi.ctrip.config.CtripSpiOptionsLoader   
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>
