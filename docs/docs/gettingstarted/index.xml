@@ -1,29 +1,75 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Capa – 快速开始</title><link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/</link><description>Recent content in 快速开始 on Capa</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://reactivegroup.github.io/capa.io/docs/gettingstarted/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 使用RPC API</title><link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/rpc-usage/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://reactivegroup.github.io/capa.io/docs/gettingstarted/rpc-usage/</guid><description>
-&lt;h2 id="步骤">步骤&lt;/h2>
-&lt;p>&lt;a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">示例&lt;/a>&lt;/p>
-&lt;ol>
-&lt;li>构建 RPC Client&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#000">CapaRpcClient&lt;/span> &lt;span style="color:#000">capaRpcClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">CapaRpcClientBuilder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>调用请求&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java"> &lt;span style="color:#000">Mono&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">byte&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&amp;gt;&lt;/span> &lt;span style="color:#000">responseMono&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">capaRpcClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">invokeMethod&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SERVICE_APP_ID&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
-&lt;span style="color:#4e9a06">&amp;#34;hello&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
-&lt;span style="color:#4e9a06">&amp;#34;hello&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
-&lt;span style="color:#000">HttpExtension&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">POST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
-&lt;span style="color:#204a87;font-weight:bold">null&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
-&lt;span style="color:#000">TypeRef&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">BYTE_ARRAY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>获取调用结果&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#204a87;font-weight:bold">byte&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> &lt;span style="color:#000">response&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">responseMono&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">block&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="解释">解释&lt;/h2>
-&lt;ol>
-&lt;li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 &lt;a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">DemoCapaHttp&lt;/a> 。&lt;/li>
-&lt;li>实现后的DemoCapaHttp，需要在 &lt;a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">capa-component.properties&lt;/a> 中进行配置，通过SPI机制实现加载。&lt;/li>
-&lt;/ol></description></item><item><title>Docs: 使用Configuration API</title><link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-&lt;/div>
-&lt;p>TODO&lt;/p></description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – 快速开始</title>
+    <link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/</link>
+    <description>Recent content in 快速开始 on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/gettingstarted/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: 使用RPC API</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/rpc-usage/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/gettingstarted/rpc-usage/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;步骤&#34;&gt;步骤&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java&#34;&gt;示例&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;构建 RPC Client&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;CapaRpcClient&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;capaRpcClient&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;CapaRpcClientBuilder&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;().&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;build&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;调用请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;  &lt;span style=&#34;color:#000&#34;&gt;Mono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;byte&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[]&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;responseMono&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;capaRpcClient&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;invokeMethod&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SERVICE_APP_ID&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#000&#34;&gt;HttpExtension&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;POST&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color:#000&#34;&gt;TypeRef&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;BYTE_ARRAY&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;获取调用结果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;byte&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;response&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;responseMono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;block&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解释&#34;&gt;解释&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 &lt;a href=&#34;https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java&#34;&gt;DemoCapaHttp&lt;/a&gt; 。&lt;/li&gt;
+&lt;li&gt;实现后的DemoCapaHttp，需要在 &lt;a href=&#34;https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java&#34;&gt;capa-component.properties&lt;/a&gt; 中进行配置，通过SPI机制实现加载。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: 使用Configuration API</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
+&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

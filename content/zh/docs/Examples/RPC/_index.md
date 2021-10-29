@@ -4,13 +4,8 @@ title: "RPC API示例"
 linkTitle: "RPC API示例"
 date: 2017-01-05
 description: >
-  A short lead description about this section page. Text here can also be **bold** or _italic_ and can even be split over multiple paragraphs.
+  RPC API 的Demo示例
 ---
 
-{{% pageinfo %}}
-This is a placeholder page. Replace it with your own content.
-{{% /pageinfo %}}
-
-
-This is the section landing page.
+[RPC API 设计文档](https://reactivegroup.github.io/capa.io/docs/concepts/rpc-design/)
 
