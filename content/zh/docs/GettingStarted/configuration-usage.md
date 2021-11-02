@@ -26,13 +26,27 @@ description: >
 
 [Demo示例](https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java)
 
-### 第一步：构建Configuration Client
+### 第一步：构建单例Configuration Client
 
 ```java
-StoreConfig storeConfig = new StoreConfig();
-storeConfig.setStoreName("config");
+public final class CapaConfigurationClientSingleton {
 
-CapaConfigurationClient client  = new CapaConfigurationClientBuilder(storeConfig).build();
+    private static volatile CapaConfigurationClient client;
+
+    public static CapaConfigurationClient getInstance() {
+        if (client == null) {
+            synchronized (CapaConfigurationClientSingleton.class) {
+                if (client == null) {
+                    StoreConfig storeConfig = new StoreConfig();
+                    storeConfig.setStoreName("qconfig");
+                    client = new CapaConfigurationClientBuilder(storeConfig).build();
+                }
+            }
+        }
+        return client;
+    }
+    private CapaConfigurationClientSingleton(){}
+}
 ```
 
 ### 第二步：通过提供的api对配置进行读/订阅/删除/保存等操作
@@ -40,6 +54,9 @@ CapaConfigurationClient client  = new CapaConfigurationClientBuilder(storeConfig
 1. 读配置操作(getConfiguration)
 
 ```java
+//拿到单例client
+private static final CapaConfigurationClient client = CapaConfigurationClientSingleton.getInstance();
+
 //getConfiguration()其中一个重载方法
 Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(new ConfigurationRequestItem(),TypeRef.get(User.class));
 
@@ -72,7 +89,11 @@ Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration("con
         TypeRef.get(User.class));
 
 //阻塞得到订阅的第一个配置结果
-SubConfigurationResp<User> config = configFlux.blockFirst();
+SubConfigurationResp<User> cur = configFlux.blockFirst();
+//订阅后续的变更并更新原数据
+configFlux.subscribe(resp-> {
+	cur.setItems(Lists.newArrayList(resp.getItems()));
+});
 ```
 
 3. 保存配置操作(saveConfiguration)

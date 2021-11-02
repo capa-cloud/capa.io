@@ -6,6 +6,84 @@ description: >
   使用Qconfig API实现在携程全家桶环境下的应用级配置管理
 ---
 
+## 目前支持的API
+
+```java
+@Override
+<T> Mono<List<ConfigurationItem<T>>> getConfiguration(String storeName, String appId, List<String> keys, Map<String, String> metadata, TypeRef<T> type);
+
+@Override
+<T> Mono<List<ConfigurationItem<T>>> getConfiguration(String storeName, String appId, List<String> keys, Map<String, String> metadata, String group, TypeRef<T> type);
+
+@Override
+<T> Mono<List<ConfigurationItem<T>>> getConfiguration(String storeName, String appId, List<String> keys, Map<String, String> metadata, String group, String label, TypeRef<T> type);
+@Override
+<T> Flux<SubConfigurationResp<T>> subscribeConfiguration(String storeName, String appId, List<String> keys, Map<String, String> metadata, TypeRef<T> type);
+
+@Override
+<T> Flux<SubConfigurationResp<T>> subscribeConfiguration(String storeName, String appId, List<String> keys, Map<String, String> metadata, String group, TypeRef<T> type);
+
+@Override
+<T> Flux<SubConfigurationResp<T>> subscribeConfiguration(String storeName, String appId, List<String> keys, Map<String, String> metadata, String group, String label, TypeRef<T> type);
+```
+
+## 暂不支持的API
+
+```java
+@Override
+<T> Mono<List<ConfigurationItem<T>>> getConfiguration(ConfigurationRequestItem configurationRequestItem, TypeRef<T> type);
+
+@Override
+<T> Flux<SubConfigurationResp<T>> subscribeConfiguration(ConfigurationRequestItem configurationRequestItem, TypeRef<T> type);
+
+@Override
+Mono<Void> saveConfiguration(SaveConfigurationRequest saveConfigurationRequest);
+
+@Override
+Mono<Void> deleteConfiguration(ConfigurationRequestItem configurationRequestItem);
+```
+
+## 推荐写法
+
+1. 创建单例的CapaConfigurationClient
+
+```java
+public final class CapaConfigurationClientSingleton {
+
+    private static volatile CapaConfigurationClient client;
+
+    public static CapaConfigurationClient getInstance() {
+        if (client == null) {
+            synchronized (CapaConfigurationClientSingleton.class) {
+                if (client == null) {
+                    StoreConfig storeConfig = new StoreConfig();
+                    storeConfig.setStoreName("qconfig");
+                    client = new CapaConfigurationClientBuilder(storeConfig).build();
+                }
+            }
+        }
+        return client;
+    }
+    private CapaConfigurationClientSingleton(){}
+}
+```
+
+2. 对于订阅配置的写法
+
+```java
+private static final CapaConfigurationClient capaConfigurationClient = CapaConfigurationClientSingleton.getInstance();
+
+static {
+    Flux<SubConfigurationResp<User>> subJsonConfigMono = capaConfigurationClient.subscribeConfiguration("qconfig", "123", Lists.newArrayList("test.json"), Collections.emptyMap(), TypeRef.get(User.class));
+    //获取当前配置
+    SubConfigurationResp<User> cur = subJsonConfigMono.blockFirst();
+    //更新订阅配置
+    subJsonConfigMono.subscribe(resp-> {
+        cur.setItems(Lists.newArrayList(resp.getItems()));
+    });
+}
+```
+
 ## 调用逻辑
 
 ![configuration_in_ctrip](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png)
