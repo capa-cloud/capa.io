@@ -5,7 +5,7 @@ title: "Configuration AWS-App Config示例"
 linkTitle: "Configuration AWS-App Config示例"
 date: 2021-10-15
 description: >
-  使用RPC API进行远程调用.
+  使用App Config实现在AWS云环境下的应用级配置管理.
 ---
 
 {{% pageinfo %}}

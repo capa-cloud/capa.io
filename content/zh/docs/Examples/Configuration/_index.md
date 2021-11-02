@@ -4,13 +4,15 @@ title: "Configuration API示例"
 linkTitle: "Configuration API示例"
 date: 2017-01-05
 description: >
-  A short lead description about this section page. Text here can also be **bold** or _italic_ and can even be split over multiple paragraphs.
+  Configuration API 的Demo示例
 ---
+Configuration API的实现类Demo示例
 
-{{% pageinfo %}}
-This is a placeholder page. Replace it with your own content.
-{{% /pageinfo %}}
+[实现类Demo](https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java)
+
+[配置文件Demo](https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/resources/capa-component.properties)
+
+ps:其中配置文件Demo中仅“group.rxcloud.capa.component.configstore.CapaConfigStore”和Configuration相关，其他property可以忽略
 
 
-This is the section landing page.
 

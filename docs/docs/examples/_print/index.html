@@ -296,15 +296,11 @@ if (!doNotTrack) {
 <div class="td-content" style="">
     
 	<h1 id="pg-3ab25b4f59302ad988083efa46ffa338">1 - Configuration API示例</h1>
-    <div class="lead">A short lead description about this section page. Text here can also be <strong>bold</strong> or <em>italic</em> and can even be split over multiple paragraphs.</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page. Replace it with your own content.</p>
-
-</div>
-
-<p>This is the section landing page.</p>
+    <div class="lead">Configuration API 的Demo示例</div>
+	<p>Configuration API的实现类Demo示例</p>
+<p><a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java">实现类Demo</a></p>
+<p><a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/resources/capa-component.properties">配置文件Demo</a></p>
+<p>ps:其中配置文件Demo中仅“group.rxcloud.capa.component.configstore.CapaConfigStore”和Configuration相关，其他property可以忽略</p>
 
 </div>
 
@@ -326,10 +322,10 @@ if (!doNotTrack) {
 	
     
 
-<div class="td-content" style="">
+<div class="td-content" style="page-break-before: always">
     
 	<h1 id="pg-04cf6018125e879c1675c190f77a8448">1.1 - Configuration AWS-App Config示例</h1>
-    <div class="lead">使用RPC API进行远程调用.</div>
+    <div class="lead">使用App Config实现在AWS云环境下的应用级配置管理.</div>
 	
 
 <div class="pageinfo pageinfo-primary">
@@ -354,15 +350,39 @@ if (!doNotTrack) {
 <div class="td-content" style="page-break-before: always">
     
 	<h1 id="pg-8b99579e65f96ca5fb1bb6afd95d27a8">1.2 - Configuration Ctrip-Qconfig示例</h1>
-    <div class="lead">使用RPC API进行远程调用.</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page. Replace it with your own content.</p>
-
-</div>
-
-<p>TODO</p>
+    <div class="lead">使用Qconfig API实现在携程全家桶环境下的应用级配置管理</div>
+	<h2 id="调用逻辑">调用逻辑</h2>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png" alt="configuration_in_ctrip"></p>
+<p>ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直接缩写成ServiceA</p>
+<ul>
+<li>ServiceA:服务调用方</li>
+<li>ServiceA通过调用Capa SDK中统一规范制定的Capa Configuration API发起该应用的配置管理请求</li>
+<li>找到通过SPI机制注册Capa Configuration API的Ctrip实现类，并执行相关逻辑</li>
+<li>Configuration API内部关于Ctrip的实现，底层调用Qconfig API进行相应的配置管理</li>
+<li>获取Qconfig Service返回的数据，并一路返回给服务调用方ServiceA</li>
+<li>ServiceA获取相关配置操作的结果，实现应用级别的配置管理</li>
+</ul>
+<h2 id="实现步骤">实现步骤</h2>
+<ol>
+<li>
+<p>针对携程全家桶的设施基础现状下，选型Qconfig为应用级别配置管理组件</p>
+</li>
+<li>
+<p>继承<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类，底层通过对Qconfig的封装，实现相应的Configuration API</p>
+</li>
+<li>
+<p>通过SPI机制引入相关实现类。具体流程为:</p>
+<ul>
+<li>引入相关实现类的jar包</li>
+<li>在项目resources路径下，新增capa-component.properties文件。在文件中新增属性key:“group.rxcloud.capa.component.configstore.CapaConfigStore”，value:“实现类的全路径”。示例如下:</li>
+</ul>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">//capa-component.properties文件
+group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
+</code></pre></li>
+<li>
+<p>调用方通过使用Capa统一规范的Configuration API即可完成对应用级别配置的管理需求。</p>
+</li>
+</ol>
 
 </div>
 
