@@ -23,14 +23,10 @@
       <description>
         
         
-        
-
-&lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;This is a placeholder page. Replace it with your own content.&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;This is the section landing page.&lt;/p&gt;
+        &lt;p&gt;Configuration API的实现类Demo示例&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java&#34;&gt;实现类Demo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/resources/capa-component.properties&#34;&gt;配置文件Demo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ps:其中配置文件Demo中仅“group.rxcloud.capa.component.configstore.CapaConfigStore”和Configuration相关，其他property可以忽略&lt;/p&gt;
 
       </description>
     </item>

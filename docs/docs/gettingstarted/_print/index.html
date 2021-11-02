@@ -195,7 +195,7 @@ if (!doNotTrack) {
     
     
 	
-<li>1: <a href="#pg-c0e7e60120879b149b7a44c21f0cd940">使用RPC API</a></li>
+<li>1: <a href="#pg-ddad2409a54422bdd1d4fcbe7deac64a">使用Configuration API</a></li>
 
 
     
@@ -203,7 +203,7 @@ if (!doNotTrack) {
     
     
 	
-<li>2: <a href="#pg-ddad2409a54422bdd1d4fcbe7deac64a">使用Configuration API</a></li>
+<li>2: <a href="#pg-c0e7e60120879b149b7a44c21f0cd940">使用RPC API</a></li>
 
 
     
@@ -241,7 +241,111 @@ if (!doNotTrack) {
 
 <div class="td-content" style="">
     
-	<h1 id="pg-c0e7e60120879b149b7a44c21f0cd940">1 - 使用RPC API</h1>
+	<h1 id="pg-ddad2409a54422bdd1d4fcbe7deac64a">1 - 使用Configuration API</h1>
+    <div class="lead">使用Configuration API进行应用级配置管理.</div>
+	<h2 id="简介">简介</h2>
+<ol>
+<li>
+<p>CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类)，如示例<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java">DemoCapaConfigStore</a></p>
+</li>
+<li>
+<p>通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component.properties文件。</p>
+<p>在文件中新增属性key:&ldquo;group.rxcloud.capa.component.configstore.CapaConfigStore&rdquo;，value:&ldquo;实现类的全路径&rdquo;。示例如下:</p>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">//capa-component.properties文件
+group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
+</code></pre></li>
+<li>
+<p>调用相应Configuration API进行应用级配置管理</p>
+</li>
+</ol>
+<h2 id="api使用步骤">API使用步骤</h2>
+<p><a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java">Demo示例</a></p>
+<h3 id="第一步构建单例configuration-client">第一步：构建单例Configuration Client</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CapaConfigurationClientSingleton</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">volatile</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">getInstance</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+            <span style="color:#204a87;font-weight:bold">synchronized</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaConfigurationClientSingleton</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+                <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+                    <span style="color:#000">StoreConfig</span> <span style="color:#000">storeConfig</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">StoreConfig</span><span style="color:#ce5c00;font-weight:bold">();</span>
+                    <span style="color:#000">storeConfig</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setStoreName</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;qconfig&#34;</span><span style="color:#ce5c00;font-weight:bold">);</span>
+                    <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">CapaConfigurationClientBuilder</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeConfig</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">build</span><span style="color:#ce5c00;font-weight:bold">();</span>
+                <span style="color:#ce5c00;font-weight:bold">}</span>
+            <span style="color:#ce5c00;font-weight:bold">}</span>
+        <span style="color:#ce5c00;font-weight:bold">}</span>
+        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">;</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
+    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">CapaConfigurationClientSingleton</span><span style="color:#ce5c00;font-weight:bold">(){}</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h3 id="第二步通过提供的api对配置进行读订阅删除保存等操作">第二步：通过提供的api对配置进行读/订阅/删除/保存等操作</h3>
+<ol>
+<li>读配置操作(getConfiguration)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//拿到单例client
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigurationClientSingleton</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getInstance</span><span style="color:#ce5c00;font-weight:bold">();</span>
+
+<span style="color:#8f5902;font-style:italic">//getConfiguration()其中一个重载方法
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">ConfigurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">(),</span><span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
+
+<span style="color:#8f5902;font-style:italic">//getConfiguration()另一个重载方法
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;config&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> 
+        <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
+        <span style="color:#000">metaDataMap</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;group&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;label&#34;</span>
+        <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
+
+<span style="color:#8f5902;font-style:italic">//阻塞获取配置结果
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">config</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><ol start="2">
+<li>订阅配置操作(subscribeConfiguration)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//subscribeConfiguration()其中一个重载方法
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">ConfigurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">(),</span><span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">))</span>
+
+<span style="color:#8f5902;font-style:italic">//subscribeConfiguration()另一个重载方法
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;config&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> 
+        <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
+        <span style="color:#000">metaDataMap</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;group&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;label&#34;</span>
+        <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
+
+<span style="color:#8f5902;font-style:italic">//阻塞得到订阅的第一个配置结果
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">cur</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">blockFirst</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#8f5902;font-style:italic">//订阅后续的变更并更新原数据
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+	<span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setItems</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">()));</span>
+<span style="color:#ce5c00;font-weight:bold">});</span>
+</code></pre></div><ol start="3">
+<li>保存配置操作(saveConfiguration)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">saveConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">SaveConfigurationRequest</span><span style="color:#ce5c00;font-weight:bold">());</span>
+</code></pre></div><ol start="4">
+<li>删除配置操作()</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">deleteConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">ConfigurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">());</span>
+</code></pre></div><p><strong>ps:以上api存在重载方法，<a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/client/DefaultCloudRuntimesClient.java">点击此处</a>查询全部api列表</strong></p>
+
+</div>
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-c0e7e60120879b149b7a44c21f0cd940">2 - 使用RPC API</h1>
     <div class="lead">使用RPC API进行远程调用.</div>
 	<h2 id="步骤">步骤</h2>
 <p><a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">示例</a></p>
@@ -267,31 +371,6 @@ if (!doNotTrack) {
 <li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 <a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">DemoCapaHttp</a> 。</li>
 <li>实现后的DemoCapaHttp，需要在 <a href="https://github.com/Huijing-Xu/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/http/DemoCapaHttp.java">capa-component.properties</a> 中进行配置，通过SPI机制实现加载。</li>
 </ol>
-
-</div>
-
-
-
-    
-	
-  
-    
-    
-	
-    
-
-<div class="td-content" style="page-break-before: always">
-    
-	<h1 id="pg-ddad2409a54422bdd1d4fcbe7deac64a">2 - 使用Configuration API</h1>
-    <div class="lead">使用Configuration API进行应用级配置管理.</div>
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page. Replace it with your own content.</p>
-
-</div>
-
-<p>TODO</p>
 
 </div>
 

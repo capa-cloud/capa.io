@@ -195,7 +195,15 @@ This the multi-page printable view of this section.
     
     
 	
-<li>1: <a href="#pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">RPC服务调用</a></li>
+<li>1: <a href="#pg-f7313c7c125cc787c1f486a153f11115">Configuration服务调用</a></li>
+
+
+    
+  
+    
+    
+	
+<li>2: <a href="#pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">RPC服务调用</a></li>
 
 
     
@@ -233,7 +241,91 @@ This the multi-page printable view of this section.
 
 <div class="td-content" style="">
     
-	<h1 id="pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">1 - RPC服务调用</h1>
+	<h1 id="pg-f7313c7c125cc787c1f486a153f11115">1 - Configuration服务调用</h1>
+    <div class="lead">执行应用级的配置管理</div>
+	<h2 id="介绍">介绍</h2>
+<p>通过调用Capa SDK API的方式，管理应用级配置。底层通过SPI的方式注册适配各平台的实现类。</p>
+<h2 id="调用逻辑">调用逻辑</h2>
+<p>下图为Capa的Configuration服务调用逻辑</p>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png" alt="Configuration"></p>
+<ul>
+<li>Service(appid:A):服务调用方，CloudX Configuration Service为服务被调用方，服务被调用方可以是任意云厂商的配置服务</li>
+<li>Service(appid:A)通过Capa SDK发起对Cloud Configuration Service的服务调用</li>
+<li>Capa Configuration API是统一的API规范</li>
+<li>Capa-CloudX Configuration Adaptor SDK为Capa的适配器实现类，通过spi的形式注册</li>
+<li>CloudX Configuration Service提供实际的配置服务</li>
+</ul>
+<h2 id="api设计">API设计</h2>
+<p>Capa Configuration API的设计参考了社区的规范</p>
+<p><a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API</a></p>
+<p><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java">Capa Configuration API</a></p>
+<p>具体参数含义如下:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>storeName</td>
+<td>存储名称</td>
+</tr>
+<tr>
+<td>appId</td>
+<td>同一命名空间内的服务唯一ID</td>
+</tr>
+<tr>
+<td>keys</td>
+<td>配置key列表</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>发送配置请求的元信息</td>
+</tr>
+<tr>
+<td>group</td>
+<td>配置组(Optional)</td>
+</tr>
+<tr>
+<td>label</td>
+<td>配置标签(Optional)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>请求响应对象中的泛型对应的具体类型</td>
+</tr>
+<tr>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java">ConfigurationRequestItem</a></td>
+<td>请求对象</td>
+</tr>
+<tr>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java">ConfigurationItem</a></td>
+<td>获取配置的响应对象</td>
+</tr>
+<tr>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java">SubConfigurationResp</a></td>
+<td>订阅配置的响应对象</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">2 - RPC服务调用</h1>
     <div class="lead">执行直接、安全、服务到服务的方法调用</div>
 	<h2 id="介绍">介绍</h2>
 <p>通过服务调用，应用程序可以使用 <a href="https://www.w3.org/Protocols/">HTTP</a> 这样的标准协议来发现并可靠地与其他应用程序通信。</p>
