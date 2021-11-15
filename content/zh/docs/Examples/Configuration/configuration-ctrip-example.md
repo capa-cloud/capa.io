@@ -3,10 +3,32 @@ title: "Configuration Ctrip-Qconfig示例"
 linkTitle: "Configuration Ctrip-Qconfig示例"
 date: 2021-10-15
 description: >
-  使用Qconfig API实现在携程全家桶环境下的应用级配置管理
+  使用Qconfig API实现在携程全家桶环境下的应用级配置管理#
 ---
 
+## 推荐使用方式
+
+**使用@QConfig注解的方式获取配置(支持热更新)**
+
+```java
+@Service
+public class JsonConfigService {
+    @QConfig("testjson.json")
+    private Person person;//非监听模式，支持热更新
+
+    @QConfig("testjson.json")
+    private void onChange(Person person) {//监听模式
+        System.out.println(person);
+    }
+
+    public String getPerson() {
+        return JSON.toJSONString(person);
+    }
+}
+```
+
 ## 目前支持的API
+**说明:不建议直接使用api的方式获取，使用上面注解方式更加方便**
 
 ```java
 @Override
@@ -41,47 +63,6 @@ Mono<Void> saveConfiguration(SaveConfigurationRequest saveConfigurationRequest);
 
 @Override
 Mono<Void> deleteConfiguration(ConfigurationRequestItem configurationRequestItem);
-```
-
-## 推荐写法
-
-1. 创建单例的CapaConfigurationClient
-
-```java
-public final class CapaConfigurationClientSingleton {
-
-    private static volatile CapaConfigurationClient client;
-
-    public static CapaConfigurationClient getInstance() {
-        if (client == null) {
-            synchronized (CapaConfigurationClientSingleton.class) {
-                if (client == null) {
-                    StoreConfig storeConfig = new StoreConfig();
-                    storeConfig.setStoreName("qconfig");
-                    client = new CapaConfigurationClientBuilder(storeConfig).build();
-                }
-            }
-        }
-        return client;
-    }
-    private CapaConfigurationClientSingleton(){}
-}
-```
-
-2. 对于订阅配置的写法
-
-```java
-private static final CapaConfigurationClient capaConfigurationClient = CapaConfigurationClientSingleton.getInstance();
-
-static {
-    Flux<SubConfigurationResp<User>> subJsonConfigMono = capaConfigurationClient.subscribeConfiguration("qconfig", "123", Lists.newArrayList("test.json"), Collections.emptyMap(), TypeRef.get(User.class));
-    //获取当前配置
-    SubConfigurationResp<User> cur = subJsonConfigMono.blockFirst();
-    //更新订阅配置
-    subJsonConfigMono.subscribe(resp-> {
-        cur.setItems(Lists.newArrayList(resp.getItems()));
-    });
-}
 ```
 
 ## 调用逻辑
