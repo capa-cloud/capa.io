@@ -27,7 +27,13 @@ public class JsonConfigService {
 }
 ```
 
+## 目前支持适配Ctrip-QConfig的功能范围
+
+1. 配置文件类型:.json和.properties结尾的文件
+2. 注解:仅支持@QConfig注解，注解支持热更新，修饰在field上，为非监听模式。需要监听模式的，可以使用注解修饰在方法上。具体使用方法见上“推荐使用方式”模块。
+
 ## 目前支持的API
+
 **说明:不建议直接使用api的方式获取，使用上面注解方式更加方便**
 
 ```java
