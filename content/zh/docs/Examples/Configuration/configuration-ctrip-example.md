@@ -93,10 +93,10 @@ ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直
 3. 通过SPI机制引入相关实现类。具体流程为:
 
    - 引入相关实现类的jar包
-   - 在项目resources路径下，新增capa-component.properties文件。在文件中新增属性key:“group.rxcloud.capa.component.configstore.CapaConfigStore”，value:“实现类的全路径”。示例如下:
+   - 在项目resources路径下，新增capa-component-configuration.properties文件。在文件中新增属性key:“group.rxcloud.capa.component.configstore.CapaConfigStore”，value:“实现类的全路径”。示例如下:
 
    ```properties
-   //capa-component.properties文件
+   //capa-component-configuration.properties文件
    group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
    ```
 

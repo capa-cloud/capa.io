@@ -34,7 +34,7 @@
 <meta itemprop="description" content="使用RPC API 在携程的 Service Mesh 中进行远程调用.
 "><meta itemprop="datePublished" content="2021-10-15T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-10-28T17:55:32+08:00" />
-<meta itemprop="wordCount" content="79">
+<meta itemprop="wordCount" content="230">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="RPC Ctrip-Service Mesh示例"/>
 <meta name="twitter:description" content="使用RPC API 在携程的 Service Mesh 中进行远程调用.
@@ -299,7 +299,7 @@ if (!doNotTrack) {
     
 
     <a href="https://github.com/reactivegroup/capa/edit/master/content/zh/docs/Examples/RPC/rpc-ctrip-example.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-    <a href="https://github.com/reactivegroup/capa/new/master/content/zh/docs/Examples/RPC/rpc-ctrip-example.md?filename=change-me.md&amp;value=---%0D%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0D%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0D%0Aweight%3A&#43;100%0D%0Adescription%3A&#43;%3E-%0D%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0D%0A---%0D%0A%0D%0A%23%23&#43;Heading%0D%0A%0D%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0D%0A%0D%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0D%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0D%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0D%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0D%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+    <a href="https://github.com/reactivegroup/capa/new/master/content/zh/docs/Examples/RPC/rpc-ctrip-example.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
     <a href="https://github.com/reactivegroup/capa/issues/new?title=RPC%20Ctrip-Service%20Mesh%e7%a4%ba%e4%be%8b" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
     
       
@@ -315,6 +315,14 @@ if (!doNotTrack) {
 
             
 
+
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#目前支持的api">目前支持的API</a></li>
+    <li><a href="#调用逻辑">调用逻辑</a></li>
+    <li><a href="#实现步骤">实现步骤</a></li>
+  </ul>
+</nav></div>
 
 
 
@@ -336,9 +344,9 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">1</span></a></li>
         
       </ul>
     </div>
@@ -360,7 +368,7 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span><span class="taxonomy-count">1</span></a></li>
         
       </ul>
     </div>
@@ -436,14 +444,48 @@ if (!doNotTrack) {
 		
 		
 	</header>    
-	<h2 id="调用逻辑">调用逻辑</h2>
+	<h2 id="目前支持的api">目前支持的API</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Object</span> <span style="color:#000">data</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Object</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">clazz</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Object</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Object</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">clazz</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">clazz</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Object</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Object</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">methodName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">HttpExtension</span> <span style="color:#000">httpExtension</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">InvokeMethodRequest</span> <span style="color:#000">invokeMethodRequest</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</code></pre></div><h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为 Capa 的 RPC 在携程的 Service Mesh 服务调用逻辑</p>
 <p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/RPC/rpc_invoke_in_ctrip.png" alt=""></p>
 <ul>
 <li>Service A 为服务调用方， Service B 为服务被调用方</li>
 <li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
 <li>Capa RPC API 是统一的 API 规范</li>
-<li>Ctrip RPC Call 是 携程 Service Mesh 支持的 RPC 调用</li>
+<li>通过 SPI 机制可以找到 Capa RPC API 的在 Ctrip 中的具体 RPC 实现 Capa-Ctrip RPC Impl</li>
+<li>获取 Service B 的返回数据，并返回给服务调用方 Service A</li>
 </ul>
 <h2 id="实现步骤">实现步骤</h2>
 <ol>
@@ -456,7 +498,7 @@ if (!doNotTrack) {
 <p>例如 CtripCapaHttp</p>
 </li>
 <li>
-<p>构建 capa-component.properties 文件，添加 group.rxcloud.capa.component.http.CapaHttp 和 group.rxcloud.capa.spi.config.CapaSpiOptionsLoader 对应的类的路径，以支持 SPI 方式加载对应的类。</p>
+<p>构建 capa-component-rpc.properties 文件，添加 group.rxcloud.capa.component.http.CapaHttp 和 group.rxcloud.capa.spi.config.CapaSpiOptionsLoader 对应的类的路径，以支持 SPI 方式加载对应的类。</p>
 <p>例如:</p>
 </li>
 </ol>

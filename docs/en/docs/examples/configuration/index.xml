@@ -118,9 +118,9 @@
 &lt;p&gt;通过SPI机制引入相关实现类。具体流程为:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;引入相关实现类的jar包&lt;/li&gt;
-&lt;li&gt;在项目resources路径下，新增capa-component.properties文件。在文件中新增属性key:“group.rxcloud.capa.component.configstore.CapaConfigStore”，value:“实现类的全路径”。示例如下:&lt;/li&gt;
+&lt;li&gt;在项目resources路径下，新增capa-component-configuration.properties文件。在文件中新增属性key:“group.rxcloud.capa.component.configstore.CapaConfigStore”，value:“实现类的全路径”。示例如下:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-properties&#34; data-lang=&#34;properties&#34;&gt;//capa-component.properties文件
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-properties&#34; data-lang=&#34;properties&#34;&gt;//capa-component-configuration.properties文件
 group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;li&gt;

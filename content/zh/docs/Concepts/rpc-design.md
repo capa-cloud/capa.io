@@ -17,7 +17,8 @@ description: >
 * Service A 为服务调用方， Service B 为服务被调用方
 * Service A 通过 Capa SDK 发起对 Service B 的服务调用
 * Capa RPC API 是统一的 API 规范
-* RPC Call 为 Service B 所支持的 RPC 调用方式 ，例如 AWS App Mesh Api
+* 通过 SPI 机制可以找到 Capa RPC API 的具体 RPC 实现 RPC Impl
+* 获取 Service B 的返回数据，并返回给服务调用方 Service A
 
 ## API 设计
 

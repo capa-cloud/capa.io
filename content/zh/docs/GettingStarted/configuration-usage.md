@@ -11,12 +11,12 @@ description: >
 
 1. CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承[CapaConfigStoreSpi](https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java)抽象类)，如示例[DemoCapaConfigStore](https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java)
 
-2. 通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component.properties文件。
+2. 通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component-configuration.properties文件。
 
    在文件中新增属性key:"group.rxcloud.capa.component.configstore.CapaConfigStore"，value:"实现类的全路径"。示例如下:
 
    ```properties
-   //capa-component.properties文件
+   //capa-component-configuration.properties文件
    group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
    ```
 
