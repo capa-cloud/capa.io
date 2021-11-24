@@ -351,7 +351,38 @@ if (!doNotTrack) {
     
 	<h1 id="pg-8b99579e65f96ca5fb1bb6afd95d27a8">1.2 - Configuration Ctrip-Qconfig示例</h1>
     <div class="lead">使用Qconfig API实现在携程全家桶环境下的应用级配置管理#</div>
-	<h2 id="推荐使用方式">推荐使用方式</h2>
+	<h2 id="接入使用流程">接入使用流程</h2>
+<p>step1.引入maven依赖</p>
+<p>引入相关依赖maven包:CAPA SDK,ctrip实现包以及ctrip 适配包</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+  <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+  <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-sdk<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+  <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.6.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>com.ctrip.ibu<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-spi-ctrip-qconfig<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.6-SNAPSHOT<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>com.ctrip.ibu<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-adaptor-ctrip-qconfig<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.0-SNAPSHOT<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+</code></pre></div><p>ps:以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入</p>
+<p>step2.增加config properties文件</p>
+<ol>
+<li>项目resources下新增capa-component-configuration.properties文件</li>
+<li>文件内容如下</li>
+</ol>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
+store.config.name=QConfig
+</code></pre><p>step3.相关代码修改</p>
+<h3 id="注解接入使用流程推荐">注解接入使用流程(推荐)</h3>
+<ol>
+<li>修改注解@QConfig注解import路径:</li>
+</ol>
+<p>将<strong>import qunar.tc.qconfig.client.spring.QConfig</strong>;修改为<strong>import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;</strong></p>
 <p><strong>使用@QConfig注解的方式获取配置(支持热更新)</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#5c35cc;font-weight:bold">@Service</span>
 <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">JsonConfigService</span> <span style="color:#ce5c00;font-weight:bold">{</span>
@@ -367,10 +398,17 @@ if (!doNotTrack) {
         <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">JSON</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">toJSONString</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">);</span>
     <span style="color:#ce5c00;font-weight:bold">}</span>
 <span style="color:#ce5c00;font-weight:bold">}</span>
-</code></pre></div><h2 id="目前支持适配ctrip-qconfig的功能范围">目前支持适配Ctrip-QConfig的功能范围</h2>
+</code></pre></div><h3 id="api接入使用流程">API接入使用流程</h3>
+<p>目前API获取配置的方式，代码已经支持，需要使用方额外创建client。后续有需求的话，再补全相关接入文档。</p>
+<h2 id="目前支持适配ctrip-qconfig的功能范围">目前支持适配Ctrip-QConfig的功能范围</h2>
 <ol>
 <li>配置文件类型:.json和.properties结尾的文件</li>
-<li>注解:仅支持@QConfig注解，注解支持热更新，修饰在field上，为非监听模式。需要监听模式的，可以使用注解修饰在方法上。具体使用方法见上“推荐使用方式”模块。</li>
+<li>注解支持范围:仅支持@QConfig注解(不支持其他注解)，注解支持修饰在field上和method上，支持热更新。
+<ul>
+<li>修饰在field上，为非监听模式。</li>
+<li>需要监听模式的，可以使用注解修饰在方法上。</li>
+</ul>
+</li>
 </ol>
 <h2 id="目前支持的api">目前支持的API</h2>
 <p><strong>说明:不建议直接使用api的方式获取，使用上面注解方式更加方便</strong></p>
@@ -429,6 +467,8 @@ if (!doNotTrack) {
 </ul>
 <pre tabindex="0"><code class="language-properties" data-lang="properties">//capa-component-configuration.properties文件
 group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
+//命名store config name(adaptor中使用)
+store.config.name=QConfig
 </code></pre></li>
 <li>
 <p>调用方通过使用Capa统一规范的Configuration API即可完成对应用级别配置的管理需求。</p>
