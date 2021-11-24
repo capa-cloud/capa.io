@@ -6,7 +6,55 @@ description: >
   使用Qconfig API实现在携程全家桶环境下的应用级配置管理#
 ---
 
-## 推荐使用方式
+## 接入使用流程
+
+step1.引入maven依赖
+
+引入相关依赖maven包:CAPA SDK,ctrip实现包以及ctrip 适配包
+
+```xml
+<dependency>
+  <groupId>group.rxcloud</groupId>
+  <artifactId>capa-sdk</artifactId>
+  <version>1.0.6.RELEASE</version>
+</dependency>
+```
+
+```xml
+<dependency>
+    <groupId>com.ctrip.ibu</groupId>
+    <artifactId>capa-spi-ctrip-qconfig</artifactId>
+    <version>1.0.6-SNAPSHOT</version>
+</dependency>
+```
+
+```xml
+<dependency>
+    <groupId>com.ctrip.ibu</groupId>
+    <artifactId>capa-adaptor-ctrip-qconfig</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+ps:以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入
+
+step2.增加config properties文件
+
+1. 项目resources下新增capa-component-configuration.properties文件
+2. 文件内容如下
+
+```properties
+group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
+store.config.name=QConfig
+```
+
+step3.相关代码修改
+
+### 注解接入使用流程(推荐)
+
+1. 修改注解@QConfig注解import路径:
+
+将**import qunar.tc.qconfig.client.spring.QConfig**;修改为**import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;**
 
 **使用@QConfig注解的方式获取配置(支持热更新)**
 
@@ -27,10 +75,16 @@ public class JsonConfigService {
 }
 ```
 
+### API接入使用流程
+
+目前API获取配置的方式，代码已经支持，需要使用方额外创建client。后续有需求的话，再补全相关接入文档。
+
 ## 目前支持适配Ctrip-QConfig的功能范围
 
 1. 配置文件类型:.json和.properties结尾的文件
-2. 注解:仅支持@QConfig注解，注解支持热更新，修饰在field上，为非监听模式。需要监听模式的，可以使用注解修饰在方法上。具体使用方法见上“推荐使用方式”模块。
+2. 注解支持范围:仅支持@QConfig注解(不支持其他注解)，注解支持修饰在field上和method上，支持热更新。
+   - 修饰在field上，为非监听模式。
+   - 需要监听模式的，可以使用注解修饰在方法上。
 
 ## 目前支持的API
 
@@ -98,6 +152,8 @@ ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直
    ```properties
    //capa-component-configuration.properties文件
    group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
+   //命名store config name(adaptor中使用)
+   store.config.name=QConfig
    ```
 
 4. 调用方通过使用Capa统一规范的Configuration API即可完成对应用级别配置的管理需求。
