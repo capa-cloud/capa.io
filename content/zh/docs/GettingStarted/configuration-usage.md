@@ -13,11 +13,12 @@ description: >
 
 2. 通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component-configuration.properties文件。
 
-   在文件中新增属性key:"group.rxcloud.capa.component.configstore.CapaConfigStore"，value:"实现类的全路径"。示例如下:
+   在文件中新增属性key:"group.rxcloud.capa.component.configstore.CapaConfigStore"，value:"实现类的全路径"；新增属性key:"CONFIGURATION_COMPONENT_STORE_NAME",value:"config store name"示例如下:
 
    ```properties
    //capa-component-configuration.properties文件
    group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
+   CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
    ```
 
 3. 调用相应Configuration API进行应用级配置管理
@@ -29,23 +30,25 @@ description: >
 ### 第一步：构建单例Configuration Client
 
 ```java
-public final class CapaConfigurationClientSingleton {
+public final class CapaConfigStoreClientProvider {
 
     private static volatile CapaConfigurationClient client;
 
-    public static CapaConfigurationClient getInstance() {
+    public static CapaConfigurationClient getClient() {
         if (client == null) {
-            synchronized (CapaConfigurationClientSingleton.class) {
+            synchronized (CapaConfigStoreClientProvider.class) {
                 if (client == null) {
                     StoreConfig storeConfig = new StoreConfig();
-                    storeConfig.setStoreName("qconfig");
+                    storeConfig.setStoreName(Optional.ofNullable(CapaProperties.COMPONENT_PROPERTIES_SUPPLIER.apply("configuration").getProperty("CONFIGURATION_COMPONENT_STORE_NAME")).orElse("UN_CONFIGURED_STORE_CONFIG_NAME"));
                     client = new CapaConfigurationClientBuilder(storeConfig).build();
                 }
             }
         }
         return client;
     }
-    private CapaConfigurationClientSingleton(){}
+
+    private CapaConfigStoreClientProvider() {
+    }
 }
 ```
 
@@ -55,7 +58,7 @@ public final class CapaConfigurationClientSingleton {
 
 ```java
 //拿到单例client
-private static final CapaConfigurationClient client = CapaConfigurationClientSingleton.getInstance();
+private static final CapaConfigurationClient client = CapaConfigurationClientSingleton.getClient();
 
 //getConfiguration()其中一个重载方法
 Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(new ConfigurationRequestItem(),TypeRef.get(User.class));
@@ -76,6 +79,9 @@ List<ConfigurationItem<User>> config = configMono.block();
 2. 订阅配置操作(subscribeConfiguration)
 
 ```java
+//本地存配置的变量
+private SubConfigurationResp<String> cur;
+
 //subscribeConfiguration()其中一个重载方法
 Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration(new ConfigurationRequestItem(),TypeRef.get(User.class))
 
@@ -88,12 +94,8 @@ Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration("con
         "label"
         TypeRef.get(User.class));
 
-//阻塞得到订阅的第一个配置结果
-SubConfigurationResp<User> cur = configFlux.blockFirst();
 //订阅后续的变更并更新原数据
-configFlux.subscribe(resp-> {
-	cur.setItems(Lists.newArrayList(resp.getItems()));
-});
+configFlux.subscribe(resp -> cur.setItems(resp.getItems()));
 ```
 
 3. 保存配置操作(saveConfiguration)
