@@ -28,13 +28,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/docs/examples/configuration/configuration-ctrip-example/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2021-10-15T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-19T15:37:25+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2021-11-27T16:15:37+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Configuration Ctrip-Qconfig示例">
 <meta itemprop="description" content="使用Qconfig API实现在携程全家桶环境下的应用级配置管理#
 "><meta itemprop="datePublished" content="2021-10-15T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-11-19T15:37:25+08:00" />
-<meta itemprop="wordCount" content="218">
+<meta itemprop="dateModified" content="2021-11-27T16:15:37+08:00" />
+<meta itemprop="wordCount" content="281">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuration Ctrip-Qconfig示例"/>
 <meta name="twitter:description" content="使用Qconfig API实现在携程全家桶环境下的应用级配置管理#
@@ -320,11 +320,11 @@ if (!doNotTrack) {
   <ul>
     <li><a href="#接入使用流程">接入使用流程</a>
       <ul>
-        <li><a href="#注解接入使用流程推荐">注解接入使用流程(推荐)</a></li>
+        <li><a href="#注解接入使用流程">注解接入使用流程</a></li>
         <li><a href="#api接入使用流程">API接入使用流程</a></li>
       </ul>
     </li>
-    <li><a href="#目前支持适配ctrip-qconfig的功能范围">目前支持适配Ctrip-QConfig的功能范围</a></li>
+    <li><a href="#目前支持的功能范围">目前支持的功能范围</a></li>
     <li><a href="#目前支持的api">目前支持的API</a></li>
     <li><a href="#暂不支持的api">暂不支持的API</a></li>
     <li><a href="#调用逻辑">调用逻辑</a></li>
@@ -346,19 +346,6 @@ if (!doNotTrack) {
 
   
   
-    <div class="taxonomy taxonomy-terms-cloud taxo-tags">
-      
-        <h5 class="taxonomy-title">Tag Cloud</h5>
-      
-      <ul class="taxonomy-terms">
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">1</span></a></li>
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">1</span></a></li>
-        
-      </ul>
-    </div>
-  
 
 	
 		
@@ -369,17 +356,6 @@ if (!doNotTrack) {
 
 
   
-  
-    <div class="taxonomy taxonomy-terms-cloud taxo-categories">
-      
-        <h5 class="taxonomy-title">Categories</h5>
-      
-      <ul class="taxonomy-terms">
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span><span class="taxonomy-count">1</span></a></li>
-        
-      </ul>
-    </div>
   
 
 	
@@ -471,20 +447,20 @@ if (!doNotTrack) {
     <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.0-SNAPSHOT<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
 <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
 </code></pre></div><p>ps:以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入</p>
-<p>step2.增加config properties文件</p>
+<p><del>step2.增加config properties文件</del></p>
+<p><strong>2021/11/27 update:升级capa-spi-ctrip-qconfig jar包，将不需要再显式加入此文件(1.0.7及以后的版本，目前还没deploy,使用1.0.6-SNAPSHOT还需要显式加入此文件)</strong></p>
 <ol>
-<li>项目resources下新增capa-component-configuration.properties文件</li>
-<li>文件内容如下</li>
+<li><del>项目resources下新增capa-component-configuration.properties文件</del></li>
+<li><del>文件内容如下</del></li>
 </ol>
 <pre tabindex="0"><code class="language-properties" data-lang="properties">group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
 store.config.name=QConfig
 </code></pre><p>step3.相关代码修改</p>
-<h3 id="注解接入使用流程推荐">注解接入使用流程(推荐)</h3>
-<ol>
-<li>修改注解@QConfig注解import路径:</li>
-</ol>
-<p>将<strong>import qunar.tc.qconfig.client.spring.QConfig</strong>;修改为<strong>import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;</strong></p>
-<p><strong>使用@QConfig注解的方式获取配置(支持热更新)</strong></p>
+<h3 id="注解接入使用流程">注解接入使用流程</h3>
+<ul>
+<li>使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将<strong>import qunar.tc.qconfig.client.spring.QConfig</strong>;修改为<strong>import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;</strong></li>
+<li>使用如下</li>
+</ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#5c35cc;font-weight:bold">@Service</span>
 <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">JsonConfigService</span> <span style="color:#ce5c00;font-weight:bold">{</span>
     <span style="color:#5c35cc;font-weight:bold">@QConfig</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;testjson.json&#34;</span><span style="color:#ce5c00;font-weight:bold">)</span>
@@ -500,19 +476,60 @@ store.config.name=QConfig
     <span style="color:#ce5c00;font-weight:bold">}</span>
 <span style="color:#ce5c00;font-weight:bold">}</span>
 </code></pre></div><h3 id="api接入使用流程">API接入使用流程</h3>
-<p>目前API获取配置的方式，代码已经支持，需要使用方额外创建client。后续有需求的话，再补全相关接入文档。</p>
-<h2 id="目前支持适配ctrip-qconfig的功能范围">目前支持适配Ctrip-QConfig的功能范围</h2>
-<ol>
-<li>配置文件类型:.json和.properties结尾的文件</li>
-<li>注解支持范围:仅支持@QConfig注解(不支持其他注解)，注解支持修饰在field上和method上，支持热更新。
 <ul>
-<li>修饰在field上，为非监听模式。</li>
-<li>需要监听模式的，可以使用注解修饰在方法上。</li>
+<li>调用adaptor中方法，创建单例单例Configuration Client</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getClient</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><ul>
+<li>调用get/subscribe接口获取/订阅数据</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//ps:storeName不能自行随便定义
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">String</span> <span style="color:#000">storeName</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Optional</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">ofNullable</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaProperties</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">COMPONENT_PROPERTIES_SUPPLIER</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">apply</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;configuration&#34;</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">getProperty</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;CONFIGURATION_COMPONENT_STORE_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">)).</span><span style="color:#c4a000">orElse</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;UN_CONFIGURED_STORE_CONFIG_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> 
+        <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
+        <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;&#34;</span>
+        <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
+
+<span style="color:#8f5902;font-style:italic">//阻塞获取配置结果
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">config</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//本地存配置的变量
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#8f5902;font-style:italic">//ps:storeName不能自行随便定义
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
+                <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#4e9a06">&#34;&#34;</span>
+                <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
+
+<span style="color:#8f5902;font-style:italic">//订阅后续的变更并更新原数据
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setItems</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">()));</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>代码中，通过本地存配置的变量cur使用相关配置</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#000">String</span> <span style="color:#000">getConfig</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#000">User</span> <span style="color:#000">user</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">().</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">0</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">getContent</span><span style="color:#ce5c00;font-weight:bold">();</span>
+        <span style="color:#000">System</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">out</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">println</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;-----------------------------------age:&#34;</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">user</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getName</span><span style="color:#ce5c00;font-weight:bold">());</span>
+ <span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h2 id="目前支持的功能范围">目前支持的功能范围</h2>
+<ol>
+<li>配置文件类型:<strong>.json和.properties结尾的文件</strong></li>
+<li>注解支持范围:仅支持@QConfig注解(不支持其他注解)，注解支持修饰在field上和method上
+<ul>
+<li>修饰在field上，为非监听模式，仅支持热更新</li>
+<li>修饰在方法上，为监听模式，同时支持热更新</li>
 </ul>
 </li>
+<li>API支持范围如下</li>
 </ol>
 <h2 id="目前支持的api">目前支持的API</h2>
-<p><strong>说明:不建议直接使用api的方式获取，使用上面注解方式更加方便</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#5c35cc;font-weight:bold">@Override</span>
 <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">keys</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
 
@@ -564,12 +581,11 @@ store.config.name=QConfig
 <p>通过SPI机制引入相关实现类。具体流程为:</p>
 <ul>
 <li>引入相关实现类的jar包</li>
-<li>在项目resources路径下，新增capa-component-configuration.properties文件。在文件中新增属性key:“group.rxcloud.capa.component.configstore.CapaConfigStore”，value:“实现类的全路径”。示例如下:</li>
+<li>在项目resources路径下，新增capa-component-configuration.properties文件。文件内容如下</li>
 </ul>
 <pre tabindex="0"><code class="language-properties" data-lang="properties">//capa-component-configuration.properties文件
-group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
-//命名store config name(adaptor中使用)
-store.config.name=QConfig
+group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
+CONFIGURATION_COMPONENT_STORE_NAME=QConfig
 </code></pre></li>
 <li>
 <p>调用方通过使用Capa统一规范的Configuration API即可完成对应用级别配置的管理需求。</p>
@@ -641,7 +657,7 @@ store.config.name=QConfig
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  最后修改 19.11.2021: <a href="https://github.com/reactivegroup/capa/commit/3456acc00b6baac1e637cf5261653225249456ba">add RPC Aws app mesh (3456acc)</a>
+  最后修改 27.11.2021: <a href="https://github.com/reactivegroup/capa/commit/eb652831e7bd3a67b2f287dd53c0473a0f34577b">docs:update Config related docs (eb65283)</a>
 </div>
 
 </div>

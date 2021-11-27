@@ -28,14 +28,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/docs/examples/configuration/configuration-aws-example/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2021-10-15T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-02T17:13:28+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2021-11-27T16:15:37+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Configuration AWS-App Config示例">
 <meta itemprop="description" content="使用App Config实现在AWS云环境下的应用级配置管理.
 "><meta itemprop="datePublished" content="2021-10-15T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-11-02T17:13:28+08:00" />
-<meta itemprop="wordCount" content="12">
-<meta itemprop="keywords" content="sample,docs," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="dateModified" content="2021-11-27T16:15:37+08:00" />
+<meta itemprop="wordCount" content="321">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuration AWS-App Config示例"/>
 <meta name="twitter:description" content="使用App Config实现在AWS云环境下的应用级配置管理.
 "/>
@@ -316,6 +316,20 @@ if (!doNotTrack) {
             
 
 
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#接入使用流程">接入使用流程</a>
+      <ul>
+        <li><a href="#非携程接入方不使用adaptor包使用流程">非携程接入方(不使用adaptor包)使用流程</a></li>
+        <li><a href="#携程接入方使用流程">携程接入方使用流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#目前支持的功能范围">目前支持的功能范围</a></li>
+    <li><a href="#目前支持的api">目前支持的API</a></li>
+    <li><a href="#暂不支持的api">暂不支持的API</a></li>
+  </ul>
+</nav></div>
+
 
 
             
@@ -330,19 +344,6 @@ if (!doNotTrack) {
 
   
   
-    <div class="taxonomy taxonomy-terms-cloud taxo-tags">
-      
-        <h5 class="taxonomy-title">Tag Cloud</h5>
-      
-      <ul class="taxonomy-terms">
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">1</span></a></li>
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">1</span></a></li>
-        
-      </ul>
-    </div>
-  
 
 	
 		
@@ -353,17 +354,6 @@ if (!doNotTrack) {
 
 
   
-  
-    <div class="taxonomy taxonomy-terms-cloud taxo-categories">
-      
-        <h5 class="taxonomy-title">Categories</h5>
-      
-      <ul class="taxonomy-terms">
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span><span class="taxonomy-count">1</span></a></li>
-        
-      </ul>
-    </div>
   
 
 	
@@ -428,43 +418,179 @@ if (!doNotTrack) {
 				
 
 
-<div class="taxonomy taxonomy-terms-article taxo-tags">
-  <h5 class="taxonomy-title">Tags:</h5>
-  <ul class="taxonomy-terms">
-    
-      <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span></a></li>
-    
-  </ul>
-</div>
-
 			
 				
 
-
-<div class="taxonomy taxonomy-terms-article taxo-categories">
-  <h5 class="taxonomy-title">Categories:</h5>
-  <ul class="taxonomy-terms">
-    
-      <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span></a></li>
-    
-  </ul>
-</div>
 
 			
 		
 		
 	</header>    
-	
+	<h2 id="接入使用流程">接入使用流程</h2>
+<p>step1.引入maven依赖</p>
+<p>引入相关依赖maven包:CAPA SDK,ctrip实现包以及ctrip 适配包</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+  <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+  <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-sdk<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+  <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.6.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-spi-aws-config<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.3.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+</code></pre></div><p>如果需要使用@QConfig注解，需要额外引入(目前jar包在携程私服上，仅限携程开发使用)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>com.ctrip.ibu<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-adaptor-ctrip-qconfig<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.0-SNAPSHOT<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+</code></pre></div><p>ps:以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入</p>
+<p><del>step2.增加config properties文件</del></p>
+<p><strong>2021/11/27 update:升级capa-spi-aws-config jar包，将不需要再显式加入此文件(1.0.4及以后的版本，目前还没deploy,使用1.0.3.RELEASE还需要显式加入此文件)</strong></p>
+<ol>
+<li><del>项目resources下新增capa-component-configuration.properties文件</del></li>
+<li><del>文件内容如下</del></li>
+</ol>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.aws.config.AwsCapaConfiguration
+CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
+</code></pre><p>step3.相关代码修改</p>
+<h3 id="非携程接入方不使用adaptor包使用流程">非携程接入方(不使用adaptor包)使用流程</h3>
+<p>参照<a href="https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/">快速开始-使用Configuration API</a></p>
+<ul>
+<li>创建单例单例Configuration Client</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CapaConfigStoreClientProvider</span> <span style="color:#ce5c00;font-weight:bold">{</span>
 
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page. Replace it with your own content.</p>
+    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">volatile</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">;</span>
 
-</div>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">getClient</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+            <span style="color:#204a87;font-weight:bold">synchronized</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+                <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+                    <span style="color:#000">StoreConfig</span> <span style="color:#000">storeConfig</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">StoreConfig</span><span style="color:#ce5c00;font-weight:bold">();</span>
+                   <span style="color:#000">String</span> <span style="color:#000">storeName</span> <span style="color:#ce5c00;font-weight:bold">=</span>  <span style="color:#000">Optional</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">ofNullable</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaProperties</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">COMPONENT_PROPERTIES_SUPPLIER</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">apply</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;configuration&#34;</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">getProperty</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;CONFIGURATION_COMPONENT_STORE_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">)).</span><span style="color:#c4a000">orElse</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;UN_CONFIGURED_STORE_CONFIG_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">);</span>
+                    <span style="color:#000">storeConfig</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setStoreName</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">);</span>
+                    <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">CapaConfigurationClientBuilder</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeConfig</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">build</span><span style="color:#ce5c00;font-weight:bold">();</span>
+                <span style="color:#ce5c00;font-weight:bold">}</span>
+            <span style="color:#ce5c00;font-weight:bold">}</span>
+        <span style="color:#ce5c00;font-weight:bold">}</span>
+        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">;</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
 
-<p>TODO</p>
+    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getClient</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><ul>
+<li>调用get/subscribe接口获取/订阅数据</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//ps:storeName不能自行随便定义
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">String</span> <span style="color:#000">storeName</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">Optional</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">ofNullable</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaProperties</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">COMPONENT_PROPERTIES_SUPPLIER</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">apply</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;configuration&#34;</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">getProperty</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;CONFIGURATION_COMPONENT_STORE_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">)).</span><span style="color:#c4a000">orElse</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;UN_CONFIGURED_STORE_CONFIG_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> 
+        <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
+        <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+        <span style="color:#4e9a06">&#34;&#34;</span>
+        <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
 
+<span style="color:#8f5902;font-style:italic">//阻塞获取配置结果
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">config</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//本地存配置的变量
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+<span style="color:#204a87;font-weight:bold">static</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#8f5902;font-style:italic">//ps:storeName不能自行随便定义
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
+                <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#4e9a06">&#34;&#34;</span>
+                <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
+
+<span style="color:#8f5902;font-style:italic">//订阅后续的变更并更新原数据
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setItems</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">()));</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>代码中，通过本地存配置的变量cur使用相关配置</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#000">String</span> <span style="color:#000">getConfig</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#000">User</span> <span style="color:#000">user</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">().</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">0</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">getContent</span><span style="color:#ce5c00;font-weight:bold">();</span>
+        <span style="color:#000">System</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">out</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">println</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;-----------------------------------age:&#34;</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">user</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getName</span><span style="color:#ce5c00;font-weight:bold">());</span>
+ <span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h3 id="携程接入方使用流程">携程接入方使用流程</h3>
+<h4 id="注解使用流程">注解使用流程</h4>
+<ul>
+<li>
+<p>使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将<strong>import qunar.tc.qconfig.client.spring.QConfig</strong>;修改为<strong>import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;</strong></p>
+</li>
+<li>
+<p>代码写法</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#5c35cc;font-weight:bold">@Service</span>
+<span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">JsonConfigService</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#5c35cc;font-weight:bold">@QConfig</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;testjson.json&#34;</span><span style="color:#ce5c00;font-weight:bold">)</span>
+    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">Person</span> <span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">;</span><span style="color:#8f5902;font-style:italic">//非监听模式，支持热更新
+</span><span style="color:#8f5902;font-style:italic"></span>
+    <span style="color:#5c35cc;font-weight:bold">@QConfig</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;testjson.json&#34;</span><span style="color:#ce5c00;font-weight:bold">)</span>
+    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">onChange</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Person</span> <span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span><span style="color:#8f5902;font-style:italic">//监听模式
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">System</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">out</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">println</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">);</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
+
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#000">String</span> <span style="color:#000">getPerson</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">JSON</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">toJSONString</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">);</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><ul>
+<li>注解支持范围:只支持@QConfig注解，并且只支持注解加载field上和method上</li>
+</ul>
+<h4 id="api使用流程">API使用流程</h4>
+<p>除第一步创建单例Client部分改为调用adaptor中方法获取,其余步骤和非携程方接入流程相同</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getClient</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><h2 id="目前支持的功能范围">目前支持的功能范围</h2>
+<ol>
+<li>配置文件类型:<strong>.json和.properties结尾的文件</strong></li>
+<li>注解支持范围:仅支持@QConfig注解(不支持其他注解)，注解支持修饰在field上和method上
+<ul>
+<li>修饰在field上，为非监听模式，仅支持热更新</li>
+<li>修饰在方法上，为监听模式，同时支持热更新</li>
+</ul>
+</li>
+<li>API支持范围如下</li>
+</ol>
+<h2 id="目前支持的api">目前支持的API</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">keys</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">keys</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">keys</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">label</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">keys</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">keys</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">keys</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">label</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</code></pre></div><h2 id="暂不支持的api">暂不支持的API</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">ConfigurationRequestItem</span> <span style="color:#000">configurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">ConfigurationRequestItem</span> <span style="color:#000">configurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">saveConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SaveConfigurationRequest</span> <span style="color:#000">saveConfigurationRequest</span><span style="color:#ce5c00;font-weight:bold">);</span>
+
+<span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">deleteConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">ConfigurationRequestItem</span> <span style="color:#000">configurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</code></pre></div>
 	
 		<style>
   .feedback--answer {
@@ -530,7 +656,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  最后修改 02.11.2021: <a href="https://github.com/reactivegroup/capa/commit/a7a29687b9d075acf7110fa7a9f5c4892b7dc1ef">docs:add configuration part documentation(except configuration for AWS part) (a7a2968)</a>
+  最后修改 27.11.2021: <a href="https://github.com/reactivegroup/capa/commit/eb652831e7bd3a67b2f287dd53c0473a0f34577b">docs:update Config related docs (eb65283)</a>
 </div>
 
 </div>

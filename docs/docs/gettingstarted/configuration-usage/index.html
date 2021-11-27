@@ -28,13 +28,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2021-10-27T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-19T15:37:25+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2021-11-27T16:15:37+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="使用Configuration API">
 <meta itemprop="description" content="使用Configuration API进行应用级配置管理.
 "><meta itemprop="datePublished" content="2021-10-27T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-11-19T15:37:25+08:00" />
-<meta itemprop="wordCount" content="132">
+<meta itemprop="dateModified" content="2021-11-27T16:15:37+08:00" />
+<meta itemprop="wordCount" content="136">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用Configuration API"/>
 <meta name="twitter:description" content="使用Configuration API进行应用级配置管理.
@@ -342,19 +342,6 @@ if (!doNotTrack) {
 
   
   
-    <div class="taxonomy taxonomy-terms-cloud taxo-tags">
-      
-        <h5 class="taxonomy-title">Tag Cloud</h5>
-      
-      <ul class="taxonomy-terms">
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/docs/" data-taxonomy-term="docs"><span class="taxonomy-label">docs</span><span class="taxonomy-count">1</span></a></li>
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/tags/sample/" data-taxonomy-term="sample"><span class="taxonomy-label">sample</span><span class="taxonomy-count">1</span></a></li>
-        
-      </ul>
-    </div>
-  
 
 	
 		
@@ -365,17 +352,6 @@ if (!doNotTrack) {
 
 
   
-  
-    <div class="taxonomy taxonomy-terms-cloud taxo-categories">
-      
-        <h5 class="taxonomy-title">Categories</h5>
-      
-      <ul class="taxonomy-terms">
-        
-          <li><a class="taxonomy-term" href="https://reactivegroup.github.io/capa.io/categories/getting-started/" data-taxonomy-term="getting-started"><span class="taxonomy-label">Getting Started</span><span class="taxonomy-count">1</span></a></li>
-        
-      </ul>
-    </div>
   
 
 	
@@ -445,9 +421,10 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component-configuration.properties文件。</p>
-<p>在文件中新增属性key:&ldquo;group.rxcloud.capa.component.configstore.CapaConfigStore&rdquo;，value:&ldquo;实现类的全路径&rdquo;。示例如下:</p>
+<p>在文件中新增属性key:&ldquo;group.rxcloud.capa.component.configstore.CapaConfigStore&rdquo;，value:&ldquo;实现类的全路径&rdquo;；新增属性key:&ldquo;CONFIGURATION_COMPONENT_STORE_NAME&rdquo;,value:&ldquo;config store name&quot;示例如下:</p>
 <pre tabindex="0"><code class="language-properties" data-lang="properties">//capa-component-configuration.properties文件
 group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.demo.configstore.DemoCapaConfigStore
+CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
 </code></pre></li>
 <li>
 <p>调用相应Configuration API进行应用级配置管理</p>
@@ -456,30 +433,32 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 <h2 id="api使用步骤">API使用步骤</h2>
 <p><a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java">Demo示例</a></p>
 <h3 id="第一步构建单例configuration-client">第一步：构建单例Configuration Client</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CapaConfigurationClientSingleton</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CapaConfigStoreClientProvider</span> <span style="color:#ce5c00;font-weight:bold">{</span>
 
     <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">volatile</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">;</span>
 
-    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">getInstance</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">getClient</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
         <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
-            <span style="color:#204a87;font-weight:bold">synchronized</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaConfigurationClientSingleton</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+            <span style="color:#204a87;font-weight:bold">synchronized</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
                 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
                     <span style="color:#000">StoreConfig</span> <span style="color:#000">storeConfig</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">StoreConfig</span><span style="color:#ce5c00;font-weight:bold">();</span>
-                    <span style="color:#000">storeConfig</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setStoreName</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;qconfig&#34;</span><span style="color:#ce5c00;font-weight:bold">);</span>
+                    <span style="color:#000">storeConfig</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setStoreName</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Optional</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">ofNullable</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">CapaProperties</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">COMPONENT_PROPERTIES_SUPPLIER</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">apply</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;configuration&#34;</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">getProperty</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;CONFIGURATION_COMPONENT_STORE_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">)).</span><span style="color:#c4a000">orElse</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;UN_CONFIGURED_STORE_CONFIG_NAME&#34;</span><span style="color:#ce5c00;font-weight:bold">));</span>
                     <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">CapaConfigurationClientBuilder</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeConfig</span><span style="color:#ce5c00;font-weight:bold">).</span><span style="color:#c4a000">build</span><span style="color:#ce5c00;font-weight:bold">();</span>
                 <span style="color:#ce5c00;font-weight:bold">}</span>
             <span style="color:#ce5c00;font-weight:bold">}</span>
         <span style="color:#ce5c00;font-weight:bold">}</span>
         <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">;</span>
     <span style="color:#ce5c00;font-weight:bold">}</span>
-    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">CapaConfigurationClientSingleton</span><span style="color:#ce5c00;font-weight:bold">(){}</span>
+
+    <span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
 <span style="color:#ce5c00;font-weight:bold">}</span>
 </code></pre></div><h3 id="第二步通过提供的api对配置进行读订阅删除保存等操作">第二步：通过提供的api对配置进行读/订阅/删除/保存等操作</h3>
 <ol>
 <li>读配置操作(getConfiguration)</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//拿到单例client
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigurationClientSingleton</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getInstance</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigurationClientSingleton</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getClient</span><span style="color:#ce5c00;font-weight:bold">();</span>
 
 <span style="color:#8f5902;font-style:italic">//getConfiguration()其中一个重载方法
 </span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">ConfigurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">(),</span><span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
@@ -498,7 +477,10 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 </code></pre></div><ol start="2">
 <li>订阅配置操作(subscribeConfiguration)</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//subscribeConfiguration()其中一个重载方法
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//本地存配置的变量
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+<span style="color:#8f5902;font-style:italic">//subscribeConfiguration()其中一个重载方法
 </span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">ConfigurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">(),</span><span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">))</span>
 
 <span style="color:#8f5902;font-style:italic">//subscribeConfiguration()另一个重载方法
@@ -510,12 +492,8 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
         <span style="color:#4e9a06">&#34;label&#34;</span>
         <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
 
-<span style="color:#8f5902;font-style:italic">//阻塞得到订阅的第一个配置结果
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">cur</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">blockFirst</span><span style="color:#ce5c00;font-weight:bold">();</span>
 <span style="color:#8f5902;font-style:italic">//订阅后续的变更并更新原数据
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#ce5c00;font-weight:bold">{</span>
-	<span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setItems</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">()));</span>
-<span style="color:#ce5c00;font-weight:bold">});</span>
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setItems</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">()));</span>
 </code></pre></div><ol start="3">
 <li>保存配置操作(saveConfiguration)</li>
 </ol>
@@ -591,7 +569,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  最后修改 19.11.2021: <a href="https://github.com/reactivegroup/capa/commit/3456acc00b6baac1e637cf5261653225249456ba">add RPC Aws app mesh (3456acc)</a>
+  最后修改 27.11.2021: <a href="https://github.com/reactivegroup/capa/commit/eb652831e7bd3a67b2f287dd53c0473a0f34577b">docs:update Config related docs (eb65283)</a>
 </div>
 
 </div>
