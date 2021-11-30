@@ -70,7 +70,7 @@ public final class CapaConfigStoreClientProvider {
             synchronized (CapaConfigStoreClientProvider.class) {
                 if (client == null) {
                     StoreConfig storeConfig = new StoreConfig();
-                   String storeName =  Optional.ofNullable(CapaProperties.COMPONENT_PROPERTIES_SUPPLIER.apply("configuration").getProperty("CONFIGURATION_COMPONENT_STORE_NAME")).orElse("UN_CONFIGURED_STORE_CONFIG_NAME");
+                    //对应实现的storeName
                     storeConfig.setStoreName(storeName);
                     client = new CapaConfigurationClientBuilder(storeConfig).build();
                 }
@@ -91,35 +91,35 @@ private static final CapaConfigurationClient client = CapaConfigStoreClientProvi
 - 调用get/subscribe接口获取/订阅数据
 
 ```java
-//ps:storeName不能自行随便定义
-String storeName = Optional.ofNullable(CapaProperties.COMPONENT_PROPERTIES_SUPPLIER.apply("configuration").getProperty("CONFIGURATION_COMPONENT_STORE_NAME")).orElse("UN_CONFIGURED_STORE_CONFIG_NAME");
 Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(storeName, 
         SERVICE_APP_ID,
         Lists.newArrayList("test.json"),
         null,
         "",
-        ""
+        "",
         TypeRef.get(User.class));
 
 //阻塞获取配置结果
 List<ConfigurationItem<User>> config = configMono.block();
 ```
 
+subscribe
+
 ```java
 //本地存配置的变量
-private SubConfigurationResp<User> cur;
+private static SubConfigurationResp<User> cur;
 
 static {
-    //ps:storeName不能自行随便定义
         Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration(storeName,
                 SERVICE_APP_ID,
                 Lists.newArrayList("test.json"),
                 null,
                 "",
-                ""
+                "",
                 TypeRef.get(User.class));
-
-//订阅后续的变更并更新原数据
+    //阻塞初始化配置
+		cur = configFlux.blockFirst();
+	//订阅变更并更新原数据
         configFlux.subscribe(resp -> cur.setItems(resp.getItems()));
     }
 ```
@@ -162,10 +162,53 @@ public class JsonConfigService {
 
 #### API使用流程
 
-除第一步创建单例Client部分改为调用adaptor中方法获取,其余步骤和非携程方接入流程相同
+- 从adaptor中获取单例config client
 
 ```java
 private static final CapaConfigurationClient client = CapaConfigStoreClientProvider.getClient();
+```
+
+- 调用get/subscribe接口获取/订阅数据
+
+```java
+//从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读)
+Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(storeName, 
+        SERVICE_APP_ID,
+        Lists.newArrayList("test.json"),
+        null,
+        TypeRef.get(User.class));
+
+//阻塞获取配置结果
+List<ConfigurationItem<User>> config = configMono.block();
+```
+
+subscribe
+
+```java
+//本地存配置的变量
+private static SubConfigurationResp<User> cur;
+
+static {
+    //从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读)
+        Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration(storeName,
+                SERVICE_APP_ID,
+                Lists.newArrayList("test.json"),
+                null,
+                TypeRef.get(User.class));
+    //阻塞初始化配置
+		cur = configFlux.blockFirst();
+	//订阅变更并更新原数据
+        configFlux.subscribe(resp -> cur.setItems(resp.getItems()));
+    }
+```
+
+- 代码中，通过本地存配置的变量cur使用相关配置
+
+```java
+public String getConfig() {
+        User user = cur.getItems().get(0).getContent();
+        System.out.println("-----------------------------------age:" + user.getName());
+ }
 ```
 
 ## 目前支持的功能范围
