@@ -28,13 +28,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/configuration-aws-example/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2021-10-15T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-11-27T16:15:37+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2021-11-30T20:23:34+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Configuration AWS-App Config示例">
 <meta itemprop="description" content="使用App Config实现在AWS云环境下的应用级配置管理.
 "><meta itemprop="datePublished" content="2021-10-15T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-11-27T16:15:37+08:00" />
-<meta itemprop="wordCount" content="373">
+<meta itemprop="dateModified" content="2021-11-30T20:23:34+08:00" />
+<meta itemprop="wordCount" content="431">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuration AWS-App Config示例"/>
 <meta name="twitter:description" content="使用App Config实现在AWS云环境下的应用级配置管理.
@@ -318,6 +318,7 @@ if (!doNotTrack) {
 
 <div class="td-toc"><nav id="TableOfContents">
   <ul>
+    <li><a href="#文档更新时间">文档更新时间</a></li>
     <li><a href="#接入使用流程">接入使用流程</a>
       <ul>
         <li><a href="#非携程接入方不使用adaptor包使用流程">非携程接入方(不使用adaptor包)使用流程</a></li>
@@ -327,6 +328,7 @@ if (!doNotTrack) {
     <li><a href="#目前支持的功能范围">目前支持的功能范围</a></li>
     <li><a href="#目前支持的api">目前支持的API</a></li>
     <li><a href="#暂不支持的api">暂不支持的API</a></li>
+    <li><a href="#实现步骤">实现步骤</a></li>
   </ul>
 </nav></div>
 
@@ -426,34 +428,45 @@ if (!doNotTrack) {
 		
 		
 	</header>    
-	<h2 id="接入使用流程">接入使用流程</h2>
+	<h2 id="文档更新时间">文档更新时间</h2>
+<p><strong>由于当前处于高速迭代中，代码和版本都很不稳定，文档可能不是最新版本，接入jar包版本和流程都可能会有较大改动，请查看最后更新时间，若和当前时间超过一周请咨询相关开发询问是否有较大改动！！！</strong></p>
+<p><strong>last updated on 2021/12/03</strong></p>
+<h2 id="接入使用流程">接入使用流程</h2>
 <p>step1.引入maven依赖</p>
 <p>引入相关依赖maven包:CAPA SDK,ctrip实现包以及ctrip 适配包</p>
+<p>21/12/03/14:40 updated maven dependency</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
   <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
   <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-sdk<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
-  <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.6.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+  <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.8.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
 <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
 </code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
     <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
     <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-spi-aws-config<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
-    <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.3.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.5.2.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
 <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
-</code></pre></div><p>如果需要使用@QConfig注解，需要额外引入(目前jar包在携程私服上，仅限携程开发使用)</p>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>io.projectreactor<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>reactor-core<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>3.3.22.RELEASE<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+</code></pre></div><p>携程用户需要额外引入(目前jar包在携程私服上，仅限携程开发使用)</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
     <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>com.ctrip.ibu<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
     <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-adaptor-ctrip-qconfig<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
     <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.0-SNAPSHOT<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
 <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
-</code></pre></div><p>ps:以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入</p>
+</code></pre></div><p>ps:1.以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入</p>
+<p>2.snapshot版本，每次要将本地snapshot版本更新再进行测试</p>
 <p><del>step2.增加config properties文件</del></p>
 <p><strong>2021/11/27 update:升级capa-spi-aws-config jar包，将不需要再显式加入此文件(1.0.4及以后的版本，目前还没deploy,使用1.0.3.RELEASE还需要显式加入此文件)</strong></p>
+<p><strong>2021/12/03 update:step2废弃，无需引入此文件</strong></p>
 <ol>
 <li><del>项目resources下新增capa-component-configuration.properties文件</del></li>
 <li><del>文件内容如下</del></li>
 </ol>
 <pre tabindex="0"><code class="language-properties" data-lang="properties">group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.aws.config.AwsCapaConfiguration
-CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
+CONFIGURATION_COMPONENT_STORE_NAME=aws.appconfig
 </code></pre><p>step3.相关代码修改</p>
 <h3 id="非携程接入方不使用adaptor包使用流程">非携程接入方(不使用adaptor包)使用流程</h3>
 <p>参照<a href="https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/">快速开始-使用Configuration API</a></p>
@@ -485,8 +498,10 @@ CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
 </code></pre></div><ul>
 <li>调用get/subscribe接口获取/订阅数据</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> 
-        <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//根据自身填入storeName，appId
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span>
+    	<span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> 
+        <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span>
         <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
         <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
         <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
@@ -500,8 +515,10 @@ CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
 </span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">;</span>
 
 <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#ce5c00;font-weight:bold">{</span>
-        <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span>
-                <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+    <span style="color:#8f5902;font-style:italic">//根据自身填入storeName，appId
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span>
+            	<span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span>
+                <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span>
                 <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
                 <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
                 <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span>
@@ -550,16 +567,19 @@ CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
 <ul>
 <li>从adaptor中获取单例config client</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigStoreClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getClient</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">private</span> <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">CapaConfigurationClient</span> <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">CapaConfigurationClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getClient</span><span style="color:#ce5c00;font-weight:bold">();</span>
 </code></pre></div><ul>
 <li>调用get/subscribe接口获取/订阅数据</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">//从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读)
-</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span> 
-        <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;&gt;</span> <span style="color:#000">configMono</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span>
+    	<span style="color:#000">CapaConfigurationClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">provideStoreName</span><span style="color:#ce5c00;font-weight:bold">(),</span> 
+        <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span>
         <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
         <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
         <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
+
+<span style="color:#8f5902;font-style:italic">//带超时时间的阻塞,自定义超时时间
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">config</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Duration</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">ofSeconds</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">30</span><span style="color:#ce5c00;font-weight:bold">));</span>
 
 <span style="color:#8f5902;font-style:italic">//阻塞获取配置结果
 </span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">ConfigurationItem</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">config</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
@@ -569,13 +589,16 @@ CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
 
 <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#ce5c00;font-weight:bold">{</span>
     <span style="color:#8f5902;font-style:italic">//从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读)
-</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">storeName</span><span style="color:#ce5c00;font-weight:bold">,</span>
-                <span style="color:#000">SERVICE_APP_ID</span><span style="color:#ce5c00;font-weight:bold">,</span>
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SubConfigurationResp</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribeConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span>
+            	<span style="color:#000">CapaConfigurationClientProvider</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">provideStoreName</span><span style="color:#ce5c00;font-weight:bold">(),</span>
+                <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span>
                 <span style="color:#000">Lists</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">newArrayList</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test.json&#34;</span><span style="color:#ce5c00;font-weight:bold">),</span>
                 <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">,</span>
                 <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">get</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">User</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">class</span><span style="color:#ce5c00;font-weight:bold">));</span>
     <span style="color:#8f5902;font-style:italic">//阻塞初始化配置
-</span><span style="color:#8f5902;font-style:italic"></span>		<span style="color:#000">cur</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">blockFirst</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">cur</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">blockFirst</span><span style="color:#ce5c00;font-weight:bold">();</span>
+    <span style="color:#8f5902;font-style:italic">//或使用带超时时间的阻塞初始化配置，自定义超时时间
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">cur</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">blockFirst</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Duration</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">ofSeconds</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">30</span><span style="color:#ce5c00;font-weight:bold">));</span>
 	<span style="color:#8f5902;font-style:italic">//订阅变更并更新原数据
 </span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">configFlux</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">cur</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">setItems</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">resp</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">getItems</span><span style="color:#ce5c00;font-weight:bold">()));</span>
     <span style="color:#ce5c00;font-weight:bold">}</span>
@@ -626,7 +649,38 @@ CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
 
 <span style="color:#5c35cc;font-weight:bold">@Override</span>
 <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">deleteConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">ConfigurationRequestItem</span> <span style="color:#000">configurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">);</span>
-</code></pre></div>
+</code></pre></div><h2 id="实现步骤">实现步骤</h2>
+<ol>
+<li>
+<p>针对AWS云的设施基础现状下，选型AWS AppConfig为应用级别配置管理组件</p>
+</li>
+<li>
+<p>继承<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类，底层通过对appconfig的封装，实现相应的Configuration API</p>
+</li>
+<li>
+<p>通过SPI机制引入相关实现类。具体流程为:</p>
+<ul>
+<li>引入相关实现类的jar包</li>
+<li>在项目resources路径下，新增capa-component-configuration.properties文件。文件内容如下</li>
+</ul>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">#capa-component-configuration.properties文件
+group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.aws.config.AwsCapaConfigStore
+</code></pre><ul>
+<li>在项目resources路径下，新增capa-component-configuration-common.properties</li>
+</ul>
+<pre tabindex="0"><code class="language-properties" data-lang="properties"># configuration component store names
+CONFIGURATION_COMPONENT_STORE_NAMES=aws.appconfig
+</code></pre><ul>
+<li>在项目resources路径下，新增capa-component-configuration-aws.propertoes</li>
+</ul>
+<pre tabindex="0"><code class="language-properties" data-lang="properties"># configstore aws app config env
+CONFIG_AWS_APP_CONFIG_ENV=ENV
+</code></pre></li>
+<li>
+<p>调用方通过使用Capa统一规范的Configuration API即可完成对应用级别配置的管理需求。</p>
+</li>
+</ol>
+
 	
 		<style>
   .feedback--answer {
@@ -692,7 +746,7 @@ CONFIGURATION_COMPONENT_STORE_NAME=AWS AppConfig
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified November 27, 2021: <a href="https://github.com/reactivegroup/capa/commit/eb652831e7bd3a67b2f287dd53c0473a0f34577b">docs:update Config related docs (eb65283)</a>
+  Last modified November 30, 2021: <a href="https://github.com/reactivegroup/capa/commit/fc359d9764b3f57cf2602dda4362989421c671b7">docs:fix config example docs (fc359d9)</a>
 </div>
 
 </div>
