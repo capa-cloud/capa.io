@@ -3,8 +3,14 @@ title: "Configuration Ctrip-Qconfig示例"
 linkTitle: "Configuration Ctrip-Qconfig示例"
 date: 2021-10-15
 description: >
-  使用Qconfig API实现在携程全家桶环境下的应用级配置管理#
+  使用Qconfig API实现在携程全家桶环境下的应用级配置管理##
 ---
+
+## 文档更新时间
+
+**由于当前处于高速迭代中，代码和版本都很不稳定，文档可能不是最新版本，接入jar包版本和流程都可能会有较大改动，请查看最后更新时间，若和当前时间超过一周请咨询相关开发询问是否有较大改动！！！**
+
+**last updated on 2021/11/26**
 
 ## 接入使用流程
 
@@ -193,9 +199,20 @@ ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直
    - 在项目resources路径下，新增capa-component-configuration.properties文件。文件内容如下
 
    ```properties
-   //capa-component-configuration.properties文件
+   #capa-component-configuration.properties文件
    group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
-   CONFIGURATION_COMPONENT_STORE_NAME=QConfig
    ```
-   
+
+   - 在项目resources路径下，新增capa-component-configuration-common.properties
+
+   ```properties
+   CONFIGURATION_COMPONENT_STORE_NAME=qconfig
+   ```
+
+   - 在项目resources路径下，新增capa-component-configuration-ctrip.propertoes
+
+   ```properties
+   #暂无配置
+   ```
+
 4. 调用方通过使用Capa统一规范的Configuration API即可完成对应用级别配置的管理需求。
