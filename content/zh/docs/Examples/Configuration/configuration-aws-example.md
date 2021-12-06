@@ -10,29 +10,31 @@ description: >
 
 **由于当前处于高速迭代中，代码和版本都很不稳定，文档可能不是最新版本，接入jar包版本和流程都可能会有较大改动，请查看最后更新时间，若和当前时间超过一周请咨询相关开发询问是否有较大改动！！！**
 
-**last updated on 2021/12/03**
+**last updated on 2021/12/06
 
 ## 接入使用流程
 
+21/12/06/18:32 updated maven dependency
+
 step1.引入maven依赖
 
-引入相关依赖maven包:CAPA SDK,ctrip实现包以及ctrip 适配包
-
-21/12/03/14:40 updated maven dependency
-
 ```xml
-<dependency>
-  <groupId>group.rxcloud</groupId>
-  <artifactId>capa-sdk</artifactId>
-  <version>1.0.8.RELEASE</version>
-</dependency>
+<dependencyManagement>        
+     <dependency>
+            <groupId>com.ctrip.ibu</groupId>
+            <artifactId>capa-framework-dependencies</artifactId>
+            <version>1.0.1</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```
 
 ```xml
 <dependency>
     <groupId>group.rxcloud</groupId>
     <artifactId>capa-spi-aws-config</artifactId>
-    <version>1.0.5.2.RELEASE</version>
 </dependency>
 ```
 
@@ -40,7 +42,6 @@ step1.引入maven依赖
 <dependency>
     <groupId>io.projectreactor</groupId>
     <artifactId>reactor-core</artifactId>
-    <version>3.3.22.RELEASE</version>
 </dependency>
 ```
 
@@ -50,29 +51,22 @@ step1.引入maven依赖
 <dependency>
     <groupId>com.ctrip.ibu</groupId>
     <artifactId>capa-adaptor-ctrip-qconfig</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
-ps:1.以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入
+此外还提供foundation方法包，供使用方获取appId,provider,env,namespace,region使用(**该foundation中的其他方法并未测试，请不要使用**)
 
-2.snapshot版本，每次要将本地snapshot版本更新再进行测试
-
-~~step2.增加config properties文件~~
-
-**2021/11/27 update:升级capa-spi-aws-config jar包，将不需要再显式加入此文件(1.0.4及以后的版本，目前还没deploy,使用1.0.3.RELEASE还需要显式加入此文件)**
-
-**2021/12/03 update:step2废弃，无需引入此文件**
-
-1. ~~项目resources下新增capa-component-configuration.properties文件~~
-2. ~~文件内容如下~~
-
-```properties
-group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.aws.config.AwsCapaConfiguration
-CONFIGURATION_COMPONENT_STORE_NAME=aws.appconfig
+```xml
+<dependency>
+    <groupId>group.rxcloud</groupId>
+    <artifactId>capa-foundation</artifactId>
+    <version>1.0.4.RELEASE</version>
+</dependency>
 ```
 
-step3.相关代码修改
+ps:后续会统一放入capa-framework-dependencies bom中进行管理
+
+step2.代码改动
 
 ### 非携程接入方(不使用adaptor包)使用流程
 
@@ -123,6 +117,8 @@ Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(
 
 //阻塞获取配置结果
 List<ConfigurationItem<User>> config = configMono.block();
+//带超时时间的阻塞,自定义超时时间
+List<ConfigurationItem<User>> config = configMono.block(Duration.ofSeconds(30));
 ```
 
 subscribe
@@ -143,6 +139,8 @@ static {
                 TypeRef.get(User.class));
     //阻塞初始化配置
 		cur = configFlux.blockFirst();
+    //或使用带超时时间的阻塞初始化配置，自定义超时时间
+    	cur = configFlux.blockFirst(Duration.ofSeconds(30));
 	//订阅变更并更新原数据
         configFlux.subscribe(resp -> cur.setItems(resp.getItems()));
     }
@@ -195,18 +193,17 @@ private static final CapaConfigurationClient client = CapaConfigurationClientPro
 - 调用get/subscribe接口获取/订阅数据
 
 ```java
+//从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读，也可以使用Foundation.app().getAppId() ps:此包为capa-foundation包提供的方法，仅在aws实现下使用)
 Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(
     	CapaConfigurationClientProvider.provideStoreName(), 
-        appId,
+        Foundation.app().getAppId(),
         Lists.newArrayList("test.json"),
         null,
         TypeRef.get(User.class));
-
-//带超时时间的阻塞,自定义超时时间
-List<ConfigurationItem<User>> config = configMono.block(Duration.ofSeconds(30));
-
 //阻塞获取配置结果
 List<ConfigurationItem<User>> config = configMono.block();
+//或带超时时间的阻塞,自定义超时时间
+List<ConfigurationItem<User>> config = configMono.block(Duration.ofSeconds(30));
 ```
 
 subscribe
@@ -216,10 +213,10 @@ subscribe
 private static SubConfigurationResp<User> cur;
 
 static {
-    //从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读)
+    //从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读，也可以使用Foundation.app().getAppId() ps:此包为capa-foundation包提供的方法，仅在aws实现下使用)
         Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration(
             	CapaConfigurationClientProvider.provideStoreName(),
-                appId,
+                Foundation.app().getAppId(),
                 Lists.newArrayList("test.json"),
                 null,
                 TypeRef.get(User.class));
@@ -285,6 +282,12 @@ Mono<Void> saveConfiguration(SaveConfigurationRequest saveConfigurationRequest);
 @Override
 Mono<Void> deleteConfiguration(ConfigurationRequestItem configurationRequestItem);
 ```
+
+## 中间件开发者配置AppConfig应用规范
+
+1. AppConfig应用名格式为:"AppId_ENV",e.g.100012345_FAT(环境与ctrip环境定义一致，且保持全大写)
+2. 创建配置文件选择托管文件的方式
+3. 文件发布部署时，选择immediate_shixu的部署方式，或者自己创建部署方式，选择创建部署时间0min，烘焙时间0min，百分比100%,线性的部署方式
 
 ## 实现步骤
 
