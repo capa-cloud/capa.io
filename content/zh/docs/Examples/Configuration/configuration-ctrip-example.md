@@ -3,28 +3,45 @@ title: "Configuration Ctrip-Qconfig示例"
 linkTitle: "Configuration Ctrip-Qconfig示例"
 date: 2021-10-15
 description: >
-  使用Qconfig API实现在携程全家桶环境下的应用级配置管理#
+  使用Qconfig API实现在携程全家桶环境下的应用级配置管理##
 ---
+
+## 文档更新时间
+
+**由于当前处于高速迭代中，代码和版本都很不稳定，文档可能不是最新版本，接入jar包版本和流程都可能会有较大改动，请查看最后更新时间，若和当前时间超过一周请咨询相关开发询问是否有较大改动！！！**
+
+**last updated on 2021/12/06**
 
 ## 接入使用流程
 
 step1.引入maven依赖
 
-引入相关依赖maven包:CAPA SDK,ctrip实现包以及ctrip 适配包
+21/12/06/18:32 updated maven dependency
 
 ```xml
-<dependency>
-  <groupId>group.rxcloud</groupId>
-  <artifactId>capa-sdk</artifactId>
-  <version>1.0.6.RELEASE</version>
-</dependency>
+<dependencyManagement>        
+     <dependency>
+            <groupId>com.ctrip.ibu</groupId>
+            <artifactId>capa-framework-dependencies</artifactId>
+            <version>1.0.1</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```
 
 ```xml
 <dependency>
     <groupId>com.ctrip.ibu</groupId>
     <artifactId>capa-spi-ctrip-qconfig</artifactId>
-    <version>1.0.6-SNAPSHOT</version>
+</dependency>
+```
+
+```xml
+<dependency>
+    <groupId>io.projectreactor</groupId>
+    <artifactId>reactor-core</artifactId>
 </dependency>
 ```
 
@@ -32,25 +49,10 @@ step1.引入maven依赖
 <dependency>
     <groupId>com.ctrip.ibu</groupId>
     <artifactId>capa-adaptor-ctrip-qconfig</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
-ps:以上版本皆为目前的版本，使用方在接入时要以当时的最新版本替代后接入
-
-~~step2.增加config properties文件~~
-
-**2021/11/27 update:升级capa-spi-ctrip-qconfig jar包，将不需要再显式加入此文件(1.0.7及以后的版本，目前还没deploy,使用1.0.6-SNAPSHOT还需要显式加入此文件)**
-
-1. ~~项目resources下新增capa-component-configuration.properties文件~~
-2. ~~文件内容如下~~
-
-```properties
-group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
-store.config.name=QConfig
-```
-
-step3.相关代码修改
+step2.相关代码修改
 
 ### 注解接入使用流程
 
@@ -79,21 +81,24 @@ public class JsonConfigService {
 - 调用adaptor中方法，创建单例单例Configuration Client
 
 ```java
-private static final CapaConfigurationClient client = CapaConfigStoreClientProvider.getClient();
+private static final CapaConfigurationClient client = CapaConfigurationClientProvider.getClient();
 ```
 
 - 调用get/subscribe接口获取/订阅数据
 
 ```java
-//从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读)
-Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(storeName, 
-        SERVICE_APP_ID,
+//从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)
+Mono<List<ConfigurationItem<User>>> configMono = client.getConfiguration(
+    	CapaConfigurationClientProvider.provideStoreName(), 
+        appid,
         Lists.newArrayList("test.json"),
         null,
         TypeRef.get(User.class));
 
 //阻塞获取配置结果
 List<ConfigurationItem<User>> config = configMono.block();
+//带超时时间的阻塞,自定义超时时间
+List<ConfigurationItem<User>> config = configMono.block(Duration.ofSeconds(30));
 ```
 
 ```java
@@ -101,14 +106,17 @@ List<ConfigurationItem<User>> config = configMono.block();
 private static SubConfigurationResp<User> cur;
 
 static {
-    //从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)和appid(可选,可以自己从app.properties中读)
-        Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration(storeName,
-                SERVICE_APP_ID,
+    //从adaptor中CapaConfigStoreClientProvider静态方法中获取storeName(必须)
+        Flux<SubConfigurationResp<User>> configFlux = client.subscribeConfiguration(
+            	CapaConfigurationClientProvider.provideStoreName(),
+                appid,
                 Lists.newArrayList("test.json"),
                 null,
                 TypeRef.get(User.class));
 	//阻塞初始化配置
     cur = configFlux.blockFirst();
+    //或使用带超时时间的阻塞初始化配置，自定义超时时间
+    cur = configFlux.blockFirst(Duration.ofSeconds(30));
 	//订阅变更并更新原数据
         configFlux.subscribe(resp -> cur.setItems(resp.getItems()));
     }
@@ -193,9 +201,20 @@ ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直
    - 在项目resources路径下，新增capa-component-configuration.properties文件。文件内容如下
 
    ```properties
-   //capa-component-configuration.properties文件
+   #capa-component-configuration.properties文件
    group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
-   CONFIGURATION_COMPONENT_STORE_NAME=QConfig
    ```
-   
+
+   - 在项目resources路径下，新增capa-component-configuration-common.properties
+
+   ```properties
+   CONFIGURATION_COMPONENT_STORE_NAME=ctrip.qconfig
+   ```
+
+   - 在项目resources路径下，新增capa-component-configuration-ctrip.propertoes
+
+   ```properties
+   #暂无配置
+   ```
+
 4. 调用方通过使用Capa统一规范的Configuration API即可完成对应用级别配置的管理需求。
