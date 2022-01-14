@@ -1,12 +1,13 @@
 ---
-title: "RPC服务调用"
-linkTitle: "RPC服务调用"
+title: "RPC Ctrip技术方案"
+linkTitle: "RPC Ctrip技术方案"
 date: 2021-10-15
 description: >
-  执行直接、安全、服务到服务的方法调用
+  RPC中间件在Ctrip云上的技术方案
 ---
 
 ## 介绍
+
 通过服务调用，应用程序可以使用 [HTTP](https://www.w3.org/Protocols/) 这样的标准协议来发现并可靠地与其他应用程序通信。
 
 ## 调用逻辑
