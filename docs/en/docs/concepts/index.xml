@@ -95,15 +95,14 @@
     
     <item>
       <title>Docs: RPC服务调用</title>
-      <link>https://reactivegroup.github.io/capa.io/en/docs/concepts/rpc-design/</link>
+      <link>https://reactivegroup.github.io/capa.io/en/docs/concepts/rpc/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/en/docs/concepts/rpc-design/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/en/docs/concepts/rpc/</guid>
       <description>
         
         
         &lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
-&lt;p&gt;通过服务调用，应用程序可以使用 &lt;a href=&#34;https://www.w3.org/Protocols/&#34;&gt;HTTP&lt;/a&gt; 这样的标准协议来发现并可靠地与其他应用程序通信。&lt;/p&gt;
 &lt;h2 id=&#34;调用逻辑&#34;&gt;调用逻辑&lt;/h2&gt;
 &lt;p&gt;下图为 Capa 的 RPC 服务调用逻辑&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;

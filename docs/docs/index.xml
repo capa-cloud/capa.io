@@ -2466,6 +2466,23 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
     </item>
     
     <item>
+      <title>Docs: RPC AWS技术方案</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-aws/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-aws/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;aws-rpc技术选型&#34;&gt;AWS RPC技术选型&lt;/h2&gt;
+&lt;p&gt;经过调研，发现AWS在RPC上&lt;/p&gt;
+&lt;h2 id=&#34;client技术选型&#34;&gt;Client技术选型&lt;/h2&gt;
+&lt;h2 id=&#34;server技术选型&#34;&gt;Server技术选型&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: RPC Ctrip-Service Mesh示例</title>
       <link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
@@ -2539,11 +2556,11 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
     </item>
     
     <item>
-      <title>Docs: RPC服务调用</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/rpc-design/</link>
+      <title>Docs: RPC Ctrip技术方案</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/rpc-design/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</guid>
       <description>
         
         

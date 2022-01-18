@@ -22,19 +22,19 @@
 <title>设计文档 | Capa</title>
 
 
-  <meta name="description" content="如何设计Capa 
+  <meta name="description" content="Capa设计概述
 ">
 <meta property="og:title" content="设计文档" />
-<meta property="og:description" content="如何设计Capa 
+<meta property="og:description" content="Capa设计概述
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/docs/concepts/" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="设计文档">
-<meta itemprop="description" content="如何设计Capa 
+<meta itemprop="description" content="Capa设计概述
 "><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="设计文档"/>
-<meta name="twitter:description" content="如何设计Capa 
+<meta name="twitter:description" content="Capa设计概述
 "/>
 
 
@@ -179,7 +179,7 @@ This the multi-page printable view of this section.
 
 
 <h1 class="title">设计文档</h1>
-<div class="lead">如何设计Capa</div>
+<div class="lead">Capa设计概述</div>
 
 
 
@@ -203,9 +203,36 @@ This the multi-page printable view of this section.
     
     
 	
-<li>2: <a href="#pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">RPC服务调用</a></li>
+<li>2: <a href="#pg-a1ed055c045af43597ae4a91771b1392">RPC服务调用</a></li>
 
 
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+<li>2.1: <a href="#pg-d5ff881f1e22a7aa8230b82bd2cbaf71">RPC AWS技术方案</a></li>
+
+
+    
+  
+    
+    
+	
+<li>2.2: <a href="#pg-239766c3760401089b548f1e076d3755">RPC Ctrip技术方案</a></li>
+
+
+    
+  
+
+    </ul>
     
   
 
@@ -216,10 +243,15 @@ This the multi-page printable view of this section.
       
 
 <div class="pageinfo pageinfo-primary">
-<p>感谢您对Capa的支持！</p>
 
 </div>
 
+<h2 id="背景">背景</h2>
+<p>在跨云、混合云的场景下，我们希望应用程序可以使用<strong>一套代码</strong>，部署到不同的云环境上。在运行时，采用对应云环境提供的<strong>云原生实现方案</strong>。</p>
+<h2 id="技术思路">技术思路</h2>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/api_design.png" alt="api design"></p>
+<p>定义<strong>与具体中间件无关的API层（无强绑定）</strong>，使应用程序在编程时仅依赖该API层。
+如此一来，应用本身便与具体中间件解耦；然后在部署到不同云环境时，将API的不同云的实现层加载到应用进程中。</p>
 
 </div>
 </div>
@@ -239,7 +271,7 @@ This the multi-page printable view of this section.
 	
     
 
-<div class="td-content" style="">
+<div class="td-content" style="page-break-before: always">
     
 	<h1 id="pg-f7313c7c125cc787c1f486a153f11115">1 - Configuration服务调用</h1>
     <div class="lead">执行应用级的配置管理</div>
@@ -325,8 +357,113 @@ This the multi-page printable view of this section.
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-ad9e0df8d7601cdd0fdadc9fa1b9bef3">2 - RPC服务调用</h1>
+	<h1 id="pg-a1ed055c045af43597ae4a91771b1392">2 - RPC服务调用</h1>
     <div class="lead">执行直接、安全、服务到服务的方法调用</div>
+	<h2 id="介绍">介绍</h2>
+<h2 id="调用逻辑">调用逻辑</h2>
+<p>下图为 Capa 的 RPC 服务调用逻辑</p>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
+<ul>
+<li>Service A 为服务调用方， Service B 为服务被调用方</li>
+<li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
+<li>Capa RPC API 是统一的 API 规范</li>
+<li>通过 SPI 机制可以找到 Capa RPC API 的具体 RPC 实现 RPC Impl</li>
+<li>获取 Service B 的返回数据，并返回给服务调用方 Service A</li>
+</ul>
+<h2 id="api-设计">API 设计</h2>
+<p>Capa的 api 设计参照了社区的规范</p>
+<p><a href="https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto">Dapr API</a></p>
+<p><a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API</a></p>
+<p><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
+<p>具体参数含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appId</td>
+<td>同一命名空间内的服务唯一ID</td>
+</tr>
+<tr>
+<td>methodName</td>
+<td>被调用服务的方法名</td>
+</tr>
+<tr>
+<td>request</td>
+<td>要发送调用的服务请求</td>
+</tr>
+<tr>
+<td>httpExtension</td>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>发送请求的元数据（GRPC）或者请求头（HTTP）</td>
+</tr>
+<tr>
+<td>clazz</td>
+<td>请求响应的类型</td>
+</tr>
+<tr>
+<td>type</td>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
+</tr>
+<tr>
+<td>invokeMethodRequest</td>
+<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-d5ff881f1e22a7aa8230b82bd2cbaf71">2.1 - RPC AWS技术方案</h1>
+    <div class="lead">RPC中间件在AWS云上的技术方案</div>
+	<h2 id="aws-rpc技术选型">AWS RPC技术选型</h2>
+<p>经过调研，发现AWS在RPC上</p>
+<h2 id="client技术选型">Client技术选型</h2>
+<h2 id="server技术选型">Server技术选型</h2>
+
+</div>
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-239766c3760401089b548f1e076d3755">2.2 - RPC Ctrip技术方案</h1>
+    <div class="lead">RPC中间件在Ctrip云上的技术方案</div>
 	<h2 id="介绍">介绍</h2>
 <p>通过服务调用，应用程序可以使用 <a href="https://www.w3.org/Protocols/">HTTP</a> 这样的标准协议来发现并可靠地与其他应用程序通信。</p>
 <h2 id="调用逻辑">调用逻辑</h2>
@@ -396,6 +533,10 @@ This the multi-page printable view of this section.
 	
   
 
+    
+	
+  
+
 
 
           </main>
@@ -440,7 +581,7 @@ This the multi-page printable view of this section.
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2021 The Capa Authors All Rights Reserved</small>
+        <small class="text-white">&copy; 2022 The Capa Authors All Rights Reserved</small>
         <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></small>
 	
 		<p class="mt-2"><a href="/capa.io/en/about/">About Capa</a></p>
