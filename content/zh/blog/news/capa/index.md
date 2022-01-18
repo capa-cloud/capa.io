@@ -1,6 +1,7 @@
 ---
-title: "Capa"
-linkTitle: "Cloud-Application-API"
+title: "Capa: Mecha SDK of Cloud Application Api"
+linkTitle: "Mecha SDK of Cloud Application Api"
+date: 2022-01-18
 ---
 
 
@@ -221,7 +222,7 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 * 社区还比较年轻，短时间内用golang重写所有SDK逻辑不太现实。
 * 社区对公有云功能支持比较好，私有云主要依赖SDK模式。
 
-![img.png](content/images/zh/blog/news/capa/feature-support.png)
+![img.png](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/feature-support.png)
 
 #### Capa设计
 
@@ -469,7 +470,7 @@ Istio 的扩展机制使用 Proxy-Wasm 应用二进制接口（ABI）规范，�
 
 基于这种思想，尝试让Runtime支持API插件，让用户自己实现自己的私有API
 
-### C、直接支持行业标准协议
+### D、直接支持行业标准协议
 
 - 直接支持SQL
 
@@ -477,7 +478,7 @@ Istio 的扩展机制使用 Proxy-Wasm 应用二进制接口（ABI）规范，�
 
 需要进一步讨论。
 
-### D、开源协同
+### E、开源协同
 
 各个Mecha项目积极交流，合作共建，互为补充。
 

@@ -3,9 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/en/blog/news/">
-<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/en/blog/news/index.xml">
-<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<meta name="generator" content="Hugo 0.88.1" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 
 <link rel="shortcut icon" href="/capa.io/favicons/favicon.ico" >
@@ -19,20 +17,62 @@
 <link rel="icon" type="image/png" href="/capa.io/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/capa.io/favicons/android-192x192.png" sizes="192x192">
 
-<title>News About Docsy | Capa</title>
+<title>Capa: Mecha SDK of Cloud Application Api | Capa</title>
 
 
   
-  <meta name="description" content="">
-<meta property="og:title" content="News About Docsy" />
-<meta property="og:description" content="Cloud Runtimes API" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/blog/news/" /><meta property="og:site_name" content="Capa" />
+  <meta name="description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁
+&ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
 
-<meta itemprop="name" content="News About Docsy">
-<meta itemprop="description" content="Cloud Runtimes API"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="News About Docsy"/>
-<meta name="twitter:description" content="Cloud Runtimes API"/>
+作者简介： 
+KevinTen，携程后端开发 …">
+<meta property="og:title" content="Capa: Mecha SDK of Cloud Application Api" />
+<meta property="og:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
+ 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/reactivegroup/capa
+ 在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
+ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
+不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
+本文主要对 ServiceMesh 进行回顾总结，并分享业界基于 ServiceMesh 这种 Sidecar 模式解决混合云应用开发的解决方案，最后是关于混合云应用开发模式的探讨。
+一、Service Mesh 回顾与总结 A、Service Mesh 的初衷  在微服务架构下，基础架构团队一般会为应用提供一个封装了各种服务治理能力的 SDK，这种做法虽然保障了应用的正常运行，但缺点也非常明显，每次基础架构团队迭代一个新功能都需要业务方参与升级才能使用，尤其是 bugfix 版本，往往需要强推业务方升级，这里面的痛苦程度每一个基础架构团队成员都深有体会。
+ 伴随着升级的困难，随之而来的就是应用使用的 SDK 版本差别非常大，生产环境同时跑着各种版本的 SDK，这种现象又会让新功能的迭代必须考虑各种兼容，就好像带着枷锁前进一般，这样随着不断迭代，会让代码维护非常困难，有些祖传逻辑更是一不小心就会掉坑里。
+同时这种“重”SDK 的开发模式，导致异构语言的治理能力非常薄弱，如果想为各种编程语言都提供一个功能完整且能持续迭代的 SDK 其中的成本可想而知。
+18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
+B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
+  探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2022-01-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-18T12:34:38+08:00" /><meta property="og:site_name" content="Capa" />
+
+<meta itemprop="name" content="Capa: Mecha SDK of Cloud Application Api">
+<meta itemprop="description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
+ 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/reactivegroup/capa
+ 在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
+ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
+不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
+本文主要对 ServiceMesh 进行回顾总结，并分享业界基于 ServiceMesh 这种 Sidecar 模式解决混合云应用开发的解决方案，最后是关于混合云应用开发模式的探讨。
+一、Service Mesh 回顾与总结 A、Service Mesh 的初衷  在微服务架构下，基础架构团队一般会为应用提供一个封装了各种服务治理能力的 SDK，这种做法虽然保障了应用的正常运行，但缺点也非常明显，每次基础架构团队迭代一个新功能都需要业务方参与升级才能使用，尤其是 bugfix 版本，往往需要强推业务方升级，这里面的痛苦程度每一个基础架构团队成员都深有体会。
+ 伴随着升级的困难，随之而来的就是应用使用的 SDK 版本差别非常大，生产环境同时跑着各种版本的 SDK，这种现象又会让新功能的迭代必须考虑各种兼容，就好像带着枷锁前进一般，这样随着不断迭代，会让代码维护非常困难，有些祖传逻辑更是一不小心就会掉坑里。
+同时这种“重”SDK 的开发模式，导致异构语言的治理能力非常薄弱，如果想为各种编程语言都提供一个功能完整且能持续迭代的 SDK 其中的成本可想而知。
+18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
+B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
+  探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。"><meta itemprop="datePublished" content="2022-01-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T12:34:38+08:00" />
+<meta itemprop="wordCount" content="850">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Capa: Mecha SDK of Cloud Application Api"/>
+<meta name="twitter:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
+ 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/reactivegroup/capa
+ 在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
+ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
+不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
+本文主要对 ServiceMesh 进行回顾总结，并分享业界基于 ServiceMesh 这种 Sidecar 模式解决混合云应用开发的解决方案，最后是关于混合云应用开发模式的探讨。
+一、Service Mesh 回顾与总结 A、Service Mesh 的初衷  在微服务架构下，基础架构团队一般会为应用提供一个封装了各种服务治理能力的 SDK，这种做法虽然保障了应用的正常运行，但缺点也非常明显，每次基础架构团队迭代一个新功能都需要业务方参与升级才能使用，尤其是 bugfix 版本，往往需要强推业务方升级，这里面的痛苦程度每一个基础架构团队成员都深有体会。
+ 伴随着升级的困难，随之而来的就是应用使用的 SDK 版本差别非常大，生产环境同时跑着各种版本的 SDK，这种现象又会让新功能的迭代必须考虑各种兼容，就好像带着枷锁前进一般，这样随着不断迭代，会让代码维护非常困难，有些祖传逻辑更是一不小心就会掉坑里。
+同时这种“重”SDK 的开发模式，导致异构语言的治理能力非常薄弱，如果想为各种编程语言都提供一个功能完整且能持续迭代的 SDK 其中的成本可想而知。
+18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
+B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
+  探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。"/>
 
 
 
@@ -67,7 +107,7 @@ if (!doNotTrack) {
 
 
   </head>
-  <body class="td-section td-blog">
+  <body class="td-page td-blog">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -136,7 +176,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/capa.io/blog/news/">简体中文</a>
+	<a class="dropdown-item" href="/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/">简体中文</a>
 	
 </div>
 			</li>
@@ -153,88 +193,218 @@ if (!doNotTrack) {
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-          </div>
-          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
-          </div>
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <div id="content-mobile">
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+<input type="search" class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete="off">
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  </div>
+  <div id="content-desktop"></div>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <div class="nav-item dropdown d-block d-lg-none">
+      
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	English
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/">简体中文</a>
+	
+</div>
+    </div>
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioenblog-li">
+  <a href="/capa.io/en/blog/" title="Capa Blog" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-capaioenblog"><span class="">博客</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioenblognews-li">
+  <a href="/capa.io/en/blog/news/" title="News About Docsy" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioenblognews"><span class="">News</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-capaioenblog20220118capa-mecha-sdk-of-cloud-application-api-li">
+  <a href="/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" title="Capa: Mecha SDK of Cloud Application Api" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-capaioenblog20220118capa-mecha-sdk-of-cloud-application-api"><span class="td-sidebar-nav-active-item">Mecha SDK of Cloud Application Api</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioenblogreleases-li">
+  <a href="/capa.io/en/blog/releases/" title="New Releases" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioenblogreleases"><span class="">Releases</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioenblog20180104another-great-release-li">
+  <a href="/capa.io/en/blog/2018/01/04/another-great-release/" title="Another Great Release" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioenblog20180104another-great-release"><span class="">Release New Features</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+  
+  
+  
+  
+  
+  
+  <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+  
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+
+    <a href="https://github.com/reactivegroup/capa/edit/master/content/en/blog/news/capa/index.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+    <a href="https://github.com/reactivegroup/capa/new/master/content/en/blog/news/capa/index.md?filename=change-me.md&amp;value=---%0D%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0D%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0D%0Aweight%3A&#43;100%0D%0Adescription%3A&#43;%3E-%0D%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0D%0A---%0D%0A%0D%0A%23%23&#43;Heading%0D%0A%0D%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0D%0A%0D%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0D%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0D%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0D%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0D%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+    <a href="https://github.com/reactivegroup/capa/issues/new?title=Capa:%20Mecha%20SDK%20of%20Cloud%20Application%20Api" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+    
+      
+      <a href="https://github.com/reactivegroup/capa/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+    
+
+  
+  
+    <a id="print" href="https://reactivegroup.github.io/capa.io/en/blog/news/_print/"><i class="fa fa-print fa-fw"></i> Print entire section</a>
+  
+  </div>
+
+
             
 
 
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一service-mesh-回顾与总结">一、Service Mesh 回顾与总结</a>
+      <ul>
+        <li><a href="#aservice-mesh-的初衷">A、Service Mesh 的初衷</a></li>
+        <li><a href="#bservice-mesh-落地现状">B、Service Mesh 落地现状</a></li>
+        <li><a href="#c新的挑战">C、新的挑战</a></li>
+      </ul>
+    </li>
+    <li><a href="#二multi-runtime-理论概述">二、Multi Runtime 理论概述</a>
+      <ul>
+        <li><a href="#a什么是-runtime">A、什么是 Runtime?</a></li>
+        <li><a href="#bservice-mesh-vs-runtime">B、Service Mesh vs Runtime</a></li>
+      </ul>
+    </li>
+    <li><a href="#三multi-runtime-落地实践">三、Multi Runtime 落地实践</a>
+      <ul>
+        <li><a href="#adapr">A、dapr</a></li>
+        <li><a href="#blayotto">B、Layotto</a></li>
+        <li><a href="#ccapa">C、Capa</a></li>
+        <li><a href="#dfemas--other--">D、Femas / Other / &hellip;</a></li>
+        <li><a href="#e移植性">E、移植性</a></li>
+      </ul>
+    </li>
+    <li><a href="#四api设计原则">四、API设计原则</a>
+      <ul>
+        <li><a href="#a功能集选择">A、功能集选择</a></li>
+        <li><a href="#b分层模型">B、分层模型</a></li>
+        <li><a href="#c拓展字段">C、拓展字段</a></li>
+        <li><a href="#e配置原语">E、配置原语</a></li>
+        <li><a href="#grpc-原语">G、RPC 原语</a></li>
+      </ul>
+    </li>
+    <li><a href="#五capa-最佳实践">五、Capa 最佳实践</a>
+      <ul>
+        <li><a href="#a适配迁移之痛">A、适配迁移之痛</a></li>
+        <li><a href="#b现状和未来规划">B、现状和未来规划</a></li>
+      </ul>
+    </li>
+    <li><a href="#六高阶拓展">六、高阶拓展</a>
+      <ul>
+        <li><a href="#awebassembly-的探索">A、WebAssembly 的探索</a></li>
+        <li><a href="#bebpf-的探索">B、eBPF 的探索</a></li>
+      </ul>
+    </li>
+    <li><a href="#七社区规划">七、社区规划</a>
+      <ul>
+        <li><a href="#a建设更多的api标准">A、建设更多的API标准</a></li>
+        <li><a href="#bapi-共建计划">B、API 共建计划</a></li>
+        <li><a href="#c可扩展api架构">C、可扩展API架构</a></li>
+        <li><a href="#d直接支持行业标准协议">D、直接支持行业标准协议</a></li>
+        <li><a href="#e开源协同">E、开源协同</a></li>
+      </ul>
+    </li>
+    <li><a href="#八云厂商的支持">八、云厂商的支持</a>
+      <ul>
+        <li><a href="#a阿里云在内部的落地">A、阿里云在内部的落地</a></li>
+        <li><a href="#b微软azure的托管支持">B、微软Azure的托管支持</a></li>
+        <li><a href="#cdapr-加入-cncf-孵化器">C、Dapr 加入 CNCF 孵化器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 
 
+
+            
+
+	
+		
+			
+		
+		
+
+
+
+  
+  
+
+	
+		
+			
+		
+		
+
+
+
+  
+  
+
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
+            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://reactivegroup.github.io/capa.io/en/blog/news/index.xml" target="_blank">
+              RSS <i class="fa fa-rss ml-2 "></i>
+            </a>
+            
 <div class="td-content">
-<div class="pageinfo pageinfo-primary d-print-none">
-<p>
-This the multi-page printable view of this section.
-<a href="#" onclick="print();return false;">Click here to print</a>.
-</p><p>
-<a href="/capa.io/en/blog/news/">Return to the regular view of this page</a>.
-</p>
-</div>
-
-
-
-<h1 class="title">News About Docsy</h1>
-
-
-
-
-
-    <ul>
-    
-  
-  
-  
-  
-
-  
-    
-    
-	
-
-    <li><a href="#pg-ea91332a15adedf943283ea3e64470a1">Capa: Mecha SDK of Cloud Application Api</a></li>
-
-
-
-    
-  
-
-    </ul>
-
-
-<div class="content">
-      
-</div>
-</div>
-
-
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-
-  
-
-<div class="td-content" style="">
-    <h1 id="pg-ea91332a15adedf943283ea3e64470a1">Capa: Mecha SDK of Cloud Application Api</h1>
+	<h1>Capa: Mecha SDK of Cloud Application Api</h1>
 	
 	<div class="td-byline mb-4">
 		
-        
 		<time datetime="2022-01-18" class="text-muted">Tuesday, January 18, 2022</time>
-        
 	</div>
+	<header class="article-meta">
+		
+		
+			
+				
+
+
+			
+				
+
+
+			
+		
+		
+	</header>
 	<h1 id="capacloud-application-api架起混合云应用开发的桥梁">Capa(Cloud-Application-API)：架起混合云应用开发的桥梁</h1>
 <p>&ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;</p>
 <blockquote>
@@ -681,16 +851,17 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <li><a href="https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index">https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index</a></li>
 </ul>
 
-</div>
-
-
-
-
-
-    
 	
-  
 
+	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+  <li>
+    <a class="btn btn-primary disabled"><span class="mr-1">←</span>Previous</a>
+  </li>
+    <a class="btn btn-primary disabled">Next<span class="ml-1">→</span></a>
+  </li>
+</ul>
+
+</div>
 
 
           </main>
