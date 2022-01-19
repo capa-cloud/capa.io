@@ -14,6 +14,241 @@
     
     
     <item>
+      <title>Docs: Actuator可观测性</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/</link>
+      <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;可观测性-规范定义&#34;&gt;可观测性 规范定义&lt;/h1&gt;
+&lt;p&gt;全面的可观测指标度量规范定义&lt;/p&gt;
+&lt;h3 id=&#34;a可观测性理论探究&#34;&gt;A、可观测性理论探究&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;http://icyfenix.cn/assets/img/mtl.7974eb9f.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://segmentfault.com/img/bVcSfQs&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s5.51cto.com/oss/202111/19/bdd32d343c4e0d45bac4012e7bc866bc.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;一命名空间-规范定义&#34;&gt;一、命名空间 规范定义&lt;/h2&gt;
+&lt;p&gt;命名空间采用分级域名命名方式：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(顶级域名).一级域名.二级域名.三级域名.x.y.z&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;0顶级域名-云划分&#34;&gt;0、顶级域名: 云划分&lt;/h3&gt;
+&lt;p&gt;顶级域名应标识所属云(私有云、公有云)等基础设施。&lt;/p&gt;
+&lt;p&gt;但目前各云监控指标命名空间本身隔离，故不考虑加入顶级域名。&lt;/p&gt;
+&lt;h3 id=&#34;a一级域名-技术栈领域划分&#34;&gt;A、一级域名: 技术栈领域划分&lt;/h3&gt;
+&lt;p&gt;将云原生技术栈划分为4个领域，一级域名标识了所属的层级。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;运维层（Maintainance）&lt;/li&gt;
+&lt;li&gt;应用层（Application）&lt;/li&gt;
+&lt;li&gt;中间件层（Middleware）&lt;/li&gt;
+&lt;li&gt;基础设施层（Infrastructure）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对应一级域命名空间为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ops&lt;/li&gt;
+&lt;li&gt;App&lt;/li&gt;
+&lt;li&gt;Fxc&lt;/li&gt;
+&lt;li&gt;Inf&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;参考设计1云原生技术栈stack&#34;&gt;参考设计1：云原生技术栈Stack&lt;/h4&gt;
+&lt;p&gt;参考云原生技术栈图示给出的四个层次，使一级域名能够显示出Actuator所属的层级。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;参考设计2携程现有监控指标分类&#34;&gt;参考设计2：携程现有监控指标分类&lt;/h4&gt;
+&lt;p&gt;携程监控指标的一级域名主要有&lt;code&gt;System&lt;/code&gt;、&lt;code&gt;FrameworkName&lt;/code&gt;、&lt;code&gt;App&lt;/code&gt;等等。&lt;/p&gt;
+&lt;p&gt;不过其技术栈领域的监控划分主要依赖于：使用不同看板进行呈现，相当于不同的监控平台本身对应于不同的技术栈领域。&lt;/p&gt;
+&lt;p&gt;应用层的监控主要还是以&lt;code&gt;FrameworkName&lt;/code&gt;为主，反映出了携程是以框架为主体，框架就强绑定了该领域的概念（看到Dal就意味着关系型数据库、看到SOA就意味着RPC领域）。&lt;/p&gt;
+&lt;h3 id=&#34;b二次域名-组件领域划分&#34;&gt;B、二次域名: 组件领域划分&lt;/h3&gt;
+&lt;h4 id=&#34;1-ops&#34;&gt;1. Ops&lt;/h4&gt;
+&lt;p&gt;Ops运维和管理领域：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CICD&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-app&#34;&gt;2. App&lt;/h4&gt;
+&lt;p&gt;应用层，应在二级域名进行应用类型的划分。&lt;/p&gt;
+&lt;p&gt;在这里，我们参考携程的应用类型设计，取运行时语言作为划分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Java&lt;/li&gt;
+&lt;li&gt;Node&lt;/li&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Golang&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-fxc&#34;&gt;3. Fxc&lt;/h4&gt;
+&lt;p&gt;主要基于中间件维度进行定义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RPC&lt;/li&gt;
+&lt;li&gt;MQ&lt;/li&gt;
+&lt;li&gt;Configuration&lt;/li&gt;
+&lt;li&gt;DB&lt;/li&gt;
+&lt;li&gt;Redis&lt;/li&gt;
+&lt;li&gt;Metric&lt;/li&gt;
+&lt;li&gt;Log&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-inf&#34;&gt;4. Inf&lt;/h4&gt;
+&lt;p&gt;以基础设施作为划分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;K8S&lt;/li&gt;
+&lt;li&gt;ECS&lt;/li&gt;
+&lt;li&gt;AppMesh&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;c三次域名-中间件语种-细节划分&#34;&gt;C、三次域名: 中间件/语种/&amp;hellip; 细节划分&lt;/h3&gt;
+&lt;p&gt;基于以上 &lt;code&gt;一级域名(技术栈领域).二级域名(组件领域划分)&lt;/code&gt; 的命名空间，我们已经能够体现具体领域。&lt;/p&gt;
+&lt;p&gt;但每个领域，都可能有多种实现。
+例如在中间件领域，携程命名空间做了 &lt;code&gt;中间件-领域&lt;/code&gt; 的强绑定。&lt;/p&gt;
+&lt;p&gt;所以在三级域名的设计上，我们希望体现一些更细节的信息。&lt;/p&gt;
+&lt;p&gt;但没有必要像一二级域名一样，保持独立的语义。
+故使用 &lt;code&gt;小写+下划线&lt;/code&gt; 作为三级域名的格式标准。
+包含更丰富的语义，但视觉上不像一二级域名一样强烈。&lt;/p&gt;
+&lt;p&gt;三级域名如果有更多细节需要体现，通过追加的方式进行拓展。&lt;/p&gt;
+&lt;h4 id=&#34;1-ops-1&#34;&gt;1. Ops&lt;/h4&gt;
+&lt;h4 id=&#34;2-app-1&#34;&gt;2. App&lt;/h4&gt;
+&lt;p&gt;从实用性上来看，可以不使用三级域名，直接基于appId等。&lt;/p&gt;
+&lt;p&gt;如果要使用，参考携程应用类型定义。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;web&lt;/li&gt;
+&lt;li&gt;service&lt;/li&gt;
+&lt;li&gt;job&lt;/li&gt;
+&lt;li&gt;serverless&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-fxc-1&#34;&gt;3. Fxc&lt;/h4&gt;
+&lt;h4 id=&#34;31-中间件工具&#34;&gt;3.1 中间件/工具&lt;/h4&gt;
+&lt;p&gt;组件领域，可能有多种 中间件实现 / 工具。&lt;/p&gt;
+&lt;p&gt;所以在三级域名上，我们希望体现 &lt;code&gt;中间件/工具&lt;/code&gt; 的概念。&lt;/p&gt;
+&lt;h4 id=&#34;32-语种&#34;&gt;3.2 语种&lt;/h4&gt;
+&lt;p&gt;组件领域，中间件领域，都可能有多种编程语言的实现，其SDK内部逻辑不可能完全一致。&lt;/p&gt;
+&lt;p&gt;所以在三级域名上，我们希望体现 &lt;code&gt;编程语言&lt;/code&gt; 的概念。&lt;/p&gt;
+&lt;h4 id=&#34;33-总结&#34;&gt;3.3 总结&lt;/h4&gt;
+&lt;p&gt;对于Fxc而言，目前已有（中间件名称_编程语言）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;capa_java&lt;/li&gt;
+&lt;li&gt;ibu_java&lt;/li&gt;
+&lt;li&gt;ibu_node&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-inf-1&#34;&gt;4. Inf&lt;/h4&gt;
+&lt;p&gt;对于Inf而言，目前已有（工具/产品名称）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ecs&lt;/li&gt;
+&lt;li&gt;eks&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;参考设计1携程框架监控&#34;&gt;参考设计1：携程框架监控&lt;/h4&gt;
+&lt;p&gt;携程在监控命名上，强体现 &lt;code&gt;框架名称&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;d命名空间划分效果&#34;&gt;D、命名空间划分效果&lt;/h3&gt;
+&lt;h4 id=&#34;1-ops-2&#34;&gt;1. Ops&lt;/h4&gt;
+&lt;h4 id=&#34;cicd&#34;&gt;CICD&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Ops.CICD.codepipeline&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-app-2&#34;&gt;2. App&lt;/h4&gt;
+&lt;h4 id=&#34;业务应用&#34;&gt;业务应用&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;App.Java.service&lt;/li&gt;
+&lt;li&gt;App.Node.web&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-fxc-2&#34;&gt;3. Fxc&lt;/h4&gt;
+&lt;p&gt;中间件领域命名空间&lt;/p&gt;
+&lt;h4 id=&#34;rpc&#34;&gt;RPC&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fxc.RPC.capa_java&lt;/li&gt;
+&lt;li&gt;Fxc.RPC.ibu_node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;mq&#34;&gt;MQ&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fxc.MQ.ibu_java&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;configuration&#34;&gt;Configuration&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fxc.Configuration.capa_java&lt;/li&gt;
+&lt;li&gt;Fxc.Configuration.ibu_java&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;db&#34;&gt;DB&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fxc.DB.dal_java&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;redis&#34;&gt;Redis&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fxc.Redis.ibu_java&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;metric&#34;&gt;Metric&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fxc.Metric.capa_java&lt;/li&gt;
+&lt;li&gt;Fxc.Metric.ibu_node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;log&#34;&gt;Log&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fxc.Log.capa_java&lt;/li&gt;
+&lt;li&gt;Fxc.Log.ibu_node&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-inf-2&#34;&gt;4. Inf&lt;/h4&gt;
+&lt;h4 id=&#34;k8s&#34;&gt;K8S&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Inf.K8S.ecs&lt;/li&gt;
+&lt;li&gt;Inf.K8S.eks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;二监控指标-规范定义&#34;&gt;二、监控指标 规范定义&lt;/h2&gt;
+&lt;p&gt;使用 &lt;code&gt;小写+下划线&lt;/code&gt; 作为 监控指标 名称的格式标准。&lt;/p&gt;
+&lt;p&gt;监控指标设计分为：Level0、Level1、Level2层次。&lt;/p&gt;
+&lt;h4 id=&#34;1-level0&#34;&gt;1. level0&lt;/h4&gt;
+&lt;p&gt;必需监控指标：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;请求量&lt;/li&gt;
+&lt;li&gt;耗时
+&lt;ul&gt;
+&lt;li&gt;avg&lt;/li&gt;
+&lt;li&gt;95&lt;/li&gt;
+&lt;li&gt;99&lt;/li&gt;
+&lt;li&gt;max&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;成功率
+&lt;ul&gt;
+&lt;li&gt;成功量&lt;/li&gt;
+&lt;li&gt;失败量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-level1&#34;&gt;2. level1&lt;/h4&gt;
+&lt;p&gt;拓展监控指标&lt;/p&gt;
+&lt;h3 id=&#34;afxc&#34;&gt;A、Fxc&lt;/h3&gt;
+&lt;h4 id=&#34;level0&#34;&gt;level0&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;xx定义为 操作/业务 名称&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;请求量：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;xx_count&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;耗时：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;xx_duration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;成功率：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;xx_success&lt;/li&gt;
+&lt;li&gt;xx_failure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;三attributes-规范定义&#34;&gt;三、Attributes 规范定义&lt;/h2&gt;
+&lt;p&gt;使用 &lt;code&gt;小写+下划线&lt;/code&gt; 作为attributes的格式标准。&lt;/p&gt;
+&lt;h3 id=&#34;a必需&#34;&gt;A、必需&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;app_id&lt;/li&gt;
+&lt;li&gt;env&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;b操作字段&#34;&gt;B、操作字段&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;method 操作名称&lt;/li&gt;
+&lt;li&gt;stub 端标识（client/server、pub/sub）&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Configuration服务调用</title>
       <link>https://reactivegroup.github.io/capa.io/docs/concepts/configuration-design/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>

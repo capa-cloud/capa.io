@@ -195,15 +195,7 @@ if (!doNotTrack) {
     
     
 	
-<li>1: <a href="#pg-f7313c7c125cc787c1f486a153f11115">Configuration服务调用</a></li>
-
-
-    
-  
-    
-    
-	
-<li>2: <a href="#pg-a1ed055c045af43597ae4a91771b1392">RPC服务调用</a></li>
+<li>1: <a href="#pg-1557c8e4254d445487b5dca87c2098cd">Actuator可观测性</a></li>
 
 
     
@@ -218,7 +210,19 @@ if (!doNotTrack) {
     
     
 	
-<li>2.1: <a href="#pg-d5ff881f1e22a7aa8230b82bd2cbaf71">RPC AWS技术方案</a></li>
+<li>1.1: <a href="#pg-85c9b5b95ec0d208817651fded0a23e8">RPC Actuator可观测性</a></li>
+
+
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+<li>2: <a href="#pg-f7313c7c125cc787c1f486a153f11115">Configuration服务调用</a></li>
 
 
     
@@ -226,7 +230,30 @@ if (!doNotTrack) {
     
     
 	
-<li>2.2: <a href="#pg-239766c3760401089b548f1e076d3755">RPC Ctrip技术方案</a></li>
+<li>3: <a href="#pg-a1ed055c045af43597ae4a91771b1392">RPC服务调用</a></li>
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+<li>3.1: <a href="#pg-d5ff881f1e22a7aa8230b82bd2cbaf71">RPC AWS技术方案</a></li>
+
+
+    
+  
+    
+    
+	
+<li>3.2: <a href="#pg-239766c3760401089b548f1e076d3755">RPC Ctrip技术方案</a></li>
 
 
     
@@ -273,7 +300,278 @@ if (!doNotTrack) {
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-f7313c7c125cc787c1f486a153f11115">1 - Configuration服务调用</h1>
+	<h1 id="pg-1557c8e4254d445487b5dca87c2098cd">1 - Actuator可观测性</h1>
+    <div class="lead">应用级组件可观测性规范定义</div>
+	<h1 id="可观测性-规范定义">可观测性 规范定义</h1>
+<p>全面的可观测指标度量规范定义</p>
+<h3 id="a可观测性理论探究">A、可观测性理论探究</h3>
+<p><img src="http://icyfenix.cn/assets/img/mtl.7974eb9f.png" alt=""></p>
+<p><img src="https://segmentfault.com/img/bVcSfQs" alt=""></p>
+<p><img src="https://s5.51cto.com/oss/202111/19/bdd32d343c4e0d45bac4012e7bc866bc.jpg" alt=""></p>
+<h2 id="一命名空间-规范定义">一、命名空间 规范定义</h2>
+<p>命名空间采用分级域名命名方式：</p>
+<p><strong>(顶级域名).一级域名.二级域名.三级域名.x.y.z</strong></p>
+<h3 id="0顶级域名-云划分">0、顶级域名: 云划分</h3>
+<p>顶级域名应标识所属云(私有云、公有云)等基础设施。</p>
+<p>但目前各云监控指标命名空间本身隔离，故不考虑加入顶级域名。</p>
+<h3 id="a一级域名-技术栈领域划分">A、一级域名: 技术栈领域划分</h3>
+<p>将云原生技术栈划分为4个领域，一级域名标识了所属的层级。</p>
+<ul>
+<li>运维层（Maintainance）</li>
+<li>应用层（Application）</li>
+<li>中间件层（Middleware）</li>
+<li>基础设施层（Infrastructure）</li>
+</ul>
+<p>对应一级域命名空间为：</p>
+<ul>
+<li>Ops</li>
+<li>App</li>
+<li>Fxc</li>
+<li>Inf</li>
+</ul>
+<h4 id="参考设计1云原生技术栈stack">参考设计1：云原生技术栈Stack</h4>
+<p>参考云原生技术栈图示给出的四个层次，使一级域名能够显示出Actuator所属的层级。</p>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png" alt=""></p>
+<h4 id="参考设计2携程现有监控指标分类">参考设计2：携程现有监控指标分类</h4>
+<p>携程监控指标的一级域名主要有<code>System</code>、<code>FrameworkName</code>、<code>App</code>等等。</p>
+<p>不过其技术栈领域的监控划分主要依赖于：使用不同看板进行呈现，相当于不同的监控平台本身对应于不同的技术栈领域。</p>
+<p>应用层的监控主要还是以<code>FrameworkName</code>为主，反映出了携程是以框架为主体，框架就强绑定了该领域的概念（看到Dal就意味着关系型数据库、看到SOA就意味着RPC领域）。</p>
+<h3 id="b二次域名-组件领域划分">B、二次域名: 组件领域划分</h3>
+<h4 id="1-ops">1. Ops</h4>
+<p>Ops运维和管理领域：</p>
+<ul>
+<li>CICD</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="2-app">2. App</h4>
+<p>应用层，应在二级域名进行应用类型的划分。</p>
+<p>在这里，我们参考携程的应用类型设计，取运行时语言作为划分：</p>
+<ul>
+<li>Java</li>
+<li>Node</li>
+<li>Python</li>
+<li>Golang</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="3-fxc">3. Fxc</h4>
+<p>主要基于中间件维度进行定义：</p>
+<ul>
+<li>RPC</li>
+<li>MQ</li>
+<li>Configuration</li>
+<li>DB</li>
+<li>Redis</li>
+<li>Metric</li>
+<li>Log</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="4-inf">4. Inf</h4>
+<p>以基础设施作为划分：</p>
+<ul>
+<li>K8S</li>
+<li>ECS</li>
+<li>AppMesh</li>
+<li>&hellip;</li>
+</ul>
+<h3 id="c三次域名-中间件语种-细节划分">C、三次域名: 中间件/语种/&hellip; 细节划分</h3>
+<p>基于以上 <code>一级域名(技术栈领域).二级域名(组件领域划分)</code> 的命名空间，我们已经能够体现具体领域。</p>
+<p>但每个领域，都可能有多种实现。
+例如在中间件领域，携程命名空间做了 <code>中间件-领域</code> 的强绑定。</p>
+<p>所以在三级域名的设计上，我们希望体现一些更细节的信息。</p>
+<p>但没有必要像一二级域名一样，保持独立的语义。
+故使用 <code>小写+下划线</code> 作为三级域名的格式标准。
+包含更丰富的语义，但视觉上不像一二级域名一样强烈。</p>
+<p>三级域名如果有更多细节需要体现，通过追加的方式进行拓展。</p>
+<h4 id="1-ops-1">1. Ops</h4>
+<h4 id="2-app-1">2. App</h4>
+<p>从实用性上来看，可以不使用三级域名，直接基于appId等。</p>
+<p>如果要使用，参考携程应用类型定义。</p>
+<ul>
+<li>web</li>
+<li>service</li>
+<li>job</li>
+<li>serverless</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="3-fxc-1">3. Fxc</h4>
+<h4 id="31-中间件工具">3.1 中间件/工具</h4>
+<p>组件领域，可能有多种 中间件实现 / 工具。</p>
+<p>所以在三级域名上，我们希望体现 <code>中间件/工具</code> 的概念。</p>
+<h4 id="32-语种">3.2 语种</h4>
+<p>组件领域，中间件领域，都可能有多种编程语言的实现，其SDK内部逻辑不可能完全一致。</p>
+<p>所以在三级域名上，我们希望体现 <code>编程语言</code> 的概念。</p>
+<h4 id="33-总结">3.3 总结</h4>
+<p>对于Fxc而言，目前已有（中间件名称_编程语言）：</p>
+<ul>
+<li>capa_java</li>
+<li>ibu_java</li>
+<li>ibu_node</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="4-inf-1">4. Inf</h4>
+<p>对于Inf而言，目前已有（工具/产品名称）：</p>
+<ul>
+<li>ecs</li>
+<li>eks</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="参考设计1携程框架监控">参考设计1：携程框架监控</h4>
+<p>携程在监控命名上，强体现 <code>框架名称</code>。</p>
+<h3 id="d命名空间划分效果">D、命名空间划分效果</h3>
+<h4 id="1-ops-2">1. Ops</h4>
+<h4 id="cicd">CICD</h4>
+<ul>
+<li>Ops.CICD.codepipeline</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="2-app-2">2. App</h4>
+<h4 id="业务应用">业务应用</h4>
+<ul>
+<li>App.Java.service</li>
+<li>App.Node.web</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="3-fxc-2">3. Fxc</h4>
+<p>中间件领域命名空间</p>
+<h4 id="rpc">RPC</h4>
+<ul>
+<li>Fxc.RPC.capa_java</li>
+<li>Fxc.RPC.ibu_node</li>
+</ul>
+<h4 id="mq">MQ</h4>
+<ul>
+<li>Fxc.MQ.ibu_java</li>
+</ul>
+<h4 id="configuration">Configuration</h4>
+<ul>
+<li>Fxc.Configuration.capa_java</li>
+<li>Fxc.Configuration.ibu_java</li>
+</ul>
+<h4 id="db">DB</h4>
+<ul>
+<li>Fxc.DB.dal_java</li>
+</ul>
+<h4 id="redis">Redis</h4>
+<ul>
+<li>Fxc.Redis.ibu_java</li>
+</ul>
+<h4 id="metric">Metric</h4>
+<ul>
+<li>Fxc.Metric.capa_java</li>
+<li>Fxc.Metric.ibu_node</li>
+</ul>
+<h4 id="log">Log</h4>
+<ul>
+<li>Fxc.Log.capa_java</li>
+<li>Fxc.Log.ibu_node</li>
+</ul>
+<h4 id="4-inf-2">4. Inf</h4>
+<h4 id="k8s">K8S</h4>
+<ul>
+<li>Inf.K8S.ecs</li>
+<li>Inf.K8S.eks</li>
+</ul>
+<h2 id="二监控指标-规范定义">二、监控指标 规范定义</h2>
+<p>使用 <code>小写+下划线</code> 作为 监控指标 名称的格式标准。</p>
+<p>监控指标设计分为：Level0、Level1、Level2层次。</p>
+<h4 id="1-level0">1. level0</h4>
+<p>必需监控指标：</p>
+<ul>
+<li>请求量</li>
+<li>耗时
+<ul>
+<li>avg</li>
+<li>95</li>
+<li>99</li>
+<li>max</li>
+</ul>
+</li>
+<li>成功率
+<ul>
+<li>成功量</li>
+<li>失败量</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-level1">2. level1</h4>
+<p>拓展监控指标</p>
+<h3 id="afxc">A、Fxc</h3>
+<h4 id="level0">level0</h4>
+<p><strong>xx定义为 操作/业务 名称</strong></p>
+<p>请求量：</p>
+<ul>
+<li>xx_count</li>
+</ul>
+<p>耗时：</p>
+<ul>
+<li>xx_duration</li>
+</ul>
+<p>成功率：</p>
+<ul>
+<li>xx_success</li>
+<li>xx_failure</li>
+</ul>
+<h2 id="三attributes-规范定义">三、Attributes 规范定义</h2>
+<p>使用 <code>小写+下划线</code> 作为attributes的格式标准。</p>
+<h3 id="a必需">A、必需</h3>
+<ul>
+<li>app_id</li>
+<li>env</li>
+<li>&hellip;</li>
+</ul>
+<h3 id="b操作字段">B、操作字段</h3>
+<ul>
+<li>method 操作名称</li>
+<li>stub 端标识（client/server、pub/sub）</li>
+</ul>
+
+</div>
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-85c9b5b95ec0d208817651fded0a23e8">1.1 - RPC Actuator可观测性</h1>
+    <div class="lead">RPC组件可观测性规范定义</div>
+	<h2 id="rpc-actuator可观测性">RPC Actuator可观测性</h2>
+<h2 id="client技术选型">Client技术选型</h2>
+<h2 id="server技术选型">Server技术选型</h2>
+
+</div>
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-f7313c7c125cc787c1f486a153f11115">2 - Configuration服务调用</h1>
     <div class="lead">执行应用级的配置管理</div>
 	<h2 id="介绍">介绍</h2>
 <p>通过调用Capa SDK API的方式，管理应用级配置。底层通过SPI的方式注册适配各平台的实现类。</p>
@@ -357,7 +655,7 @@ if (!doNotTrack) {
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-a1ed055c045af43597ae4a91771b1392">2 - RPC服务调用</h1>
+	<h1 id="pg-a1ed055c045af43597ae4a91771b1392">3 - RPC服务调用</h1>
     <div class="lead">执行直接、安全、服务到服务的方法调用</div>
 	<h2 id="介绍">介绍</h2>
 <h2 id="调用逻辑">调用逻辑</h2>
@@ -441,7 +739,7 @@ if (!doNotTrack) {
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-d5ff881f1e22a7aa8230b82bd2cbaf71">2.1 - RPC AWS技术方案</h1>
+	<h1 id="pg-d5ff881f1e22a7aa8230b82bd2cbaf71">3.1 - RPC AWS技术方案</h1>
     <div class="lead">RPC中间件在AWS云上的技术方案</div>
 	<h2 id="aws-rpc技术选型">AWS RPC技术选型</h2>
 <p>经过调研，发现AWS在RPC上</p>
@@ -462,7 +760,7 @@ if (!doNotTrack) {
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-239766c3760401089b548f1e076d3755">2.2 - RPC Ctrip技术方案</h1>
+	<h1 id="pg-239766c3760401089b548f1e076d3755">3.2 - RPC Ctrip技术方案</h1>
     <div class="lead">RPC中间件在Ctrip云上的技术方案</div>
 	<h2 id="介绍">介绍</h2>
 <p>通过服务调用，应用程序可以使用 <a href="https://www.w3.org/Protocols/">HTTP</a> 这样的标准协议来发现并可靠地与其他应用程序通信。</p>

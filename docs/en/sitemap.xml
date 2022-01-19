@@ -249,8 +249,21 @@
                 href="https://reactivegroup.github.io/capa.io/en/docs/"
                 />
   </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/en/docs/concepts/actuator/</loc>
+    <lastmod>2022-01-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/docs/concepts/actuator/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/en/docs/concepts/actuator/"
+                />
+  </url><url>
     <loc>https://reactivegroup.github.io/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</loc>
-    <lastmod>2022-01-18T12:34:38+08:00</lastmod>
+    <lastmod>2022-01-18T12:43:36+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -260,6 +273,19 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://reactivegroup.github.io/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/"
+                />
+  </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/en/docs/concepts/actuator/actuator-rpc/</loc>
+    <lastmod>2022-01-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/docs/concepts/actuator/actuator-rpc/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/en/docs/concepts/actuator/actuator-rpc/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/configuration-aws-example/</loc>

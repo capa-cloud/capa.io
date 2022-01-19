@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/docs/concepts/actuator/">
+<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/docs/concepts/actuator/index.xml">
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="shortcut icon" href="/capa.io/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/capa.io/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-192x192.png" sizes="192x192">
+
+<title>Actuator可观测性 | Capa</title>
+
+
+  <meta name="description" content="应用级组件可观测性规范定义
+">
+<meta property="og:title" content="Actuator可观测性" />
+<meta property="og:description" content="应用级组件可观测性规范定义
+" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://reactivegroup.github.io/capa.io/docs/concepts/actuator/" /><meta property="og:site_name" content="Capa" />
+
+<meta itemprop="name" content="Actuator可观测性">
+<meta itemprop="description" content="应用级组件可观测性规范定义
+"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Actuator可观测性"/>
+<meta name="twitter:description" content="应用级组件可观测性规范定义
+"/>
+
+
+
+
+<link rel="preload" href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" as="style">
+<link href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-00000000-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+  </head>
+  <body class="td-section">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/capa.io/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Capa</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/about/" ><span>关于</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/capa.io/docs/" ><span class="active">文档</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/blog/" ><span>博客</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/community/" ><span>社区</span></a>
+			</li>
+			
+			
+			
+			<li class="nav-item dropdown mr-4 d-none d-lg-block">
+				
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	简体中文
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="/capa.io/en/docs/concepts/actuator/">English</a>
+	
+</div>
+			</li>
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+<input type="search" class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label="站内搜索…" autocomplete="off">
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+            
+
+
+
+
+<div class="td-content">
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+这是本节的多页打印视图。
+<a href="#" onclick="print();return false;">点击此处打印</a>.
+</p><p>
+<a href="/capa.io/docs/concepts/actuator/">返回本页常规视图</a>.
+</p>
+</div>
+
+
+
+<h1 class="title">Actuator可观测性</h1>
+<div class="lead">应用级组件可观测性规范定义</div>
+
+
+
+
+    <ul>
+    
+  
+  
+  
+  
+
+  
+    
+    
+	
+<li>1: <a href="#pg-85c9b5b95ec0d208817651fded0a23e8">RPC Actuator可观测性</a></li>
+
+
+    
+  
+
+    </ul>
+
+
+<div class="content">
+      <h1 id="可观测性-规范定义">可观测性 规范定义</h1>
+<p>全面的可观测指标度量规范定义</p>
+<h3 id="a可观测性理论探究">A、可观测性理论探究</h3>
+<p><img src="http://icyfenix.cn/assets/img/mtl.7974eb9f.png" alt=""></p>
+<p><img src="https://segmentfault.com/img/bVcSfQs" alt=""></p>
+<p><img src="https://s5.51cto.com/oss/202111/19/bdd32d343c4e0d45bac4012e7bc866bc.jpg" alt=""></p>
+<h2 id="一命名空间-规范定义">一、命名空间 规范定义</h2>
+<p>命名空间采用分级域名命名方式：</p>
+<p><strong>(顶级域名).一级域名.二级域名.三级域名.x.y.z</strong></p>
+<h3 id="0顶级域名-云划分">0、顶级域名: 云划分</h3>
+<p>顶级域名应标识所属云(私有云、公有云)等基础设施。</p>
+<p>但目前各云监控指标命名空间本身隔离，故不考虑加入顶级域名。</p>
+<h3 id="a一级域名-技术栈领域划分">A、一级域名: 技术栈领域划分</h3>
+<p>将云原生技术栈划分为4个领域，一级域名标识了所属的层级。</p>
+<ul>
+<li>运维层（Maintainance）</li>
+<li>应用层（Application）</li>
+<li>中间件层（Middleware）</li>
+<li>基础设施层（Infrastructure）</li>
+</ul>
+<p>对应一级域命名空间为：</p>
+<ul>
+<li>Ops</li>
+<li>App</li>
+<li>Fxc</li>
+<li>Inf</li>
+</ul>
+<h4 id="参考设计1云原生技术栈stack">参考设计1：云原生技术栈Stack</h4>
+<p>参考云原生技术栈图示给出的四个层次，使一级域名能够显示出Actuator所属的层级。</p>
+<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png" alt=""></p>
+<h4 id="参考设计2携程现有监控指标分类">参考设计2：携程现有监控指标分类</h4>
+<p>携程监控指标的一级域名主要有<code>System</code>、<code>FrameworkName</code>、<code>App</code>等等。</p>
+<p>不过其技术栈领域的监控划分主要依赖于：使用不同看板进行呈现，相当于不同的监控平台本身对应于不同的技术栈领域。</p>
+<p>应用层的监控主要还是以<code>FrameworkName</code>为主，反映出了携程是以框架为主体，框架就强绑定了该领域的概念（看到Dal就意味着关系型数据库、看到SOA就意味着RPC领域）。</p>
+<h3 id="b二次域名-组件领域划分">B、二次域名: 组件领域划分</h3>
+<h4 id="1-ops">1. Ops</h4>
+<p>Ops运维和管理领域：</p>
+<ul>
+<li>CICD</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="2-app">2. App</h4>
+<p>应用层，应在二级域名进行应用类型的划分。</p>
+<p>在这里，我们参考携程的应用类型设计，取运行时语言作为划分：</p>
+<ul>
+<li>Java</li>
+<li>Node</li>
+<li>Python</li>
+<li>Golang</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="3-fxc">3. Fxc</h4>
+<p>主要基于中间件维度进行定义：</p>
+<ul>
+<li>RPC</li>
+<li>MQ</li>
+<li>Configuration</li>
+<li>DB</li>
+<li>Redis</li>
+<li>Metric</li>
+<li>Log</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="4-inf">4. Inf</h4>
+<p>以基础设施作为划分：</p>
+<ul>
+<li>K8S</li>
+<li>ECS</li>
+<li>AppMesh</li>
+<li>&hellip;</li>
+</ul>
+<h3 id="c三次域名-中间件语种-细节划分">C、三次域名: 中间件/语种/&hellip; 细节划分</h3>
+<p>基于以上 <code>一级域名(技术栈领域).二级域名(组件领域划分)</code> 的命名空间，我们已经能够体现具体领域。</p>
+<p>但每个领域，都可能有多种实现。
+例如在中间件领域，携程命名空间做了 <code>中间件-领域</code> 的强绑定。</p>
+<p>所以在三级域名的设计上，我们希望体现一些更细节的信息。</p>
+<p>但没有必要像一二级域名一样，保持独立的语义。
+故使用 <code>小写+下划线</code> 作为三级域名的格式标准。
+包含更丰富的语义，但视觉上不像一二级域名一样强烈。</p>
+<p>三级域名如果有更多细节需要体现，通过追加的方式进行拓展。</p>
+<h4 id="1-ops-1">1. Ops</h4>
+<h4 id="2-app-1">2. App</h4>
+<p>从实用性上来看，可以不使用三级域名，直接基于appId等。</p>
+<p>如果要使用，参考携程应用类型定义。</p>
+<ul>
+<li>web</li>
+<li>service</li>
+<li>job</li>
+<li>serverless</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="3-fxc-1">3. Fxc</h4>
+<h4 id="31-中间件工具">3.1 中间件/工具</h4>
+<p>组件领域，可能有多种 中间件实现 / 工具。</p>
+<p>所以在三级域名上，我们希望体现 <code>中间件/工具</code> 的概念。</p>
+<h4 id="32-语种">3.2 语种</h4>
+<p>组件领域，中间件领域，都可能有多种编程语言的实现，其SDK内部逻辑不可能完全一致。</p>
+<p>所以在三级域名上，我们希望体现 <code>编程语言</code> 的概念。</p>
+<h4 id="33-总结">3.3 总结</h4>
+<p>对于Fxc而言，目前已有（中间件名称_编程语言）：</p>
+<ul>
+<li>capa_java</li>
+<li>ibu_java</li>
+<li>ibu_node</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="4-inf-1">4. Inf</h4>
+<p>对于Inf而言，目前已有（工具/产品名称）：</p>
+<ul>
+<li>ecs</li>
+<li>eks</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="参考设计1携程框架监控">参考设计1：携程框架监控</h4>
+<p>携程在监控命名上，强体现 <code>框架名称</code>。</p>
+<h3 id="d命名空间划分效果">D、命名空间划分效果</h3>
+<h4 id="1-ops-2">1. Ops</h4>
+<h4 id="cicd">CICD</h4>
+<ul>
+<li>Ops.CICD.codepipeline</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="2-app-2">2. App</h4>
+<h4 id="业务应用">业务应用</h4>
+<ul>
+<li>App.Java.service</li>
+<li>App.Node.web</li>
+<li>&hellip;</li>
+</ul>
+<h4 id="3-fxc-2">3. Fxc</h4>
+<p>中间件领域命名空间</p>
+<h4 id="rpc">RPC</h4>
+<ul>
+<li>Fxc.RPC.capa_java</li>
+<li>Fxc.RPC.ibu_node</li>
+</ul>
+<h4 id="mq">MQ</h4>
+<ul>
+<li>Fxc.MQ.ibu_java</li>
+</ul>
+<h4 id="configuration">Configuration</h4>
+<ul>
+<li>Fxc.Configuration.capa_java</li>
+<li>Fxc.Configuration.ibu_java</li>
+</ul>
+<h4 id="db">DB</h4>
+<ul>
+<li>Fxc.DB.dal_java</li>
+</ul>
+<h4 id="redis">Redis</h4>
+<ul>
+<li>Fxc.Redis.ibu_java</li>
+</ul>
+<h4 id="metric">Metric</h4>
+<ul>
+<li>Fxc.Metric.capa_java</li>
+<li>Fxc.Metric.ibu_node</li>
+</ul>
+<h4 id="log">Log</h4>
+<ul>
+<li>Fxc.Log.capa_java</li>
+<li>Fxc.Log.ibu_node</li>
+</ul>
+<h4 id="4-inf-2">4. Inf</h4>
+<h4 id="k8s">K8S</h4>
+<ul>
+<li>Inf.K8S.ecs</li>
+<li>Inf.K8S.eks</li>
+</ul>
+<h2 id="二监控指标-规范定义">二、监控指标 规范定义</h2>
+<p>使用 <code>小写+下划线</code> 作为 监控指标 名称的格式标准。</p>
+<p>监控指标设计分为：Level0、Level1、Level2层次。</p>
+<h4 id="1-level0">1. level0</h4>
+<p>必需监控指标：</p>
+<ul>
+<li>请求量</li>
+<li>耗时
+<ul>
+<li>avg</li>
+<li>95</li>
+<li>99</li>
+<li>max</li>
+</ul>
+</li>
+<li>成功率
+<ul>
+<li>成功量</li>
+<li>失败量</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-level1">2. level1</h4>
+<p>拓展监控指标</p>
+<h3 id="afxc">A、Fxc</h3>
+<h4 id="level0">level0</h4>
+<p><strong>xx定义为 操作/业务 名称</strong></p>
+<p>请求量：</p>
+<ul>
+<li>xx_count</li>
+</ul>
+<p>耗时：</p>
+<ul>
+<li>xx_duration</li>
+</ul>
+<p>成功率：</p>
+<ul>
+<li>xx_success</li>
+<li>xx_failure</li>
+</ul>
+<h2 id="三attributes-规范定义">三、Attributes 规范定义</h2>
+<p>使用 <code>小写+下划线</code> 作为attributes的格式标准。</p>
+<h3 id="a必需">A、必需</h3>
+<ul>
+<li>app_id</li>
+<li>env</li>
+<li>&hellip;</li>
+</ul>
+<h3 id="b操作字段">B、操作字段</h3>
+<ul>
+<li>method 操作名称</li>
+<li>stub 端标识（client/server、pub/sub）</li>
+</ul>
+
+</div>
+</div>
+
+
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-85c9b5b95ec0d208817651fded0a23e8">1 - RPC Actuator可观测性</h1>
+    <div class="lead">RPC组件可观测性规范定义</div>
+	<h2 id="rpc-actuator可观测性">RPC Actuator可观测性</h2>
+<h2 id="client技术选型">Client技术选型</h2>
+<h2 id="server技术选型">Server技术选型</h2>
+
+</div>
+
+
+
+    
+	
+  
+
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2022 The Capa Authors All Rights Reserved</small>
+        <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">隐私政策</a></small>
+	
+		<p class="mt-2"><a href="/capa.io/about/">About Capa</a></p>
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src='/capa.io/js/tabpane-persist.js'></script>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/capa.io/js/main.min.c30c86b73d90a0180556503734816437e56f9d02c4939409d2766a99c0d89b4c.js" integrity="sha256-wwyGtz2QoBgFVlA3NIFkN&#43;VvnQLEk5QJ0nZqmcDYm0w=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>

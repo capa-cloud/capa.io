@@ -1856,6 +1856,22 @@ bar := &amp;quot;foo&amp;quot;;
     </item>
     
     <item>
+      <title>Docs: RPC Actuator可观测性</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/actuator-rpc/</link>
+      <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/actuator-rpc/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;rpc-actuator可观测性&#34;&gt;RPC Actuator可观测性&lt;/h2&gt;
+&lt;h2 id=&#34;client技术选型&#34;&gt;Client技术选型&lt;/h2&gt;
+&lt;h2 id=&#34;server技术选型&#34;&gt;Server技术选型&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Configuration AWS-App Config示例</title>
       <link>https://reactivegroup.github.io/capa.io/docs/examples/configuration/configuration-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
