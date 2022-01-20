@@ -53,7 +53,7 @@ Capa官方GitHub地址:&lt;a href=&#34;https://github.com/reactivegroup/capa&#34
 &lt;li&gt;大规模落地及生态发展阶段：2021 年至今&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/service-mesh.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/service-mesh.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;mson&#34;&gt;Mson&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*rRG_TYlHMqYAAAAAAAAAAAAAARQnAQ&#34; alt=&#34;&#34;&gt;
@@ -151,14 +151,14 @@ Multi-Runtime Microservices Architecture
 &lt;p&gt;&lt;img src=&#34;https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*srPVSYTEHc4AAAAAAAAAAAAAARQnAQ&#34; alt=&#34;&#34;&gt;
 为了让大家对 Runtime 有一个更加清晰的认识，上图针对 Service Mesh 跟 Runtime 两种理念的定位、交互方式、通信协议以及能力丰富度进行了总结，可以看到相比 Service Mesh 而言，Runtime 提供了语义明确、能力丰富的 API，可以让应用跟它的交互变得更加简单直接。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;三multi-runtime-落地实践&#34;&gt;三、Multi Runtime 落地实践&lt;/h2&gt;
 &lt;h3 id=&#34;adapr&#34;&gt;A、dapr&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/93/93ccecd9a241b5c6921b988b18f0362e.png&#34; alt=&#34;&#34;&gt;
 dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/dapr-archi.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/dapr-archi.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;提供了多种分布式能力，API 定义清晰，基本能满足一般的使用场景。&lt;/li&gt;
 &lt;li&gt;针对各种能力都提供了不同的实现组件，基本涵盖了常用的中间件产品，用户可以根据需要自由选择。&lt;/li&gt;
@@ -212,7 +212,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 &lt;li&gt;社区还比较年轻，短时间内用golang重写所有SDK逻辑不太现实。&lt;/li&gt;
 &lt;li&gt;社区对公有云功能支持比较好，私有云主要依赖SDK模式。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/feature-support.png&#34; alt=&#34;img.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/feature-support.png&#34; alt=&#34;img.png&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;capa设计&#34;&gt;Capa设计&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;参考资料：https://github.com/dapr/dapr/issues/3261&lt;/p&gt;
@@ -246,7 +246,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 &lt;p&gt;参考资料：https://www.infoq.cn/article/wjkNGoGaaHyKs7xIyTSB&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;a功能集选择&#34;&gt;A、功能集选择&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/api-design.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/api-design.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;组件提供的能力不平齐&#34;&gt;组件提供的能力不平齐&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/29/298af0137732cd1fb526bd46229a71fc.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;解决思路一runtime-弥补组件缺失能力sidecar&#34;&gt;解决思路一：Runtime 弥补组件缺失能力（sidecar）&lt;/h4&gt;
@@ -310,7 +310,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 &lt;p&gt;&lt;img src=&#34;https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*i-JnSaeZbJ4AAAAAAAAAAAAAARQnAQ&#34; alt=&#34;&#34;&gt;
 RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的需求，对于 RPC 接口的定义，我们同样参考了 dapr 社区的定义，发现完全可以满足我们的需求，因此接口定义就直接复用 dapr 的，但目前 dapr 提供的 RPC 实现方案还比较薄弱，而 MOSN 经过多年迭代，能力已经非常成熟完善，因此我们大胆把 Runtime 跟 Service Mesh 两种思路结合在一起，把 MOSN 本身作为我们实现 RPC 能力的一个 Component，这样 Layotto 在收到 RPC 请求以后交给 MOSN 进行实际数据传输，这种方案可以通过 istio 动态改变路由规则，降级限流等等设置，相当于直接复用了 Service Mesh 的各种能力，这也说明 Runtime 不是要推翻 Service Mesh，而是要在此基础上继续向前迈一步。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/capa-rpc.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;五capa-最佳实践&#34;&gt;五、Capa 最佳实践&lt;/h2&gt;
 &lt;h3 id=&#34;a适配迁移之痛&#34;&gt;A、适配迁移之痛&lt;/h3&gt;
 &lt;p&gt;如果要使用原生的Capa API，您的遗留系统需要面对较大的重构工作量。&lt;/p&gt;
@@ -322,7 +322,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 &lt;li&gt;接入(携程)私有云SDK的适配层&lt;/li&gt;
 &lt;li&gt;接入spring boot体系的适配层&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/capa-use.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;b现状和未来规划&#34;&gt;B、现状和未来规划&lt;/h3&gt;
 &lt;p&gt;Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域的特：&lt;/p&gt;
 &lt;ul&gt;
@@ -368,8 +368,8 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 &lt;p&gt;参考资料：https://mp.weixin.qq.com/s/VAwTCIP6RhqDNoBbmE8zVA&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;bebpf-的探索&#34;&gt;B、eBPF 的探索&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/ebpf-1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -461,7 +461,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 &lt;blockquote&gt;
 &lt;p&gt;参考资料：https://mp.weixin.qq.com/s/8qnmL12JrESwJg3RsSelJQ&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/slog.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/slog.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;主要参考文献&#34;&gt;主要参考文献&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index&#34;&gt;https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index&lt;/a&gt;&lt;/li&gt;

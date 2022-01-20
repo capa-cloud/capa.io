@@ -428,7 +428,7 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
 &lt;span style=&#34;color:#5c35cc;font-weight:bold&#34;&gt;@Override&lt;/span&gt;
 &lt;span style=&#34;color:#000&#34;&gt;Mono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Void&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;deleteConfiguration&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ConfigurationRequestItem&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;configurationRequestItem&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;调用逻辑&#34;&gt;调用逻辑&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png&#34; alt=&#34;configuration_in_ctrip&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png&#34; alt=&#34;configuration_in_ctrip&#34;&gt;&lt;/p&gt;
 &lt;p&gt;ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直接缩写成ServiceA&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;ServiceA:服务调用方&lt;/li&gt;

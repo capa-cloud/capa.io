@@ -178,7 +178,7 @@ Mono<Void> deleteConfiguration(ConfigurationRequestItem configurationRequestItem
 
 ## 调用逻辑
 
-![configuration_in_ctrip](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png)
+![configuration_in_ctrip](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png)
 
 ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直接缩写成ServiceA
 

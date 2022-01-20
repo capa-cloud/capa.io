@@ -13,7 +13,7 @@ description: >
 ## 调用逻辑
 下图为 Capa 的 RPC 服务调用逻辑
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png)
 
 * Service A 为服务调用方， Service B 为服务被调用方
 * Service A 通过 Capa SDK 发起对 Service B 的服务调用

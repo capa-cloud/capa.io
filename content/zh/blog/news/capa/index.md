@@ -47,7 +47,7 @@ ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始�
 
 如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/service-mesh.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/service-mesh.png)
 
 #### Mson
 
@@ -141,7 +141,7 @@ Multi-Runtime Microservices Architecture
 >![](https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*srPVSYTEHc4AAAAAAAAAAAAAARQnAQ)
 为了让大家对 Runtime 有一个更加清晰的认识，上图针对 Service Mesh 跟 Runtime 两种理念的定位、交互方式、通信协议以及能力丰富度进行了总结，可以看到相比 Service Mesh 而言，Runtime 提供了语义明确、能力丰富的 API，可以让应用跟它的交互变得更加简单直接。
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png)
 
 ## 三、Multi Runtime 落地实践
 
@@ -150,7 +150,7 @@ Multi-Runtime Microservices Architecture
 >![](https://static001.geekbang.org/wechat/images/93/93ccecd9a241b5c6921b988b18f0362e.png)
 dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/dapr-archi.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/dapr-archi.png)
 
 1.  提供了多种分布式能力，API 定义清晰，基本能满足一般的使用场景。
 2.  针对各种能力都提供了不同的实现组件，基本涵盖了常用的中间件产品，用户可以根据需要自由选择。
@@ -222,7 +222,7 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 * 社区还比较年轻，短时间内用golang重写所有SDK逻辑不太现实。
 * 社区对公有云功能支持比较好，私有云主要依赖SDK模式。
 
-![img.png](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/feature-support.png)
+![img.png](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/feature-support.png)
 
 #### Capa设计
 
@@ -265,7 +265,7 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 
 ### A、功能集选择
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/api-design.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/api-design.png)
 
 #### 组件提供的能力不平齐
 
@@ -346,7 +346,7 @@ metadata
 >![](https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*i-JnSaeZbJ4AAAAAAAAAAAAAARQnAQ)
 RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的需求，对于 RPC 接口的定义，我们同样参考了 dapr 社区的定义，发现完全可以满足我们的需求，因此接口定义就直接复用 dapr 的，但目前 dapr 提供的 RPC 实现方案还比较薄弱，而 MOSN 经过多年迭代，能力已经非常成熟完善，因此我们大胆把 Runtime 跟 Service Mesh 两种思路结合在一起，把 MOSN 本身作为我们实现 RPC 能力的一个 Component，这样 Layotto 在收到 RPC 请求以后交给 MOSN 进行实际数据传输，这种方案可以通过 istio 动态改变路由规则，降级限流等等设置，相当于直接复用了 Service Mesh 的各种能力，这也说明 Runtime 不是要推翻 Service Mesh，而是要在此基础上继续向前迈一步。
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/capa-rpc.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc.png)
 
 ## 五、Capa 最佳实践
 
@@ -365,7 +365,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 + 接入(携程)私有云SDK的适配层
 + 接入spring boot体系的适配层
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/capa-use.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png)
 
 ### B、现状和未来规划
 
@@ -420,9 +420,9 @@ Istio 的扩展机制使用 Proxy-Wasm 应用二进制接口（ABI）规范，�
 
 ### B、eBPF 的探索
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/ebpf-1.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-1.png)
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png)
 
 > 参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA
  
@@ -520,7 +520,7 @@ CNCF 托管了许多与 Dapr 紧密结合的项目。例如，Dapr 使用 gRPC �
 
 > 参考资料：https://mp.weixin.qq.com/s/8qnmL12JrESwJg3RsSelJQ
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/slog.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/slog.png)
 
 #### 主要参考文献
 

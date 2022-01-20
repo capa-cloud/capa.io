@@ -51,7 +51,7 @@
 &lt;/ul&gt;
 &lt;h4 id=&#34;参考设计1云原生技术栈stack&#34;&gt;参考设计1：云原生技术栈Stack&lt;/h4&gt;
 &lt;p&gt;参考云原生技术栈图示给出的四个层次，使一级域名能够显示出Actuator所属的层级。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;参考设计2携程现有监控指标分类&#34;&gt;参考设计2：携程现有监控指标分类&lt;/h4&gt;
 &lt;p&gt;携程监控指标的一级域名主要有&lt;code&gt;System&lt;/code&gt;、&lt;code&gt;FrameworkName&lt;/code&gt;、&lt;code&gt;App&lt;/code&gt;等等。&lt;/p&gt;
 &lt;p&gt;不过其技术栈领域的监控划分主要依赖于：使用不同看板进行呈现，相当于不同的监控平台本身对应于不同的技术栈领域。&lt;/p&gt;
@@ -261,7 +261,7 @@
 &lt;p&gt;通过调用Capa SDK API的方式，管理应用级配置。底层通过SPI的方式注册适配各平台的实现类。&lt;/p&gt;
 &lt;h2 id=&#34;调用逻辑&#34;&gt;调用逻辑&lt;/h2&gt;
 &lt;p&gt;下图为Capa的Configuration服务调用逻辑&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png&#34; alt=&#34;Configuration&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png&#34; alt=&#34;Configuration&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service(appid:A):服务调用方，CloudX Configuration Service为服务被调用方，服务被调用方可以是任意云厂商的配置服务&lt;/li&gt;
 &lt;li&gt;Service(appid:A)通过Capa SDK发起对Cloud Configuration Service的服务调用&lt;/li&gt;
@@ -340,7 +340,7 @@
         &lt;h2 id=&#34;介绍&#34;&gt;介绍&lt;/h2&gt;
 &lt;h2 id=&#34;调用逻辑&#34;&gt;调用逻辑&lt;/h2&gt;
 &lt;p&gt;下图为 Capa 的 RPC 服务调用逻辑&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service A 为服务调用方， Service B 为服务被调用方&lt;/li&gt;
 &lt;li&gt;Service A 通过 Capa SDK 发起对 Service B 的服务调用&lt;/li&gt;

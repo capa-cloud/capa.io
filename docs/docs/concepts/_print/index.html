@@ -276,7 +276,7 @@ if (!doNotTrack) {
 <h2 id="背景">背景</h2>
 <p>在跨云、混合云的场景下，我们希望应用程序可以使用<strong>一套代码</strong>，部署到不同的云环境上。在运行时，采用对应云环境提供的<strong>云原生实现方案</strong>。</p>
 <h2 id="技术思路">技术思路</h2>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/api_design.png" alt="api design"></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/api_design.png" alt="api design"></p>
 <p>定义<strong>与具体中间件无关的API层（无强绑定）</strong>，使应用程序在编程时仅依赖该API层。
 如此一来，应用本身便与具体中间件解耦；然后在部署到不同云环境时，将API的不同云的实现层加载到应用进程中。</p>
 
@@ -331,7 +331,7 @@ if (!doNotTrack) {
 </ul>
 <h4 id="参考设计1云原生技术栈stack">参考设计1：云原生技术栈Stack</h4>
 <p>参考云原生技术栈图示给出的四个层次，使一级域名能够显示出Actuator所属的层级。</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png" alt=""></p>
 <h4 id="参考设计2携程现有监控指标分类">参考设计2：携程现有监控指标分类</h4>
 <p>携程监控指标的一级域名主要有<code>System</code>、<code>FrameworkName</code>、<code>App</code>等等。</p>
 <p>不过其技术栈领域的监控划分主要依赖于：使用不同看板进行呈现，相当于不同的监控平台本身对应于不同的技术栈领域。</p>
@@ -577,7 +577,7 @@ if (!doNotTrack) {
 <p>通过调用Capa SDK API的方式，管理应用级配置。底层通过SPI的方式注册适配各平台的实现类。</p>
 <h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为Capa的Configuration服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png" alt="Configuration"></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png" alt="Configuration"></p>
 <ul>
 <li>Service(appid:A):服务调用方，CloudX Configuration Service为服务被调用方，服务被调用方可以是任意云厂商的配置服务</li>
 <li>Service(appid:A)通过Capa SDK发起对Cloud Configuration Service的服务调用</li>
@@ -660,7 +660,7 @@ if (!doNotTrack) {
 	<h2 id="介绍">介绍</h2>
 <h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为 Capa 的 RPC 服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
 <ul>
 <li>Service A 为服务调用方， Service B 为服务被调用方</li>
 <li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
@@ -766,7 +766,7 @@ if (!doNotTrack) {
 <p>通过服务调用，应用程序可以使用 <a href="https://www.w3.org/Protocols/">HTTP</a> 这样的标准协议来发现并可靠地与其他应用程序通信。</p>
 <h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为 Capa 的 RPC 服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
 <ul>
 <li>Service A 为服务调用方， Service B 为服务被调用方</li>
 <li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>

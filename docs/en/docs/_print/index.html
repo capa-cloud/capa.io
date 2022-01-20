@@ -1427,7 +1427,7 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
 <span style="color:#5c35cc;font-weight:bold">@Override</span>
 <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">deleteConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">ConfigurationRequestItem</span> <span style="color:#000">configurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">);</span>
 </code></pre></div><h2 id="调用逻辑">调用逻辑</h2>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png" alt="configuration_in_ctrip"></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png" alt="configuration_in_ctrip"></p>
 <p>ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直接缩写成ServiceA</p>
 <ul>
 <li>ServiceA:服务调用方</li>
@@ -1548,7 +1548,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
     <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">InvokeMethodRequest</span> <span style="color:#000">invokeMethodRequest</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
 </code></pre></div><h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为 Capa 的 RPC 在携程的 App Mesh 服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/RPC/rpc_invoke_in_aws.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Example/RPC/rpc_invoke_in_aws.png" alt=""></p>
 <ul>
 <li>Service A 为服务调用方， Service B 为服务被调用方</li>
 <li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
@@ -1625,7 +1625,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
     <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeMethod</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">InvokeMethodRequest</span> <span style="color:#000">invokeMethodRequest</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">TypeRef</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">);</span>
 </code></pre></div><h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为 Capa 的 RPC 在携程的 Service Mesh 服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Example/RPC/rpc_invoke_in_ctrip.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Example/RPC/rpc_invoke_in_ctrip.png" alt=""></p>
 <ul>
 <li>Service A 为服务调用方， Service B 为服务被调用方</li>
 <li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
@@ -1684,7 +1684,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 <h2 id="背景">背景</h2>
 <p>在跨云、混合云的场景下，我们希望应用程序可以使用<strong>一套代码</strong>，部署到不同的云环境上。在运行时，采用对应云环境提供的<strong>云原生实现方案</strong>。</p>
 <h2 id="技术思路">技术思路</h2>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/api_design.png" alt="api design"></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/api_design.png" alt="api design"></p>
 <p>定义<strong>与具体中间件无关的API层（无强绑定）</strong>，使应用程序在编程时仅依赖该API层。
 如此一来，应用本身便与具体中间件解耦；然后在部署到不同云环境时，将API的不同云的实现层加载到应用进程中。</p>
 
@@ -1741,7 +1741,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 </ul>
 <h4 id="参考设计1云原生技术栈stack">参考设计1：云原生技术栈Stack</h4>
 <p>参考云原生技术栈图示给出的四个层次，使一级域名能够显示出Actuator所属的层级。</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png" alt=""></p>
 <h4 id="参考设计2携程现有监控指标分类">参考设计2：携程现有监控指标分类</h4>
 <p>携程监控指标的一级域名主要有<code>System</code>、<code>FrameworkName</code>、<code>App</code>等等。</p>
 <p>不过其技术栈领域的监控划分主要依赖于：使用不同看板进行呈现，相当于不同的监控平台本身对应于不同的技术栈领域。</p>
@@ -1987,7 +1987,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 <p>通过调用Capa SDK API的方式，管理应用级配置。底层通过SPI的方式注册适配各平台的实现类。</p>
 <h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为Capa的Configuration服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png" alt="Configuration"></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png" alt="Configuration"></p>
 <ul>
 <li>Service(appid:A):服务调用方，CloudX Configuration Service为服务被调用方，服务被调用方可以是任意云厂商的配置服务</li>
 <li>Service(appid:A)通过Capa SDK发起对Cloud Configuration Service的服务调用</li>
@@ -2070,7 +2070,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 	<h2 id="介绍">介绍</h2>
 <h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为 Capa 的 RPC 服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
 <ul>
 <li>Service A 为服务调用方， Service B 为服务被调用方</li>
 <li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
@@ -2176,7 +2176,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 <p>通过服务调用，应用程序可以使用 <a href="https://www.w3.org/Protocols/">HTTP</a> 这样的标准协议来发现并可靠地与其他应用程序通信。</p>
 <h2 id="调用逻辑">调用逻辑</h2>
 <p>下图为 Capa 的 RPC 服务调用逻辑</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt=""></p>
 <ul>
 <li>Service A 为服务调用方， Service B 为服务被调用方</li>
 <li>Service A 通过 Capa SDK 发起对 Service B 的服务调用</li>
@@ -4419,17 +4419,17 @@ bar := &quot;foo&quot;;
 <h3 id="文件路径说明">文件路径说明</h3>
 <p>文件统一放在 content/ 目录下，其中中文文档存放于 content/zh ，英文文档存放于 content/en。</p>
 <p>如果需要新增文档，需要按照目录结构新增文件夹和.md文件。</p>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt=""></p>
 <h3 id="图片路径说明">图片路径说明</h3>
 <p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。</p>
-<p>文档中统一使用全路径来引用图片，Url前缀 <a href="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images</a> 。</p>
+<p>文档中统一使用全路径来引用图片，Url前缀 <a href="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images">https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images</a> 。</p>
 <p>例如，引入下图的图片（contribution_file.png），Markdown写法如下：</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"> ![<span style="color:#204a87;font-weight:bold">Architecture</span>](<span style="color:#c4a000">https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"> ![<span style="color:#204a87;font-weight:bold">Architecture</span>](<span style="color:#c4a000">https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png</span>)
 </code></pre></div><ul>
 <li>master 表示分支名</li>
 <li>content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt=""></p>
 
 </div>
 

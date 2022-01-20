@@ -26,7 +26,7 @@
 &lt;p&gt;通过服务调用，应用程序可以使用 &lt;a href=&#34;https://www.w3.org/Protocols/&#34;&gt;HTTP&lt;/a&gt; 这样的标准协议来发现并可靠地与其他应用程序通信。&lt;/p&gt;
 &lt;h2 id=&#34;调用逻辑&#34;&gt;调用逻辑&lt;/h2&gt;
 &lt;p&gt;下图为 Capa 的 RPC 服务调用逻辑&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Service A 为服务调用方， Service B 为服务被调用方&lt;/li&gt;
 &lt;li&gt;Service A 通过 Capa SDK 发起对 Service B 的服务调用&lt;/li&gt;

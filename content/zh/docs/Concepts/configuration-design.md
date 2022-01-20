@@ -14,7 +14,7 @@ description: >
 
 下图为Capa的Configuration服务调用逻辑
 
-![Configuration](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png)
+![Configuration](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png)
 
 - Service(appid:A):服务调用方，CloudX Configuration Service为服务被调用方，服务被调用方可以是任意云厂商的配置服务
 - Service(appid:A)通过Capa SDK发起对Cloud Configuration Service的服务调用

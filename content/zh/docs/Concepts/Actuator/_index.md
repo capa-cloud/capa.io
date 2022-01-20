@@ -50,7 +50,7 @@ description: >
 
 参考云原生技术栈图示给出的四个层次，使一级域名能够显示出Actuator所属的层级。
 
-![](https://raw.githubusercontent.com/reactivegroup/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png)
 
 #### 参考设计2：携程现有监控指标分类
 
@@ -274,9 +274,9 @@ Ops运维和管理领域：
 
 使用 `小写+下划线` 作为attributes的格式标准。
 
-### A、必需
+### A、必需（建议）
 
-+ app_id
++ app_id（广义的app_id）
 + env
 + ...
 
