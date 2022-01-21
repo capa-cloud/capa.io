@@ -14,9 +14,15 @@ description: >
 
 ![](http://icyfenix.cn/assets/img/mtl.7974eb9f.png)
 
+> 参考资料：https://segmentfault.com/a/1190000040061004
+
 ![](https://segmentfault.com/img/bVcSfQs)
 
-![](https://s5.51cto.com/oss/202111/19/bdd32d343c4e0d45bac4012e7bc866bc.jpg) 
+> 参考资料：https://www.51cto.com/article/691184.html
+
+![](https://s5.51cto.com/oss/202111/19/bdd32d343c4e0d45bac4012e7bc866bc.jpg)
+
+> 参考资料：https://segmentfault.com/a/1190000040061004
 
 ## 一、命名空间 规范定义
 
