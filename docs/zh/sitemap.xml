@@ -263,7 +263,7 @@
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/blog/2022/01/21/grpc-landscape/</loc>
-    <lastmod>2022-01-31T17:12:53+08:00</lastmod>
+    <lastmod>2022-03-01T14:09:22+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -468,6 +468,32 @@
                 rel="alternate"
                 hreflang="zh"
                 href="https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/"
+                />
+  </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/blog/1/01/01/</loc>
+    <lastmod>2022-03-01T14:09:22+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/en/blog/1/01/01/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/blog/1/01/01/"
+                />
+  </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/blog/1/01/01/</loc>
+    <lastmod>2022-03-01T14:09:22+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/en/blog/1/01/01/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/blog/1/01/01/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/</loc>

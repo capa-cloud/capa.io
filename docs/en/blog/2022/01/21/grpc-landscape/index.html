@@ -28,13 +28,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/blog/2022/01/21/grpc-landscape/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-01-21T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-01-31T17:12:53+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2022-03-01T14:09:22+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="gRPC Landscape">
 <meta itemprop="description" content="gRPC Landscape.
 "><meta itemprop="datePublished" content="2022-01-21T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-01-31T17:12:53+08:00" />
-<meta itemprop="wordCount" content="217">
+<meta itemprop="dateModified" content="2022-03-01T14:09:22+08:00" />
+<meta itemprop="wordCount" content="276">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="gRPC Landscape"/>
 <meta name="twitter:description" content="gRPC Landscape.
@@ -200,6 +200,10 @@ if (!doNotTrack) {
   <a href="/capa.io/en/blog/2022/01/21/grpc-landscape/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-capaioenblog20220121grpc-landscape"><span class="td-sidebar-nav-active-item">gRPC Landscape</span></a>
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioenblog10101-li">
+  <a href="/capa.io/en/blog/1/01/01/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioenblog10101"><span class=""></span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioenblog10101-li">
+  <a href="/capa.io/en/blog/1/01/01/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioenblog10101"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioenblogtecktalk-li">
@@ -269,11 +273,16 @@ if (!doNotTrack) {
     <li><a href="#二grpc协议">二、gRPC协议</a>
       <ul>
         <li><a href="#设计原则">设计原则</a></li>
-        <li><a href="#在http2之上">在HTTP2之上</a></li>
+        <li><a href="#http2">HTTP2</a></li>
         <li><a href="#交互分析">交互分析</a></li>
+        <li><a href="#grpc-1">grpc</a></li>
       </ul>
     </li>
-    <li><a href="#三grpc框架">三、gRPC框架</a></li>
+    <li><a href="#三grpc框架">三、gRPC框架</a>
+      <ul>
+        <li><a href="#主链路-1">主链路</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
 
@@ -366,7 +375,7 @@ if (!doNotTrack) {
 <p>鉴于 gRPC 在应用层技术栈的广泛使用和重要性，对其有源码级了解是有价值的。</p>
 <h2 id="二grpc协议">二、gRPC协议</h2>
 <h3 id="设计原则">设计原则</h3>
-<p>● <strong>服务非对象、消息非引用</strong> —— 促进微服务的系统间粗粒度消息交互设计理念，同时避免分布式对象的陷阱和分布式计算的谬误。</p>
+<p>● 服务非对象、消息非引用 —— 促进微服务的系统间粗粒度消息交互设计理念，同时避免分布式对象的陷阱和分布式计算的谬误。</p>
 <blockquote>
 <p>和 DCOM 及 EJB 完全相反的。只有数据，不包含逻辑</p>
 </blockquote>
@@ -384,8 +393,17 @@ if (!doNotTrack) {
 </ul>
 </blockquote>
 <p>● 普遍并且简单 —— 该基础框架应该在任何流行的开发平台上适用，并且易于被个人在自己的平台上构建。它在CPU和内存有限的设备上也应该切实可行。</p>
+<blockquote>
+<p>协议的设计应考虑全面的应用场景：边缘节点、serverless等</p>
+</blockquote>
 <p>● 免费并且开源 —— 所有人可免费使用基本特性。以友好的许可协议开源方式发布所有交付件。</p>
+<blockquote>
+<p>避免具体技术锁定，应是可插拔的</p>
+</blockquote>
 <p>● <strong>互通性</strong> —— 该报文协议(Wire Protocol)必须遵循普通互联网基础框架。</p>
+<blockquote>
+<p>同现有网络设施的兼容性和连通性</p>
+</blockquote>
 <blockquote>
 <ul>
 <li>over HTTP</li>
@@ -393,13 +411,9 @@ if (!doNotTrack) {
 <li>over UDP</li>
 </ul>
 </blockquote>
-<p>● <strong>通用并且高性能</strong> —— 该框架应该适用于绝大多数用例场景，相比针对特定用例的框架，该框架只会牺牲一点性能。</p>
+<p>● 通用并且高性能 —— 该框架应该适用于绝大多数用例场景，相比针对特定用例的框架，该框架只会牺牲一点性能。</p>
 <blockquote>
-<ul>
-<li>over HTTP</li>
-<li>over TCP</li>
-<li>over UDP</li>
-</ul>
+<p>要通用性，不要极端性能优化</p>
 </blockquote>
 <p>● 分层的 —— 该框架的关键是必须能够独立演进。对报文格式(Wire Format)的修改不应该影响应用层。</p>
 <blockquote>
@@ -410,13 +424,30 @@ if (!doNotTrack) {
 <p>Payload agnostic，RPC 框架不应该规定用的是什么 payload 格式</p>
 </blockquote>
 <p>● <strong>流</strong> —— 存储系统依赖于流和流控来传递大数据集。像语音转文本或股票代码等其它服务，依靠流表达时间相关的消息序列。</p>
-<p>● <strong>阻塞式和非阻塞式</strong> —— 支持异步和同步处理在客户端和服务端间交互的消息序列。这是在某些平台上缩放和处理流的关键。</p>
-<p>● 取消和超时 —— 有的操作可能会用时很长，客户端运行正常时，可以通过取消操作让服务端回收资源。当任务因果链被追踪时，取消可以级联。客户端可能会被告知调用超时，此时服务就可以根据客户端的需求来调整自己的行为。</p>
 <blockquote>
-<p>(RST_STREAM 帧)</p>
+<p>在某种程度上，可以将其理解为类似消息系统的消息队列。</p>
 </blockquote>
-<p>● Lameducking —— 服务端必须支持优雅关闭，优雅关闭时拒绝新请求，但继续处理正在运行中的请求。</p>
+<p><img src="https://img.toutiao.io/c/df910edf0aca9dd3ba8387f2e767411d" alt=""></p>
+<p>● 阻塞式和非阻塞式 —— 支持异步和同步处理在客户端和服务端间交互的消息序列。这是在某些平台上缩放和处理流的关键。</p>
+<blockquote>
+<p>用户态线程阻塞模型性能较差，应使用NIO编程模型，支持异步非阻塞式的交互。</p>
+</blockquote>
+<p>● <strong>取消和超时</strong> —— 有的操作可能会用时很长，客户端运行正常时，可以通过取消操作让服务端回收资源。当任务因果链被追踪时，取消可以级联。客户端可能会被告知调用超时，此时服务就可以根据客户端的需求来调整自己的行为。</p>
+<blockquote>
+<p>支持重置功能(RST_STREAM 帧)</p>
+</blockquote>
+<p>● <strong>Lameducking</strong> —— 服务端必须支持优雅关闭，优雅关闭时拒绝新请求，但继续处理正在运行中的请求。</p>
+<blockquote>
+<p>优先级设计(Http2)</p>
+<ul>
+<li>针对流ID</li>
+<li>流级联设计</li>
+</ul>
+</blockquote>
 <p>● <strong>流控</strong> —— 在客户端和服务端之间，计算能力和网络容量往往是不平衡的。流控可以更好的缓冲管理，以及保护系统免受来自异常活跃对端的拒绝服务(DOS)攻击。</p>
+<blockquote>
+<p>维护缓冲区：窗口/背压/租约</p>
+</blockquote>
 <blockquote>
 <p>基于HTTP2缓冲区的流控机制
 基于应用层语义的流控</p>
@@ -428,19 +459,13 @@ if (!doNotTrack) {
 <p>metadata与payload分离</p>
 </blockquote>
 <p>● 标准化状态码 —— 客户端通常以有限的方式响应API调用返回的错误。应该限制状态代码名字空间，使得这些错误处理决定更清晰。如果需要更丰富的特定域的状态，可以使用元数据交换机制来提供。</p>
+<hr>
+<p>● <strong>对端平等</strong> —— 人机交互强调 客户端-&gt;服务端 模型，机器之间交互任意一端都可作为客户端/服务端</p>
+<p>● <strong>长链接</strong> —— 为服务端推送和双向流交互提供基础。</p>
 <blockquote>
 <p>完善的应用层状态码命名空间</p>
 </blockquote>
-<h3 id="在http2之上">在HTTP2之上</h3>
-<h4 id="语义概念">语义概念</h4>
-<p>gRPC 引入了三个新概念：通道、远程过程调用(RPC) 和消息。三者之间的关系很简单：每个通道可能有很多 RPC，而每个 RPC 可能有很多消息。</p>
-<p><img src="https://grpc.io/img/channels_mapping_2.png" alt=""></p>
-<p><img src="https://grpc.io/img/grpc_on_http2_mapping_2.png" alt=""></p>
-<p>通道是 gRPC 中的一个关键概念。HTTP/2 中的流支持在单个连接上进行多个并发会话；通道通过在多个并发连接上启用多个流来扩展这个概念。</p>
-<p>通道代表到端点的虚拟连接，实际上可能由许多 HTTP/2 连接支持。RPC 与连接相关联。RPC 实际上是普通的 HTTP/2 流。消息与 RPC 相关联并作为 HTTP/2 数据帧发送。更具体地说，消息是在数据帧之上分层的。一个数据帧可能有很多 gRPC 消息，或者如果一个 gRPC 消息非常大它可能跨越多个数据帧。</p>
-<blockquote>
-<p>gRPC 对 16kb 的数据帧使用 HTTP/2 默认的最大大小。超过 16kb 的消息可能跨越多个数据帧，而低于该大小的消息可能与一些其他消息共享一个数据帧。</p>
-</blockquote>
+<h3 id="http2">HTTP2</h3>
 <h3 id="交互分析">交互分析</h3>
 <p><img src="https://i.imgur.com/H0HPgv9.jpg" alt=""></p>
 <ul>
@@ -457,6 +482,23 @@ if (!doNotTrack) {
 <li>WINDOW_UPDATE</li>
 <li>PING</li>
 </ul>
+<h4 id="主链路">主链路</h4>
+<ul>
+<li>Magic</li>
+<li>Settings</li>
+</ul>
+<h4 id="流链路">流链路</h4>
+<ul>
+<li>Settings</li>
+<li>Headers</li>
+<li>data</li>
+<li>Window_update</li>
+</ul>
+<h4 id="控制链路">控制链路</h4>
+<ul>
+<li>Window_update</li>
+<li>Ping</li>
+</ul>
 <p><img src="https://i.imgur.com/FrA8EW4.png" alt=""></p>
 <ul>
 <li>在建立连接之前，客户端/服务端都会发送连接前言（Magic+SETTINGS），确立协议和配置项。</li>
@@ -465,7 +507,73 @@ if (!doNotTrack) {
 <li>请求/响应结果会分为 HTTP 和 gRPC 状态响应两种类型。</li>
 <li>客户端发起 PING，服务端就会回应 PONG，反之亦可。</li>
 </ul>
+<h3 id="grpc-1">grpc</h3>
+<h4 id="语义概念">语义概念</h4>
+<p>gRPC 引入了三个新概念：通道、远程过程调用(RPC) 和消息。三者之间的关系很简单：每个通道可能有很多 RPC，而每个 RPC 可能有很多消息。</p>
+<p><img src="https://grpc.io/img/channels_mapping_2.png" alt=""></p>
+<p><img src="https://grpc.io/img/grpc_on_http2_mapping_2.png" alt=""></p>
+<p>通道是 gRPC 中的一个关键概念。HTTP/2 中的流支持在单个连接上进行多个并发会话；通道通过在多个并发连接上启用多个流来扩展这个概念。</p>
+<p>通道代表到端点的虚拟连接，实际上可能由许多 HTTP/2 连接支持。RPC 与连接相关联。RPC 实际上是普通的 HTTP/2 流。消息与 RPC 相关联并作为 HTTP/2 数据帧发送。更具体地说，消息是在数据帧之上分层的。一个数据帧可能有很多 gRPC 消息，或者如果一个 gRPC 消息非常大它可能跨越多个数据帧。</p>
+<blockquote>
+<p>gRPC 对 16kb 的数据帧使用 HTTP/2 默认的最大大小。超过 16kb 的消息可能跨越多个数据帧，而低于该大小的消息可能与一些其他消息共享一个数据帧。</p>
+</blockquote>
+<h4 id="并非与http2强绑定">并非与HTTP2强绑定？</h4>
+<ul>
+<li>Channel
+<ul>
+<li>Conns</li>
+<li>负载均衡</li>
+</ul>
+</li>
+<li>RPC
+<ul>
+<li>Conn</li>
+<li>Stream</li>
+</ul>
+</li>
+<li>Message
+<ul>
+<li>Frame m:n</li>
+</ul>
+</li>
+</ul>
 <h2 id="三grpc框架">三、gRPC框架</h2>
+<h3 id="主链路-1">主链路</h3>
+<ul>
+<li>启动net server
+<ul>
+<li></li>
+</ul>
+</li>
+<li>Stub
+<ul>
+<li>Contact
+<ul>
+<li>proto</li>
+</ul>
+</li>
+<li>Channel
+<ul>
+<li>生命周期</li>
+</ul>
+</li>
+<li>业务executor</li>
+</ul>
+</li>
+<li>Channel
+<ul>
+<li>创建ClientCall(RPC)</li>
+<li>将ClientCall转化成realCall(H2 Conn)</li>
+<li>将realCall转化成realStream (H2 Stream)</li>
+<li>执行realStream</li>
+<li>获取Response</li>
+</ul>
+</li>
+</ul>
+<p>H2 Conn:</p>
+<p>startCall</p>
+<p>call.sendMessage</p>
+<p>call.halfMessage</p>
 <p>TODO</p>
 <p><a href="https://juejin.cn/post/6844903984524705800">https://juejin.cn/post/6844903984524705800</a>
 <a href="https://grpc.io/docs/what-is-grpc/core-concepts/">https://grpc.io/docs/what-is-grpc/core-concepts/</a>
