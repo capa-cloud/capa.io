@@ -236,6 +236,19 @@
                 href="https://reactivegroup.github.io/capa.io/en/blog/cloudstack/grpc/"
                 />
   </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/en/blog/cloudstack/istio/</loc>
+    <lastmod>2022-03-09T09:19:56+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/blog/cloudstack/istio/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/en/blog/cloudstack/istio/"
+                />
+  </url><url>
     <loc>https://reactivegroup.github.io/capa.io/en/blog/tecktalk/</loc>
     <lastmod>2022-01-21T18:50:16+08:00</lastmod>
     <xhtml:link
@@ -260,6 +273,19 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://reactivegroup.github.io/capa.io/en/docs/"
+                />
+  </url><url>
+    <loc>https://reactivegroup.github.io/capa.io/en/blog/2022/03/09/istio-landscape/</loc>
+    <lastmod>2022-03-10T16:42:10+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-landscape/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://reactivegroup.github.io/capa.io/en/blog/2022/03/09/istio-landscape/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/en/blog/2022/01/21/grpc-landscape/</loc>
@@ -468,19 +494,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://reactivegroup.github.io/capa.io/en/docs/tasks/ponycopters/"
-                />
-  </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/en/blog/1/01/01/</loc>
-    <lastmod>2022-03-01T14:09:22+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/blog/1/01/01/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/en/blog/1/01/01/"
                 />
   </url><url>
     <loc>https://reactivegroup.github.io/capa.io/en/blog/1/01/01/</loc>

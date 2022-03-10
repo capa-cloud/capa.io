@@ -21,26 +21,28 @@
 
 
   
-  <meta name="description" content="原文链接：https://blog.csdn.net/wyy4045/article/details/119170348
-https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/
-">
+  <meta name="description" content="envoy http重定向
+配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤 …">
 <meta property="og:title" content="" />
-<meta property="og:description" content="原文链接：https://blog.csdn.net/wyy4045/article/details/119170348
-https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/" />
+<meta property="og:description" content="envoy http重定向 配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。
+指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。
+https://www.ciocso.com/article/730.html" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/blog/1/01/01/" /><meta property="article:section" content="blog" />
 
 <meta property="article:modified_time" content="2022-03-01T14:09:22+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="">
-<meta itemprop="description" content="原文链接：https://blog.csdn.net/wyy4045/article/details/119170348
-https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/">
+<meta itemprop="description" content="envoy http重定向 配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。
+指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。
+https://www.ciocso.com/article/730.html">
 <meta itemprop="dateModified" content="2022-03-01T14:09:22+08:00" />
-<meta itemprop="wordCount" content="2">
+<meta itemprop="wordCount" content="7">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="原文链接：https://blog.csdn.net/wyy4045/article/details/119170348
-https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/"/>
+<meta name="twitter:description" content="envoy http重定向 配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。
+指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。
+https://www.ciocso.com/article/730.html"/>
 
 
 
@@ -202,8 +204,13 @@ if (!doNotTrack) {
   <a href="/capa.io/en/blog/2022/01/21/grpc-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioenblog20220121grpc-landscape"><span class="">gRPC Landscape</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioenblog10101-li">
-  <a href="/capa.io/en/blog/1/01/01/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioenblog10101"><span class=""></span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioenblogcloudstackistio-li">
+  <a href="/capa.io/en/blog/cloudstack/istio/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioenblogcloudstackistio"><span class="">Istio Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioenblog20220309istio-landscape-li">
+  <a href="/capa.io/en/blog/2022/03/09/istio-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioenblog20220309istio-landscape"><span class="">Istio Landscape</span></a>
+</li>
+  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-capaioenblog10101-li">
   <a href="/capa.io/en/blog/1/01/01/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-capaioenblog10101"><span class="td-sidebar-nav-active-item"></span></a>
 </li>
@@ -244,8 +251,8 @@ if (!doNotTrack) {
     
     
 
-    <a href="https://github.com/reactivegroup/capa/edit/master/content/en/blog/cloudstack/istio/istio-landscape.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-    <a href="https://github.com/reactivegroup/capa/new/master/content/en/blog/cloudstack/istio/istio-landscape.md?filename=change-me.md&amp;value=---%0D%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0D%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0D%0Aweight%3A&#43;100%0D%0Adescription%3A&#43;%3E-%0D%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0D%0A---%0D%0A%0D%0A%23%23&#43;Heading%0D%0A%0D%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0D%0A%0D%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0D%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0D%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0D%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0D%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+    <a href="https://github.com/reactivegroup/capa/edit/master/content/en/blog/cloudstack/envoy/envoy-landscape.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+    <a href="https://github.com/reactivegroup/capa/new/master/content/en/blog/cloudstack/envoy/envoy-landscape.md?filename=change-me.md&amp;value=---%0D%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0D%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0D%0Aweight%3A&#43;100%0D%0Adescription%3A&#43;%3E-%0D%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0D%0A---%0D%0A%0D%0A%23%23&#43;Heading%0D%0A%0D%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0D%0A%0D%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0D%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0D%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0D%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0D%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
     <a href="https://github.com/reactivegroup/capa/issues/new?title=" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
     
       
@@ -318,8 +325,10 @@ if (!doNotTrack) {
 		
 		
 	</header>
-	<p>原文链接：https://blog.csdn.net/wyy4045/article/details/119170348</p>
-<p><a href="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/">https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/</a></p>
+	<h4 id="envoy-http重定向">envoy http重定向</h4>
+<p>配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。</p>
+<p>指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。</p>
+<p><a href="https://www.ciocso.com/article/730.html">https://www.ciocso.com/article/730.html</a></p>
 
 	
 
@@ -327,99 +336,7 @@ if (!doNotTrack) {
   <li>
     <a class="btn btn-primary disabled"><span class="mr-1">←</span>Previous</a>
   </li>
-    <a href="/capa.io/en/blog/1/01/01/" aria-label="Next - " class="btn btn-primary">Next<span class="ml-1">→</span></a>
-  </li>
-</ul>
-
-</div>
-
-
-          </main>
-        </div>
-      </div>
-      
-<footer class="bg-dark py-5 row d-print-none">
-  <div class="container-fluid mx-sm-5">
-    <div class="row">
-      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
-        
-        
-        
-<ul class="list-inline mb-0">
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
-      <i class="fa fa-envelope"></i>
-    </a>
-  </li>
-  
-</ul>
-
-        
-        
-      </div>
-      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
-        
-        
-        
-<ul class="list-inline mb-0">
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
-      <i class="fab fa-github"></i>
-    </a>
-  </li>
-  
-</ul>
-
-        
-        
-      </div>
-      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2022 The Capa Authors All Rights Reserved</small>
-        <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></small>
-	
-		<p class="mt-2"><a href="/capa.io/en/about/">About Capa</a></p>
-	
-      </div>
-    </div>
-  </div>
-</footer>
-
-
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-
-
-
-
-
-<script src='/capa.io/js/tabpane-persist.js'></script>
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/capa.io/js/main.min.c30c86b73d90a0180556503734816437e56f9d02c4939409d2766a99c0d89b4c.js" integrity="sha256-wwyGtz2QoBgFVlA3NIFkN&#43;VvnQLEk5QJ0nZqmcDYm0w=" crossorigin="anonymous"></script>
-
-
-
-
-  </body>
-</html>tn btn-primary disabled">Next<span class="ml-1">→</span></a>
+    <a class="btn btn-primary disabled">Next<span class="ml-1">→</span></a>
   </li>
 </ul>
 

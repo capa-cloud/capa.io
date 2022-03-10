@@ -13,6 +13,449 @@
     
     
     <item>
+      <title>Blog: Istio Landscape</title>
+      <link>https://reactivegroup.github.io/capa.io/en/blog/2022/03/09/istio-landscape/</link>
+      <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/en/blog/2022/03/09/istio-landscape/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;一istio-sidecar&#34;&gt;一、Istio Sidecar&lt;/h2&gt;
+&lt;h4 id=&#34;sidecar模式是什么&#34;&gt;Sidecar模式是什么&lt;/h4&gt;
+&lt;p&gt;Sidecar模式是一种&lt;strong&gt;单节点、多容器&lt;/strong&gt;的应用设计形式。Sidecar主张以额外的容器来扩展或增强主容器,而这个额外的容器被称为Sidecar容器&lt;/p&gt;
+&lt;p&gt;sidecar 模式也符合当前微服务的以下特点:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;隔离(separation of concerns):让每个容器环境不需要相互依赖而独立运行,也就意味着sidecar程序可以和任何语言的应用服务一起运行。&lt;/li&gt;
+&lt;li&gt;单一责任原则(single responsibility principle),各个容器负责自己的处理逻辑,各司其职&lt;/li&gt;
+&lt;li&gt;内聚性/可重用性(Cohesiveness/Reusability)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.servicemesher.com/istio-handbook/images/sidecar-pattern.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在软件架构中， Sidecar 连接到父应用并且为其添加扩展或者增强功能。Sidecar 应用与主应用程序松散耦合。它可以屏蔽不同编程语言的差异，统一实现微服务的可观察性、监控、日志记录、配置、断路器等功能。&lt;/p&gt;
+&lt;h4 id=&#34;使用-sidecar-模式的优势&#34;&gt;使用 Sidecar 模式的优势&lt;/h4&gt;
+&lt;p&gt;使用 sidecar 模式部署服务网格时，无需在节点上运行代理，但是集群中将运行多个相同的 sidecar 副本。在 sidecar 部署方式中，&lt;strong&gt;每个应用的容器旁都会部署一个伴生容器（如 Envoy 或 MOSN），这个容器称之为 sidecar 容器&lt;/strong&gt;。Sidecar 接管进出应用容器的所有流量。&lt;strong&gt;在 Kubernetes 的 Pod 中，在原有的应用容器旁边注入一个 Sidecar 容器，两个容器共享存储、网络等资源&lt;/strong&gt;，可以广义的将这个包含了 sidecar 容器的 Pod 理解为一台主机，两个容器共享主机资源。&lt;/p&gt;
+&lt;p&gt;因其独特的部署结构，使得 sidecar 模式具有以下优势：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将与应用业务逻辑无关的功能抽象到共同基础设施，降低了微服务代码的复杂度。&lt;/li&gt;
+&lt;li&gt;因为不再需要编写相同的第三方组件配置文件和代码，所以能够降低微服务架构中的代码重复度。
+Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;sidecar模式&#34;&gt;Sidecar模式&lt;/h4&gt;
+&lt;p&gt;借助于K8S良好的可拓展性，使用sidecar模式可以享受到分布式系统中的规模化效率红利。相比于这种效率提升，我们可以容许性能上的开销。&lt;/p&gt;
+&lt;h3 id=&#34;sidecar实现&#34;&gt;Sidecar实现&lt;/h3&gt;
+&lt;h4 id=&#34;该如何实现一个sidecar&#34;&gt;该如何实现一个sidecar&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。&lt;/li&gt;
+&lt;li&gt;在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。&lt;/li&gt;
+&lt;li&gt;此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;asidecar-vm&#34;&gt;A、Sidecar VM&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;创建虚拟机&lt;/li&gt;
+&lt;li&gt;设置环境变量&lt;/li&gt;
+&lt;li&gt;安装依赖包&lt;/li&gt;
+&lt;li&gt;上传脚本到虚拟机&lt;/li&gt;
+&lt;li&gt;命令行启动多个可执行文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;bsidecar-docker&#34;&gt;B、Sidecar docker&lt;/h3&gt;
+&lt;p&gt;借助 docker-compose.yml 文件，开发人员可定义一组相关服务，通过部署命令将其部署为组合应用程序。 它还配置其依赖项关系和运行时配置。多个容器使用同一个network。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;dockerfile -&amp;gt; image&lt;/li&gt;
+&lt;li&gt;imges      -&amp;gt; docker-compose&lt;/li&gt;
+&lt;li&gt;docker-compose -&amp;gt; image&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://osswangxining.github.io/images/envoy-front-proxy-topology.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;version&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;3.4&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;services&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;webmvc&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;eshop/web&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;environment&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;CatalogUrl=http://catalog-api&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;OrderingUrl=http://ordering-api&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;80:80&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;depends_on&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;catalog-api&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;ordering-api&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;catalog-api&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;eshop/catalog-api&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;environment&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;ConnectionString=Server=sqldata;Port=1433;Database=CatalogDB;…&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;81:80&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;depends_on&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;sqldata&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ordering-api&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;eshop/ordering-api&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;environment&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;ConnectionString=Server=sqldata;Database=OrderingDb;…&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;82:80&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;extra_hosts&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;CESARDLBOOKVHD:10.0.75.1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;depends_on&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;sqldata&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sqldata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mcr.microsoft.com/mssql/server:latest&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;environment&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;SA_PASSWORD=Pass@word&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;ACCEPT_EULA=Y&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;5433:1433&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;istio-dockerfile&#34;&gt;istio dockerfile&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# BASE_DISTRIBUTION is used to switch between the old base distribution and distroless base images&lt;/span&gt;
+ARG &lt;span style=&#34;color:#000&#34;&gt;BASE_DISTRIBUTION&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;debug
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Version is the base image version from the TLD Makefile&lt;/span&gt;
+ARG &lt;span style=&#34;color:#000&#34;&gt;BASE_VERSION&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;latest
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The following section is used as base image if BASE_DISTRIBUTION=debug&lt;/span&gt;
+FROM gcr.io/istio-release/base:&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;BASE_VERSION&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt; as debug
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The following section is used as base image if BASE_DISTRIBUTION=distroless&lt;/span&gt;
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This image is a custom built debian11 distroless image with multiarchitecture support.&lt;/span&gt;
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# It is built on the base distroless image, with iptables binary and libraries added&lt;/span&gt;
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The source can be found at https://github.com/istio/distroless/tree/iptables&lt;/span&gt;
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This version is from commit 105e1319a176a5156205b9e351b4e2016363f00d.&lt;/span&gt;
+FROM gcr.io/istio-release/iptables@sha256:bae9287d64be13179b7bc794ec3db26bd5c5fe3fb591c484992366314c9a7d3d as distroless
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This will build the final image based on either debug or distroless from above&lt;/span&gt;
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# hadolint ignore=DL3006&lt;/span&gt;
+FROM &lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;BASE_DISTRIBUTION&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;debug&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;
+
+WORKDIR /
+
+ARG proxy_version
+ARG istio_version
+ARG &lt;span style=&#34;color:#000&#34;&gt;SIDECAR&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;envoy
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy Envoy bootstrap templates used by pilot-agent&lt;/span&gt;
+COPY envoy_bootstrap.json /var/lib/istio/envoy/envoy_bootstrap_tmpl.json
+COPY gcp_envoy_bootstrap.json /var/lib/istio/envoy/gcp_envoy_bootstrap_tmpl.json
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Install Envoy.&lt;/span&gt;
+ARG TARGETARCH
+COPY &lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TARGETARCH&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;amd64&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;/&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SIDECAR&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt; /usr/local/bin/&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SIDECAR&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Environment variable indicating the exact proxy sha - for debugging or version-specific configs &lt;/span&gt;
+ENV ISTIO_META_ISTIO_PROXY_SHA &lt;span style=&#34;color:#000&#34;&gt;$proxy_version&lt;/span&gt;
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Environment variable indicating the exact build, for debugging&lt;/span&gt;
+ENV ISTIO_META_ISTIO_VERSION &lt;span style=&#34;color:#000&#34;&gt;$istio_version&lt;/span&gt;
+
+ARG TARGETARCH
+COPY &lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TARGETARCH&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;amd64&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;/pilot-agent /usr/local/bin/pilot-agent
+
+COPY stats-filter.wasm /etc/istio/extensions/stats-filter.wasm
+COPY stats-filter.compiled.wasm /etc/istio/extensions/stats-filter.compiled.wasm
+COPY metadata-exchange-filter.wasm /etc/istio/extensions/metadata-exchange-filter.wasm
+COPY metadata-exchange-filter.compiled.wasm /etc/istio/extensions/metadata-exchange-filter.compiled.wasm
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The pilot-agent will bootstrap Envoy.&lt;/span&gt;
+ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/usr/local/bin/pilot-agent&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;csidecar-k8s&#34;&gt;C、Sidecar k8s&lt;/h3&gt;
+&lt;h4 id=&#34;1基于docker进行注入&#34;&gt;1、基于docker进行注入&lt;/h4&gt;
+&lt;p&gt;Kompose是个转换工具，可将 compose（即 Docker Compose）所组装的所有内容 转换成容器编排器（Kubernetes 或 OpenShift）可识别的形式。&lt;/p&gt;
+&lt;p&gt;要将 docker-compose.yml 转换为 kubectl 可用的文件，请运行 kompose convert 命令进行转换，然后运行 kubectl create -f &lt;output file&gt; 进行创建。&lt;/p&gt;
+&lt;h4 id=&#34;2控制面进行注入&#34;&gt;2、控制面进行注入&lt;/h4&gt;
+&lt;h4 id=&#34;实现机制&#34;&gt;实现机制&lt;/h4&gt;
+&lt;p&gt;K8S作为云原生操作系统的定位，其设计理念是&amp;quot;微内核&amp;quot;架构。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单体进程，往往采用Filter机制。&lt;/li&gt;
+&lt;li&gt;分布式系统，通过webhook机制将自定义插件注入到分布式集群中。&lt;/li&gt;
+&lt;li&gt;in-proxy模式，通过沙箱+远程脚本，实现非侵入性的单体进程内filter机制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Kubernetes 的 apiserver 一开始就有 AdmissionController 的设计，这个设计和各类 Web 框架中的 Filter 很像，就是一个插件化的责任链，责任链中的每个插件针对 apiserver 收到的请求做一些操作或校验。分类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MutatingWebhookConfiguration，操作 api 对象的， 会对request的resource，进行转换，比如填充默认的request/limit（有副作用）&lt;/li&gt;
+&lt;li&gt;ValidatingWebhookConfiguration，校验 api 对象的, 比如校验Pod副本数必须大于2。（无副作用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Kubernetes 中的许多高级功能需要启用准入控制器才能正确支持该功能。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiankunli.github.io/public/upload/kubernetes/admission_controller.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;k8s准入控制器&#34;&gt;K8S准入控制器&lt;/h4&gt;
+&lt;p&gt;通过创建webhook资源，利用k8s的webhook能力实现pod的自动注入。&lt;/p&gt;
+&lt;p&gt;基于 Kubernetes 的 突变 webhook 入驻控制器（mutating webhook addmission controller 的自动 sidecar 注入方式。&lt;/p&gt;
+&lt;p&gt;实现流程大致如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定义webhook监听pod&lt;/li&gt;
+&lt;li&gt;注册到webhook&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admissionregistration.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ValidatingWebhookConfiguration&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;pod-policy.example.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;webhooks&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;pod-policy.example.com&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;rules&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiGroups&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;operations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;CREATE&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;resources&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;pods&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;scope&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;       &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Namespaced&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;clientConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;service&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-namespace&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-service&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;caBundle&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Ci0tLS0tQk...&amp;lt;base64-encoded PEM bundle containing the CA that signed the webhook&amp;#39;s serving certificate&amp;gt;...tLS0K&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;admissionReviewVersions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;v1beta1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sideEffects&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;timeoutSeconds&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;自动化和规模化&#34;&gt;自动化和规模化&lt;/h4&gt;
+&lt;p&gt;Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulSet、DeamonSet、Job等，还有多种基础资源封装例如ConfigMap、Secret、Serivce等，但是一个应用往往有多个服务，有的可能还要依赖持久化存储，当这些服务之间直接互相依赖，需要有一定的组合的情况下，使用YAML文件的方式配置应用往往十分繁琐还容易出错，这时候就需要服务编排工具。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jimmysong.io/kubernetes-handbook/images/helm-chart.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;编写k8s资源文件集合&lt;/li&gt;
+&lt;li&gt;通过打包格式进行管理&lt;/li&gt;
+&lt;li&gt;上传到镜像仓库&lt;/li&gt;
+&lt;li&gt;通过k8s包管理工具helm进行安装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;dsidecar-istio&#34;&gt;D、Sidecar istio&lt;/h3&gt;
+&lt;h4 id=&#34;sidecar-injector-准入控制器&#34;&gt;sidecar injector 准入控制器&lt;/h4&gt;
+&lt;p&gt;Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAdmissionWebhooks 自动将 Sidecar 代理注入至用户 Pod。&lt;/p&gt;
+&lt;p&gt;它使用 MutatingWebhook 机制在 pod 创建的时候将 sidecar 的容器和卷添加到每个 pod 的模版里。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s5.51cto.com/images/blog/202104/21/a1c6109f7a0c20fe6fae9ea0aafedcbb.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/istio/examples-bookinfo-productpage-v1:1.15.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# 应用镜像&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;productpage&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containerPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;9080&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;proxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;sidecar&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;domain&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;$(POD_NAMESPACE).svc.cluster.local&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;configPath&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;/etc/istio/proxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;binaryPath&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;/usr/local/bin/envoy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;serviceCluster&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;productpage.$(POD_NAMESPACE)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;drainDuration&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;45s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;parentShutdownDuration&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;1m0s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;discoveryAddress&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;istiod.istio-system.svc:15012&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;zipkinAddress&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;zipkin.istio-system:9411&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;proxyLogLevel=warning&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;proxyComponentLogLevel=misc:error&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;connectTimeout&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;10s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;proxyAdminPort&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;15000&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;concurrency&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;controlPlaneAuthPolicy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;NONE&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;dnsRefreshRate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;300s&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;statusPort&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;15020&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;trust-domain=cluster.local&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- --&lt;span style=&#34;color:#000&#34;&gt;controlPlaneBootstrap=false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/istio/proxyv2:1.5.1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# sidecar proxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;istio-proxy&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containerPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15090&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;http-envoy-prom&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TCP&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;initContainers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;command&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;istio-iptables&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;15001&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;z&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;15006&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1337&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;REDIRECT&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- -&lt;span style=&#34;color:#000&#34;&gt;d&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15090&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15020&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/istio/proxyv2:1.5.1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# init 容器&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;istio-init&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;二istio-polit-agent&#34;&gt;二、Istio polit-agent&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Init 容器 istio-init：用于 pod 中设置 iptables 端口转发&lt;/li&gt;
+&lt;li&gt;Sidecar 容器 istio-proxy：运行 sidecar 代理，如 Envoy 或 MOSN。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://ucc.alicdn.com/pic/developer-ecology/99530825860d4c3aa80b58ac8e68d61b.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://pic1.zhimg.com/80/v2-4aa36ede4332a0b2d99005188c8056d4_1440w.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;init&#34;&gt;init&lt;/h4&gt;
+&lt;p&gt;Init 容器是一种专用容器，它在应用程序容器启动之前运行，用来包含一些应用镜像中不存在的实用工具或安装脚本。&lt;/p&gt;
+&lt;p&gt;一个 Pod 中可以指定多个 Init 容器，如果指定了多个，那么 Init 容器将会按顺序依次运行。只有当前面的 Init 容器必须运行成功后，才可以运行下一个 Init 容器。当所有的 Init 容器运行完成后，Kubernetes 才初始化 Pod 和运行应用容器。&lt;/p&gt;
+&lt;p&gt;Init 容器使用 Linux Namespace，所以相对应用程序容器来说具有不同的文件系统视图。因此，它们能够具有访问 Secret 的权限，而应用程序容器则不能。&lt;/p&gt;
+&lt;p&gt;在 Pod 启动过程中，Init 容器会按顺序在网络和数据卷初始化之后启动。每个容器必须在下一个容器启动之前成功退出。如果由于运行时或失败退出，将导致容器启动失败，它会根据 Pod 的 restartPolicy 指定的策略进行重试。然而，如果 Pod 的 restartPolicy 设置为 Always，Init 容器失败时会使用 RestartPolicy 策略。&lt;/p&gt;
+&lt;p&gt;在所有的 Init 容器没有成功之前，Pod 将不会变成 Ready 状态。Init 容器的端口将不会在 Service中进行聚集。 正在初始化中的 Pod 处于 Pending 状态，但应该会将 Initializing 状态设置为 true。Init 容器运行完成以后就会自动终止。&lt;/p&gt;
+&lt;h3 id=&#34;aistio-sidecar-结构&#34;&gt;A、istio sidecar 结构&lt;/h3&gt;
+&lt;h3 id=&#34;istio-init容器&#34;&gt;istio-init容器&lt;/h3&gt;
+&lt;h4 id=&#34;1-istio-iptables-进程&#34;&gt;1. istio-iptables 进程&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;istio-iptables &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+  -p: 指定重定向所有 TCP 流量的 sidecar 端口（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ENVOY_PORT&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; 15001）
+  -m: 指定入站连接重定向到 sidecar 的模式，“REDIRECT” 或 “TPROXY”（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ISTIO_INBOUND_INTERCEPTION_MODE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+  -b: 逗号分隔的入站端口列表，其流量将重定向到 Envoy（可选）。使用通配符 “*” 表示重定向所有端口。为空时表示禁用所有入站重定向（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ISTIO_INBOUND_PORTS&lt;/span&gt;）
+  -d: 指定要从重定向到 sidecar 中排除的入站端口列表（可选），以逗号格式分隔。使用通配符“*” 表示重定向所有入站流量（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ISTIO_LOCAL_EXCLUDE_PORTS&lt;/span&gt;）
+  -o：逗号分隔的出站端口列表，不包括重定向到 Envoy 的端口。
+  -i: 指定重定向到 sidecar 的 IP 地址范围（可选），以逗号分隔的 CIDR 格式列表。使用通配符 “*” 表示重定向所有出站流量。空列表将禁用所有出站重定向（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ISTIO_SERVICE_CIDR&lt;/span&gt;）
+  -x: 指定将从重定向中排除的 IP 地址范围，以逗号分隔的 CIDR 格式列表。使用通配符 “*” 表示重定向所有出站流量（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ISTIO_SERVICE_EXCLUDE_CIDR&lt;/span&gt;）。
+  -k：逗号分隔的虚拟接口列表，其入站流量（来自虚拟机的）将被视为出站流量。
+  -g：指定不应用重定向的用户的 GID。&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;默认值与 -u param 相同&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+  -u：指定不应用重定向的用户的 UID。通常情况下，这是代理容器的 UID（默认值是 1337，即 istio-proxy 的 UID）。
+  -z: 所有进入 pod/VM 的 TCP 流量应被重定向到的端口（默认 &lt;span style=&#34;color:#000&#34;&gt;$INBOUND_CAPTURE_PORT&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; 15006）。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;istio-proxy容器&#34;&gt;istio-proxy容器&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2018/09/09/5b94b1c621c56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用单容器多进程模型。&lt;/p&gt;
+&lt;p&gt;为什么不使用单进程模型？代理属于第三方提供，istio是对其进行了管理和拓展。&lt;/p&gt;
+&lt;p&gt;如果代理本身属于istio，是可以实现单进程模型。&lt;/p&gt;
+&lt;h4 id=&#34;1-pilot-agent进程&#34;&gt;1. pilot agent进程&lt;/h4&gt;
+&lt;p&gt;在proxy镜像中，pilot-agent 负责的工作包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;生成envoy的配置：
+&lt;ol&gt;
+&lt;li&gt;与控制面板通讯，获取xDS配置&lt;/li&gt;
+&lt;li&gt;生成 Envoy 的Bootstrap启动配置&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;启动envoy&lt;/li&gt;
+&lt;li&gt;监控并管理envoy的运行状况
+&lt;ol&gt;
+&lt;li&gt;envoy健康检查&lt;/li&gt;
+&lt;li&gt;envoy出错时pilot-agent负责重启envoy&lt;/li&gt;
+&lt;li&gt;envoy配置变更后reload envoy&lt;/li&gt;
+&lt;li&gt;envoy优雅退出&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://i1.wp.com/www.do1618.com/wp-content/uploads/2019/02/pilot-agent-arch.png?w=625&amp;amp;ssl=1&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;status-server&#34;&gt;status server&lt;/h4&gt;
+&lt;p&gt;[/pilot-agent/main/initStatusServer]&lt;/p&gt;
+&lt;h4 id=&#34;envoy检查&#34;&gt;envoy检查&lt;/h4&gt;
+&lt;p&gt;对于 ready 检查，调用的路径为/healthz/ready， 并配合设置的端口 applicationPorts 通过 Envoy 的 admin 端口进行对应的端口进行检查，用于决定 Envoy 是否已经 ready 接受相对应的流量。&lt;/p&gt;
+&lt;p&gt;检查原理是通过本地管理端口，如 http://127.0.0.1:15000/listeners 获取 Envoy 当前监听的全部端口，然后将配置的端口 applicationPorts 在监听的端口中进行查找，来决定 Envoy 是否 ready。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img.png&#34; alt=&#34;img.png&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;应用端口检查&#34;&gt;应用端口检查&lt;/h4&gt;
+&lt;p&gt;检查的路径为 /url 路径，在 header 中设置 istio-app-probe-port 端口，使用 访问路径中的 url 来进行检查，最终调用的是 http://127.0.0.1:istio-app-probe-port/url，头部设置的全部参数也都会传递到别检测的服务端口上；&lt;/p&gt;
+&lt;h4 id=&#34;xds-proxy&#34;&gt;xds proxy&lt;/h4&gt;
+&lt;p&gt;[/pilot-agent/main/istio_agent.NewAgent/initXdsProxy]&lt;/p&gt;
+&lt;h4 id=&#34;2-proxy进程第三方代理进程&#34;&gt;2. proxy进程(第三方代理进程)&lt;/h4&gt;
+&lt;h4 id=&#34;启动envoy&#34;&gt;启动Envoy&lt;/h4&gt;
+&lt;p&gt;[/pilot-agent/main/istio_agent.NewAgent]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;img_1.png&#34; alt=&#34;img_1.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;b流量拦截&#34;&gt;B、流量拦截&lt;/h3&gt;
+&lt;h4 id=&#34;iptables&#34;&gt;iptables&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;ip netns exec cni-bf783dac-fe05-cb35-4d5a-848449119b19 iptables -L -t nat
+
+-A PREROUTING -p tcp -j ISTIO_INBOUND                          # PREROUTING全部转发到INBOUND,PREROUTING发生在流入的数据包进入路由表之前
+-A OUTPUT -p tcp -j ISTIO_OUTPUT                               # 由本机产生的数据向外转发的
+-A ISTIO_INBOUND -p tcp -m tcp --dport 22 -j RETURN            # 22 15090  15021 15020的不转发到ISTIO_REDIRECT 
+-A ISTIO_INBOUND -p tcp -m tcp --dport 15090 -j RETURN         
+-A ISTIO_INBOUND -p tcp -m tcp --dport 15021 -j RETURN
+-A ISTIO_INBOUND -p tcp -m tcp --dport 15020 -j RETURN
+-A ISTIO_INBOUND -p tcp -j ISTIO_IN_REDIRECT                   # 剩余的流量都转发到ISTIO_REDIRECT
+-A ISTIO_IN_REDIRECT -p tcp -j REDIRECT --to-ports 15006       # 转发到15006
+-A ISTIO_OUTPUT -s 127.0.0.6/32 -o lo -j RETURN                # 127.0.0.6是InboundPassthroughBindIpv4,代表原地址是passthrough的流量都直接跳过,不劫持
+-A ISTIO_OUTPUT ! -d 127.0.0.1/32 -o lo -m owner --uid-owner 1337 -j ISTIO_IN_REDIRECT  #lo网卡出流量,目标地址不是localhost的,且为同用户的流量进入ISTIO_IN_REDIRECT
+-A ISTIO_OUTPUT -o lo -m owner ! --uid-owner 1337 -j RETURN    # lo网卡出流量 非同用户的不劫持
+-A ISTIO_OUTPUT -m owner --uid-owner 1337 -j RETURN            # 剩下的同用户的都跳过
+-A ISTIO_OUTPUT ! -d 127.0.0.1/32 -o lo -m owner --gid-owner 1337 -j ISTIO_IN_REDIRECT  # lo网卡出流量,目标地址非本地,同用户组的流量进入ISTIO_IN_REDIRECT
+-A ISTIO_OUTPUT -o lo -m owner ! --gid-owner 1337 -j RETURN    # lo网卡出流量非同组的不劫持
+-A ISTIO_OUTPUT -m owner --gid-owner 1337 -j RETURN            # 剩余的同用户的不劫持
+-A ISTIO_OUTPUT -d 127.0.0.1/32 -j RETURN                      # 剩余的目标地址为127的不劫持
+-A ISTIO_OUTPUT -j ISTIO_REDIRECT                              # 剩下的都进入 ISTIO_REDIRECT
+-A ISTIO_REDIRECT -p tcp -j REDIRECT --to-ports 15001          # 转达到15001 outbond
+COMMIT
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三sidecar-发展&#34;&gt;三、Sidecar 发展&lt;/h2&gt;
+&lt;h3 id=&#34;asidecar-流量交互&#34;&gt;A、sidecar 流量交互&lt;/h3&gt;
+&lt;p&gt;要实现 应用容器(进程) 和 Sidecar容器(进程) 之间的交互。需要完成流量交互的功能。&lt;/p&gt;
+&lt;h3 id=&#34;流量交互模式&#34;&gt;流量交互模式&lt;/h3&gt;
+&lt;p&gt;对于跨容器(进程)的流量交互，主要有以下两种交互模式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;proxyless sidecar 和 Servicemesh 在方式上的差异：暴露 API 还是代理通讯协议。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;1-流量劫持-servicemesh&#34;&gt;1. 流量劫持 servicemesh&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 Servicemesh 中，“零侵入”是一个非常强调的特性，为此不惜引入 iptables 等流量劫持方案。“零侵入”在某些特殊场景下会发挥巨大的优势，如旧有应用不做改造的前提下接入 servicemesh。好处自然不言而喻，但零侵入也有自身的限制：客户端必须能发出符合服务器端要求的网络通讯请求，这个过程外部无法插手。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;代理模式强调的是 原协议转发，应用进程无感。往往使用操作系统提供的流量劫持功能。&lt;/p&gt;
+&lt;p&gt;适合于统一的网络协议栈（HTTP），仅实现原协议层面的控制（路由、重试等）。&lt;/p&gt;
+&lt;p&gt;应用场景：envoy流量代理&lt;/p&gt;
+&lt;p&gt;发展方向：内核高性能（eBPF）&lt;/p&gt;
+&lt;h4 id=&#34;ebpf&#34;&gt;eBPF&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48iaibekyLCc7BRPdN5wia28fe7SzrOGGzdlTzAuYOYHPXepdNYM1neIlOxA/640?wx_fmt=jpeg&amp;amp;wxfrom=5&amp;amp;wx_lazy=1&amp;amp;wx_co=1&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;几乎没有开销是来自代理本身的逻辑。开销是通过注入代理，将网络流量重定向到它，终止连接和启动新的连接而增加的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48iafV5EjtlibK6up9icGHXubrYicVWBeWsHTgL3wdWWFVqq6icIrR5fAEA5jw/640?wx_fmt=jpeg&amp;amp;wxfrom=5&amp;amp;wx_lazy=1&amp;amp;wx_co=1&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48ianSOrK1RicmJy8CmThERZC9m6Qch9QjP50Kp1dA0n9y2jSwegErrV07Q/640?wx_fmt=jpeg&amp;amp;wxfrom=5&amp;amp;wx_lazy=1&amp;amp;wx_co=1&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2-流量明确指向-proxyless-sidecar&#34;&gt;2. 流量明确指向 proxyless sidecar&lt;/h4&gt;
+&lt;p&gt;应用进程明确转发，协议自由切换，更丰富的应用层语义。往往使用grpc建立跨进程的链接。&lt;/p&gt;
+&lt;p&gt;适合异构协议栈，支持更丰富的功能，支持协议之上应用层语义的控制。&lt;/p&gt;
+&lt;p&gt;应用场景：multi runtime&lt;/p&gt;
+&lt;p&gt;发展方向：grpc proxyless sidecar&lt;/p&gt;
+&lt;h4 id=&#34;proxyless-sidecar&#34;&gt;proxyless sidecar&lt;/h4&gt;
+&lt;p&gt;gRPC 项目对 xDS API 有很好的支持，也就是说你可以管理 gRPC 工作负载，而不需要同时部署 Envoy sidecar。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGkFicB5CmUgMOuzpRGeOaPMSlYdnSibQFZkFD4TTbGYfJQq4bEuDBb2sl9zpR3771SXnjegj8khDq4A/640?wx_fmt=jpeg&amp;amp;wxfrom=5&amp;amp;wx_lazy=1&amp;amp;wx_co=1&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bmulti-sidecar&#34;&gt;B、multi sidecar&lt;/h3&gt;
+&lt;p&gt;ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。&lt;/p&gt;
+&lt;p&gt;不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://skyao.io/talk/202103-dapr-from-servicemesh-to-cloudnative/images/ant-more-mesh_hu56c375bdd66e5b8ec5c7446e085ec97c_227360_1200x1200_fit_lanczos_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;与其依靠多个代理来实现不同的目的（例如网络代理，缓存代理，绑定代理），不如使用一个 Mecha 提供所有这些能力。&lt;/p&gt;
+&lt;p&gt;Mecha 强调是“提供能力”，而不是通讯代理。&lt;/p&gt;
+&lt;p&gt;Mecha 和 Micrologic 之间的交互是开放而有 API 标准的，Mecha 和 Micrologic 之间的“协议”体现在 API 上，而不是 TCP 通讯协议。这提供了一个契机：一个统一 Micrologic 和 Mecha 之间通讯方式的契机。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mmbiz.qpic.cn/mmbiz_png/Pz6fSfK82D54JicV1tMvpmkrUqzsNfAKTxWChX3hiacPB5ohAWGhlxGocQ9kEoZAc3tFQfV26xKC0TDJiaToLnASw/640?wx_fmt=png&amp;amp;wxfrom=5&amp;amp;wx_lazy=1&amp;amp;wx_co=1&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;csidecar-拓展性&#34;&gt;C、sidecar 拓展性&lt;/h3&gt;
+&lt;p&gt;面对千变万化的需求和复杂的应用环境，期望 Sidecar 本身的控制面和数据面来覆盖所有的场景显然是不现实的。强大、全面往往是因为&lt;strong&gt;易扩展&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;1-控制面拓展&#34;&gt;1. 控制面拓展&lt;/h4&gt;
+&lt;p&gt;使用类似K8S webhook的机制，将自定义插件注入到控制面中，作为单独的服务执行。&lt;/p&gt;
+&lt;p&gt;此类扩展可以完全无侵入的实现数据平面的增强。而且 API 的抽象屏蔽了数据平面的实现细节，扩展会具有更好的可移植性；独立进程执行和部署，具备更强的伸缩性。但是 webhook 模 也引入了大量额外的外部调用和数据交互，带来了巨大的性能开销。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.servicemesher.com/istio-handbook/images/ecosystem-webassembly-mixer.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2-in-proxy拓展wasm&#34;&gt;2. in-proxy拓展（WASM）&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*-ACRSpqbuJ0AAAAAAAAAAAAAARQnAQ&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览器上来解决 JavaScript 的性能问题，但由于它良好的安全性，隔离性以及语言无关性等优秀特性，很快人们便开始让它跑在浏览器之外的地方，随着 WASI 定义的出现，只需要一个 WASM 运行时，就可以让 WASM 文件随处执行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;wasm和java字节码非常相似&#34;&gt;WASM和Java字节码非常相似&lt;/h4&gt;
+&lt;p&gt;WASM 字节码不能直接在任何 CPU 架构上执行，但由于它与机器码非常相近，因此能够以非常快的速度被 WASM 引擎（或者也可以称之为 WASM 虚拟机）翻译为对应架构的机器码，获得和机器码相近的性能。&lt;/p&gt;
+&lt;p&gt;WASM 本身是为 Web 而设计，因此天然具有跨平台支持；同时，通过 WASM 虚拟机的沙箱隔离，也使得执行 WASM 字节码相比于直接执行机器码有更高的安全性。&lt;/p&gt;
+&lt;h4 id=&#34;envoy-wasm&#34;&gt;Envoy Wasm&lt;/h4&gt;
+&lt;p&gt;Envoy 在可拓展性方面做了两方面的工作：&lt;/p&gt;
+&lt;p&gt;第一，提供了名为 lua 的特殊扩展，允许控制面通过 xDS 协议动态下发 Lua 脚本并由 Envoy 解释执行。&lt;/p&gt;
+&lt;p&gt;第二，也是本节的主题，Envoy 引入了 WASM 技术用于开发 Envoy 扩展。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.servicemesher.com/istio-handbook/images/ecosystem-webassembly-envoy.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;istio-wasm&#34;&gt;Istio Wasm&lt;/h4&gt;
+&lt;p&gt;Istio 的扩展机制使用 Proxy-Wasm 应用二进制接口（ABI）规范，提供了一套代理无关的流媒体 API 和实用功能，可以用任何有合适 SDK 的语言来实现。&lt;/p&gt;
+&lt;p&gt;扩展 Istio 的功能，满足你的特定需求，需要三个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 Golang 中实现你的插件功能。&lt;/li&gt;
+&lt;li&gt;编译、构建，并将 Wasm 模块推送到符合 OCI 标准的 Docker 镜像仓库。&lt;/li&gt;
+&lt;li&gt;使用 WasmPlugin 资源配置服务网格工作负载，以便从远程镜像仓库中拉取 Wasm 模块。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;e其他&#34;&gt;E、其他&lt;/h3&gt;
+&lt;h4 id=&#34;1-服务发现&#34;&gt;1. 服务发现&lt;/h4&gt;
+&lt;p&gt;Mesh: dns拦截&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://img.rocdu.top/20201117/role-of-dns-today.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://img.rocdu.top/20201117/dns-interception-in-istio.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: gRPC Landscape</title>
       <link>https://reactivegroup.github.io/capa.io/en/blog/2022/01/21/grpc-landscape/</link>
       <pubDate>Fri, 21 Jan 2022 00:00:00 +0000</pubDate>
@@ -735,21 +1178,6 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 &lt;p&gt;配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。&lt;/p&gt;
 &lt;p&gt;指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.ciocso.com/article/730.html&#34;&gt;https://www.ciocso.com/article/730.html&lt;/a&gt;&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: </title>
-      <link>https://reactivegroup.github.io/capa.io/en/blog/1/01/01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://reactivegroup.github.io/capa.io/en/blog/1/01/01/</guid>
-      <description>
-        
-        
-        &lt;p&gt;原文链接：https://blog.csdn.net/wyy4045/article/details/119170348&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/&#34;&gt;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
