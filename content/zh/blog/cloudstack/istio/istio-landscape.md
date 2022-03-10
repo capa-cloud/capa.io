@@ -44,6 +44,15 @@ Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。
 * 在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。
 * 此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。
 
+```golang
+func main() {
+	if err := rootCmd.Execute(); err != nil {
+		log.Error(err)
+		os.Exit(-1)
+	}
+}
+```
+
 ### A、Sidecar VM
 
 1. 创建虚拟机
@@ -197,8 +206,8 @@ Kubernetes 中的许多高级功能需要启用准入控制器才能正确支持
 
 实现流程大致如下：
 
-1. 定义webhook监听pod
-2. 注册到webhook
+1. 定义webhook监听pod(node)
+2. 注册到webhook(master)
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -227,7 +236,7 @@ webhooks:
 
 Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulSet、DeamonSet、Job等，还有多种基础资源封装例如ConfigMap、Secret、Serivce等，但是一个应用往往有多个服务，有的可能还要依赖持久化存储，当这些服务之间直接互相依赖，需要有一定的组合的情况下，使用YAML文件的方式配置应用往往十分繁琐还容易出错，这时候就需要服务编排工具。
 
-![](https://jimmysong.io/kubernetes-handbook/images/helm-chart.png)
+![img_2.png](img_2.png)
 
 1. 编写k8s资源文件集合
 2. 通过打包格式进行管理
@@ -242,7 +251,7 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 
 它使用 MutatingWebhook 机制在 pod 创建的时候将 sidecar 的容器和卷添加到每个 pod 的模版里。
 
-![](https://s5.51cto.com/images/blog/202104/21/a1c6109f7a0c20fe6fae9ea0aafedcbb.jpeg)
+![img_3.png](img_3.png)
 
 ```yaml
       containers:
@@ -323,8 +332,6 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 
 ![](https://ucc.alicdn.com/pic/developer-ecology/99530825860d4c3aa80b58ac8e68d61b.png)
 
-![](https://pic1.zhimg.com/80/v2-4aa36ede4332a0b2d99005188c8056d4_1440w.jpg)
-
 #### init
 
 Init 容器是一种专用容器，它在应用程序容器启动之前运行，用来包含一些应用镜像中不存在的实用工具或安装脚本。
@@ -337,9 +344,13 @@ Init 容器使用 Linux Namespace，所以相对应用程序容器来说具有�
 
 在所有的 Init 容器没有成功之前，Pod 将不会变成 Ready 状态。Init 容器的端口将不会在 Service中进行聚集。 正在初始化中的 Pod 处于 Pending 状态，但应该会将 Initializing 状态设置为 true。Init 容器运行完成以后就会自动终止。
 
+![](https://pic1.zhimg.com/80/v2-4aa36ede4332a0b2d99005188c8056d4_1440w.jpg)
+
 ### A、istio sidecar 结构
 
 ### istio-init容器 
+
+该容器存在的意义就是让 sidecar 代理可以拦截所有的进出 pod 的流量，15090 端口（Mixer 使用）和 15092 端口（Ingress Gateway）除外的所有入站（inbound）流量重定向到 15006 端口（sidecar），再拦截应用容器的出站（outbound）流量经过 sidecar 处理（通过 15001 端口监听）后再出站。
 
 #### 1. istio-iptables 进程
 
@@ -439,6 +450,8 @@ ip netns exec cni-bf783dac-fe05-cb35-4d5a-848449119b19 iptables -L -t nat
 -A ISTIO_REDIRECT -p tcp -j REDIRECT --to-ports 15001          # 转达到15001 outbond
 COMMIT
 ```
+
+![img_4.png](img_4.png)
 
 ![](https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=)
 
@@ -562,9 +575,9 @@ Istio 的扩展机制使用 Proxy-Wasm 应用二进制接口（ABI）规范，�
 
 ### E、其他
 
-#### 1. 服务发现
+#### 1. 服务发现代理
 
-Mesh: dns拦截
+Mesh: dns拦截(udp)
 
 ![](http://img.rocdu.top/20201117/role-of-dns-today.png)
 
