@@ -10,8 +10,8 @@ date: 2022-01-18
  "让代码实现"一次编写，随处运行"。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。"
 
 > 作者简介： 
-> KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha混合云中间件有深度实践经验。 
-> Capa官方GitHub地址:[https://github.com/reactivegroup/capa](https://github.com/reactivegroup/capa)
+> KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有实践经验。 
+> Capa官方GitHub地址:[https://github.com/capa-cloud/capa-java](https://github.com/capa-cloud/capa-java)
 
 在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。
 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
@@ -55,6 +55,7 @@ ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始�
 蚂蚁很快意识到了 Service Mesh 的价值，全力投入到这个方向，用 Go 语言开发了 MOSN 这样可以对标 envoy 的优秀数据面，全权负责服务路由，负载均衡，熔断限流等能力的建设，大大加快了公司内部落地 Service Mesh 的进度。
 
 现在 MOSN 在蚂蚁内部已经覆盖了数千个应用、数十万容器，新创建的应用默认接入 MOSN，形成闭环。而且在大家最关心的资源占用、性能损耗方面 MOSN 也交出了一份让人满意的答卷：
+
 1.  RT 小于 0.2ms
 
 2.  CPU 占用增加 0%~2%
@@ -115,6 +116,7 @@ Multi-Runtime Microservices Architecture
 的文章，里面对微服务架构下一阶段的形态进行了讨论。
 
 如上图所示，作者把分布式服务的需求进行了抽象，总共分为了四大类：
+
 1.  生命周期（Lifecycle）
     主要指应用的编译、打包、部署等事情，在云原生的大趋势下基本被 docker、kubernetes 承包。
 
@@ -196,9 +198,9 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 
 最后 Layotto 目前虽然是构建在 MOSN 之上，未来我们希望 Layotto 可以跑在 envoy 上，这样只要应用接入了 Service Mesh，无论数据面使用的是 MOSN 还是 envoy，都可以在上面增加 Runtime能力。
 
-### C、Capa 
+### C、Capa
 
-> github: https://github.com/reactivegroup/capa
+> github: https://github.com/capa-cloud/capa-java
 
 Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Runtime的标准API。
 
@@ -224,7 +226,7 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 
 ![img.png](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/feature-support.png)
 
-#### Capa设计
+#### Capa SDK设计
 
 > 参考资料：https://github.com/dapr/dapr/issues/3261
 
@@ -238,7 +240,48 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 
 ![](https://user-images.githubusercontent.com/22876610/120766251-9ef56200-c54c-11eb-9fc2-15b17937b4bb.PNG)
 
-### D、Femas / Other / ...
+#### 示例：Capa-java + Maven
+
+核心实现思想就是：面向接口编程 + 通过JavaSPI动态加载实现类
+
+![capa-sdk](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-sdk.png)
+
+Maven配置伪代码示例：
+
+```xml
+<!-- 编程时直接引入API层 -->
+<dependency>
+    <groupId>group.rxcloud</groupId>
+    <artifactId>capa-sdk</artifactId>
+</dependency>
+
+<profiles>
+    <!-- AWS云实现类 -->
+    <profile>aws</profile>
+    <dependencys>
+        <dependency>
+            <groupId>group.rxcloud</groupId>
+            <artifactId>capa-sdk-aws</artifactId>
+        </dependency>  
+    </dependencys>
+
+    <!-- Ali云实现类 -->
+    <profile>ali</profile>
+    <dependencys>
+        <dependency>
+            <groupId>group.rxcloud</groupId>
+            <artifactId>capa-sdk-ali</artifactId>
+        </dependency>
+    </dependencys>
+</profiles>
+```
+
+运行时，应用程序直接调用API层的接口。
+
+然后通过Java SPI机制，动态加载API层接口的实现类。
+该实现类，即为各个云平台上不同的SDK实现。
+
+### D、Femas / OpenSergo / Other / ...
 
 > 参考资料：https://www.yuque.com/docs/share/5221c27a-9d0c-44c7-8ef2-0956d3b09a32?#
 
@@ -277,7 +320,7 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 
 #### 解决思路二：Component 弥补组件缺失能力
 
-Capa：
+#### Capa示例：
 
 通过集成Plugin，弥补AWS公有云SDK组件能力，对齐私有云组件能力。
 通过Plugin自定义加载机制，切换不同的能力实现。
@@ -362,12 +405,16 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 
 目前在Java语言上，Capa可以支持：
 
-+ 接入(携程)私有云SDK的适配层
-+ 接入spring boot体系的适配层
++ 接入(携程)私有云SDK的适配层(较成熟)
++ 接入spring boot体系的适配层(开发中)
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png)
 
-### B、现状和未来规划
+#### 改动范围
+
+
+
+### B、API设计
 
 Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域的特：
 
@@ -378,8 +425,51 @@ Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前
 * Application Log/Metrics/Traces (Telemetry可观测性)
 * Database (SQL关系型数据库) -alpha
 * Schedule (Schedule定时调度) -alpha
-* Redis (Redis高度定制化存储) -planning
+* Redis (Redis高度定制化存储) -alpha
 * Actuator (组件自身可观测性) -planning
+
+
+### 完全复用标准API
+
++ RPC
++ Configuration
+
+### 补充了标准API
+
+### 未使用的标准API
+
+### 完全自定义的API
+
+#### SQL
+
+场景
+
+#### Redis
+
+场景
+
+#### Telemetry
+
+场景：
+
+
+
+### C、云原生技术栈选型
+
+|领域|云厂商|技术选型|
+|---|---|---|
+|RPC|Trip|ServiceMesh|
+| |AWS|AWS App Mesh|
+|Configuration|Trip|QConfig|
+| |AWS|AWS AppConfig|
+|MQ|Trip|QMQ|
+| |AWS|AWS MSK Kafka|
+|Redis|Trip|CRedis|
+| |AWS|AWS ElasticCache|
+|Metric|Trip|CAT|
+| |AWS|AWS CloudWatch|
+
+
 
 ## 六、高阶拓展
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/blog/cloudstack/">
+<meta name="generator" content="Hugo 0.89.4" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/blog/cloudstack/">
 <link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/blog/cloudstack/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -136,7 +136,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/capa.io/en/blog/cloudstack/">English</a>
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
 	
 </div>
 			</li>
@@ -247,6 +247,16 @@ if (!doNotTrack) {
 
     
   
+    
+    
+	
+
+    <li><a href="#pg-179b936f9c9380fc33559a465bf3e7b1"></a></li>
+
+
+
+    
+  
 
     </ul>
     
@@ -255,7 +265,17 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-7ec20a72ed150172d15f7afcfd97867a"></a></li>
+    <li><a href="#pg-7ec20a72ed150172d15f7afcfd97867a">Envoy Landscape</a></li>
+
+
+
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-079187596e1cce1b656b7acbb8223f8a"></a></li>
 
 
 
@@ -529,10 +549,7 @@ if (!doNotTrack) {
 <h3 id="主链路-1">主链路</h3>
 <ul>
 <li>启动net server
-<ul>
-<li></li>
-</ul>
-</li>
+*</li>
 <li>Stub
 <ul>
 <li>Contact
@@ -1081,6 +1098,117 @@ COMMIT
     
 	
   
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-179b936f9c9380fc33559a465bf3e7b1"></h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+	</div>
+	<h3 id="请求的生命周期">请求的生命周期</h3>
+<p>在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。</p>
+<p>当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.</p>
+<p>$ curl example.com -v</p>
+<ul>
+<li>Trying 192.0.2.0:80&hellip;</li>
+</ul>
+<p>接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。</p>
+<p>如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。</p>
+<p>一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。</p>
+<p>使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。
+在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints
+使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。
+请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。</p>
+<p>DNS 代理
+3分钟阅读 页面测试</p>
+<p>除了捕获应用程序流量之外，Istio 还可以捕获 DNS 请求以提高网格的性能和可用性。在代理 DNS 时，来自应用程序的所有 DNS 请求都将被重定向到 sidecar，其中存储了本地域名到 IP 地址的映射。如果请求可以被 Sidecar 处理，它将直接向应用程序返回响应，避免往返上游 DNS 服务器。否则，请求将按照标准/etc/resolv.confDNS 配置向上游转发。</p>
+<p>虽然 Kubernetes 为 Kubernetes 提供了开箱即用的 DNS 解析Service，但任何自定义ServiceEntry的都不会被识别。使用此功能，ServiceEntry无需自定义配置 DNS 服务器即可解析地址。对于 Kubernetes Service，DNS 响应将是相同的，但负载减少kube-dns并提高了性能。</p>
+<p>此功能也可用于在 Kubernetes 之外运行的服务。这意味着可以解决所有内部服务，而无需笨拙的变通方法将 Kubernetes DNS 条目暴露在集群之外。</p>
+<p>入门
+默认情况下当前未启用此功能。要启用它，请使用以下设置安装 Istio：</p>
+<p>$ cat &laquo;EOF | istioctl install -y -f -
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+meshConfig:
+defaultConfig:
+proxyMetadata:</p>
+<h1 id="enable-basic-dns-proxying">Enable basic DNS proxying</h1>
+<p>ISTIO_META_DNS_CAPTURE: &ldquo;true&rdquo;</p>
+<h1 id="enable-automatic-address-allocation-optional">Enable automatic address allocation, optional</h1>
+<p>ISTIO_META_DNS_AUTO_ALLOCATE: &ldquo;true&rdquo;
+EOF</p>
+<p>这也可以使用proxy.istio.io/configannotation在每个 pod 的基础上启用。</p>
+<p>使用 部署到 VM 时，默认情况下将启用基本 DNS 代理。istioctl workload entry configure
+DNS 捕获在行动
+要尝试 DNS 捕获，首先ServiceEntry为一些外部服务设置一个：</p>
+<p>apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+name: external-address
+spec:
+addresses:</p>
+<ul>
+<li>198.51.100.0
+hosts:</li>
+<li>address.internal
+ports:</li>
+<li>name: http
+number: 80
+protocol: HTTP</li>
+</ul>
+<p>如果没有 DNS 捕获，请求address.internal可能无法解析。启用此功能后，您应该根据配置获得响应address：</p>
+<p>$ curl -v address.internal</p>
+<ul>
+<li>Trying 198.51.100.1:80&hellip;</li>
+</ul>
+<p>地址自动分配
+在上面的示例中，您有一个用于发送请求的服务的预定义 IP 地址。但是，访问没有稳定地址的外部服务是很常见的，而是依赖 DNS。在这种情况下，DNS 代理将没有足够的信息来返回响应，并且需要向上游转发 DNS 请求。</p>
+<p>这对于 TCP 流量来说尤其成问题。与基于Host标头路由的 HTTP 请求不同，TCP 携带的信息要少得多。您只能在目标 IP 和端口号上进行路由。因为后端没有一个稳定的IP，所以也不能基于它进行路由，只留下端口号，当多个ServiceEntryTCP服务共享同一个端口时，会导致冲突。</p>
+<p>为了解决这些问题，DNS 代理还支持为ServiceEntry未明确定义地址的 s 自动分配地址。这是由ISTIO_META_DNS_AUTO_ALLOCATE选项配置的。</p>
+<p>启用此功能后，DNS 响应将为每个ServiceEntry. 然后将代理配置为将请求匹配到此 IP 地址，并将请求转发到相应的ServiceEntry.</p>
+<p>由于此功能会修改 DNS 响应，因此它可能无法与所有应用程序兼容。
+要尝试这一点，请配置另一个ServiceEntry：</p>
+<p>apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+name: external-auto
+spec:
+hosts:</p>
+<ul>
+<li>auto.internal
+ports:</li>
+<li>name: http
+number: 80
+protocol: HTTP
+resolution: STATIC
+endpoints:</li>
+<li>address: 198.51.100.2</li>
+</ul>
+<p>现在，发送请求：</p>
+<p>$ curl -v auto.internal</p>
+<ul>
+<li>Trying 240.240.0.1:80&hellip;</li>
+</ul>
+<p>如您所见，请求被发送到一个自动分配的地址，240.240.0.1. 这些地址将从240.240.0.0/16保留的 IP 地址范围中挑选，以避免与实际服务发生冲突。</p>
+
+</div>
+
+
+
+
+
+    
+	
+  
 
     
 	
@@ -1094,16 +1222,107 @@ COMMIT
   
 
 <div class="td-content" style="page-break-before: always">
-    <h1 id="pg-7ec20a72ed150172d15f7afcfd97867a"></h1>
+    <h1 id="pg-7ec20a72ed150172d15f7afcfd97867a">Envoy Landscape</h1>
+	<div class="lead">Envoy Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-03" class="text-muted">03.05.2022</time>
+        
+	</div>
+	<h3 id="监听器">监听器</h3>
+<h4 id="dns-过滤器">DNS 过滤器</h4>
+<p>Envoy 支持通过配置UDP 侦听器 DNS Filter来响应 DNS 请求。</p>
+<p>DNS 过滤器支持响应 A 和 AAAA 记录的转发查询。答案是从静态配置的资源、集群或外部 DNS 服务器中发现的。过滤器将返回最多 512 个字节的 DNS 响应。如果域配置了多个地址，或者集群配置了多个端点，Envoy 将返回每个发现的地址，但不超过上述大小限制。</p>
+<h3 id="http">HTTP</h3>
+<h4 id="envoy-http重定向">envoy http重定向</h4>
+<p>配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。</p>
+<p>指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。</p>
+<p><a href="https://www.ciocso.com/article/730.html">https://www.ciocso.com/article/730.html</a></p>
+<h4 id="路线匹配">路线匹配</h4>
+<p>当 Envoy 匹配路由时，它使用以下过程：</p>
+<p>HTTP 请求的主机或:authority标头与虚拟主机匹配。</p>
+<p>按顺序检查虚拟主机中的 每个路由条目。如果存在匹配，则使用该路由并且不再进行路由检查。</p>
+<p>独立地，按顺序检查虚拟主机中的每个虚拟集群。如果匹配，则使用虚拟集群并且不再进行虚拟集群检查。</p>
+<h4 id="http-动态转发代理">HTTP 动态转发代理</h4>
+<p>通过HTTP 过滤器和 自定义集群的组合，Envoy 支持 HTTP 动态转发代理。这意味着 Envoy 可以在不事先了解所有配置的 DNS 地址的情况下执行 HTTP 代理的角色，同时仍保留 Envoy 的绝大多数优势，包括异步 DNS 解析。实施工作如下：</p>
+<p>如果目标 DNS 主机尚未在缓存中，则动态转发代理 HTTP 过滤器用于暂停请求。</p>
+<p>Envoy 将开始异步解析 DNS 地址，并在解析完成时解锁任何等待响应的请求。</p>
+<p>由于 DNS 地址已在缓存中，因此不会阻止任何未来的请求。解析过程类似于逻辑 DNS服务发现类型，在任何给定时间都会记住一个目标地址。</p>
+<p>所有已知主机都存储在动态转发代理集群中，以便它们可以显示在管理输出中。</p>
+<p>一个特殊的负载均衡器将在转发期间根据 HTTP 主机/权限标头选择要使用的正确主机。</p>
+<p>一段时间未使用的主机会受到将清除它们的 TTL。</p>
+<p>当上游集群配置了 TLS 上下文时，Envoy 将自动对解析的主机名执行 SAN 验证，并通过 SNI 指定主机名。</p>
+<p>上述实现细节意味着在稳定状态下，Envoy 可以转发大量 HTTP 代理流量，而所有 DNS 解析都在后台异步进行。此外，所有其他 Envoy 过滤器和扩展都可以与动态转发代理支持结合使用，包括身份验证、RBAC、速率限制等 。</p>
+<h4 id="http-标头">HTTP 标头</h4>
+<p><a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers">https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers</a></p>
+<h4 id="http-过滤器">HTTP 过滤器</h4>
+<p>动态代理转发</p>
+<p><a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/dynamic_forward_proxy_filter">https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/dynamic_forward_proxy_filter</a></p>
+<h3 id="服务发现">服务发现</h3>
+<h4 id="原始目的地">原始目的地</h4>
+<p>当传入连接通过 iptables REDIRECT 或 TPROXY 目标或使用代理协议重定向到 Envoy 时，可以使用原始目标集群。在这些情况下，路由到原始目标集群的请求被转发到由重定向元数据寻址的上游主机，而无需任何显式主机配置或上游主机发现。当上游主机的空闲时间超过 cleanup_interval（默认为 5000 毫秒）时，连接到上游主机的连接被池化，并且未使用的主机被刷新。如果原始目标地址不可用，则不打开上游连接。Envoy 还可以从HTTP 标头中获取原始目标。原始目标服务发现必须与原始目标负载均衡器一起使用.</p>
+<h4 id="原始来源">原始来源</h4>
+<p>此过滤器应配置为envoy.filters.listener.original_src名称。</p>
+<p>原始源侦听器过滤器在 Envoy 的上游端复制连接的下游远程地址。例如，如果下游连接使用 IP 地址连接到 Envoy 10.1.2.3，那么 Envoy 将使用源 IP 连接到上游10.1.2.3。</p>
+<h3 id="热重启">热重启</h3>
+<p>易于操作是 Envoy 的主要目标之一。除了强大的统计数据和本地管理界面之外，Envoy 还能够“热”或“实时”重启自身。这意味着 Envoy 可以完全重新加载自身（代码和配置），而不会在排水过程中丢弃现有连接。热重启功能具有以下通用架构：</p>
+<p>两个活动进程使用基本的 RPC 协议通过 unix 域套接字相互通信。所有计数器都通过 unix 域从旧进程发送到新进程，并且除了标有NeverImport的那些之外，还会传输仪表。热重启完成后，从旧进程传来的 g​​auge 会被清理，但 会保留server.hot_restart_generation 统计等特殊的 gauge 。</p>
+<p>新进程在向旧进程请求侦听套接字的副本之前，会完全初始化自身（加载配置、执行初始服务发现和健康检查阶段等）。新进程开始监听，然后告诉旧进程开始排空。</p>
+<p>在耗尽阶段，旧进程尝试正常关闭现有连接。如何完成取决于配置的过滤器。排水时间可通过 &ndash;drain-time-s选项配置，随着时间的推移，排水变得更加激进。</p>
+<p>在耗尽序列之后，新的 Envoy 进程告诉旧的 Envoy 进程自行关闭。该时间可通过&ndash;parent-shutdown-time-s选项进行配置。</p>
+<p>Envoy 的热重启支持被设计为即使新的 Envoy 进程和旧的 Envoy 进程在不同的容器中运行，它也能正常工作。进程之间的通信仅使用 unix 域套接字进行。</p>
+<p>源代码分发中包含一个用 Python 编写的示例重启程序/父进程。此父进程可用于标准进程控制实用程序，例如 monit/runit/etc。</p>
+<h3 id="ip">IP</h3>
+<h4 id="http-标头-1">HTTP 标头</h4>
+<p>HTTP 标头可以在x-forwarded-for标头中携带请求的原始 IP 地址 。上游服务器可以使用此标头来确定下游远程地址。Envoy 也可以使用这个 header 来选择 Original Src HTTP Filter使用的 IP 地址。</p>
+<p>HTTP 标头方法有一些缺点：</p>
+<p>它仅适用于 HTTP。</p>
+<p>上游主机可能不支持它。</p>
+<p>它需要仔细配置。</p>
+<h2 id="生命周期">生命周期</h2>
+<h3 id="术语">术语</h3>
+<p>Envoy 在其代码库和文档中使用以下术语：</p>
+<p>集群：具有一组端点的逻辑服务，Envoy 将请求转发到这些端点。</p>
+<p>下游：连接到 Envoy 的实体。这可能是本地应用程序（在边车模型中）或网络节点。在非 Sidecar 模型中，这是一个远程客户端。</p>
+<p>端点：实现逻辑服务的网络节点。它们被分组到集群中。集群中的端点位于Envoy 代理的上游。</p>
+<p>过滤器：连接或请求处理管道中的模块，提供请求处理的某些方面。Unix 的一个类比是小型实用程序（过滤器）与 Unix 管道（过滤器链）的组合。</p>
+<p>过滤器链：一系列过滤器。</p>
+<p>侦听器：Envoy 模块，负责绑定到 IP/端口、接受新的 TCP 连接（或 UDP 数据报）并协调面向下游的请求处理方面。</p>
+<p>上游：Envoy 在转发服务请求时连接的端点（网络节点）。这可能是本地应用程序（在边车模型中）或网络节点。在非边车模型中，这对应于远程后端。</p>
+<p><img src="https://www.envoyproxy.io/docs/envoy/latest/_images/lor-architecture.svg" alt=""></p>
+<h2 id="运维">运维</h2>
+<h4 id="管理界面">管理界面</h4>
+<p><a href="https://www.envoyproxy.io/docs/envoy/latest/operations/admin">https://www.envoyproxy.io/docs/envoy/latest/operations/admin</a></p>
+<h2 id="xds">xDS</h2>
+
+</div>
+
+
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-079187596e1cce1b656b7acbb8223f8a"></h1>
 	
 	<div class="td-byline mb-4">
 		
         
 	</div>
-	<h4 id="envoy-http重定向">envoy http重定向</h4>
-<p>配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。</p>
-<p>指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。</p>
-<p><a href="https://www.ciocso.com/article/730.html">https://www.ciocso.com/article/730.html</a></p>
+	<h3 id="参考文章">参考文章</h3>
+<h4 id="io-模型">IO 模型</h4>
+<p><a href="https://xie.infoq.cn/article/25d369e183563e44fc50d8168">https://xie.infoq.cn/article/25d369e183563e44fc50d8168</a></p>
 
 </div>
 

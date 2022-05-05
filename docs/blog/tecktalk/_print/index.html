@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/blog/tecktalk/">
+<meta name="generator" content="Hugo 0.89.4" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/blog/tecktalk/">
 <link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/blog/tecktalk/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
@@ -136,7 +136,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/capa.io/en/blog/tecktalk/">English</a>
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
 	
 </div>
 			</li>
@@ -238,9 +238,9 @@ if (!doNotTrack) {
 	<h1 id="capacloud-application-api架起混合云应用开发的桥梁">Capa(Cloud-Application-API)：架起混合云应用开发的桥梁</h1>
 <p>&ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;</p>
 <blockquote>
-<p>作者简介： 
-KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha混合云中间件有深度实践经验。 
-Capa官方GitHub地址:<a href="https://github.com/reactivegroup/capa">https://github.com/reactivegroup/capa</a></p>
+<p>作者简介：
+KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有实践经验。
+Capa官方GitHub地址:<a href="https://github.com/capa-cloud/capa-java">https://github.com/capa-cloud/capa-java</a></p>
 </blockquote>
 <p>在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。
 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。</p>
@@ -410,7 +410,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 <p>最后 Layotto 目前虽然是构建在 MOSN 之上，未来我们希望 Layotto 可以跑在 envoy 上，这样只要应用接入了 Service Mesh，无论数据面使用的是 MOSN 还是 envoy，都可以在上面增加 Runtime能力。</p>
 <h3 id="ccapa">C、Capa</h3>
 <blockquote>
-<p>github: <a href="https://github.com/reactivegroup/capa">https://github.com/reactivegroup/capa</a></p>
+<p>github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/capa-cloud/capa-java</a></p>
 </blockquote>
 <p>Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Runtime的标准API。</p>
 <p>您可以简单的将Capa项目理解为 Dapr / Layotto 等Sidecar模式项目的SDK实现版本。</p>
@@ -427,7 +427,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 <li>社区对公有云功能支持比较好，私有云主要依赖SDK模式。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/feature-support.png" alt="img.png"></p>
-<h4 id="capa设计">Capa设计</h4>
+<h4 id="capa-sdk设计">Capa SDK设计</h4>
 <blockquote>
 <p>参考资料：https://github.com/dapr/dapr/issues/3261</p>
 </blockquote>
@@ -436,7 +436,39 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 <p>在部署到不同的目标环境时，Capa将会装载标准API的不同实现类到应用程序中。当调用统一的编程API时，底层运行时会适配到不同的具体中间件SDK实现。</p>
 <p>中间件团队需要针对不同目标环境，开发标准API在目标环境下的实现类即可；而应用代码可以拥有&quot;一次编写，随处运行&quot;的开发体验。</p>
 <p><img src="https://user-images.githubusercontent.com/22876610/120766251-9ef56200-c54c-11eb-9fc2-15b17937b4bb.PNG" alt=""></p>
-<h3 id="dfemas--other--">D、Femas / Other / &hellip;</h3>
+<h4 id="示例capa-java--maven">示例：Capa-java + Maven</h4>
+<p>核心实现思想就是：面向接口编程 + 通过JavaSPI动态加载实现类</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-sdk.png" alt="capa-sdk"></p>
+<p>Maven配置伪代码示例：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#8f5902;font-style:italic">&lt;!-- 编程时直接引入API层 --&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-sdk<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+
+<span style="color:#204a87;font-weight:bold">&lt;profiles&gt;</span>
+    <span style="color:#8f5902;font-style:italic">&lt;!-- AWS云实现类 --&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;profile&gt;</span>aws<span style="color:#204a87;font-weight:bold">&lt;/profile&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;dependencys&gt;</span>
+        <span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+            <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+            <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-sdk-aws<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+        <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>  
+    <span style="color:#204a87;font-weight:bold">&lt;/dependencys&gt;</span>
+
+    <span style="color:#8f5902;font-style:italic">&lt;!-- Ali云实现类 --&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;profile&gt;</span>ali<span style="color:#204a87;font-weight:bold">&lt;/profile&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;dependencys&gt;</span>
+        <span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
+            <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+            <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-sdk-ali<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+        <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;/dependencys&gt;</span>
+<span style="color:#204a87;font-weight:bold">&lt;/profiles&gt;</span>
+</code></pre></div><p>运行时，应用程序直接调用API层的接口。</p>
+<p>然后通过Java SPI机制，动态加载API层接口的实现类。
+该实现类，即为各个云平台上不同的SDK实现。</p>
+<h3 id="dfemas--opensergo--other--">D、Femas / OpenSergo / Other / &hellip;</h3>
 <blockquote>
 <p>参考资料：https://www.yuque.com/docs/share/5221c27a-9d0c-44c7-8ef2-0956d3b09a32?#</p>
 </blockquote>
@@ -466,7 +498,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 <h4 id="解决思路一runtime-弥补组件缺失能力sidecar">解决思路一：Runtime 弥补组件缺失能力（sidecar）</h4>
 <p><img src="https://static001.geekbang.org/wechat/images/ca/caa5f9fc42715d24967cbeed433bd870.png" alt=""></p>
 <h4 id="解决思路二component-弥补组件缺失能力">解决思路二：Component 弥补组件缺失能力</h4>
-<p>Capa：</p>
+<h4 id="capa示例">Capa示例：</h4>
 <p>通过集成Plugin，弥补AWS公有云SDK组件能力，对齐私有云组件能力。
 通过Plugin自定义加载机制，切换不同的能力实现。</p>
 <h4 id="解决思路三无法弥补但可以模糊处理">解决思路三：无法弥补，但可以模糊处理</h4>
@@ -533,11 +565,12 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <p>如此一来，应用程序只需要更改很少的代码(例如更换注解/接口的路径名)即可迁移到Capa架构。</p>
 <p>目前在Java语言上，Capa可以支持：</p>
 <ul>
-<li>接入(携程)私有云SDK的适配层</li>
-<li>接入spring boot体系的适配层</li>
+<li>接入(携程)私有云SDK的适配层(较成熟)</li>
+<li>接入spring boot体系的适配层(开发中)</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png" alt=""></p>
-<h3 id="b现状和未来规划">B、现状和未来规划</h3>
+<h4 id="改动范围">改动范围</h4>
+<h3 id="bapi设计">B、API设计</h3>
 <p>Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域的特：</p>
 <ul>
 <li>Service Invocation (RPC服务调用)</li>
@@ -547,9 +580,85 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <li>Application Log/Metrics/Traces (Telemetry可观测性)</li>
 <li>Database (SQL关系型数据库) -alpha</li>
 <li>Schedule (Schedule定时调度) -alpha</li>
-<li>Redis (Redis高度定制化存储) -planning</li>
+<li>Redis (Redis高度定制化存储) -alpha</li>
 <li>Actuator (组件自身可观测性) -planning</li>
 </ul>
+<h3 id="完全复用标准api">完全复用标准API</h3>
+<ul>
+<li>RPC</li>
+<li>Configuration</li>
+</ul>
+<h3 id="补充了标准api">补充了标准API</h3>
+<h3 id="未使用的标准api">未使用的标准API</h3>
+<h3 id="完全自定义的api">完全自定义的API</h3>
+<h4 id="sql">SQL</h4>
+<p>场景</p>
+<h4 id="redis">Redis</h4>
+<p>场景</p>
+<h4 id="telemetry">Telemetry</h4>
+<p>场景：</p>
+<h3 id="c云原生技术栈选型">C、云原生技术栈选型</h3>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>云厂商</th>
+<th>技术选型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RPC</td>
+<td>Trip</td>
+<td>ServiceMesh</td>
+</tr>
+<tr>
+<td></td>
+<td>AWS</td>
+<td>AWS App Mesh</td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td>Trip</td>
+<td>QConfig</td>
+</tr>
+<tr>
+<td></td>
+<td>AWS</td>
+<td>AWS AppConfig</td>
+</tr>
+<tr>
+<td>MQ</td>
+<td>Trip</td>
+<td>QMQ</td>
+</tr>
+<tr>
+<td></td>
+<td>AWS</td>
+<td>AWS MSK Kafka</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Trip</td>
+<td>CRedis</td>
+</tr>
+<tr>
+<td></td>
+<td>AWS</td>
+<td>AWS ElasticCache</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td>Trip</td>
+<td>CAT</td>
+</tr>
+<tr>
+<td></td>
+<td>AWS</td>
+<td>AWS CloudWatch</td>
+</tr>
+</tbody>
+</table>
 <h2 id="六高阶拓展">六、高阶拓展</h2>
 <h3 id="awebassembly-的探索">A、WebAssembly 的探索</h3>
 <blockquote>

@@ -40,6 +40,84 @@
     </item>
     
     <item>
+      <title>Blog: Envoy Landscape</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/03/envoy-landscape/</link>
+      <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/03/envoy-landscape/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;监听器&#34;&gt;监听器&lt;/h3&gt;
+&lt;h4 id=&#34;dns-过滤器&#34;&gt;DNS 过滤器&lt;/h4&gt;
+&lt;p&gt;Envoy 支持通过配置UDP 侦听器 DNS Filter来响应 DNS 请求。&lt;/p&gt;
+&lt;p&gt;DNS 过滤器支持响应 A 和 AAAA 记录的转发查询。答案是从静态配置的资源、集群或外部 DNS 服务器中发现的。过滤器将返回最多 512 个字节的 DNS 响应。如果域配置了多个地址，或者集群配置了多个端点，Envoy 将返回每个发现的地址，但不超过上述大小限制。&lt;/p&gt;
+&lt;h3 id=&#34;http&#34;&gt;HTTP&lt;/h3&gt;
+&lt;h4 id=&#34;envoy-http重定向&#34;&gt;envoy http重定向&lt;/h4&gt;
+&lt;p&gt;配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。&lt;/p&gt;
+&lt;p&gt;指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.ciocso.com/article/730.html&#34;&gt;https://www.ciocso.com/article/730.html&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;路线匹配&#34;&gt;路线匹配&lt;/h4&gt;
+&lt;p&gt;当 Envoy 匹配路由时，它使用以下过程：&lt;/p&gt;
+&lt;p&gt;HTTP 请求的主机或:authority标头与虚拟主机匹配。&lt;/p&gt;
+&lt;p&gt;按顺序检查虚拟主机中的 每个路由条目。如果存在匹配，则使用该路由并且不再进行路由检查。&lt;/p&gt;
+&lt;p&gt;独立地，按顺序检查虚拟主机中的每个虚拟集群。如果匹配，则使用虚拟集群并且不再进行虚拟集群检查。&lt;/p&gt;
+&lt;h4 id=&#34;http-动态转发代理&#34;&gt;HTTP 动态转发代理&lt;/h4&gt;
+&lt;p&gt;通过HTTP 过滤器和 自定义集群的组合，Envoy 支持 HTTP 动态转发代理。这意味着 Envoy 可以在不事先了解所有配置的 DNS 地址的情况下执行 HTTP 代理的角色，同时仍保留 Envoy 的绝大多数优势，包括异步 DNS 解析。实施工作如下：&lt;/p&gt;
+&lt;p&gt;如果目标 DNS 主机尚未在缓存中，则动态转发代理 HTTP 过滤器用于暂停请求。&lt;/p&gt;
+&lt;p&gt;Envoy 将开始异步解析 DNS 地址，并在解析完成时解锁任何等待响应的请求。&lt;/p&gt;
+&lt;p&gt;由于 DNS 地址已在缓存中，因此不会阻止任何未来的请求。解析过程类似于逻辑 DNS服务发现类型，在任何给定时间都会记住一个目标地址。&lt;/p&gt;
+&lt;p&gt;所有已知主机都存储在动态转发代理集群中，以便它们可以显示在管理输出中。&lt;/p&gt;
+&lt;p&gt;一个特殊的负载均衡器将在转发期间根据 HTTP 主机/权限标头选择要使用的正确主机。&lt;/p&gt;
+&lt;p&gt;一段时间未使用的主机会受到将清除它们的 TTL。&lt;/p&gt;
+&lt;p&gt;当上游集群配置了 TLS 上下文时，Envoy 将自动对解析的主机名执行 SAN 验证，并通过 SNI 指定主机名。&lt;/p&gt;
+&lt;p&gt;上述实现细节意味着在稳定状态下，Envoy 可以转发大量 HTTP 代理流量，而所有 DNS 解析都在后台异步进行。此外，所有其他 Envoy 过滤器和扩展都可以与动态转发代理支持结合使用，包括身份验证、RBAC、速率限制等 。&lt;/p&gt;
+&lt;h4 id=&#34;http-标头&#34;&gt;HTTP 标头&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers&#34;&gt;https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;http-过滤器&#34;&gt;HTTP 过滤器&lt;/h4&gt;
+&lt;p&gt;动态代理转发&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/dynamic_forward_proxy_filter&#34;&gt;https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/dynamic_forward_proxy_filter&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;服务发现&#34;&gt;服务发现&lt;/h3&gt;
+&lt;h4 id=&#34;原始目的地&#34;&gt;原始目的地&lt;/h4&gt;
+&lt;p&gt;当传入连接通过 iptables REDIRECT 或 TPROXY 目标或使用代理协议重定向到 Envoy 时，可以使用原始目标集群。在这些情况下，路由到原始目标集群的请求被转发到由重定向元数据寻址的上游主机，而无需任何显式主机配置或上游主机发现。当上游主机的空闲时间超过 cleanup_interval（默认为 5000 毫秒）时，连接到上游主机的连接被池化，并且未使用的主机被刷新。如果原始目标地址不可用，则不打开上游连接。Envoy 还可以从HTTP 标头中获取原始目标。原始目标服务发现必须与原始目标负载均衡器一起使用.&lt;/p&gt;
+&lt;h4 id=&#34;原始来源&#34;&gt;原始来源&lt;/h4&gt;
+&lt;p&gt;此过滤器应配置为envoy.filters.listener.original_src名称。&lt;/p&gt;
+&lt;p&gt;原始源侦听器过滤器在 Envoy 的上游端复制连接的下游远程地址。例如，如果下游连接使用 IP 地址连接到 Envoy 10.1.2.3，那么 Envoy 将使用源 IP 连接到上游10.1.2.3。&lt;/p&gt;
+&lt;h3 id=&#34;热重启&#34;&gt;热重启&lt;/h3&gt;
+&lt;p&gt;易于操作是 Envoy 的主要目标之一。除了强大的统计数据和本地管理界面之外，Envoy 还能够“热”或“实时”重启自身。这意味着 Envoy 可以完全重新加载自身（代码和配置），而不会在排水过程中丢弃现有连接。热重启功能具有以下通用架构：&lt;/p&gt;
+&lt;p&gt;两个活动进程使用基本的 RPC 协议通过 unix 域套接字相互通信。所有计数器都通过 unix 域从旧进程发送到新进程，并且除了标有NeverImport的那些之外，还会传输仪表。热重启完成后，从旧进程传来的 g​​auge 会被清理，但 会保留server.hot_restart_generation 统计等特殊的 gauge 。&lt;/p&gt;
+&lt;p&gt;新进程在向旧进程请求侦听套接字的副本之前，会完全初始化自身（加载配置、执行初始服务发现和健康检查阶段等）。新进程开始监听，然后告诉旧进程开始排空。&lt;/p&gt;
+&lt;p&gt;在耗尽阶段，旧进程尝试正常关闭现有连接。如何完成取决于配置的过滤器。排水时间可通过 &amp;ndash;drain-time-s选项配置，随着时间的推移，排水变得更加激进。&lt;/p&gt;
+&lt;p&gt;在耗尽序列之后，新的 Envoy 进程告诉旧的 Envoy 进程自行关闭。该时间可通过&amp;ndash;parent-shutdown-time-s选项进行配置。&lt;/p&gt;
+&lt;p&gt;Envoy 的热重启支持被设计为即使新的 Envoy 进程和旧的 Envoy 进程在不同的容器中运行，它也能正常工作。进程之间的通信仅使用 unix 域套接字进行。&lt;/p&gt;
+&lt;p&gt;源代码分发中包含一个用 Python 编写的示例重启程序/父进程。此父进程可用于标准进程控制实用程序，例如 monit/runit/etc。&lt;/p&gt;
+&lt;h3 id=&#34;ip&#34;&gt;IP&lt;/h3&gt;
+&lt;h4 id=&#34;http-标头-1&#34;&gt;HTTP 标头&lt;/h4&gt;
+&lt;p&gt;HTTP 标头可以在x-forwarded-for标头中携带请求的原始 IP 地址 。上游服务器可以使用此标头来确定下游远程地址。Envoy 也可以使用这个 header 来选择 Original Src HTTP Filter使用的 IP 地址。&lt;/p&gt;
+&lt;p&gt;HTTP 标头方法有一些缺点：&lt;/p&gt;
+&lt;p&gt;它仅适用于 HTTP。&lt;/p&gt;
+&lt;p&gt;上游主机可能不支持它。&lt;/p&gt;
+&lt;p&gt;它需要仔细配置。&lt;/p&gt;
+&lt;h2 id=&#34;生命周期&#34;&gt;生命周期&lt;/h2&gt;
+&lt;h3 id=&#34;术语&#34;&gt;术语&lt;/h3&gt;
+&lt;p&gt;Envoy 在其代码库和文档中使用以下术语：&lt;/p&gt;
+&lt;p&gt;集群：具有一组端点的逻辑服务，Envoy 将请求转发到这些端点。&lt;/p&gt;
+&lt;p&gt;下游：连接到 Envoy 的实体。这可能是本地应用程序（在边车模型中）或网络节点。在非 Sidecar 模型中，这是一个远程客户端。&lt;/p&gt;
+&lt;p&gt;端点：实现逻辑服务的网络节点。它们被分组到集群中。集群中的端点位于Envoy 代理的上游。&lt;/p&gt;
+&lt;p&gt;过滤器：连接或请求处理管道中的模块，提供请求处理的某些方面。Unix 的一个类比是小型实用程序（过滤器）与 Unix 管道（过滤器链）的组合。&lt;/p&gt;
+&lt;p&gt;过滤器链：一系列过滤器。&lt;/p&gt;
+&lt;p&gt;侦听器：Envoy 模块，负责绑定到 IP/端口、接受新的 TCP 连接（或 UDP 数据报）并协调面向下游的请求处理方面。&lt;/p&gt;
+&lt;p&gt;上游：Envoy 在转发服务请求时连接的端点（网络节点）。这可能是本地应用程序（在边车模型中）或网络节点。在非边车模型中，这对应于远程后端。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.envoyproxy.io/docs/envoy/latest/_images/lor-architecture.svg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;运维&#34;&gt;运维&lt;/h2&gt;
+&lt;h4 id=&#34;管理界面&#34;&gt;管理界面&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.envoyproxy.io/docs/envoy/latest/operations/admin&#34;&gt;https://www.envoyproxy.io/docs/envoy/latest/operations/admin&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;xds&#34;&gt;xDS&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: </title>
       <link>https://reactivegroup.github.io/capa.io/blog/1/01/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -48,10 +126,9 @@
       <description>
         
         
-        &lt;h4 id=&#34;envoy-http重定向&#34;&gt;envoy http重定向&lt;/h4&gt;
-&lt;p&gt;配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。&lt;/p&gt;
-&lt;p&gt;指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.ciocso.com/article/730.html&#34;&gt;https://www.ciocso.com/article/730.html&lt;/a&gt;&lt;/p&gt;
+        &lt;h3 id=&#34;参考文章&#34;&gt;参考文章&lt;/h3&gt;
+&lt;h4 id=&#34;io-模型&#34;&gt;IO 模型&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://xie.infoq.cn/article/25d369e183563e44fc50d8168&#34;&gt;https://xie.infoq.cn/article/25d369e183563e44fc50d8168&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>

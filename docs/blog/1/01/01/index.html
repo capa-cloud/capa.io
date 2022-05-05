@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+<meta name="generator" content="Hugo 0.89.4" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 
 <link rel="shortcut icon" href="/capa.io/favicons/favicon.ico" >
@@ -21,28 +21,41 @@
 
 
   
-  <meta name="description" content="envoy http重定向
-配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤 …">
+  <meta name="description" content="请求的生命周期
+在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。
+当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流 …">
 <meta property="og:title" content="" />
-<meta property="og:description" content="envoy http重定向 配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。
-指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。
-https://www.ciocso.com/article/730.html" />
+<meta property="og:description" content="请求的生命周期 在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。
+当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.
+$ curl example.com -v
+ Trying 192.0.2.0:80&hellip;  接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。
+如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。
+一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。
+使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。 在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints 使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。 请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/1/01/01/" /><meta property="article:section" content="blog" />
 
-<meta property="article:modified_time" content="2022-03-01T14:09:22+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="">
-<meta itemprop="description" content="envoy http重定向 配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。
-指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。
-https://www.ciocso.com/article/730.html">
-<meta itemprop="dateModified" content="2022-03-01T14:09:22+08:00" />
-<meta itemprop="wordCount" content="7">
+<meta itemprop="description" content="请求的生命周期 在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。
+当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.
+$ curl example.com -v
+ Trying 192.0.2.0:80&hellip;  接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。
+如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。
+一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。
+使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。 在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints 使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。 请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。">
+
+<meta itemprop="wordCount" content="263">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="envoy http重定向 配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。
-指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。
-https://www.ciocso.com/article/730.html"/>
+<meta name="twitter:description" content="请求的生命周期 在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。
+当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.
+$ curl example.com -v
+ Trying 192.0.2.0:80&hellip;  接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。
+如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。
+一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。
+使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。 在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints 使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。 请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。"/>
 
 
 
@@ -146,7 +159,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/capa.io/en/blog/1/01/01/">English</a>
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
 	
 </div>
 			</li>
@@ -186,7 +199,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/capa.io/en/blog/1/01/01/">English</a>
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
 	
 </div>
     </div>
@@ -204,15 +217,19 @@ if (!doNotTrack) {
   <a href="/capa.io/blog/2022/01/21/grpc-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220121grpc-landscape"><span class="">gRPC Landscape</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackistio-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblogcloudstackistio-li">
   <a href="/capa.io/blog/cloudstack/istio/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackistio"><span class="">Istio Stack</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-landscape-li">
   <a href="/capa.io/blog/2022/03/09/istio-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-landscape"><span class="">Istio Landscape</span></a>
-</li>
-  </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-capaioblog10101-li">
   <a href="/capa.io/blog/1/01/01/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-capaioblog10101"><span class="td-sidebar-nav-active-item"></span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220503envoy-landscape-li">
+  <a href="/capa.io/blog/2022/05/03/envoy-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220503envoy-landscape"><span class="">Envoy Landscape</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog10101-li">
+  <a href="/capa.io/blog/1/01/01/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog10101"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogtecktalk-li">
@@ -251,8 +268,8 @@ if (!doNotTrack) {
     
     
 
-    <a href="https://github.com/reactivegroup/capa/edit/master/content/zh/blog/cloudstack/envoy/envoy-landscape.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-    <a href="https://github.com/reactivegroup/capa/new/master/content/zh/blog/cloudstack/envoy/envoy-landscape.md?filename=change-me.md&amp;value=---%0D%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0D%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0D%0Aweight%3A&#43;100%0D%0Adescription%3A&#43;%3E-%0D%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0D%0A---%0D%0A%0D%0A%23%23&#43;Heading%0D%0A%0D%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0D%0A%0D%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0D%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0D%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0D%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0D%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+    <a href="https://github.com/reactivegroup/capa/edit/master/content/zh/blog/cloudstack/istio/istio-devops.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+    <a href="https://github.com/reactivegroup/capa/new/master/content/zh/blog/cloudstack/istio/istio-devops.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
     <a href="https://github.com/reactivegroup/capa/issues/new?title=" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
     
       
@@ -261,7 +278,7 @@ if (!doNotTrack) {
 
   
   
-    <a id="print" href="https://reactivegroup.github.io/capa.io/blog/cloudstack/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
+    <a id="print" href="https://reactivegroup.github.io/capa.io/blog/cloudstack/istio/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
   
   </div>
 
@@ -299,7 +316,7 @@ if (!doNotTrack) {
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://reactivegroup.github.io/capa.io/blog/cloudstack/index.xml" target="_blank">
+            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://reactivegroup.github.io/capa.io/blog/cloudstack/istio/index.xml" target="_blank">
               RSS <i class="fa fa-rss ml-2 "></i>
             </a>
             
@@ -325,10 +342,92 @@ if (!doNotTrack) {
 		
 		
 	</header>
-	<h4 id="envoy-http重定向">envoy http重定向</h4>
-<p>配置http过滤器类型为envoy.filters.http.router，我们的用例中需要这个过滤器将地址127.0.0.1:10000上收到的请求路由到www.envoyproxy.io，除此之外，envoy还有其他过滤器，比如带宽限制过滤器envoy.filters.http.bandwidth_limit,速率限制过滤器envoy.filters.http.ratelimit等。具体可参考：http 过滤器。</p>
-<p>指定了cluster的名称为service_envoyproxy_io， 上文中的listener监听到的请求在37行就会被路由到该cluster，listener_0监听来自下游主机的请求后，路由到service_envoyproxy_io，service_envoyproxy_io会将该请求发送给相应的上游端点进行处理。</p>
-<p><a href="https://www.ciocso.com/article/730.html">https://www.ciocso.com/article/730.html</a></p>
+	<h3 id="请求的生命周期">请求的生命周期</h3>
+<p>在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。</p>
+<p>当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.</p>
+<p>$ curl example.com -v</p>
+<ul>
+<li>Trying 192.0.2.0:80&hellip;</li>
+</ul>
+<p>接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。</p>
+<p>如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。</p>
+<p>一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。</p>
+<p>使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。
+在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints
+使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。
+请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。</p>
+<p>DNS 代理
+3分钟阅读 页面测试</p>
+<p>除了捕获应用程序流量之外，Istio 还可以捕获 DNS 请求以提高网格的性能和可用性。在代理 DNS 时，来自应用程序的所有 DNS 请求都将被重定向到 sidecar，其中存储了本地域名到 IP 地址的映射。如果请求可以被 Sidecar 处理，它将直接向应用程序返回响应，避免往返上游 DNS 服务器。否则，请求将按照标准/etc/resolv.confDNS 配置向上游转发。</p>
+<p>虽然 Kubernetes 为 Kubernetes 提供了开箱即用的 DNS 解析Service，但任何自定义ServiceEntry的都不会被识别。使用此功能，ServiceEntry无需自定义配置 DNS 服务器即可解析地址。对于 Kubernetes Service，DNS 响应将是相同的，但负载减少kube-dns并提高了性能。</p>
+<p>此功能也可用于在 Kubernetes 之外运行的服务。这意味着可以解决所有内部服务，而无需笨拙的变通方法将 Kubernetes DNS 条目暴露在集群之外。</p>
+<p>入门
+默认情况下当前未启用此功能。要启用它，请使用以下设置安装 Istio：</p>
+<p>$ cat &laquo;EOF | istioctl install -y -f -
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+meshConfig:
+defaultConfig:
+proxyMetadata:</p>
+<h1 id="enable-basic-dns-proxying">Enable basic DNS proxying</h1>
+<p>ISTIO_META_DNS_CAPTURE: &ldquo;true&rdquo;</p>
+<h1 id="enable-automatic-address-allocation-optional">Enable automatic address allocation, optional</h1>
+<p>ISTIO_META_DNS_AUTO_ALLOCATE: &ldquo;true&rdquo;
+EOF</p>
+<p>这也可以使用proxy.istio.io/configannotation在每个 pod 的基础上启用。</p>
+<p>使用 部署到 VM 时，默认情况下将启用基本 DNS 代理。istioctl workload entry configure
+DNS 捕获在行动
+要尝试 DNS 捕获，首先ServiceEntry为一些外部服务设置一个：</p>
+<p>apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+name: external-address
+spec:
+addresses:</p>
+<ul>
+<li>198.51.100.0
+hosts:</li>
+<li>address.internal
+ports:</li>
+<li>name: http
+number: 80
+protocol: HTTP</li>
+</ul>
+<p>如果没有 DNS 捕获，请求address.internal可能无法解析。启用此功能后，您应该根据配置获得响应address：</p>
+<p>$ curl -v address.internal</p>
+<ul>
+<li>Trying 198.51.100.1:80&hellip;</li>
+</ul>
+<p>地址自动分配
+在上面的示例中，您有一个用于发送请求的服务的预定义 IP 地址。但是，访问没有稳定地址的外部服务是很常见的，而是依赖 DNS。在这种情况下，DNS 代理将没有足够的信息来返回响应，并且需要向上游转发 DNS 请求。</p>
+<p>这对于 TCP 流量来说尤其成问题。与基于Host标头路由的 HTTP 请求不同，TCP 携带的信息要少得多。您只能在目标 IP 和端口号上进行路由。因为后端没有一个稳定的IP，所以也不能基于它进行路由，只留下端口号，当多个ServiceEntryTCP服务共享同一个端口时，会导致冲突。</p>
+<p>为了解决这些问题，DNS 代理还支持为ServiceEntry未明确定义地址的 s 自动分配地址。这是由ISTIO_META_DNS_AUTO_ALLOCATE选项配置的。</p>
+<p>启用此功能后，DNS 响应将为每个ServiceEntry. 然后将代理配置为将请求匹配到此 IP 地址，并将请求转发到相应的ServiceEntry.</p>
+<p>由于此功能会修改 DNS 响应，因此它可能无法与所有应用程序兼容。
+要尝试这一点，请配置另一个ServiceEntry：</p>
+<p>apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+name: external-auto
+spec:
+hosts:</p>
+<ul>
+<li>auto.internal
+ports:</li>
+<li>name: http
+number: 80
+protocol: HTTP
+resolution: STATIC
+endpoints:</li>
+<li>address: 198.51.100.2</li>
+</ul>
+<p>现在，发送请求：</p>
+<p>$ curl -v auto.internal</p>
+<ul>
+<li>Trying 240.240.0.1:80&hellip;</li>
+</ul>
+<p>如您所见，请求被发送到一个自动分配的地址，240.240.0.1. 这些地址将从240.240.0.0/16保留的 IP 地址范围中挑选，以避免与实际服务发生冲突。</p>
 
 	
 
@@ -336,7 +435,7 @@ if (!doNotTrack) {
   <li>
     <a class="btn btn-primary disabled"><span class="mr-1">←</span>上一页</a>
   </li>
-    <a class="btn btn-primary disabled">下一页<span class="ml-1">→</span></a>
+    <a href="/capa.io/blog/2022/03/09/istio-landscape/" aria-label="下一页 - Istio Landscape" class="btn btn-primary">下一页<span class="ml-1">→</span></a>
   </li>
 </ul>
 
