@@ -215,6 +215,10 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 
 概括：以Dapr为代表的Sidecar架构是未来，但现有的很多企业和系统很难一步到位的升级到Sidecar架构，富SDK架构将会长期的存在下去。
 
++ sidecar的开发和运维成本高
++ sidecar中实现自定义逻辑的复杂度高
++ 当前sidecar模式还不足够成熟，无法短时间内完成开发和部署
+
 引申：面对庞大的Java系统体系，Capa项目将使用富SDK模型支持Java系统向Mecha架构过渡。在Dapr等项目成熟后，也可以无缝衔接到Sidecar架构。
 
 #### 能力水平模型

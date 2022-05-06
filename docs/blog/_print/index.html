@@ -1718,6 +1718,11 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 <p>基于Mecha架构理念的Multi-Runtime，以Sidecar的方式提供标准API的功能，看起来似乎是最合理的选择。</p>
 <p>那为什么不直接使用Dapr/Layotto等项目，而是选择开发 富SDK模式 的Capa项目呢。</p>
 <p>概括：以Dapr为代表的Sidecar架构是未来，但现有的很多企业和系统很难一步到位的升级到Sidecar架构，富SDK架构将会长期的存在下去。</p>
+<ul>
+<li>sidecar的开发和运维成本高</li>
+<li>sidecar中实现自定义逻辑的复杂度高</li>
+<li>当前sidecar模式还不足够成熟，无法短时间内完成开发和部署</li>
+</ul>
 <p>引申：面对庞大的Java系统体系，Capa项目将使用富SDK模型支持Java系统向Mecha架构过渡。在Dapr等项目成熟后，也可以无缝衔接到Sidecar架构。</p>
 <h4 id="能力水平模型">能力水平模型</h4>
 <p>选用sidecar来进行中间件支持，存在以下几个问题：</p>
