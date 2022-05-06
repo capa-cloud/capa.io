@@ -410,7 +410,8 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 <p>最后 Layotto 目前虽然是构建在 MOSN 之上，未来我们希望 Layotto 可以跑在 envoy 上，这样只要应用接入了 Service Mesh，无论数据面使用的是 MOSN 还是 envoy，都可以在上面增加 Runtime能力。</p>
 <h3 id="ccapa">C、Capa</h3>
 <blockquote>
-<p>github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/capa-cloud/capa-java</a></p>
+<p>Capa主要为了解决携程混合云部署开发的问题，主要面向Java技术栈。
+github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/capa-cloud/capa-java</a></p>
 </blockquote>
 <p>Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Runtime的标准API。</p>
 <p>您可以简单的将Capa项目理解为 Dapr / Layotto 等Sidecar模式项目的SDK实现版本。</p>
@@ -640,8 +641,8 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <h3 id="补充了标准api">补充了标准API</h3>
 <h4 id="rpc">RPC</h4>
 <p>标准API中只涵盖了作为Client调用其他服务的API。</p>
-<p>但不同云上服务注册的框架弈有所不同（例如：dubbo/spring cloud/service mesh)</p>
-<p>在sidecar模式中，sidecar本身可类似service mesh一样承担服务注册的能力，但SDK模式时却不行。</p>
+<p>但不同云上服务注册的框架弈有所不同（例如：dubbo/spring cloud/service mesh)。</p>
+<p>在sidecar模式中，sidecar本身可类似service mesh一样承担服务注册的能力，通过callback API调用服务接口，但SDK模式时却不行。</p>
 <p>所以添加了作为服务端的API：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#8f5902;font-style:italic">// -- Runtime as Server
 </span><span style="color:#8f5902;font-style:italic"></span>
@@ -667,7 +668,8 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 </span><span style="color:#8f5902;font-style:italic">     * @return A Mono Plan of register result.
 </span><span style="color:#8f5902;font-style:italic">     */</span>
     <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Boolean</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">registerServer</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">RegisterServerRequest</span> <span style="color:#000">registerServerRequest</span><span style="color:#ce5c00;font-weight:bold">);</span>
-</code></pre></div><h4 id="pubsub">PubSub</h4>
+</code></pre></div><p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-server.png" alt=""></p>
+<h4 id="pubsub">PubSub</h4>
 <p>标准API中定义了Pub发布消息的API，而Sub订阅消息则通过callback进行定义。</p>
 <p>sidecar通过callback回调触发Sub订阅，但对于SDK模式而言，并没有额外的进程可触发callback逻辑。</p>
 <p>所以添加了消息订阅的API：</p>
@@ -727,89 +729,147 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <h4 id="telemetry-logmetrictrace">Telemetry (Log/Metric/Trace)</h4>
 <p>场景：中间件SDK/应用程序 需要记录指标埋点。</p>
 <p>之前，我们可以通过 CAT 这类应用监控告警平台进行实现。</p>
-<p>Capa采用了和 OpenTelemetry 完全一致的API，来实现监控告警/指标收集的功能。</p>
-<h3 id="c云原生技术栈选型">C、云原生技术栈选型</h3>
+<p>Capa复用了 OpenTelemetry 的API，来实现监控告警/指标收集的功能。</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-telemetry-api.png" alt=""></p>
+<h4 id="schedule">Schedule</h4>
+<p>场景：触发job调度任务（规划中）</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic"> * Schedule Bindings Runtimes standard API defined.
+</span><span style="color:#8f5902;font-style:italic"> */</span>
+<span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">ScheduleRuntimes</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#8f5902;font-style:italic">/**
+</span><span style="color:#8f5902;font-style:italic">     * Invokes a Schedule Binding operation.
+</span><span style="color:#8f5902;font-style:italic">     *
+</span><span style="color:#8f5902;font-style:italic">     * @param appId    the app id
+</span><span style="color:#8f5902;font-style:italic">     * @param jobName  the job name
+</span><span style="color:#8f5902;font-style:italic">     * @param metadata the metadata
+</span><span style="color:#8f5902;font-style:italic">     * @return the job flux stream
+</span><span style="color:#8f5902;font-style:italic">     */</span>
+    <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Object</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeSchedule</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">jobName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h3 id="c云原生技术栈选型">C、云原生技术栈选型</h3>
 <table>
 <thead>
 <tr>
 <th>领域</th>
 <th>云厂商</th>
 <th>技术选型</th>
+<th>实践经验</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>RPC</td>
 <td>Trip</td>
-<td>ServiceMesh</td>
+<td>Trip SOA</td>
+<td></td>
 </tr>
 <tr>
 <td></td>
 <td>AWS</td>
-<td>AWS App Mesh</td>
+<td>AWS AppMesh</td>
+<td>重试、熔断、超时等全部从SDK中下沉到Mesh层处理</td>
 </tr>
 <tr>
 <td>Configuration</td>
 <td>Trip</td>
 <td><a href="https://github.com/qunarcorp/qconfig">QConfig</a></td>
+<td></td>
 </tr>
 <tr>
 <td></td>
 <td>AWS</td>
 <td>AWS AppConfig</td>
+<td>功能较为简陋，需要在SDK中进行弥补</td>
 </tr>
 <tr>
 <td>MQ</td>
 <td>Trip</td>
-<td>QMQ</td>
+<td><a href="(https://github.com/qunarcorp/qmq)">QMQ</a></td>
+<td></td>
 </tr>
 <tr>
 <td></td>
 <td>AWS</td>
 <td>AWS MSK Kafka</td>
+<td>缺少如延时消息等功能，需要借助周边系统进行弥补</td>
 </tr>
 <tr>
 <td>Redis</td>
 <td>Trip</td>
 <td>CRedis</td>
+<td></td>
 </tr>
 <tr>
 <td></td>
 <td>AWS</td>
 <td>AWS ElasticCache</td>
+<td></td>
 </tr>
 <tr>
 <td>Metric</td>
 <td>Trip</td>
 <td>CAT</td>
+<td></td>
 </tr>
 <tr>
 <td></td>
 <td>AWS</td>
 <td>AWS CloudWatch</td>
+<td>OpenTelemetryAPI对接CloudWatch SDK</td>
 </tr>
 <tr>
 <td>DB(SQL)</td>
 <td>Trip</td>
-<td>DAL</td>
+<td><a href="https://github.com/ctripcorp/dal">DAL</a></td>
+<td>非Mecha架构</td>
 </tr>
 <tr>
 <td></td>
 <td>AWS</td>
 <td>DAL + AWS RDS</td>
+<td>非Mecha架构</td>
+</tr>
+<tr>
+<td>Schedule</td>
+<td>Trip</td>
+<td>QSchedule</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>AWS</td>
+<td>K8S cronJob</td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <h3 id="d个性化的配置和逻辑">D、个性化的配置和逻辑</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-plugin.png" alt=""></p>
+<ol>
+<li>应用程序可以覆写 配置 ，实现自定义</li>
+<li>应用程序可以覆写 插件 ，实现自定义</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-plugin-config.png" alt=""></p>
+<p>自定义配置类似layotto：<a href="https://github.com/mosn/layotto/issues/500">layotto 配置下发通道与配置热加载 #500</a></p>
 <h4 id="特定云的配置">特定云的配置</h4>
 <p>集成在对应云的SDK中。</p>
-<p>举个例子：</p>
-<p>如果用户在调用API时明确指定了，使用redis作为存储，那么对于没有部署redis的云平台，则无法运行。</p>
-<p>所以对于redis这种存储系统的选择，capa并不暴露给用户：</p>
+<h4 id="举个例子layotto-解耦api跟具体实现-513httpsgithubcommosnlayottoissues513">举个例子：<a href="https://github.com/mosn/layotto/issues/513">layotto 解耦API跟具体实现 #513</a></h4>
+<p>如果用户在调用API时明确指定了，使用redis作为store_name，那么对于没有部署redis的云平台，则无法运行。</p>
+<p>所以对于redis这种与基础设施有关的选择，capa并不暴露给用户：</p>
 <ul>
-<li>存储系统的name，存放在特定sdk的配置文件中。</li>
-<li>用户通过一个接口方法，获取该name，并透传给API调用。</li>
+<li>store_name，存放在sdk的配置文件中。</li>
+<li>用户通过一个接口方法(比如getStoreName())，获取该name，并透传给API调用。</li>
 </ul>
+<p>主要也是因为，capa当前都是1:1的情况，目前不存在1个领域有多种实现。</p>
+<p>后续如果有这种情况，考虑使用configuration配置功能进行映射：</p>
+<ol>
+<li>定义一个configuration配置，key1=redis, key2=mongo</li>
+<li>用户发起了两次调用，两次调用分别为例如key1=1, key2=2</li>
+<li>则getStoreName(key1)=redis，getStoreName(key1)=mongodb，默认=redis</li>
+<li>用户将此store_name透传给API调用</li>
+</ol>
 <h4 id="应用个性化的配置和逻辑">应用个性化的配置和逻辑</h4>
 <p>SDK中的一些逻辑是可替换的，实现上通过面向Java接口编程，在SDK中提供了接口的默认实现。</p>
 <p>应用程序可以通过覆盖接口实现，从而实现自定义逻辑。</p>
@@ -819,13 +879,13 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <p>另一方面作为混合云架构，若要发挥每个云各自的优势，有可能不同服务会部署在不同的云平台上，这时也会面对跨云交互的问题。</p>
 <p>而要实现跨云交互，主要由以下两个思路：</p>
 <h4 id="1-由mecha-runtime解决跨云交互问题">1. 由Mecha Runtime解决跨云交互问题</h4>
-<p>Mecha Runtime感知混合云，并实现跨云交互。</p>
-<p>但可能实现起来比较复杂，设计到跨云的认证、网络等。</p>
-<h4 id="2-由外部插件系统完成该部分的功能">2. 由外部插件/系统，完成该部分的功能</h4>
-<p>Mecha Runtime将会比较轻量，不需要感知其他云。
-涉及到某个领域的跨云交互问题，交由该领域的基础设施完成。</p>
-<p>Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂逻辑，故Capa架构中，所有跨云交互问题。
-都交由具体领域的周边系统完成，Capa只关注于当前云的配置和使用。</p>
+<p>Mecha Runtime/SDK感知混合云，并实现跨云交互。</p>
+<p>但可能实现起来比较复杂，设计到跨云的认证、网络打通等。</p>
+<h4 id="2-capa由外部插件周边系统完成跨云交互部分的功能">2. (Capa)由外部插件/周边系统，完成跨云交互部分的功能</h4>
+<p>Mecha Runtime/SDK将会比较轻量，不需要感知其他云。
+涉及到某个领域的跨云交互问题，交由该领域的 基础设施/周边系统 完成。</p>
+<p>Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂逻辑，会导致SDK过于臃肿，且无法多语言复用。
+故Capa架构中，所有跨云交互问题，都交由具体领域的周边系统完成，Capa只关注于当前云的配置和使用。</p>
 <h4 id="rpc服务调用跨云">RPC服务调用跨云</h4>
 <p>跨云服务调用的前提是，网络层面流量已经打通。
 例如在AWS上，通过PrivateLink技术进行网络流量打通。</p>
@@ -840,30 +900,36 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <tbody>
 <tr>
 <td>K8S</td>
-<td>ExternalService</td>
+<td>ExternalService转发</td>
 </tr>
 <tr>
 <td>Istio</td>
-<td>ServiceEntry</td>
+<td>ServiceEntry转发</td>
 </tr>
 <tr>
-<td>Dubbo/SpringCloud</td>
-<td>MockService</td>
+<td>Dubbo/SpringCloud/Trip SOA</td>
+<td>MockService转发</td>
 </tr>
 <tr>
 <td>AWS AppMesh</td>
 <td>VirtualNode DNS转发</td>
+</tr>
+<tr>
+<td>不支持？</td>
+<td>搭建Nginx代理实现转发</td>
 </tr>
 </tbody>
 </table>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-crose.png" alt=""></p>
 <h4 id="mq跨云">MQ跨云</h4>
 <p>使用周边系统：MQ同步工具，进行跨云消息传输。</p>
-<p>按需申请，消息格式转换。</p>
+<p>按需申请，消息格式转换，失败重试。</p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-mq-crose.png" alt=""></p>
 <h4 id="数据跨云">数据跨云</h4>
 <p>DB数据使用周边系统：<a href="https://github.com/ctripcorp/drc">MySQL同步工具</a> ，进行跨云数据传输。</p>
 <p>Redis数据目前不做跨云传输。</p>
+<h4 id="configuration等">Configuration等</h4>
+<p>使用周边系统：XX同步工具，进行跨云的数据同步。</p>
 <h2 id="六高阶拓展">六、高阶拓展</h2>
 <h3 id="awebassembly-的探索">A、WebAssembly 的探索</h3>
 <blockquote>
@@ -990,7 +1056,18 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <p>参考资料：https://mp.weixin.qq.com/s/8qnmL12JrESwJg3RsSelJQ</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/slog.png" alt=""></p>
-<h4 id="主要参考文献">主要参考文献</h4>
+<h2 id="九capa-落地情况">九、Capa 落地情况</h2>
+<h3 id="a混合云支持">A、混合云支持</h3>
+<p>目前支持：</p>
+<ul>
+<li>携程私有云</li>
+<li>AWS公有云</li>
+</ul>
+<h3 id="b应用接入情况">B、应用接入情况</h3>
+<h4 id="携程私有云">携程私有云</h4>
+<h4 id="aws公有云">AWS公有云</h4>
+<hr>
+<h3 id="主要参考文献">主要参考文献</h3>
 <ul>
 <li><a href="https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index">https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index</a></li>
 </ul>

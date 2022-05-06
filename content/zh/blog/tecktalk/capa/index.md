@@ -200,6 +200,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 
 ### C、Capa
 
+> Capa主要为了解决携程混合云部署开发的问题，主要面向Java技术栈。
 > github: https://github.com/capa-cloud/capa-java
 
 Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Runtime的标准API。
@@ -502,9 +503,9 @@ Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前
 
 标准API中只涵盖了作为Client调用其他服务的API。
 
-但不同云上服务注册的框架弈有所不同（例如：dubbo/spring cloud/service mesh)
+但不同云上服务注册的框架弈有所不同（例如：dubbo/spring cloud/service mesh)。
 
-在sidecar模式中，sidecar本身可类似service mesh一样承担服务注册的能力，但SDK模式时却不行。
+在sidecar模式中，sidecar本身可类似service mesh一样承担服务注册的能力，通过callback API调用服务接口，但SDK模式时却不行。
 
 所以添加了作为服务端的API：
 
@@ -534,6 +535,8 @@ Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前
      */
     Mono<Boolean> registerServer(RegisterServerRequest registerServerRequest);
 ```
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-server.png)
 
 #### PubSub
 
@@ -628,39 +631,83 @@ sidecar通过callback回调触发Sub订阅，但对于SDK模式而言，并没�
 
 之前，我们可以通过 CAT 这类应用监控告警平台进行实现。
 
-Capa采用了和 OpenTelemetry 完全一致的API，来实现监控告警/指标收集的功能。
+Capa复用了 OpenTelemetry 的API，来实现监控告警/指标收集的功能。
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-telemetry-api.png)
+
+#### Schedule
+
+场景：触发job调度任务（规划中）
+
+```java
+/**
+ * Schedule Bindings Runtimes standard API defined.
+ */
+public interface ScheduleRuntimes {
+
+    /**
+     * Invokes a Schedule Binding operation.
+     *
+     * @param appId    the app id
+     * @param jobName  the job name
+     * @param metadata the metadata
+     * @return the job flux stream
+     */
+    Flux<Object> invokeSchedule(String appId, String jobName, Map<String, String> metadata);
+}
+```
 
 ### C、云原生技术栈选型
 
-|领域|云厂商|技术选型|
-|---|---|---|
-|RPC|Trip|ServiceMesh|
-| |AWS|AWS App Mesh|
-|Configuration|Trip|[QConfig](https://github.com/qunarcorp/qconfig)|
-| |AWS|AWS AppConfig|
-|MQ|Trip|QMQ|
-| |AWS|AWS MSK Kafka|
-|Redis|Trip|CRedis|
-| |AWS|AWS ElasticCache|
-|Metric|Trip|CAT|
-| |AWS|AWS CloudWatch|
-|DB(SQL)|Trip|DAL|
-| |AWS|DAL + AWS RDS|
+|领域|云厂商|技术选型|实践经验|
+|---|---|---|---|
+|RPC|Trip|Trip SOA||
+| |AWS|AWS AppMesh|重试、熔断、超时等全部从SDK中下沉到Mesh层处理|
+|Configuration|Trip|[QConfig](https://github.com/qunarcorp/qconfig)||
+| |AWS|AWS AppConfig|功能较为简陋，需要在SDK中进行弥补|
+|MQ|Trip|[QMQ]((https://github.com/qunarcorp/qmq))||
+| |AWS|AWS MSK Kafka|缺少如延时消息等功能，需要借助周边系统进行弥补|
+|Redis|Trip|CRedis||
+| |AWS|AWS ElasticCache||
+|Metric|Trip|CAT||
+| |AWS|AWS CloudWatch|OpenTelemetryAPI对接CloudWatch SDK|
+|DB(SQL)|Trip|[DAL](https://github.com/ctripcorp/dal)|非Mecha架构|
+| |AWS|DAL + AWS RDS|非Mecha架构|
+|Schedule|Trip|QSchedule||
+| |AWS|K8S cronJob||
 
 ### D、个性化的配置和逻辑
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-plugin.png)
+
+1. 应用程序可以覆写 配置 ，实现自定义
+2. 应用程序可以覆写 插件 ，实现自定义
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-plugin-config.png)
+
+自定义配置类似layotto：[layotto 配置下发通道与配置热加载 #500](https://github.com/mosn/layotto/issues/500)
 
 #### 特定云的配置
 
 集成在对应云的SDK中。
 
-举个例子：
+#### 举个例子：[layotto 解耦API跟具体实现 #513](https://github.com/mosn/layotto/issues/513)
 
-如果用户在调用API时明确指定了，使用redis作为存储，那么对于没有部署redis的云平台，则无法运行。
+如果用户在调用API时明确指定了，使用redis作为store_name，那么对于没有部署redis的云平台，则无法运行。
 
-所以对于redis这种存储系统的选择，capa并不暴露给用户：
+所以对于redis这种与基础设施有关的选择，capa并不暴露给用户：
 
-+ 存储系统的name，存放在特定sdk的配置文件中。
-+ 用户通过一个接口方法，获取该name，并透传给API调用。
++ store_name，存放在sdk的配置文件中。
++ 用户通过一个接口方法(比如getStoreName())，获取该name，并透传给API调用。
+
+主要也是因为，capa当前都是1:1的情况，目前不存在1个领域有多种实现。
+
+后续如果有这种情况，考虑使用configuration配置功能进行映射：
+
+1. 定义一个configuration配置，key1=redis, key2=mongo
+2. 用户发起了两次调用，两次调用分别为例如key1=1, key2=2
+3. 则getStoreName(key1)=redis，getStoreName(key1)=mongodb，默认=redis
+4. 用户将此store_name透传给API调用
 
 #### 应用个性化的配置和逻辑
 
@@ -679,17 +726,17 @@ SDK中的一些逻辑是可替换的，实现上通过面向Java接口编程，�
 
 #### 1. 由Mecha Runtime解决跨云交互问题
 
-Mecha Runtime感知混合云，并实现跨云交互。
+Mecha Runtime/SDK感知混合云，并实现跨云交互。
 
-但可能实现起来比较复杂，设计到跨云的认证、网络等。
+但可能实现起来比较复杂，设计到跨云的认证、网络打通等。
 
-#### 2. 由外部插件/系统，完成该部分的功能
+#### 2. (Capa)由外部插件/周边系统，完成跨云交互部分的功能
 
-Mecha Runtime将会比较轻量，不需要感知其他云。
-涉及到某个领域的跨云交互问题，交由该领域的基础设施完成。
+Mecha Runtime/SDK将会比较轻量，不需要感知其他云。
+涉及到某个领域的跨云交互问题，交由该领域的 基础设施/周边系统 完成。
 
-Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂逻辑，故Capa架构中，所有跨云交互问题。
-都交由具体领域的周边系统完成，Capa只关注于当前云的配置和使用。
+Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂逻辑，会导致SDK过于臃肿，且无法多语言复用。
+故Capa架构中，所有跨云交互问题，都交由具体领域的周边系统完成，Capa只关注于当前云的配置和使用。
 
 #### RPC服务调用跨云
 
@@ -700,11 +747,11 @@ Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂�
 
 |RPC网络基础设施|跨云交互能力|
 |---|---|
-|K8S|ExternalService|
-|Istio|ServiceEntry|
-|Dubbo/SpringCloud|MockService|
+|K8S|ExternalService转发|
+|Istio|ServiceEntry转发|
+|Dubbo/SpringCloud/Trip SOA|MockService转发|
 |AWS AppMesh|VirtualNode DNS转发|
-
+|不支持？|搭建Nginx代理实现转发|
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-crose.png)
 
@@ -712,7 +759,7 @@ Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂�
 
 使用周边系统：MQ同步工具，进行跨云消息传输。
 
-按需申请，消息格式转换。
+按需申请，消息格式转换，失败重试。
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-mq-crose.png)
 
@@ -721,6 +768,10 @@ Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂�
 DB数据使用周边系统：[MySQL同步工具](https://github.com/ctripcorp/drc) ，进行跨云数据传输。
 
 Redis数据目前不做跨云传输。
+
+#### Configuration等
+
+使用周边系统：XX同步工具，进行跨云的数据同步。
 
 ## 六、高阶拓展
 
@@ -863,6 +914,23 @@ CNCF 托管了许多与 Dapr 紧密结合的项目。例如，Dapr 使用 gRPC �
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/slog.png)
 
-#### 主要参考文献
+## 九、Capa 落地情况
+
+### A、混合云支持
+
+目前支持：
+
++ 携程私有云
++ AWS公有云
+
+### B、应用接入情况
+
+#### 携程私有云
+
+#### AWS公有云
+
+------------
+
+### 主要参考文献
 
 + https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index
