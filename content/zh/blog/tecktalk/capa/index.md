@@ -366,9 +366,10 @@ SDK模式的优点在于开发和接入的成本较低，可以快速拥有混�
 
 ### C、拓展字段
 
-高度定制化。
+高度定制化。不建议用户直接使用。
 
-不建议使用。
+若要用，则使用定义好的有限枚举。
+SDK实现中对该枚举进行支持。
 
 ![](https://static001.geekbang.org/wechat/images/39/391a3a9fa724a81fb53ac409adb4e3f9.jpeg)
 
@@ -439,7 +440,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png)
 
-#### 改动范围
+#### 接入适配模式的改动范围
 
 1. 替换中间件依赖
 
@@ -481,27 +482,26 @@ private Person person;
 > 
 > A: 当运行在特定云上时，需要加载对应的sdk进来；这时如果有类路径完全一致的类存在，会导致类加载冲突。
 
-### B、API设计
+### B、Capa API设计
 
-Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域的特：
+Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域：
 
 * Service Invocation (RPC服务调用)
 * Configuration Centor (Configuration动态配置)
 * Publish/Subscribe (Pub/Sub发布订阅)
 * State Management (State状态管理)
 * Application Log/Metrics/Traces (Telemetry可观测性)
+* Redis (Redis高度定制化存储) -beta
 * Database (SQL关系型数据库) -alpha
 * Schedule (Schedule定时调度) -alpha
-* Redis (Redis高度定制化存储) -alpha
-* Actuator (组件自身可观测性) -planning
 
-### 完全复用标准API
+### 完全复用的标准API
 
 * Service Invocation (RPC服务调用)
 * Configuration Centor (Configuration动态配置)
 * Publish/Subscribe (Pub/Sub发布订阅)
 
-### 补充了标准API
+### 补充了的标准API
 
 #### RPC
 
@@ -606,7 +606,7 @@ sidecar通过callback回调触发Sub订阅，但对于SDK模式而言，并没�
 
 但目前密钥存储还未暴露给用户使用，而只是中间件在使用，所以中间件中直接引用了对应云的SDK来实现。
 
-### 完全自定义的API
+### 自定义的非标准API
 
 目前的 dapr api 并不能在保持可移植性的同时满足现实世界中应用程序的所有需求。
 
@@ -663,17 +663,19 @@ public interface ScheduleRuntimes {
 
 ### C、云原生技术栈选型
 
+Capa SDK本身不具有丰富的功能，更像是一个包装适配层，具体功能由下层的具体中间件来实现。
+
 |领域|云厂商|技术选型|实践经验|
 |---|---|---|---|
 |RPC|Trip|Trip SOA||
 | |AWS|AWS AppMesh|重试、熔断、超时等全部从SDK中下沉到Mesh层处理|
-|Configuration|Trip|[QConfig](https://github.com/qunarcorp/qconfig)||
+|Configuration|Trip|Apollo / [QConfig](https://github.com/qunarcorp/qconfig)||
 | |AWS|AWS AppConfig|功能较为简陋，需要在SDK中进行弥补|
 |MQ|Trip|[QMQ]((https://github.com/qunarcorp/qmq))||
 | |AWS|AWS MSK Kafka|缺少如延时消息等功能，需要借助周边系统进行弥补|
 |Redis|Trip|CRedis||
 | |AWS|AWS ElasticCache||
-|Metric|Trip|CAT||
+|Log/Metric/Trace|Trip|CAT||
 | |AWS|AWS CloudWatch|OpenTelemetryAPI对接CloudWatch SDK|
 |DB(SQL)|Trip|[DAL](https://github.com/ctripcorp/dal)|非Mecha架构|
 | |AWS|DAL + AWS RDS|非Mecha架构|
@@ -927,11 +929,19 @@ CNCF 托管了许多与 Dapr 紧密结合的项目。例如，Dapr 使用 gRPC �
 + 携程私有云
 + AWS公有云
 
+调研开发中:
+
++ 阿里云
+
 ### B、应用接入情况
 
 #### 携程私有云
 
+生产xx+应用，不断接入中
+
 #### AWS公有云
+
+生产xx+应用，不断接入中
 
 ------------
 

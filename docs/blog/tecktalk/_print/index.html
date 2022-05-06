@@ -533,8 +533,9 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 <h3 id="b分层模型">B、分层模型</h3>
 <p><img src="https://static001.geekbang.org/wechat/images/2a/2a92f5f1dd7d8dae44df981e3afa5368.png" alt=""></p>
 <h3 id="c拓展字段">C、拓展字段</h3>
-<p>高度定制化。</p>
-<p>不建议使用。</p>
+<p>高度定制化。不建议用户直接使用。</p>
+<p>若要用，则使用定义好的有限枚举。
+SDK实现中对该枚举进行支持。</p>
 <p><img src="https://static001.geekbang.org/wechat/images/39/391a3a9fa724a81fb53ac409adb4e3f9.jpeg" alt=""></p>
 <h3 id="e配置原语">E、配置原语</h3>
 <blockquote>
@@ -595,7 +596,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <li>接入spring boot体系的适配层(开发中)</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png" alt=""></p>
-<h4 id="改动范围">改动范围</h4>
+<h4 id="接入适配模式的改动范围">接入适配模式的改动范围</h4>
 <ol>
 <li>替换中间件依赖</li>
 </ol>
@@ -624,26 +625,25 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <p>Q: 为什么不保持import路径和使用方式完全一致？</p>
 <p>A: 当运行在特定云上时，需要加载对应的sdk进来；这时如果有类路径完全一致的类存在，会导致类加载冲突。</p>
 </blockquote>
-<h3 id="bapi设计">B、API设计</h3>
-<p>Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域的特：</p>
+<h3 id="bcapa-api设计">B、Capa API设计</h3>
+<p>Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域：</p>
 <ul>
 <li>Service Invocation (RPC服务调用)</li>
 <li>Configuration Centor (Configuration动态配置)</li>
 <li>Publish/Subscribe (Pub/Sub发布订阅)</li>
 <li>State Management (State状态管理)</li>
 <li>Application Log/Metrics/Traces (Telemetry可观测性)</li>
+<li>Redis (Redis高度定制化存储) -beta</li>
 <li>Database (SQL关系型数据库) -alpha</li>
 <li>Schedule (Schedule定时调度) -alpha</li>
-<li>Redis (Redis高度定制化存储) -alpha</li>
-<li>Actuator (组件自身可观测性) -planning</li>
 </ul>
-<h3 id="完全复用标准api">完全复用标准API</h3>
+<h3 id="完全复用的标准api">完全复用的标准API</h3>
 <ul>
 <li>Service Invocation (RPC服务调用)</li>
 <li>Configuration Centor (Configuration动态配置)</li>
 <li>Publish/Subscribe (Pub/Sub发布订阅)</li>
 </ul>
-<h3 id="补充了标准api">补充了标准API</h3>
+<h3 id="补充了的标准api">补充了的标准API</h3>
 <h4 id="rpc">RPC</h4>
 <p>标准API中只涵盖了作为Client调用其他服务的API。</p>
 <p>但不同云上服务注册的框架弈有所不同（例如：dubbo/spring cloud/service mesh)。</p>
@@ -714,7 +714,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <p>规划中。</p>
 <p>后续可能会做，因为不同云上密钥存储使用方式不同。</p>
 <p>但目前密钥存储还未暴露给用户使用，而只是中间件在使用，所以中间件中直接引用了对应云的SDK来实现。</p>
-<h3 id="完全自定义的api">完全自定义的API</h3>
+<h3 id="自定义的非标准api">自定义的非标准API</h3>
 <p>目前的 dapr api 并不能在保持可移植性的同时满足现实世界中应用程序的所有需求。</p>
 <blockquote>
 <p>参考：https://github.com/mosn/layotto/issues/530</p>
@@ -754,6 +754,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
     <span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Object</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invokeSchedule</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">appId</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span> <span style="color:#000">jobName</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Map</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">metadata</span><span style="color:#ce5c00;font-weight:bold">);</span>
 <span style="color:#ce5c00;font-weight:bold">}</span>
 </code></pre></div><h3 id="c云原生技术栈选型">C、云原生技术栈选型</h3>
+<p>Capa SDK本身不具有丰富的功能，更像是一个包装适配层，具体功能由下层的具体中间件来实现。</p>
 <table>
 <thead>
 <tr>
@@ -779,7 +780,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <tr>
 <td>Configuration</td>
 <td>Trip</td>
-<td><a href="https://github.com/qunarcorp/qconfig">QConfig</a></td>
+<td>Apollo / <a href="https://github.com/qunarcorp/qconfig">QConfig</a></td>
 <td></td>
 </tr>
 <tr>
@@ -813,7 +814,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <td></td>
 </tr>
 <tr>
-<td>Metric</td>
+<td>Log/Metric/Trace</td>
 <td>Trip</td>
 <td>CAT</td>
 <td></td>
@@ -1068,9 +1069,15 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <li>携程私有云</li>
 <li>AWS公有云</li>
 </ul>
+<p>调研开发中:</p>
+<ul>
+<li>阿里云</li>
+</ul>
 <h3 id="b应用接入情况">B、应用接入情况</h3>
 <h4 id="携程私有云">携程私有云</h4>
+<p>生产xx+应用，不断接入中</p>
 <h4 id="aws公有云">AWS公有云</h4>
+<p>生产xx+应用，不断接入中</p>
 <hr>
 <h3 id="主要参考文献">主要参考文献</h3>
 <ul>
