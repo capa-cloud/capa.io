@@ -992,6 +992,15 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 &lt;li&gt;社区对公有云功能支持比较好，私有云主要依赖SDK模式。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/feature-support.png&#34; alt=&#34;img.png&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SDK模式的缺点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;跨语言开发和维护成本高&lt;/li&gt;
+&lt;li&gt;SDK升级侵入性强&lt;/li&gt;
+&lt;li&gt;依赖冲突&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;capa-sdk设计&#34;&gt;Capa SDK设计&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;参考资料：https://github.com/dapr/dapr/issues/3261&lt;/p&gt;
@@ -1030,8 +1039,9 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
         &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
     &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/dependencys&amp;gt;&lt;/span&gt;
 &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/profiles&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行时，应用程序直接调用API层的接口。&lt;/p&gt;
-&lt;p&gt;然后通过Java SPI机制，动态加载API层接口的实现类。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;开发人员编程时，应用程序直接调用API层的接口进行编程。&lt;/p&gt;
+&lt;p&gt;在打包成镜像的过程中，通过maven profile加载不同云平台的jar实现。&lt;/p&gt;
+&lt;p&gt;在运行时，SDK通过Java SPI机制，动态加载API层接口的实现类。
 该实现类，即为各个云平台上不同的SDK实现。&lt;/p&gt;
 &lt;h3 id=&#34;dfemas--opensergo--other--&#34;&gt;D、Femas / OpenSergo / Other / &amp;hellip;&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -1044,6 +1054,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 如上图所示，一旦完成 Runtime API 的标准化建设，接入 Mecha 的应用天然具备了可移植性，应用不需要任何改造就可以在私有云以及各种公有云上部署，并且由于使用的是标准 API，应用也可以无需任何改造就在 Layotto / dapr / Capa 之间自由切换。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;未来迁移&#34;&gt;未来迁移&lt;/h4&gt;
+&lt;p&gt;SDK模式的优点在于开发和接入的成本较低，可以快速拥有混合云部署开发的能力。但缺点也是无法忽视的，当随着Mecha Runtime的发展，未来SDK模式很可能将会迁移到更有技术优势的Mecha Runtime Sidecar模式中。&lt;/p&gt;
 &lt;p&gt;推动API的标准化建设：使各大Mecha体系保持API层的统一，保留未来互相迁移的可能。&lt;/p&gt;
 &lt;p&gt;从未来几年来看：&lt;/p&gt;
 &lt;ul&gt;
@@ -1051,6 +1062,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 &lt;li&gt;在较大的私有云，框架团队有能力完成大规模sidecar化改造，会从SDK模式迁移到Sidecar模式。&lt;/li&gt;
 &lt;li&gt;在公有云，目前可以选用SDK模式/Sidecar模式，SDK模式更有利于二次定制；&lt;/li&gt;
 &lt;li&gt;随着社区在公有云能力的发展，以及云厂商的支持，未来可全部切换到sidecar模式。&lt;/li&gt;
+&lt;li&gt;对于异构语言架构，可对主要语种采用sdk模式(功能更丰富)，小语种采用sidecar模式。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;四api设计原则&#34;&gt;四、API设计原则&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -1063,17 +1075,25 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 &lt;h4 id=&#34;解决思路一runtime-弥补组件缺失能力sidecar&#34;&gt;解决思路一：Runtime 弥补组件缺失能力（sidecar）&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/ca/caa5f9fc42715d24967cbeed433bd870.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;解决思路二component-弥补组件缺失能力&#34;&gt;解决思路二：Component 弥补组件缺失能力&lt;/h4&gt;
-&lt;h4 id=&#34;capa示例&#34;&gt;Capa示例：&lt;/h4&gt;
-&lt;p&gt;通过集成Plugin，弥补AWS公有云SDK组件能力，对齐私有云组件能力。
-通过Plugin自定义加载机制，切换不同的能力实现。&lt;/p&gt;
+&lt;h4 id=&#34;capa示例configuration&#34;&gt;Capa示例：Configuration&lt;/h4&gt;
+&lt;p&gt;在私有云的Configuraion-java-sdk(如apollo/qconfig)中，sdk本身支持监听配置变化。&lt;/p&gt;
+&lt;p&gt;但在AWS AppConfig java sdk中，本身并不支持监听配置变化。&lt;/p&gt;
+&lt;p&gt;那我们认为对于configuraion中间件领域而言，监听配置变化是level0的功能，是必须具有的功能。&lt;/p&gt;
+&lt;p&gt;所以需要在component-sdk中对其进行弥补：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sdk中通过定时线程+轮询接口的方式，获取最新的配置变化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以此，使用户接入时，认为具有这项能力。&lt;/p&gt;
 &lt;h4 id=&#34;解决思路三无法弥补但可以模糊处理&#34;&gt;解决思路三：无法弥补，但可以模糊处理&lt;/h4&gt;
 &lt;p&gt;能力分层模型。&lt;/p&gt;
 &lt;h4 id=&#34;解决思路四无法弥补又不能模糊处理&#34;&gt;解决思路四：无法弥补又不能模糊处理&lt;/h4&gt;
-&lt;p&gt;高危，按条件选用&lt;/p&gt;
+&lt;p&gt;高危，按条件选用。&lt;/p&gt;
+&lt;p&gt;明确告知研发，告知其在特定云上才有这项能力。&lt;/p&gt;
 &lt;h3 id=&#34;b分层模型&#34;&gt;B、分层模型&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/2a/2a92f5f1dd7d8dae44df981e3afa5368.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;c拓展字段&#34;&gt;C、拓展字段&lt;/h3&gt;
 &lt;p&gt;高度定制化。&lt;/p&gt;
+&lt;p&gt;不建议使用。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/39/391a3a9fa724a81fb53ac409adb4e3f9.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;e配置原语&#34;&gt;E、配置原语&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -1122,7 +1142,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的需求，对于 RPC 接口的定义，我们同样参考了 dapr 社区的定义，发现完全可以满足我们的需求，因此接口定义就直接复用 dapr 的，但目前 dapr 提供的 RPC 实现方案还比较薄弱，而 MOSN 经过多年迭代，能力已经非常成熟完善，因此我们大胆把 Runtime 跟 Service Mesh 两种思路结合在一起，把 MOSN 本身作为我们实现 RPC 能力的一个 Component，这样 Layotto 在收到 RPC 请求以后交给 MOSN 进行实际数据传输，这种方案可以通过 istio 动态改变路由规则，降级限流等等设置，相当于直接复用了 Service Mesh 的各种能力，这也说明 Runtime 不是要推翻 Service Mesh，而是要在此基础上继续向前迈一步。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;五capa-最佳实践&#34;&gt;五、Capa 最佳实践&lt;/h2&gt;
+&lt;h2 id=&#34;五capa-实践&#34;&gt;五、Capa 实践&lt;/h2&gt;
 &lt;h3 id=&#34;a适配迁移之痛&#34;&gt;A、适配迁移之痛&lt;/h3&gt;
 &lt;p&gt;如果要使用原生的Capa API，您的遗留系统需要面对较大的重构工作量。&lt;/p&gt;
 &lt;p&gt;为了使迁移做到低成本，我们可以复用目前使用到的中间件API。&lt;/p&gt;
@@ -1135,6 +1155,34 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;改动范围&#34;&gt;改动范围&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;替换中间件依赖&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.ctrip.framework.apollo&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;apollo-client&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;to&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;group.rxcloud&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;capa-sdk-configuration&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;替换相关代码（import路径+注解名）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;com.ctrip.framework.apollo.Config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;;&lt;/span&gt;
+
+&lt;span style=&#34;color:#5c35cc;font-weight:bold&#34;&gt;@Config&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;testjson.json&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Person&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;to&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;group.rxcloud.capa.config.CloudConfig&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;;&lt;/span&gt;
+
+&lt;span style=&#34;color:#5c35cc;font-weight:bold&#34;&gt;@CloudConfig&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;testjson.json&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Person&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Q: 为什么不保持import路径和使用方式完全一致？&lt;/p&gt;
+&lt;p&gt;A: 当运行在特定云上时，需要加载对应的sdk进来；这时如果有类路径完全一致的类存在，会导致类加载冲突。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;bapi设计&#34;&gt;B、API设计&lt;/h3&gt;
 &lt;p&gt;Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前支持以下领域的特：&lt;/p&gt;
 &lt;ul&gt;
@@ -1150,18 +1198,101 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 &lt;/ul&gt;
 &lt;h3 id=&#34;完全复用标准api&#34;&gt;完全复用标准API&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;RPC&lt;/li&gt;
-&lt;li&gt;Configuration&lt;/li&gt;
+&lt;li&gt;Service Invocation (RPC服务调用)&lt;/li&gt;
+&lt;li&gt;Configuration Centor (Configuration动态配置)&lt;/li&gt;
+&lt;li&gt;Publish/Subscribe (Pub/Sub发布订阅)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;补充了标准api&#34;&gt;补充了标准API&lt;/h3&gt;
-&lt;h3 id=&#34;未使用的标准api&#34;&gt;未使用的标准API&lt;/h3&gt;
+&lt;h4 id=&#34;rpc&#34;&gt;RPC&lt;/h4&gt;
+&lt;p&gt;标准API中只涵盖了作为Client调用其他服务的API。&lt;/p&gt;
+&lt;p&gt;但不同云上服务注册的框架弈有所不同（例如：dubbo/spring cloud/service mesh)&lt;/p&gt;
+&lt;p&gt;在sidecar模式中，sidecar本身可类似service mesh一样承担服务注册的能力，但SDK模式时却不行。&lt;/p&gt;
+&lt;p&gt;所以添加了作为服务端的API：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// -- Runtime as Server
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/**
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * Register onInvoke method when runtime as server.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     *
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param &amp;lt;T&amp;gt;            The Type of the request type, use byte[] to skip serialization.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param &amp;lt;R&amp;gt;            The Type of the response type, use byte[] to skip serialization.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param methodName     The actual Method to be call in the application.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param httpExtensions Additional fields that are needed if the receiving app is listening on                       HTTP, {@link HttpExtension#NONE} otherwise.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param onInvoke       the on invoke
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param metadata       Metadata (in GRPC) or headers (in HTTP) to be received in request.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @return A Mono Plan of register result.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     */&lt;/span&gt;
+    &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;R&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Mono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Boolean&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;registerMethod&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;methodName&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;HttpExtension&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;httpExtensions&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt;
+                                        &lt;span style=&#34;color:#000&#34;&gt;Function&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;R&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;onInvoke&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt;
+                                        &lt;span style=&#34;color:#000&#34;&gt;Map&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+
+    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/**
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * Register controller class when runtime as server.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     *
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param registerServerRequest the register server request
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @return A Mono Plan of register result.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     */&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;Mono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Boolean&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;registerServer&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;RegisterServerRequest&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;registerServerRequest&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;pubsub&#34;&gt;PubSub&lt;/h4&gt;
+&lt;p&gt;标准API中定义了Pub发布消息的API，而Sub订阅消息则通过callback进行定义。&lt;/p&gt;
+&lt;p&gt;sidecar通过callback回调触发Sub订阅，但对于SDK模式而言，并没有额外的进程可触发callback逻辑。&lt;/p&gt;
+&lt;p&gt;所以添加了消息订阅的API：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// -- Runtime as Subscriber
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/**
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * Subscribe events.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     *
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param pubsubName the pubsub name we will subscribe the event from.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param topicName  the topicName where the event will be subscribed.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param metadata   The metadata for the subscription.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @return a Flux stream of subscription events.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     */&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;Flux&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TopicEventRequest&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;subscribeEvents&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;pubsubName&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;topicName&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Map&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+
+    &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;/**
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * Subscribe events.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     *
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @param topicSubscription the request for topic subscription.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     * @return a Flux stream of subscription events.
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;     */&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;Flux&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TopicEventRequest&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;subscribeEvents&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TopicSubscription&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;topicSubscription&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;未使用的标准api&#34;&gt;未使用的标准API&lt;/h3&gt;
+&lt;h4 id=&#34;state-management-state状态管理&#34;&gt;State Management (State状态管理)&lt;/h4&gt;
+&lt;p&gt;目前KV主要使用的Redis。&lt;/p&gt;
+&lt;p&gt;而标准State API，可表达的语义较弱，无法cover redis场景。&lt;/p&gt;
+&lt;p&gt;所以暂时未使用。&lt;/p&gt;
+&lt;h4 id=&#34;distributed-lock-api-分布式锁&#34;&gt;Distributed Lock API (分布式锁)&lt;/h4&gt;
+&lt;p&gt;规划中。&lt;/p&gt;
+&lt;p&gt;但对于跨云环境而言，很难做到全局锁，只能做到Region/云级别的锁。&lt;/p&gt;
+&lt;h4 id=&#34;sequencer-api-全局uuid&#34;&gt;Sequencer API (全局UUID)&lt;/h4&gt;
+&lt;p&gt;目前在java中，直接使用本地进程内算法实现。&lt;/p&gt;
+&lt;h4 id=&#34;file-api-文件系统&#34;&gt;File API (文件系统)&lt;/h4&gt;
+&lt;p&gt;规划中。&lt;/p&gt;
+&lt;p&gt;后续应该会做，因为不同云上的文件系统使用方式不同。&lt;/p&gt;
+&lt;h4 id=&#34;secret-api-密钥存储&#34;&gt;Secret API (密钥存储)&lt;/h4&gt;
+&lt;p&gt;规划中。&lt;/p&gt;
+&lt;p&gt;后续可能会做，因为不同云上密钥存储使用方式不同。&lt;/p&gt;
+&lt;p&gt;但目前密钥存储还未暴露给用户使用，而只是中间件在使用，所以中间件中直接引用了对应云的SDK来实现。&lt;/p&gt;
 &lt;h3 id=&#34;完全自定义的api&#34;&gt;完全自定义的API&lt;/h3&gt;
-&lt;h4 id=&#34;sql&#34;&gt;SQL&lt;/h4&gt;
-&lt;p&gt;场景&lt;/p&gt;
+&lt;p&gt;目前的 dapr api 并不能在保持可移植性的同时满足现实世界中应用程序的所有需求。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：https://github.com/mosn/layotto/issues/530&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;db-sql&#34;&gt;DB SQL&lt;/h4&gt;
+&lt;p&gt;对于SQL而言：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SQL协议已经十分成熟&lt;/li&gt;
+&lt;li&gt;将SQL抽象为一套API，面临的挑战很多&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;故Capa目前仅提供了一套待讨论的SQL API: &lt;a href=&#34;https://github.com/dapr/dapr/issues/3354&#34;&gt;dapr【提案】数据库API设计 #3354&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;而在落地实践过程中，SQL关系型数据库领域采用的方案是
+&lt;a href=&#34;https://github.com/ctripcorp/dal&#34;&gt;DAL&lt;/a&gt; 数据库连接技术，经二次开发支持混合云SDK模式。&lt;/p&gt;
 &lt;h4 id=&#34;redis&#34;&gt;Redis&lt;/h4&gt;
-&lt;p&gt;场景&lt;/p&gt;
-&lt;h4 id=&#34;telemetry&#34;&gt;Telemetry&lt;/h4&gt;
-&lt;p&gt;场景：&lt;/p&gt;
+&lt;p&gt;目前的State API，无法支持复杂的Redis语义表达。
+故Capa在Redis领域，基于 Jedis 定义了一套 &lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/develop/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/enhanced/RedisRuntimes.java&#34;&gt;Redis API&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;telemetry-logmetrictrace&#34;&gt;Telemetry (Log/Metric/Trace)&lt;/h4&gt;
+&lt;p&gt;场景：中间件SDK/应用程序 需要记录指标埋点。&lt;/p&gt;
+&lt;p&gt;之前，我们可以通过 CAT 这类应用监控告警平台进行实现。&lt;/p&gt;
+&lt;p&gt;Capa采用了和 OpenTelemetry 完全一致的API，来实现监控告警/指标收集的功能。&lt;/p&gt;
 &lt;h3 id=&#34;c云原生技术栈选型&#34;&gt;C、云原生技术栈选型&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1185,7 +1316,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 &lt;tr&gt;
 &lt;td&gt;Configuration&lt;/td&gt;
 &lt;td&gt;Trip&lt;/td&gt;
-&lt;td&gt;QConfig&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/qunarcorp/qconfig&#34;&gt;QConfig&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;/td&gt;
@@ -1222,8 +1353,82 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 &lt;td&gt;AWS&lt;/td&gt;
 &lt;td&gt;AWS CloudWatch&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DB(SQL)&lt;/td&gt;
+&lt;td&gt;Trip&lt;/td&gt;
+&lt;td&gt;DAL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;AWS&lt;/td&gt;
+&lt;td&gt;DAL + AWS RDS&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h3 id=&#34;d个性化的配置和逻辑&#34;&gt;D、个性化的配置和逻辑&lt;/h3&gt;
+&lt;h4 id=&#34;特定云的配置&#34;&gt;特定云的配置&lt;/h4&gt;
+&lt;p&gt;集成在对应云的SDK中。&lt;/p&gt;
+&lt;p&gt;举个例子：&lt;/p&gt;
+&lt;p&gt;如果用户在调用API时明确指定了，使用redis作为存储，那么对于没有部署redis的云平台，则无法运行。&lt;/p&gt;
+&lt;p&gt;所以对于redis这种存储系统的选择，capa并不暴露给用户：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;存储系统的name，存放在特定sdk的配置文件中。&lt;/li&gt;
+&lt;li&gt;用户通过一个接口方法，获取该name，并透传给API调用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;应用个性化的配置和逻辑&#34;&gt;应用个性化的配置和逻辑&lt;/h4&gt;
+&lt;p&gt;SDK中的一些逻辑是可替换的，实现上通过面向Java接口编程，在SDK中提供了接口的默认实现。&lt;/p&gt;
+&lt;p&gt;应用程序可以通过覆盖接口实现，从而实现自定义逻辑。&lt;/p&gt;
+&lt;h3 id=&#34;e跨云交互&#34;&gt;E、跨云交互&lt;/h3&gt;
+&lt;p&gt;一方面在进行混合云改造的过程中，面临过渡期的问题。
+当一部分的服务和数据在原云平台上时，新云平台将面临和原云平台进行交互的问题。&lt;/p&gt;
+&lt;p&gt;另一方面作为混合云架构，若要发挥每个云各自的优势，有可能不同服务会部署在不同的云平台上，这时也会面对跨云交互的问题。&lt;/p&gt;
+&lt;p&gt;而要实现跨云交互，主要由以下两个思路：&lt;/p&gt;
+&lt;h4 id=&#34;1-由mecha-runtime解决跨云交互问题&#34;&gt;1. 由Mecha Runtime解决跨云交互问题&lt;/h4&gt;
+&lt;p&gt;Mecha Runtime感知混合云，并实现跨云交互。&lt;/p&gt;
+&lt;p&gt;但可能实现起来比较复杂，设计到跨云的认证、网络等。&lt;/p&gt;
+&lt;h4 id=&#34;2-由外部插件系统完成该部分的功能&#34;&gt;2. 由外部插件/系统，完成该部分的功能&lt;/h4&gt;
+&lt;p&gt;Mecha Runtime将会比较轻量，不需要感知其他云。
+涉及到某个领域的跨云交互问题，交由该领域的基础设施完成。&lt;/p&gt;
+&lt;p&gt;Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂逻辑，故Capa架构中，所有跨云交互问题。
+都交由具体领域的周边系统完成，Capa只关注于当前云的配置和使用。&lt;/p&gt;
+&lt;h4 id=&#34;rpc服务调用跨云&#34;&gt;RPC服务调用跨云&lt;/h4&gt;
+&lt;p&gt;跨云服务调用的前提是，网络层面流量已经打通。
+例如在AWS上，通过PrivateLink技术进行网络流量打通。&lt;/p&gt;
+&lt;p&gt;之后在服务调用中，依赖网络基础的流量转发实现:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;RPC网络基础设施&lt;/th&gt;
+&lt;th&gt;跨云交互能力&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;K8S&lt;/td&gt;
+&lt;td&gt;ExternalService&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Istio&lt;/td&gt;
+&lt;td&gt;ServiceEntry&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dubbo/SpringCloud&lt;/td&gt;
+&lt;td&gt;MockService&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AWS AppMesh&lt;/td&gt;
+&lt;td&gt;VirtualNode DNS转发&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-crose.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;mq跨云&#34;&gt;MQ跨云&lt;/h4&gt;
+&lt;p&gt;使用周边系统：MQ同步工具，进行跨云消息传输。&lt;/p&gt;
+&lt;p&gt;按需申请，消息格式转换。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-mq-crose.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;数据跨云&#34;&gt;数据跨云&lt;/h4&gt;
+&lt;p&gt;DB数据使用周边系统：&lt;a href=&#34;https://github.com/ctripcorp/drc&#34;&gt;MySQL同步工具&lt;/a&gt; ，进行跨云数据传输。&lt;/p&gt;
+&lt;p&gt;Redis数据目前不做跨云传输。&lt;/p&gt;
 &lt;h2 id=&#34;六高阶拓展&#34;&gt;六、高阶拓展&lt;/h2&gt;
 &lt;h3 id=&#34;awebassembly-的探索&#34;&gt;A、WebAssembly 的探索&lt;/h3&gt;
 &lt;blockquote&gt;

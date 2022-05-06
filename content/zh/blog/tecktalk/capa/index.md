@@ -226,6 +226,12 @@ Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Run
 
 ![img.png](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/feature-support.png)
 
+> SDK模式的缺点
+> + 跨语言开发和维护成本高
+> + SDK升级侵入性强
+> + 依赖冲突
+> + ......
+
 #### Capa SDK设计
 
 > 参考资料：https://github.com/dapr/dapr/issues/3261
@@ -276,9 +282,11 @@ Maven配置伪代码示例：
 </profiles>
 ```
 
-运行时，应用程序直接调用API层的接口。
+开发人员编程时，应用程序直接调用API层的接口进行编程。
 
-然后通过Java SPI机制，动态加载API层接口的实现类。
+在打包成镜像的过程中，通过maven profile加载不同云平台的jar实现。
+
+在运行时，SDK通过Java SPI机制，动态加载API层接口的实现类。
 该实现类，即为各个云平台上不同的SDK实现。
 
 ### D、Femas / OpenSergo / Other / ...
@@ -294,6 +302,8 @@ Maven配置伪代码示例：
 
 #### 未来迁移
 
+SDK模式的优点在于开发和接入的成本较低，可以快速拥有混合云部署开发的能力。但缺点也是无法忽视的，当随着Mecha Runtime的发展，未来SDK模式很可能将会迁移到更有技术优势的Mecha Runtime Sidecar模式中。
+
 推动API的标准化建设：使各大Mecha体系保持API层的统一，保留未来互相迁移的可能。
 
 从未来几年来看：
@@ -301,6 +311,7 @@ Maven配置伪代码示例：
 * 在较大的私有云，框架团队有能力完成大规模sidecar化改造，会从SDK模式迁移到Sidecar模式。
 * 在公有云，目前可以选用SDK模式/Sidecar模式，SDK模式更有利于二次定制；
 * 随着社区在公有云能力的发展，以及云厂商的支持，未来可全部切换到sidecar模式。
+* 对于异构语言架构，可对主要语种采用sdk模式(功能更丰富)，小语种采用sidecar模式。
 
 ## 四、API设计原则
 
@@ -320,10 +331,19 @@ Maven配置伪代码示例：
 
 #### 解决思路二：Component 弥补组件缺失能力
 
-#### Capa示例：
+#### Capa示例：Configuration
 
-通过集成Plugin，弥补AWS公有云SDK组件能力，对齐私有云组件能力。
-通过Plugin自定义加载机制，切换不同的能力实现。
+在私有云的Configuraion-java-sdk(如apollo/qconfig)中，sdk本身支持监听配置变化。
+
+但在AWS AppConfig java sdk中，本身并不支持监听配置变化。
+
+那我们认为对于configuraion中间件领域而言，监听配置变化是level0的功能，是必须具有的功能。
+
+所以需要在component-sdk中对其进行弥补：
+
++ sdk中通过定时线程+轮询接口的方式，获取最新的配置变化。
+
+以此，使用户接入时，认为具有这项能力。
 
 #### 解决思路三：无法弥补，但可以模糊处理
 
@@ -331,7 +351,9 @@ Maven配置伪代码示例：
 
 #### 解决思路四：无法弥补又不能模糊处理
 
-高危，按条件选用
+高危，按条件选用。
+
+明确告知研发，告知其在特定云上才有这项能力。
 
 ### B、分层模型
 
@@ -340,6 +362,8 @@ Maven配置伪代码示例：
 ### C、拓展字段
 
 高度定制化。
+
+不建议使用。
 
 ![](https://static001.geekbang.org/wechat/images/39/391a3a9fa724a81fb53ac409adb4e3f9.jpeg)
 
@@ -391,7 +415,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc.png)
 
-## 五、Capa 最佳实践
+## 五、Capa 实践
 
 ### A、适配迁移之痛
 
@@ -412,7 +436,45 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 
 #### 改动范围
 
+1. 替换中间件依赖
 
+```xml
+<dependency>
+    <groupId>com.ctrip.framework.apollo</groupId>
+    <artifactId>apollo-client</artifactId>
+</dependency>
+```
+
+to
+
+```xml
+<dependency>
+    <groupId>group.rxcloud</groupId>
+    <artifactId>capa-sdk-configuration</artifactId>
+</dependency>
+```
+
+2. 替换相关代码（import路径+注解名）
+
+```java
+import com.ctrip.framework.apollo.Config;
+
+@Config("testjson.json")
+private Person person;
+```
+
+to
+
+```java
+import group.rxcloud.capa.config.CloudConfig;
+
+@CloudConfig("testjson.json")
+private Person person;
+```
+
+> Q: 为什么不保持import路径和使用方式完全一致？
+> 
+> A: 当运行在特定云上时，需要加载对应的sdk进来；这时如果有类路径完全一致的类存在，会导致类加载冲突。
 
 ### B、API设计
 
@@ -428,31 +490,145 @@ Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前
 * Redis (Redis高度定制化存储) -alpha
 * Actuator (组件自身可观测性) -planning
 
-
 ### 完全复用标准API
 
-+ RPC
-+ Configuration
+* Service Invocation (RPC服务调用)
+* Configuration Centor (Configuration动态配置)
+* Publish/Subscribe (Pub/Sub发布订阅)
 
 ### 补充了标准API
 
+#### RPC
+
+标准API中只涵盖了作为Client调用其他服务的API。
+
+但不同云上服务注册的框架弈有所不同（例如：dubbo/spring cloud/service mesh)
+
+在sidecar模式中，sidecar本身可类似service mesh一样承担服务注册的能力，但SDK模式时却不行。
+
+所以添加了作为服务端的API：
+
+```java
+    // -- Runtime as Server
+
+    /**
+     * Register onInvoke method when runtime as server.
+     *
+     * @param <T>            The Type of the request type, use byte[] to skip serialization.
+     * @param <R>            The Type of the response type, use byte[] to skip serialization.
+     * @param methodName     The actual Method to be call in the application.
+     * @param httpExtensions Additional fields that are needed if the receiving app is listening on                       HTTP, {@link HttpExtension#NONE} otherwise.
+     * @param onInvoke       the on invoke
+     * @param metadata       Metadata (in GRPC) or headers (in HTTP) to be received in request.
+     * @return A Mono Plan of register result.
+     */
+    <T, R> Mono<Boolean> registerMethod(String methodName, List<HttpExtension> httpExtensions,
+                                        Function<T, R> onInvoke,
+                                        Map<String, String> metadata);
+
+    /**
+     * Register controller class when runtime as server.
+     *
+     * @param registerServerRequest the register server request
+     * @return A Mono Plan of register result.
+     */
+    Mono<Boolean> registerServer(RegisterServerRequest registerServerRequest);
+```
+
+#### PubSub
+
+标准API中定义了Pub发布消息的API，而Sub订阅消息则通过callback进行定义。
+
+sidecar通过callback回调触发Sub订阅，但对于SDK模式而言，并没有额外的进程可触发callback逻辑。
+
+所以添加了消息订阅的API：
+
+```java
+    // -- Runtime as Subscriber
+
+    /**
+     * Subscribe events.
+     *
+     * @param pubsubName the pubsub name we will subscribe the event from.
+     * @param topicName  the topicName where the event will be subscribed.
+     * @param metadata   The metadata for the subscription.
+     * @return a Flux stream of subscription events.
+     */
+    Flux<TopicEventRequest> subscribeEvents(String pubsubName, String topicName, Map<String, String> metadata);
+
+    /**
+     * Subscribe events.
+     *
+     * @param topicSubscription the request for topic subscription.
+     * @return a Flux stream of subscription events.
+     */
+    Flux<TopicEventRequest> subscribeEvents(TopicSubscription topicSubscription);
+```
+
 ### 未使用的标准API
+
+#### State Management (State状态管理)
+
+目前KV主要使用的Redis。
+
+而标准State API，可表达的语义较弱，无法cover redis场景。
+
+所以暂时未使用。
+
+#### Distributed Lock API (分布式锁)
+
+规划中。
+
+但对于跨云环境而言，很难做到全局锁，只能做到Region/云级别的锁。
+
+#### Sequencer API (全局UUID)
+
+目前在java中，直接使用本地进程内算法实现。
+
+#### File API (文件系统)
+
+规划中。
+
+后续应该会做，因为不同云上的文件系统使用方式不同。
+
+#### Secret API (密钥存储)
+
+规划中。
+
+后续可能会做，因为不同云上密钥存储使用方式不同。
+
+但目前密钥存储还未暴露给用户使用，而只是中间件在使用，所以中间件中直接引用了对应云的SDK来实现。
 
 ### 完全自定义的API
 
-#### SQL
+目前的 dapr api 并不能在保持可移植性的同时满足现实世界中应用程序的所有需求。
 
-场景
+> 参考：https://github.com/mosn/layotto/issues/530
+
+#### DB SQL
+
+对于SQL而言：
+
++ SQL协议已经十分成熟
++ 将SQL抽象为一套API，面临的挑战很多
+
+故Capa目前仅提供了一套待讨论的SQL API: [dapr【提案】数据库API设计 #3354](https://github.com/dapr/dapr/issues/3354)
+
+而在落地实践过程中，SQL关系型数据库领域采用的方案是 
+[DAL](https://github.com/ctripcorp/dal) 数据库连接技术，经二次开发支持混合云SDK模式。
 
 #### Redis
 
-场景
+目前的State API，无法支持复杂的Redis语义表达。
+故Capa在Redis领域，基于 Jedis 定义了一套 [Redis API](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/develop/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/enhanced/RedisRuntimes.java)
 
-#### Telemetry
+#### Telemetry (Log/Metric/Trace)
 
-场景：
+场景：中间件SDK/应用程序 需要记录指标埋点。
 
+之前，我们可以通过 CAT 这类应用监控告警平台进行实现。
 
+Capa采用了和 OpenTelemetry 完全一致的API，来实现监控告警/指标收集的功能。
 
 ### C、云原生技术栈选型
 
@@ -460,7 +636,7 @@ Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前
 |---|---|---|
 |RPC|Trip|ServiceMesh|
 | |AWS|AWS App Mesh|
-|Configuration|Trip|QConfig|
+|Configuration|Trip|[QConfig](https://github.com/qunarcorp/qconfig)|
 | |AWS|AWS AppConfig|
 |MQ|Trip|QMQ|
 | |AWS|AWS MSK Kafka|
@@ -468,8 +644,83 @@ Capa(Java SDK)是面向Java应用实现Mecha架构的SDK解决方案，它目前
 | |AWS|AWS ElasticCache|
 |Metric|Trip|CAT|
 | |AWS|AWS CloudWatch|
+|DB(SQL)|Trip|DAL|
+| |AWS|DAL + AWS RDS|
+
+### D、个性化的配置和逻辑
+
+#### 特定云的配置
+
+集成在对应云的SDK中。
+
+举个例子：
+
+如果用户在调用API时明确指定了，使用redis作为存储，那么对于没有部署redis的云平台，则无法运行。
+
+所以对于redis这种存储系统的选择，capa并不暴露给用户：
+
++ 存储系统的name，存放在特定sdk的配置文件中。
++ 用户通过一个接口方法，获取该name，并透传给API调用。
+
+#### 应用个性化的配置和逻辑
+
+SDK中的一些逻辑是可替换的，实现上通过面向Java接口编程，在SDK中提供了接口的默认实现。
+
+应用程序可以通过覆盖接口实现，从而实现自定义逻辑。
+
+### E、跨云交互
+
+一方面在进行混合云改造的过程中，面临过渡期的问题。
+当一部分的服务和数据在原云平台上时，新云平台将面临和原云平台进行交互的问题。
+
+另一方面作为混合云架构，若要发挥每个云各自的优势，有可能不同服务会部署在不同的云平台上，这时也会面对跨云交互的问题。
+
+而要实现跨云交互，主要由以下两个思路：
+
+#### 1. 由Mecha Runtime解决跨云交互问题
+
+Mecha Runtime感知混合云，并实现跨云交互。
+
+但可能实现起来比较复杂，设计到跨云的认证、网络等。
+
+#### 2. 由外部插件/系统，完成该部分的功能
+
+Mecha Runtime将会比较轻量，不需要感知其他云。
+涉及到某个领域的跨云交互问题，交由该领域的基础设施完成。
+
+Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂逻辑，故Capa架构中，所有跨云交互问题。
+都交由具体领域的周边系统完成，Capa只关注于当前云的配置和使用。
+
+#### RPC服务调用跨云
+
+跨云服务调用的前提是，网络层面流量已经打通。
+例如在AWS上，通过PrivateLink技术进行网络流量打通。
+
+之后在服务调用中，依赖网络基础的流量转发实现:
+
+|RPC网络基础设施|跨云交互能力|
+|---|---|
+|K8S|ExternalService|
+|Istio|ServiceEntry|
+|Dubbo/SpringCloud|MockService|
+|AWS AppMesh|VirtualNode DNS转发|
 
 
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-crose.png)
+
+#### MQ跨云
+
+使用周边系统：MQ同步工具，进行跨云消息传输。
+
+按需申请，消息格式转换。
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-mq-crose.png)
+
+#### 数据跨云
+
+DB数据使用周边系统：[MySQL同步工具](https://github.com/ctripcorp/drc) ，进行跨云数据传输。
+
+Redis数据目前不做跨云传输。
 
 ## 六、高阶拓展
 
