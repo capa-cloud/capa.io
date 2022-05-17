@@ -42,7 +42,7 @@ B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/x
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-01-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-05-06T19:54:32+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2022-05-17T22:58:21+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Capa: Mecha SDK of Cloud Application Api">
 <meta itemprop="description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
@@ -57,8 +57,8 @@ ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始�
 18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
 B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
   探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。"><meta itemprop="datePublished" content="2022-01-18T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-05-06T19:54:32+08:00" />
-<meta itemprop="wordCount" content="1495">
+<meta itemprop="dateModified" content="2022-05-17T22:58:21+08:00" />
+<meta itemprop="wordCount" content="1508">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Capa: Mecha SDK of Cloud Application Api"/>
 <meta name="twitter:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
@@ -573,7 +573,7 @@ Multi-Runtime Microservices Architecture
 <p><img src="https://static001.geekbang.org/wechat/images/93/93ccecd9a241b5c6921b988b18f0362e.png" alt="">
 dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/dapr-archi.png" alt=""></p>
+<p><img src="https://docs.dapr.io/images/overview-sidecar-model.png" alt=""></p>
 <ol>
 <li>提供了多种分布式能力，API 定义清晰，基本能满足一般的使用场景。</li>
 <li>针对各种能力都提供了不同的实现组件，基本涵盖了常用的中间件产品，用户可以根据需要自由选择。</li>
@@ -649,7 +649,9 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 </blockquote>
 <p>设计思路：标准API + 可拔插可替换的SDK组件 模式</p>
 <p>在不同的分布式中间件领域，Capa提供与具体中间件API无关的统一的标准编程API。 所以应用程序在使用Capa编程时不需要依赖任何具体的中间件API，只需要依赖Capa的标准编程API即可。</p>
-<p>在部署到不同的目标环境时，Capa将会装载标准API的不同实现类到应用程序中。当调用统一的编程API时，底层运行时会适配到不同的具体中间件SDK实现。</p>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">result</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">publishEvent</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mytopic&#34;</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;my message&#34;</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</code></pre></div><p>在部署到不同的目标环境时，Capa将会装载标准API的不同实现类到应用程序中。当调用统一的编程API时，底层运行时会适配到不同的具体中间件SDK实现。</p>
 <p>中间件团队需要针对不同目标环境，开发标准API在目标环境下的实现类即可；而应用代码可以拥有&quot;一次编写，随处运行&quot;的开发体验。</p>
 <p><img src="https://user-images.githubusercontent.com/22876610/120766251-9ef56200-c54c-11eb-9fc2-15b17937b4bb.PNG" alt=""></p>
 <h4 id="示例capa-java--maven">示例：Capa-java + Maven</h4>
@@ -735,7 +737,7 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 <p>能力分层模型。</p>
 <h4 id="解决思路四无法弥补又不能模糊处理">解决思路四：无法弥补又不能模糊处理</h4>
 <p>高危，按条件选用。</p>
-<p>明确告知研发，告知其在特定云上才有这项能力。</p>
+<p>明确告知在特定云上才有这项能力。</p>
 <h3 id="b分层模型">B、分层模型</h3>
 <p><img src="https://static001.geekbang.org/wechat/images/2a/2a92f5f1dd7d8dae44df981e3afa5368.png" alt=""></p>
 <h3 id="c拓展字段">C、拓展字段</h3>
@@ -798,8 +800,8 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 <p>如此一来，应用程序只需要更改很少的代码(例如更换注解/接口的路径名)即可迁移到Capa架构。</p>
 <p>目前在Java语言上，Capa可以支持：</p>
 <ul>
-<li>接入(携程)私有云SDK的适配层(较成熟)</li>
-<li>接入spring boot体系的适配层(开发中)</li>
+<li>接入(携程)私有云SDK的适配层</li>
+<li>接入spring boot体系的适配层</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png" alt=""></p>
 <h4 id="接入适配模式的改动范围">接入适配模式的改动范围</h4>
@@ -1193,10 +1195,8 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA</p>
 </blockquote>
-<h4 id="应用场景">应用场景</h4>
-<ul>
-<li>sidecar加速</li>
-</ul>
+<h4 id="应用场景-sidecar加速">应用场景: sidecar加速</h4>
+<p>socket重定向，绕过TCP/IP协议栈，</p>
 <h2 id="七社区规划">七、社区规划</h2>
 <p>最后来看下社区的做的一些事情。</p>
 <blockquote>
@@ -1268,6 +1268,9 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <p>FaaS 对多语言支持的需求强烈，并不局限于 Java。但实际上，由于成本和时间限制，用所有语言重新开发客户是不切实际的。</p>
 <p>借助 Dapr，阿里巴巴解决了 FaaS 的多语言问题，帮助客户通过 FaaS 提高开发效率。</p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ali-dapr.png" alt=""></p>
+<blockquote>
+<p><a href="https://github.com/dapr/dapr/issues/3169">Are you using Dapr? #3169</a></p>
+</blockquote>
 <h4 id="适配基于java的遗留系统">适配基于Java的遗留系统</h4>
 <p>我们旨在消除业务开发团队进行代码更改以减少迁移期间对业务应用程序的影响的需要。在将这些遗留系统迁移到 Dapr 时，我们设计了一个 Java 适配层，它将原始 Java 调用适配到 Dapr 客户端 API。</p>
 <p><img src="https://blog.dapr.io/posts/2021/03/19/how-alibaba-is-using-dapr/multiple-langurage_hu5d98ca782c8bcb789c89210a0f8e3e46_207793_1500x0_resize_q75_box.jpg" alt=""></p>

@@ -937,7 +937,7 @@ Multi-Runtime Microservices Architecture
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/93/93ccecd9a241b5c6921b988b18f0362e.png&#34; alt=&#34;&#34;&gt;
 dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/dapr-archi.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://docs.dapr.io/images/overview-sidecar-model.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;提供了多种分布式能力，API 定义清晰，基本能满足一般的使用场景。&lt;/li&gt;
 &lt;li&gt;针对各种能力都提供了不同的实现组件，基本涵盖了常用的中间件产品，用户可以根据需要自由选择。&lt;/li&gt;
@@ -1013,7 +1013,9 @@ github: &lt;a href=&#34;https://github.com/capa-cloud/capa-java&#34;&gt;https://
 &lt;/blockquote&gt;
 &lt;p&gt;设计思路：标准API + 可拔插可替换的SDK组件 模式&lt;/p&gt;
 &lt;p&gt;在不同的分布式中间件领域，Capa提供与具体中间件API无关的统一的标准编程API。 所以应用程序在使用Capa编程时不需要依赖任何具体的中间件API，只需要依赖Capa的标准编程API即可。&lt;/p&gt;
-&lt;p&gt;在部署到不同的目标环境时，Capa将会装载标准API的不同实现类到应用程序中。当调用统一的编程API时，底层运行时会适配到不同的具体中间件SDK实现。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;Mono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Void&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;result&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;publishEvent&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;mytopic&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;my message&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在部署到不同的目标环境时，Capa将会装载标准API的不同实现类到应用程序中。当调用统一的编程API时，底层运行时会适配到不同的具体中间件SDK实现。&lt;/p&gt;
 &lt;p&gt;中间件团队需要针对不同目标环境，开发标准API在目标环境下的实现类即可；而应用代码可以拥有&amp;quot;一次编写，随处运行&amp;quot;的开发体验。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/22876610/120766251-9ef56200-c54c-11eb-9fc2-15b17937b4bb.PNG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;示例capa-java--maven&#34;&gt;示例：Capa-java + Maven&lt;/h4&gt;
@@ -1099,7 +1101,7 @@ github: &lt;a href=&#34;https://github.com/capa-cloud/capa-java&#34;&gt;https://
 &lt;p&gt;能力分层模型。&lt;/p&gt;
 &lt;h4 id=&#34;解决思路四无法弥补又不能模糊处理&#34;&gt;解决思路四：无法弥补又不能模糊处理&lt;/h4&gt;
 &lt;p&gt;高危，按条件选用。&lt;/p&gt;
-&lt;p&gt;明确告知研发，告知其在特定云上才有这项能力。&lt;/p&gt;
+&lt;p&gt;明确告知在特定云上才有这项能力。&lt;/p&gt;
 &lt;h3 id=&#34;b分层模型&#34;&gt;B、分层模型&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/2a/2a92f5f1dd7d8dae44df981e3afa5368.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;c拓展字段&#34;&gt;C、拓展字段&lt;/h3&gt;
@@ -1162,8 +1164,8 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 &lt;p&gt;如此一来，应用程序只需要更改很少的代码(例如更换注解/接口的路径名)即可迁移到Capa架构。&lt;/p&gt;
 &lt;p&gt;目前在Java语言上，Capa可以支持：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;接入(携程)私有云SDK的适配层(较成熟)&lt;/li&gt;
-&lt;li&gt;接入spring boot体系的适配层(开发中)&lt;/li&gt;
+&lt;li&gt;接入(携程)私有云SDK的适配层&lt;/li&gt;
+&lt;li&gt;接入spring boot体系的适配层&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-use.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;接入适配模式的改动范围&#34;&gt;接入适配模式的改动范围&lt;/h4&gt;
@@ -1557,10 +1559,8 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 &lt;blockquote&gt;
 &lt;p&gt;参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&#34;应用场景&#34;&gt;应用场景&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;sidecar加速&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h4 id=&#34;应用场景-sidecar加速&#34;&gt;应用场景: sidecar加速&lt;/h4&gt;
+&lt;p&gt;socket重定向，绕过TCP/IP协议栈，&lt;/p&gt;
 &lt;h2 id=&#34;七社区规划&#34;&gt;七、社区规划&lt;/h2&gt;
 &lt;p&gt;最后来看下社区的做的一些事情。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1632,6 +1632,9 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 &lt;p&gt;FaaS 对多语言支持的需求强烈，并不局限于 Java。但实际上，由于成本和时间限制，用所有语言重新开发客户是不切实际的。&lt;/p&gt;
 &lt;p&gt;借助 Dapr，阿里巴巴解决了 FaaS 的多语言问题，帮助客户通过 FaaS 提高开发效率。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ali-dapr.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/dapr/dapr/issues/3169&#34;&gt;Are you using Dapr? #3169&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;适配基于java的遗留系统&#34;&gt;适配基于Java的遗留系统&lt;/h4&gt;
 &lt;p&gt;我们旨在消除业务开发团队进行代码更改以减少迁移期间对业务应用程序的影响的需要。在将这些遗留系统迁移到 Dapr 时，我们设计了一个 Java 适配层，它将原始 Java 调用适配到 Dapr 客户端 API。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://blog.dapr.io/posts/2021/03/19/how-alibaba-is-using-dapr/multiple-langurage_hu5d98ca782c8bcb789c89210a0f8e3e46_207793_1500x0_resize_q75_box.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
