@@ -954,6 +954,26 @@ bar := &amp;quot;foo&amp;quot;;
     </item>
     
     <item>
+      <title>Docs: SDK管理实践</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/</link>
+      <pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Capa采用SDK模型，相比于Sidecar模型将带来很多问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;依赖版本冲突管理&lt;/li&gt;
+&lt;li&gt;SDK升级推动&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本章主要介绍Capa在SDK实践中，遇到的一些问题以及相关的解决思路。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Working with Ponycopters</title>
       <link>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>

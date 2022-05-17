@@ -28,7 +28,7 @@
 KevinTen，携程后端开发工 …">
 <meta property="og:title" content="Capa: Mecha SDK of Cloud Application Api" />
 <meta property="og:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
- 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
+ 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
  在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
 ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
 不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
@@ -42,11 +42,11 @@ B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/x
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-01-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-05-06T19:11:45+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2022-05-06T19:54:32+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Capa: Mecha SDK of Cloud Application Api">
 <meta itemprop="description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
- 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
+ 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
  在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
 ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
 不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
@@ -57,12 +57,12 @@ ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始�
 18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
 B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
   探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。"><meta itemprop="datePublished" content="2022-01-18T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-05-06T19:11:45+08:00" />
-<meta itemprop="wordCount" content="1473">
+<meta itemprop="dateModified" content="2022-05-06T19:54:32+08:00" />
+<meta itemprop="wordCount" content="1495">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Capa: Mecha SDK of Cloud Application Api"/>
 <meta name="twitter:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
- 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
+ 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
  在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
 ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
 不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
@@ -328,7 +328,7 @@ if (!doNotTrack) {
         <li><a href="#adapr">A、dapr</a></li>
         <li><a href="#blayotto">B、Layotto</a></li>
         <li><a href="#ccapa">C、Capa</a></li>
-        <li><a href="#dfemas--opensergo--other--">D、Femas / OpenSergo / Other / &hellip;</a></li>
+        <li><a href="#dfemas--opensergo--micro--other--">D、Femas / OpenSergo / Micro / Other / &hellip;</a></li>
         <li><a href="#e移植性">E、移植性</a></li>
       </ul>
     </li>
@@ -363,7 +363,7 @@ if (!doNotTrack) {
     <li><a href="#七社区规划">七、社区规划</a>
       <ul>
         <li><a href="#a建设更多的api标准">A、建设更多的API标准</a></li>
-        <li><a href="#bapi-共建计划">B、API 共建计划</a></li>
+        <li><a href="#bapi-标准化建设">B、API 标准化建设</a></li>
         <li><a href="#c可扩展api架构">C、可扩展API架构</a></li>
         <li><a href="#d直接支持行业标准协议">D、直接支持行业标准协议</a></li>
         <li><a href="#e开源协同">E、开源协同</a></li>
@@ -373,13 +373,7 @@ if (!doNotTrack) {
       <ul>
         <li><a href="#a阿里云在内部的落地">A、阿里云在内部的落地</a></li>
         <li><a href="#b微软azure的托管支持">B、微软Azure的托管支持</a></li>
-        <li><a href="#cdapr-加入-cncf-孵化器">C、Dapr 加入 CNCF 孵化器</a></li>
-      </ul>
-    </li>
-    <li><a href="#九capa-落地情况">九、Capa 落地情况</a>
-      <ul>
-        <li><a href="#a混合云支持">A、混合云支持</a></li>
-        <li><a href="#b应用接入情况">B、应用接入情况</a></li>
+        <li><a href="#cdaprlayotto-加入-cncf-孵化器">C、Dapr/Layotto 加入 CNCF 孵化器</a></li>
         <li><a href="#主要参考文献">主要参考文献</a></li>
       </ul>
     </li>
@@ -446,7 +440,7 @@ if (!doNotTrack) {
 <p>&ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;</p>
 <blockquote>
 <p>作者简介：
-KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有实践经验。
+KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。
 Capa官方GitHub地址:<a href="https://github.com/capa-cloud/capa-java">https://github.com/capa-cloud/capa-java</a></p>
 </blockquote>
 <p>在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。
@@ -497,7 +491,7 @@ Capa官方GitHub地址:<a href="https://github.com/capa-cloud/capa-java">https:/
 <h3 id="c新的挑战">C、新的挑战</h3>
 <p><strong>Mesh化是云原生落地的关键步骤。</strong></p>
 <ul>
-<li>最下方是云，以kubernetes为核心，关于这一点社区基本已经达成共识：kubernetes 就是云原生下的操作系统</li>
+<li>最下方是云，以kubernetes为核心，关于这一点社区基本已经达成共识：kubernetes 就是云原生下的操作系统，屏蔽了不同云的软硬件差异。</li>
 <li>在kubernetes之上，是Mesh层。不仅仅有我们熟悉的 ServiceMesh，还有诸如Database Mesh和Message Mesh等类似的其他 Mesh 产品形态，这些Mesh组成了一个标准化的通信层。</li>
 <li>运行在各种 Mesh 的应用，不管是微服务形态，还是传统非微服务形态，都可以借助Mesh的帮助实现应用轻量化。非业务逻辑的各种功能被剥离到Mesh中后，应用得以“瘦身减负”。</li>
 <li>瘦身之后的应用，其内容主要是业务逻辑实现。这样的工作负载形式，更适合 serverless 的要求，为接下来转型 serverless 做好准备。</li>
@@ -627,9 +621,9 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 <p>那为什么不直接使用Dapr/Layotto等项目，而是选择开发 富SDK模式 的Capa项目呢。</p>
 <p>概括：以Dapr为代表的Sidecar架构是未来，但现有的很多企业和系统很难一步到位的升级到Sidecar架构，富SDK架构将会长期的存在下去。</p>
 <ul>
-<li>sidecar的开发和运维成本高</li>
-<li>sidecar中实现自定义逻辑的复杂度高</li>
-<li>当前sidecar模式还不足够成熟，无法短时间内完成开发和部署</li>
+<li>sidecar的开发和运维成本高。</li>
+<li>sidecar中实现自定义逻辑的复杂度高。</li>
+<li>当前sidecar模式还不足够成熟，无法短时间内完成开发和部署。</li>
 </ul>
 <p>引申：面对庞大的Java系统体系，Capa项目将使用富SDK模型支持Java系统向Mecha架构过渡。在Dapr等项目成熟后，也可以无缝衔接到Sidecar架构。</p>
 <h4 id="能力水平模型">能力水平模型</h4>
@@ -643,8 +637,8 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 <blockquote>
 <p>SDK模式的缺点</p>
 <ul>
-<li>跨语言开发和维护成本高</li>
-<li>SDK升级侵入性强</li>
+<li>跨语言开发和维护成本高。无法支撑多语言战略，团队没有精力维护除了 Java 以外其他语言的 SDK；</li>
+<li>SDK升级侵入性强。客户端 SDK 版本升级推进困难，特别是遇到 Bug 的时候，彻底下线一个版本可能会花上几个月的时间，给业务带来了隐患；</li>
 <li>依赖冲突</li>
 <li>&hellip;&hellip;</li>
 </ul>
@@ -691,11 +685,12 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 <p>在打包成镜像的过程中，通过maven profile加载不同云平台的jar实现。</p>
 <p>在运行时，SDK通过Java SPI机制，动态加载API层接口的实现类。
 该实现类，即为各个云平台上不同的SDK实现。</p>
-<h3 id="dfemas--opensergo--other--">D、Femas / OpenSergo / Other / &hellip;</h3>
+<h3 id="dfemas--opensergo--micro--other--">D、Femas / OpenSergo / Micro / Other / &hellip;</h3>
 <blockquote>
 <p>参考资料：https://www.yuque.com/docs/share/5221c27a-9d0c-44c7-8ef2-0956d3b09a32?#</p>
 </blockquote>
 <p><img src="https://cdn.nlark.com/yuque/0/2021/png/12961124/1632385886671-69b482d2-eef9-498d-a036-021e3810e6ee.png?x-oss-process=image%2Fresize%2Cw_750%2Climit_0" alt=""></p>
+<p><img src="https://camo.githubusercontent.com/69c8695b4a1c5440d798343bb4b86128b7b733d60b67605f7476c099616f9dd8/68747470733a2f2f6d6963726f2e6d752f696d616765732f6d6963726f2d332e302e706e67" alt=""></p>
 <h3 id="e移植性">E、移植性</h3>
 <blockquote>
 <p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*2DrSQJ6GL8cAAAAAAAAAAAAAARQnAQ" alt="">
@@ -703,6 +698,10 @@ github: <a href="https://github.com/capa-cloud/capa-java">https://github.com/cap
 </blockquote>
 <h4 id="未来迁移">未来迁移</h4>
 <p>SDK模式的优点在于开发和接入的成本较低，可以快速拥有混合云部署开发的能力。但缺点也是无法忽视的，当随着Mecha Runtime的发展，未来SDK模式很可能将会迁移到更有技术优势的Mecha Runtime Sidecar模式中。</p>
+<blockquote>
+<p>但也要考虑到性能敏感领域，例如分布式缓存领域。相关模块能接受额外 1ms 的响应延迟吗？Sidecar 带来的优势能否弥补这个问题？
+所以in-process(SDK)模型在这些领域仍具备不可替代的优势。</p>
+</blockquote>
 <p>推动API的标准化建设：使各大Mecha体系保持API层的统一，保留未来互相迁移的可能。</p>
 <p>从未来几年来看：</p>
 <ul>
@@ -1163,6 +1162,14 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*NzwKRY2GZPcAAAAAAAAAAAAAARQnAQ" alt="">
 虽然现在 Layotto 中对 WASM 的使用还处于试验阶段，但我们希望它最终可以成为 Serverless 的一种实现形态，如上图所示，应用通过各种编程语言开发，然后统一编译成 WASM 文件，最后跑在 Layotto+MOSN 上面，而对于应用的运维管理统一由 k8s、docker、prometheus 等产品负责。</p>
 </blockquote>
+<ol>
+<li>用户实现自定义的逻辑</li>
+</ol>
+<p>对于中间件领域，可以由社区定义一套执行模板，而用户可以灵活的插入自定义的回调逻辑，更具有动态扩展性。</p>
+<ol start="2">
+<li>隔离中间件运行时</li>
+</ol>
+<p>Runtime启动多个相互隔离的 WASM Runtime ，从而隔离每个中间件组件的运行时（CPU/内存/&hellip;)，避免异常的扩散和传播，互不影响。</p>
 <h4 id="istio-wasm">Istio Wasm</h4>
 <p>Istio 的扩展机制使用 Proxy-Wasm 应用二进制接口（ABI）规范，提供了一套代理无关的流媒体 API 和实用功能，可以用任何有合适 SDK 的语言来实现。</p>
 <p>扩展 Istio 的功能，满足你的特定需求，需要三个步骤：</p>
@@ -1174,12 +1181,22 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/VAwTCIP6RhqDNoBbmE8zVA</p>
 </blockquote>
+<h4 id="wasm-展望">Wasm 展望</h4>
+<ol>
+<li>支持网络接口</li>
+<li>对go-sdk有更好的支持，现在以c/rust为主。</li>
+</ol>
 <h3 id="bebpf-的探索">B、eBPF 的探索</h3>
-<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-1.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/iptables.png" alt=""></p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png" alt=""></p>
+<p><img src="https://filescdn.proginn.com/1866796ec3e1c77ec5298ec566828e81/3ccd47377c8f1b9be2056c8e246be264.webp" alt=""></p>
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA</p>
 </blockquote>
+<h4 id="应用场景">应用场景</h4>
+<ul>
+<li>sidecar加速</li>
+</ul>
 <h2 id="七社区规划">七、社区规划</h2>
 <p>最后来看下社区的做的一些事情。</p>
 <blockquote>
@@ -1197,7 +1214,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <li>密钥管理API</li>
 <li>&hellip;</li>
 </ul>
-<h3 id="bapi-共建计划">B、API 共建计划</h3>
+<h3 id="bapi-标准化建设">B、API 标准化建设</h3>
 <blockquote>
 <p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*GAe8QqZ03eoAAAAAAAAAAAAAARQnAQ" alt="">
 关于如何定义一套标准的 API 以及如何让 Layotto 可以跑在 envoy 上等等事项，我们已经在各个社区进行了深入讨论，并且以后也还会继续推进。</p>
@@ -1246,9 +1263,11 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <blockquote>
 <p>参考资料：https://blog.dapr.io/posts/2021/03/19/how-alibaba-is-using-dapr/</p>
 </blockquote>
-<h4 id="faas与多语言应用">Faas与多语言应用</h4>
+<h4 id="微服务架构faas-与-多语言应用">微服务架构、Faas 与 多语言应用</h4>
+<p>微服务架构分层逐渐形成，后端 BaaS 化，客户端轻量化，业务侧 Serverless 化，让业务更加聚焦业务开发，进一步提升研发效率。</p>
 <p>FaaS 对多语言支持的需求强烈，并不局限于 Java。但实际上，由于成本和时间限制，用所有语言重新开发客户是不切实际的。</p>
 <p>借助 Dapr，阿里巴巴解决了 FaaS 的多语言问题，帮助客户通过 FaaS 提高开发效率。</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ali-dapr.png" alt=""></p>
 <h4 id="适配基于java的遗留系统">适配基于Java的遗留系统</h4>
 <p>我们旨在消除业务开发团队进行代码更改以减少迁移期间对业务应用程序的影响的需要。在将这些遗留系统迁移到 Dapr 时，我们设计了一个 Java 适配层，它将原始 Java 调用适配到 Dapr 客户端 API。</p>
 <p><img src="https://blog.dapr.io/posts/2021/03/19/how-alibaba-is-using-dapr/multiple-langurage_hu5d98ca782c8bcb789c89210a0f8e3e46_207793_1500x0_resize_q75_box.jpg" alt=""></p>
@@ -1263,32 +1282,17 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <blockquote>
 <p>参考资料：https://www.cnblogs.com/shanyou/p/15509042.html</p>
 </blockquote>
-<h3 id="cdapr-加入-cncf-孵化器">C、Dapr 加入 CNCF 孵化器</h3>
+<h3 id="cdaprlayotto-加入-cncf-孵化器">C、Dapr/Layotto 加入 CNCF 孵化器</h3>
 <p>CNCF 托管了许多与 Dapr 紧密结合的项目。例如，Dapr 使用 gRPC 作为它的主要 RPC 堆栈。OpenTelemetry 用作 Dapr 的遥测协议，CloudEvents 用于标准化 Dapr 的 Pub/Sub API 中的消息格式，SPIFFE 用作 Dapr 的访问列表特性的身份格式，Prometheus 用作 Dapr 端点的指标格式，Dapr 支持 NATS 的 Pub/Sub 实现以及 Open Policy Agent。此外，Dapr 使用 Operator 在 Kubernetes 上原生运行，并使用 Helm 作为主要部署机制。</p>
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/8qnmL12JrESwJg3RsSelJQ</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/slog.png" alt=""></p>
-<h2 id="九capa-落地情况">九、Capa 落地情况</h2>
-<h3 id="a混合云支持">A、混合云支持</h3>
-<p>目前支持：</p>
-<ul>
-<li>携程私有云</li>
-<li>AWS公有云</li>
-</ul>
-<p>调研开发中:</p>
-<ul>
-<li>阿里云</li>
-</ul>
-<h3 id="b应用接入情况">B、应用接入情况</h3>
-<h4 id="携程私有云">携程私有云</h4>
-<p>生产xx+应用，不断接入中</p>
-<h4 id="aws公有云">AWS公有云</h4>
-<p>生产xx+应用，不断接入中</p>
 <hr>
 <h3 id="主要参考文献">主要参考文献</h3>
 <ul>
 <li><a href="https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index">https://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index</a></li>
+<li><a href="https://mp.weixin.qq.com/s/N3dzDc4QvtvCZytBh46PLw">https://mp.weixin.qq.com/s/N3dzDc4QvtvCZytBh46PLw</a></li>
 </ul>
 
 	

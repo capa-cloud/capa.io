@@ -471,7 +471,7 @@ if (!doNotTrack) {
     
     
 	
-<li>5.4: <a href="#pg-013e157738e63d8c3f90b39d559e8c8d">Working with Ponycopters</a></li>
+<li>5.4: <a href="#pg-7f7083bba7e7496cb4e7dea79eaf1cc0">SDK管理实践</a></li>
 
 
     
@@ -486,7 +486,34 @@ if (!doNotTrack) {
     
     
 	
-<li>5.4.1: <a href="#pg-ab480eb0e8e417eb7cd925a592e0cbcc">Configuring Ponycopters</a></li>
+<li>5.4.1: <a href="#pg-55ebf85b006294351bc0d045e2a7088c">SDK-Java管理实践</a></li>
+
+
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+<li>5.5: <a href="#pg-013e157738e63d8c3f90b39d559e8c8d">Working with Ponycopters</a></li>
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+<li>5.5.1: <a href="#pg-ab480eb0e8e417eb7cd925a592e0cbcc">Configuring Ponycopters</a></li>
 
 
     
@@ -494,7 +521,7 @@ if (!doNotTrack) {
     
     
 	
-<li>5.4.2: <a href="#pg-3662f29ce4d0c9029454f98cd85d98ca">Launching Ponycopters</a></li>
+<li>5.5.2: <a href="#pg-3662f29ce4d0c9029454f98cd85d98ca">Launching Ponycopters</a></li>
 
 
     
@@ -3256,7 +3283,142 @@ bar := &quot;foo&quot;;
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-013e157738e63d8c3f90b39d559e8c8d">5.4 - Working with Ponycopters</h1>
+	<h1 id="pg-7f7083bba7e7496cb4e7dea79eaf1cc0">5.4 - SDK管理实践</h1>
+    <div class="lead">SDK管理与实践经验.</div>
+	<p>Capa采用SDK模型，相比于Sidecar模型将带来很多问题：</p>
+<ul>
+<li>依赖版本冲突管理</li>
+<li>SDK升级推动</li>
+<li>&hellip;&hellip;&hellip;&hellip;&hellip;.</li>
+</ul>
+<p>本章主要介绍Capa在SDK实践中，遇到的一些问题以及相关的解决思路。</p>
+
+</div>
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-55ebf85b006294351bc0d045e2a7088c">5.4.1 - SDK-Java管理实践</h1>
+    <div class="lead">SDK Java管理与实践经验.</div>
+	<p>Java SDK主要使用Maven进行管理，故以下内容主要基于Maven进行实践。</p>
+<h1 id="动态加载不同的sdk实现包">动态加载不同的SDK实现包</h1>
+<p>根据Capa设计，接入层面向API层的SDK进行编程，然后在运行时动态调用不同的实现层SDK。</p>
+<h2 id="实现包如何加载到运行时空间">实现包如何加载到运行时空间？</h2>
+<h3 id="思路一打包时包含了所有实现层sdk运行时仅加载对应的实现包">思路一：打包时包含了所有实现层SDK，运行时仅加载对应的实现包。</h3>
+<p>问题：</p>
+<p>若包含所有的实现层SDK，则面对依赖冲突的可能性大增。</p>
+<p>有的实现层SDK在初始化时执行了操作，若将A云的实现层jar打包到B云的包中，可能有未知的问题出现。</p>
+<p>综上，不使用该方案。</p>
+<h3 id="思路二将不同云的实现打包成不同的包镜像">思路二：将不同云的实现，打包成不同的包/镜像。</h3>
+<p>基于Maven提供的profile机制，可以将不同云的实现打包到不同的包中，最终生成不同的镜像。</p>
+<p>可以避免不同云SDK之间的冲突，以及可以针对性的添加个性化的配置。</p>
+<p>具体实现主要有以下思路：</p>
+<h4 id="1-使用maven插件自动化该步骤">1. 使用maven插件自动化该步骤</h4>
+<p>但动态修改 pom 文件本身并不推荐。</p>
+<p>maven 官方建议直接指定需要的依赖：</p>
+<ul>
+<li>可以更方便的解决依赖冲突的问题</li>
+<li>为项目提供了更容易阅读的文档，只需要阅读项目中的 pom 文件或者执行 mvn dependency: tree 即可了解更多信息</li>
+</ul>
+<p>综上，不使用该方案。</p>
+<h4 id="2-手动指定profile">2. 手动指定profile</h4>
+<p>面对的问题：</p>
+<ul>
+<li>接入方需要编写额外的pom内容。</li>
+<li>需要生成不同的包/镜像，需要改动原有的CI流程。</li>
+<li>profile在查看依赖冲突等问题时，IDE支持的不如直接引用的方式。</li>
+</ul>
+<p>但以上问题，提高了复杂度，但减少了面对未知问题的可能性，更有利于生产的稳定性。</p>
+<p><strong>所以使用该种方式。</strong></p>
+<hr>
+<h2 id="实现包加载到运行时空间实践">实现包加载到运行时空间实践</h2>
+<h3 id="heading"></h3>
+<hr>
+<h1 id="依赖冲突管理">依赖冲突管理</h1>
+<p>本文介绍在SDK-Java中的依赖管理实践经验。</p>
+<h2 id="maven依赖管理">Maven依赖管理</h2>
+<h3 id="依赖版本传递">依赖版本传递</h3>
+<p>因为有了依赖传递，我们就不需要考虑依赖的依赖如何管理了，maven都会把他们加载进来，但是这么多依赖都进来到底用哪个，会不会冲突呢？</p>
+<p>maven在解析pom时，会使用依赖调解，具体原则有：</p>
+<ol>
+<li>
+<p>第一原则 路径最近者优先</p>
+<p>A -&gt; B -&gt; X(1.0)
+A -&gt; C -&gt; D -&gt; X(2.0)</p>
+</li>
+</ol>
+<p>X（1.0） 路径长度为2，X（2.0）路径长度3，所以 X（1.0） 会被真正的使用</p>
+<ol start="2">
+<li>
+<p>第二原则 第一声明者优先</p>
+<p>A -&gt; B -&gt; X(1.0)
+A -&gt; C -&gt; X(2.0)</p>
+</li>
+</ol>
+<p>这次X（1.0） X（2.0）路径长度相同了，因为B比C声明的早，所以取B依赖的X（1.0）版本</p>
+<h3 id="scope的分类">scope的分类</h3>
+<h4 id="compile">compile</h4>
+<p><strong>默认就是compile</strong>，什么都不配置也就是意味着compile。compile表示被依赖项目需要参与当前项目的编译，当然后续的测试，运行周期也参与其中，是一个比较强的依赖。打包的时候通常需要包含进去。</p>
+<h4 id="test">test</h4>
+<p>scope为test表示依赖项目仅仅参与测试相关的工作，包括测试代码的编译，执行。比较典型的如junit。</p>
+<h4 id="runtime">runtime</h4>
+<p>runntime表示被依赖项目无需参与项目的编译，不过后期的测试和运行周期需要其参与。与compile相比，跳过编译而已，说实话在终端的项目（非开源，企业内部系统）中，和compile区别不是很大。比较常见的如JSR×××的实现，对应的API jar是compile的，具体实现是runtime的，compile只需要知道接口就足够了。oracle jdbc驱动架包就是一个很好的例子，一般scope为runntime。<strong>另外runntime的依赖通常和optional搭配使用，optional为true。我可以用A实现，也可以用B实现。</strong></p>
+<h4 id="provided">provided</h4>
+<p>provided意味着打包的时候可以不用包进去，别的设施(Web Container)会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。<strong>相当于compile，但是在打包阶段做了exclude的动作。</strong></p>
+<p>scope使用provided，表示用于当前项目编译使用，不向下传递。</p>
+<h4 id="system">system</h4>
+<p>从参与度来说，也provided相同，不过被依赖项不会从maven仓库抓，而是从本地文件系统拿，一定需要配合systemPath属性使用。</p>
+<h4 id="总结">总结</h4>
+<ul>
+<li>compile： 默认配置适用于所有阶段，会随着项目一起发布。</li>
+<li>runtime： 只在运行时使用，如JDBC驱动</li>
+<li>provided： 期望JDK、容器或使用者会提供这个依赖。如 servlet.jar需要tomcat来提供</li>
+<li>test：只在测试时使用，用于编译和运行测试代码。不会随 项目发布, 比如junit</li>
+<li>import: 用来导入依赖, 比如tcdev</li>
+</ul>
+<h3 id="scope的依赖传递">scope的依赖传递</h3>
+<p>A–&gt;B–&gt;C。当前项目为A，A依赖于B，B依赖于C。知道B在A项目中的scope，那么怎么知道C在A中的scope呢？答案是：</p>
+<ul>
+<li>当C是test或者provided时，C直接被丢弃，A不依赖C；</li>
+<li>否则A依赖C，C的scope继承于B的scope。</li>
+</ul>
+
+</div>
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-013e157738e63d8c3f90b39d559e8c8d">5.5 - Working with Ponycopters</h1>
     <div class="lead">A short lead description about this section page. Text here can also be <strong>bold</strong> or <em>italic</em> and can even be split over multiple paragraphs.</div>
 	
 
@@ -3289,7 +3451,7 @@ bar := &quot;foo&quot;;
 
 <div class="td-content" style="">
     
-	<h1 id="pg-ab480eb0e8e417eb7cd925a592e0cbcc">5.4.1 - Configuring Ponycopters</h1>
+	<h1 id="pg-ab480eb0e8e417eb7cd925a592e0cbcc">5.5.1 - Configuring Ponycopters</h1>
     <div class="lead">A short lead description about this content page. It can be <strong>bold</strong> or <em>italic</em> and can be split over multiple paragraphs.</div>
 	
 
@@ -3606,7 +3768,7 @@ bar := &quot;foo&quot;;
 
 <div class="td-content" style="page-break-before: always">
     
-	<h1 id="pg-3662f29ce4d0c9029454f98cd85d98ca">5.4.2 - Launching Ponycopters</h1>
+	<h1 id="pg-3662f29ce4d0c9029454f98cd85d98ca">5.5.2 - Launching Ponycopters</h1>
     <div class="lead">A short lead description about this content page. It can be <strong>bold</strong> or <em>italic</em> and can be split over multiple paragraphs.</div>
 	
 

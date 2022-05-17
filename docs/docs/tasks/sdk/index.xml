@@ -1,0 +1,113 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – SDK管理实践</title>
+    <link>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/</link>
+    <description>Recent content in SDK管理实践 on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 15 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/tasks/sdk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: SDK-Java管理实践</title>
+      <link>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/sdk-java/</link>
+      <pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/sdk-java/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Java SDK主要使用Maven进行管理，故以下内容主要基于Maven进行实践。&lt;/p&gt;
+&lt;h1 id=&#34;动态加载不同的sdk实现包&#34;&gt;动态加载不同的SDK实现包&lt;/h1&gt;
+&lt;p&gt;根据Capa设计，接入层面向API层的SDK进行编程，然后在运行时动态调用不同的实现层SDK。&lt;/p&gt;
+&lt;h2 id=&#34;实现包如何加载到运行时空间&#34;&gt;实现包如何加载到运行时空间？&lt;/h2&gt;
+&lt;h3 id=&#34;思路一打包时包含了所有实现层sdk运行时仅加载对应的实现包&#34;&gt;思路一：打包时包含了所有实现层SDK，运行时仅加载对应的实现包。&lt;/h3&gt;
+&lt;p&gt;问题：&lt;/p&gt;
+&lt;p&gt;若包含所有的实现层SDK，则面对依赖冲突的可能性大增。&lt;/p&gt;
+&lt;p&gt;有的实现层SDK在初始化时执行了操作，若将A云的实现层jar打包到B云的包中，可能有未知的问题出现。&lt;/p&gt;
+&lt;p&gt;综上，不使用该方案。&lt;/p&gt;
+&lt;h3 id=&#34;思路二将不同云的实现打包成不同的包镜像&#34;&gt;思路二：将不同云的实现，打包成不同的包/镜像。&lt;/h3&gt;
+&lt;p&gt;基于Maven提供的profile机制，可以将不同云的实现打包到不同的包中，最终生成不同的镜像。&lt;/p&gt;
+&lt;p&gt;可以避免不同云SDK之间的冲突，以及可以针对性的添加个性化的配置。&lt;/p&gt;
+&lt;p&gt;具体实现主要有以下思路：&lt;/p&gt;
+&lt;h4 id=&#34;1-使用maven插件自动化该步骤&#34;&gt;1. 使用maven插件自动化该步骤&lt;/h4&gt;
+&lt;p&gt;但动态修改 pom 文件本身并不推荐。&lt;/p&gt;
+&lt;p&gt;maven 官方建议直接指定需要的依赖：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以更方便的解决依赖冲突的问题&lt;/li&gt;
+&lt;li&gt;为项目提供了更容易阅读的文档，只需要阅读项目中的 pom 文件或者执行 mvn dependency: tree 即可了解更多信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;综上，不使用该方案。&lt;/p&gt;
+&lt;h4 id=&#34;2-手动指定profile&#34;&gt;2. 手动指定profile&lt;/h4&gt;
+&lt;p&gt;面对的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;接入方需要编写额外的pom内容。&lt;/li&gt;
+&lt;li&gt;需要生成不同的包/镜像，需要改动原有的CI流程。&lt;/li&gt;
+&lt;li&gt;profile在查看依赖冲突等问题时，IDE支持的不如直接引用的方式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但以上问题，提高了复杂度，但减少了面对未知问题的可能性，更有利于生产的稳定性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以使用该种方式。&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;实现包加载到运行时空间实践&#34;&gt;实现包加载到运行时空间实践&lt;/h2&gt;
+&lt;h3 id=&#34;heading&#34;&gt;&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;依赖冲突管理&#34;&gt;依赖冲突管理&lt;/h1&gt;
+&lt;p&gt;本文介绍在SDK-Java中的依赖管理实践经验。&lt;/p&gt;
+&lt;h2 id=&#34;maven依赖管理&#34;&gt;Maven依赖管理&lt;/h2&gt;
+&lt;h3 id=&#34;依赖版本传递&#34;&gt;依赖版本传递&lt;/h3&gt;
+&lt;p&gt;因为有了依赖传递，我们就不需要考虑依赖的依赖如何管理了，maven都会把他们加载进来，但是这么多依赖都进来到底用哪个，会不会冲突呢？&lt;/p&gt;
+&lt;p&gt;maven在解析pom时，会使用依赖调解，具体原则有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;第一原则 路径最近者优先&lt;/p&gt;
+&lt;p&gt;A -&amp;gt; B -&amp;gt; X(1.0)
+A -&amp;gt; C -&amp;gt; D -&amp;gt; X(2.0)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;X（1.0） 路径长度为2，X（2.0）路径长度3，所以 X（1.0） 会被真正的使用&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;第二原则 第一声明者优先&lt;/p&gt;
+&lt;p&gt;A -&amp;gt; B -&amp;gt; X(1.0)
+A -&amp;gt; C -&amp;gt; X(2.0)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这次X（1.0） X（2.0）路径长度相同了，因为B比C声明的早，所以取B依赖的X（1.0）版本&lt;/p&gt;
+&lt;h3 id=&#34;scope的分类&#34;&gt;scope的分类&lt;/h3&gt;
+&lt;h4 id=&#34;compile&#34;&gt;compile&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;默认就是compile&lt;/strong&gt;，什么都不配置也就是意味着compile。compile表示被依赖项目需要参与当前项目的编译，当然后续的测试，运行周期也参与其中，是一个比较强的依赖。打包的时候通常需要包含进去。&lt;/p&gt;
+&lt;h4 id=&#34;test&#34;&gt;test&lt;/h4&gt;
+&lt;p&gt;scope为test表示依赖项目仅仅参与测试相关的工作，包括测试代码的编译，执行。比较典型的如junit。&lt;/p&gt;
+&lt;h4 id=&#34;runtime&#34;&gt;runtime&lt;/h4&gt;
+&lt;p&gt;runntime表示被依赖项目无需参与项目的编译，不过后期的测试和运行周期需要其参与。与compile相比，跳过编译而已，说实话在终端的项目（非开源，企业内部系统）中，和compile区别不是很大。比较常见的如JSR×××的实现，对应的API jar是compile的，具体实现是runtime的，compile只需要知道接口就足够了。oracle jdbc驱动架包就是一个很好的例子，一般scope为runntime。&lt;strong&gt;另外runntime的依赖通常和optional搭配使用，optional为true。我可以用A实现，也可以用B实现。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;provided&#34;&gt;provided&lt;/h4&gt;
+&lt;p&gt;provided意味着打包的时候可以不用包进去，别的设施(Web Container)会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。&lt;strong&gt;相当于compile，但是在打包阶段做了exclude的动作。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;scope使用provided，表示用于当前项目编译使用，不向下传递。&lt;/p&gt;
+&lt;h4 id=&#34;system&#34;&gt;system&lt;/h4&gt;
+&lt;p&gt;从参与度来说，也provided相同，不过被依赖项不会从maven仓库抓，而是从本地文件系统拿，一定需要配合systemPath属性使用。&lt;/p&gt;
+&lt;h4 id=&#34;总结&#34;&gt;总结&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;compile： 默认配置适用于所有阶段，会随着项目一起发布。&lt;/li&gt;
+&lt;li&gt;runtime： 只在运行时使用，如JDBC驱动&lt;/li&gt;
+&lt;li&gt;provided： 期望JDK、容器或使用者会提供这个依赖。如 servlet.jar需要tomcat来提供&lt;/li&gt;
+&lt;li&gt;test：只在测试时使用，用于编译和运行测试代码。不会随 项目发布, 比如junit&lt;/li&gt;
+&lt;li&gt;import: 用来导入依赖, 比如tcdev&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;scope的依赖传递&#34;&gt;scope的依赖传递&lt;/h3&gt;
+&lt;p&gt;A–&amp;gt;B–&amp;gt;C。当前项目为A，A依赖于B，B依赖于C。知道B在A项目中的scope，那么怎么知道C在A中的scope呢？答案是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当C是test或者provided时，C直接被丢弃，A不依赖C；&lt;/li&gt;
+&lt;li&gt;否则A依赖C，C的scope继承于B的scope。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
