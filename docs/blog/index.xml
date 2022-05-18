@@ -1079,6 +1079,7 @@ github: &lt;a href=&#34;https://github.com/capa-cloud/capa-java&#34;&gt;https://
 &lt;/ul&gt;
 &lt;h2 id=&#34;四api设计原则&#34;&gt;四、API设计原则&lt;/h2&gt;
 &lt;blockquote&gt;
+&lt;p&gt;就像SQL标准之于关系型数据库。&lt;/p&gt;
 &lt;p&gt;参考资料：https://www.infoq.cn/article/wjkNGoGaaHyKs7xIyTSB&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;a功能集选择&#34;&gt;A、功能集选择&lt;/h3&gt;
@@ -1098,10 +1099,12 @@ github: &lt;a href=&#34;https://github.com/capa-cloud/capa-java&#34;&gt;https://
 &lt;/ul&gt;
 &lt;p&gt;以此，使用户接入时，认为具有这项能力。&lt;/p&gt;
 &lt;h4 id=&#34;解决思路三无法弥补但可以模糊处理&#34;&gt;解决思路三：无法弥补，但可以模糊处理&lt;/h4&gt;
-&lt;p&gt;能力分层模型。&lt;/p&gt;
+&lt;p&gt;能力分层模型：A云能够实现，B云通过其他方式也能实现。&lt;/p&gt;
 &lt;h4 id=&#34;解决思路四无法弥补又不能模糊处理&#34;&gt;解决思路四：无法弥补又不能模糊处理&lt;/h4&gt;
-&lt;p&gt;高危，按条件选用。&lt;/p&gt;
-&lt;p&gt;明确告知在特定云上才有这项能力。&lt;/p&gt;
+&lt;p&gt;高危，按条件选用。 明确告知在特定云上才有这项能力。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;社区讨论：协商机制&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;b分层模型&#34;&gt;B、分层模型&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/wechat/images/2a/2a92f5f1dd7d8dae44df981e3afa5368.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;c拓展字段&#34;&gt;C、拓展字段&lt;/h3&gt;
