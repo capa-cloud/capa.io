@@ -846,7 +846,7 @@ Istio 的扩展机制使用 Proxy-Wasm 应用二进制接口（ABI）规范，�
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png)
 
-![](https://filescdn.proginn.com/1866796ec3e1c77ec5298ec566828e81/3ccd47377c8f1b9be2056c8e246be264.webp)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-3.png)
 
 > 参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA
 
@@ -940,7 +940,29 @@ Dapr 的可移植性将钉钉文档的上层应用与消息系统等底层基础
 
 ![](https://blog.dapr.io/posts/2021/03/19/how-alibaba-is-using-dapr/cloud-migration_hu5d98ca782c8bcb789c89210a0f8e3e46_276395_1500x0_resize_q75_box.jpg)
 
-### B、微软Azure的托管支持
+### B、蚂蚁集团Mesh化进展
+
+> 参考文章：https://mp.weixin.qq.com/s/eh0Jz7YeF27bXqdBMd4MPw
+
+#### 1、SOA 时代
+
+中间件的客户端，均直接集成在业务进程内：
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-1.png)
+
+#### 2、Mesh 化阶段
+
+中间件能力下沉，应用和基础设施实现部分解耦：
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-2.png)
+
+#### 3.应用运行时阶段
+
+将应用和具体基础设施的类型解耦，仅依赖标准 API 编程：
+
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-3.png)
+
+### C、微软Azure的托管支持
 
 微软在 Ignite 2021 大会上发布了预览版的Azure Container Apps，这是一个完全托管的无服务器容器运行时，用于大规模构建和运行现代应用程序。
 
@@ -948,7 +970,7 @@ Dapr 的可移植性将钉钉文档的上层应用与消息系统等底层基础
 
 > 参考资料：https://www.cnblogs.com/shanyou/p/15509042.html
 
-### C、Dapr/Layotto 加入 CNCF 孵化器
+### D、Dapr/Layotto 加入 CNCF 孵化器
 
 CNCF 托管了许多与 Dapr 紧密结合的项目。例如，Dapr 使用 gRPC 作为它的主要 RPC 堆栈。OpenTelemetry 用作 Dapr 的遥测协议，CloudEvents 用于标准化 Dapr 的 Pub/Sub API 中的消息格式，SPIFFE 用作 Dapr 的访问列表特性的身份格式，Prometheus 用作 Dapr 端点的指标格式，Dapr 支持 NATS 的 Pub/Sub 实现以及 Open Policy Agent。此外，Dapr 使用 Operator 在 Kubernetes 上原生运行，并使用 Helm 作为主要部署机制。
 

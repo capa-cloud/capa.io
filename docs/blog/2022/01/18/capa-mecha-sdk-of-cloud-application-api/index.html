@@ -42,7 +42,7 @@ B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/x
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-01-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-05-17T22:58:21+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2022-05-18T00:21:38+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Capa: Mecha SDK of Cloud Application Api">
 <meta itemprop="description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
@@ -57,8 +57,8 @@ ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始�
 18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
 B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
   探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。"><meta itemprop="datePublished" content="2022-01-18T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-05-17T22:58:21+08:00" />
-<meta itemprop="wordCount" content="1508">
+<meta itemprop="dateModified" content="2022-05-18T00:21:38+08:00" />
+<meta itemprop="wordCount" content="1520">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Capa: Mecha SDK of Cloud Application Api"/>
 <meta name="twitter:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
@@ -372,8 +372,9 @@ if (!doNotTrack) {
     <li><a href="#八云厂商的支持">八、云厂商的支持</a>
       <ul>
         <li><a href="#a阿里云在内部的落地">A、阿里云在内部的落地</a></li>
-        <li><a href="#b微软azure的托管支持">B、微软Azure的托管支持</a></li>
-        <li><a href="#cdaprlayotto-加入-cncf-孵化器">C、Dapr/Layotto 加入 CNCF 孵化器</a></li>
+        <li><a href="#b蚂蚁集团mesh化进展">B、蚂蚁集团Mesh化进展</a></li>
+        <li><a href="#c微软azure的托管支持">C、微软Azure的托管支持</a></li>
+        <li><a href="#ddaprlayotto-加入-cncf-孵化器">D、Dapr/Layotto 加入 CNCF 孵化器</a></li>
         <li><a href="#主要参考文献">主要参考文献</a></li>
       </ul>
     </li>
@@ -1191,7 +1192,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <h3 id="bebpf-的探索">B、eBPF 的探索</h3>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/iptables.png" alt=""></p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png" alt=""></p>
-<p><img src="https://filescdn.proginn.com/1866796ec3e1c77ec5298ec566828e81/3ccd47377c8f1b9be2056c8e246be264.webp" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-3.png" alt=""></p>
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA</p>
 </blockquote>
@@ -1277,7 +1278,20 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <h4 id="混合云云到云迁移">混合云：云到云迁移</h4>
 <p>Dapr 的可移植性将钉钉文档的上层应用与消息系统等底层基础设施解耦。从而，钉钉文档实现了不同云平台之间的平滑迁移。</p>
 <p><img src="https://blog.dapr.io/posts/2021/03/19/how-alibaba-is-using-dapr/cloud-migration_hu5d98ca782c8bcb789c89210a0f8e3e46_276395_1500x0_resize_q75_box.jpg" alt=""></p>
-<h3 id="b微软azure的托管支持">B、微软Azure的托管支持</h3>
+<h3 id="b蚂蚁集团mesh化进展">B、蚂蚁集团Mesh化进展</h3>
+<blockquote>
+<p>参考文章：https://mp.weixin.qq.com/s/eh0Jz7YeF27bXqdBMd4MPw</p>
+</blockquote>
+<h4 id="1soa-时代">1、SOA 时代</h4>
+<p>中间件的客户端，均直接集成在业务进程内：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-1.png" alt=""></p>
+<h4 id="2mesh-化阶段">2、Mesh 化阶段</h4>
+<p>中间件能力下沉，应用和基础设施实现部分解耦：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-2.png" alt=""></p>
+<h4 id="3应用运行时阶段">3.应用运行时阶段</h4>
+<p>将应用和具体基础设施的类型解耦，仅依赖标准 API 编程：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-3.png" alt=""></p>
+<h3 id="c微软azure的托管支持">C、微软Azure的托管支持</h3>
 <p>微软在 Ignite 2021 大会上发布了预览版的Azure Container Apps，这是一个完全托管的无服务器容器运行时，用于大规模构建和运行现代应用程序。</p>
 <ul>
 <li>利用分布式应用运行时 Dapr 轻松构建和连接微服务。 Dapr允许你构建松耦合的微服务应用程序，而不是构建一个分布式单体应用，在Azure Container Apps里我，利用 Dapr 及其组件构建具有弹性、可扩展性和松耦合的应用程序</li>
@@ -1285,7 +1299,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <blockquote>
 <p>参考资料：https://www.cnblogs.com/shanyou/p/15509042.html</p>
 </blockquote>
-<h3 id="cdaprlayotto-加入-cncf-孵化器">C、Dapr/Layotto 加入 CNCF 孵化器</h3>
+<h3 id="ddaprlayotto-加入-cncf-孵化器">D、Dapr/Layotto 加入 CNCF 孵化器</h3>
 <p>CNCF 托管了许多与 Dapr 紧密结合的项目。例如，Dapr 使用 gRPC 作为它的主要 RPC 堆栈。OpenTelemetry 用作 Dapr 的遥测协议，CloudEvents 用于标准化 Dapr 的 Pub/Sub API 中的消息格式，SPIFFE 用作 Dapr 的访问列表特性的身份格式，Prometheus 用作 Dapr 端点的指标格式，Dapr 支持 NATS 的 Pub/Sub 实现以及 Open Policy Agent。此外，Dapr 使用 Operator 在 Kubernetes 上原生运行，并使用 Helm 作为主要部署机制。</p>
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/8qnmL12JrESwJg3RsSelJQ</p>

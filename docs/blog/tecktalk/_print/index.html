@@ -990,7 +990,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <h3 id="bebpf-的探索">B、eBPF 的探索</h3>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/iptables.png" alt=""></p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-2.png" alt=""></p>
-<p><img src="https://filescdn.proginn.com/1866796ec3e1c77ec5298ec566828e81/3ccd47377c8f1b9be2056c8e246be264.webp" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ebpf-3.png" alt=""></p>
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/W9NySdKnxuQ6S917QQn3PA</p>
 </blockquote>
@@ -1076,7 +1076,20 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <h4 id="混合云云到云迁移">混合云：云到云迁移</h4>
 <p>Dapr 的可移植性将钉钉文档的上层应用与消息系统等底层基础设施解耦。从而，钉钉文档实现了不同云平台之间的平滑迁移。</p>
 <p><img src="https://blog.dapr.io/posts/2021/03/19/how-alibaba-is-using-dapr/cloud-migration_hu5d98ca782c8bcb789c89210a0f8e3e46_276395_1500x0_resize_q75_box.jpg" alt=""></p>
-<h3 id="b微软azure的托管支持">B、微软Azure的托管支持</h3>
+<h3 id="b蚂蚁集团mesh化进展">B、蚂蚁集团Mesh化进展</h3>
+<blockquote>
+<p>参考文章：https://mp.weixin.qq.com/s/eh0Jz7YeF27bXqdBMd4MPw</p>
+</blockquote>
+<h4 id="1soa-时代">1、SOA 时代</h4>
+<p>中间件的客户端，均直接集成在业务进程内：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-1.png" alt=""></p>
+<h4 id="2mesh-化阶段">2、Mesh 化阶段</h4>
+<p>中间件能力下沉，应用和基础设施实现部分解耦：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-2.png" alt=""></p>
+<h4 id="3应用运行时阶段">3.应用运行时阶段</h4>
+<p>将应用和具体基础设施的类型解耦，仅依赖标准 API 编程：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/ant-3.png" alt=""></p>
+<h3 id="c微软azure的托管支持">C、微软Azure的托管支持</h3>
 <p>微软在 Ignite 2021 大会上发布了预览版的Azure Container Apps，这是一个完全托管的无服务器容器运行时，用于大规模构建和运行现代应用程序。</p>
 <ul>
 <li>利用分布式应用运行时 Dapr 轻松构建和连接微服务。 Dapr允许你构建松耦合的微服务应用程序，而不是构建一个分布式单体应用，在Azure Container Apps里我，利用 Dapr 及其组件构建具有弹性、可扩展性和松耦合的应用程序</li>
@@ -1084,7 +1097,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <blockquote>
 <p>参考资料：https://www.cnblogs.com/shanyou/p/15509042.html</p>
 </blockquote>
-<h3 id="cdaprlayotto-加入-cncf-孵化器">C、Dapr/Layotto 加入 CNCF 孵化器</h3>
+<h3 id="ddaprlayotto-加入-cncf-孵化器">D、Dapr/Layotto 加入 CNCF 孵化器</h3>
 <p>CNCF 托管了许多与 Dapr 紧密结合的项目。例如，Dapr 使用 gRPC 作为它的主要 RPC 堆栈。OpenTelemetry 用作 Dapr 的遥测协议，CloudEvents 用于标准化 Dapr 的 Pub/Sub API 中的消息格式，SPIFFE 用作 Dapr 的访问列表特性的身份格式，Prometheus 用作 Dapr 端点的指标格式，Dapr 支持 NATS 的 Pub/Sub 实现以及 Open Policy Agent。此外，Dapr 使用 Operator 在 Kubernetes 上原生运行，并使用 Helm 作为主要部署机制。</p>
 <blockquote>
 <p>参考资料：https://mp.weixin.qq.com/s/8qnmL12JrESwJg3RsSelJQ</p>
