@@ -1,4 +1,3 @@
-
 ---
 title: "Envoy Stack"
 linkTitle: "Envoy Stack"

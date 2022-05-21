@@ -6,6 +6,8 @@ description: >
    Istio Landscape.
 ---
 
+> 参考文档：https://www.servicemesher.com/istio-handbook/concepts/sidecar-injection.html
+
 ## 一、Istio Sidecar
 
 #### Sidecar模式是什么
@@ -236,7 +238,7 @@ webhooks:
 
 Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulSet、DeamonSet、Job等，还有多种基础资源封装例如ConfigMap、Secret、Serivce等，但是一个应用往往有多个服务，有的可能还要依赖持久化存储，当这些服务之间直接互相依赖，需要有一定的组合的情况下，使用YAML文件的方式配置应用往往十分繁琐还容易出错，这时候就需要服务编排工具。
 
-![img_2.png](img_2.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_2.png)
 
 1. 编写k8s资源文件集合
 2. 通过打包格式进行管理
@@ -251,7 +253,7 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 
 它使用 MutatingWebhook 机制在 pod 创建的时候将 sidecar 的容器和卷添加到每个 pod 的模版里。
 
-![img_3.png](img_3.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_3.png)
 
 ```yaml
       containers:
@@ -323,6 +325,25 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
         name: istio-init
 ```
 
+#### 配置管理设计
+
+##### 1. 启动静态配置
+
+启动的最小配置集，可以和镜像集成在一起。
+
+##### 2. 静态自定义配置
+
+可以使用K8S的静态配置进行配置：
+
+* k8s config
+* k8s crd
+
+##### 3. 灵活的动态配置
+
+控制面下发，全量/增量推送：
+
+* xDS
+
 ------
 
 ## 二、Istio polit-agent
@@ -375,10 +396,6 @@ istio-iptables [flags]
 
 使用单容器多进程模型。
 
-为什么不使用单进程模型？代理属于第三方提供，istio是对其进行了管理和拓展。
-
-如果代理本身属于istio，是可以实现单进程模型。
-
 #### 1. pilot agent进程
 
 在proxy镜像中，pilot-agent 负责的工作包括：
@@ -405,7 +422,7 @@ istio-iptables [flags]
 
 检查原理是通过本地管理端口，如 http://127.0.0.1:15000/listeners 获取 Envoy 当前监听的全部端口，然后将配置的端口 applicationPorts 在监听的端口中进行查找，来决定 Envoy 是否 ready。
 
-![img.png](img.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_0.png)
 
 #### 应用端口检查
 
@@ -421,7 +438,21 @@ istio-iptables [flags]
 
 [/pilot-agent/main/istio_agent.NewAgent]
 
-![img_1.png](img_1.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_1.png)
+
+### sidecar多进程设计模式
+
+#### 1. 开源集成
+
+代理属于第三方提供，istio是对其进行了管理和拓展。
+
+如果代理本身属于istio，是可以实现单进程模型。
+
+#### 2. agent设计思想
+
+由agent负责配置监听和下发。
+
+解耦配置管理和运行时，同时可以对proxy进程进行热重启。
 
 ### B、流量拦截
 
@@ -451,7 +482,7 @@ ip netns exec cni-bf783dac-fe05-cb35-4d5a-848449119b19 iptables -L -t nat
 COMMIT
 ```
 
-![img_4.png](img_4.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_4.png)
 
 ![](https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=)
 

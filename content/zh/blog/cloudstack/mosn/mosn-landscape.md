@@ -1,0 +1,167 @@
+---
+title: "Mosn Landscape"
+linkTitle: "Mosn Landscape"
+date: 2022-05-20
+description: >
+    Mosn Landscape.
+---
+
+## 一、Mosn 常用概念
+
+### A、流量劫持
+
+> MOSN 作为 Sidecar 使用时的流量劫持方案。
+
+MOSN 作为 Sidecar 和业务容器部署在同一个 Pod 中时，需要使得业务应用的 Inbound 和 Outbound 服务请求都能够经过 Sidecar 处理。**区别于 Istio 社区使用 iptables 做流量透明劫持**，MOSN 目前使用的是流量接管方案，并在积极探索适用于大规模流量下的透明劫持方案
+
+#### 流量接管
+
+区别于 Istio 社区的 iptables 流量劫持方案，MOSN 使用的流量接管的方案如下：
+
+1. 假设服务端运行在 1.2.3.4 这台机器上，监听 20880 端口，首先服务端会向自己的 Sidecar 发起服务注册请求，告知 Sidecar 需要注册的服务以及 IP + 端口（1.2.3.4:20880）
+2. 服务端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务注册请求，告知需要注册的服务以及 IP + 端口，不过这里需要注意的是注册上去的并不是业务应用的端口（20880），而是 Sidecar 自己监听的一个端口（例如：20881）
+3. 调用端向自己的 Sidecar 发起服务订阅请求，告知需要订阅的服务信息
+4. 调用端的 Sidecar 向调用端推送服务地址，这里需要注意的是推送的 IP 是本机，端口是调用端的 Sidecar 监听的端口（例如 20882）
+5. 调用端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务订阅请求，告知需要订阅的服务信息；
+6. 服务注册中心（如 SOFA Registry）向调用端的 Sidecar 推送服务地址（1.2.3.4:20881）
+
+#### 服务调用过程
+
+经过上述的服务发现过程，流量转发过程就显得非常自然了：
+
+1. 调用端拿到的服务端地址是 127.0.0.1:20882，所以就会向这个地址发起服务调用
+2. 调用端的 Sidecar 接收到请求后，通过解析请求头，可以得知具体要调用的服务信息，然后获取之前从服务注册中心返回的地址后就可以发起真实的调用（1.2.3.4:20881）
+3. 服务端的 Sidecar 接收到请求后，经过一系列处理，最终会把请求发送给服务端（127.0.0.1:20880）
+
+### B、透明劫持
+
+上文通过在服务注册过程中把服务端地址替换成本机监听端口实现了轻量级的“流量劫持”，在存在注册中心，且调用端和服务端同时使用特定SDK的场景中可以很好的工作，如果不满足这两个条件，则无法流量劫持。为了降低对于应用程序的要求，需要引入透明劫持。
+
+#### 使用 iptables 做流量劫持
+
+iptables 通过 NAT 表的 redirect 动作执行流量重定向，通过 syn 包触发新建 nefilter 层的连接，后续报文到来时查找连接转换目的地址与端口。新建连接时同时会记录下原始目的地址，应用程序可以通过(SOL_IP、SO_ORIGINAL_DST)获取到真实的目的地址。
+
+iptables 劫持原理如下图所示：
+
+![](https://mosn.io/docs/products/structure/traffic-hijack/iptables.png)
+
+使用 iptables 做流量劫持时存在的问题
+目前 Istio 使用 iptables 实现透明劫持，主要存在以下三个问题：
+
+1. 需要借助于 conntrack 模块实现连接跟踪，在连接数较多的情况下，会造成较大的消耗，同时可能会造成 track 表满的情况，为了避免这个问题，业内有关闭 conntrack 的做法。
+2. iptables 属于常用模块，全局生效，不能显式的禁止相关联的修改，可管控性比较差。
+3. iptables 重定向流量本质上是通过 loopback 交换数据，outbond 流量将两次穿越协议栈，在大并发场景下会损失转发性能。
+4. 
+上述几个问题并非在所有场景中都存在，比方说某些场景下，连接数并不多，且 NAT 表未被使用到的情况下，iptables 是一个满足要求的简单方案。为了适配更加广泛的场景，透明劫持需要解决上述三个问题。
+
+#### 透明劫持方案优化
+
+1. 使用 tproxy 处理 inbound 流量
+
+tproxy 可以用于 inbound 流量的重定向，且无需改变报文中的目的 IP/端口，不需要执行连接跟踪，不会出现 conntrack 模块创建大量连接的问题。受限于内核版本，tproxy 应用于 outbound 存在一定缺陷。目前 Istio 支持通过 tproxy 处理 inbound 流量。
+
+2. 使用 hook connect 处理 outbound 流量
+
+为了适配更多应用场景，outbound 方向通过 hook connect 来实现，实现原理如下：
+
+![](https://mosn.io/docs/products/structure/traffic-hijack/iptables.png)
+
+无论采用哪种透明劫持方案，均需要解决获取真实目的 IP/端口的问题，使用 iptables 方案通过 getsockopt 方式获取，tproxy 可以直接读取目的地址，通过修改调用接口，hook connect 方案读取方式类似于tproxy。
+
+实现透明劫持后，在内核版本满足要求（4.16以上）的前提下，通过 sockmap 可以缩短报文穿越路径，进而改善 outbound 方向的转发性能。
+
+#### 总结
+
+总结来看，如果应用程序通过注册中心发布/订阅服务时，可以结合注册中心劫持流量；在需要用到透明劫持的场景，如果性能压力不大，使用 iptables redirect 即可，大并发压力下使用 tproxy 与hook connect 结合的方案。
+
+### C、MOSN 平滑升级原理解析
+
+本文介绍 MOSN 支持平滑升级的原因和解决方案，对于平滑升级的一些基础概念，大家可以通过 Nginx vs Enovy vs Mosn 平滑升级原理解析了解。
+
+先简单介绍一下为什么 Nginx 和 Envoy 不需要具备 MOSN 这样的连接无损迁移方案，主要还是跟业务场景相关，Nginx 和 Envoy 主要支持的是 HTTP1 和 HTTP2 协议，HTTP1使用 connection: Close，HTTP2 使用 Goaway Frame 都可以让 Client 端主动断链接，然后新建链接到新的 New process，但是针对 Dubbo、SOFA PRC 等常见的多路复用协议，它们是没有控制帧，Old process 的链接如果断了就会影响请求的。
+
+> 参考：Envoy热重启
+
+一般的升级做法就是切走应用的流量，比如自己UnPub掉服务，等待一段时间没有请求之后，升级MOSN，升级好之后再Pub服务，整个过程比较耗时，并且会有一段时间是不提供服务的，还要考虑应用的水位，在大规模场景下，就很难兼顾评估。MOSN 为了满足自身业务场景，开发了长连接迁移方案，把这条链接迁移到 New process 上，整个过程对 Client 透明，不需要重新建链接，达到请求无损的平滑升级。
+
+![](https://mosn.io/docs/products/structure/smooth-upgrade/reqeust-smooth-upgrade-process.png)
+
+### D、MOSN 多协议机制解析
+
+> https://mosn.io/blog/posts/multi-protocol-deep-dive/
+
+基于 MOSN 本身的扩展机制，我们完成了最初版本的协议扩展接入。但是在实践过程中，我们发现这并不是一件容易的事情：
+
+1. 相比编解码，协议自身的处理以及与框架集成才是其中最困难的环节，需要理解并实现包括请求生命周期、多路复用处理、链接池等等机制；
+2. 社区主流的 xDS 路由配置是面向 HTTP 协议的，无法直接支持私有协议，存在适配成本；
+
+基于这些实践痛点，我们设计了 MOSN 多协议框架，希望可以降低私有协议的接入成本，加快普及 ServiceMesh 架构的落地推进。
+
+#### 常见的协议扩展思路初探 
+
+第一个要介绍的是目前发展势头强劲的 Envoy。从图上可以看出，Envoy 支持四层的读写过滤器扩展、基于 HTTP 的七层读写过滤器扩展以及对应的 Router/Upstream 实现。如果想要基于 Envoy 的扩展框架实现 L7 协议接入，目前的普遍做法是基于 L4 filter 封装相应的 L7 codec，在此基础之上再实现对应的协议路由等能力，无法复用 HTTP L7 的扩展框架。
+
+### E、MOSN 扩展机制解析
+
+> https://mosn.io/blog/posts/mosn-extensions/
+
+![](https://mosn.io/blog/posts/mosn-extensions/1586436269068-a0a77749-1a98-4bce-9e9b-323ea3bd14a5.png)
+
+#### Plugin机制
+
+MOSN 的 Plugin 机制包含了两部分内容，一是 MOSN 自定义的 Plugin 框架，它支持通过在 MOSN 中实现 agent 与一个独立的进程进行交互来完成 MOSN 扩展能力的实现。二是基于 Golang 的 Plugin 框架，通过动态库（SO）加载的方式，实现 MOSN 的扩展。其中动态库加载的方式目前还存在一些局限性，还处于 beta 阶段。
+
+#### 多进程 Plugin 框架
+
+MOSN 的 Plugin 框架是 MOSN 封装的一个可以让 MOSN 通过 gRPC 和独立进程进行交互的方式，它包含两部分：
+
+1. 独立的进程通过 MOSN Plugin 框架管理，作为 MOSN 的子进程；MOSN 的 Plugin 框架可以管理它们，如启动、关闭等；
+2. 通过在 MOSN 中实现的 agent，使用 gRPC 的方式和子进程进行交互，gRPC 可以是基于 tcp 的，也可以是基于 domain socket 的；
+
+![](https://mosn.io/blog/posts/mosn-extensions/1586436268954-38e37509-fbf8-44f4-a0fe-0860401daae0.png)
+
+---
+
+## 二、Mosn VS Envoy
+
+### A、MOSN 与 Envoy 不同点是什么？优势在哪里？
+
+#### 语言栈的不同
+
+MOSN 使用 Go 语言编写，Go 语言在生产效率，内存安全上有比较强的保障，同时 Go 语言在云原生时代有广泛的库生态系统，性能在 Mesh 场景下被我们评估以及实践是可以接受的。所以 MOSN 对于使用 Go、Java 等语言的公司和个人的心智成本更低。
+
+#### 核心能力的差异化
+
+* MOSN 支持多协议框架，用户可以比较容易的接入私有协议，具有统一的路由框架；
+
+* 多进程的插件机制，可以通过插件框架很方便的扩展独立 MOSN 进程的插件，做一些其他管理，旁路等的功能模块扩展；
+
+* 具备中国密码合规的传输层国密算法支持；
+
+---
+
+## 三、WebAssembly
+
+采用 WebAssembly(Wasm) 技术，给 MOSN 实现了一个安全隔离的沙箱环境，让扩展程序能够运行在隔离沙箱之中，并对其资源、能力进行严格限制，使程序故障止步于沙箱，从而实现安全隔离的目标。本文将着重叙述 MOSN 中的 Wasm 扩展框架，并介绍我们在 Proxy-Wasm 这一代理扩展规范上的工作。
+
+![](https://mosn.io/blog/posts/mosn-wasm-framework/framework.png)
+
+上图为 MOSN Wasm 扩展框架的整体示意图。如图所示，对于 MOSN 的任意扩展点(Codec、NetworkFilter、StreamFilter 等)，用户均能够通过 Wasm 扩展框架，以隔离沙箱的形式运行自定义的扩展代码。而 MOSN 与 Wasm 扩展代码之间的交互，是通过 Proxy-Wasm 标准 ABI 来完成的。
+
+#### 隔离沙箱
+
+当我们在讨论 Wasm 时，都明白 Wasm 能够提供一个安全隔离的沙箱环境，但并不是每个人都了解 Wasm 实现隔离沙箱的技术原理。这时又要搬出计算机科学中的至理名言: “计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决”。Wasm 实际上也是通过引用一个“中间层”来实现的安全隔离。简单来说，Wasm 通过一个运行时(Runtime)来运行 Wasm 沙箱扩展，每个 Wasm 沙箱都有其独立的线性内存空间和一组导入/导出模块。
+
+![](https://mosn.io/blog/posts/mosn-wasm-framework/wasm-memory.png)
+
+一方面，每个 Wasm 沙箱都有其独立的线性内存空间，其内存模型如上图所示。Wasm 代码只能通过简单的 load/store 等指令访问线性内存空间的有限部分，并通过符号(下标)的方式来间接访问函数、全局变量等，杜绝了类似 C 语言中访问任意内存地址的骚操作。同时，用于间接调用函数的符号表对于 Wasm 代码而言是只读的，从而保证 Wasm 代码的执行是受控的。此外，Wasm 沙箱的整个线性内存空间由宿主机(Wasm Runtime)分配及管理，通过严格的内存管理保证沙箱的隔离性。
+
+另一方面，Wasm 也规定了代码中任何可能产生外部影响的操作只能通过导入/导出模块来实现。以 C 语言为例，我们可以直接通过系统调用来访问系统的环境变量、文件、网络等资源。而在 Wasm 的世界中，并不存在系统调用相关的指令，任何对外部资源的访问必须通过导入模块来间接实现。以文件读写为例，在 Wasm 中要想进行文件读写，需要宿主机提供实现文件读写功能的导入函数，Wasm 代码调用该导入函数，由宿主机间接进行文件读写，再将操作结果返回给 Wasm 扩展。在上述过程中，实际的文件读写操作由宿主机完成，宿主机对这一过程有绝对的控制权，包括但不限于只允许读写指定文件、限制读写内容、完全禁止读写等。
+
+![](https://mosn.io/blog/posts/mosn-wasm-framework/config.png)
+
+#### Proxy-Wasm ABI 规范
+
+本小节将介绍 MOSN 具体是如何跟 Wasm 扩展程序进行交互的。先说结论: MOSN 跟 Wasm 扩展代码之间的交互采用的是社区规范: Proxy-Wasm
+
+Proxy-Wasm 规范定义了宿主机与 Wasm 扩展程序之间的交互细节，包括 API 列表、函数调用规范以及数据传输规范这几个方面。其中，API 列表包含了 L4/L7、property、metrics、日志等方面的扩展点，涵盖了网络代理场景下所需的大部分交互点，且可以划分为宿主侧扩展和 Wasm 侧扩展点。这里简单展示规范中的部分内容，完整内容请参考 spec。

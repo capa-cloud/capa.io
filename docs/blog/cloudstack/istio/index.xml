@@ -14,6 +14,105 @@
     
     
     <item>
+      <title>Blog: Istio devops</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-devops/</link>
+      <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-devops/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;请求的生命周期&#34;&gt;请求的生命周期&lt;/h3&gt;
+&lt;p&gt;在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。&lt;/p&gt;
+&lt;p&gt;当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.&lt;/p&gt;
+&lt;p&gt;$ curl example.com -v&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Trying 192.0.2.0:80&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。&lt;/p&gt;
+&lt;p&gt;如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。&lt;/p&gt;
+&lt;p&gt;一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。&lt;/p&gt;
+&lt;p&gt;使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。
+在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints
+使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。
+请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。&lt;/p&gt;
+&lt;p&gt;DNS 代理
+3分钟阅读 页面测试&lt;/p&gt;
+&lt;p&gt;除了捕获应用程序流量之外，Istio 还可以捕获 DNS 请求以提高网格的性能和可用性。在代理 DNS 时，来自应用程序的所有 DNS 请求都将被重定向到 sidecar，其中存储了本地域名到 IP 地址的映射。如果请求可以被 Sidecar 处理，它将直接向应用程序返回响应，避免往返上游 DNS 服务器。否则，请求将按照标准/etc/resolv.confDNS 配置向上游转发。&lt;/p&gt;
+&lt;p&gt;虽然 Kubernetes 为 Kubernetes 提供了开箱即用的 DNS 解析Service，但任何自定义ServiceEntry的都不会被识别。使用此功能，ServiceEntry无需自定义配置 DNS 服务器即可解析地址。对于 Kubernetes Service，DNS 响应将是相同的，但负载减少kube-dns并提高了性能。&lt;/p&gt;
+&lt;p&gt;此功能也可用于在 Kubernetes 之外运行的服务。这意味着可以解决所有内部服务，而无需笨拙的变通方法将 Kubernetes DNS 条目暴露在集群之外。&lt;/p&gt;
+&lt;p&gt;入门
+默认情况下当前未启用此功能。要启用它，请使用以下设置安装 Istio：&lt;/p&gt;
+&lt;p&gt;$ cat &amp;laquo;EOF | istioctl install -y -f -
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+meshConfig:
+defaultConfig:
+proxyMetadata:&lt;/p&gt;
+&lt;h1 id=&#34;enable-basic-dns-proxying&#34;&gt;Enable basic DNS proxying&lt;/h1&gt;
+&lt;p&gt;ISTIO_META_DNS_CAPTURE: &amp;ldquo;true&amp;rdquo;&lt;/p&gt;
+&lt;h1 id=&#34;enable-automatic-address-allocation-optional&#34;&gt;Enable automatic address allocation, optional&lt;/h1&gt;
+&lt;p&gt;ISTIO_META_DNS_AUTO_ALLOCATE: &amp;ldquo;true&amp;rdquo;
+EOF&lt;/p&gt;
+&lt;p&gt;这也可以使用proxy.istio.io/configannotation在每个 pod 的基础上启用。&lt;/p&gt;
+&lt;p&gt;使用 部署到 VM 时，默认情况下将启用基本 DNS 代理。istioctl workload entry configure
+DNS 捕获在行动
+要尝试 DNS 捕获，首先ServiceEntry为一些外部服务设置一个：&lt;/p&gt;
+&lt;p&gt;apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+name: external-address
+spec:
+addresses:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;198.51.100.0
+hosts:&lt;/li&gt;
+&lt;li&gt;address.internal
+ports:&lt;/li&gt;
+&lt;li&gt;name: http
+number: 80
+protocol: HTTP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果没有 DNS 捕获，请求address.internal可能无法解析。启用此功能后，您应该根据配置获得响应address：&lt;/p&gt;
+&lt;p&gt;$ curl -v address.internal&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Trying 198.51.100.1:80&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;地址自动分配
+在上面的示例中，您有一个用于发送请求的服务的预定义 IP 地址。但是，访问没有稳定地址的外部服务是很常见的，而是依赖 DNS。在这种情况下，DNS 代理将没有足够的信息来返回响应，并且需要向上游转发 DNS 请求。&lt;/p&gt;
+&lt;p&gt;这对于 TCP 流量来说尤其成问题。与基于Host标头路由的 HTTP 请求不同，TCP 携带的信息要少得多。您只能在目标 IP 和端口号上进行路由。因为后端没有一个稳定的IP，所以也不能基于它进行路由，只留下端口号，当多个ServiceEntryTCP服务共享同一个端口时，会导致冲突。&lt;/p&gt;
+&lt;p&gt;为了解决这些问题，DNS 代理还支持为ServiceEntry未明确定义地址的 s 自动分配地址。这是由ISTIO_META_DNS_AUTO_ALLOCATE选项配置的。&lt;/p&gt;
+&lt;p&gt;启用此功能后，DNS 响应将为每个ServiceEntry. 然后将代理配置为将请求匹配到此 IP 地址，并将请求转发到相应的ServiceEntry.&lt;/p&gt;
+&lt;p&gt;由于此功能会修改 DNS 响应，因此它可能无法与所有应用程序兼容。
+要尝试这一点，请配置另一个ServiceEntry：&lt;/p&gt;
+&lt;p&gt;apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+name: external-auto
+spec:
+hosts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;auto.internal
+ports:&lt;/li&gt;
+&lt;li&gt;name: http
+number: 80
+protocol: HTTP
+resolution: STATIC
+endpoints:&lt;/li&gt;
+&lt;li&gt;address: 198.51.100.2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在，发送请求：&lt;/p&gt;
+&lt;p&gt;$ curl -v auto.internal&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Trying 240.240.0.1:80&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如您所见，请求被发送到一个自动分配的地址，240.240.0.1. 这些地址将从240.240.0.0/16保留的 IP 地址范围中挑选，以避免与实际服务发生冲突。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Istio Landscape</title>
       <link>https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-landscape/</link>
       <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
@@ -22,7 +121,10 @@
       <description>
         
         
-        &lt;h2 id=&#34;一istio-sidecar&#34;&gt;一、Istio Sidecar&lt;/h2&gt;
+        &lt;blockquote&gt;
+&lt;p&gt;参考文档：https://www.servicemesher.com/istio-handbook/concepts/sidecar-injection.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;一istio-sidecar&#34;&gt;一、Istio Sidecar&lt;/h2&gt;
 &lt;h4 id=&#34;sidecar模式是什么&#34;&gt;Sidecar模式是什么&lt;/h4&gt;
 &lt;p&gt;Sidecar模式是一种&lt;strong&gt;单节点、多容器&lt;/strong&gt;的应用设计形式。Sidecar主张以额外的容器来扩展或增强主容器,而这个额外的容器被称为Sidecar容器&lt;/p&gt;
 &lt;p&gt;sidecar 模式也符合当前微服务的以下特点:&lt;/p&gt;
@@ -214,7 +316,7 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;timeoutSeconds&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;自动化和规模化&#34;&gt;自动化和规模化&lt;/h4&gt;
 &lt;p&gt;Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulSet、DeamonSet、Job等，还有多种基础资源封装例如ConfigMap、Secret、Serivce等，但是一个应用往往有多个服务，有的可能还要依赖持久化存储，当这些服务之间直接互相依赖，需要有一定的组合的情况下，使用YAML文件的方式配置应用往往十分繁琐还容易出错，这时候就需要服务编排工具。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img_2.png&#34; alt=&#34;img_2.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;编写k8s资源文件集合&lt;/li&gt;
 &lt;li&gt;通过打包格式进行管理&lt;/li&gt;
@@ -225,7 +327,7 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;h4 id=&#34;sidecar-injector-准入控制器&#34;&gt;sidecar injector 准入控制器&lt;/h4&gt;
 &lt;p&gt;Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAdmissionWebhooks 自动将 Sidecar 代理注入至用户 Pod。&lt;/p&gt;
 &lt;p&gt;它使用 MutatingWebhook 机制在 pod 创建的时候将 sidecar 的容器和卷添加到每个 pod 的模版里。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img_3.png&#34; alt=&#34;img_3.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/istio/examples-bookinfo-productpage-v1:1.15.0&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# 应用镜像&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;productpage&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -293,7 +395,21 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15090&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15020&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;docker.io/istio/proxyv2:1.5.1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# init 容器&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;istio-init&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;配置管理设计&#34;&gt;配置管理设计&lt;/h4&gt;
+&lt;h5 id=&#34;1-启动静态配置&#34;&gt;1. 启动静态配置&lt;/h5&gt;
+&lt;p&gt;启动的最小配置集，可以和镜像集成在一起。&lt;/p&gt;
+&lt;h5 id=&#34;2-静态自定义配置&#34;&gt;2. 静态自定义配置&lt;/h5&gt;
+&lt;p&gt;可以使用K8S的静态配置进行配置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;k8s config&lt;/li&gt;
+&lt;li&gt;k8s crd&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-灵活的动态配置&#34;&gt;3. 灵活的动态配置&lt;/h5&gt;
+&lt;p&gt;控制面下发，全量/增量推送：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;xDS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;二istio-polit-agent&#34;&gt;二、Istio polit-agent&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Init 容器 istio-init：用于 pod 中设置 iptables 端口转发&lt;/li&gt;
@@ -326,8 +442,6 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;istio-proxy容器&#34;&gt;istio-proxy容器&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://i.loli.net/2018/09/09/5b94b1c621c56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;使用单容器多进程模型。&lt;/p&gt;
-&lt;p&gt;为什么不使用单进程模型？代理属于第三方提供，istio是对其进行了管理和拓展。&lt;/p&gt;
-&lt;p&gt;如果代理本身属于istio，是可以实现单进程模型。&lt;/p&gt;
 &lt;h4 id=&#34;1-pilot-agent进程&#34;&gt;1. pilot agent进程&lt;/h4&gt;
 &lt;p&gt;在proxy镜像中，pilot-agent 负责的工作包括：&lt;/p&gt;
 &lt;ol&gt;
@@ -353,7 +467,7 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;h4 id=&#34;envoy检查&#34;&gt;envoy检查&lt;/h4&gt;
 &lt;p&gt;对于 ready 检查，调用的路径为/healthz/ready， 并配合设置的端口 applicationPorts 通过 Envoy 的 admin 端口进行对应的端口进行检查，用于决定 Envoy 是否已经 ready 接受相对应的流量。&lt;/p&gt;
 &lt;p&gt;检查原理是通过本地管理端口，如 http://127.0.0.1:15000/listeners 获取 Envoy 当前监听的全部端口，然后将配置的端口 applicationPorts 在监听的端口中进行查找，来决定 Envoy 是否 ready。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img.png&#34; alt=&#34;img.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_0.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;应用端口检查&#34;&gt;应用端口检查&lt;/h4&gt;
 &lt;p&gt;检查的路径为 /url 路径，在 header 中设置 istio-app-probe-port 端口，使用 访问路径中的 url 来进行检查，最终调用的是 http://127.0.0.1:istio-app-probe-port/url，头部设置的全部参数也都会传递到别检测的服务端口上；&lt;/p&gt;
 &lt;h4 id=&#34;xds-proxy&#34;&gt;xds proxy&lt;/h4&gt;
@@ -361,7 +475,14 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;h4 id=&#34;2-proxy进程第三方代理进程&#34;&gt;2. proxy进程(第三方代理进程)&lt;/h4&gt;
 &lt;h4 id=&#34;启动envoy&#34;&gt;启动Envoy&lt;/h4&gt;
 &lt;p&gt;[/pilot-agent/main/istio_agent.NewAgent]&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img_1.png&#34; alt=&#34;img_1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;sidecar多进程设计模式&#34;&gt;sidecar多进程设计模式&lt;/h3&gt;
+&lt;h4 id=&#34;1-开源集成&#34;&gt;1. 开源集成&lt;/h4&gt;
+&lt;p&gt;代理属于第三方提供，istio是对其进行了管理和拓展。&lt;/p&gt;
+&lt;p&gt;如果代理本身属于istio，是可以实现单进程模型。&lt;/p&gt;
+&lt;h4 id=&#34;2-agent设计思想&#34;&gt;2. agent设计思想&lt;/h4&gt;
+&lt;p&gt;由agent负责配置监听和下发。&lt;/p&gt;
+&lt;p&gt;解耦配置管理和运行时，同时可以对proxy进程进行热重启。&lt;/p&gt;
 &lt;h3 id=&#34;b流量拦截&#34;&gt;B、流量拦截&lt;/h3&gt;
 &lt;h4 id=&#34;iptables&#34;&gt;iptables&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;ip netns exec cni-bf783dac-fe05-cb35-4d5a-848449119b19 iptables -L -t nat
@@ -385,7 +506,7 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 -A ISTIO_OUTPUT -j ISTIO_REDIRECT                              # 剩下的都进入 ISTIO_REDIRECT
 -A ISTIO_REDIRECT -p tcp -j REDIRECT --to-ports 15001          # 转达到15001 outbond
 COMMIT
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;img_4.png&#34; alt=&#34;img_4.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -460,105 +581,6 @@ COMMIT
 &lt;p&gt;Mesh: dns拦截(udp)&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://img.rocdu.top/20201117/role-of-dns-today.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://img.rocdu.top/20201117/dns-interception-in-istio.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: </title>
-      <link>https://reactivegroup.github.io/capa.io/blog/1/01/01/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://reactivegroup.github.io/capa.io/blog/1/01/01/</guid>
-      <description>
-        
-        
-        &lt;h3 id=&#34;请求的生命周期&#34;&gt;请求的生命周期&lt;/h3&gt;
-&lt;p&gt;在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。&lt;/p&gt;
-&lt;p&gt;当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.&lt;/p&gt;
-&lt;p&gt;$ curl example.com -v&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Trying 192.0.2.0:80&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。&lt;/p&gt;
-&lt;p&gt;如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。&lt;/p&gt;
-&lt;p&gt;一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。&lt;/p&gt;
-&lt;p&gt;使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。
-在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints
-使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。
-请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。&lt;/p&gt;
-&lt;p&gt;DNS 代理
-3分钟阅读 页面测试&lt;/p&gt;
-&lt;p&gt;除了捕获应用程序流量之外，Istio 还可以捕获 DNS 请求以提高网格的性能和可用性。在代理 DNS 时，来自应用程序的所有 DNS 请求都将被重定向到 sidecar，其中存储了本地域名到 IP 地址的映射。如果请求可以被 Sidecar 处理，它将直接向应用程序返回响应，避免往返上游 DNS 服务器。否则，请求将按照标准/etc/resolv.confDNS 配置向上游转发。&lt;/p&gt;
-&lt;p&gt;虽然 Kubernetes 为 Kubernetes 提供了开箱即用的 DNS 解析Service，但任何自定义ServiceEntry的都不会被识别。使用此功能，ServiceEntry无需自定义配置 DNS 服务器即可解析地址。对于 Kubernetes Service，DNS 响应将是相同的，但负载减少kube-dns并提高了性能。&lt;/p&gt;
-&lt;p&gt;此功能也可用于在 Kubernetes 之外运行的服务。这意味着可以解决所有内部服务，而无需笨拙的变通方法将 Kubernetes DNS 条目暴露在集群之外。&lt;/p&gt;
-&lt;p&gt;入门
-默认情况下当前未启用此功能。要启用它，请使用以下设置安装 Istio：&lt;/p&gt;
-&lt;p&gt;$ cat &amp;laquo;EOF | istioctl install -y -f -
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-meshConfig:
-defaultConfig:
-proxyMetadata:&lt;/p&gt;
-&lt;h1 id=&#34;enable-basic-dns-proxying&#34;&gt;Enable basic DNS proxying&lt;/h1&gt;
-&lt;p&gt;ISTIO_META_DNS_CAPTURE: &amp;ldquo;true&amp;rdquo;&lt;/p&gt;
-&lt;h1 id=&#34;enable-automatic-address-allocation-optional&#34;&gt;Enable automatic address allocation, optional&lt;/h1&gt;
-&lt;p&gt;ISTIO_META_DNS_AUTO_ALLOCATE: &amp;ldquo;true&amp;rdquo;
-EOF&lt;/p&gt;
-&lt;p&gt;这也可以使用proxy.istio.io/configannotation在每个 pod 的基础上启用。&lt;/p&gt;
-&lt;p&gt;使用 部署到 VM 时，默认情况下将启用基本 DNS 代理。istioctl workload entry configure
-DNS 捕获在行动
-要尝试 DNS 捕获，首先ServiceEntry为一些外部服务设置一个：&lt;/p&gt;
-&lt;p&gt;apiVersion: networking.istio.io/v1beta1
-kind: ServiceEntry
-metadata:
-name: external-address
-spec:
-addresses:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;198.51.100.0
-hosts:&lt;/li&gt;
-&lt;li&gt;address.internal
-ports:&lt;/li&gt;
-&lt;li&gt;name: http
-number: 80
-protocol: HTTP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;如果没有 DNS 捕获，请求address.internal可能无法解析。启用此功能后，您应该根据配置获得响应address：&lt;/p&gt;
-&lt;p&gt;$ curl -v address.internal&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Trying 198.51.100.1:80&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;地址自动分配
-在上面的示例中，您有一个用于发送请求的服务的预定义 IP 地址。但是，访问没有稳定地址的外部服务是很常见的，而是依赖 DNS。在这种情况下，DNS 代理将没有足够的信息来返回响应，并且需要向上游转发 DNS 请求。&lt;/p&gt;
-&lt;p&gt;这对于 TCP 流量来说尤其成问题。与基于Host标头路由的 HTTP 请求不同，TCP 携带的信息要少得多。您只能在目标 IP 和端口号上进行路由。因为后端没有一个稳定的IP，所以也不能基于它进行路由，只留下端口号，当多个ServiceEntryTCP服务共享同一个端口时，会导致冲突。&lt;/p&gt;
-&lt;p&gt;为了解决这些问题，DNS 代理还支持为ServiceEntry未明确定义地址的 s 自动分配地址。这是由ISTIO_META_DNS_AUTO_ALLOCATE选项配置的。&lt;/p&gt;
-&lt;p&gt;启用此功能后，DNS 响应将为每个ServiceEntry. 然后将代理配置为将请求匹配到此 IP 地址，并将请求转发到相应的ServiceEntry.&lt;/p&gt;
-&lt;p&gt;由于此功能会修改 DNS 响应，因此它可能无法与所有应用程序兼容。
-要尝试这一点，请配置另一个ServiceEntry：&lt;/p&gt;
-&lt;p&gt;apiVersion: networking.istio.io/v1beta1
-kind: ServiceEntry
-metadata:
-name: external-auto
-spec:
-hosts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;auto.internal
-ports:&lt;/li&gt;
-&lt;li&gt;name: http
-number: 80
-protocol: HTTP
-resolution: STATIC
-endpoints:&lt;/li&gt;
-&lt;li&gt;address: 198.51.100.2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;现在，发送请求：&lt;/p&gt;
-&lt;p&gt;$ curl -v auto.internal&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Trying 240.240.0.1:80&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;如您所见，请求被发送到一个自动分配的地址，240.240.0.1. 这些地址将从240.240.0.0/16保留的 IP 地址范围中挑选，以避免与实际服务发生冲突。&lt;/p&gt;
 
       </description>
     </item>

@@ -187,10 +187,26 @@ if (!doNotTrack) {
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblogcloudstack-li">
   <a href="/capa.io/blog/cloudstack/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstack"><span class="">Cloud Native Stack</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackenvoy-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackmosn-li">
+  <a href="/capa.io/blog/cloudstack/mosn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackmosn"><span class="">Mosn Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520mosn-landscape-li">
+  <a href="/capa.io/blog/2022/05/20/mosn-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520mosn-landscape"><span class="">Mosn Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstacknetty-li">
+  <a href="/capa.io/blog/cloudstack/netty/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstacknetty"><span class="">Netty Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520netty-landscape-li">
+  <a href="/capa.io/blog/2022/05/20/netty-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520netty-landscape"><span class="">Netty Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackenvoy-li">
   <a href="/capa.io/blog/cloudstack/envoy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackenvoy"><span class="">Envoy Stack</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220503envoy-landscape-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220521envoy-gateway-li">
+  <a href="/capa.io/blog/2022/05/21/envoy-gateway/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220521envoy-gateway"><span class="">Envoy Gateway</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220503envoy-landscape-li">
   <a href="/capa.io/blog/2022/05/03/envoy-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220503envoy-landscape"><span class="">Envoy Landscape</span></a>
 </li>
   </ul>
@@ -204,14 +220,12 @@ if (!doNotTrack) {
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblogcloudstackistio-li">
   <a href="/capa.io/blog/cloudstack/istio/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackistio"><span class="td-sidebar-nav-active-item">Istio Stack</span></a>
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-landscape-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-devops-li">
+  <a href="/capa.io/blog/2022/03/09/istio-devops/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-devops"><span class="">Istio devops</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-landscape-li">
   <a href="/capa.io/blog/2022/03/09/istio-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-landscape"><span class="">Istio Landscape</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog10101-li">
-  <a href="/capa.io/blog/1/01/01/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog10101"><span class=""></span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog10101-li">
-  <a href="/capa.io/blog/1/01/01/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog10101"><span class=""></span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogtecktalk-li">
@@ -337,22 +351,18 @@ if (!doNotTrack) {
 
 
 
-						<p class="pt-0 mt-0">一、Istio Sidecar Sidecar模式是什么 Sidecar模式是一种单节点、多容器的应用设计形式。Sidecar主张以额外的容器来扩展或增强主容器,而这个额外的容器被称为Sidecar容器
+						<p class="pt-0 mt-0"> 参考文档：https://www.servicemesher.com/istio-handbook/concepts/sidecar-injection.html
+ 一、Istio Sidecar Sidecar模式是什么 Sidecar模式是一种单节点、多容器的应用设计形式。Sidecar主张以额外的容器来扩展或增强主容器,而这个额外的容器被称为Sidecar容器
 sidecar 模式也符合当前微服务的以下特点:
- 隔离(separation of concerns):让每个容器环境不需要相互依赖而独立运行,也就意味着sidecar程序可以和任何语言的应用服务一起运行。 单一责任原则(single responsibility principle),各个容 …</p>
+ 隔离(separation of concerns):让每个容器环境不需要相 …</p>
 						<p class="pt-0"><a href="/capa.io/blog/2022/03/09/istio-landscape/" aria-label="更多 - Istio Landscape">更多</a></p>
 					</div>
 				</li>
 				
-			</ul>
-			
-			<h2>Posts in 0001</h2>
-			<ul class="list-unstyled mt-4">
-				
 				<li class="media mb-4">
 					<div class="media-body">
-						<h5 class="mt-0 mb-1"><a href="/capa.io/blog/1/01/01/"></a></h5>
-						<p class="mb-2 mb-md-3"><small class="text-muted">01.01.0001 in Istio Stack</small></p>
+						<h5 class="mt-0 mb-1"><a href="/capa.io/blog/2022/03/09/istio-devops/">Istio devops</a></h5>
+						<p class="mb-2 mb-md-3"><small class="text-muted">09.03.2022 in Istio Stack</small></p>
 						<header class="article-meta">
 							
 							
@@ -378,7 +388,7 @@ sidecar 模式也符合当前微服务的以下特点:
 当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.
 $ curl example.com -v
  Trying …</p>
-						<p class="pt-0"><a href="/capa.io/blog/1/01/01/" aria-label="更多 - ">更多</a></p>
+						<p class="pt-0"><a href="/capa.io/blog/2022/03/09/istio-devops/" aria-label="更多 - Istio devops">更多</a></p>
 					</div>
 				</li>
 				

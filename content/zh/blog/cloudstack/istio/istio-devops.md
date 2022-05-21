@@ -1,3 +1,11 @@
+---
+title: "Istio devops"
+linkTitle: "Istio devops"
+date: 2022-03-09
+description: >
+    Istio devops.
+---
+
 ### 请求的生命周期
 
 在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。

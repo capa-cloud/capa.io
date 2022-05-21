@@ -1,4 +1,3 @@
-
 ---
 title: "Istio Stack"
 linkTitle: "Istio Stack"
