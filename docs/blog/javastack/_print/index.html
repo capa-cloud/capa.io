@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.89.4" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/blog/javastack/">
+<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/blog/javastack/index.xml">
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="shortcut icon" href="/capa.io/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/capa.io/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-192x192.png" sizes="192x192">
+
+<title>Cloud Java Stack | Capa</title>
+
+
+  
+  <meta name="description" content="">
+<meta property="og:title" content="Cloud Java Stack" />
+<meta property="og:description" content="Cloud Runtimes API" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/javastack/" /><meta property="og:site_name" content="Capa" />
+
+<meta itemprop="name" content="Cloud Java Stack">
+<meta itemprop="description" content="Cloud Runtimes API"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cloud Java Stack"/>
+<meta name="twitter:description" content="Cloud Runtimes API"/>
+
+
+
+
+<link rel="preload" href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" as="style">
+<link href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-00000000-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+  </head>
+  <body class="td-section td-blog">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/capa.io/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Capa</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/about/" ><span>关于</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/docs/" ><span>文档</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/capa.io/blog/" ><span class="active">博客</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/community/" ><span>社区</span></a>
+			</li>
+			
+			
+			
+			<li class="nav-item dropdown mr-4 d-none d-lg-block">
+				
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	简体中文
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
+	
+</div>
+			</li>
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+<input type="search" class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label="站内搜索…" autocomplete="off">
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
+            
+
+
+
+
+<div class="td-content">
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+这是本节的多页打印视图。
+<a href="#" onclick="print();return false;">点击此处打印</a>.
+</p><p>
+<a href="/capa.io/blog/javastack/">返回本页常规视图</a>.
+</p>
+</div>
+
+
+
+<h1 class="title">Cloud Java Stack</h1>
+
+
+
+
+
+    <ul>
+    
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-261f22b6a4e2fdb44edd3dd2f14c62ee">Dubbo Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-967e9aa79f3ddac5796d87369f2bf268">Dubbo Invoke流程</a></li>
+
+
+
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-1ee71be258b4e94974f165af524f9f7e">Dubbo Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-03d02d97bf9aa60a5c05b9cf56c91fbe">Netty Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-7d923a1561824f2a60d7ad00cfeb0d36">Netty Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-e862cad1bba3c9950e40928bb47c9a41">Reactive Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-14e34b1064ac833217e025bb77c63fd2">Reactive Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
+
+    </ul>
+
+
+<div class="content">
+      
+</div>
+</div>
+
+
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-261f22b6a4e2fdb44edd3dd2f14c62ee">Dubbo Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-967e9aa79f3ddac5796d87369f2bf268">Dubbo Invoke流程</h1>
+	<div class="lead">Dubbo Invoke流程.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	<h3 id="概要">概要</h3>
+<p>梳理Dubbo的调用链路流程，分析其设计理念和思路，以及阅读其中关键步骤的源码逻辑</p>
+<h4 id="review">Review</h4>
+<blockquote>
+<p>在 RPC 中，Protocol 是核心层，也就是只要有 Protocol + Invoker + Exporter 就可以完成非透明的 RPC 调用，然后在 Invoker 的主过程上 Filter 拦截点。</p>
+</blockquote>
+<p>调用流程主要围绕<code>Protocol</code>/<code>Invoker</code>/<code>Filter</code>三个接口进行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Protocol</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Exporter</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">export</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">refer</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">URL</span> <span style="color:#000">url</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Node</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Filter</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">BaseFilter</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h2 id="整体流程">整体流程</h2>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img.png" alt=""></p>
+<h3 id="初始化流程">初始化流程</h3>
+<ol>
+<li>初始化配置相关&hellip;&hellip;.</li>
+<li>初始化<code>Protocol</code></li>
+<li>初始化<code>Invoker</code></li>
+<li>初始化底层资源</li>
+</ol>
+<h3 id="调用流程">调用流程</h3>
+<ol>
+<li>调用<code>Invoker</code>，做一些逻辑</li>
+<li>调用<code>Filter</code>，做一些逻辑</li>
+<li>调用<code>Invoker</code>，做一些逻辑</li>
+<li>调用底层资源</li>
+</ol>
+<h2 id="简化设计">简化设计</h2>
+<p>从一个Client开始&hellip;&hellip;</p>
+<h4 id="1-直接调用">1. 直接调用</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_1.png" alt=""></p>
+<h4 id="2-责任链模式">2. 责任链模式</h4>
+<p>解决函数逻辑的水平拓展问题</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_2.png" alt=""></p>
+<p>定义接口：<code>Response invoke(Request request);</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Node</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h4 id="3-过滤器插件">3. 过滤器插件</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_3.png" alt=""></p>
+<h4 id="在重要的过程上设置拦截接口">在重要的过程上设置拦截接口</h4>
+<p>如果你要写个远程调用框架，那远程调用的过程应该有一个统一的拦截接口。如果你要写一个 ORM 框架，那至少 SQL 的执行过程，Mapping 过程要有拦截接口；如果你要写一个 Web 框架，那请求的执行过程应该要有拦截接口，等等。没有哪个公用的框架可以 Cover 住所有需求，允许外置行为，是框架的基本扩展方式。这样，如果有人想在远程调用前，验证下令牌，验证下黑白名单，统计下日志；如果有人想在 SQL 执行前加下分页包装，做下数据权限控制，统计下 SQL 执行时间；如果有人想在请求执行前检查下角色，包装下输入输出流，统计下请求量，等等，就可以自行完成，而不用侵入框架内部。<strong>拦截接口，通常是把过程本身用一个对象封装起来，传给拦截器链，比如：远程调用主过程为 invoke()，那拦截器接口通常为 invoke(Invocation)，Invocation 对象封装了本来要执行过程的上下文，并且 Invocation 里有一个 invoke() 方法，由拦截器决定什么时候执行，同时，Invocation 也代表拦截器行为本身，这样上一拦截器的 Invocation 其实是包装的下一拦截器的过程，直到最后一个拦截器的 Invocation 是包装的最终的 invoke() 过程</strong>；同理，SQL 主过程为 execute()，那拦截器接口通常为 execute(Execution)，原理一样。当然，实现方式可以任意，上面只是举例。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Filter</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">BaseFilter</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p><strong>装饰模式/组合模式</strong></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_4.png" alt=""></p>
+<h4 id="4-领域模型的设计">4. 领域模型的设计</h4>
+<p><strong>重资源 -&gt; 资源的管理 -&gt; 生命周期</strong></p>
+<p>资源的管理：</p>
+<p>共享、创建、释放、生命周期&hellip;&hellip;..</p>
+<p>链路治理、上下文、组装&hellip;&hellip;..</p>
+<h4 id="领域模型">领域模型</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_5.png" alt=""></p>
+<p>在 Dubbo 的核心领域模型中：</p>
+<ul>
+<li>Protocol 是服务域，它是 Invoker 暴露和引用的主功能入口，它负责 Invoker 的生命周期管理。</li>
+<li>Invoker 是实体域，它是 Dubbo 的核心模型，其它模型都向它靠扰，或转换成它，它代表一个可执行体，可向它发起 invoke 调用，它有可能是一个本地的实现，也可能是一个远程的实现，也可能一个集群实现。</li>
+<li>Invocation 是会话域，它持有调用过程中的变量，比如方法名，参数等。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Protocol</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Exporter</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">export</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">refer</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">URL</span> <span style="color:#000">url</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_6.png" alt=""></p>
+<p>共享资源谁持有？</p>
+<p>缓存在哪里存储？</p>
+<p>线程安全？</p>
+<p>单例还是New？</p>
+<h4 id="服务域实体域会话域分离">服务域/实体域/会话域分离</h4>
+<p>任何框架或组件，总会有核心领域模型，比如：Spring 的 Bean，Struts 的 Action，Dubbo 的 Service，Napoli 的 Queue 等等。这个核心领域模型及其组成部分称为实体域，它代表着我们要操作的目标本身。**实体域通常是线程安全的，不管是通过不变类，同步状态，或复制的方式。**①</p>
+<p>服务域也就是行为域，它是组件的功能集，同时也负责实体域和会话域的生命周期管理， 比如 Spring 的 ApplicationContext，Dubbo 的 ServiceManager 等。**服务域的对象通常会比较重，而且是线程安全的，并以单一实例服务于所有调用。**②</p>
+<p>什么是会话？就是一次交互过程。会话中重要的概念是上下文，什么是上下文？比如我们说：“老地方见”，这里的“老地方”就是上下文信息。为什么说“老地方”对方会知道，因为我们前面定义了“老地方”的具体内容。所以说，上下文通常持有交互过程中的状态变量等。<strong>会话对象通常较轻，每次请求都重新创建实例，请求结束后销毁。简而言之：把元信息交由实体域持有</strong>③，把一次请求中的临时状态由会话域持有，由服务域贯穿整个过程。</p>
+<p>① <code>Invoker</code>仅维护自己的状态，类似Actor设计模式</p>
+<p>② <code>Protocol</code>初始化为单例，并且持有缓存Map</p>
+<p>③ <code>Invoker</code>中存储默认元信息，临时信息存储到<code>Invocation</code></p>
+<p>=&gt; show code</p>
+<h4 id="41-资源的销毁">4.1 资源的销毁</h4>
+<p>由服务域管理资源的生命周期，并委托给实体域执行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Protocol</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Exporter</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">export</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">refer</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">URL</span> <span style="color:#000">url</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Node</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h4 id="42-状态的监听">4.2 状态的监听</h4>
+<h4 id="重要的状态的变更发送事件并留出监听接口">重要的状态的变更发送事件并留出监听接口</h4>
+<p>这里先要讲一个事件和上面拦截器的区别，拦截器是干预过程的，它是过程的一部分，是基于过程行为的，而事件是基于状态数据的，任何行为改变的相同状态，对事件应该是一致的。事件通常是事后通知，是一个 Callback 接口，方法名通常是过去式的，比如 onChanged()。比如远程调用框架，当网络断开或连上应该发出一个事件，当出现错误也可以考虑发出一个事件，这样外围应用就有可能观察到框架内部的变化，做相应适应。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">InvokerListener</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">referred</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroyed</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h4 id="43-纵向拓展">4.3 纵向拓展</h4>
+<p>SPI，微内核，插件化</p>
+<h4 id="微核插件式平等对待第三方">微核插件式，平等对待第三方</h4>
+<p>大凡发展的比较好的框架，都遵守微核的理念。Eclipse 的微核是 OSGi， Spring 的微核是 BeanFactory，Maven 的微核是 Plexus。通常核心是不应该带有功能性的，而是一个生命周期和集成容器，这样各功能可以通过相同的方式交互及扩展，并且任何功能都可以被替换。如果做不到微核，至少要平等对待第三方，即原作者能实现的功能，扩展者应该可以通过扩展的方式全部做到。原作者要把自己也当作扩展者，这样才能保证框架的可持续性及由内向外的稳定性。</p>
+<p>引入配置模块，担当微内核。并负责<code>Protocol</code>的初始化启动（Protocol再负责下层的初始化）</p>
+<h4 id="44-完善的分层">4.4 完善的分层</h4>
+<ul>
+<li><strong>config 配置层</strong>：对外配置接口，以 ServiceConfig, ReferenceConfig 为中心，可以直接初始化配置类，也可以通过 spring 解析配置生成配置类</li>
+<li><strong>proxy 服务代理层</strong>：服务接口透明代理，生成服务的客户端 Stub 和服务器端 Skeleton, 以 ServiceProxy 为中心，扩展接口为 ProxyFactory</li>
+<li><strong>registry 注册中心层</strong>：封装服务地址的注册与发现，以服务 URL 为中心，扩展接口为 RegistryFactory, Registry, RegistryService</li>
+<li><strong>cluster 路由层</strong>：封装多个提供者的路由及负载均衡，并桥接注册中心，以 Invoker 为中心，扩展接口为 Cluster, Directory, Router, LoadBalance</li>
+<li>monitor 监控层：RPC 调用次数和调用时间监控，以 Statistics 为中心，扩展接口为 MonitorFactory, Monitor, MonitorService</li>
+<li><strong>protocol 远程调用层</strong>：封装 RPC 调用，以 Invocation, Result 为中心，扩展接口为 Protocol, Invoker, Exporter</li>
+<li>exchange 信息交换层：封装请求响应模式，同步转异步，以 Request, Response 为中心，扩展接口为 Exchanger, ExchangeChannel, ExchangeClient, ExchangeServer</li>
+<li>transport 网络传输层：抽象 mina 和 netty 为统一接口，以 Message 为中心，扩展接口为 Channel, Transporter, Client, Server, Codec</li>
+<li>serialize 数据序列化层：可复用的一些工具，扩展接口为 Serialization, ObjectInput, ObjectOutput, ThreadPool</li>
+</ul>
+<p>其他层次以插件的方式装配到config里，核心仍然是<code>Protocol</code>层。功能要么伪装成<code>Invoker</code>，要么在初始化时进行。</p>
+<blockquote>
+<p>在 RPC 中，Protocol 是核心层，也就是只要有 Protocol + Invoker + Exporter 就可以完成非透明的 RPC 调用，然后在 Invoker 的主过程上 Filter 拦截点。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_7.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_8.png" alt=""></p>
+<p>层级关系：</p>
+<pre><code>-system
+-config
+-proxy
+-registry
+-cluster
+-monitor
+-protocol
+    -invoker
+        -exchange
+        -...
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_9.png" alt=""></p>
+<h4 id="5-异步调用">5. 异步调用</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Result</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Serializable</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">whenCompleteWithContext</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">BiConsumer</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Result</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Throwable</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">fn</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h3 id="重点关注点">重点关注点</h3>
+<p>结合一开始的大概流程&hellip;</p>
+<h4 id="1-protocol初始化流程">1. protocol初始化流程</h4>
+<p>初始化的时候做了什么？集群？注册发现？代理封装？</p>
+<p>资源如何加载？如何缓存？连接池？线程池？</p>
+<p>&hellip;&hellip;..</p>
+<h4 id="2-invoke流程">2. invoke流程</h4>
+<p>实际调用过程的流程？有哪些逻辑步骤？</p>
+<p>负载均衡？重试？监控？序列化？</p>
+<p>同步异步？流式调用？</p>
+<p>&hellip;&hellip;..</p>
+<h2 id="invoke流程解读">Invoke流程解读</h2>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_10.png" alt=""></p>
+<h3 id="调用流程-1">调用流程</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_11.png" alt=""></p>
+<h3 id="源码分析">源码分析</h3>
+<p>关键Invoker的逻辑：</p>
+<p><code>AbstractInvoker</code>: 3个步骤，（PR：https://github.com/apache/dubbo/pull/7952）</p>
+<p>具体逻辑在<code>doInvoke</code>中</p>
+<h4 id="failoverclusterinvoker"><code>FailoverClusterInvoker</code></h4>
+<p>当调用失败时，记录初始错误并重试其他调用程序(重试n次，这意味着最多将调用n个不同的调用程序)注意，重试会导致延迟。 故障转移</p>
+<p>图中方法：list、route、select</p>
+<p>什么时候会重试？非biz异常，但粒度很粗&hellip;.（Issue相关）</p>
+<h4 id="listenerinvokerwrapper"><code>ListenerInvokerWrapper</code></h4>
+<p>注册invoker的listener，并进行操作，装饰模式</p>
+<p>改进：观察者模式+生命周期</p>
+<h4 id="filterchainnode"><code>FilterChainNode</code></h4>
+<p>实际上是Invoker，但内部保存了Filter</p>
+<p>Invoker装饰，Filter适配，两者的组合</p>
+<h4 id="dubboinvoker"><code>DubboInvoker</code></h4>
+<p>可以看到：Invoker层持有下层的资源管理</p>
+<p>接下来就是<code>excahnge</code>层的逻辑</p>
+<h4 id="tripleinvoker"><code>TripleInvoker</code></h4>
+<p>直接持有底层netty资源，比较粗糙</p>
+<p>=&gt; show code</p>
+<h2 id="总结">总结</h2>
+<h3 id="1层次结构">1.层次结构</h3>
+<p>层级关系：</p>
+<pre><code>-system
+-config
+-proxy
+-registry
+-cluster
+-monitor
+-protocol
+    -invoker
+        -exchange
+        -...
+</code></pre>
+<h3 id="2调用流程">2.调用流程</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_12.png" alt=""></p>
+<h3 id="3设计模式">3.设计模式</h3>
+<p>责任链：Invoker</p>
+<p>适配器：适配到Invoker责任链中</p>
+<p>装饰：对Invoker进行增强</p>
+<p>&hellip;&hellip;&hellip;</p>
+<h3 id="4设计优化">4.设计优化</h3>
+<p>Invoker调用链：√，整个系统的核心，插件化功能采用拓展接口的方式，各个模块功能比较明确</p>
+<p>Lifecycle生命周期：不完全，没有完整的生命周期；对于生命周期的事件处理比较硬编码</p>
+<p>Listener：装饰的比较硬编码，事件阶段不够全，拓展性不够好</p>
+<p>Filter：采用装饰模型而非组合模型，拓展性较差；嵌套层级深，调试时链路不清晰</p>
+<p>&hellip;&hellip;..</p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-1ee71be258b4e94974f165af524f9f7e">Dubbo Landscape</h1>
+	<div class="lead">Dubbo Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	<h2 id="dubbo整体设计概述">Dubbo整体设计概述</h2>
+<h3 id="ainvoker责任链设计">A、Invoker责任链设计</h3>
+<h3 id="bfilter拓展机制设计">B、Filter拓展机制设计</h3>
+<h3 id="cmanager容器管理设计">C、Manager容器管理设计</h3>
+<h3 id="d">D、</h3>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-03d02d97bf9aa60a5c05b9cf56c91fbe">Netty Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-7d923a1561824f2a60d7ad00cfeb0d36">Netty Landscape</h1>
+	<div class="lead">Netty Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	<h3 id="参考文章">参考文章</h3>
+<h4 id="io-模型">IO 模型</h4>
+<p><a href="https://xie.infoq.cn/article/25d369e183563e44fc50d8168">https://xie.infoq.cn/article/25d369e183563e44fc50d8168</a></p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-e862cad1bba3c9950e40928bb47c9a41">Reactive Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-14e34b1064ac833217e025bb77c63fd2">Reactive Landscape</h1>
+	<div class="lead">Reactive Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	<h3 id="参考文章">参考文章</h3>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2022 The Capa Authors All Rights Reserved</small>
+        <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">隐私政策</a></small>
+	
+		<p class="mt-2"><a href="/capa.io/about/">About Capa</a></p>
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src='/capa.io/js/tabpane-persist.js'></script>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/capa.io/js/main.min.c30c86b73d90a0180556503734816437e56f9d02c4939409d2766a99c0d89b4c.js" integrity="sha256-wwyGtz2QoBgFVlA3NIFkN&#43;VvnQLEk5QJ0nZqmcDYm0w=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>

@@ -195,6 +195,130 @@ if (!doNotTrack) {
     
 	
 
+    <li><a href="#pg-2e9978843142c9c932f712bbe8d8abad">Cloud Java Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-261f22b6a4e2fdb44edd3dd2f14c62ee">Dubbo Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-967e9aa79f3ddac5796d87369f2bf268">Dubbo Invoke流程</a></li>
+
+
+
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-1ee71be258b4e94974f165af524f9f7e">Dubbo Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-03d02d97bf9aa60a5c05b9cf56c91fbe">Netty Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-7d923a1561824f2a60d7ad00cfeb0d36">Netty Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-e862cad1bba3c9950e40928bb47c9a41">Reactive Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-14e34b1064ac833217e025bb77c63fd2">Reactive Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+
     <li><a href="#pg-cf7d2529b2c997fab6881fa00e7393a4">Cloud Native Stack</a></li>
 
 
@@ -212,7 +336,7 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-8cabaf3d60ffba9526ff1248d04d8fe2">Mosn Stack</a></li>
+    <li><a href="#pg-16ce7c0e151cc3f247f9db27606370e1">AppMesh Stack</a></li>
 
 
 
@@ -229,7 +353,7 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-37ebdc4fe907c9cfd95ce197323ead8c">Mosn Landscape</a></li>
+    <li><a href="#pg-6371b7bf3a254e7459ee7f5ac1e7b00e">AppMesh Landscape</a></li>
 
 
 
@@ -243,7 +367,7 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-11c8a3427e130c510f2df8d0b30b409f">Netty Stack</a></li>
+    <li><a href="#pg-8c5b245f8cf887e44e99a7de1dfdc798">Nginx Stack</a></li>
 
 
 
@@ -260,7 +384,7 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-079187596e1cce1b656b7acbb8223f8a">Netty Landscape</a></li>
+    <li><a href="#pg-fc20f7f49d484d53f278ddb306806c81">Nginx Landscape</a></li>
 
 
 
@@ -383,6 +507,37 @@ if (!doNotTrack) {
     </ul>
     
   
+    
+    
+	
+
+    <li><a href="#pg-8cabaf3d60ffba9526ff1248d04d8fe2">Mosn Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-37ebdc4fe907c9cfd95ce197323ead8c">Mosn Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
 
     </ul>
     
@@ -448,6 +603,506 @@ if (!doNotTrack) {
   
 
 <div class="td-content" style="">
+    <h1 id="pg-2e9978843142c9c932f712bbe8d8abad">Cloud Java Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-261f22b6a4e2fdb44edd3dd2f14c62ee">Dubbo Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-967e9aa79f3ddac5796d87369f2bf268">Dubbo Invoke流程</h1>
+	<div class="lead">Dubbo Invoke流程.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	<h3 id="概要">概要</h3>
+<p>梳理Dubbo的调用链路流程，分析其设计理念和思路，以及阅读其中关键步骤的源码逻辑</p>
+<h4 id="review">Review</h4>
+<blockquote>
+<p>在 RPC 中，Protocol 是核心层，也就是只要有 Protocol + Invoker + Exporter 就可以完成非透明的 RPC 调用，然后在 Invoker 的主过程上 Filter 拦截点。</p>
+</blockquote>
+<p>调用流程主要围绕<code>Protocol</code>/<code>Invoker</code>/<code>Filter</code>三个接口进行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Protocol</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Exporter</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">export</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">refer</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">URL</span> <span style="color:#000">url</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Node</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Filter</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">BaseFilter</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h2 id="整体流程">整体流程</h2>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img.png" alt=""></p>
+<h3 id="初始化流程">初始化流程</h3>
+<ol>
+<li>初始化配置相关&hellip;&hellip;.</li>
+<li>初始化<code>Protocol</code></li>
+<li>初始化<code>Invoker</code></li>
+<li>初始化底层资源</li>
+</ol>
+<h3 id="调用流程">调用流程</h3>
+<ol>
+<li>调用<code>Invoker</code>，做一些逻辑</li>
+<li>调用<code>Filter</code>，做一些逻辑</li>
+<li>调用<code>Invoker</code>，做一些逻辑</li>
+<li>调用底层资源</li>
+</ol>
+<h2 id="简化设计">简化设计</h2>
+<p>从一个Client开始&hellip;&hellip;</p>
+<h4 id="1-直接调用">1. 直接调用</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_1.png" alt=""></p>
+<h4 id="2-责任链模式">2. 责任链模式</h4>
+<p>解决函数逻辑的水平拓展问题</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_2.png" alt=""></p>
+<p>定义接口：<code>Response invoke(Request request);</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Node</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h4 id="3-过滤器插件">3. 过滤器插件</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_3.png" alt=""></p>
+<h4 id="在重要的过程上设置拦截接口">在重要的过程上设置拦截接口</h4>
+<p>如果你要写个远程调用框架，那远程调用的过程应该有一个统一的拦截接口。如果你要写一个 ORM 框架，那至少 SQL 的执行过程，Mapping 过程要有拦截接口；如果你要写一个 Web 框架，那请求的执行过程应该要有拦截接口，等等。没有哪个公用的框架可以 Cover 住所有需求，允许外置行为，是框架的基本扩展方式。这样，如果有人想在远程调用前，验证下令牌，验证下黑白名单，统计下日志；如果有人想在 SQL 执行前加下分页包装，做下数据权限控制，统计下 SQL 执行时间；如果有人想在请求执行前检查下角色，包装下输入输出流，统计下请求量，等等，就可以自行完成，而不用侵入框架内部。<strong>拦截接口，通常是把过程本身用一个对象封装起来，传给拦截器链，比如：远程调用主过程为 invoke()，那拦截器接口通常为 invoke(Invocation)，Invocation 对象封装了本来要执行过程的上下文，并且 Invocation 里有一个 invoke() 方法，由拦截器决定什么时候执行，同时，Invocation 也代表拦截器行为本身，这样上一拦截器的 Invocation 其实是包装的下一拦截器的过程，直到最后一个拦截器的 Invocation 是包装的最终的 invoke() 过程</strong>；同理，SQL 主过程为 execute()，那拦截器接口通常为 execute(Execution)，原理一样。当然，实现方式可以任意，上面只是举例。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Filter</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">BaseFilter</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p><strong>装饰模式/组合模式</strong></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_4.png" alt=""></p>
+<h4 id="4-领域模型的设计">4. 领域模型的设计</h4>
+<p><strong>重资源 -&gt; 资源的管理 -&gt; 生命周期</strong></p>
+<p>资源的管理：</p>
+<p>共享、创建、释放、生命周期&hellip;&hellip;..</p>
+<p>链路治理、上下文、组装&hellip;&hellip;..</p>
+<h4 id="领域模型">领域模型</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_5.png" alt=""></p>
+<p>在 Dubbo 的核心领域模型中：</p>
+<ul>
+<li>Protocol 是服务域，它是 Invoker 暴露和引用的主功能入口，它负责 Invoker 的生命周期管理。</li>
+<li>Invoker 是实体域，它是 Dubbo 的核心模型，其它模型都向它靠扰，或转换成它，它代表一个可执行体，可向它发起 invoke 调用，它有可能是一个本地的实现，也可能是一个远程的实现，也可能一个集群实现。</li>
+<li>Invocation 是会话域，它持有调用过程中的变量，比如方法名，参数等。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Protocol</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Exporter</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">export</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">refer</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">URL</span> <span style="color:#000">url</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_6.png" alt=""></p>
+<p>共享资源谁持有？</p>
+<p>缓存在哪里存储？</p>
+<p>线程安全？</p>
+<p>单例还是New？</p>
+<h4 id="服务域实体域会话域分离">服务域/实体域/会话域分离</h4>
+<p>任何框架或组件，总会有核心领域模型，比如：Spring 的 Bean，Struts 的 Action，Dubbo 的 Service，Napoli 的 Queue 等等。这个核心领域模型及其组成部分称为实体域，它代表着我们要操作的目标本身。**实体域通常是线程安全的，不管是通过不变类，同步状态，或复制的方式。**①</p>
+<p>服务域也就是行为域，它是组件的功能集，同时也负责实体域和会话域的生命周期管理， 比如 Spring 的 ApplicationContext，Dubbo 的 ServiceManager 等。**服务域的对象通常会比较重，而且是线程安全的，并以单一实例服务于所有调用。**②</p>
+<p>什么是会话？就是一次交互过程。会话中重要的概念是上下文，什么是上下文？比如我们说：“老地方见”，这里的“老地方”就是上下文信息。为什么说“老地方”对方会知道，因为我们前面定义了“老地方”的具体内容。所以说，上下文通常持有交互过程中的状态变量等。<strong>会话对象通常较轻，每次请求都重新创建实例，请求结束后销毁。简而言之：把元信息交由实体域持有</strong>③，把一次请求中的临时状态由会话域持有，由服务域贯穿整个过程。</p>
+<p>① <code>Invoker</code>仅维护自己的状态，类似Actor设计模式</p>
+<p>② <code>Protocol</code>初始化为单例，并且持有缓存Map</p>
+<p>③ <code>Invoker</code>中存储默认元信息，临时信息存储到<code>Invocation</code></p>
+<p>=&gt; show code</p>
+<h4 id="41-资源的销毁">4.1 资源的销毁</h4>
+<p>由服务域管理资源的生命周期，并委托给实体域执行</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Protocol</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Exporter</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">export</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">refer</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Class</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">URL</span> <span style="color:#000">url</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Node</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">invoke</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invocation</span> <span style="color:#000">invocation</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroy</span><span style="color:#ce5c00;font-weight:bold">();</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h4 id="42-状态的监听">4.2 状态的监听</h4>
+<h4 id="重要的状态的变更发送事件并留出监听接口">重要的状态的变更发送事件并留出监听接口</h4>
+<p>这里先要讲一个事件和上面拦截器的区别，拦截器是干预过程的，它是过程的一部分，是基于过程行为的，而事件是基于状态数据的，任何行为改变的相同状态，对事件应该是一致的。事件通常是事后通知，是一个 Callback 接口，方法名通常是过去式的，比如 onChanged()。比如远程调用框架，当网络断开或连上应该发出一个事件，当出现错误也可以考虑发出一个事件，这样外围应用就有可能观察到框架内部的变化，做相应适应。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">InvokerListener</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">referred</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">RpcException</span><span style="color:#ce5c00;font-weight:bold">;</span>
+
+    <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">destroyed</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Invoker</span><span style="color:#ce5c00;font-weight:bold">&lt;?&gt;</span> <span style="color:#000">invoker</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h4 id="43-纵向拓展">4.3 纵向拓展</h4>
+<p>SPI，微内核，插件化</p>
+<h4 id="微核插件式平等对待第三方">微核插件式，平等对待第三方</h4>
+<p>大凡发展的比较好的框架，都遵守微核的理念。Eclipse 的微核是 OSGi， Spring 的微核是 BeanFactory，Maven 的微核是 Plexus。通常核心是不应该带有功能性的，而是一个生命周期和集成容器，这样各功能可以通过相同的方式交互及扩展，并且任何功能都可以被替换。如果做不到微核，至少要平等对待第三方，即原作者能实现的功能，扩展者应该可以通过扩展的方式全部做到。原作者要把自己也当作扩展者，这样才能保证框架的可持续性及由内向外的稳定性。</p>
+<p>引入配置模块，担当微内核。并负责<code>Protocol</code>的初始化启动（Protocol再负责下层的初始化）</p>
+<h4 id="44-完善的分层">4.4 完善的分层</h4>
+<ul>
+<li><strong>config 配置层</strong>：对外配置接口，以 ServiceConfig, ReferenceConfig 为中心，可以直接初始化配置类，也可以通过 spring 解析配置生成配置类</li>
+<li><strong>proxy 服务代理层</strong>：服务接口透明代理，生成服务的客户端 Stub 和服务器端 Skeleton, 以 ServiceProxy 为中心，扩展接口为 ProxyFactory</li>
+<li><strong>registry 注册中心层</strong>：封装服务地址的注册与发现，以服务 URL 为中心，扩展接口为 RegistryFactory, Registry, RegistryService</li>
+<li><strong>cluster 路由层</strong>：封装多个提供者的路由及负载均衡，并桥接注册中心，以 Invoker 为中心，扩展接口为 Cluster, Directory, Router, LoadBalance</li>
+<li>monitor 监控层：RPC 调用次数和调用时间监控，以 Statistics 为中心，扩展接口为 MonitorFactory, Monitor, MonitorService</li>
+<li><strong>protocol 远程调用层</strong>：封装 RPC 调用，以 Invocation, Result 为中心，扩展接口为 Protocol, Invoker, Exporter</li>
+<li>exchange 信息交换层：封装请求响应模式，同步转异步，以 Request, Response 为中心，扩展接口为 Exchanger, ExchangeChannel, ExchangeClient, ExchangeServer</li>
+<li>transport 网络传输层：抽象 mina 和 netty 为统一接口，以 Message 为中心，扩展接口为 Channel, Transporter, Client, Server, Codec</li>
+<li>serialize 数据序列化层：可复用的一些工具，扩展接口为 Serialization, ObjectInput, ObjectOutput, ThreadPool</li>
+</ul>
+<p>其他层次以插件的方式装配到config里，核心仍然是<code>Protocol</code>层。功能要么伪装成<code>Invoker</code>，要么在初始化时进行。</p>
+<blockquote>
+<p>在 RPC 中，Protocol 是核心层，也就是只要有 Protocol + Invoker + Exporter 就可以完成非透明的 RPC 调用，然后在 Invoker 的主过程上 Filter 拦截点。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_7.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_8.png" alt=""></p>
+<p>层级关系：</p>
+<pre><code>-system
+-config
+-proxy
+-registry
+-cluster
+-monitor
+-protocol
+    -invoker
+        -exchange
+        -...
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_9.png" alt=""></p>
+<h4 id="5-异步调用">5. 异步调用</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Result</span> <span style="color:#204a87;font-weight:bold">extends</span> <span style="color:#000">Serializable</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+
+    <span style="color:#000">Result</span> <span style="color:#000">whenCompleteWithContext</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">BiConsumer</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Result</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Throwable</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">fn</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><h3 id="重点关注点">重点关注点</h3>
+<p>结合一开始的大概流程&hellip;</p>
+<h4 id="1-protocol初始化流程">1. protocol初始化流程</h4>
+<p>初始化的时候做了什么？集群？注册发现？代理封装？</p>
+<p>资源如何加载？如何缓存？连接池？线程池？</p>
+<p>&hellip;&hellip;..</p>
+<h4 id="2-invoke流程">2. invoke流程</h4>
+<p>实际调用过程的流程？有哪些逻辑步骤？</p>
+<p>负载均衡？重试？监控？序列化？</p>
+<p>同步异步？流式调用？</p>
+<p>&hellip;&hellip;..</p>
+<h2 id="invoke流程解读">Invoke流程解读</h2>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_10.png" alt=""></p>
+<h3 id="调用流程-1">调用流程</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_11.png" alt=""></p>
+<h3 id="源码分析">源码分析</h3>
+<p>关键Invoker的逻辑：</p>
+<p><code>AbstractInvoker</code>: 3个步骤，（PR：https://github.com/apache/dubbo/pull/7952）</p>
+<p>具体逻辑在<code>doInvoke</code>中</p>
+<h4 id="failoverclusterinvoker"><code>FailoverClusterInvoker</code></h4>
+<p>当调用失败时，记录初始错误并重试其他调用程序(重试n次，这意味着最多将调用n个不同的调用程序)注意，重试会导致延迟。 故障转移</p>
+<p>图中方法：list、route、select</p>
+<p>什么时候会重试？非biz异常，但粒度很粗&hellip;.（Issue相关）</p>
+<h4 id="listenerinvokerwrapper"><code>ListenerInvokerWrapper</code></h4>
+<p>注册invoker的listener，并进行操作，装饰模式</p>
+<p>改进：观察者模式+生命周期</p>
+<h4 id="filterchainnode"><code>FilterChainNode</code></h4>
+<p>实际上是Invoker，但内部保存了Filter</p>
+<p>Invoker装饰，Filter适配，两者的组合</p>
+<h4 id="dubboinvoker"><code>DubboInvoker</code></h4>
+<p>可以看到：Invoker层持有下层的资源管理</p>
+<p>接下来就是<code>excahnge</code>层的逻辑</p>
+<h4 id="tripleinvoker"><code>TripleInvoker</code></h4>
+<p>直接持有底层netty资源，比较粗糙</p>
+<p>=&gt; show code</p>
+<h2 id="总结">总结</h2>
+<h3 id="1层次结构">1.层次结构</h3>
+<p>层级关系：</p>
+<pre><code>-system
+-config
+-proxy
+-registry
+-cluster
+-monitor
+-protocol
+    -invoker
+        -exchange
+        -...
+</code></pre>
+<h3 id="2调用流程">2.调用流程</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/dubbo/img_12.png" alt=""></p>
+<h3 id="3设计模式">3.设计模式</h3>
+<p>责任链：Invoker</p>
+<p>适配器：适配到Invoker责任链中</p>
+<p>装饰：对Invoker进行增强</p>
+<p>&hellip;&hellip;&hellip;</p>
+<h3 id="4设计优化">4.设计优化</h3>
+<p>Invoker调用链：√，整个系统的核心，插件化功能采用拓展接口的方式，各个模块功能比较明确</p>
+<p>Lifecycle生命周期：不完全，没有完整的生命周期；对于生命周期的事件处理比较硬编码</p>
+<p>Listener：装饰的比较硬编码，事件阶段不够全，拓展性不够好</p>
+<p>Filter：采用装饰模型而非组合模型，拓展性较差；嵌套层级深，调试时链路不清晰</p>
+<p>&hellip;&hellip;..</p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-1ee71be258b4e94974f165af524f9f7e">Dubbo Landscape</h1>
+	<div class="lead">Dubbo Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	<h2 id="dubbo整体设计概述">Dubbo整体设计概述</h2>
+<h3 id="ainvoker责任链设计">A、Invoker责任链设计</h3>
+<h3 id="bfilter拓展机制设计">B、Filter拓展机制设计</h3>
+<h3 id="cmanager容器管理设计">C、Manager容器管理设计</h3>
+<h3 id="d">D、</h3>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-03d02d97bf9aa60a5c05b9cf56c91fbe">Netty Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-7d923a1561824f2a60d7ad00cfeb0d36">Netty Landscape</h1>
+	<div class="lead">Netty Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	<h3 id="参考文章">参考文章</h3>
+<h4 id="io-模型">IO 模型</h4>
+<p><a href="https://xie.infoq.cn/article/25d369e183563e44fc50d8168">https://xie.infoq.cn/article/25d369e183563e44fc50d8168</a></p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-e862cad1bba3c9950e40928bb47c9a41">Reactive Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-14e34b1064ac833217e025bb77c63fd2">Reactive Landscape</h1>
+	<div class="lead">Reactive Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	<h3 id="参考文章">参考文章</h3>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
     <h1 id="pg-cf7d2529b2c997fab6881fa00e7393a4">Cloud Native Stack</h1>
 	
 	<div class="td-byline mb-4">
@@ -481,12 +1136,12 @@ if (!doNotTrack) {
   
 
 <div class="td-content" style="">
-    <h1 id="pg-8cabaf3d60ffba9526ff1248d04d8fe2">Mosn Stack</h1>
+    <h1 id="pg-16ce7c0e151cc3f247f9db27606370e1">AppMesh Stack</h1>
 	
 	<div class="td-byline mb-4">
 		
         
-		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
         
 	</div>
 	
@@ -516,130 +1171,31 @@ if (!doNotTrack) {
   
 
 <div class="td-content" style="">
-    <h1 id="pg-37ebdc4fe907c9cfd95ce197323ead8c">Mosn Landscape</h1>
-	<div class="lead">Mosn Landscape.</div>
+    <h1 id="pg-6371b7bf3a254e7459ee7f5ac1e7b00e">AppMesh Landscape</h1>
+	<div class="lead">AppMesh Landscape.</div>
 	<div class="td-byline mb-4">
 		
         
-		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
         
 	</div>
-	<h2 id="一mosn-常用概念">一、Mosn 常用概念</h2>
-<h3 id="a流量劫持">A、流量劫持</h3>
-<blockquote>
-<p>MOSN 作为 Sidecar 使用时的流量劫持方案。</p>
-</blockquote>
-<p>MOSN 作为 Sidecar 和业务容器部署在同一个 Pod 中时，需要使得业务应用的 Inbound 和 Outbound 服务请求都能够经过 Sidecar 处理。<strong>区别于 Istio 社区使用 iptables 做流量透明劫持</strong>，MOSN 目前使用的是流量接管方案，并在积极探索适用于大规模流量下的透明劫持方案</p>
-<h4 id="流量接管">流量接管</h4>
-<p>区别于 Istio 社区的 iptables 流量劫持方案，MOSN 使用的流量接管的方案如下：</p>
-<ol>
-<li>假设服务端运行在 1.2.3.4 这台机器上，监听 20880 端口，首先服务端会向自己的 Sidecar 发起服务注册请求，告知 Sidecar 需要注册的服务以及 IP + 端口（1.2.3.4:20880）</li>
-<li>服务端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务注册请求，告知需要注册的服务以及 IP + 端口，不过这里需要注意的是注册上去的并不是业务应用的端口（20880），而是 Sidecar 自己监听的一个端口（例如：20881）</li>
-<li>调用端向自己的 Sidecar 发起服务订阅请求，告知需要订阅的服务信息</li>
-<li>调用端的 Sidecar 向调用端推送服务地址，这里需要注意的是推送的 IP 是本机，端口是调用端的 Sidecar 监听的端口（例如 20882）</li>
-<li>调用端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务订阅请求，告知需要订阅的服务信息；</li>
-<li>服务注册中心（如 SOFA Registry）向调用端的 Sidecar 推送服务地址（1.2.3.4:20881）</li>
-</ol>
-<h4 id="服务调用过程">服务调用过程</h4>
-<p>经过上述的服务发现过程，流量转发过程就显得非常自然了：</p>
-<ol>
-<li>调用端拿到的服务端地址是 127.0.0.1:20882，所以就会向这个地址发起服务调用</li>
-<li>调用端的 Sidecar 接收到请求后，通过解析请求头，可以得知具体要调用的服务信息，然后获取之前从服务注册中心返回的地址后就可以发起真实的调用（1.2.3.4:20881）</li>
-<li>服务端的 Sidecar 接收到请求后，经过一系列处理，最终会把请求发送给服务端（127.0.0.1:20880）</li>
-</ol>
-<h3 id="b透明劫持">B、透明劫持</h3>
-<p>上文通过在服务注册过程中把服务端地址替换成本机监听端口实现了轻量级的“流量劫持”，在存在注册中心，且调用端和服务端同时使用特定SDK的场景中可以很好的工作，如果不满足这两个条件，则无法流量劫持。为了降低对于应用程序的要求，需要引入透明劫持。</p>
-<h4 id="使用-iptables-做流量劫持">使用 iptables 做流量劫持</h4>
-<p>iptables 通过 NAT 表的 redirect 动作执行流量重定向，通过 syn 包触发新建 nefilter 层的连接，后续报文到来时查找连接转换目的地址与端口。新建连接时同时会记录下原始目的地址，应用程序可以通过(SOL_IP、SO_ORIGINAL_DST)获取到真实的目的地址。</p>
-<p>iptables 劫持原理如下图所示：</p>
-<p><img src="https://mosn.io/docs/products/structure/traffic-hijack/iptables.png" alt=""></p>
-<p>使用 iptables 做流量劫持时存在的问题
-目前 Istio 使用 iptables 实现透明劫持，主要存在以下三个问题：</p>
-<ol>
-<li>需要借助于 conntrack 模块实现连接跟踪，在连接数较多的情况下，会造成较大的消耗，同时可能会造成 track 表满的情况，为了避免这个问题，业内有关闭 conntrack 的做法。</li>
-<li>iptables 属于常用模块，全局生效，不能显式的禁止相关联的修改，可管控性比较差。</li>
-<li>iptables 重定向流量本质上是通过 loopback 交换数据，outbond 流量将两次穿越协议栈，在大并发场景下会损失转发性能。</li>
-<li></li>
-</ol>
-<h4 id="透明劫持方案优化">透明劫持方案优化</h4>
-<ol>
-<li>使用 tproxy 处理 inbound 流量</li>
-</ol>
-<p>tproxy 可以用于 inbound 流量的重定向，且无需改变报文中的目的 IP/端口，不需要执行连接跟踪，不会出现 conntrack 模块创建大量连接的问题。受限于内核版本，tproxy 应用于 outbound 存在一定缺陷。目前 Istio 支持通过 tproxy 处理 inbound 流量。</p>
-<ol start="2">
-<li>使用 hook connect 处理 outbound 流量</li>
-</ol>
-<p>为了适配更多应用场景，outbound 方向通过 hook connect 来实现，实现原理如下：</p>
-<p><img src="https://mosn.io/docs/products/structure/traffic-hijack/iptables.png" alt=""></p>
-<p>无论采用哪种透明劫持方案，均需要解决获取真实目的 IP/端口的问题，使用 iptables 方案通过 getsockopt 方式获取，tproxy 可以直接读取目的地址，通过修改调用接口，hook connect 方案读取方式类似于tproxy。</p>
-<p>实现透明劫持后，在内核版本满足要求（4.16以上）的前提下，通过 sockmap 可以缩短报文穿越路径，进而改善 outbound 方向的转发性能。</p>
-<h4 id="总结">总结</h4>
-<p>总结来看，如果应用程序通过注册中心发布/订阅服务时，可以结合注册中心劫持流量；在需要用到透明劫持的场景，如果性能压力不大，使用 iptables redirect 即可，大并发压力下使用 tproxy 与hook connect 结合的方案。</p>
-<h3 id="cmosn-平滑升级原理解析">C、MOSN 平滑升级原理解析</h3>
-<p>本文介绍 MOSN 支持平滑升级的原因和解决方案，对于平滑升级的一些基础概念，大家可以通过 Nginx vs Enovy vs Mosn 平滑升级原理解析了解。</p>
-<p>先简单介绍一下为什么 Nginx 和 Envoy 不需要具备 MOSN 这样的连接无损迁移方案，主要还是跟业务场景相关，Nginx 和 Envoy 主要支持的是 HTTP1 和 HTTP2 协议，HTTP1使用 connection: Close，HTTP2 使用 Goaway Frame 都可以让 Client 端主动断链接，然后新建链接到新的 New process，但是针对 Dubbo、SOFA PRC 等常见的多路复用协议，它们是没有控制帧，Old process 的链接如果断了就会影响请求的。</p>
-<blockquote>
-<p>参考：Envoy热重启</p>
-</blockquote>
-<p>一般的升级做法就是切走应用的流量，比如自己UnPub掉服务，等待一段时间没有请求之后，升级MOSN，升级好之后再Pub服务，整个过程比较耗时，并且会有一段时间是不提供服务的，还要考虑应用的水位，在大规模场景下，就很难兼顾评估。MOSN 为了满足自身业务场景，开发了长连接迁移方案，把这条链接迁移到 New process 上，整个过程对 Client 透明，不需要重新建链接，达到请求无损的平滑升级。</p>
-<p><img src="https://mosn.io/docs/products/structure/smooth-upgrade/reqeust-smooth-upgrade-process.png" alt=""></p>
-<h3 id="dmosn-多协议机制解析">D、MOSN 多协议机制解析</h3>
-<blockquote>
-<p><a href="https://mosn.io/blog/posts/multi-protocol-deep-dive/">https://mosn.io/blog/posts/multi-protocol-deep-dive/</a></p>
-</blockquote>
-<p>基于 MOSN 本身的扩展机制，我们完成了最初版本的协议扩展接入。但是在实践过程中，我们发现这并不是一件容易的事情：</p>
-<ol>
-<li>相比编解码，协议自身的处理以及与框架集成才是其中最困难的环节，需要理解并实现包括请求生命周期、多路复用处理、链接池等等机制；</li>
-<li>社区主流的 xDS 路由配置是面向 HTTP 协议的，无法直接支持私有协议，存在适配成本；</li>
-</ol>
-<p>基于这些实践痛点，我们设计了 MOSN 多协议框架，希望可以降低私有协议的接入成本，加快普及 ServiceMesh 架构的落地推进。</p>
-<h4 id="常见的协议扩展思路初探">常见的协议扩展思路初探</h4>
-<p>第一个要介绍的是目前发展势头强劲的 Envoy。从图上可以看出，Envoy 支持四层的读写过滤器扩展、基于 HTTP 的七层读写过滤器扩展以及对应的 Router/Upstream 实现。如果想要基于 Envoy 的扩展框架实现 L7 协议接入，目前的普遍做法是基于 L4 filter 封装相应的 L7 codec，在此基础之上再实现对应的协议路由等能力，无法复用 HTTP L7 的扩展框架。</p>
-<h3 id="emosn-扩展机制解析">E、MOSN 扩展机制解析</h3>
-<blockquote>
-<p><a href="https://mosn.io/blog/posts/mosn-extensions/">https://mosn.io/blog/posts/mosn-extensions/</a></p>
-</blockquote>
-<p><img src="https://mosn.io/blog/posts/mosn-extensions/1586436269068-a0a77749-1a98-4bce-9e9b-323ea3bd14a5.png" alt=""></p>
-<h4 id="plugin机制">Plugin机制</h4>
-<p>MOSN 的 Plugin 机制包含了两部分内容，一是 MOSN 自定义的 Plugin 框架，它支持通过在 MOSN 中实现 agent 与一个独立的进程进行交互来完成 MOSN 扩展能力的实现。二是基于 Golang 的 Plugin 框架，通过动态库（SO）加载的方式，实现 MOSN 的扩展。其中动态库加载的方式目前还存在一些局限性，还处于 beta 阶段。</p>
-<h4 id="多进程-plugin-框架">多进程 Plugin 框架</h4>
-<p>MOSN 的 Plugin 框架是 MOSN 封装的一个可以让 MOSN 通过 gRPC 和独立进程进行交互的方式，它包含两部分：</p>
-<ol>
-<li>独立的进程通过 MOSN Plugin 框架管理，作为 MOSN 的子进程；MOSN 的 Plugin 框架可以管理它们，如启动、关闭等；</li>
-<li>通过在 MOSN 中实现的 agent，使用 gRPC 的方式和子进程进行交互，gRPC 可以是基于 tcp 的，也可以是基于 domain socket 的；</li>
-</ol>
-<p><img src="https://mosn.io/blog/posts/mosn-extensions/1586436268954-38e37509-fbf8-44f4-a0fe-0860401daae0.png" alt=""></p>
-<hr>
-<h2 id="二mosn-vs-envoy">二、Mosn VS Envoy</h2>
-<h3 id="amosn-与-envoy-不同点是什么优势在哪里">A、MOSN 与 Envoy 不同点是什么？优势在哪里？</h3>
-<h4 id="语言栈的不同">语言栈的不同</h4>
-<p>MOSN 使用 Go 语言编写，Go 语言在生产效率，内存安全上有比较强的保障，同时 Go 语言在云原生时代有广泛的库生态系统，性能在 Mesh 场景下被我们评估以及实践是可以接受的。所以 MOSN 对于使用 Go、Java 等语言的公司和个人的心智成本更低。</p>
-<h4 id="核心能力的差异化">核心能力的差异化</h4>
-<ul>
-<li>
-<p>MOSN 支持多协议框架，用户可以比较容易的接入私有协议，具有统一的路由框架；</p>
-</li>
-<li>
-<p>多进程的插件机制，可以通过插件框架很方便的扩展独立 MOSN 进程的插件，做一些其他管理，旁路等的功能模块扩展；</p>
-</li>
-<li>
-<p>具备中国密码合规的传输层国密算法支持；</p>
-</li>
-</ul>
-<hr>
-<h2 id="三webassembly">三、WebAssembly</h2>
-<p>采用 WebAssembly(Wasm) 技术，给 MOSN 实现了一个安全隔离的沙箱环境，让扩展程序能够运行在隔离沙箱之中，并对其资源、能力进行严格限制，使程序故障止步于沙箱，从而实现安全隔离的目标。本文将着重叙述 MOSN 中的 Wasm 扩展框架，并介绍我们在 Proxy-Wasm 这一代理扩展规范上的工作。</p>
-<p><img src="https://mosn.io/blog/posts/mosn-wasm-framework/framework.png" alt=""></p>
-<p>上图为 MOSN Wasm 扩展框架的整体示意图。如图所示，对于 MOSN 的任意扩展点(Codec、NetworkFilter、StreamFilter 等)，用户均能够通过 Wasm 扩展框架，以隔离沙箱的形式运行自定义的扩展代码。而 MOSN 与 Wasm 扩展代码之间的交互，是通过 Proxy-Wasm 标准 ABI 来完成的。</p>
-<h4 id="隔离沙箱">隔离沙箱</h4>
-<p>当我们在讨论 Wasm 时，都明白 Wasm 能够提供一个安全隔离的沙箱环境，但并不是每个人都了解 Wasm 实现隔离沙箱的技术原理。这时又要搬出计算机科学中的至理名言: “计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决”。Wasm 实际上也是通过引用一个“中间层”来实现的安全隔离。简单来说，Wasm 通过一个运行时(Runtime)来运行 Wasm 沙箱扩展，每个 Wasm 沙箱都有其独立的线性内存空间和一组导入/导出模块。</p>
-<p><img src="https://mosn.io/blog/posts/mosn-wasm-framework/wasm-memory.png" alt=""></p>
-<p>一方面，每个 Wasm 沙箱都有其独立的线性内存空间，其内存模型如上图所示。Wasm 代码只能通过简单的 load/store 等指令访问线性内存空间的有限部分，并通过符号(下标)的方式来间接访问函数、全局变量等，杜绝了类似 C 语言中访问任意内存地址的骚操作。同时，用于间接调用函数的符号表对于 Wasm 代码而言是只读的，从而保证 Wasm 代码的执行是受控的。此外，Wasm 沙箱的整个线性内存空间由宿主机(Wasm Runtime)分配及管理，通过严格的内存管理保证沙箱的隔离性。</p>
-<p>另一方面，Wasm 也规定了代码中任何可能产生外部影响的操作只能通过导入/导出模块来实现。以 C 语言为例，我们可以直接通过系统调用来访问系统的环境变量、文件、网络等资源。而在 Wasm 的世界中，并不存在系统调用相关的指令，任何对外部资源的访问必须通过导入模块来间接实现。以文件读写为例，在 Wasm 中要想进行文件读写，需要宿主机提供实现文件读写功能的导入函数，Wasm 代码调用该导入函数，由宿主机间接进行文件读写，再将操作结果返回给 Wasm 扩展。在上述过程中，实际的文件读写操作由宿主机完成，宿主机对这一过程有绝对的控制权，包括但不限于只允许读写指定文件、限制读写内容、完全禁止读写等。</p>
-<p><img src="https://mosn.io/blog/posts/mosn-wasm-framework/config.png" alt=""></p>
-<h4 id="proxy-wasm-abi-规范">Proxy-Wasm ABI 规范</h4>
-<p>本小节将介绍 MOSN 具体是如何跟 Wasm 扩展程序进行交互的。先说结论: MOSN 跟 Wasm 扩展代码之间的交互采用的是社区规范: Proxy-Wasm</p>
-<p>Proxy-Wasm 规范定义了宿主机与 Wasm 扩展程序之间的交互细节，包括 API 列表、函数调用规范以及数据传输规范这几个方面。其中，API 列表包含了 L4/L7、property、metrics、日志等方面的扩展点，涵盖了网络代理场景下所需的大部分交互点，且可以划分为宿主侧扩展和 Wasm 侧扩展点。这里简单展示规范中的部分内容，完整内容请参考 spec。</p>
+	<h2 id="二appmesh-运维">二、AppMesh 运维</h2>
+<h3 id="故障排除">故障排除</h3>
+<p>跟踪控制器日志：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">export</span> <span style="color:#000">APPMESH_SYSTEM_NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>appmesh-system
+kubectl logs -n <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPMESH_SYSTEM_NAMESPACE</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span> -f --since 10s <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span><span style="color:#204a87;font-weight:bold">$(</span>kubectl get pods -n <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPMESH_SYSTEM_NAMESPACE</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span> -o name <span style="color:#000;font-weight:bold">|</span> grep controller<span style="color:#204a87;font-weight:bold">)</span>
+</code></pre></div><p>尾特使日志：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">export</span> <span style="color:#000">APPLICATION_NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>&lt;your namespace&gt;
+<span style="color:#204a87">export</span> <span style="color:#000">APPLICATION</span><span style="color:#ce5c00;font-weight:bold">=</span>&lt;your pod or deployment&gt; <span style="color:#8f5902;font-style:italic"># i.e. deploy/my-app</span>
+kubectl logs -n <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPLICATION_NAMESPACE</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06"> &#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPLICATION_POD</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34; envoy -f --since 10s
+</span></code></pre></div><p>查看特使配置：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">export</span> <span style="color:#000">APPLICATION_NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>&lt;your namespace&gt;
+<span style="color:#204a87">export</span> <span style="color:#000">APPLICATION</span><span style="color:#ce5c00;font-weight:bold">=</span>&lt;your pod&gt;
+kubectl port-forward -n <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPLICATION_NAMESPACE</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span><span style="color:#204a87;font-weight:bold">$(</span>kubectl get pod -n <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPLICATION_NAMESPACE</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span> <span style="color:#000;font-weight:bold">|</span> grep <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPLICATION</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span> <span style="color:#000;font-weight:bold">|</span>awk <span style="color:#4e9a06">&#39;{print $1}&#39;</span><span style="color:#204a87;font-weight:bold">)</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span><span style="color:#0000cf;font-weight:bold">9901</span>
+</code></pre></div><p>然后导航到localhost:9901/索引或localhost:9901/config_dump特使配置。</p>
 
 </div>
 
@@ -663,12 +1219,12 @@ if (!doNotTrack) {
   
 
 <div class="td-content" style="page-break-before: always">
-    <h1 id="pg-11c8a3427e130c510f2df8d0b30b409f">Netty Stack</h1>
+    <h1 id="pg-8c5b245f8cf887e44e99a7de1dfdc798">Nginx Stack</h1>
 	
 	<div class="td-byline mb-4">
 		
         
-		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
         
 	</div>
 	
@@ -698,17 +1254,80 @@ if (!doNotTrack) {
   
 
 <div class="td-content" style="">
-    <h1 id="pg-079187596e1cce1b656b7acbb8223f8a">Netty Landscape</h1>
-	<div class="lead">Netty Landscape.</div>
+    <h1 id="pg-fc20f7f49d484d53f278ddb306806c81">Nginx Landscape</h1>
+	<div class="lead">Nginx Landscape.</div>
 	<div class="td-byline mb-4">
 		
         
-		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
         
 	</div>
-	<h3 id="参考文章">参考文章</h3>
-<h4 id="io-模型">IO 模型</h4>
-<p><a href="https://xie.infoq.cn/article/25d369e183563e44fc50d8168">https://xie.infoq.cn/article/25d369e183563e44fc50d8168</a></p>
+	<h2 id="一nginx-功能">一、Nginx 功能</h2>
+<h3 id="a跨域问题">A、跨域问题</h3>
+<h4 id="关键字">关键字：</h4>
+<ul>
+<li>OPTIONS预检请求</li>
+<li>CORS跨域校验</li>
+</ul>
+<h4 id="资料">资料：</h4>
+<p>跨域中一些ngxin的配置：https://juejin.cn/post/6995374680114741279</p>
+<p>跨域的解释：https://juejin.cn/post/6844903938232156167#heading-46</p>
+<p>CORS：https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS</p>
+<h2 id="二nginx-运维">二、Nginx 运维</h2>
+<h4 id="快速部署">快速部署</h4>
+<p><a href="https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/">https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/</a></p>
+<h4 id="常用目录">常用目录</h4>
+<p>配置文件 /etc/nginx/conf.d</p>
+<p>默认日志 /var/logs/nginx</p>
+<p>配置日志 /etc/nginx/logs/</p>
+<h4 id="常用命令">常用命令</h4>
+<p>测试：nginx -t</p>
+<p>重启：nginx -s reload</p>
+<p>查看日志：</p>
+<ul>
+<li>tail -n 10 xxx.log</li>
+<li>head -n 10 xxx.log</li>
+</ul>
+<p>域名解析：</p>
+<ul>
+<li>/etc/resov.conf</li>
+<li>nslookup
+<ul>
+<li>apt-get install dnsutils</li>
+<li>nslookup <a href="http://www.baidu.com">www.baidu.com</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="配置">配置</h3>
+<h4 id="日志">日志</h4>
+<p>error_log    logs/error_<a href="http://www.abc.com.log">www.abc.com.log</a>    error;</p>
+<h4 id="proxy">proxy</h4>
+<p>如果proxy_pass中hostname使用了占位符，需要指定resovler的dns服务器ip</p>
+<h4 id="参数">参数</h4>
+<ul>
+<li>使用$arg_xxx来获取get中的参数</li>
+<li>使用$http_xxx来获取header中的参数</li>
+</ul>
+<h4 id="header">header</h4>
+<ul>
+<li>add_header 是当请求从 server 端回来时，Nginx 再往这个 response 里添加一些额外的 reponse header 然后发送给 客户端。</li>
+<li>proxy_set_header 是当请求从客户端发出时，Nginx接收到 request 再往请求里添加一些额外的 request header 然后发送给 服务端。
+<ul>
+<li>常见的一些需要设置 proxy_set_header 的场景，比如说，有些 server 可能需要验证 Host，这个时候，就可以使用 proxy_set_header 伪造一个 Host 来骗过服务端。</li>
+</ul>
+</li>
+</ul>
+<h3 id="经验">经验</h3>
+<h4 id="proxy-1">proxy</h4>
+<p>使用resolver指定dns服务器时，hostname要带上 .svc.cluster.local</p>
+<p>可以查看/etc/resov.conf中的dns服务器，来指定nginx的resovler</p>
+<h3 id="参考资料">参考资料</h3>
+<h4 id="变量名">变量名：</h4>
+<p><a href="https://www.cnblogs.com/dadonggg/p/7797281.html">https://www.cnblogs.com/dadonggg/p/7797281.html</a></p>
+<h4 id="代理配置">代理配置：</h4>
+<p><a href="https://segmentfault.com/a/1190000019894251">https://segmentfault.com/a/1190000019894251</a></p>
+<h4 id="service跨namespace">service跨namespace：</h4>
+<p><a href="https://cloud.tencent.com/developer/article/1718427">https://cloud.tencent.com/developer/article/1718427</a></p>
 
 </div>
 
@@ -2050,6 +2669,186 @@ COMMIT
 <p>Mesh: dns拦截(udp)</p>
 <p><img src="http://img.rocdu.top/20201117/role-of-dns-today.png" alt=""></p>
 <p><img src="http://img.rocdu.top/20201117/dns-interception-in-istio.png" alt=""></p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-8cabaf3d60ffba9526ff1248d04d8fe2">Mosn Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-37ebdc4fe907c9cfd95ce197323ead8c">Mosn Landscape</h1>
+	<div class="lead">Mosn Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	<h2 id="一mosn-常用概念">一、Mosn 常用概念</h2>
+<h3 id="a流量劫持">A、流量劫持</h3>
+<blockquote>
+<p>MOSN 作为 Sidecar 使用时的流量劫持方案。</p>
+</blockquote>
+<p>MOSN 作为 Sidecar 和业务容器部署在同一个 Pod 中时，需要使得业务应用的 Inbound 和 Outbound 服务请求都能够经过 Sidecar 处理。<strong>区别于 Istio 社区使用 iptables 做流量透明劫持</strong>，MOSN 目前使用的是流量接管方案，并在积极探索适用于大规模流量下的透明劫持方案</p>
+<h4 id="流量接管">流量接管</h4>
+<p>区别于 Istio 社区的 iptables 流量劫持方案，MOSN 使用的流量接管的方案如下：</p>
+<ol>
+<li>假设服务端运行在 1.2.3.4 这台机器上，监听 20880 端口，首先服务端会向自己的 Sidecar 发起服务注册请求，告知 Sidecar 需要注册的服务以及 IP + 端口（1.2.3.4:20880）</li>
+<li>服务端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务注册请求，告知需要注册的服务以及 IP + 端口，不过这里需要注意的是注册上去的并不是业务应用的端口（20880），而是 Sidecar 自己监听的一个端口（例如：20881）</li>
+<li>调用端向自己的 Sidecar 发起服务订阅请求，告知需要订阅的服务信息</li>
+<li>调用端的 Sidecar 向调用端推送服务地址，这里需要注意的是推送的 IP 是本机，端口是调用端的 Sidecar 监听的端口（例如 20882）</li>
+<li>调用端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务订阅请求，告知需要订阅的服务信息；</li>
+<li>服务注册中心（如 SOFA Registry）向调用端的 Sidecar 推送服务地址（1.2.3.4:20881）</li>
+</ol>
+<h4 id="服务调用过程">服务调用过程</h4>
+<p>经过上述的服务发现过程，流量转发过程就显得非常自然了：</p>
+<ol>
+<li>调用端拿到的服务端地址是 127.0.0.1:20882，所以就会向这个地址发起服务调用</li>
+<li>调用端的 Sidecar 接收到请求后，通过解析请求头，可以得知具体要调用的服务信息，然后获取之前从服务注册中心返回的地址后就可以发起真实的调用（1.2.3.4:20881）</li>
+<li>服务端的 Sidecar 接收到请求后，经过一系列处理，最终会把请求发送给服务端（127.0.0.1:20880）</li>
+</ol>
+<h3 id="b透明劫持">B、透明劫持</h3>
+<p>上文通过在服务注册过程中把服务端地址替换成本机监听端口实现了轻量级的“流量劫持”，在存在注册中心，且调用端和服务端同时使用特定SDK的场景中可以很好的工作，如果不满足这两个条件，则无法流量劫持。为了降低对于应用程序的要求，需要引入透明劫持。</p>
+<h4 id="使用-iptables-做流量劫持">使用 iptables 做流量劫持</h4>
+<p>iptables 通过 NAT 表的 redirect 动作执行流量重定向，通过 syn 包触发新建 nefilter 层的连接，后续报文到来时查找连接转换目的地址与端口。新建连接时同时会记录下原始目的地址，应用程序可以通过(SOL_IP、SO_ORIGINAL_DST)获取到真实的目的地址。</p>
+<p>iptables 劫持原理如下图所示：</p>
+<p><img src="https://mosn.io/docs/products/structure/traffic-hijack/iptables.png" alt=""></p>
+<p>使用 iptables 做流量劫持时存在的问题
+目前 Istio 使用 iptables 实现透明劫持，主要存在以下三个问题：</p>
+<ol>
+<li>需要借助于 conntrack 模块实现连接跟踪，在连接数较多的情况下，会造成较大的消耗，同时可能会造成 track 表满的情况，为了避免这个问题，业内有关闭 conntrack 的做法。</li>
+<li>iptables 属于常用模块，全局生效，不能显式的禁止相关联的修改，可管控性比较差。</li>
+<li>iptables 重定向流量本质上是通过 loopback 交换数据，outbond 流量将两次穿越协议栈，在大并发场景下会损失转发性能。</li>
+<li></li>
+</ol>
+<h4 id="透明劫持方案优化">透明劫持方案优化</h4>
+<ol>
+<li>使用 tproxy 处理 inbound 流量</li>
+</ol>
+<p>tproxy 可以用于 inbound 流量的重定向，且无需改变报文中的目的 IP/端口，不需要执行连接跟踪，不会出现 conntrack 模块创建大量连接的问题。受限于内核版本，tproxy 应用于 outbound 存在一定缺陷。目前 Istio 支持通过 tproxy 处理 inbound 流量。</p>
+<ol start="2">
+<li>使用 hook connect 处理 outbound 流量</li>
+</ol>
+<p>为了适配更多应用场景，outbound 方向通过 hook connect 来实现，实现原理如下：</p>
+<p><img src="https://mosn.io/docs/products/structure/traffic-hijack/iptables.png" alt=""></p>
+<p>无论采用哪种透明劫持方案，均需要解决获取真实目的 IP/端口的问题，使用 iptables 方案通过 getsockopt 方式获取，tproxy 可以直接读取目的地址，通过修改调用接口，hook connect 方案读取方式类似于tproxy。</p>
+<p>实现透明劫持后，在内核版本满足要求（4.16以上）的前提下，通过 sockmap 可以缩短报文穿越路径，进而改善 outbound 方向的转发性能。</p>
+<h4 id="总结">总结</h4>
+<p>总结来看，如果应用程序通过注册中心发布/订阅服务时，可以结合注册中心劫持流量；在需要用到透明劫持的场景，如果性能压力不大，使用 iptables redirect 即可，大并发压力下使用 tproxy 与hook connect 结合的方案。</p>
+<h3 id="cmosn-平滑升级原理解析">C、MOSN 平滑升级原理解析</h3>
+<p>本文介绍 MOSN 支持平滑升级的原因和解决方案，对于平滑升级的一些基础概念，大家可以通过 Nginx vs Enovy vs Mosn 平滑升级原理解析了解。</p>
+<p>先简单介绍一下为什么 Nginx 和 Envoy 不需要具备 MOSN 这样的连接无损迁移方案，主要还是跟业务场景相关，Nginx 和 Envoy 主要支持的是 HTTP1 和 HTTP2 协议，HTTP1使用 connection: Close，HTTP2 使用 Goaway Frame 都可以让 Client 端主动断链接，然后新建链接到新的 New process，但是针对 Dubbo、SOFA PRC 等常见的多路复用协议，它们是没有控制帧，Old process 的链接如果断了就会影响请求的。</p>
+<blockquote>
+<p>参考：Envoy热重启</p>
+</blockquote>
+<p>一般的升级做法就是切走应用的流量，比如自己UnPub掉服务，等待一段时间没有请求之后，升级MOSN，升级好之后再Pub服务，整个过程比较耗时，并且会有一段时间是不提供服务的，还要考虑应用的水位，在大规模场景下，就很难兼顾评估。MOSN 为了满足自身业务场景，开发了长连接迁移方案，把这条链接迁移到 New process 上，整个过程对 Client 透明，不需要重新建链接，达到请求无损的平滑升级。</p>
+<p><img src="https://mosn.io/docs/products/structure/smooth-upgrade/reqeust-smooth-upgrade-process.png" alt=""></p>
+<h3 id="dmosn-多协议机制解析">D、MOSN 多协议机制解析</h3>
+<blockquote>
+<p><a href="https://mosn.io/blog/posts/multi-protocol-deep-dive/">https://mosn.io/blog/posts/multi-protocol-deep-dive/</a></p>
+</blockquote>
+<p>基于 MOSN 本身的扩展机制，我们完成了最初版本的协议扩展接入。但是在实践过程中，我们发现这并不是一件容易的事情：</p>
+<ol>
+<li>相比编解码，协议自身的处理以及与框架集成才是其中最困难的环节，需要理解并实现包括请求生命周期、多路复用处理、链接池等等机制；</li>
+<li>社区主流的 xDS 路由配置是面向 HTTP 协议的，无法直接支持私有协议，存在适配成本；</li>
+</ol>
+<p>基于这些实践痛点，我们设计了 MOSN 多协议框架，希望可以降低私有协议的接入成本，加快普及 ServiceMesh 架构的落地推进。</p>
+<h4 id="常见的协议扩展思路初探">常见的协议扩展思路初探</h4>
+<p>第一个要介绍的是目前发展势头强劲的 Envoy。从图上可以看出，Envoy 支持四层的读写过滤器扩展、基于 HTTP 的七层读写过滤器扩展以及对应的 Router/Upstream 实现。如果想要基于 Envoy 的扩展框架实现 L7 协议接入，目前的普遍做法是基于 L4 filter 封装相应的 L7 codec，在此基础之上再实现对应的协议路由等能力，无法复用 HTTP L7 的扩展框架。</p>
+<h3 id="emosn-扩展机制解析">E、MOSN 扩展机制解析</h3>
+<blockquote>
+<p><a href="https://mosn.io/blog/posts/mosn-extensions/">https://mosn.io/blog/posts/mosn-extensions/</a></p>
+</blockquote>
+<p><img src="https://mosn.io/blog/posts/mosn-extensions/1586436269068-a0a77749-1a98-4bce-9e9b-323ea3bd14a5.png" alt=""></p>
+<h4 id="plugin机制">Plugin机制</h4>
+<p>MOSN 的 Plugin 机制包含了两部分内容，一是 MOSN 自定义的 Plugin 框架，它支持通过在 MOSN 中实现 agent 与一个独立的进程进行交互来完成 MOSN 扩展能力的实现。二是基于 Golang 的 Plugin 框架，通过动态库（SO）加载的方式，实现 MOSN 的扩展。其中动态库加载的方式目前还存在一些局限性，还处于 beta 阶段。</p>
+<h4 id="多进程-plugin-框架">多进程 Plugin 框架</h4>
+<p>MOSN 的 Plugin 框架是 MOSN 封装的一个可以让 MOSN 通过 gRPC 和独立进程进行交互的方式，它包含两部分：</p>
+<ol>
+<li>独立的进程通过 MOSN Plugin 框架管理，作为 MOSN 的子进程；MOSN 的 Plugin 框架可以管理它们，如启动、关闭等；</li>
+<li>通过在 MOSN 中实现的 agent，使用 gRPC 的方式和子进程进行交互，gRPC 可以是基于 tcp 的，也可以是基于 domain socket 的；</li>
+</ol>
+<p><img src="https://mosn.io/blog/posts/mosn-extensions/1586436268954-38e37509-fbf8-44f4-a0fe-0860401daae0.png" alt=""></p>
+<hr>
+<h2 id="二mosn-vs-envoy">二、Mosn VS Envoy</h2>
+<h3 id="amosn-与-envoy-不同点是什么优势在哪里">A、MOSN 与 Envoy 不同点是什么？优势在哪里？</h3>
+<h4 id="语言栈的不同">语言栈的不同</h4>
+<p>MOSN 使用 Go 语言编写，Go 语言在生产效率，内存安全上有比较强的保障，同时 Go 语言在云原生时代有广泛的库生态系统，性能在 Mesh 场景下被我们评估以及实践是可以接受的。所以 MOSN 对于使用 Go、Java 等语言的公司和个人的心智成本更低。</p>
+<h4 id="核心能力的差异化">核心能力的差异化</h4>
+<ul>
+<li>
+<p>MOSN 支持多协议框架，用户可以比较容易的接入私有协议，具有统一的路由框架；</p>
+</li>
+<li>
+<p>多进程的插件机制，可以通过插件框架很方便的扩展独立 MOSN 进程的插件，做一些其他管理，旁路等的功能模块扩展；</p>
+</li>
+<li>
+<p>具备中国密码合规的传输层国密算法支持；</p>
+</li>
+</ul>
+<hr>
+<h2 id="三webassembly">三、WebAssembly</h2>
+<p>采用 WebAssembly(Wasm) 技术，给 MOSN 实现了一个安全隔离的沙箱环境，让扩展程序能够运行在隔离沙箱之中，并对其资源、能力进行严格限制，使程序故障止步于沙箱，从而实现安全隔离的目标。本文将着重叙述 MOSN 中的 Wasm 扩展框架，并介绍我们在 Proxy-Wasm 这一代理扩展规范上的工作。</p>
+<p><img src="https://mosn.io/blog/posts/mosn-wasm-framework/framework.png" alt=""></p>
+<p>上图为 MOSN Wasm 扩展框架的整体示意图。如图所示，对于 MOSN 的任意扩展点(Codec、NetworkFilter、StreamFilter 等)，用户均能够通过 Wasm 扩展框架，以隔离沙箱的形式运行自定义的扩展代码。而 MOSN 与 Wasm 扩展代码之间的交互，是通过 Proxy-Wasm 标准 ABI 来完成的。</p>
+<h4 id="隔离沙箱">隔离沙箱</h4>
+<p>当我们在讨论 Wasm 时，都明白 Wasm 能够提供一个安全隔离的沙箱环境，但并不是每个人都了解 Wasm 实现隔离沙箱的技术原理。这时又要搬出计算机科学中的至理名言: “计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决”。Wasm 实际上也是通过引用一个“中间层”来实现的安全隔离。简单来说，Wasm 通过一个运行时(Runtime)来运行 Wasm 沙箱扩展，每个 Wasm 沙箱都有其独立的线性内存空间和一组导入/导出模块。</p>
+<p><img src="https://mosn.io/blog/posts/mosn-wasm-framework/wasm-memory.png" alt=""></p>
+<p>一方面，每个 Wasm 沙箱都有其独立的线性内存空间，其内存模型如上图所示。Wasm 代码只能通过简单的 load/store 等指令访问线性内存空间的有限部分，并通过符号(下标)的方式来间接访问函数、全局变量等，杜绝了类似 C 语言中访问任意内存地址的骚操作。同时，用于间接调用函数的符号表对于 Wasm 代码而言是只读的，从而保证 Wasm 代码的执行是受控的。此外，Wasm 沙箱的整个线性内存空间由宿主机(Wasm Runtime)分配及管理，通过严格的内存管理保证沙箱的隔离性。</p>
+<p>另一方面，Wasm 也规定了代码中任何可能产生外部影响的操作只能通过导入/导出模块来实现。以 C 语言为例，我们可以直接通过系统调用来访问系统的环境变量、文件、网络等资源。而在 Wasm 的世界中，并不存在系统调用相关的指令，任何对外部资源的访问必须通过导入模块来间接实现。以文件读写为例，在 Wasm 中要想进行文件读写，需要宿主机提供实现文件读写功能的导入函数，Wasm 代码调用该导入函数，由宿主机间接进行文件读写，再将操作结果返回给 Wasm 扩展。在上述过程中，实际的文件读写操作由宿主机完成，宿主机对这一过程有绝对的控制权，包括但不限于只允许读写指定文件、限制读写内容、完全禁止读写等。</p>
+<p><img src="https://mosn.io/blog/posts/mosn-wasm-framework/config.png" alt=""></p>
+<h4 id="proxy-wasm-abi-规范">Proxy-Wasm ABI 规范</h4>
+<p>本小节将介绍 MOSN 具体是如何跟 Wasm 扩展程序进行交互的。先说结论: MOSN 跟 Wasm 扩展代码之间的交互采用的是社区规范: Proxy-Wasm</p>
+<p>Proxy-Wasm 规范定义了宿主机与 Wasm 扩展程序之间的交互细节，包括 API 列表、函数调用规范以及数据传输规范这几个方面。其中，API 列表包含了 L4/L7、property、metrics、日志等方面的扩展点，涵盖了网络代理场景下所需的大部分交互点，且可以划分为宿主侧扩展和 Wasm 侧扩展点。这里简单展示规范中的部分内容，完整内容请参考 spec。</p>
 
 </div>
 
