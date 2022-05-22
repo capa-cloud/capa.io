@@ -23,7 +23,11 @@
 
 
   
-  <meta name="description" content="">
+  <meta name="description" content="Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。
+Capa本身不提供功能，而是由底层的各种云原生的能力来提供。
+所以了解云原生中常用中间件的设计是很有必要的。
+本目录主要为对云原生生态中中间件的学习和实践。
+">
 <meta property="og:title" content="Cloud Native Stack" />
 <meta property="og:description" content="Cloud Runtimes API" />
 <meta property="og:type" content="website" />
@@ -224,37 +228,6 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-8c5b245f8cf887e44e99a7de1dfdc798">Nginx Stack</a></li>
-
-
-
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-
-    <li><a href="#pg-fc20f7f49d484d53f278ddb306806c81">Nginx Landscape</a></li>
-
-
-
-    
-  
-
-    </ul>
-    
-  
-    
-    
-	
-
     <li><a href="#pg-34bab3fee93c10ab605e56ad17707be3">Envoy Stack</a></li>
 
 
@@ -395,12 +368,47 @@ if (!doNotTrack) {
     </ul>
     
   
+    
+    
+	
+
+    <li><a href="#pg-8c5b245f8cf887e44e99a7de1dfdc798">Nginx Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-fc20f7f49d484d53f278ddb306806c81">Nginx Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
 
     </ul>
 
 
 <div class="content">
-      
+      <p>Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。</p>
+<p>Capa本身不提供功能，而是由底层的各种云原生的能力来提供。</p>
+<p>所以了解云原生中常用中间件的设计是很有必要的。</p>
+<p>本目录主要为对云原生生态中中间件的学习和实践。</p>
+
 </div>
 </div>
 
@@ -422,13 +430,11 @@ if (!doNotTrack) {
 
   
 
-<div class="td-content" style="">
+<div class="td-content" style="page-break-before: always">
     <h1 id="pg-16ce7c0e151cc3f247f9db27606370e1">AppMesh Stack</h1>
 	
 	<div class="td-byline mb-4">
 		
-        
-		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
         
 	</div>
 	
@@ -483,138 +489,6 @@ kubectl port-forward -n <span style="color:#4e9a06">&#34;</span><span style="col
 </span><span style="color:#4e9a06"></span><span style="color:#204a87;font-weight:bold">$(</span>kubectl get pod -n <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPLICATION_NAMESPACE</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span> <span style="color:#000;font-weight:bold">|</span> grep <span style="color:#4e9a06">&#34;</span><span style="color:#4e9a06">${</span><span style="color:#000">APPLICATION</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span> <span style="color:#000;font-weight:bold">|</span>awk <span style="color:#4e9a06">&#39;{print $1}&#39;</span><span style="color:#204a87;font-weight:bold">)</span> <span style="color:#4e9a06">\
 </span><span style="color:#4e9a06"></span><span style="color:#0000cf;font-weight:bold">9901</span>
 </code></pre></div><p>然后导航到localhost:9901/索引或localhost:9901/config_dump特使配置。</p>
-
-</div>
-
-
-
-
-
-    
-	
-  
-
-    
-	
-  
-    
-    
-	
-    
-
-
-  
-
-<div class="td-content" style="page-break-before: always">
-    <h1 id="pg-8c5b245f8cf887e44e99a7de1dfdc798">Nginx Stack</h1>
-	
-	<div class="td-byline mb-4">
-		
-        
-		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
-        
-	</div>
-	
-</div>
-
-
-
-
-
-    
-      
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-
-  
-
-<div class="td-content" style="">
-    <h1 id="pg-fc20f7f49d484d53f278ddb306806c81">Nginx Landscape</h1>
-	<div class="lead">Nginx Landscape.</div>
-	<div class="td-byline mb-4">
-		
-        
-		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
-        
-	</div>
-	<h2 id="一nginx-功能">一、Nginx 功能</h2>
-<h3 id="a跨域问题">A、跨域问题</h3>
-<h4 id="关键字">关键字：</h4>
-<ul>
-<li>OPTIONS预检请求</li>
-<li>CORS跨域校验</li>
-</ul>
-<h4 id="资料">资料：</h4>
-<p>跨域中一些ngxin的配置：https://juejin.cn/post/6995374680114741279</p>
-<p>跨域的解释：https://juejin.cn/post/6844903938232156167#heading-46</p>
-<p>CORS：https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS</p>
-<h2 id="二nginx-运维">二、Nginx 运维</h2>
-<h4 id="快速部署">快速部署</h4>
-<p><a href="https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/">https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/</a></p>
-<h4 id="常用目录">常用目录</h4>
-<p>配置文件 /etc/nginx/conf.d</p>
-<p>默认日志 /var/logs/nginx</p>
-<p>配置日志 /etc/nginx/logs/</p>
-<h4 id="常用命令">常用命令</h4>
-<p>测试：nginx -t</p>
-<p>重启：nginx -s reload</p>
-<p>查看日志：</p>
-<ul>
-<li>tail -n 10 xxx.log</li>
-<li>head -n 10 xxx.log</li>
-</ul>
-<p>域名解析：</p>
-<ul>
-<li>/etc/resov.conf</li>
-<li>nslookup
-<ul>
-<li>apt-get install dnsutils</li>
-<li>nslookup <a href="http://www.baidu.com">www.baidu.com</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="配置">配置</h3>
-<h4 id="日志">日志</h4>
-<p>error_log    logs/error_<a href="http://www.abc.com.log">www.abc.com.log</a>    error;</p>
-<h4 id="proxy">proxy</h4>
-<p>如果proxy_pass中hostname使用了占位符，需要指定resovler的dns服务器ip</p>
-<h4 id="参数">参数</h4>
-<ul>
-<li>使用$arg_xxx来获取get中的参数</li>
-<li>使用$http_xxx来获取header中的参数</li>
-</ul>
-<h4 id="header">header</h4>
-<ul>
-<li>add_header 是当请求从 server 端回来时，Nginx 再往这个 response 里添加一些额外的 reponse header 然后发送给 客户端。</li>
-<li>proxy_set_header 是当请求从客户端发出时，Nginx接收到 request 再往请求里添加一些额外的 request header 然后发送给 服务端。
-<ul>
-<li>常见的一些需要设置 proxy_set_header 的场景，比如说，有些 server 可能需要验证 Host，这个时候，就可以使用 proxy_set_header 伪造一个 Host 来骗过服务端。</li>
-</ul>
-</li>
-</ul>
-<h3 id="经验">经验</h3>
-<h4 id="proxy-1">proxy</h4>
-<p>使用resolver指定dns服务器时，hostname要带上 .svc.cluster.local</p>
-<p>可以查看/etc/resov.conf中的dns服务器，来指定nginx的resovler</p>
-<h3 id="参考资料">参考资料</h3>
-<h4 id="变量名">变量名：</h4>
-<p><a href="https://www.cnblogs.com/dadonggg/p/7797281.html">https://www.cnblogs.com/dadonggg/p/7797281.html</a></p>
-<h4 id="代理配置">代理配置：</h4>
-<p><a href="https://segmentfault.com/a/1190000019894251">https://segmentfault.com/a/1190000019894251</a></p>
-<h4 id="service跨namespace">service跨namespace：</h4>
-<p><a href="https://cloud.tencent.com/developer/article/1718427">https://cloud.tencent.com/developer/article/1718427</a></p>
 
 </div>
 
@@ -2136,6 +2010,136 @@ COMMIT
 <h4 id="proxy-wasm-abi-规范">Proxy-Wasm ABI 规范</h4>
 <p>本小节将介绍 MOSN 具体是如何跟 Wasm 扩展程序进行交互的。先说结论: MOSN 跟 Wasm 扩展代码之间的交互采用的是社区规范: Proxy-Wasm</p>
 <p>Proxy-Wasm 规范定义了宿主机与 Wasm 扩展程序之间的交互细节，包括 API 列表、函数调用规范以及数据传输规范这几个方面。其中，API 列表包含了 L4/L7、property、metrics、日志等方面的扩展点，涵盖了网络代理场景下所需的大部分交互点，且可以划分为宿主侧扩展和 Wasm 侧扩展点。这里简单展示规范中的部分内容，完整内容请参考 spec。</p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-8c5b245f8cf887e44e99a7de1dfdc798">Nginx Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-fc20f7f49d484d53f278ddb306806c81">Nginx Landscape</h1>
+	<div class="lead">Nginx Landscape.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-22" class="text-muted">22.05.2022</time>
+        
+	</div>
+	<h2 id="一nginx-功能">一、Nginx 功能</h2>
+<h3 id="a跨域问题">A、跨域问题</h3>
+<h4 id="关键字">关键字：</h4>
+<ul>
+<li>OPTIONS预检请求</li>
+<li>CORS跨域校验</li>
+</ul>
+<h4 id="资料">资料：</h4>
+<p>跨域中一些ngxin的配置：https://juejin.cn/post/6995374680114741279</p>
+<p>跨域的解释：https://juejin.cn/post/6844903938232156167#heading-46</p>
+<p>CORS：https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS</p>
+<h2 id="二nginx-运维">二、Nginx 运维</h2>
+<h4 id="快速部署">快速部署</h4>
+<p><a href="https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/">https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/</a></p>
+<h4 id="常用目录">常用目录</h4>
+<p>配置文件 /etc/nginx/conf.d</p>
+<p>默认日志 /var/logs/nginx</p>
+<p>配置日志 /etc/nginx/logs/</p>
+<h4 id="常用命令">常用命令</h4>
+<p>测试：nginx -t</p>
+<p>重启：nginx -s reload</p>
+<p>查看日志：</p>
+<ul>
+<li>tail -n 10 xxx.log</li>
+<li>head -n 10 xxx.log</li>
+</ul>
+<p>域名解析：</p>
+<ul>
+<li>/etc/resov.conf</li>
+<li>nslookup
+<ul>
+<li>apt-get install dnsutils</li>
+<li>nslookup <a href="http://www.baidu.com">www.baidu.com</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="配置">配置</h3>
+<h4 id="日志">日志</h4>
+<p>error_log    logs/error_<a href="http://www.abc.com.log">www.abc.com.log</a>    error;</p>
+<h4 id="proxy">proxy</h4>
+<p>如果proxy_pass中hostname使用了占位符，需要指定resovler的dns服务器ip</p>
+<h4 id="参数">参数</h4>
+<ul>
+<li>使用$arg_xxx来获取get中的参数</li>
+<li>使用$http_xxx来获取header中的参数</li>
+</ul>
+<h4 id="header">header</h4>
+<ul>
+<li>add_header 是当请求从 server 端回来时，Nginx 再往这个 response 里添加一些额外的 reponse header 然后发送给 客户端。</li>
+<li>proxy_set_header 是当请求从客户端发出时，Nginx接收到 request 再往请求里添加一些额外的 request header 然后发送给 服务端。
+<ul>
+<li>常见的一些需要设置 proxy_set_header 的场景，比如说，有些 server 可能需要验证 Host，这个时候，就可以使用 proxy_set_header 伪造一个 Host 来骗过服务端。</li>
+</ul>
+</li>
+</ul>
+<h3 id="经验">经验</h3>
+<h4 id="proxy-1">proxy</h4>
+<p>使用resolver指定dns服务器时，hostname要带上 .svc.cluster.local</p>
+<p>可以查看/etc/resov.conf中的dns服务器，来指定nginx的resovler</p>
+<h3 id="参考资料">参考资料</h3>
+<h4 id="变量名">变量名：</h4>
+<p><a href="https://www.cnblogs.com/dadonggg/p/7797281.html">https://www.cnblogs.com/dadonggg/p/7797281.html</a></p>
+<h4 id="代理配置">代理配置：</h4>
+<p><a href="https://segmentfault.com/a/1190000019894251">https://segmentfault.com/a/1190000019894251</a></p>
+<h4 id="service跨namespace">service跨namespace：</h4>
+<p><a href="https://cloud.tencent.com/developer/article/1718427">https://cloud.tencent.com/developer/article/1718427</a></p>
 
 </div>
 

@@ -4,7 +4,6 @@
     <link>https://reactivegroup.github.io/capa.io/blog/javastack/</link>
     <description>Recent content in Cloud Java Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 22 May 2022 00:00:00 +0000</lastBuildDate>
     
 	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/javastack/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,7 +16,7 @@
     <item>
       <title>Blog: Dubbo Stack</title>
       <link>https://reactivegroup.github.io/capa.io/blog/javastack/dubbo/</link>
-      <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://reactivegroup.github.io/capa.io/blog/javastack/dubbo/</guid>
       <description>
@@ -30,7 +29,7 @@
     <item>
       <title>Blog: Netty Stack</title>
       <link>https://reactivegroup.github.io/capa.io/blog/javastack/netty/</link>
-      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://reactivegroup.github.io/capa.io/blog/javastack/netty/</guid>
       <description>
@@ -43,7 +42,7 @@
     <item>
       <title>Blog: Reactive Stack</title>
       <link>https://reactivegroup.github.io/capa.io/blog/javastack/reactive/</link>
-      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://reactivegroup.github.io/capa.io/blog/javastack/reactive/</guid>
       <description>

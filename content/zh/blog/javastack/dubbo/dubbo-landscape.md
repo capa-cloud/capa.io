@@ -6,7 +6,7 @@ description: >
     Dubbo Landscape.
 ---
 
-## Dubbo整体设计概述
+## 一、Dubbo整体设计概述
 
 ### A、Invoker责任链设计
 
@@ -14,4 +14,20 @@ description: >
 
 ### C、Manager容器管理设计
 
-### D、
+### D、Listener监听器设计
+
+### E、Lifecycle生命周期设计
+
+## 二、设计思想
+
+### A、可拓展架构
+
+SPI，微内核，插件化
+
+### B、设计模式
+
+装饰器模式
+
+责任链模式
+
+### C、DDD设计

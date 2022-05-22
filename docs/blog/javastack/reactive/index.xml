@@ -4,7 +4,6 @@
     <link>https://reactivegroup.github.io/capa.io/blog/javastack/reactive/</link>
     <description>Recent content in Reactive Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate>
     
 	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/javastack/reactive/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,7 +22,370 @@
       <description>
         
         
-        &lt;h3 id=&#34;参考文章&#34;&gt;参考文章&lt;/h3&gt;
+        &lt;h2 id=&#34;一reactive-stream整体设计概述&#34;&gt;一、Reactive Stream整体设计概述&lt;/h2&gt;
+&lt;h3 id=&#34;a声明式编程&#34;&gt;A、声明式编程&lt;/h3&gt;
+&lt;h3 id=&#34;b延迟执行&#34;&gt;B、延迟执行&lt;/h3&gt;
+&lt;p&gt;单流&lt;/p&gt;
+&lt;h3 id=&#34;c反向组装&#34;&gt;C、反向组装&lt;/h3&gt;
+&lt;p&gt;三流&lt;/p&gt;
+&lt;h3 id=&#34;d背压反向订阅&#34;&gt;D、背压(反向订阅)&lt;/h3&gt;
+&lt;p&gt;五流&lt;/p&gt;
+&lt;h2 id=&#34;二设计思想&#34;&gt;二、设计思想&lt;/h2&gt;
+&lt;h3 id=&#34;a命令模式拓展&#34;&gt;A、命令模式拓展&lt;/h3&gt;
+&lt;p&gt;将步骤抽象为Sink算子&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Reactive模式在Trip.com消息推送平台上的实践</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/</guid>
+      <description>
+        
+        
+        &lt;p&gt;原文地址：https://zhuanlan.zhihu.com/p/392401566&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Reactive 数据流模型设计</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;反应式编程理论与reactor源码解析&#34;&gt;反应式编程理论与Reactor源码解析&lt;/h1&gt;
+&lt;h2 id=&#34;反应式编程理论&#34;&gt;反应式编程理论&lt;/h2&gt;
+&lt;h3 id=&#34;反应式宣言&#34;&gt;反应式宣言&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;反应式宣言：&lt;strong&gt;异步&lt;/strong&gt; &lt;strong&gt;非阻塞&lt;/strong&gt; &lt;strong&gt;带回压&lt;/strong&gt; 的方式进行流程控制&lt;/p&gt;
+&lt;p&gt;技术手段+表现形式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;异步非阻塞 → 相比基于回调和Future的异步开发模型，通过函数式编程和声明式编程更加具有可编排性和可读性。&lt;/li&gt;
+&lt;li&gt;回压机制 → 通过订阅模型，组装数据流的流水线，下游订阅者可以反压源头，将“推送”模式转换为“推送+拉取”混合的模式。&lt;/li&gt;
+&lt;li&gt;事件驱动 → 应用内事件循环，使用EventLoop线程模型，能够做到异步非阻塞&lt;/li&gt;
+&lt;li&gt;消息驱动 → 分布式系统通信和协作，使用反应式的网络通信协议&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;反应式编程适用场景&#34;&gt;反应式编程适用场景&lt;/h3&gt;
+&lt;p&gt;我们在选择使用反应式编程时，一定要明确它的适用场景，主要包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;处理由用户或其他系统发起的事件，如鼠标点击、键盘按键或者物联网设备等无时无刻都在发射信号的情况&lt;/li&gt;
+&lt;li&gt;处理磁盘或网络等高延迟的IO数据，且保证这些IO操作是异步的&lt;/li&gt;
+&lt;li&gt;业务的处理流程是流式的，且需要高响应的非阻塞操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;仍然没有免费的午餐&#34;&gt;仍然没有免费的午餐&lt;/h3&gt;
+&lt;p&gt;首先，我们的代码是声明式的，不方便调试，错误发生时不容易定位。使用原生的API，例如不通过Spring框架而直接使用Reactor，会使情况变的更糟，因为我们自己要做很多的错误处理，每次进行网络调用都要写很多样板代码。通过组合使用 Spring 和 Reactor 我们可以方便的查看堆栈信息和未捕获的异常。由于运行的线程不受我们控制，因此在理解上会有困难。&lt;/p&gt;
+&lt;p&gt;其次，一旦编写错误导致一个Reactive回调被阻塞，在同一线程上的所有请求都会挂起。在servlet容器中，由于是一个请求一个线程，一个请求阻塞时，其它的请求不会受影响。而在Reactive中，一个请求被阻塞会导致所有请求的延迟都增加。&lt;/p&gt;
+&lt;h2 id=&#34;一反应式编程库介绍&#34;&gt;一、反应式编程库介绍&lt;/h2&gt;
+&lt;p&gt;实践反应式宣言的编程框架，提供开箱即用的反应式编程手段&lt;/p&gt;
+&lt;h3 id=&#34;11-为什么要使用反应式编程库&#34;&gt;1.1 为什么要使用反应式编程库？&lt;/h3&gt;
+&lt;p&gt;编写非阻塞、并发和可伸缩的代码是困难的。反应式编程库通过提供基于reactor模式的简单编程模型，提供了构建此类应用程序的最简单方法，这将允许应用程序高效地使用所有硬件资源。&lt;/p&gt;
+&lt;p&gt;相对于传统的基于回调和Future的异步开发方式，响应式编程更加具有可编排性和可读性，配合lambda表达式，代码更加简洁，处理逻辑的表达就像装配“流水线”，适用于对数据流的处理。&lt;/p&gt;
+&lt;p&gt;统一的编码方式，在不同的反应式网络协议和编程模型之上，构建了抽象编程层。例如gRPC和RSocket等反应式网络协议，无需了解具体协议细节，直接使用抽象层编程即可实现相关功能。&lt;/p&gt;
+&lt;h3 id=&#34;12-反应式编程库示例&#34;&gt;1.2 反应式编程库示例&lt;/h3&gt;
+&lt;h4 id=&#34;主流反应式编程框架&#34;&gt;主流反应式编程框架&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Reactor-core&lt;/li&gt;
+&lt;li&gt;Spring-Webflux&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;其他反应式编程框架&#34;&gt;其他反应式编程框架&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;RxJava&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;新兴反应式框架套件&#34;&gt;新兴反应式框架套件&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;vert.x&lt;/li&gt;
+&lt;li&gt;Quarkus&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;静态编译技术：GraalVM/Android&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;13-反应式编程库和其他异步编程框架的对比&#34;&gt;1.3 反应式编程库和其他异步编程框架的对比&lt;/h3&gt;
+&lt;h4 id=&#34;java8&#34;&gt;Java8&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;responseHandlerFuture&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;whenCompleteAsync&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;((&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;t&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;t&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#000&#34;&gt;responseFuture&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;complete&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#000&#34;&gt;responseFuture&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;completeExceptionally&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;t&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;futureCompletionExecutor&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;guava&#34;&gt;Guava&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;responseFuture&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;addListener&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(()&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{...},&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;rpcExecutorService&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;reactor&#34;&gt;reactor&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// sending with async non-blocking io
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Mono&lt;/span&gt;
+        &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;fromCompletionStage&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(()&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// 注①
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;            &lt;span style=&#34;color:#000&#34;&gt;CompletableFuture&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SendEmailResponse&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;responseFuture&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;awsAsyncClient&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;sendEmail&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sendEmailRequest&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;responseFuture&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;})&lt;/span&gt;
+        &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// 注② thread switching: callback executor
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// .publishOn(asyncResponseScheduler)
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// 注③ callback: success
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;map&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;response&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;onSuccess&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;response&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;))&lt;/span&gt;
+        &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// 注④ callback: failure
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;onErrorResume&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;throwable&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;onFailure&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;throwable&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;14-为啥不用java-stream来进行数据流的操作&#34;&gt;1.4 为啥不用Java Stream来进行数据流的操作？&lt;/h3&gt;
+&lt;p&gt;原因在于，若将其用于响应式编程中，是有局限性的。比如如下两个需要面对的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Web 应用具有I/O密集的特点，I/O阻塞会带来比较大的性能损失或资源浪费，我们需要一种异步非阻塞的响应式的库，而Java Stream是一种同步API。&lt;/li&gt;
+&lt;li&gt;假设我们要搭建从数据层到前端的一个变化传递管道，可能会遇到数据层每秒上千次的数据更新，而显然不需要向前端传递每一次更新，这时候就需要一种流量控制能力，就像我们家里的水龙头，可以控制开关流速，而Java Stream不具备完善的对数据流的流量控制的能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具备“异步非阻塞”特性和“流量控制”能力的数据流，我们称之为反应式流（Reactive Stream）。&lt;/p&gt;
+&lt;h2 id=&#34;二反应式编程库原理&#34;&gt;二、反应式编程库原理&lt;/h2&gt;
+&lt;h3 id=&#34;21-编程理论&#34;&gt;2.1 编程理论&lt;/h3&gt;
+&lt;h4 id=&#34;函数式编程风格&#34;&gt;函数式编程风格&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;就像面向对象的编程思想一样，函数式编程只是一系列想法，而不是一套严苛的规定。有很多支持函数式编程的程序语言，它们之间的具体设计都不完全一样。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;延迟执行的&lt;/li&gt;
+&lt;li&gt;无副作用&lt;/li&gt;
+&lt;li&gt;不可变变量&lt;/li&gt;
+&lt;li&gt;并发编程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;声明式编程风格&#34;&gt;声明式编程风格&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;结合函数式编程&lt;/li&gt;
+&lt;li&gt;分隔函数算子，隔离副作用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;反应式编程风格&#34;&gt;反应式编程风格&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;响应式编程（reactive programming）是一种基于数据流（data stream）和变化传递（propagation of change）的声明式（declarative）的编程范式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;函数式+声明式&lt;/li&gt;
+&lt;li&gt;延迟执行&lt;/li&gt;
+&lt;li&gt;背压&lt;/li&gt;
+&lt;li&gt;变化传递，推送&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本质上都是java编程语言，主要区别在于编程风格和思考逻辑的不同&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;22-反应式库的核心接口&#34;&gt;2.2 反应式库的核心接口&lt;/h3&gt;
+&lt;p&gt;组装数据流处理链的几种形式：&lt;/p&gt;
+&lt;h4 id=&#34;1-链表形式&#34;&gt;1. 链表形式&lt;/h4&gt;
+&lt;p&gt;面向过程&lt;/p&gt;
+&lt;h4 id=&#34;2-观察者模式&#34;&gt;2. 观察者模式&lt;/h4&gt;
+&lt;p&gt;面向对象&lt;/p&gt;
+&lt;p&gt;Publisher/Subscriber/Subctiption&lt;/p&gt;
+&lt;p&gt;java9&lt;/p&gt;
+&lt;h4 id=&#34;publisher-即被观察者&#34;&gt;Publisher 即被观察者&lt;/h4&gt;
+&lt;p&gt;Publisher 在 PRR 中 所承担的角色也就是传统的 观察者模式 中的 被观察者对象，在 PRR 的定义也极为简单。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;org.reactivestreams&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Publisher&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;subscribe&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Subscriber&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;?&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;super&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Publisher 的定义可以看出来，Publisher 接受 Subscriber，非常简单的一个接口。但是这里有个有趣的小细节，这个类所在的包是 org.reactivestreams，这里的做法和传统的 J2EE 标准类似，我们使用标准的 Javax 接口定义行为，不定义具体的实现。&lt;/p&gt;
+&lt;h4 id=&#34;subscriber-即观察者&#34;&gt;Subscriber 即观察者&lt;/h4&gt;
+&lt;p&gt;Subscriber 在 PRR 中 所承担的角色也就是传统的 观察者模式 中的 观察者对象，在 PRR 的定义要多一些。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Subscriber&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;onSubscribe&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Subscription&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;s&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt; &lt;span style=&#34;color:#a40000&#34;&gt;➊&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;onNext&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;t&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt; &lt;span style=&#34;color:#a40000&#34;&gt;➋&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;onError&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Throwable&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;t&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt; 
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;onComplete&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#a40000&#34;&gt;➍&lt;/span&gt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;➊ 订阅时被调用
+➋ 每一个元素接受时被触发一次
+➌ 当在触发错误的时候被调用
+➍ 在接受完最后一个元素最终完成被调用&lt;/p&gt;
+&lt;p&gt;Subscriber 的定义可以看出来，Publisher 是主要的行为对象，用来描述我们最终的执行逻辑。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;行为是由Subscriber触发的，这是一种Pull模型，如果是Publisher触发，则为Push模型。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;subscription-桥接者&#34;&gt;Subscription 桥接者&lt;/h4&gt;
+&lt;p&gt;在最基础的 观察者模式 中，我们只是需要 Subscriber 观察者 Publisher 发布者，而在 PRR 中增加了一个 Subscription 作为 Subscriber Publisher 的桥接者。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Subscription&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;n&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt; &lt;span style=&#34;color:#a40000&#34;&gt;➊&lt;/span&gt;
+    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;cancel&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#a40000&#34;&gt;➋&lt;/span&gt;
+&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;➊ 获取 N 个元素往下传递
+➋ 取消执行&lt;/p&gt;
+&lt;p&gt;为什么需要这个对象，笔者觉得是一是为了解耦合，第二在 Reference 中有提到 Backpressure 也就是下游可以保护自己不受上游大流量冲击，这个在 Stream 编程中是无法做到的，想要做到这个，就需要可以控制流速，那秘密看起来也就是在 request(long n) 中。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;中间层，主要用于解耦和流控。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;23-实现原理概括&#34;&gt;2.3 实现原理概括&lt;/h3&gt;
+&lt;h3 id=&#34;1-命令式编程&#34;&gt;1. 命令式编程&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-声明式编程&#34;&gt;2. 声明式编程&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;常用的、简单的数据流处理链路&lt;/p&gt;
+&lt;p&gt;Netty&lt;/p&gt;
+&lt;h3 id=&#34;3-函数式编程-stream&#34;&gt;3. 函数式编程 Stream&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;去除中间过程，横向改为纵向处理&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h5 id=&#34;1-声明阶段&#34;&gt;1. 声明阶段&lt;/h5&gt;
+&lt;p&gt;将Op组装成Pipeline&lt;/p&gt;
+&lt;h5 id=&#34;2-组装订阅链&#34;&gt;2. 组装订阅链&lt;/h5&gt;
+&lt;p&gt;生成Sink链&lt;/p&gt;
+&lt;p&gt;优化：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;中间操作合并&lt;/li&gt;
+&lt;li&gt;终结操作收集数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-执行阶段&#34;&gt;3. 执行阶段&lt;/h5&gt;
+&lt;p&gt;执行Sink方法&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最核心的就是类为AbstractPipeline，ReferencePipeline和Sink接口.AbstractPipeline抽象类是整个Stream中流水线的高度抽象了源头sourceStage，上游previousStage，下游nextStage，定义evaluate结束方法，而ReferencePipeline则是抽象了过滤,转换,聚合,归约等功能，每一个功能的添加实际上可以理解为卷心菜，菜心就是源头，每一次加入一个功能就相当于重新长出一片叶子包住了菜心，最后一个功能集成完毕之后整颗卷心菜就长大了。而Sink接口呢负责把整个流水线串起来，然后在执行聚合,归约时候调AbstractPipeline抽象类的evaluate结束方法，根据是否是并行执行，调用不同的结束逻辑，如果不是并行方法则执行terminalOp.evaluateSequential否则就执行terminalOp.evaluateParallel，非并行执行模式下则是执行的是AbstractPipeline抽象类的wrapAndCopyInto方法去调用copyInto，调用前会先执行一下wrapSink，用于剥开这个我们在流水线上产生的卷心菜。从下游向上游去遍历AbstractPipeline，然后包装到Sink，然后在copyInto方法内部迭代执行对应的方法。最后完成调用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;4-反应式编程-reactor&#34;&gt;4. 反应式编程 Reactor&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;反应式编程模型在执行中主要有5条链路:&lt;/p&gt;
+&lt;h5 id=&#34;1-声明流程&#34;&gt;1. 声明流程&lt;/h5&gt;
+&lt;p&gt;组装reactor执行链路，绑定上下游节点，在 subscribe() 之前，我们什么都没做，只是在不断的包裹 Publisher 将作为原始的 Publisher 一层又一层的返回回来。&lt;/p&gt;
+&lt;p&gt;生成Publisher&lt;/p&gt;
+&lt;h5 id=&#34;2-组装订阅链-1&#34;&gt;2. 组装订阅链&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;subscribe()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;生成Subscriber&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内存数据发送很简单，就是循环发送。而对于像数据库、RPC 这样的场景，则会触发请求的发送。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Publisher 接口中的 subscribe 方法语义上有些奇特，它表示的不是订阅关系，而是被订阅关系。即 aPublisher.subscribe(aSubscriber) 表示的是 aPublisher 被 aSubscriber 订阅。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于中间过程的 Mono/Flux，subscribe 阶段是订阅上一个 Mono/Flux；而对于源 Mono/Flux，则是要执行 Subscriber.onSubscribe(Subscription s) 方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;3-通知执行前初始化--生成许可&#34;&gt;3. 通知：执行前初始化 + 生成许可&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;onSubscribe()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;生成Subscription，并将Subscriber作为成员参数传入&lt;/p&gt;
+&lt;h5 id=&#34;4-背压流程&#34;&gt;4. 背压流程&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;request(n)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;基于Subscription实现request(n)机制&lt;/p&gt;
+&lt;h5 id=&#34;5-执行流程&#34;&gt;5. 执行流程&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;doNext()&lt;/code&gt;/&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;基于Subscription中的Subscriber实现执行机制&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;三reactor源码分析&#34;&gt;三、Reactor源码分析&lt;/h2&gt;
+&lt;h3 id=&#34;31-reactor-core工作原理&#34;&gt;3.1 Reactor-core工作原理&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_7.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;32-实现细节&#34;&gt;3.2 实现细节&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;声明阶段: 当我们每进行一次 Operator 操作 （也就 map filter flatmap），就会将原有的 FluxPublisher 包裹成一个新的 FluxPublisher&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_8.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;最后生成的对象是这样的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_9.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;subscribe阶段: 当我们最终进行 subscribe 操作的时候，就会从最外层的 Publisher 一层一层的处理，从这层将 Subscriber 变化成需要的 Subscriber 直到最外层的 Publisher&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_10.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;最后生成的对象是这样的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;onSubscribe阶段: 在最外层的 Publisher 的时候调用 上一层 Subscriber 的 onSubscribe 函数，在此处将 Publisher 和 Subscriber 包裹成一个 Subscription 对象作为 onSubscribe 的入参数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;最终在 原始 Subscriber 对象调用 request() ，触发 Subscription 的 Source 获得数据作为 onNext 的参数，但是注意 Subscription 包裹的是我们封装的 Subscriber 所有的数据是从 MapSubscriber 进行一次转换再给我们的原始 Subscriber 的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_13.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;经过一顿分析，整个 PRR 是如何将操作整合起来的，我们已经有一个大致的了解，通过不断的包裹出新的 Subscriber 对象，在最终的 request() 行为中触发整个消息的处理，这个过程非常像 俄罗斯套娃，一层一层的将变化组合形变操作变成一个新的 Subscriber， 然后就和一个管道一样，一层一层的往下传递。&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;最终在 Subscription 开始了我们整个系统的数据处理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_14.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;33-reactor示例高级用法&#34;&gt;3.3 Reactor示例/高级用法&lt;/h3&gt;
+&lt;p&gt;Reactor库提供了丰富的操作符，通过这些操作符你几乎可以搭建出能够进行任何业务需求的数据处理管道/流水线。如果将Reactor的执行步骤看做一条流水线，那么操作符就可以比作流水线中的一个工作台，负责处理流程中的元素，并传递给下游。
+上述章节我们了解到Reactor的执行流程包括subscribe、onSubscribe、onRequest阶段，一个基本的操作符需要实现这些阶段的处理，比如连接上下游并往下传递，之后在onNext中实现该操作符具体的功能便可以完成一个操作。接下来我们通过学习一些操作符来了解&lt;/p&gt;
+&lt;h3 id=&#34;publishon-切换线程&#34;&gt;publishOn 切换线程&lt;/h3&gt;
+&lt;p&gt;publishOn 强制下一个操作符（很可能包括下一个的下一个…）来运行在一个不同的线程上。
+&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_15.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;背压控制&#34;&gt;背压控制&lt;/h3&gt;
+&lt;p&gt;背压指的是当Subscriber请求的数据的访问超出它的处理能力时，Publisher限制数据发送速度的能力。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;本质上背压和TCP中的窗口限流机制比较类似，都是让消费者反馈请求数据的范围，生产者根据消费者的反馈提供一定量的数据来进行流控。&lt;/p&gt;
+&lt;p&gt;反馈请求数据范围的操作，可以在Subscriber每次完成数据的处理之后，让Subscriber自行反馈；也可以在Subscriber外部对Subscriber的消费情况进行监视，根据监视情况进行反馈。
+背压通常在以下场景中使用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;网络通信中服务端控制客户端的请求速度或发布者与订阅者不在同一个线程中，因为在同一个线程中的话，通常使用传统的逻辑就可以，不需要进行回压处理；&lt;/li&gt;
+&lt;li&gt;发布者发出数据的速度高于订阅者处理数据的速度，也就是处于“PUSH”状态下，如果相反，那就是“PUll”状态，不需要处理回压。
+我们可以自定义subscriber，并在subscriber中使用&lt;code&gt;request(n)&lt;/code&gt;来通过 subscription 向上游传递 背压请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;Flux&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;source&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;someStringSource&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;();&lt;/span&gt;
+
+&lt;span style=&#34;color:#000&#34;&gt;source&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;map&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;toUpperCase&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
+      &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;subscribe&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;BaseSubscriber&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;()&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt; 
+          &lt;span style=&#34;color:#5c35cc;font-weight:bold&#34;&gt;@Override&lt;/span&gt;
+          &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;hookOnSubscribe&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Subscription&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;subscription&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+              &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//在开始这个流的时候请求一个元素值。
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;              &lt;span style=&#34;color:#000&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt; 
+          &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+          &lt;span style=&#34;color:#5c35cc;font-weight:bold&#34;&gt;@Override&lt;/span&gt;
+          &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;hookOnNext&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
+                &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;//执行onnext的时候向上游请求一个元素
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;              &lt;span style=&#34;color:#000&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;);&lt;/span&gt; 
+          &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;}&lt;/span&gt;
+      &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;34-reactor流程总结&#34;&gt;3.4 Reactor流程总结&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;在声明阶段，我们像 俄罗斯套娃 一样，创建一个嵌套一个的 Publisher&lt;/li&gt;
+&lt;li&gt;在 subscribe() 调用的时候，我们从最外围的 Publisher 根据包裹的 Operator 创建各种 Subscriber&lt;/li&gt;
+&lt;li&gt;Subscriber 通过 onSubscribe() 使得他们像一个链条一样关联起来，并和 最外围的 Publisher 组合成一个 Subscription&lt;/li&gt;
+&lt;li&gt;在最底层的 Subscriber 调用 onSubscribe 去调用 Subscription 的 request(n); 函数开始操作&lt;/li&gt;
+&lt;li&gt;元素就像水管中的水一样挨个 经过 Subscriber 的 onNext()，直至我们最终消费的 Subscriber&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;四反应式编程总结&#34;&gt;四、反应式编程总结&lt;/h2&gt;
+&lt;h3 id=&#34;41-编程理论&#34;&gt;4.1 编程理论&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;命令式编程/面向对象编程 → 优缺点，适用场景&lt;/li&gt;
+&lt;li&gt;函数式编程 → 算子，副作用约束，函数式流编程&lt;/li&gt;
+&lt;li&gt;声明式编程 → 动词封装，逻辑清晰&lt;/li&gt;
+&lt;li&gt;反应式编程 → 异步非阻塞，事件驱动/消息驱动，背压&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;42-流式框架的设计&#34;&gt;4.2 流式框架的设计&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;同步流框架设计（一线）
+&lt;ul&gt;
+&lt;li&gt;函数式流&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;异步流框架设计（二线）
+&lt;ul&gt;
+&lt;li&gt;Netty等框架，声明编排&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;完善的流式框架设计（三线）
+&lt;ul&gt;
+&lt;li&gt;Java Stream&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;反应式流框架设计（五线）
+&lt;ul&gt;
+&lt;li&gt;反应式编程框架，反应式网络协议&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;43-底层原理&#34;&gt;4.3 底层原理&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;异步非阻塞IO原理
+&lt;ul&gt;
+&lt;li&gt;Epoll，CF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;网络协议
+&lt;ul&gt;
+&lt;li&gt;gRPC，RSocket&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;传统阻塞IO原理
+&lt;ul&gt;
+&lt;li&gt;JDBC，BIO&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>

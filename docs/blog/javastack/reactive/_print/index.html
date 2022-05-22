@@ -199,6 +199,26 @@ if (!doNotTrack) {
 
     
   
+    
+    
+	
+
+    <li><a href="#pg-31eb92571f21035519def0085b835fc1">Reactive模式在Trip.com消息推送平台上的实践</a></li>
+
+
+
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-f896adba4338c89b3a0b0e9b4ccf2de1">Reactive 数据流模型设计</a></li>
+
+
+
+    
+  
 
     </ul>
 
@@ -235,7 +255,398 @@ if (!doNotTrack) {
 		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
         
 	</div>
-	<h3 id="参考文章">参考文章</h3>
+	<h2 id="一reactive-stream整体设计概述">一、Reactive Stream整体设计概述</h2>
+<h3 id="a声明式编程">A、声明式编程</h3>
+<h3 id="b延迟执行">B、延迟执行</h3>
+<p>单流</p>
+<h3 id="c反向组装">C、反向组装</h3>
+<p>三流</p>
+<h3 id="d背压反向订阅">D、背压(反向订阅)</h3>
+<p>五流</p>
+<h2 id="二设计思想">二、设计思想</h2>
+<h3 id="a命令模式拓展">A、命令模式拓展</h3>
+<p>将步骤抽象为Sink算子</p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-31eb92571f21035519def0085b835fc1">Reactive模式在Trip.com消息推送平台上的实践</h1>
+	<div class="lead">Reactive模式在Trip.com消息推送平台上的实践.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	<p>原文地址：https://zhuanlan.zhihu.com/p/392401566</p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-f896adba4338c89b3a0b0e9b4ccf2de1">Reactive 数据流模型设计</h1>
+	<div class="lead">reactor-core 数据流模型设计.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+        
+	</div>
+	<h1 id="反应式编程理论与reactor源码解析">反应式编程理论与Reactor源码解析</h1>
+<h2 id="反应式编程理论">反应式编程理论</h2>
+<h3 id="反应式宣言">反应式宣言</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img.png" alt=""></p>
+<p>反应式宣言：<strong>异步</strong> <strong>非阻塞</strong> <strong>带回压</strong> 的方式进行流程控制</p>
+<p>技术手段+表现形式：</p>
+<ul>
+<li>异步非阻塞 → 相比基于回调和Future的异步开发模型，通过函数式编程和声明式编程更加具有可编排性和可读性。</li>
+<li>回压机制 → 通过订阅模型，组装数据流的流水线，下游订阅者可以反压源头，将“推送”模式转换为“推送+拉取”混合的模式。</li>
+<li>事件驱动 → 应用内事件循环，使用EventLoop线程模型，能够做到异步非阻塞</li>
+<li>消息驱动 → 分布式系统通信和协作，使用反应式的网络通信协议</li>
+</ul>
+<h3 id="反应式编程适用场景">反应式编程适用场景</h3>
+<p>我们在选择使用反应式编程时，一定要明确它的适用场景，主要包括：</p>
+<ul>
+<li>处理由用户或其他系统发起的事件，如鼠标点击、键盘按键或者物联网设备等无时无刻都在发射信号的情况</li>
+<li>处理磁盘或网络等高延迟的IO数据，且保证这些IO操作是异步的</li>
+<li>业务的处理流程是流式的，且需要高响应的非阻塞操作</li>
+</ul>
+<h3 id="仍然没有免费的午餐">仍然没有免费的午餐</h3>
+<p>首先，我们的代码是声明式的，不方便调试，错误发生时不容易定位。使用原生的API，例如不通过Spring框架而直接使用Reactor，会使情况变的更糟，因为我们自己要做很多的错误处理，每次进行网络调用都要写很多样板代码。通过组合使用 Spring 和 Reactor 我们可以方便的查看堆栈信息和未捕获的异常。由于运行的线程不受我们控制，因此在理解上会有困难。</p>
+<p>其次，一旦编写错误导致一个Reactive回调被阻塞，在同一线程上的所有请求都会挂起。在servlet容器中，由于是一个请求一个线程，一个请求阻塞时，其它的请求不会受影响。而在Reactive中，一个请求被阻塞会导致所有请求的延迟都增加。</p>
+<h2 id="一反应式编程库介绍">一、反应式编程库介绍</h2>
+<p>实践反应式宣言的编程框架，提供开箱即用的反应式编程手段</p>
+<h3 id="11-为什么要使用反应式编程库">1.1 为什么要使用反应式编程库？</h3>
+<p>编写非阻塞、并发和可伸缩的代码是困难的。反应式编程库通过提供基于reactor模式的简单编程模型，提供了构建此类应用程序的最简单方法，这将允许应用程序高效地使用所有硬件资源。</p>
+<p>相对于传统的基于回调和Future的异步开发方式，响应式编程更加具有可编排性和可读性，配合lambda表达式，代码更加简洁，处理逻辑的表达就像装配“流水线”，适用于对数据流的处理。</p>
+<p>统一的编码方式，在不同的反应式网络协议和编程模型之上，构建了抽象编程层。例如gRPC和RSocket等反应式网络协议，无需了解具体协议细节，直接使用抽象层编程即可实现相关功能。</p>
+<h3 id="12-反应式编程库示例">1.2 反应式编程库示例</h3>
+<h4 id="主流反应式编程框架">主流反应式编程框架</h4>
+<ul>
+<li>Reactor-core</li>
+<li>Spring-Webflux</li>
+</ul>
+<h4 id="其他反应式编程框架">其他反应式编程框架</h4>
+<ul>
+<li>RxJava</li>
+</ul>
+<h4 id="新兴反应式框架套件">新兴反应式框架套件</h4>
+<ul>
+<li>vert.x</li>
+<li>Quarkus</li>
+</ul>
+<blockquote>
+<p>静态编译技术：GraalVM/Android</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_1.png" alt=""></p>
+<h3 id="13-反应式编程库和其他异步编程框架的对比">1.3 反应式编程库和其他异步编程框架的对比</h3>
+<h4 id="java8">Java8</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">responseHandlerFuture</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">whenCompleteAsync</span><span style="color:#ce5c00;font-weight:bold">((</span><span style="color:#000">r</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">t</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">t</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">null</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#000">responseFuture</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">complete</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">r</span><span style="color:#ce5c00;font-weight:bold">);</span>
+        <span style="color:#ce5c00;font-weight:bold">}</span> <span style="color:#204a87;font-weight:bold">else</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#000">responseFuture</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">completeExceptionally</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">t</span><span style="color:#ce5c00;font-weight:bold">);</span>
+        <span style="color:#ce5c00;font-weight:bold">}</span>
+<span style="color:#ce5c00;font-weight:bold">},</span> <span style="color:#000">futureCompletionExecutor</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</code></pre></div><h4 id="guava">Guava</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">responseFuture</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">addListener</span><span style="color:#ce5c00;font-weight:bold">(()</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#ce5c00;font-weight:bold">{...},</span> <span style="color:#000">rpcExecutorService</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</code></pre></div><h4 id="reactor">reactor</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8f5902;font-style:italic">// sending with async non-blocking io
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">Mono</span>
+        <span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">fromCompletionStage</span><span style="color:#ce5c00;font-weight:bold">(()</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+            <span style="color:#8f5902;font-style:italic">// 注①
+</span><span style="color:#8f5902;font-style:italic"></span>            <span style="color:#000">CompletableFuture</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">SendEmailResponse</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">responseFuture</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">awsAsyncClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">sendEmail</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">sendEmailRequest</span><span style="color:#ce5c00;font-weight:bold">);</span>
+            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">responseFuture</span><span style="color:#ce5c00;font-weight:bold">;</span>
+        <span style="color:#ce5c00;font-weight:bold">})</span>
+        <span style="color:#8f5902;font-style:italic">// 注② thread switching: callback executor
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#8f5902;font-style:italic">// .publishOn(asyncResponseScheduler)
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#8f5902;font-style:italic">// 注③ callback: success
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">map</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#204a87;font-weight:bold">this</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">onSuccess</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">response</span><span style="color:#ce5c00;font-weight:bold">))</span>
+        <span style="color:#8f5902;font-style:italic">// 注④ callback: failure
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">onErrorResume</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">throwable</span> <span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+            <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">this</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">onFailure</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">throwable</span><span style="color:#ce5c00;font-weight:bold">);</span>
+        <span style="color:#ce5c00;font-weight:bold">});</span>
+</code></pre></div><h3 id="14-为啥不用java-stream来进行数据流的操作">1.4 为啥不用Java Stream来进行数据流的操作？</h3>
+<p>原因在于，若将其用于响应式编程中，是有局限性的。比如如下两个需要面对的问题：</p>
+<ul>
+<li>Web 应用具有I/O密集的特点，I/O阻塞会带来比较大的性能损失或资源浪费，我们需要一种异步非阻塞的响应式的库，而Java Stream是一种同步API。</li>
+<li>假设我们要搭建从数据层到前端的一个变化传递管道，可能会遇到数据层每秒上千次的数据更新，而显然不需要向前端传递每一次更新，这时候就需要一种流量控制能力，就像我们家里的水龙头，可以控制开关流速，而Java Stream不具备完善的对数据流的流量控制的能力。</li>
+</ul>
+<p>具备“异步非阻塞”特性和“流量控制”能力的数据流，我们称之为反应式流（Reactive Stream）。</p>
+<h2 id="二反应式编程库原理">二、反应式编程库原理</h2>
+<h3 id="21-编程理论">2.1 编程理论</h3>
+<h4 id="函数式编程风格">函数式编程风格</h4>
+<blockquote>
+<p>就像面向对象的编程思想一样，函数式编程只是一系列想法，而不是一套严苛的规定。有很多支持函数式编程的程序语言，它们之间的具体设计都不完全一样。</p>
+</blockquote>
+<ol>
+<li>延迟执行的</li>
+<li>无副作用</li>
+<li>不可变变量</li>
+<li>并发编程</li>
+</ol>
+<h4 id="声明式编程风格">声明式编程风格</h4>
+<ol>
+<li>结合函数式编程</li>
+<li>分隔函数算子，隔离副作用</li>
+</ol>
+<h4 id="反应式编程风格">反应式编程风格</h4>
+<blockquote>
+<p>响应式编程（reactive programming）是一种基于数据流（data stream）和变化传递（propagation of change）的声明式（declarative）的编程范式。</p>
+</blockquote>
+<ol>
+<li>函数式+声明式</li>
+<li>延迟执行</li>
+<li>背压</li>
+<li>变化传递，推送</li>
+</ol>
+<blockquote>
+<p>本质上都是java编程语言，主要区别在于编程风格和思考逻辑的不同</p>
+</blockquote>
+<h3 id="22-反应式库的核心接口">2.2 反应式库的核心接口</h3>
+<p>组装数据流处理链的几种形式：</p>
+<h4 id="1-链表形式">1. 链表形式</h4>
+<p>面向过程</p>
+<h4 id="2-观察者模式">2. 观察者模式</h4>
+<p>面向对象</p>
+<p>Publisher/Subscriber/Subctiption</p>
+<p>java9</p>
+<h4 id="publisher-即被观察者">Publisher 即被观察者</h4>
+<p>Publisher 在 PRR 中 所承担的角色也就是传统的 观察者模式 中的 被观察者对象，在 PRR 的定义也极为简单。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">org.reactivestreams</span><span style="color:#ce5c00;font-weight:bold">;</span>
+<span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Publisher</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Subscriber</span><span style="color:#ce5c00;font-weight:bold">&lt;?</span> <span style="color:#204a87;font-weight:bold">super</span> <span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">);</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p>Publisher 的定义可以看出来，Publisher 接受 Subscriber，非常简单的一个接口。但是这里有个有趣的小细节，这个类所在的包是 org.reactivestreams，这里的做法和传统的 J2EE 标准类似，我们使用标准的 Javax 接口定义行为，不定义具体的实现。</p>
+<h4 id="subscriber-即观察者">Subscriber 即观察者</h4>
+<p>Subscriber 在 PRR 中 所承担的角色也就是传统的 观察者模式 中的 观察者对象，在 PRR 的定义要多一些。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Subscriber</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">onSubscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Subscription</span> <span style="color:#000">s</span><span style="color:#ce5c00;font-weight:bold">);</span> <span style="color:#a40000">➊</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">onNext</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">T</span> <span style="color:#000">t</span><span style="color:#ce5c00;font-weight:bold">);</span> <span style="color:#a40000">➋</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">onError</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Throwable</span> <span style="color:#000">t</span><span style="color:#ce5c00;font-weight:bold">);</span> 
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">onComplete</span><span style="color:#ce5c00;font-weight:bold">();</span> <span style="color:#a40000">➍</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p>➊ 订阅时被调用
+➋ 每一个元素接受时被触发一次
+➌ 当在触发错误的时候被调用
+➍ 在接受完最后一个元素最终完成被调用</p>
+<p>Subscriber 的定义可以看出来，Publisher 是主要的行为对象，用来描述我们最终的执行逻辑。</p>
+<blockquote>
+<p>行为是由Subscriber触发的，这是一种Pull模型，如果是Publisher触发，则为Push模型。</p>
+</blockquote>
+<h4 id="subscription-桥接者">Subscription 桥接者</h4>
+<p>在最基础的 观察者模式 中，我们只是需要 Subscriber 观察者 Publisher 发布者，而在 PRR 中增加了一个 Subscription 作为 Subscriber Publisher 的桥接者。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">interface</span> <span style="color:#000">Subscription</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">long</span> <span style="color:#000">n</span><span style="color:#ce5c00;font-weight:bold">);</span> <span style="color:#a40000">➊</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">cancel</span><span style="color:#ce5c00;font-weight:bold">();</span> <span style="color:#a40000">➋</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p>➊ 获取 N 个元素往下传递
+➋ 取消执行</p>
+<p>为什么需要这个对象，笔者觉得是一是为了解耦合，第二在 Reference 中有提到 Backpressure 也就是下游可以保护自己不受上游大流量冲击，这个在 Stream 编程中是无法做到的，想要做到这个，就需要可以控制流速，那秘密看起来也就是在 request(long n) 中。</p>
+<blockquote>
+<p>中间层，主要用于解耦和流控。</p>
+</blockquote>
+<h3 id="23-实现原理概括">2.3 实现原理概括</h3>
+<h3 id="1-命令式编程">1. 命令式编程</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_2.png" alt=""></p>
+<h3 id="2-声明式编程">2. 声明式编程</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_3.png" alt=""></p>
+<p>常用的、简单的数据流处理链路</p>
+<p>Netty</p>
+<h3 id="3-函数式编程-stream">3. 函数式编程 Stream</h3>
+<blockquote>
+<p>去除中间过程，横向改为纵向处理</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_4.png" alt=""></p>
+<h5 id="1-声明阶段">1. 声明阶段</h5>
+<p>将Op组装成Pipeline</p>
+<h5 id="2-组装订阅链">2. 组装订阅链</h5>
+<p>生成Sink链</p>
+<p>优化：</p>
+<ul>
+<li>中间操作合并</li>
+<li>终结操作收集数据</li>
+</ul>
+<h5 id="3-执行阶段">3. 执行阶段</h5>
+<p>执行Sink方法</p>
+<blockquote>
+<p>最核心的就是类为AbstractPipeline，ReferencePipeline和Sink接口.AbstractPipeline抽象类是整个Stream中流水线的高度抽象了源头sourceStage，上游previousStage，下游nextStage，定义evaluate结束方法，而ReferencePipeline则是抽象了过滤,转换,聚合,归约等功能，每一个功能的添加实际上可以理解为卷心菜，菜心就是源头，每一次加入一个功能就相当于重新长出一片叶子包住了菜心，最后一个功能集成完毕之后整颗卷心菜就长大了。而Sink接口呢负责把整个流水线串起来，然后在执行聚合,归约时候调AbstractPipeline抽象类的evaluate结束方法，根据是否是并行执行，调用不同的结束逻辑，如果不是并行方法则执行terminalOp.evaluateSequential否则就执行terminalOp.evaluateParallel，非并行执行模式下则是执行的是AbstractPipeline抽象类的wrapAndCopyInto方法去调用copyInto，调用前会先执行一下wrapSink，用于剥开这个我们在流水线上产生的卷心菜。从下游向上游去遍历AbstractPipeline，然后包装到Sink，然后在copyInto方法内部迭代执行对应的方法。最后完成调用</p>
+</blockquote>
+<h4 id="4-反应式编程-reactor">4. 反应式编程 Reactor</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_5.png" alt=""></p>
+<p>反应式编程模型在执行中主要有5条链路:</p>
+<h5 id="1-声明流程">1. 声明流程</h5>
+<p>组装reactor执行链路，绑定上下游节点，在 subscribe() 之前，我们什么都没做，只是在不断的包裹 Publisher 将作为原始的 Publisher 一层又一层的返回回来。</p>
+<p>生成Publisher</p>
+<h5 id="2-组装订阅链-1">2. 组装订阅链</h5>
+<p><code>subscribe()</code></p>
+<p>生成Subscriber</p>
+<blockquote>
+<p>内存数据发送很简单，就是循环发送。而对于像数据库、RPC 这样的场景，则会触发请求的发送。</p>
+</blockquote>
+<blockquote>
+<p>Publisher 接口中的 subscribe 方法语义上有些奇特，它表示的不是订阅关系，而是被订阅关系。即 aPublisher.subscribe(aSubscriber) 表示的是 aPublisher 被 aSubscriber 订阅。</p>
+</blockquote>
+<blockquote>
+<p>对于中间过程的 Mono/Flux，subscribe 阶段是订阅上一个 Mono/Flux；而对于源 Mono/Flux，则是要执行 Subscriber.onSubscribe(Subscription s) 方法。</p>
+</blockquote>
+<h5 id="3-通知执行前初始化--生成许可">3. 通知：执行前初始化 + 生成许可</h5>
+<p><code>onSubscribe()</code></p>
+<p>生成Subscription，并将Subscriber作为成员参数传入</p>
+<h5 id="4-背压流程">4. 背压流程</h5>
+<p><code>request(n)</code></p>
+<p>基于Subscription实现request(n)机制</p>
+<h5 id="5-执行流程">5. 执行流程</h5>
+<p><code>doNext()</code>/&hellip;.</p>
+<p>基于Subscription中的Subscriber实现执行机制</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_6.png" alt=""></p>
+<h2 id="三reactor源码分析">三、Reactor源码分析</h2>
+<h3 id="31-reactor-core工作原理">3.1 Reactor-core工作原理</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_7.png" alt=""></p>
+<h3 id="32-实现细节">3.2 实现细节</h3>
+<ol>
+<li>声明阶段: 当我们每进行一次 Operator 操作 （也就 map filter flatmap），就会将原有的 FluxPublisher 包裹成一个新的 FluxPublisher</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_8.png" alt=""></p>
+<p>最后生成的对象是这样的</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_9.png" alt=""></p>
+<ol start="2">
+<li>subscribe阶段: 当我们最终进行 subscribe 操作的时候，就会从最外层的 Publisher 一层一层的处理，从这层将 Subscriber 变化成需要的 Subscriber 直到最外层的 Publisher</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_10.png" alt=""></p>
+<p>最后生成的对象是这样的</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_11.png" alt=""></p>
+<ol start="3">
+<li>onSubscribe阶段: 在最外层的 Publisher 的时候调用 上一层 Subscriber 的 onSubscribe 函数，在此处将 Publisher 和 Subscriber 包裹成一个 Subscription 对象作为 onSubscribe 的入参数。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_12.png" alt=""></p>
+<ol start="4">
+<li>最终在 原始 Subscriber 对象调用 request() ，触发 Subscription 的 Source 获得数据作为 onNext 的参数，但是注意 Subscription 包裹的是我们封装的 Subscriber 所有的数据是从 MapSubscriber 进行一次转换再给我们的原始 Subscriber 的。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_13.png" alt=""></p>
+<p>经过一顿分析，整个 PRR 是如何将操作整合起来的，我们已经有一个大致的了解，通过不断的包裹出新的 Subscriber 对象，在最终的 request() 行为中触发整个消息的处理，这个过程非常像 俄罗斯套娃，一层一层的将变化组合形变操作变成一个新的 Subscriber， 然后就和一个管道一样，一层一层的往下传递。</p>
+<ol start="5">
+<li>最终在 Subscription 开始了我们整个系统的数据处理</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_14.png" alt=""></p>
+<h3 id="33-reactor示例高级用法">3.3 Reactor示例/高级用法</h3>
+<p>Reactor库提供了丰富的操作符，通过这些操作符你几乎可以搭建出能够进行任何业务需求的数据处理管道/流水线。如果将Reactor的执行步骤看做一条流水线，那么操作符就可以比作流水线中的一个工作台，负责处理流程中的元素，并传递给下游。
+上述章节我们了解到Reactor的执行流程包括subscribe、onSubscribe、onRequest阶段，一个基本的操作符需要实现这些阶段的处理，比如连接上下游并往下传递，之后在onNext中实现该操作符具体的功能便可以完成一个操作。接下来我们通过学习一些操作符来了解</p>
+<h3 id="publishon-切换线程">publishOn 切换线程</h3>
+<p>publishOn 强制下一个操作符（很可能包括下一个的下一个…）来运行在一个不同的线程上。
+<img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_15.png" alt=""></p>
+<h3 id="背压控制">背压控制</h3>
+<p>背压指的是当Subscriber请求的数据的访问超出它的处理能力时，Publisher限制数据发送速度的能力。</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/reactive/img_16.png" alt=""></p>
+<p>本质上背压和TCP中的窗口限流机制比较类似，都是让消费者反馈请求数据的范围，生产者根据消费者的反馈提供一定量的数据来进行流控。</p>
+<p>反馈请求数据范围的操作，可以在Subscriber每次完成数据的处理之后，让Subscriber自行反馈；也可以在Subscriber外部对Subscriber的消费情况进行监视，根据监视情况进行反馈。
+背压通常在以下场景中使用：</p>
+<ol>
+<li>网络通信中服务端控制客户端的请求速度或发布者与订阅者不在同一个线程中，因为在同一个线程中的话，通常使用传统的逻辑就可以，不需要进行回压处理；</li>
+<li>发布者发出数据的速度高于订阅者处理数据的速度，也就是处于“PUSH”状态下，如果相反，那就是“PUll”状态，不需要处理回压。
+我们可以自定义subscriber，并在subscriber中使用<code>request(n)</code>来通过 subscription 向上游传递 背压请求</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Flux</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">source</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">someStringSource</span><span style="color:#ce5c00;font-weight:bold">();</span>
+
+<span style="color:#000">source</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">map</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">toUpperCase</span><span style="color:#ce5c00;font-weight:bold">)</span>
+      <span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">subscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">BaseSubscriber</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#ce5c00;font-weight:bold">&gt;()</span> <span style="color:#ce5c00;font-weight:bold">{</span> 
+          <span style="color:#5c35cc;font-weight:bold">@Override</span>
+          <span style="color:#204a87;font-weight:bold">protected</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">hookOnSubscribe</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Subscription</span> <span style="color:#000">subscription</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+              <span style="color:#8f5902;font-style:italic">//在开始这个流的时候请求一个元素值。
+</span><span style="color:#8f5902;font-style:italic"></span>              <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">1</span><span style="color:#ce5c00;font-weight:bold">);</span> 
+          <span style="color:#ce5c00;font-weight:bold">}</span>
+          <span style="color:#5c35cc;font-weight:bold">@Override</span>
+          <span style="color:#204a87;font-weight:bold">protected</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">hookOnNext</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">String</span> <span style="color:#000">value</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+                <span style="color:#8f5902;font-style:italic">//执行onnext的时候向上游请求一个元素
+</span><span style="color:#8f5902;font-style:italic"></span>              <span style="color:#000">request</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">1</span><span style="color:#ce5c00;font-weight:bold">);</span> 
+          <span style="color:#ce5c00;font-weight:bold">}</span>
+      <span style="color:#ce5c00;font-weight:bold">});</span>
+</code></pre></div><h3 id="34-reactor流程总结">3.4 Reactor流程总结</h3>
+<ol>
+<li>在声明阶段，我们像 俄罗斯套娃 一样，创建一个嵌套一个的 Publisher</li>
+<li>在 subscribe() 调用的时候，我们从最外围的 Publisher 根据包裹的 Operator 创建各种 Subscriber</li>
+<li>Subscriber 通过 onSubscribe() 使得他们像一个链条一样关联起来，并和 最外围的 Publisher 组合成一个 Subscription</li>
+<li>在最底层的 Subscriber 调用 onSubscribe 去调用 Subscription 的 request(n); 函数开始操作</li>
+<li>元素就像水管中的水一样挨个 经过 Subscriber 的 onNext()，直至我们最终消费的 Subscriber</li>
+</ol>
+<h2 id="四反应式编程总结">四、反应式编程总结</h2>
+<h3 id="41-编程理论">4.1 编程理论</h3>
+<ul>
+<li>命令式编程/面向对象编程 → 优缺点，适用场景</li>
+<li>函数式编程 → 算子，副作用约束，函数式流编程</li>
+<li>声明式编程 → 动词封装，逻辑清晰</li>
+<li>反应式编程 → 异步非阻塞，事件驱动/消息驱动，背压</li>
+</ul>
+<h3 id="42-流式框架的设计">4.2 流式框架的设计</h3>
+<ul>
+<li>同步流框架设计（一线）
+<ul>
+<li>函数式流</li>
+</ul>
+</li>
+<li>异步流框架设计（二线）
+<ul>
+<li>Netty等框架，声明编排</li>
+</ul>
+</li>
+<li>完善的流式框架设计（三线）
+<ul>
+<li>Java Stream</li>
+</ul>
+</li>
+<li>反应式流框架设计（五线）
+<ul>
+<li>反应式编程框架，反应式网络协议</li>
+</ul>
+</li>
+</ul>
+<h3 id="43-底层原理">4.3 底层原理</h3>
+<ul>
+<li>异步非阻塞IO原理
+<ul>
+<li>Epoll，CF</li>
+</ul>
+</li>
+<li>网络协议
+<ul>
+<li>gRPC，RSocket</li>
+</ul>
+</li>
+<li>传统阻塞IO原理
+<ul>
+<li>JDBC，BIO</li>
+</ul>
+</li>
+</ul>
 
 </div>
 

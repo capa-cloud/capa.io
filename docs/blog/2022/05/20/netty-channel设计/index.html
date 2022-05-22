@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.89.4" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+
+
+<link rel="shortcut icon" href="/capa.io/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/capa.io/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-192x192.png" sizes="192x192">
+
+<title>Netty Channel设计 | Capa</title>
+
+
+  <meta name="description" content="Netty Channel设计.
+">
+<meta property="og:title" content="Netty Channel设计" />
+<meta property="og:description" content="Netty Channel设计.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2022-05-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-20T00:00:00+00:00" /><meta property="og:site_name" content="Capa" />
+
+<meta itemprop="name" content="Netty Channel设计">
+<meta itemprop="description" content="Netty Channel设计.
+"><meta itemprop="datePublished" content="2022-05-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-05-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="362">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Netty Channel设计"/>
+<meta name="twitter:description" content="Netty Channel设计.
+"/>
+
+
+
+
+<link rel="preload" href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" as="style">
+<link href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-00000000-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+  </head>
+  <body class="td-page td-blog">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/capa.io/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Capa</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/about/" ><span>关于</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/docs/" ><span>文档</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/capa.io/blog/" ><span class="active">博客</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/community/" ><span>社区</span></a>
+			</li>
+			
+			
+			
+			<li class="nav-item dropdown mr-4 d-none d-lg-block">
+				
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	简体中文
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
+	
+</div>
+			</li>
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+<input type="search" class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label="站内搜索…" autocomplete="off">
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <div id="content-mobile">
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+<input type="search" class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label="站内搜索…" autocomplete="off">
+
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  </div>
+  <div id="content-desktop"></div>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <div class="nav-item dropdown d-block d-lg-none">
+      
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	简体中文
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
+	
+</div>
+    </div>
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblog-li">
+  <a href="/capa.io/blog/" title="Capa Blog" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-capaioblog"><span class="">博客</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblogjavastack-li">
+  <a href="/capa.io/blog/javastack/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastack"><span class="">Cloud Java Stack</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackdubbo-li">
+  <a href="/capa.io/blog/javastack/dubbo/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackdubbo"><span class="">Dubbo Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522dubbo-invokee6b581e7a88b-li">
+  <a href="/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dubbo-invokee6b581e7a88b"><span class="">Dubbo Invoke流程</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522dubbo-landscape-li">
+  <a href="/capa.io/blog/2022/05/22/dubbo-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dubbo-landscape"><span class="">Dubbo Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblogjavastacknetty-li">
+  <a href="/capa.io/blog/javastack/netty/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastacknetty"><span class="">Netty Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-capaioblog20220520netty-channele8aebee8aea1-li">
+  <a href="/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520netty-channele8aebee8aea1"><span class="td-sidebar-nav-active-item">Netty Channel设计</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520netty-landscape-li">
+  <a href="/capa.io/blog/2022/05/20/netty-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520netty-landscape"><span class="">Netty Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackreactive-li">
+  <a href="/capa.io/blog/javastack/reactive/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackreactive"><span class="">Reactive Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactive-landscape-li">
+  <a href="/capa.io/blog/2022/05/20/reactive-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactive-landscape"><span class="">Reactive Landscape</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5-li">
+  <a href="/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5"><span class="">Reactive模式在Trip.com消息推送平台上的实践</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactive-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1-li">
+  <a href="/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/" title="Reactive 数据流模型设计" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactive-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1"><span class="">reactor-core 数据流模型设计</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstack-li">
+  <a href="/capa.io/blog/cloudstack/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstack"><span class="">Cloud Native Stack</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackappmesh-li">
+  <a href="/capa.io/blog/cloudstack/appmesh/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackappmesh"><span class="">AppMesh Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522appmesh-landscape-li">
+  <a href="/capa.io/blog/2022/05/22/appmesh-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522appmesh-landscape"><span class="">AppMesh Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackenvoy-li">
+  <a href="/capa.io/blog/cloudstack/envoy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackenvoy"><span class="">Envoy Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220521envoy-gateway-li">
+  <a href="/capa.io/blog/2022/05/21/envoy-gateway/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220521envoy-gateway"><span class="">Envoy Gateway</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220503envoy-landscape-li">
+  <a href="/capa.io/blog/2022/05/03/envoy-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220503envoy-landscape"><span class="">Envoy Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackgrpc-li">
+  <a href="/capa.io/blog/cloudstack/grpc/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackgrpc"><span class="">gRPC Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220121grpc-landscape-li">
+  <a href="/capa.io/blog/2022/01/21/grpc-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220121grpc-landscape"><span class="">gRPC Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackistio-li">
+  <a href="/capa.io/blog/cloudstack/istio/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackistio"><span class="">Istio Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-devops-li">
+  <a href="/capa.io/blog/2022/03/09/istio-devops/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-devops"><span class="">Istio devops</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-landscape-li">
+  <a href="/capa.io/blog/2022/03/09/istio-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-landscape"><span class="">Istio Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackmosn-li">
+  <a href="/capa.io/blog/cloudstack/mosn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackmosn"><span class="">Mosn Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520mosn-landscape-li">
+  <a href="/capa.io/blog/2022/05/20/mosn-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520mosn-landscape"><span class="">Mosn Landscape</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstacknginx-li">
+  <a href="/capa.io/blog/cloudstack/nginx/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstacknginx"><span class="">Nginx Stack</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522nginx-landscape-li">
+  <a href="/capa.io/blog/2022/05/22/nginx-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522nginx-landscape"><span class="">Nginx Landscape</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogtecktalk-li">
+  <a href="/capa.io/blog/tecktalk/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalk"><span class="">Teck Talk</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-li">
+  <a href="/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" title="Capa: Mecha SDK of Cloud Application Api" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api"><span class="">Mecha SDK of Cloud Application Api</span></a>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+  
+  
+  
+  
+  
+  
+  <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+  
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+
+    <a href="https://github.com/reactivegroup/capa/edit/master/content/zh/blog/javastack/netty/netty-channel.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+    <a href="https://github.com/reactivegroup/capa/new/master/content/zh/blog/javastack/netty/netty-channel.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+    <a href="https://github.com/reactivegroup/capa/issues/new?title=Netty%20Channel%e8%ae%be%e8%ae%a1" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+    
+      
+      <a href="https://github.com/reactivegroup/capa/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
+    
+
+  
+  
+    <a id="print" href="https://reactivegroup.github.io/capa.io/blog/javastack/netty/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
+  
+  </div>
+
+
+            
+
+
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一整体流程概览">一、整体流程概览</a>
+      <ul>
+        <li><a href="#11-启动流程">1.1 启动流程</a></li>
+        <li><a href="#server端">Server端</a></li>
+        <li><a href="#client端">Client端</a></li>
+        <li><a href="#12-事件驱动模型设计">1.2 事件驱动模型设计</a></li>
+      </ul>
+    </li>
+    <li><a href="#二主要模块">二、主要模块</a>
+      <ul>
+        <li><a href="#21-reactor线程模型">2.1 Reactor线程模型</a></li>
+        <li><a href="#22-channelpipeline设计">2.2 ChannelPipeline设计</a></li>
+        <li><a href="#23-channel模块设计">2.3 Channel模块设计</a></li>
+        <li><a href="#3-channel接口交互">3. channel接口交互</a></li>
+      </ul>
+    </li>
+    <li><a href="#三细节功能">三、细节功能</a>
+      <ul>
+        <li><a href="#31-缓冲区零拷贝">3.1 缓冲区/零拷贝</a></li>
+        <li><a href="#32-io异步机制">3.2 IO异步机制</a></li>
+        <li><a href="#33-网络协议">3.3 网络协议</a></li>
+        <li><a href="#参考文章">参考文章</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+
+
+
+            
+
+	
+		
+			
+		
+		
+
+
+
+  
+  
+
+	
+		
+			
+		
+		
+
+
+
+  
+  
+
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
+            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://reactivegroup.github.io/capa.io/blog/javastack/netty/index.xml" target="_blank">
+              RSS <i class="fa fa-rss ml-2 "></i>
+            </a>
+            
+<div class="td-content">
+	<h1>Netty Channel设计</h1>
+	<div class="lead">Netty Channel设计.</div>
+	<div class="td-byline mb-4">
+		
+		<time datetime="2022-05-20" class="text-muted">20.05.2022</time>
+	</div>
+	<header class="article-meta">
+		
+		
+			
+				
+
+
+			
+				
+
+
+			
+		
+		
+	</header>
+	<h2 id="一整体流程概览">一、整体流程概览</h2>
+<p>&hellip;&hellip;</p>
+<h3 id="11-启动流程">1.1 启动流程</h3>
+<h3 id="server端">Server端</h3>
+<h4 id="1-创建handler">1. 创建Handler</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">EchoServerHandler</span> <span style="color:#000">serverHandler</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">EchoServerHandler</span><span style="color:#ce5c00;font-weight:bold">()</span>
+</code></pre></div><p>Handler类结构图：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img.png" alt=""></p>
+<h4 id="2-创建eventloopgroup">2. 创建EventLoopGroup</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">EventLoopGroup</span> <span style="color:#000">group</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">NioEventLoopGroup</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><p>EventLoopGroup类结构图：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_1.png" alt=""></p>
+<h4 id="21-创建group下面的eventloop">2.1 创建Group下面的EventLoop</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#5c35cc;font-weight:bold">@Override</span>
+<span style="color:#204a87;font-weight:bold">protected</span> <span style="color:#000">EventLoop</span> <span style="color:#000">newChild</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">Executor</span> <span style="color:#000">executor</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">Object</span><span style="color:#ce5c00;font-weight:bold">...</span> <span style="color:#000">args</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">throws</span> <span style="color:#000">Exception</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">NioEventLoop</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">this</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">executor</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">SelectorProvider</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#000">args</span><span style="color:#ce5c00;font-weight:bold">[</span><span style="color:#000">0</span><span style="color:#ce5c00;font-weight:bold">],</span>
+        <span style="color:#ce5c00;font-weight:bold">((</span><span style="color:#000">SelectStrategyFactory</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#000">args</span><span style="color:#ce5c00;font-weight:bold">[</span><span style="color:#000">1</span><span style="color:#ce5c00;font-weight:bold">]).</span><span style="color:#c4a000">newSelectStrategy</span><span style="color:#ce5c00;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">RejectedExecutionHandler</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#000">args</span><span style="color:#ce5c00;font-weight:bold">[</span><span style="color:#000">2</span><span style="color:#ce5c00;font-weight:bold">]);</span>
+<span style="color:#ce5c00;font-weight:bold">}</span>
+</code></pre></div><p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_2.png" alt=""></p>
+<h4 id="22-创建eventloop">2.2 创建EventLoop</h4>
+<ul>
+<li>
+<p><code>taskQueue</code>: <code>MpscChunkedArrayQueue</code></p>
+</li>
+<li>
+<p><code>tailQueue</code>: <code>MpscChunkedArrayQueue</code></p>
+</li>
+<li>
+<p><code>selectNowSupplier</code>: <code>selector.selectNow()</code></p>
+</li>
+<li>
+<p><code>pendingTasksCallable</code>: <code>super.pendingTasks() + tailTasks.size()</code></p>
+</li>
+<li>
+<p><code>selectProvider</code>: <code>SelectorProvider.provider()</code></p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_3.png" alt=""></p>
+<h4 id="3-创建引导">3. 创建引导</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">ServerBootstrap</span> <span style="color:#000">b</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">ServerBootstrap</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</code></pre></div><p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_4.png" alt=""></p>
+<h4 id="31-初始化一个channel">3.1 初始化一个Channel</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_5.png" alt=""></p>
+<h4 id="4-bind流程">4. bind流程</h4>
+<h4 id="41-初始化一个channel">4.1 初始化一个Channel</h4>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_6.png" alt=""></p>
+<p>持有底层的SocketChannel:(此处的Channel为java.nio的Channel)</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_7.png" alt=""></p>
+<h4 id="42-初始化channelpipeline">4.2 初始化ChannelPipeline</h4>
+<p>创建一个<code>DefaultChannelPipeline</code>:</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_8.png" alt=""></p>
+<p>Channel和ChannelPipeline是双向绑定的关系，向ChannelPipeline中通过<code>addLast</code>方法添加Handler。
+将ChannelHandler包装进入ChannelContext, 然后ChannelPipeline持有ChannelContext的双向链表：</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_9.png" alt=""></p>
+<h4 id="43-注册channelfuture">4.3 注册ChannelFuture</h4>
+<p>ChannelFuture：对Channel的各个生命周期阶段注册回调</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_10.png" alt=""></p>
+<p>调用的是<code>AbstractChannel</code>的：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">register</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">EventLoop</span> <span style="color:#000">eventLoop</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#000">ChannelPromise</span> <span style="color:#000">promise</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+</code></pre></div><p>然后是:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">eventLoop</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">execute</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">Runnable</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+    <span style="color:#5c35cc;font-weight:bold">@Override</span>
+    <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">run</span><span style="color:#ce5c00;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">{</span>
+        <span style="color:#000">register0</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">promise</span><span style="color:#ce5c00;font-weight:bold">);</span>
+    <span style="color:#ce5c00;font-weight:bold">}</span>
+<span style="color:#ce5c00;font-weight:bold">});</span>
+</code></pre></div><p>eventloop在这里是前面创建的EventLoopGroup</p>
+<h4 id="44-register0解析">4.4 register0()解析</h4>
+<ol>
+<li>pipeline.invokeHandlerAddedIfNeeded();</li>
+</ol>
+<p>执行前面注册的ChannelHandler初始化initChannel的动作</p>
+<ol start="2">
+<li>第一个Handler执行完成后，会再次提交一个Runnable给EventLoop</li>
+</ol>
+<p><code>ServerBootstrapAcceptor</code></p>
+<ol start="3">
+<li>EventLoop不断执行Task（该部分需要细化）</li>
+</ol>
+<p>最终进入bind()操作，执行<code>ServerSocketChannelImpl.bind()</code></p>
+<hr>
+<h3 id="client端">Client端</h3>
+<h4 id="1-启动流程">1. 启动流程</h4>
+<p>同Server</p>
+<h4 id="2-connect流程">2. connect流程</h4>
+<ol>
+<li>
+<p>connect操作会注册一个task给eventloop</p>
+</li>
+<li>
+<p>eventloop执行task:</p>
+<p><code>Bootstrap.doResolveAndConnect0()</code></p>
+</li>
+<li>
+<p>doConnect()</p>
+</li>
+<li>
+<p>channel.connect()</p>
+</li>
+<li>
+<p>SocketChannelImpl.connect()</p>
+</li>
+<li>
+<p>interestOps置为8</p>
+</li>
+</ol>
+<h4 id="3-clienthandler">3. ClientHandler</h4>
+<ol>
+<li>channelActive()</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_11.png" alt=""></p>
+<ol start="2">
+<li>channelRead()</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_12.png" alt=""></p>
+<hr>
+<h3 id="12-事件驱动模型设计">1.2 事件驱动模型设计</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_13.png" alt=""></p>
+<p>主要包括4个基本组件：</p>
+<p>事件队列（event queue）：接收事件的入口，存储待处理事件</p>
+<p>分发器（event mediator）：将不同的事件分发到不同的业务逻辑单元</p>
+<p>事件通道（event channel）：分发器与处理器之间的联系渠道</p>
+<p>事件处理器（event processor）：实现业务逻辑，处理完成后会发出事件，触发下一步操作</p>
+<p>可以看出，相对传统轮询模式，事件驱动有如下优点：</p>
+<ul>
+<li>可扩展性好，分布式的异步架构，事件处理器之间高度解耦，可以方便扩展事件处理逻辑</li>
+<li>高性能，基于队列暂存事件，能方便并行异步处理事件</li>
+</ul>
+<blockquote>
+<p>在同一组会话/链接中，将会触发不同的事件入口时，适合事件驱动架构</p>
+</blockquote>
+<h2 id="二主要模块">二、主要模块</h2>
+<h3 id="21-reactor线程模型">2.1 Reactor线程模型</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_14.png" alt=""></p>
+<p>1）Netty 抽象出两组线程池：BossGroup 和 WorkerGroup，也可以叫做 BossNioEventLoopGroup 和 WorkerNioEventLoopGroup。每个线程池中都有 NioEventLoop 线程。BossGroup 中的线程专门负责和客户端建立连接，WorkerGroup 中的线程专门负责处理连接上的读写。BossGroup 和 WorkerGroup 的类型都是 NioEventLoopGroup。</p>
+<p>2）NioEventLoopGroup 相当于一个事件循环组，这个组中含有多个事件循环，每个事件循环就是一个 NioEventLoop。</p>
+<p>3）NioEventLoop 表示一个不断循环的执行事件处理的线程，每个 NioEventLoop 都包含一个 Selector，用于监听注册在其上的 Socket 网络连接（Channel）。</p>
+<p>4）NioEventLoopGroup 可以含有多个线程，即可以含有多个 NioEventLoop。</p>
+<p>5）每个 BossNioEventLoop 中循环执行以下三个步骤：</p>
+<p>5.1）select：轮训注册在其上的 ServerSocketChannel 的 accept 事件（OP_ACCEPT 事件）</p>
+<p>5.2）processSelectedKeys：处理 accept 事件，与客户端建立连接，生成一个 NioSocketChannel，并将其注册到某个 WorkerNioEventLoop 上的 Selector 上</p>
+<p>5.3）runAllTasks：再去以此循环处理任务队列中的其他任务</p>
+<p>6）每个 WorkerNioEventLoop 中循环执行以下三个步骤：</p>
+<p>6.1）select：轮训注册在其上的 NioSocketChannel 的 read/write 事件（OP_READ/OP_WRITE 事件）</p>
+<p>6.2）processSelectedKeys：在对应的 NioSocketChannel 上处理 read/write 事件</p>
+<p>6.3）runAllTasks：再去以此循环处理任务队列中的其他任务</p>
+<p>7）在以上两个processSelectedKeys步骤中，会使用 Pipeline（管道），Pipeline 中引用了 Channel，即通过 Pipeline 可以获取到对应的 Channel，Pipeline 中维护了很多的处理器（拦截处理器、过滤处理器、自定义处理器等）。这里暂时不详细展开讲解 Pipeline。</p>
+<h3 id="22-channelpipeline设计">2.2 ChannelPipeline设计</h3>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_15.png" alt=""></p>
+<p>1）Bootstrap 和 ServerBootstrap 分别是客户端和服务器端的引导类，一个 Netty 应用程序通常由一个引导类开始，主要是用来配置整个 Netty 程序、设置业务处理类（Handler）、绑定端口、发起连接等。</p>
+<p>2）客户端创建一个 NioSocketChannel 作为客户端通道，去连接服务器。</p>
+<p>3）服务端首先创建一个 NioServerSocketChannel 作为服务器端通道，每当接收一个客户端连接就产生一个 NioSocketChannel 应对该客户端。</p>
+<p>4）使用 Channel 构建网络 IO 程序的时候，不同的协议、不同的阻塞类型和 Netty 中不同的 Channel 对应，常用的 Channel 有：</p>
+<p>NioSocketChannel：非阻塞的 TCP 客户端 Channel（本案例的客户端使用的 Channel）
+NioServerSocketChannel：非阻塞的 TCP 服务器端 Channel（本案例的服务器端使用的 Channel）
+NioDatagramChannel：非阻塞的 UDP Channel
+NioSctpChannel：非阻塞的 SCTP 客户端 Channel
+NioSctpServerChannel：非阻塞的 SCTP 服务器端 Channel…</p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/netty/img_16.png" alt=""></p>
+<p>每个 Netty Channel 包含了一个 ChannelPipeline（其实 Channel 和 ChannelPipeline 互相引用），而 ChannelPipeline 又维护了一个由 ChannelHandlerContext 构成的双向循环列表，其中的每一个 ChannelHandlerContext 都包含一个 ChannelHandler。（前文描述的时候为了简便，直接说 ChannelPipeline 包含了一个 ChannelHandler 责任链，这里给出完整的细节。）</p>
+<h3 id="23-channel模块设计">2.3 Channel模块设计</h3>
+<h4 id="1-事件驱动--指令式设计--过程调用">1. 事件驱动 + 指令式设计 + 过程调用</h4>
+<p>网络Channel对象 + 执行器 + 不同的事件处理器</p>
+<p>processor.execute(channel(data), executor(executore))</p>
+<h4 id="2-事件驱动--对象设计--责任链">2. 事件驱动 + 对象设计 + 责任链</h4>
+<p>面向对象包装Channel：执行器、自身属性、操作定义</p>
+<p>事件处理器责任链化：pipeline</p>
+<p>事件处理器状态机：内部状态流转和外部状态触发
+(好几套状态机&hellip;channel/pipeline/bootstrap&hellip;)</p>
+<blockquote>
+<p>内部状态流转的例子：register-&gt;register0-&gt;doregister &mdash;future完成后&mdash;&gt; bind-&gt;dobind0
+内部状态流转：bind &ndash;&gt; pipeline.fireChannelActive &mdash;&gt; 一系列handler等内部状态流转 &mdash;&gt; read  &ndash;&gt; 注册read状态位 &ndash;&gt; 进入外部事件触发</p>
+</blockquote>
+<p>register: 接口定义，事件入口
+register0: 抽象类封装（递交给eventloop）
+doregister: 委托底层实现</p>
+<h3 id="3-channel接口交互">3. channel接口交互</h3>
+<pre><code>channel事件入口 ---&gt;递交给  channelpipeline（invoker定义链路操作）  ---&gt;链路入口   channelhandler执行具体链路方法
+                                                               ---&gt;上下文    channelcontext
+</code></pre>
+<p>channelpipelint: invoker+链路组装</p>
+<p>佐证：channelpipeline(invoker)和handler的方法一一对应
+推测：context：面向对象的封装、另开一条链路</p>
+<blockquote>
+<p>ctx.fireChannelActive(); 链路控制</p>
+</blockquote>
+<p>责任链需要递归无用的handler，通过context直接指向下一个执行者，优化了流程</p>
+<h2 id="三细节功能">三、细节功能</h2>
+<h3 id="31-缓冲区零拷贝">3.1 缓冲区/零拷贝</h3>
+<p>&hellip;&hellip;</p>
+<h3 id="32-io异步机制">3.2 IO异步机制</h3>
+<p>&hellip;&hellip;</p>
+<h3 id="33-网络协议">3.3 网络协议</h3>
+<p>&hellip;&hellip;</p>
+<h3 id="参考文章">参考文章</h3>
+<h4 id="io-模型">IO 模型</h4>
+<p><a href="https://xie.infoq.cn/article/25d369e183563e44fc50d8168">https://xie.infoq.cn/article/25d369e183563e44fc50d8168</a></p>
+
+	
+
+	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+  <li>
+    <a href="/capa.io/blog/2022/05/20/netty-landscape/" aria-label="上一页 - Netty Landscape" class="btn btn-primary"><span class="mr-1">←</span>上一页</a>
+  </li>
+    <a class="btn btn-primary disabled">下一页<span class="ml-1">→</span></a>
+  </li>
+</ul>
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2022 The Capa Authors All Rights Reserved</small>
+        <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">隐私政策</a></small>
+	
+		<p class="mt-2"><a href="/capa.io/about/">About Capa</a></p>
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src='/capa.io/js/tabpane-persist.js'></script>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/capa.io/js/main.min.c30c86b73d90a0180556503734816437e56f9d02c4939409d2766a99c0d89b4c.js" integrity="sha256-wwyGtz2QoBgFVlA3NIFkN&#43;VvnQLEk5QJ0nZqmcDYm0w=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>
