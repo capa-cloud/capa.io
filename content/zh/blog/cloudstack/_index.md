@@ -1,7 +1,7 @@
 ---
 title: "Cloud Native Stack"
 linkTitle: "Cloud Native Stack"
-weight: 20
+weight: 60
 ---
 
 Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。

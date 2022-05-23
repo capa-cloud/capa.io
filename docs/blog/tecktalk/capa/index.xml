@@ -1,0 +1,47 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – Capa: Mecha SDK of Cloud Application Api</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/tecktalk/capa/</link>
+    <description>Recent content in Capa: Mecha SDK of Cloud Application Api on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 18 Jan 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/tecktalk/capa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Capa Trip落地</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</link>
+      <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;capa-落地情况&#34;&gt;Capa 落地情况&lt;/h2&gt;
+&lt;h3 id=&#34;a混合云支持&#34;&gt;A、混合云支持&lt;/h3&gt;
+&lt;p&gt;目前支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;携程私有云&lt;/li&gt;
+&lt;li&gt;AWS公有云&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;调研开发中:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;阿里云&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;b应用接入情况&#34;&gt;B、应用接入情况&lt;/h3&gt;
+&lt;h4 id=&#34;携程私有云&#34;&gt;携程私有云&lt;/h4&gt;
+&lt;p&gt;生产xx+应用，不断接入中&lt;/p&gt;
+&lt;h4 id=&#34;aws公有云&#34;&gt;AWS公有云&lt;/h4&gt;
+&lt;p&gt;生产xx+应用，不断接入中&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
