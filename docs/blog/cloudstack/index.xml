@@ -91,5 +91,18 @@
       </description>
     </item>
     
+    <item>
+      <title>Blog: AWS EKS Devops</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</link>
+      <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
   </channel>
 </rss>

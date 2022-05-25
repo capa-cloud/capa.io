@@ -13,5 +13,25 @@
       
     
     
+    <item>
+      <title>Blog: Layotto 启动流程分析</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;参考文档：https://mosn.io/layotto/#/zh/README&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;命令行入口&#34;&gt;命令行入口&lt;/h2&gt;
+&lt;h2 id=&#34;启动mosn&#34;&gt;启动Mosn&lt;/h2&gt;
+&lt;h2 id=&#34;启动grpc-server&#34;&gt;启动GRPC Server&lt;/h2&gt;
+&lt;h2 id=&#34;注册components组件&#34;&gt;注册Components组件&lt;/h2&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>

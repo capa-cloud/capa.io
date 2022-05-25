@@ -1,0 +1,46 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – Chaos 混沌工程</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/</link>
+    <description>Recent content in Chaos 混沌工程 on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: AWS故障注入模拟器</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/aws-fis/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/aws-fis/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;一aws-fault-injection-simulator-aws-fis&#34;&gt;一、AWS Fault Injection Simulator (AWS FIS)&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Chaos Mesh</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/chaos-mesh/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/chaos-mesh/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;一chaos-mesh&#34;&gt;一、Chaos Mesh&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

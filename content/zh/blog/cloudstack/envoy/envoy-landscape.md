@@ -218,9 +218,13 @@ filter_chain_match 匹配条件，只有发向 10.40.0.18 这个 IP 的出向请
 
 ## 三、Envoy 运维
 
-#### 管理界面
+### 管理界面
 
 > https://www.envoyproxy.io/docs/envoy/latest/operations/admin
+
+#### request_id
+
+默认UUID格式：xxxxxx-xxx-xxx-xxx-xxxxxxx
 
 ### 查看配置
 

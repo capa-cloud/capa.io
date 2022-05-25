@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – AWS故障注入模拟器</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/aws-fis/</link>
+    <description>Recent content in AWS故障注入模拟器 on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/aws-fis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

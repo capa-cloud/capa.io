@@ -1,0 +1,35 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – Femas Stack</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/mechastack/femas/</link>
+    <description>Recent content in Femas Stack on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 22 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/mechastack/femas/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Femas Landscape</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/femas-landscape/</link>
+      <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/femas-landscape/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;参考文档：http://femas.io/doc/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;api设计启发&#34;&gt;API设计启发&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

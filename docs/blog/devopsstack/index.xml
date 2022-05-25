@@ -1,0 +1,32 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – DevOps Stack</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/</link>
+    <description>Recent content in DevOps Stack on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Chaos 混沌工程</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/</guid>
+      <description>
+        
+        
+        &lt;p&gt;本目录主要为对云原生生态中Chaos混沌工程的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
