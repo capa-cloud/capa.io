@@ -1,6 +1,6 @@
 ---
 title: "Capa Trip落地"
-linkTitle: "Mecha SDK of Cloud Application Api"
+linkTitle: "Capa Trip落地"
 date: 2022-01-18
 ---
 
@@ -10,7 +10,7 @@ date: 2022-01-18
 
 目前支持：
 
-+ 携程私有云
++ Trip私有云
 + AWS公有云
 
 调研开发中:
@@ -19,7 +19,7 @@ date: 2022-01-18
 
 ### B、应用接入情况
 
-#### 携程私有云
+#### Trip私有云
 
 生产xx+应用，不断接入中
 

@@ -1,0 +1,46 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – Cloud SRE</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/</link>
+    <description>Recent content in Cloud SRE on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: AWS SRE - CloudWatch</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;aws-sre---cloudwatch使用经验&#34;&gt;AWS SRE - CloudWatch使用经验&lt;/h1&gt;
+&lt;p&gt;日志、指标、告警等功能&lt;/p&gt;
+&lt;h2 id=&#34;一日志查询&#34;&gt;一、日志查询&lt;/h2&gt;
+&lt;h3 id=&#34;a全局日志搜索logs-insights&#34;&gt;A、全局日志搜索：Logs Insights&lt;/h3&gt;
+&lt;p&gt;使用 CloudWatch 查询语法进行 日志组 维度的全局日志搜索。&lt;/p&gt;
+&lt;h4 id=&#34;常用查询语法&#34;&gt;常用查询语法&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fields @timestamp, @message
+| sort @timestamp desc
+| limit 20
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;或语法&#34;&gt;&amp;ldquo;或&amp;quot;语法：|&lt;/h4&gt;
+&lt;p&gt;使用 &amp;lsquo;|&amp;rsquo; 来作为 &amp;ldquo;或&amp;rdquo; 语义的分隔符，使用多个查询条件&lt;/p&gt;
+&lt;h4 id=&#34;注释&#34;&gt;&amp;ldquo;注释&amp;rdquo;&lt;/h4&gt;
+&lt;p&gt;使用 &amp;lsquo;#&amp;rsquo; 在开头，作为该行查询语句的注释，可使用快捷键 &amp;ldquo;ctrl + /&amp;rdquo;&lt;/p&gt;
+&lt;h3 id=&#34;b日志组&#34;&gt;B、日志组&lt;/h3&gt;
+&lt;h4 id=&#34;aws原生日志组&#34;&gt;AWS原生日志组&lt;/h4&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

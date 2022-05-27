@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.89.4" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-cloud/">
+<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-cloud/index.xml">
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="shortcut icon" href="/capa.io/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/capa.io/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/capa.io/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/capa.io/favicons/android-192x192.png" sizes="192x192">
+
+<title>Multi Cloud 多云混合云架构 | Capa</title>
+
+
+  
+  <meta name="description" content="混合云架构
+A、混合云的多活架构指南
+1. 企业选择混合云的技术诉求
+稳定性
+随着云厂商的技术建设，稳定性越来越高，且同 region 的多可用区方案进一步降低了企业集中式故障的概率。但云厂商仍存在中心式服务，如 region 的网络汇聚、统一的结算系统等。
+
+region级别的可用性，还是比较依赖 …">
+<meta property="og:title" content="Multi Cloud 多云混合云架构" />
+<meta property="og:description" content="Cloud Runtimes API" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-cloud/" /><meta property="og:site_name" content="Capa" />
+
+<meta itemprop="name" content="Multi Cloud 多云混合云架构">
+<meta itemprop="description" content="Cloud Runtimes API"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Multi Cloud 多云混合云架构"/>
+<meta name="twitter:description" content="Cloud Runtimes API"/>
+
+
+
+
+<link rel="preload" href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" as="style">
+<link href="/capa.io/scss/main.min.bd5285b713d3061549a6bfd34e5f4ec6775ede36672a3088260f0d420050647f.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-00000000-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+  </head>
+  <body class="td-section td-blog">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+        <a class="navbar-brand" href="/capa.io/">
+		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">Capa</span>
+	</a>
+	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/about/" ><span>关于</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/docs/" ><span>文档</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link active" href="/capa.io/blog/" ><span class="active">博客</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				
+				
+				
+				
+				<a class="nav-link" href="/capa.io/community/" ><span>社区</span></a>
+			</li>
+			
+			
+			
+			<li class="nav-item dropdown mr-4 d-none d-lg-block">
+				
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	简体中文
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	
+	<a class="dropdown-item" href="/capa.io/en/">English</a>
+	
+</div>
+			</li>
+			
+		</ul>
+	</div>
+	<div class="navbar-nav d-none d-lg-block">
+<input type="search" class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label="站内搜索…" autocomplete="off">
+
+</div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+          </div>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
+            
+
+
+
+
+<div class="td-content">
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+这是本节的多页打印视图。
+<a href="#" onclick="print();return false;">点击此处打印</a>.
+</p><p>
+<a href="/capa.io/blog/tecktalk/references/multi-cloud/">返回本页常规视图</a>.
+</p>
+</div>
+
+
+
+<h1 class="title">Multi Cloud 多云混合云架构</h1>
+
+
+
+
+
+    <ul>
+    
+  
+  
+  
+  
+
+  
+
+    </ul>
+
+
+<div class="content">
+      <h1 id="混合云架构">混合云架构</h1>
+<h2 id="a混合云的多活架构指南httpswwwinfoqcnarticlezesndlwpvj8gwf0hdrja">A、<a href="https://www.infoq.cn/article/ZESNdLWpvj8gWf0hdrJA">混合云的多活架构指南</a></h2>
+<h3 id="1-企业选择混合云的技术诉求">1. 企业选择混合云的技术诉求</h3>
+<h4 id="稳定性">稳定性</h4>
+<pre><code>随着云厂商的技术建设，稳定性越来越高，且同 region 的多可用区方案进一步降低了企业集中式故障的概率。但云厂商仍存在中心式服务，如 region 的网络汇聚、统一的结算系统等。
+</code></pre>
+<p>region级别的可用性，还是比较依赖云厂商的可用性，尤其是一些中心式服务，可能可用性不能达到要求。</p>
+<pre><code>对于用户使用时间窗口特别集中的业务，对稳定性的要求更高。比如在线素养课就是在有限时间内老师和学生完成知识传授，如果在这段时间内云服务出现故障，学生的学业受到影响，学生和老师需要重新匹配时间才能完成学习计划。健康码、打车软件这些使用集中在早晚高峰的场景也是同理。对于 SLA 要求更高的业务，选择多云多活是必然的趋势。
+</code></pre>
+<p>实际应用场景，尤其是跟人的现实活动挂钩的，对可用性要求比线上服务要更高。</p>
+<h4 id="成本-服务">成本 &amp;服务</h4>
+<pre><code>但随着互联网红利不断消退，公司希望实现成本效益最大化，引入更多的供应商也是必选的手段之一。新的供应商，可以用来做数据灾备，或者用于峰值时的弹性计算，也或者按照不同业务进行切分。
+</code></pre>
+<p>不希望鸡蛋放到一个篮子里，厂商锁定可能在议价时处于劣势。而如果可以灵活选择供应商，就可以选择折扣比较多的云服务。</p>
+<h3 id="2-多云sla的挑战">2. 多云SLA的挑战</h3>
+<h4 id="稳定性-1">稳定性</h4>
+<pre><code>多活架构是用来解决稳定性问题的，但若不能做到多云各自完整的闭环，彼此之间还有千丝万缕的调用依赖，故障率反而会增加。
+</code></pre>
+<p>如果每个云都是单独的服务，并且存在互相调用问题。那么故障的几率是乘积的关系，其实是比单云可用性要更低的。</p>
+<p>所以每个服务，都部署到多云上，将会极大地提高SLA。但在这种架构的过渡时期，则必须面对以上问题。</p>
+<pre><code>除了部署异构导致的故障率加剧外，脑裂加剧也是一大隐患。多家云厂商中数据存储一般采用主从的方式进行同步，master 所在的主云故障后，需要将另一边云的数据存储提主。但是主云并不是完整挂掉，运维人员无法从控制台登陆，无法将 master 降为 slave。但用户南北流量或者定时任务还在持续请求，主云仍有可能还在处理写入流量。这时候从云的切主，就会导致不可避免的脑裂。脑裂无法简单的进行修复，需要业务研发 case by case 的进行修复，代价巨大。
+</code></pre>
+<p>&ldquo;脑裂&quot;类似的场景很多，比如数据同步，以及在A云故障时，如何将数据放回B云，是值得思考的问题。</p>
+<h4 id="效率">效率</h4>
+<pre><code>如果做不到多云的对等部署，不得不通过持续演练的方式来应对墒增，保证多云架构的有效性。一旦松懈了，很有可能导致花大精力做的架构升级，但在真正的单云故障面前不起任何作用。另外，在两次演练之间的窗口内，架构能否很好的应对单云故障也是存疑的。
+</code></pre>
+<p>虽然多云号称可以解决单云故障问题，但系统是熵增的，必须通过不断的演练来确保这一点。不然可能真的故障的时候，手忙脚乱，导致各种业务问题。</p>
+<h2 id="b如何正确选择多云架构httpswwwinfoqcnarticlewnlmkzmyujiis9bnhglk">B、<a href="https://www.infoq.cn/article/WNLMkZmYujIIs9BNHGlk">如何正确选择多云架构？</a></h2>
+<h3 id="1-多云架构优势">1. 多云架构优势</h3>
+<pre><code>多云架构有如下优势：
+* 灾难恢复，当一家云供应商出现故障时，数据存储可以从另一家云供应商进行恢复。虽然云厂商有多地域，单地域也有多可用区，但还是存在中心化的依赖。这种依赖的故障就会导致整个云的故障。后面提到的故障主要指这种类型的故障。
+* 故障转移，当一家云供应商出现故障时，使用另一家云供应商承接服务，实现服务平稳不中断。
+* 成本优化，任意的采购只要有了两家及以上供应商，采购方就有了充分选择和议价的能力。
+* 避免供应商锁定，单一供应商，除了没有议价能力外，各种依赖也会使得变更极为困难。
+* 数据主权，企业提供服务，但产生的数据产权也是归属于服务对象。服务对象既有普通的用户（行权由国家主体代为进行），也有机构。他们对产权的需求，连带的导致企业的云基础设施选择也受其限制。
+* 特定服务访问，不同云有自己优势的服务，一般出现在 PaaS 层，如各式各样的数据库、大数据实时方案等。使用多云可以集各家之长。
+</code></pre>
+<ul>
+<li>便于全球化业务，基于当地优势云，快速部署一套当地的服务集群。</li>
+<li>业务本地化，边缘节点更接近用户，体验更良好（游戏业务居多？）</li>
+</ul>
+<h3 id="2-5种多云架构模式">2. 5种多云架构模式</h3>
+<p>Good！回看文章。</p>
+
+</div>
+</div>
+
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+        
+        
+<ul class="list-inline mb-0">
+  
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+</ul>
+
+        
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2022 The Capa Authors All Rights Reserved</small>
+        <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">隐私政策</a></small>
+	
+		<p class="mt-2"><a href="/capa.io/about/">About Capa</a></p>
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+
+
+
+
+<script src='/capa.io/js/tabpane-persist.js'></script>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/capa.io/js/main.min.c30c86b73d90a0180556503734816437e56f9d02c4939409d2766a99c0d89b4c.js" integrity="sha256-wwyGtz2QoBgFVlA3NIFkN&#43;VvnQLEk5QJ0nZqmcDYm0w=" crossorigin="anonymous"></script>
+
+
+
+
+  </body>
+</html>

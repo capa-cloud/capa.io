@@ -4,7 +4,6 @@
     <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/</link>
     <description>Recent content in DevOps Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0000</lastBuildDate>
     
 	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +14,51 @@
     
     
     <item>
+      <title>Blog: Cloud CICD</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/cicd/</link>
+      <pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/cicd/</guid>
+      <description>
+        
+        
+        &lt;p&gt;本目录主要为对云原生CICD的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Cloud Security</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/security/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/security/</guid>
+      <description>
+        
+        
+        &lt;p&gt;本目录主要为对云原生安全策略的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Cloud SRE</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/</guid>
+      <description>
+        
+        
+        &lt;p&gt;本目录主要为对云原生SRE的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Chaos 混沌工程</title>
       <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/</link>
-      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/</guid>
       <description>

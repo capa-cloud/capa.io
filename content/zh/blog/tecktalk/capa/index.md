@@ -4,7 +4,6 @@ linkTitle: "Mecha SDK of Cloud Application Api"
 date: 2022-01-18
 ---
 
-
 # Capa(Cloud-Application-API)：架起混合云应用开发的桥梁
 
  "让代码实现"一次编写，随处运行"。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。"

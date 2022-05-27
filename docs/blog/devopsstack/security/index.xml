@@ -1,0 +1,73 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – Cloud Security</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/security/</link>
+    <description>Recent content in Cloud Security on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 25 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: AWS Security - IAM</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/security/aws-iam/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/security/aws-iam/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;aws-security---iam使用经验&#34;&gt;AWS Security - IAM使用经验&lt;/h1&gt;
+&lt;h2 id=&#34;一iam相关概念&#34;&gt;一、IAM相关概念&lt;/h2&gt;
+&lt;h3 id=&#34;a用户&#34;&gt;A、用户&lt;/h3&gt;
+&lt;p&gt;用户和角色类似，也是一组权限的集合，但是用户应该更多的面向 人/客户端？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;人 是某个用户，通过密钥进行认证，然后具有对应的权限&lt;/li&gt;
+&lt;li&gt;机器 是某个用户，通过secretkey进行认证，然后具有对应的权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;b角色&#34;&gt;B、角色&lt;/h3&gt;
+&lt;p&gt;角色可以理解为，一组权限的集合代表，当需要权限进行操作时，往往是基于 角色 这个实体进行赋予。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对某个应用赋予某个角色&lt;/li&gt;
+&lt;li&gt;对某项操作赋予某个角色&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;c策略&#34;&gt;C、策略&lt;/h3&gt;
+&lt;p&gt;就是一组权限，或者单个权限。可以赋给 用户、角色。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二权限认证实践&#34;&gt;二、权限认证实践&lt;/h2&gt;
+&lt;h3 id=&#34;a开放的访问环境sandbox&#34;&gt;A、开放的访问环境（sandbox）&lt;/h3&gt;
+&lt;p&gt;由于本身网络环境是开放的，所以仅需进行IAM认证即可连接到其中。&lt;/p&gt;
+&lt;p&gt;以下为一种示例流程：&lt;/p&gt;
+&lt;h4 id=&#34;1-设置-用户-访问密钥&#34;&gt;1. 设置 用户 访问密钥&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;添加到系统文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[aws]
+aws_access_key_id=
+aws_secret_access_key=
+aws_session_token=
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;会话级别参数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_SESSION_TOKEN=
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;2-访问目标环境&#34;&gt;2. 访问目标环境&lt;/h4&gt;
+&lt;p&gt;这时，作为客户端，需要使用的是 用户 这个概念，然后具有 用户 上面对应的权限。&lt;/p&gt;
+&lt;h3 id=&#34;b隔离的访问环境&#34;&gt;B、隔离的访问环境&lt;/h3&gt;
+&lt;h4 id=&#34;1-通过会话管理器进行访问&#34;&gt;1. 通过会话管理器进行访问&lt;/h4&gt;
+&lt;p&gt;这时，作为客户端，需要使用的是 用户 这个概念，然后具有 用户 上面对应的权限。&lt;/p&gt;
+&lt;h4 id=&#34;2-通过vpn进行访问&#34;&gt;2. 通过VPN进行访问&lt;/h4&gt;
+&lt;p&gt;连接VPN后，操作步骤同A中所示。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

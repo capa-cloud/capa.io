@@ -14,6 +14,24 @@
     
     
     <item>
+      <title>Blog: Nginx Devops</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/26/nginx-devops/</link>
+      <pubDate>Thu, 26 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/26/nginx-devops/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;一nginx-devops&#34;&gt;一、Nginx Devops&lt;/h2&gt;
+&lt;h3 id=&#34;a作为aws网关&#34;&gt;A、作为AWS网关&lt;/h3&gt;
+&lt;h4 id=&#34;同elb配合使用&#34;&gt;同ELB配合使用&lt;/h4&gt;
+&lt;p&gt;当ELB的IP变化时，DNS刷新不及时，导致499超时问题。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.microideation.com/2020/04/06/nginx-proxy-with-aws-elb-critical-handling-for-intermittent-gateway-timeout-499-or-502/&#34;&gt;带有 AWS ELB 的 Nginx 代理：间歇性网关超时（499 或 502）的关键处理&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Nginx Landscape</title>
       <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/nginx-landscape/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>

@@ -1,0 +1,60 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – K8S Stack</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/cloudstack/k8s/</link>
+    <description>Recent content in K8S Stack on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 24 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/cloudstack/k8s/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: AWS EKS Devops</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</link>
+      <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;eks-devops&#34;&gt;EKS Devops&lt;/h1&gt;
+&lt;h2 id=&#34;一eks集群&#34;&gt;一、EKS集群&lt;/h2&gt;
+&lt;h3 id=&#34;a安装相关命令行工具&#34;&gt;A、安装相关命令行工具&lt;/h3&gt;
+&lt;h4 id=&#34;awsctl&#34;&gt;awsctl&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;pip install awscli
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;eksctl&#34;&gt;eksctl&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;curl --silent --location &amp;quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&amp;quot; | tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;kubectl&#34;&gt;kubectl&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+mkdir -p $HOME/bin &amp;amp;&amp;amp; cp ./kubectl $HOME/bin/kubectl &amp;amp;&amp;amp; export PATH=$PATH:$HOME/bin
+echo &#39;export PATH=$PATH:$HOME/bin&#39; &amp;gt;&amp;gt; ~/.bashrc
+
+kubectl version --short --client
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;b连接&#34;&gt;B、连接&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt; aws eks update-kubeconfig --region ap-southeast-1 --name xxx-eks-cluster
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更新kube的config文件&lt;/p&gt;
+&lt;h3 id=&#34;c权限&#34;&gt;C、权限&lt;/h3&gt;
+&lt;p&gt;默认使用的是客户端 用户/角色 的权限。&lt;/p&gt;
+&lt;p&gt;AWS IAM权限映射到EKS的RBCA权限上。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
