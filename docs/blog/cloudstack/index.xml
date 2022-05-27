@@ -14,37 +14,6 @@
     
     
     <item>
-      <title>Blog: K8S Stack</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/cloudstack/k8s/</link>
-      <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://reactivegroup.github.io/capa.io/blog/cloudstack/k8s/</guid>
-      <description>
-        
-        
-        &lt;h1 id=&#34;k8s&#34;&gt;K8S&lt;/h1&gt;
-&lt;h2 id=&#34;一常用操作命令&#34;&gt;一、常用操作命令&lt;/h2&gt;
-&lt;h3 id=&#34;a调试pod&#34;&gt;A、调试POD&lt;/h3&gt;
-&lt;h4 id=&#34;1-kubectl-exec&#34;&gt;1. kubectl exec&lt;/h4&gt;
-&lt;p&gt;登录命令&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;nodejs: sh&lt;/li&gt;
-&lt;li&gt;java: /bin/bash&lt;/li&gt;
-&lt;li&gt;nginx: /bin/bash&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-busybox&#34;&gt;2. busybox&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;3-pod调试&#34;&gt;3. pod调试&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
       <title>Blog: AppMesh Stack</title>
       <link>https://reactivegroup.github.io/capa.io/blog/cloudstack/appmesh/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -93,6 +62,37 @@
         
         
         
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: K8S Stack</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/cloudstack/k8s/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/cloudstack/k8s/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;k8s&#34;&gt;K8S&lt;/h1&gt;
+&lt;h2 id=&#34;一常用操作命令&#34;&gt;一、常用操作命令&lt;/h2&gt;
+&lt;h3 id=&#34;a调试pod&#34;&gt;A、调试POD&lt;/h3&gt;
+&lt;h4 id=&#34;1-kubectl-exec&#34;&gt;1. kubectl exec&lt;/h4&gt;
+&lt;p&gt;登录命令&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nodejs: sh&lt;/li&gt;
+&lt;li&gt;java: /bin/bash&lt;/li&gt;
+&lt;li&gt;nginx: /bin/bash&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-busybox&#34;&gt;2. busybox&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3-pod调试&#34;&gt;3. pod调试&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
       </description>
     </item>
     

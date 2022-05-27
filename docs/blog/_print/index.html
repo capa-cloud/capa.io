@@ -576,37 +576,6 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-007c15cc7a8b2b2f6f414f149453406d">K8S Stack</a></li>
-
-
-
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-
-    <li><a href="#pg-01b531c0677c94230fe461c0bededeaf">AWS EKS Devops</a></li>
-
-
-
-    
-  
-
-    </ul>
-    
-  
-    
-    
-	
-
     <li><a href="#pg-16ce7c0e151cc3f247f9db27606370e1">AppMesh Stack</a></li>
 
 
@@ -738,6 +707,37 @@ if (!doNotTrack) {
 	
 
     <li><a href="#pg-b7cbd7aebfcedf68a846e9242d068864">Istio Landscape</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+
+    <li><a href="#pg-007c15cc7a8b2b2f6f414f149453406d">K8S Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-01b531c0677c94230fe461c0bededeaf">AWS EKS Devops</a></li>
 
 
 
@@ -2209,8 +2209,6 @@ doregister: 委托底层实现</p>
 	<div class="td-byline mb-4">
 		
         
-		<time datetime="2022-05-27" class="text-muted">27.05.2022</time>
-        
 	</div>
 	<p>本目录主要为对云原生CICD的学习和实践。</p>
 
@@ -2287,8 +2285,6 @@ doregister: 委托底层实现</p>
 	
 	<div class="td-byline mb-4">
 		
-        
-		<time datetime="2022-05-25" class="text-muted">25.05.2022</time>
         
 	</div>
 	<p>本目录主要为对云原生安全策略的学习和实践。</p>
@@ -2408,8 +2404,6 @@ export AWS_SESSION_TOKEN=
 	
 	<div class="td-byline mb-4">
 		
-        
-		<time datetime="2022-05-25" class="text-muted">25.05.2022</time>
         
 	</div>
 	<p>本目录主要为对云原生SRE的学习和实践。</p>
@@ -2850,119 +2844,6 @@ Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 image 为 &ldq
   
   
 
-  
-    
-    
-	
-    
-
-
-  
-
-<div class="td-content" style="page-break-before: always">
-    <h1 id="pg-007c15cc7a8b2b2f6f414f149453406d">K8S Stack</h1>
-	
-	<div class="td-byline mb-4">
-		
-        
-		<time datetime="2022-05-24" class="text-muted">24.05.2022</time>
-        
-	</div>
-	<h1 id="k8s">K8S</h1>
-<h2 id="一常用操作命令">一、常用操作命令</h2>
-<h3 id="a调试pod">A、调试POD</h3>
-<h4 id="1-kubectl-exec">1. kubectl exec</h4>
-<p>登录命令</p>
-<ul>
-<li>nodejs: sh</li>
-<li>java: /bin/bash</li>
-<li>nginx: /bin/bash</li>
-</ul>
-<h4 id="2-busybox">2. busybox</h4>
-<pre><code>kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
-</code></pre>
-<h4 id="3-pod调试">3. pod调试</h4>
-<ul>
-<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/</a></li>
-<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods</a></li>
-</ul>
-
-</div>
-
-
-
-
-
-    
-      
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-
-  
-
-<div class="td-content" style="">
-    <h1 id="pg-01b531c0677c94230fe461c0bededeaf">AWS EKS Devops</h1>
-	<div class="lead">AWS EKS Devops.</div>
-	<div class="td-byline mb-4">
-		
-        
-		<time datetime="2022-05-24" class="text-muted">24.05.2022</time>
-        
-	</div>
-	<h1 id="eks-devops">EKS Devops</h1>
-<h2 id="一eks集群">一、EKS集群</h2>
-<h3 id="a安装相关命令行工具">A、安装相关命令行工具</h3>
-<h4 id="awsctl">awsctl</h4>
-<pre><code>pip install awscli
-</code></pre>
-<h4 id="eksctl">eksctl</h4>
-<pre><code>curl --silent --location &quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&quot; | tar xz -C /tmp
-
-sudo mv /tmp/eksctl /usr/local/bin
-
-eksctl version
-</code></pre>
-<h4 id="kubectl">kubectl</h4>
-<pre><code>curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
-
-chmod +x ./kubectl
-mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export PATH=$PATH:$HOME/bin
-echo 'export PATH=$PATH:$HOME/bin' &gt;&gt; ~/.bashrc
-
-kubectl version --short --client
-</code></pre>
-<h3 id="b连接">B、连接</h3>
-<pre><code> aws eks update-kubeconfig --region ap-southeast-1 --name xxx-eks-cluster
-</code></pre>
-<p>更新kube的config文件</p>
-<h3 id="c权限">C、权限</h3>
-<p>默认使用的是客户端 用户/角色 的权限。</p>
-<p>AWS IAM权限映射到EKS的RBCA权限上。</p>
-
-</div>
-
-
-
-
-
-    
-	
-  
-
-    
-	
   
     
     
@@ -8923,6 +8804,117 @@ COMMIT
 <p>Mesh: dns拦截(udp)</p>
 <p><img src="http://img.rocdu.top/20201117/role-of-dns-today.png" alt=""></p>
 <p><img src="http://img.rocdu.top/20201117/dns-interception-in-istio.png" alt=""></p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-007c15cc7a8b2b2f6f414f149453406d">K8S Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+	</div>
+	<h1 id="k8s">K8S</h1>
+<h2 id="一常用操作命令">一、常用操作命令</h2>
+<h3 id="a调试pod">A、调试POD</h3>
+<h4 id="1-kubectl-exec">1. kubectl exec</h4>
+<p>登录命令</p>
+<ul>
+<li>nodejs: sh</li>
+<li>java: /bin/bash</li>
+<li>nginx: /bin/bash</li>
+</ul>
+<h4 id="2-busybox">2. busybox</h4>
+<pre><code>kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
+</code></pre>
+<h4 id="3-pod调试">3. pod调试</h4>
+<ul>
+<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/</a></li>
+<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods</a></li>
+</ul>
+
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-01b531c0677c94230fe461c0bededeaf">AWS EKS Devops</h1>
+	<div class="lead">AWS EKS Devops.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-24" class="text-muted">24.05.2022</time>
+        
+	</div>
+	<h1 id="eks-devops">EKS Devops</h1>
+<h2 id="一eks集群">一、EKS集群</h2>
+<h3 id="a安装相关命令行工具">A、安装相关命令行工具</h3>
+<h4 id="awsctl">awsctl</h4>
+<pre><code>pip install awscli
+</code></pre>
+<h4 id="eksctl">eksctl</h4>
+<pre><code>curl --silent --location &quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&quot; | tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
+</code></pre>
+<h4 id="kubectl">kubectl</h4>
+<pre><code>curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+mkdir -p $HOME/bin &amp;&amp; cp ./kubectl $HOME/bin/kubectl &amp;&amp; export PATH=$PATH:$HOME/bin
+echo 'export PATH=$PATH:$HOME/bin' &gt;&gt; ~/.bashrc
+
+kubectl version --short --client
+</code></pre>
+<h3 id="b连接">B、连接</h3>
+<pre><code> aws eks update-kubeconfig --region ap-southeast-1 --name xxx-eks-cluster
+</code></pre>
+<p>更新kube的config文件</p>
+<h3 id="c权限">C、权限</h3>
+<p>默认使用的是客户端 用户/角色 的权限。</p>
+<p>AWS IAM权限映射到EKS的RBCA权限上。</p>
 
 </div>
 

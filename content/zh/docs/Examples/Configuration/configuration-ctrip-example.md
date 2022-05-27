@@ -21,7 +21,7 @@ step1.引入maven依赖
 ```xml
 <dependencyManagement>        
      <dependency>
-            <groupId>com.ctrip.ibu</groupId>
+            <groupId>group.rxcloud</groupId>
             <artifactId>capa-framework-dependencies</artifactId>
             <version>1.0.1</version>
             <type>pom</type>
@@ -33,8 +33,8 @@ step1.引入maven依赖
 
 ```xml
 <dependency>
-    <groupId>com.ctrip.ibu</groupId>
-    <artifactId>capa-spi-ctrip-qconfig</artifactId>
+    <groupId>group.rxcloud</groupId>
+    <artifactId>capa-spi-group.rxcloud-qconfig</artifactId>
 </dependency>
 ```
 
@@ -47,8 +47,8 @@ step1.引入maven依赖
 
 ```xml
 <dependency>
-    <groupId>com.ctrip.ibu</groupId>
-    <artifactId>capa-adaptor-ctrip-qconfig</artifactId>
+    <groupId>group.rxcloud</groupId>
+    <artifactId>capa-adaptor-group.rxcloud-qconfig</artifactId>
 </dependency>
 ```
 
@@ -56,7 +56,7 @@ step2.相关代码修改
 
 ### 注解接入使用流程
 
-- 使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将**import qunar.tc.qconfig.client.spring.QConfig**;修改为**import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;**
+- 使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将**import qunar.tc.qconfig.client.spring.QConfig**;修改为**import group.rxcloud.capa.adaptor.group.rxcloud.qconfig.annotation.QConfig;**
 - 使用如下
 
 ```java
@@ -178,7 +178,7 @@ Mono<Void> deleteConfiguration(ConfigurationRequestItem configurationRequestItem
 
 ## 调用逻辑
 
-![configuration_in_ctrip](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png)
+![configuration_in_group.rxcloud](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Example/Configuration/configuration_ctrip.png)
 
 ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直接缩写成ServiceA
 
@@ -202,16 +202,16 @@ ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直
 
    ```properties
    #capa-component-configuration.properties文件
-   group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.ctrip.configstore.CtripCapaConfigStore
+   group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.group.rxcloud.configstore.CtripCapaConfigStore
    ```
 
    - 在项目resources路径下，新增capa-component-configuration-common.properties
 
    ```properties
-   CONFIGURATION_COMPONENT_STORE_NAME=ctrip.qconfig
+   CONFIGURATION_COMPONENT_STORE_NAME=group.rxcloud.qconfig
    ```
 
-   - 在项目resources路径下，新增capa-component-configuration-ctrip.propertoes
+   - 在项目resources路径下，新增capa-component-configuration-group.rxcloud.propertoes
 
    ```properties
    #暂无配置

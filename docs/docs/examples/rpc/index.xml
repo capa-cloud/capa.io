@@ -81,8 +81,8 @@
 &lt;p&gt;例如:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; group.rxcloud.capa.component.http.CapaHttp=com.ctrip.ibu.capa.spi.ctrip.http.AwsCapaHttp
- group.rxcloud.capa.spi.config.CapaSpiOptionsLoader=com.ctrip.ibu.capa.spi.ctrip.config.AwsSpiOptionsLoader   
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; group.rxcloud.capa.component.http.CapaHttp=group.rxcloud.capa.spi.group.rxcloud.http.AwsCapaHttp
+ group.rxcloud.capa.spi.config.CapaSpiOptionsLoader=group.rxcloud.capa.spi.group.rxcloud.config.AwsSpiOptionsLoader   
 &lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
@@ -154,8 +154,8 @@
 &lt;p&gt;例如:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; group.rxcloud.capa.component.http.CapaHttp=com.ctrip.ibu.capa.spi.ctrip.http.CtripCapaHttp
- group.rxcloud.capa.spi.config.CapaSpiOptionsLoader=com.ctrip.ibu.capa.spi.ctrip.config.CtripSpiOptionsLoader   
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; group.rxcloud.capa.component.http.CapaHttp=group.rxcloud.capa.spi.group.rxcloud.http.CtripCapaHttp
+ group.rxcloud.capa.spi.config.CapaSpiOptionsLoader=group.rxcloud.capa.spi.group.rxcloud.config.CtripSpiOptionsLoader   
 &lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>

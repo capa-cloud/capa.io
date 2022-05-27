@@ -21,7 +21,7 @@ step1.引入maven依赖
 ```xml
 <dependencyManagement>        
      <dependency>
-            <groupId>com.ctrip.ibu</groupId>
+            <groupId>group.rxcloud</groupId>
             <artifactId>capa-framework-dependencies</artifactId>
             <version>1.0.1</version>
             <type>pom</type>
@@ -49,8 +49,8 @@ step1.引入maven依赖
 
 ```xml
 <dependency>
-    <groupId>com.ctrip.ibu</groupId>
-    <artifactId>capa-adaptor-ctrip-qconfig</artifactId>
+    <groupId>group.rxcloud</groupId>
+    <artifactId>capa-adaptor-group.rxcloud-qconfig</artifactId>
 </dependency>
 ```
 
@@ -159,7 +159,7 @@ public String getConfig() {
 
 #### 注解使用流程
 
-- 使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将**import qunar.tc.qconfig.client.spring.QConfig**;修改为**import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;**
+- 使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将**import qunar.tc.qconfig.client.spring.QConfig**;修改为**import group.rxcloud.capa.adaptor.group.rxcloud.qconfig.annotation.QConfig;**
 
 - 代码写法
 
@@ -285,7 +285,7 @@ Mono<Void> deleteConfiguration(ConfigurationRequestItem configurationRequestItem
 
 ## 中间件开发者配置AppConfig应用规范
 
-1. AppConfig应用名格式为:"AppId_ENV",e.g.100012345_FAT(环境与ctrip环境定义一致，且保持全大写)
+1. AppConfig应用名格式为:"AppId_ENV",e.g.100012345_FAT(环境与group.rxcloud环境定义一致，且保持全大写)
 2. 创建配置文件选择托管文件的方式
 3. 文件发布部署时，选择immediate_shixu的部署方式，或者自己创建部署方式，选择创建部署时间0min，烘焙时间0min，百分比100%,线性的部署方式
 

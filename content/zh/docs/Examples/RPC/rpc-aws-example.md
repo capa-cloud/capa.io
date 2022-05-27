@@ -68,6 +68,6 @@ description: >
 
    例如:
 ```
- group.rxcloud.capa.component.http.CapaHttp=com.ctrip.ibu.capa.spi.ctrip.http.AwsCapaHttp
- group.rxcloud.capa.spi.config.CapaSpiOptionsLoader=com.ctrip.ibu.capa.spi.ctrip.config.AwsSpiOptionsLoader   
+ group.rxcloud.capa.component.http.CapaHttp=group.rxcloud.capa.spi.group.rxcloud.http.AwsCapaHttp
+ group.rxcloud.capa.spi.config.CapaSpiOptionsLoader=group.rxcloud.capa.spi.group.rxcloud.config.AwsSpiOptionsLoader   
 ```

@@ -458,7 +458,7 @@ if (!doNotTrack) {
 <p>step1.引入maven依赖</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependencyManagement&gt;</span>        
      <span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
-            <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>com.ctrip.ibu<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+            <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
             <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-framework-dependencies<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
             <span style="color:#204a87;font-weight:bold">&lt;version&gt;</span>1.0.1<span style="color:#204a87;font-weight:bold">&lt;/version&gt;</span>
             <span style="color:#204a87;font-weight:bold">&lt;type&gt;</span>pom<span style="color:#204a87;font-weight:bold">&lt;/type&gt;</span>
@@ -476,8 +476,8 @@ if (!doNotTrack) {
 <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
 </code></pre></div><p>携程用户需要额外引入(目前jar包在携程私服上，仅限携程开发使用)</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
-    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>com.ctrip.ibu<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
-    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-adaptor-ctrip-qconfig<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;groupId&gt;</span>group.rxcloud<span style="color:#204a87;font-weight:bold">&lt;/groupId&gt;</span>
+    <span style="color:#204a87;font-weight:bold">&lt;artifactId&gt;</span>capa-adaptor-group.rxcloud-qconfig<span style="color:#204a87;font-weight:bold">&lt;/artifactId&gt;</span>
 <span style="color:#204a87;font-weight:bold">&lt;/dependency&gt;</span>
 </code></pre></div><p>此外还提供foundation方法包，供使用方获取appId,provider,env,namespace,region使用(<strong>该foundation中的其他方法并未测试，请不要使用</strong>)</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#204a87;font-weight:bold">&lt;dependency&gt;</span>
@@ -563,7 +563,7 @@ if (!doNotTrack) {
 <h4 id="注解使用流程">注解使用流程</h4>
 <ul>
 <li>
-<p>使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将<strong>import qunar.tc.qconfig.client.spring.QConfig</strong>;修改为<strong>import com.ctrip.ibu.capa.adaptor.ctrip.qconfig.annotation.QConfig;</strong></p>
+<p>使用adaptor包中的@QConfig注解替换QConfig中原来的@QConfig注解:将<strong>import qunar.tc.qconfig.client.spring.QConfig</strong>;修改为<strong>import group.rxcloud.capa.adaptor.group.rxcloud.qconfig.annotation.QConfig;</strong></p>
 </li>
 <li>
 <p>代码写法</p>
@@ -673,7 +673,7 @@ if (!doNotTrack) {
 <span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">deleteConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">ConfigurationRequestItem</span> <span style="color:#000">configurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">);</span>
 </code></pre></div><h2 id="中间件开发者配置appconfig应用规范">中间件开发者配置AppConfig应用规范</h2>
 <ol>
-<li>AppConfig应用名格式为:&ldquo;AppId_ENV&rdquo;,e.g.100012345_FAT(环境与ctrip环境定义一致，且保持全大写)</li>
+<li>AppConfig应用名格式为:&ldquo;AppId_ENV&rdquo;,e.g.100012345_FAT(环境与group.rxcloud环境定义一致，且保持全大写)</li>
 <li>创建配置文件选择托管文件的方式</li>
 <li>文件发布部署时，选择immediate_shixu的部署方式，或者自己创建部署方式，选择创建部署时间0min，烘焙时间0min，百分比100%,线性的部署方式</li>
 </ol>
