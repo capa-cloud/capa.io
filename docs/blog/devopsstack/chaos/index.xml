@@ -199,47 +199,6 @@ Events:
 &lt;h2 id=&#34;三chaos-mesh-workflow&#34;&gt;三、Chaos Mesh Workflow&lt;/h2&gt;
 &lt;p&gt;复杂的注入工作流。&lt;/p&gt;
 &lt;p&gt;TODO&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;四混沌实验类型&#34;&gt;四、混沌实验类型&lt;/h2&gt;
-&lt;p&gt;见 &lt;a href=&#34;https://chaos-mesh.org/zh/docs/simulate-pod-chaos-on-kubernetes/&#34;&gt;Kubernetes&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;apod故障&#34;&gt;A、POD故障&lt;/h3&gt;
-&lt;h4 id=&#34;1-pod-failure&#34;&gt;1. Pod Failure&lt;/h4&gt;
-&lt;p&gt;向指定的 Pod 中注入故障，使得该 Pod 在一段时间内处于不可用的状态。&lt;/p&gt;
-&lt;p&gt;实践：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;POD不会被K8S回收重新部署。&lt;/li&gt;
-&lt;li&gt;POD会一直处于restart状态，可以看到值在增加&lt;/li&gt;
-&lt;li&gt;仅在对应namespace生效&lt;/li&gt;
-&lt;li&gt;使用http访问时，直接报连接错误&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;pod-failure-混沌实验的一些注意事项&#34;&gt;“Pod Failure” 混沌实验的一些注意事项&lt;/h4&gt;
-&lt;p&gt;简言之，这里有几个关于使用 &amp;ldquo;Pod Failure&amp;rdquo; 混沌实验的建议：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果你正在运行一个气隙或网络隔离的 Kubernetes 集群，请更换一个可用的 &amp;ldquo;pause image&amp;rdquo;。&lt;/li&gt;
-&lt;li&gt;为容器配置 livenessProbe 和 readinessProbe。
-Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 image 为 &amp;ldquo;pause image&amp;rdquo;，这是一个特殊的镜像，不会执行任何操作。我们使用 gcr.io/google-containers/pause:latest 作为默认的 &amp;ldquo;pause image&amp;rdquo;，你可以在 helm values controllerManager.podChaos.podFailure.pauseImage 中更改它。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;下载 &amp;ldquo;pause image&amp;rdquo; 将会消耗时间，并且这个时间将会被计入实验的持续时间中。所以你可能会发现，&lt;strong&gt;&amp;ldquo;实际受影响的时间&amp;rdquo; 可能会比配置的时间短&lt;/strong&gt;。这是推荐设置可用的 &amp;ldquo;pause image&amp;rdquo; 的另一个原因。&lt;/p&gt;
-&lt;p&gt;另外一个迷惑的点是，&amp;ldquo;pause image&amp;rdquo; 可以在未配置 command 的容器中正常工作。所以，如果容器未配置 command，livenessProbe 和 readinessProbe，它将会被视为 Running 和 Ready，&lt;strong&gt;即使它已经被改变为 &amp;ldquo;pause image&amp;rdquo;，并且实际上不提供正常功能， 或者被视为不可用。所以建议为容器配置 livenessProbe 和 readinessProbe。&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;b网络故障&#34;&gt;B、网络故障&lt;/h3&gt;
-&lt;h4 id=&#34;1-网络延时&#34;&gt;1. 网络延时&lt;/h4&gt;
-&lt;p&gt;实践：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;仅在对应namespace、pod生效&lt;/li&gt;
-&lt;li&gt;http调用，感觉会有两个延时：一个是connect，一个是数据发送。所以如果设置10sdelay，可能完成一次调用要20s。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;caws故障&#34;&gt;C、AWS故障&lt;/h3&gt;
-&lt;p&gt;AWSChaos 能够帮助你模拟指定的 AWS 实例发生故障的情景。目前，AWSChaos 支持以下类型的故障：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;EC2 Stop: 使指定的 EC2 实例进入停止状态。&lt;/li&gt;
-&lt;li&gt;EC2 Restart: 重启指定的 EC2 实例。&lt;/li&gt;
-&lt;li&gt;Detach Volume: 从指定的 EC2 实例中卸载存储卷。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;实践：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;似乎无法操作非k8s管理的ec2&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;ec2级别的故障，可以由aws原生的fis来进行。&lt;/p&gt;
 
       </description>
     </item>

@@ -228,6 +228,16 @@ if (!doNotTrack) {
   
 
   
+    
+    
+	
+
+    <li><a href="#pg-b81ced864d87bf10ef4d9a62de09831a">Chaos Mesh - K8S实验</a></li>
+
+
+
+    
+  
 
     </ul>
     
@@ -472,8 +482,52 @@ Events:
 <h2 id="三chaos-mesh-workflow">三、Chaos Mesh Workflow</h2>
 <p>复杂的注入工作流。</p>
 <p>TODO</p>
+
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-b81ced864d87bf10ef4d9a62de09831a">Chaos Mesh - K8S实验</h1>
+	<div class="lead">K8S 故障注入实践经验.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-30" class="text-muted">30.05.2022</time>
+        
+	</div>
+	<h1 id="chaos-mesh">Chaos Mesh</h1>
+<h2 id="一故障注入场景">一、故障注入场景</h2>
+<h3 id="arpc服务通讯层演练">A、RPC服务通讯层演练</h3>
+<h4 id="1-rpc演练-服务延时性能-监控告警">1. RPC演练-服务延时/性能 监控告警</h4>
+<p><strong>演练目标：</strong></p>
+<p><strong>演练手段：</strong></p>
+<p><strong>演练：</strong></p>
+<h4 id="2-rpc演练-服务弹性伸缩高可用">2. RPC演练-服务弹性伸缩高可用</h4>
+<h4 id="3-rpc演练-服务恢复">3. RPC演练-服务恢复</h4>
 <hr>
-<h2 id="四混沌实验类型">四、混沌实验类型</h2>
+<h2 id="二k8s混沌实验">二、K8S混沌实验</h2>
 <p>见 <a href="https://chaos-mesh.org/zh/docs/simulate-pod-chaos-on-kubernetes/">Kubernetes</a></p>
 <h3 id="apod故障">A、POD故障</h3>
 <h4 id="1-pod-failure">1. Pod Failure</h4>
@@ -489,18 +543,40 @@ Events:
 <p>简言之，这里有几个关于使用 &ldquo;Pod Failure&rdquo; 混沌实验的建议：</p>
 <ul>
 <li>如果你正在运行一个气隙或网络隔离的 Kubernetes 集群，请更换一个可用的 &ldquo;pause image&rdquo;。</li>
-<li>为容器配置 livenessProbe 和 readinessProbe。
-Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 image 为 &ldquo;pause image&rdquo;，这是一个特殊的镜像，不会执行任何操作。我们使用 gcr.io/google-containers/pause:latest 作为默认的 &ldquo;pause image&rdquo;，你可以在 helm values controllerManager.podChaos.podFailure.pauseImage 中更改它。</li>
+<li>为容器配置 livenessProbe 和 readinessProbe。</li>
 </ul>
+<p>Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 image 为 &ldquo;pause image&rdquo;，这是一个特殊的镜像，不会执行任何操作。我们使用 gcr.io/google-containers/pause:latest 作为默认的 &ldquo;pause image&rdquo;，你可以在 helm values controllerManager.podChaos.podFailure.pauseImage 中更改它。</p>
 <p>下载 &ldquo;pause image&rdquo; 将会消耗时间，并且这个时间将会被计入实验的持续时间中。所以你可能会发现，<strong>&ldquo;实际受影响的时间&rdquo; 可能会比配置的时间短</strong>。这是推荐设置可用的 &ldquo;pause image&rdquo; 的另一个原因。</p>
 <p>另外一个迷惑的点是，&ldquo;pause image&rdquo; 可以在未配置 command 的容器中正常工作。所以，如果容器未配置 command，livenessProbe 和 readinessProbe，它将会被视为 Running 和 Ready，<strong>即使它已经被改变为 &ldquo;pause image&rdquo;，并且实际上不提供正常功能， 或者被视为不可用。所以建议为容器配置 livenessProbe 和 readinessProbe。</strong></p>
+<hr>
 <h3 id="b网络故障">B、网络故障</h3>
 <h4 id="1-网络延时">1. 网络延时</h4>
-<p>实践：</p>
+<p>配置：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">chaos-mesh.org/v1alpha1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">NetworkChaos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">delay</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">action</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">delay</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#8f5902;font-style:italic"># one（表示随机选出一个符合条件的 Pod）</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">one</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">selector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">namespaces</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- {<span style="color:#000">default}</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">labelSelectors</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">&#39;app&#39;</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;{web-show}&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">delay</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">latency</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;{10ms}&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># 表示延迟时间的时间长度与前一次延迟时长的相关性。取值范围：[0, 100]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">correlation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;100&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># 表示延迟时间的变化范围</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">jitter</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;0ms&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>实践：</p>
 <ol>
 <li>仅在对应namespace、pod生效</li>
 <li>http调用，感觉会有两个延时：一个是connect，一个是数据发送。所以如果设置10sdelay，可能完成一次调用要20s。</li>
 </ol>
+<hr>
 <h3 id="caws故障">C、AWS故障</h3>
 <p>AWSChaos 能够帮助你模拟指定的 AWS 实例发生故障的情景。目前，AWSChaos 支持以下类型的故障：</p>
 <ul>
@@ -521,15 +597,7 @@ Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 image 为 &ldq
 
 
     
-      
-  
-  
-  
-  
-
-  
-  
-
+	
   
 
     

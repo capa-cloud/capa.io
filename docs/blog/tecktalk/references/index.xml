@@ -69,5 +69,21 @@
       </description>
     </item>
     
+    <item>
+      <title>Blog: Multi Mesh 各领域Mesh架构</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-mesh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-mesh/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;db-mesh架构&#34;&gt;DB Mesh架构&lt;/h1&gt;
+&lt;h2 id=&#34;adatabase-mesh-20-如何在云原生场景下提高数据库治理性能httpswwwinfoqcnarticle6t0skldyjbu2ecdcujgw&#34;&gt;A、&lt;a href=&#34;https://www.infoq.cn/article/6T0SKldyjbU2ecDcujGW&#34;&gt;Database Mesh 2.0 如何在云原生场景下提高数据库治理性能？&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;1-企业选择混合云的技术诉求&#34;&gt;1. 企业选择混合云的技术诉求&lt;/h3&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>

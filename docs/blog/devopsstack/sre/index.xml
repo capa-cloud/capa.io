@@ -14,6 +14,21 @@
     
     
     <item>
+      <title>Blog: SRE</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/sre/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/sre/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;sre&#34;&gt;SRE&lt;/h1&gt;
+&lt;h2 id=&#34;一目标和职责&#34;&gt;一、目标和职责&lt;/h2&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: AWS SRE - CloudWatch</title>
       <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
