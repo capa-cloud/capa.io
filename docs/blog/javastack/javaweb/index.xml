@@ -1,0 +1,77 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – Java Web Stack</title>
+    <link>https://reactivegroup.github.io/capa.io/blog/javastack/javaweb/</link>
+    <description>Recent content in Java Web Stack on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/javastack/javaweb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Java Servlet</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-servlet/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-servlet/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;a初始化&#34;&gt;A、初始化&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.codetd.com/en/article/13249666#ServletContextListener_27&#34;&gt;https://www.codetd.com/en/article/13249666#ServletContextListener_27&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;servletcontextlistener&#34;&gt;ServletContextListener&lt;/h4&gt;
+&lt;p&gt;ServletContextListener 接口，它能够监听 ServletContext 对象的生命周期，当Servlet 容器启动或终止Web 应用时，会触发ServletContextEvent 事件，该事件由ServletContextListener 来处理。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Java Spring</title>
+      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-spring/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-spring/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;a初始化&#34;&gt;A、初始化&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.codetd.com/en/article/13249666#ServletContextListener_27&#34;&gt;https://www.codetd.com/en/article/13249666#ServletContextListener_27&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;beanpostprocessor&#34;&gt;BeanPostProcessor&lt;/h4&gt;
+&lt;p&gt;Spring容器的创建Bean前后执行&lt;/p&gt;
+&lt;h4 id=&#34;initializingbean&#34;&gt;InitializingBean&lt;/h4&gt;
+&lt;p&gt;InitializingBean接口为bean提供了属性初始化后的处理方法，在bean的属性初始化后都会执行该方法。&lt;/p&gt;
+&lt;h4 id=&#34;postconstruct&#34;&gt;PostConstruct&lt;/h4&gt;
+&lt;p&gt;使用@PostConstruct注解一个方法来完成初始化，@PostConstruct注解的方法将会在依赖注入完成后被自动调用。&lt;/p&gt;
+&lt;h4 id=&#34;applicationrunner和commandlinerunner&#34;&gt;ApplicationRunner和CommandLineRunner&lt;/h4&gt;
+&lt;p&gt;项目启动后执行，CommandLineRunner和ApplicationRunner的作用是相同的，不同在于参数的封装和没封装。可以创建多个实现CommandLineRunner和ApplicationRunner接口的类。为了使他们按一定顺序执行，可以使用@Order注解或实现Ordered接口。&lt;/p&gt;
+&lt;h4 id=&#34;执行顺序结果&#34;&gt;执行顺序结果&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.   ____          _            __ _ _
+/\\ / ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | &#39;_ | &#39;_| | &#39;_ \/ _` | \ \ \ \
+\\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+&#39;  |____| .__|_| |_|_| |_\__, | / / / /
+=========|_|==============|___/=/_/_/_/
+:: Spring Boot ::        (v1.5.9.RELEASE)
+
+beanPostProcessor run...
+servletContextListener run...
+initializingBean run...
+postConstruct run...
+applicationRunner run...
+commandLineRunner run...&lt;/code&gt;&lt;/pre&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
