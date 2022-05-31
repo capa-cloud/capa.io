@@ -28,10 +28,10 @@
     
     <item>
       <title>Blog: Capa: Mecha SDK of Cloud Application Api</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</link>
+      <link>https://reactivegroup.github.io/capa.io/blog/tecktalk/capa/</link>
       <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/blog/tecktalk/capa/</guid>
       <description>
         
         
@@ -737,6 +737,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-crose.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/rpc-cross.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;mq跨云&#34;&gt;MQ跨云&lt;/h4&gt;
 &lt;p&gt;使用周边系统：MQ同步工具，进行跨云消息传输。&lt;/p&gt;
 &lt;p&gt;按需申请，消息格式转换，失败重试。&lt;/p&gt;

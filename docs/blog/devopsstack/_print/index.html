@@ -197,6 +197,48 @@ if (!doNotTrack) {
     
 	
 
+    <li><a href="#pg-bcd3e340831333b48f0b95d5349a6b36">Cloud Ops</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-8f9bb6ba6a53b80b7e4fe0353477d5eb">Traffic Ops</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+
+    </ul>
+    
+  
+
+    </ul>
+    
+  
+    
+    
+	
+
     <li><a href="#pg-f2a9961f6318c4e4437e3629e1251c53">Cloud CICD</a></li>
 
 
@@ -332,6 +374,16 @@ if (!doNotTrack) {
   
 
   
+    
+    
+	
+
+    <li><a href="#pg-fa51f159a050be2d3f4b107eecd1f5d7">CloudWatch - Log Insights</a></li>
+
+
+
+    
+  
 
     </ul>
     
@@ -436,6 +488,91 @@ if (!doNotTrack) {
   
   
 
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-bcd3e340831333b48f0b95d5349a6b36">Cloud Ops</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-31" class="text-muted">31.05.2022</time>
+        
+	</div>
+	<p>本目录主要为对云原生运维的学习和实践。</p>
+
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-8f9bb6ba6a53b80b7e4fe0353477d5eb">Traffic Ops</h1>
+	<div class="lead">Traffic Ops - 流量治理/运维.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-31" class="text-muted">31.05.2022</time>
+        
+	</div>
+	<h3 id="a爬虫流量">A、爬虫流量</h3>
+<h4 id="1-查看useragent">1. 查看userAgent</h4>
+<ul>
+<li>infosec：信安扫描流量</li>
+<li>python：爬虫脚本流量</li>
+</ul>
+
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+
+    
+	
+  
+
+    
+	
   
     
     
@@ -758,6 +895,67 @@ export AWS_SESSION_TOKEN=
   
 
   
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-fa51f159a050be2d3f4b107eecd1f5d7">CloudWatch - Log Insights</h1>
+	<div class="lead">CloudWatch Log Insights 使用经验.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-25" class="text-muted">25.05.2022</time>
+        
+	</div>
+	<h2 id="一网关搜索">一、网关搜索</h2>
+<h3 id="a查询接口以及响应码">A、查询接口以及响应码</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter @message like /(?i)(queryData)/
+| filter @message like /(?i)(&quot;500&quot;)/
+| sort @timestamp desc
+| limit 100
+</code></pre><hr>
+<h2 id="二应用搜索">二、应用搜索</h2>
+<h3 id="atraceid检索">A、TraceId检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter log._trace_id = '12345'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="b应用检索">B、应用检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter kubernetes.labels.appid = '12345'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="cpod检索">C、POD检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter kubernetes.pod_name = '12345-fb5f75b84-k5kgv'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="d日志级别检索">D、日志级别检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter log._log_level = 'INFO'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="e异常模糊匹配">E、异常模糊匹配</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter @message like 'HttpMediaTypeNotSupportedException'
+| sort @timestamp desc
+| limit 20
+</code></pre>
+</div>
+
+
+
+
+
+    
+	
+  
 
     
 	
@@ -1067,10 +1265,37 @@ Events:
 <hr>
 <h2 id="二k8s混沌实验">二、K8S混沌实验</h2>
 <p>见 <a href="https://chaos-mesh.org/zh/docs/simulate-pod-chaos-on-kubernetes/">Kubernetes</a></p>
+<h4 id="故障注入暂停">故障注入暂停</h4>
+<pre><code># kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause=true
+kubectl annotate {networkchaos} {network-delay} experiment.chaos-mesh.org/pause=true
+</code></pre>
+<h4 id="故障注入恢复">故障注入恢复</h4>
+<pre><code># kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause-
+kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
+</code></pre>
+<h4 id="故障注入删除">故障注入删除</h4>
+<pre><code>kubectl delete -f network-delay.yaml
+# or delete the chaos object directly
+kubectl delete {networkchaos} {network-delay}
+</code></pre>
+<hr>
 <h3 id="apod故障">A、POD故障</h3>
 <h4 id="1-pod-failure">1. Pod Failure</h4>
 <p>向指定的 Pod 中注入故障，使得该 Pod 在一段时间内处于不可用的状态。</p>
-<p>实践：</p>
+<p><strong>配置：</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">chaos-mesh.org/v1alpha1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PodChaos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pod-failure-example</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">chaos-testing</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">action</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pod-failure</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">one</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">duration</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;30s&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">selector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">labelSelectors</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">&#39;app.kubernetes.io/component&#39;</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;tikv&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p><strong>实践：</strong></p>
 <ol>
 <li>POD不会被K8S回收重新部署。</li>
 <li>POD会一直处于restart状态，可以看到值在增加</li>
@@ -1089,7 +1314,7 @@ Events:
 <hr>
 <h3 id="b网络故障">B、网络故障</h3>
 <h4 id="1-网络延时">1. 网络延时</h4>
-<p>配置：</p>
+<p><strong>配置：</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">chaos-mesh.org/v1alpha1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">NetworkChaos</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -1109,7 +1334,7 @@ Events:
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">correlation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;100&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># 表示延迟时间的变化范围</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">jitter</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;0ms&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>实践：</p>
+</span></code></pre></div><p><strong>实践：</strong></p>
 <ol>
 <li>仅在对应namespace、pod生效</li>
 <li>http调用，感觉会有两个延时：一个是connect，一个是数据发送。所以如果设置10sdelay，可能完成一次调用要20s。</li>
@@ -1122,7 +1347,7 @@ Events:
 <li>EC2 Restart: 重启指定的 EC2 实例。</li>
 <li>Detach Volume: 从指定的 EC2 实例中卸载存储卷。</li>
 </ul>
-<p>实践：</p>
+<p><strong>实践：</strong></p>
 <ol>
 <li>似乎无法操作非k8s管理的ec2</li>
 </ol>

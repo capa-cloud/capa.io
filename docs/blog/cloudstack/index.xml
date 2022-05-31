@@ -92,6 +92,10 @@
 &lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;b动态伸缩&#34;&gt;B、动态伸缩&lt;/h3&gt;
+&lt;h4 id=&#34;1-动态伸缩deployment副本数量&#34;&gt;1. 动态伸缩deployment副本数量&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;kubectl scale deployment/nginx-proxy-deployment --replicas=2&lt;/code&gt;&lt;/pre&gt;
 
       </description>
     </item>

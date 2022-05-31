@@ -381,10 +381,37 @@ Events:
 <hr>
 <h2 id="二k8s混沌实验">二、K8S混沌实验</h2>
 <p>见 <a href="https://chaos-mesh.org/zh/docs/simulate-pod-chaos-on-kubernetes/">Kubernetes</a></p>
+<h4 id="故障注入暂停">故障注入暂停</h4>
+<pre><code># kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause=true
+kubectl annotate {networkchaos} {network-delay} experiment.chaos-mesh.org/pause=true
+</code></pre>
+<h4 id="故障注入恢复">故障注入恢复</h4>
+<pre><code># kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause-
+kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
+</code></pre>
+<h4 id="故障注入删除">故障注入删除</h4>
+<pre><code>kubectl delete -f network-delay.yaml
+# or delete the chaos object directly
+kubectl delete {networkchaos} {network-delay}
+</code></pre>
+<hr>
 <h3 id="apod故障">A、POD故障</h3>
 <h4 id="1-pod-failure">1. Pod Failure</h4>
 <p>向指定的 Pod 中注入故障，使得该 Pod 在一段时间内处于不可用的状态。</p>
-<p>实践：</p>
+<p><strong>配置：</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">chaos-mesh.org/v1alpha1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">PodChaos</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pod-failure-example</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">chaos-testing</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">action</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">pod-failure</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">mode</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">one</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">duration</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;30s&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">selector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">labelSelectors</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">&#39;app.kubernetes.io/component&#39;</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;tikv&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p><strong>实践：</strong></p>
 <ol>
 <li>POD不会被K8S回收重新部署。</li>
 <li>POD会一直处于restart状态，可以看到值在增加</li>
@@ -403,7 +430,7 @@ Events:
 <hr>
 <h3 id="b网络故障">B、网络故障</h3>
 <h4 id="1-网络延时">1. 网络延时</h4>
-<p>配置：</p>
+<p><strong>配置：</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">chaos-mesh.org/v1alpha1</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">NetworkChaos</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
@@ -423,7 +450,7 @@ Events:
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">correlation</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;100&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#8f5902;font-style:italic"># 表示延迟时间的变化范围</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">jitter</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;0ms&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><p>实践：</p>
+</span></code></pre></div><p><strong>实践：</strong></p>
 <ol>
 <li>仅在对应namespace、pod生效</li>
 <li>http调用，感觉会有两个延时：一个是connect，一个是数据发送。所以如果设置10sdelay，可能完成一次调用要20s。</li>
@@ -436,7 +463,7 @@ Events:
 <li>EC2 Restart: 重启指定的 EC2 实例。</li>
 <li>Detach Volume: 从指定的 EC2 实例中卸载存储卷。</li>
 </ul>
-<p>实践：</p>
+<p><strong>实践：</strong></p>
 <ol>
 <li>似乎无法操作非k8s管理的ec2</li>
 </ol>

@@ -773,6 +773,8 @@ Capa相比于layotto等sidecar模型，采用SDK模式更不易引入较复杂�
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-crose.png)
 
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/rpc-cross.png)
+
 #### MQ跨云
 
 使用周边系统：MQ同步工具，进行跨云消息传输。

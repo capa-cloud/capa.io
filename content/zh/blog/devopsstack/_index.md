@@ -1,7 +1,7 @@
 ---
 title: "DevOps Stack"
 linkTitle: "DevOps Stack"
-weight: 40
+weight: 20
 ---
 
 Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。

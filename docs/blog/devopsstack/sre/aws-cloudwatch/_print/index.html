@@ -192,6 +192,16 @@ if (!doNotTrack) {
   
 
   
+    
+    
+	
+
+    <li><a href="#pg-fa51f159a050be2d3f4b107eecd1f5d7">CloudWatch - Log Insights</a></li>
+
+
+
+    
+  
 
     </ul>
 
@@ -225,6 +235,67 @@ if (!doNotTrack) {
   
   
 
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-fa51f159a050be2d3f4b107eecd1f5d7">CloudWatch - Log Insights</h1>
+	<div class="lead">CloudWatch Log Insights 使用经验.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-25" class="text-muted">25.05.2022</time>
+        
+	</div>
+	<h2 id="一网关搜索">一、网关搜索</h2>
+<h3 id="a查询接口以及响应码">A、查询接口以及响应码</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter @message like /(?i)(queryData)/
+| filter @message like /(?i)(&quot;500&quot;)/
+| sort @timestamp desc
+| limit 100
+</code></pre><hr>
+<h2 id="二应用搜索">二、应用搜索</h2>
+<h3 id="atraceid检索">A、TraceId检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter log._trace_id = '12345'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="b应用检索">B、应用检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter kubernetes.labels.appid = '12345'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="cpod检索">C、POD检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter kubernetes.pod_name = '12345-fb5f75b84-k5kgv'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="d日志级别检索">D、日志级别检索</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter log._log_level = 'INFO'
+| sort @timestamp desc
+| limit 20
+</code></pre><h3 id="e异常模糊匹配">E、异常模糊匹配</h3>
+<pre tabindex="0"><code>fields @timestamp, @message
+| filter @message like 'HttpMediaTypeNotSupportedException'
+| sort @timestamp desc
+| limit 20
+</code></pre>
+</div>
+
+
+
+
+
+    
+	
   
 
 

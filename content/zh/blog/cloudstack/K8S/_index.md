@@ -26,3 +26,10 @@ weight: 20
 
 + https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/
 + https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods
+---------
+
+### B、动态伸缩
+
+#### 1. 动态伸缩deployment副本数量
+
+    kubectl scale deployment/nginx-proxy-deployment --replicas=2

@@ -16,10 +16,10 @@
     
     <item>
       <title>Blog: Capa Trip落地</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</link>
+      <link>https://reactivegroup.github.io/capa.io/blog/tecktalk/capa/trip/</link>
       <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</guid>
+      <guid>https://reactivegroup.github.io/capa.io/blog/tecktalk/capa/trip/</guid>
       <description>
         
         
@@ -27,7 +27,7 @@
 &lt;h3 id=&#34;a混合云支持&#34;&gt;A、混合云支持&lt;/h3&gt;
 &lt;p&gt;目前支持：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;携程私有云&lt;/li&gt;
+&lt;li&gt;Trip私有云&lt;/li&gt;
 &lt;li&gt;AWS公有云&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;调研开发中:&lt;/p&gt;
@@ -35,7 +35,7 @@
 &lt;li&gt;阿里云&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;b应用接入情况&#34;&gt;B、应用接入情况&lt;/h3&gt;
-&lt;h4 id=&#34;携程私有云&#34;&gt;携程私有云&lt;/h4&gt;
+&lt;h4 id=&#34;trip私有云&#34;&gt;Trip私有云&lt;/h4&gt;
 &lt;p&gt;生产xx+应用，不断接入中&lt;/p&gt;
 &lt;h4 id=&#34;aws公有云&#34;&gt;AWS公有云&lt;/h4&gt;
 &lt;p&gt;生产xx+应用，不断接入中&lt;/p&gt;

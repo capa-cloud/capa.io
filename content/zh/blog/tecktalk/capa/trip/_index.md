@@ -2,6 +2,8 @@
 title: "Capa Trip落地"
 linkTitle: "Capa Trip落地"
 date: 2022-01-18
+description: >
+    Capa Trip落地.
 ---
 
 ## Capa 落地情况

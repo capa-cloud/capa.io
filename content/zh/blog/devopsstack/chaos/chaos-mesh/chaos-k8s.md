@@ -16,15 +16,11 @@ description: >
 
 **演练目标：**
 
-
-
 **演练手段：**
 
 **演练：**
 
 #### 2. RPC演练-服务弹性伸缩高可用
-
-
 
 #### 3. RPC演练-服务恢复
 
@@ -34,13 +30,48 @@ description: >
 
 见 [Kubernetes](https://chaos-mesh.org/zh/docs/simulate-pod-chaos-on-kubernetes/)
 
+#### 故障注入暂停
+
+    # kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause=true
+    kubectl annotate {networkchaos} {network-delay} experiment.chaos-mesh.org/pause=true
+
+#### 故障注入恢复
+
+    # kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause-
+    kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
+
+#### 故障注入删除
+
+    kubectl delete -f network-delay.yaml
+    # or delete the chaos object directly
+    kubectl delete {networkchaos} {network-delay}
+
+------
+
 ### A、POD故障
 
 #### 1. Pod Failure
 
 向指定的 Pod 中注入故障，使得该 Pod 在一段时间内处于不可用的状态。
 
-实践：
+**配置：**
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-failure-example
+  namespace: chaos-testing
+spec:
+  action: pod-failure
+  mode: one
+  duration: '30s'
+  selector:
+    labelSelectors:
+      'app.kubernetes.io/component': 'tikv'
+```
+
+**实践：**
 
 1. POD不会被K8S回收重新部署。
 2. POD会一直处于restart状态，可以看到值在增加
@@ -66,7 +97,7 @@ Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 image 为 "pau
 
 #### 1. 网络延时
 
-配置：
+**配置：**
 
 ```yaml 
 apiVersion: chaos-mesh.org/v1alpha1
@@ -90,7 +121,7 @@ spec:
     jitter: '0ms'
 ```
 
-实践：
+**实践：**
 
 1. 仅在对应namespace、pod生效
 2. http调用，感觉会有两个延时：一个是connect，一个是数据发送。所以如果设置10sdelay，可能完成一次调用要20s。
@@ -105,7 +136,7 @@ AWSChaos 能够帮助你模拟指定的 AWS 实例发生故障的情景。目前
 * EC2 Restart: 重启指定的 EC2 实例。
 * Detach Volume: 从指定的 EC2 实例中卸载存储卷。
 
-实践：
+**实践：**
 
 1. 似乎无法操作非k8s管理的ec2
 

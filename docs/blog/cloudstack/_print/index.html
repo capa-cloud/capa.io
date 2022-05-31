@@ -6469,6 +6469,10 @@ COMMIT
 <li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/</a></li>
 <li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods</a></li>
 </ul>
+<hr>
+<h3 id="b动态伸缩">B、动态伸缩</h3>
+<h4 id="1-动态伸缩deployment副本数量">1. 动态伸缩deployment副本数量</h4>
+<pre><code>kubectl scale deployment/nginx-proxy-deployment --replicas=2</code></pre>
 
 </div>
 
@@ -6495,7 +6499,7 @@ COMMIT
 
   
 
-<div class="td-content" style="">
+<div class="td-content" style="page-break-before: always">
     <h1 id="pg-01b531c0677c94230fe461c0bededeaf">AWS EKS Devops</h1>
 	<div class="lead">AWS EKS Devops.</div>
 	<div class="td-byline mb-4">
@@ -6778,10 +6782,13 @@ kubectl version --short --client
         
 	</div>
 	<h2 id="一nginx-devops">一、Nginx Devops</h2>
-<h3 id="a作为aws网关">A、作为AWS网关</h3>
-<h4 id="同elb配合使用">同ELB配合使用</h4>
+<h3 id="a499">A、499</h3>
+<h4 id="作为aws网关-同elb配合使用">作为AWS网关, 同ELB配合使用</h4>
 <p>当ELB的IP变化时，DNS刷新不及时，导致499超时问题。</p>
 <p><a href="https://blog.microideation.com/2020/04/06/nginx-proxy-with-aws-elb-critical-handling-for-intermittent-gateway-timeout-499-or-502/">带有 AWS ELB 的 Nginx 代理：间歇性网关超时（499 或 502）的关键处理</a></p>
+<hr>
+<h3 id="b502">B、502</h3>
+<p>往往是Nginx服务有问题</p>
 
 </div>
 
