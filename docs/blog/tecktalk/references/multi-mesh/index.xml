@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Multi Mesh 各领域Mesh架构</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-mesh/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/tecktalk/references/multi-mesh/</link>
     <description>Recent content in Multi Mesh 各领域Mesh架构 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-mesh/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/tecktalk/references/multi-mesh/index.xml" rel="self" type="application/rss+xml" />
     
     
       

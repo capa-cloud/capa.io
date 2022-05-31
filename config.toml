@@ -1,7 +1,7 @@
 title = "Capa"
 
 # copy from github pages
-baseURL = "https://reactivegroup.github.io/capa.io/"
+baseURL = "https://capa-cloud.github.io/capa.io/"
 
 # use '/docs' github pages mode
 publishDir = "docs"
@@ -128,12 +128,12 @@ version = "0.0"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
-url_latest_version = "https://github.com/reactivegroup/capa.io"
+url_latest_version = "https://github.com/capa-cloud/capa.io"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/reactivegroup/capa"
+github_repo = "https://github.com/capa-cloud/capa"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-github_project_repo = "https://github.com/reactivegroup/capa"
+github_project_repo = "https://github.com/capa-cloud/capa"
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
@@ -165,7 +165,10 @@ navbar_logo = false
 # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like on the homepage.
 navbar_translucent_over_cover_disable = false
 # Enable to show the side bar menu in its compact state.
-sidebar_menu_compact = false
+sidebar_menu_compact = true
+ul_show = 1
+sidebar_menu_foldable = true
+sidebar_cache_limit = 100
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
 sidebar_search_disable = true
 
@@ -176,8 +179,8 @@ sidebar_search_disable = true
 [params.ui.feedback]
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-yes = 'Glad to hear it! Please <a href="https://github.com/reactivegroup/capa/issues">tell us how we can improve</a>.'
-no = 'Sorry to hear that. Please <a href="https://github.com/reactivegroup/capa/issues">tell us how we can improve</a>.'
+yes = 'Glad to hear it! Please <a href="https://github.com/capa-cloud/capa/issues">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/capa-cloud/capa/issues">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page, 
@@ -189,7 +192,7 @@ enable = false
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
 	name = "User mailing list"
-	url = "https://github.com/reactivegroup"
+	url = "https://github.com/capa-cloud"
 	icon = "fa fa-envelope"
         desc = "Discussion and help from your fellow users"
 #[[params.links.user]]
@@ -205,7 +208,7 @@ enable = false
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "GitHub"
-	url = "https://github.com/reactivegroup"
+	url = "https://github.com/capa-cloud"
 	icon = "fab fa-github"
         desc = "Development takes place here!"
 #[[params.links.developer]]

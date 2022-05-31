@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – 参与贡献</title>
-    <link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/</link>
+    <link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/</link>
     <description>Recent content in 参与贡献 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/contributionguidelines/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/docs/contributionguidelines/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: 贡献者指南</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/contributor-guide/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/contributor-guide/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/contributor-guide/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/contributor-guide/</guid>
       <description>
         
         
@@ -107,10 +107,10 @@
     
     <item>
       <title>Docs: 文档贡献指南</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/document-contribution/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/document-contribution/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/document-contribution/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/document-contribution/</guid>
       <description>
         
         

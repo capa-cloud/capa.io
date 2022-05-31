@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Envoy Stack</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/cloudstack/envoy/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/cloudstack/envoy/</link>
     <description>Recent content in Envoy Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/cloudstack/envoy/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/envoy/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: Envoy Gateway</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/21/envoy-gateway/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/21/envoy-gateway/</link>
       <pubDate>Sat, 21 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/21/envoy-gateway/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/21/envoy-gateway/</guid>
       <description>
         
         
@@ -4581,10 +4581,10 @@ server.initialization_time_ms: P0(nan,220.00000000000003) P25(nan,222.5000000000
     
     <item>
       <title>Blog: Envoy Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/03/envoy-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/03/envoy-landscape/</link>
       <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/03/envoy-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/03/envoy-landscape/</guid>
       <description>
         
         

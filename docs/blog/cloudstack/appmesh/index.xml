@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – AppMesh Stack</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/cloudstack/appmesh/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/cloudstack/appmesh/</link>
     <description>Recent content in AppMesh Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/cloudstack/appmesh/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/appmesh/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: AppMesh Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</guid>
       <description>
         
         

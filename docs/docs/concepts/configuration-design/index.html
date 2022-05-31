@@ -26,7 +26,7 @@
 <meta property="og:description" content="执行应用级的配置管理
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://reactivegroup.github.io/capa.io/docs/concepts/configuration-design/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2021-10-15T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-01-20T17:05:20+08:00" /><meta property="og:site_name" content="Capa" />
 
@@ -161,7 +161,21 @@ if (!doNotTrack) {
         <div class="row flex-xl-nowrap">
           <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
             
-<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-capaiodocsconceptsconfiguration-design").addClass("active"); 
+    $("#td-section-nav #m-capaiodocsconceptsconfiguration-design-li span").addClass("td-sidebar-nav-active-item"); 
+    $("#td-section-nav #m-capaiodocsconceptsconfiguration-design").parents("li").addClass("active-path"); 
+    $("#td-section-nav li.active-path").addClass("show"); 
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-capaiodocsconceptsconfiguration-design-li").siblings("li").addClass("show");  
+    $("#td-section-nav #m-capaiodocsconceptsconfiguration-design-li").children("ul").children("li").addClass("show");  
+    $("#td-sidebar-menu").toggleClass("d-none"); 
+    });
+  </script>
+  
+<div id="td-sidebar-menu" class="td-sidebar__inner d-none">
   <div id="content-mobile">
   <form class="td-sidebar__search d-flex align-items-center">
     
@@ -173,7 +187,7 @@ if (!doNotTrack) {
   </form>
   </div>
   <div id="content-desktop"></div>
-  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+  <nav class="collapse td-sidebar-nav foldable-nav" id="td-section-nav">
     <div class="nav-item dropdown d-block d-lg-none">
       
 
@@ -187,107 +201,171 @@ if (!doNotTrack) {
 </div>
     </div>
     <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaiodocs-li">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocs-li">
   <a href="/capa.io/docs/" title="CAPA文档" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-capaiodocs"><span class="">文档</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsoverview-li">
-  <a href="/capa.io/docs/overview/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsoverview"><span class="">简介</span></a>
+  <input type="checkbox" id="m-capaiodocsoverview-check"/>
+  <label for="m-capaiodocsoverview-check"><a href="/capa.io/docs/overview/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsoverview"><span class="">简介</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsgettingstarted-li">
-  <a href="/capa.io/docs/gettingstarted/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsgettingstarted"><span class="">快速开始</span></a>
+  <input type="checkbox" id="m-capaiodocsgettingstarted-check"/>
+  <label for="m-capaiodocsgettingstarted-check"><a href="/capa.io/docs/gettingstarted/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsgettingstarted"><span class="">快速开始</span></a></label>
+  
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsgettingstartedconfiguration-usage-li">
-  <a href="/capa.io/docs/gettingstarted/configuration-usage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsgettingstartedconfiguration-usage"><span class="">使用Configuration API</span></a>
+  <input type="checkbox" id="m-capaiodocsgettingstartedconfiguration-usage-check"/>
+  <label for="m-capaiodocsgettingstartedconfiguration-usage-check"><a href="/capa.io/docs/gettingstarted/configuration-usage/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsgettingstartedconfiguration-usage"><span class="">使用Configuration API</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsgettingstartedrpc-usage-li">
-  <a href="/capa.io/docs/gettingstarted/rpc-usage/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsgettingstartedrpc-usage"><span class="">使用RPC API</span></a>
+  <input type="checkbox" id="m-capaiodocsgettingstartedrpc-usage-check"/>
+  <label for="m-capaiodocsgettingstartedrpc-usage-check"><a href="/capa.io/docs/gettingstarted/rpc-usage/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsgettingstartedrpc-usage"><span class="">使用RPC API</span></a></label>
+  
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsexamples-li">
-  <a href="/capa.io/docs/examples/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsexamples"><span class="">Demo示例</span></a>
+  <input type="checkbox" id="m-capaiodocsexamples-check"/>
+  <label for="m-capaiodocsexamples-check"><a href="/capa.io/docs/examples/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsexamples"><span class="">Demo示例</span></a></label>
+  
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsexamplesconfiguration-li">
-  <a href="/capa.io/docs/examples/configuration/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsexamplesconfiguration"><span class="">Configuration API示例</span></a>
+  <input type="checkbox" id="m-capaiodocsexamplesconfiguration-check"/>
+  <label for="m-capaiodocsexamplesconfiguration-check"><a href="/capa.io/docs/examples/configuration/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsexamplesconfiguration"><span class="">Configuration API示例</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsexamplesconfigurationconfiguration-aws-example-li">
-  <a href="/capa.io/docs/examples/configuration/configuration-aws-example/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesconfigurationconfiguration-aws-example"><span class="">Configuration AWS-App Config示例</span></a>
+  <input type="checkbox" id="m-capaiodocsexamplesconfigurationconfiguration-aws-example-check"/>
+  <label for="m-capaiodocsexamplesconfigurationconfiguration-aws-example-check"><a href="/capa.io/docs/examples/configuration/configuration-aws-example/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesconfigurationconfiguration-aws-example"><span class="">Configuration AWS-App Config示例</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsexamplesconfigurationconfiguration-ctrip-example-li">
-  <a href="/capa.io/docs/examples/configuration/configuration-ctrip-example/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesconfigurationconfiguration-ctrip-example"><span class="">Configuration Ctrip-Qconfig示例</span></a>
+  <input type="checkbox" id="m-capaiodocsexamplesconfigurationconfiguration-ctrip-example-check"/>
+  <label for="m-capaiodocsexamplesconfigurationconfiguration-ctrip-example-check"><a href="/capa.io/docs/examples/configuration/configuration-ctrip-example/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesconfigurationconfiguration-ctrip-example"><span class="">Configuration Ctrip-Qconfig示例</span></a></label>
+  
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsexamplesrpc-li">
-  <a href="/capa.io/docs/examples/rpc/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsexamplesrpc"><span class="">RPC API示例</span></a>
+  <input type="checkbox" id="m-capaiodocsexamplesrpc-check"/>
+  <label for="m-capaiodocsexamplesrpc-check"><a href="/capa.io/docs/examples/rpc/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsexamplesrpc"><span class="">RPC API示例</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsexamplesrpcrpc-aws-example-li">
-  <a href="/capa.io/docs/examples/rpc/rpc-aws-example/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesrpcrpc-aws-example"><span class="">RPC AWS-App Mesh示例</span></a>
+  <input type="checkbox" id="m-capaiodocsexamplesrpcrpc-aws-example-check"/>
+  <label for="m-capaiodocsexamplesrpcrpc-aws-example-check"><a href="/capa.io/docs/examples/rpc/rpc-aws-example/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesrpcrpc-aws-example"><span class="">RPC AWS-App Mesh示例</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsexamplesrpcrpc-ctrip-example-li">
-  <a href="/capa.io/docs/examples/rpc/rpc-ctrip-example/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesrpcrpc-ctrip-example"><span class="">RPC Ctrip-Service Mesh示例</span></a>
+  <input type="checkbox" id="m-capaiodocsexamplesrpcrpc-ctrip-example-check"/>
+  <label for="m-capaiodocsexamplesrpcrpc-ctrip-example-check"><a href="/capa.io/docs/examples/rpc/rpc-ctrip-example/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsexamplesrpcrpc-ctrip-example"><span class="">RPC Ctrip-Service Mesh示例</span></a></label>
+  
 </li>
   </ul>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaiodocsconcepts-li">
-  <a href="/capa.io/docs/concepts/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsconcepts"><span class="">设计文档</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsconcepts-li">
+  <input type="checkbox" id="m-capaiodocsconcepts-check"/>
+  <label for="m-capaiodocsconcepts-check"><a href="/capa.io/docs/concepts/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsconcepts"><span class="">设计文档</span></a></label>
+  
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsconceptsactuator-li">
-  <a href="/capa.io/docs/concepts/actuator/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsconceptsactuator"><span class="">Actuator可观测性</span></a>
+  <input type="checkbox" id="m-capaiodocsconceptsactuator-check"/>
+  <label for="m-capaiodocsconceptsactuator-check"><a href="/capa.io/docs/concepts/actuator/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsconceptsactuator"><span class="">Actuator可观测性</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsconceptsactuatoractuator-rpc-li">
-  <a href="/capa.io/docs/concepts/actuator/actuator-rpc/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsactuatoractuator-rpc"><span class="">RPC Actuator可观测性</span></a>
+  <input type="checkbox" id="m-capaiodocsconceptsactuatoractuator-rpc-check"/>
+  <label for="m-capaiodocsconceptsactuatoractuator-rpc-check"><a href="/capa.io/docs/concepts/actuator/actuator-rpc/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsactuatoractuator-rpc"><span class="">RPC Actuator可观测性</span></a></label>
+  
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-capaiodocsconceptsconfiguration-design-li">
-  <a href="/capa.io/docs/concepts/configuration-design/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsconfiguration-design"><span class="td-sidebar-nav-active-item">Configuration服务调用</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsconceptsconfiguration-design-li">
+  <input type="checkbox" id="m-capaiodocsconceptsconfiguration-design-check"/>
+  <label for="m-capaiodocsconceptsconfiguration-design-check"><a href="/capa.io/docs/concepts/configuration-design/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsconfiguration-design"><span class="">Configuration服务调用</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsconceptsrpc-li">
-  <a href="/capa.io/docs/concepts/rpc/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsconceptsrpc"><span class="">RPC服务调用</span></a>
+  <input type="checkbox" id="m-capaiodocsconceptsrpc-check"/>
+  <label for="m-capaiodocsconceptsrpc-check"><a href="/capa.io/docs/concepts/rpc/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsconceptsrpc"><span class="">RPC服务调用</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsconceptsrpcrpc-aws-li">
-  <a href="/capa.io/docs/concepts/rpc/rpc-aws/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsrpcrpc-aws"><span class="">RPC AWS技术方案</span></a>
+  <input type="checkbox" id="m-capaiodocsconceptsrpcrpc-aws-check"/>
+  <label for="m-capaiodocsconceptsrpcrpc-aws-check"><a href="/capa.io/docs/concepts/rpc/rpc-aws/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsrpcrpc-aws"><span class="">RPC AWS技术方案</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsconceptsrpcrpc-ctrip-li">
-  <a href="/capa.io/docs/concepts/rpc/rpc-ctrip/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsrpcrpc-ctrip"><span class="">RPC Ctrip技术方案</span></a>
+  <input type="checkbox" id="m-capaiodocsconceptsrpcrpc-ctrip-check"/>
+  <label for="m-capaiodocsconceptsrpcrpc-ctrip-check"><a href="/capa.io/docs/concepts/rpc/rpc-ctrip/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsconceptsrpcrpc-ctrip"><span class="">RPC Ctrip技术方案</span></a></label>
+  
 </li>
   </ul>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocstasks-li">
-  <a href="/capa.io/docs/tasks/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocstasks"><span class="">开发指南</span></a>
+  <input type="checkbox" id="m-capaiodocstasks-check"/>
+  <label for="m-capaiodocstasks-check"><a href="/capa.io/docs/tasks/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocstasks"><span class="">开发指南</span></a></label>
+  
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocstasksbeds-li">
-  <a href="/capa.io/docs/tasks/beds/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksbeds"><span class="">Bed and Chair Metrics</span></a>
+  <input type="checkbox" id="m-capaiodocstasksbeds-check"/>
+  <label for="m-capaiodocstasksbeds-check"><a href="/capa.io/docs/tasks/beds/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksbeds"><span class="">Bed and Chair Metrics</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocstasksporridge-li">
-  <a href="/capa.io/docs/tasks/porridge/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksporridge"><span class="">Porridge Assessment</span></a>
+  <input type="checkbox" id="m-capaiodocstasksporridge-check"/>
+  <label for="m-capaiodocstasksporridge-check"><a href="/capa.io/docs/tasks/porridge/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksporridge"><span class="">Porridge Assessment</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocstaskstask-li">
-  <a href="/capa.io/docs/tasks/task/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocstaskstask"><span class="">Another Task</span></a>
+  <input type="checkbox" id="m-capaiodocstaskstask-check"/>
+  <label for="m-capaiodocstaskstask-check"><a href="/capa.io/docs/tasks/task/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocstaskstask"><span class="">Another Task</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocstaskssdk-li">
-  <a href="/capa.io/docs/tasks/sdk/" title="SDK管理实践" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocstaskssdk"><span class="">SDK管理与实践经验</span></a>
+  <input type="checkbox" id="m-capaiodocstaskssdk-check"/>
+  <label for="m-capaiodocstaskssdk-check"><a href="/capa.io/docs/tasks/sdk/" title="SDK管理实践" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocstaskssdk"><span class="">SDK管理与实践经验</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocstaskssdksdk-java-li">
-  <a href="/capa.io/docs/tasks/sdk/sdk-java/" title="SDK-Java管理实践" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocstaskssdksdk-java"><span class="">SDK-Java管理与实践经验</span></a>
+  <input type="checkbox" id="m-capaiodocstaskssdksdk-java-check"/>
+  <label for="m-capaiodocstaskssdksdk-java-check"><a href="/capa.io/docs/tasks/sdk/sdk-java/" title="SDK-Java管理实践" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocstaskssdksdk-java"><span class="">SDK-Java管理与实践经验</span></a></label>
+  
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocstasksponycopters-li">
-  <a href="/capa.io/docs/tasks/ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocstasksponycopters"><span class="">Working with Ponycopters</span></a>
+  <input type="checkbox" id="m-capaiodocstasksponycopters-check"/>
+  <label for="m-capaiodocstasksponycopters-check"><a href="/capa.io/docs/tasks/ponycopters/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocstasksponycopters"><span class="">Working with Ponycopters</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocstasksponycoptersconfiguring-ponycopters-li">
-  <a href="/capa.io/docs/tasks/ponycopters/configuring-ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksponycoptersconfiguring-ponycopters"><span class="">Configuring Ponycopters</span></a>
+  <input type="checkbox" id="m-capaiodocstasksponycoptersconfiguring-ponycopters-check"/>
+  <label for="m-capaiodocstasksponycoptersconfiguring-ponycopters-check"><a href="/capa.io/docs/tasks/ponycopters/configuring-ponycopters/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksponycoptersconfiguring-ponycopters"><span class="">Configuring Ponycopters</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocstasksponycopterslaunching-ponycopters-li">
-  <a href="/capa.io/docs/tasks/ponycopters/launching-ponycopters/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksponycopterslaunching-ponycopters"><span class="">Launching Ponycopters</span></a>
+  <input type="checkbox" id="m-capaiodocstasksponycopterslaunching-ponycopters-check"/>
+  <label for="m-capaiodocstasksponycopterslaunching-ponycopters-check"><a href="/capa.io/docs/tasks/ponycopters/launching-ponycopters/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocstasksponycopterslaunching-ponycopters"><span class="">Launching Ponycopters</span></a></label>
+  
 </li>
   </ul>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocsreference-li">
-  <a href="/capa.io/docs/reference/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocsreference"><span class="">参考手册</span></a>
+  <input type="checkbox" id="m-capaiodocsreference-check"/>
+  <label for="m-capaiodocsreference-check"><a href="/capa.io/docs/reference/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocsreference"><span class="">参考手册</span></a></label>
+  
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocsreferenceparameter-reference-li">
-  <a href="/capa.io/docs/reference/parameter-reference/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocsreferenceparameter-reference"><span class="">Parameter Reference</span></a>
+  <input type="checkbox" id="m-capaiodocsreferenceparameter-reference-check"/>
+  <label for="m-capaiodocsreferenceparameter-reference-check"><a href="/capa.io/docs/reference/parameter-reference/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocsreferenceparameter-reference"><span class="">Parameter Reference</span></a></label>
+  
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaiodocscontributionguidelines-li">
-  <a href="/capa.io/docs/contributionguidelines/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaiodocscontributionguidelines"><span class="">参与贡献</span></a>
+  <input type="checkbox" id="m-capaiodocscontributionguidelines-check"/>
+  <label for="m-capaiodocscontributionguidelines-check"><a href="/capa.io/docs/contributionguidelines/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaiodocscontributionguidelines"><span class="">参与贡献</span></a></label>
+  
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocscontributionguidelinescontributor-guide-li">
-  <a href="/capa.io/docs/contributionguidelines/contributor-guide/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocscontributionguidelinescontributor-guide"><span class="">贡献者指南</span></a>
+  <input type="checkbox" id="m-capaiodocscontributionguidelinescontributor-guide-check"/>
+  <label for="m-capaiodocscontributionguidelinescontributor-guide-check"><a href="/capa.io/docs/contributionguidelines/contributor-guide/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocscontributionguidelinescontributor-guide"><span class="">贡献者指南</span></a></label>
+  
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaiodocscontributionguidelinesdocument-contribution-li">
-  <a href="/capa.io/docs/contributionguidelines/document-contribution/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaiodocscontributionguidelinesdocument-contribution"><span class="">文档贡献指南</span></a>
+  <input type="checkbox" id="m-capaiodocscontributionguidelinesdocument-contribution-check"/>
+  <label for="m-capaiodocscontributionguidelinesdocument-contribution-check"><a href="/capa.io/docs/contributionguidelines/document-contribution/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaiodocscontributionguidelinesdocument-contribution"><span class="">文档贡献指南</span></a></label>
+  
 </li>
   </ul>
 </li>
@@ -296,6 +374,7 @@ if (!doNotTrack) {
     </ul>
   </nav>
 </div>
+
 
           </aside>
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
@@ -319,17 +398,17 @@ if (!doNotTrack) {
     
     
 
-    <a href="https://github.com/reactivegroup/capa/edit/master/content/zh/docs/Concepts/configuration-design.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-    <a href="https://github.com/reactivegroup/capa/new/master/content/zh/docs/Concepts/configuration-design.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-    <a href="https://github.com/reactivegroup/capa/issues/new?title=Configuration%e6%9c%8d%e5%8a%a1%e8%b0%83%e7%94%a8" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+    <a href="https://github.com/capa-cloud/capa/edit/master/content/zh/docs/Concepts/configuration-design.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+    <a href="https://github.com/capa-cloud/capa/new/master/content/zh/docs/Concepts/configuration-design.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+    <a href="https://github.com/capa-cloud/capa/issues/new?title=Configuration%e6%9c%8d%e5%8a%a1%e8%b0%83%e7%94%a8" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
     
       
-      <a href="https://github.com/reactivegroup/capa/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
+      <a href="https://github.com/capa-cloud/capa/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
     
 
   
   
-    <a id="print" href="https://reactivegroup.github.io/capa.io/docs/concepts/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
+    <a id="print" href="https://capa-cloud.github.io/capa.io/docs/concepts/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
   
   </div>
 
@@ -384,21 +463,21 @@ if (!doNotTrack) {
 
 
 <li class="breadcrumb-item" >
-	<a href="https://reactivegroup.github.io/capa.io/docs/">文档</a>
+	<a href="https://capa-cloud.github.io/capa.io/docs/">文档</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item" >
-	<a href="https://reactivegroup.github.io/capa.io/docs/concepts/">设计文档</a>
+	<a href="https://capa-cloud.github.io/capa.io/docs/concepts/">设计文档</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://reactivegroup.github.io/capa.io/docs/concepts/configuration-design/">Configuration服务调用</a>
+	<a href="https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/">Configuration服务调用</a>
 </li>
 
 	</ol>
@@ -513,10 +592,10 @@ if (!doNotTrack) {
 <button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
 <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
 <p class="feedback--response feedback--response-yes">
-  Glad to hear it! Please <a href="https://github.com/reactivegroup/capa/issues">tell us how we can improve</a>.
+  Glad to hear it! Please <a href="https://github.com/capa-cloud/capa/issues">tell us how we can improve</a>.
 </p>
 <p class="feedback--response feedback--response-no">
-  Sorry to hear that. Please <a href="https://github.com/reactivegroup/capa/issues">tell us how we can improve</a>.
+  Sorry to hear that. Please <a href="https://github.com/capa-cloud/capa/issues">tell us how we can improve</a>.
 </p>
 </div>
 <script>
@@ -556,7 +635,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  最后修改 20.01.2022: <a href="https://github.com/reactivegroup/capa/commit/3bc8278d600754e5f257cb04c7b794fe65f77fc6">refactor: move to capa-cloud (3bc8278)</a>
+  最后修改 20.01.2022: <a href="https://github.com/capa-cloud/capa/commit/3bc8278d600754e5f257cb04c7b794fe65f77fc6">refactor: move to capa-cloud (3bc8278)</a>
 </div>
 
 </div>
@@ -576,7 +655,7 @@ if (!doNotTrack) {
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="User mailing list">
       <i class="fa fa-envelope"></i>
     </a>
   </li>
@@ -593,7 +672,7 @@ if (!doNotTrack) {
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="GitHub">
       <i class="fab fa-github"></i>
     </a>
   </li>
@@ -641,7 +720,7 @@ if (!doNotTrack) {
 
 
 
-<script src="/capa.io/js/main.min.c30c86b73d90a0180556503734816437e56f9d02c4939409d2766a99c0d89b4c.js" integrity="sha256-wwyGtz2QoBgFVlA3NIFkN&#43;VvnQLEk5QJ0nZqmcDYm0w=" crossorigin="anonymous"></script>
+<script src="/capa.io/js/main.min.ee950676387eab97235d899be7f8fdf5f1cd0751e479d20dd3f3bcb825c7fd46.js" integrity="sha256-7pUGdjh&#43;q5cjXYmb5/j99fHNB1HkedIN0/O8uCXH/UY=" crossorigin="anonymous"></script>
 
 
 

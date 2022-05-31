@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Dubbo Stack</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/javastack/dubbo/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/javastack/dubbo/</link>
     <description>Recent content in Dubbo Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/javastack/dubbo/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/javastack/dubbo/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: Dubbo Invoke流程</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</guid>
       <description>
         
         
@@ -255,10 +255,10 @@
     
     <item>
       <title>Blog: Dubbo Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</guid>
       <description>
         
         

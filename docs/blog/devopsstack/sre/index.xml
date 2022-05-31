@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Cloud SRE</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/</link>
     <description>Recent content in Cloud SRE on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: SRE</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/sre/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/sre/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/sre/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/sre/</guid>
       <description>
         
         
@@ -30,10 +30,10 @@
     
     <item>
       <title>Blog: AWS SRE - CloudWatch</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</guid>
       <description>
         
         

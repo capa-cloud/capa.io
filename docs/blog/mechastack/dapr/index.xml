@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Dapr Stack</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/mechastack/dapr/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/mechastack/dapr/</link>
     <description>Recent content in Dapr Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/mechastack/dapr/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/mechastack/dapr/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: Dapr 设计思路</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</guid>
       <description>
         
         

@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – 设计文档</title>
-    <link>https://reactivegroup.github.io/capa.io/docs/concepts/</link>
+    <link>https://capa-cloud.github.io/capa.io/docs/concepts/</link>
     <description>Recent content in 设计文档 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/docs/concepts/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Actuator可观测性</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/concepts/actuator/</link>
       <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/concepts/actuator/</guid>
       <description>
         
         
@@ -259,10 +259,10 @@
     
     <item>
       <title>Docs: Configuration服务调用</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/configuration-design/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/configuration-design/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/</guid>
       <description>
         
         
@@ -339,10 +339,10 @@
     
     <item>
       <title>Docs: RPC服务调用</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/</guid>
       <description>
         
         

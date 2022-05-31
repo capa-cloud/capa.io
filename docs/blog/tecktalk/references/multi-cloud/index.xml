@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Multi Cloud 多云混合云架构</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-cloud/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/tecktalk/references/multi-cloud/</link>
     <description>Recent content in Multi Cloud 多云混合云架构 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/tecktalk/references/multi-cloud/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/tecktalk/references/multi-cloud/index.xml" rel="self" type="application/rss+xml" />
     
     
       

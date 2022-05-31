@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Capa</title>
-    <link>https://reactivegroup.github.io/capa.io/</link>
+    <link>https://capa-cloud.github.io/capa.io/</link>
     <description>Recent content on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -14,10 +14,10 @@
     
     <item>
       <title>Blog: Chaos Mesh - K8S实验</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/30/chaos-mesh-k8s%E5%AE%9E%E9%AA%8C/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/chaos-mesh-k8s%E5%AE%9E%E9%AA%8C/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/30/chaos-mesh-k8s%E5%AE%9E%E9%AA%8C/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/chaos-mesh-k8s%E5%AE%9E%E9%AA%8C/</guid>
       <description>
         
         
@@ -126,10 +126,10 @@ kubectl delete {networkchaos} {network-delay}
     
     <item>
       <title>Blog: Java Servlet</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-servlet/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-servlet/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-servlet/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-servlet/</guid>
       <description>
         
         
@@ -145,10 +145,10 @@ kubectl delete {networkchaos} {network-delay}
     
     <item>
       <title>Blog: Java Spring</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-spring/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-spring/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-spring/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-spring/</guid>
       <description>
         
         
@@ -185,10 +185,10 @@ commandLineRunner run...&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Blog: Nginx Devops</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/26/nginx-devops/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/26/nginx-devops/</link>
       <pubDate>Thu, 26 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/26/nginx-devops/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/26/nginx-devops/</guid>
       <description>
         
         
@@ -205,11 +205,201 @@ commandLineRunner run...&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Blog: CloudWatch - Log Insights</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/25/cloudwatch-log-insights/</link>
+      <title>Blog: AWS故障注入模拟器</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E6%A8%A1%E6%8B%9F%E5%99%A8/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/25/cloudwatch-log-insights/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5%E6%A8%A1%E6%8B%9F%E5%99%A8/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;aws-fault-injection-simulator-aws-fis&#34;&gt;AWS Fault Injection Simulator (AWS FIS)&lt;/h1&gt;
+&lt;h2 id=&#34;一重要概念&#34;&gt;一、重要概念&lt;/h2&gt;
+&lt;p&gt;要运行实验，您首先要创建一个&lt;strong&gt;实验模板&lt;/strong&gt;。实验模板是实验的蓝图。它包含实验的 &lt;strong&gt;操作&lt;/strong&gt;、&lt;strong&gt;目标&lt;/strong&gt;和&lt;strong&gt;停止条件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://docs.aws.amazon.com/fis/latest/userguide/images/experiment-components.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;aaws-fis-操作和支持的-aws-服务&#34;&gt;A、AWS FIS 操作和支持的 AWS 服务&lt;/h3&gt;
+&lt;p&gt;AWS FIS 支持针对以下 AWS 服务的目标资源的操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Amazon 弹性计算云 (Amazon EC2)&lt;/li&gt;
+&lt;li&gt;亚马逊弹性容器服务 (Amazon ECS)&lt;/li&gt;
+&lt;li&gt;Amazon 弹性 Kubernetes 服务 (Amazon EKS)
+&lt;ul&gt;
+&lt;li&gt;Node(EC2)维度&lt;/li&gt;
+&lt;li&gt;不支持到POD维度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Amazon 关系数据库服务 (Amazon RDS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;b基本原则和指导方针&#34;&gt;B、基本原则和指导方针&lt;/h3&gt;
+&lt;p&gt;在开始使用 AWS FIS 进行实验之前，请执行以下步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;确定实验的目标部署&lt;/strong&gt;——首先确定目标部署。如果这是您的第一次实验，我们建议您从预生产或测试环境开始。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;审查应用程序架构&lt;/strong&gt;——您必须确保您已确定所有应用程序组件、依赖项和每个组件的恢复过程。首先查看应用程序架构。根据应用程序，请参阅AWS 架构完善的框架。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定义稳态行为&lt;/strong&gt;——根据重要的技术和业务指标定义系统的稳态行为，例如延迟、CPU 负载、每分钟登录失败、重试次数或页面加载速度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;形成一个假设&lt;/strong&gt;——形成一个假设，说明您期望系统行为在实验期间如何变化。假设定义遵循以下格式：如果fault injection action执行，则business or technical metric impact不应超过value. 身份验证服务的假设可能如下所示：如果网络延迟增加 10%，则登录失败的增加不到 1%。实验完成后，您将评估应用程序弹性是否符合您的业务和技术预期。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二实验步骤&#34;&gt;二、实验步骤&lt;/h2&gt;
+&lt;h3 id=&#34;a创建角色权限&#34;&gt;A、创建角色权限&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考: &lt;a href=&#34;https://docs.aws.amazon.com/fis/latest/userguide/getting-started-iam-service-role.html&#34;&gt;https://docs.aws.amazon.com/fis/latest/userguide/getting-started-iam-service-role.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;b创建实验&#34;&gt;B、创建实验&lt;/h3&gt;
+&lt;h3 id=&#34;ctodo&#34;&gt;C、TODO&lt;/h3&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Chaos Mesh</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/chaos-mesh/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/chaos-mesh/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;chaos-mesh&#34;&gt;Chaos Mesh&lt;/h1&gt;
+&lt;h2 id=&#34;一安装到k8s集群&#34;&gt;一、安装到K8S集群&lt;/h2&gt;
+&lt;h3 id=&#34;helm&#34;&gt;Helm&lt;/h3&gt;
+&lt;h3 id=&#34;a有哪些pod&#34;&gt;A、有哪些POD&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;chaos-testing       chaos-controller-manager-7788488bbd-dq8k8          1/1     Running            0                45h
+chaos-testing       chaos-controller-manager-7788488bbd-dvqdj          1/1     Running            1 (34h ago)      45h
+chaos-testing       chaos-controller-manager-7788488bbd-ffwss          1/1     Running            0                45h
+chaos-testing       chaos-daemon-4cqnm                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-djrth                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-hpc59                                 0/1     Pending            0                44h
+chaos-testing       chaos-daemon-jppg9                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-kgdwb                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-mqh5k                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-qw5cn                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-v8ptz                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-xzkm4                                 1/1     Running            0                44h
+chaos-testing       chaos-daemon-zlt67                                 1/1     Running            0                44h
+chaos-testing       chaos-dashboard-84ffc4bb9-4nxf9                    1/1     Running            0                45h
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;chaos-daemon每个node一个，以daemonset方式运行。&lt;/p&gt;
+&lt;h3 id=&#34;b范围控制配置允许混沌实验的命名空间&#34;&gt;B、范围控制：配置允许混沌实验的命名空间&lt;/h3&gt;
+&lt;p&gt;控制混沌实验生效的范围&lt;/p&gt;
+&lt;p&gt;Chaos Mesh 提供了以下两种方式用于控制混沌实验生效的范围：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;要配置混沌实验只在指定的命名空间内生效，你需要开启 FilterNamespace 功能（默认关闭），此功能将在全局范围内生效。开启此功能后，你可以为允许混沌实验的命名空间添加注解，其他未添加注解的命名空间则会受到保护不会被注入故障。&lt;/li&gt;
+&lt;li&gt;要为单个混沌实验指定实验生效的范围，请参考定义实验范围&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;开启-filternamespace-功能&#34;&gt;开启 FilterNamespace 功能&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerManager.enableFilterNamespace=true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在开启 FilterNamespace 功能后，Chaos Mesh 将只会向包含有 chaos-mesh.org/inject=enabled 注解的命名空间注入故障。因此，在进行混沌实验之前，你需要为允许混沌实验的命名空间添加该注解，其他命名空间则受到保护不会被注入故障。&lt;/p&gt;
+&lt;h4 id=&#34;添加注解&#34;&gt;添加注解&lt;/h4&gt;
+&lt;p&gt;见 &lt;a href=&#34;https://chaos-mesh.org/zh/docs/configure-enabled-namespace/&#34;&gt;为允许混沌实验的命名空间添加注解&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;qa&#34;&gt;Q&amp;amp;A&lt;/h3&gt;
+&lt;h3 id=&#34;akubectl和k8s集群版本差距过大&#34;&gt;A、kubectl和k8s集群版本差距过大&lt;/h3&gt;
+&lt;p&gt;A：降级kubectl到和k8s server匹配的版本上&lt;/p&gt;
+&lt;h3 id=&#34;b执行命令行时报权限类错误&#34;&gt;B、执行命令行时报权限类错误&lt;/h3&gt;
+&lt;p&gt;确保命令行执行时，具有相应的权限。&lt;/p&gt;
+&lt;p&gt;如在AWS时，需确保客户端的IAM角色具有EKS的操作权限。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Chaos Mesh 使用 Kubernetes 原生的 RBAC 功能来管理用户角色和权限。用户在创建、查看、管理混沌实验时，需要拥有 chaos-mesh.org 这个 apiGroups 下混沌实验自定义资源的相应权限。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于AWS而言，IAM会映射到RBAC上，所以需要IAM具有权限。&lt;/p&gt;
+&lt;h3 id=&#34;cchaosmesh支持k8s的版本&#34;&gt;C、ChaosMesh支持K8s的版本&lt;/h3&gt;
+&lt;p&gt;见 &lt;a href=&#34;https://chaos-mesh.org/zh/docs/supported-releases/&#34;&gt;各版本支持情况与版本时间表​&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二执行实验&#34;&gt;二、执行实验&lt;/h2&gt;
+&lt;h3 id=&#34;a爆炸范围选择&#34;&gt;A、爆炸范围选择&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;命名空间选择器 (Namespace Selectors)&lt;/li&gt;
+&lt;li&gt;标签选择器 (Label Selectors)&lt;/li&gt;
+&lt;li&gt;注解选择器 (Annotation Selectors)&lt;/li&gt;
+&lt;li&gt;POD&lt;/li&gt;
+&lt;li&gt;NODE&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;b故障恢复&#34;&gt;B、故障恢复&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;创建后，实验会立刻向测试目标注入已配置的故障。如果配置了 duration 参数，故障在 duration 指定的时间结束后会自动恢复。&lt;/li&gt;
+&lt;li&gt;当暂停或者删除混沌实验时，故障会立刻被恢复。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;c实验阶段介绍&#34;&gt;C、实验阶段介绍&lt;/h3&gt;
+&lt;p&gt;在 Chaos Mesh 中，根据实验的执行流程，一个混沌实验的生命周期主要分为以下四个阶段：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;注入阶段：混沌实验正在进行注入故障操作。通常情况下，此阶段持续的时间很短。如果此阶段持续的时间很长，可能是由于混沌实验出现了异常，此时可以查看事件信息确定异常原因。&lt;/li&gt;
+&lt;li&gt;运行阶段：当所有测试目标都已经被成功注入故障后，混沌实验进入运行阶段。&lt;/li&gt;
+&lt;li&gt;暂停阶段：当对混沌实验进行暂停操作时，Chaos Mesh 会恢复所有测试目标，此时实验进入暂停阶段。&lt;/li&gt;
+&lt;li&gt;结束阶段：如果配置了实验持续时间，当实验运行时间达到了持续时间后，Chaos Mesh 会恢复所有测试目标，表示实验已经结束。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;c查看实验结果&#34;&gt;C、查看实验结果&lt;/h3&gt;
+&lt;p&gt;可以使用 kubectl describe 命令查看此混沌实验对象的 Status 和 Events，从而确定实验结果。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl describe podchaos pod-failure-tikv -n tidb-cluster
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;...
+Status:
+  Conditions:
+    Reason:
+    Status:  False
+    Type:    Paused
+    Reason:
+    Status:  True
+    Type:    Selected
+    Reason:
+    Status:  True
+    Type:    AllInjected
+    Reason:
+    Status:  False
+    Type:    AllRecovered
+  Experiment:
+    Container Records:
+      Id:            tidb-cluster/basic-tikv-0
+      Phase:         Injected
+      Selector Key:  .
+    Desired Phase:   Run
+Events:
+  Type    Reason           Age   From          Message
+  ----    ------           ----  ----          -------
+  Normal  FinalizerInited  39s   finalizer     Finalizer has been inited
+  Normal  Paused           39s   desiredphase  Experiment has been paused
+  Normal  Updated          39s   finalizer     Successfully update finalizer of resource
+  Normal  Updated          39s   records       Successfully update records of resource
+  Normal  Updated          39s   desiredphase  Successfully update desiredPhase of resource
+  Normal  Started          17s   desiredphase  Experiment has started
+  Normal  Updated          17s   desiredphase  Successfully update desiredPhase of resource
+  Normal  Applied          17s   records       Successfully apply chaos for tidb-cluster/basic-tikv-0
+  Normal  Updated          17s   records       Successfully update records of resource
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;status&#34;&gt;Status&lt;/h4&gt;
+&lt;p&gt;依据混沌实验的执行流程，Status 提供了以下四类状态记录：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Paused： 代表混沌实验正处于暂停阶段。&lt;/li&gt;
+&lt;li&gt;Selected： 代表混沌实验已经正确选择出待测试目标。&lt;/li&gt;
+&lt;li&gt;AllInjected：代表所有测试目标都已经被成功注入故障。&lt;/li&gt;
+&lt;li&gt;AllRecoverd：代表所有测试目标的故障都已经被成功恢复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以通过这四类状态记录推断出当前混沌实验的真实运行情况。例如：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;当 Paused、Selected、AllRecoverd 的状态是 True 且 AllInjected 的状态是 False时，说明当前实验处在暂停状态。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当 Paused 为 True 的时，说明当前实验处在暂停状态，但是如果此时的 Selected 值为 False，那么可以进一步得出此混沌实验无法选出待测试目标。&lt;/p&gt;
+&lt;p&gt;注意
+你可以从上述的四类实验记录组合中可以推导出更多的信息，例如当 Paused 为 True 的时候，说明混沌实验处在暂停状态，但是如果此时的 Selected 值为 False，那么可以进一步得出此混沌实验无法选出待测试目标。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;events&#34;&gt;Events&lt;/h4&gt;
+&lt;p&gt;事件列表中包含混沌实验整个生命周期中的操作记录，可以帮助确定混沌实验状态并排除问题。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三chaos-mesh-workflow&#34;&gt;三、Chaos Mesh Workflow&lt;/h2&gt;
+&lt;p&gt;复杂的注入工作流。&lt;/p&gt;
+&lt;p&gt;TODO&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: CloudWatch - Log Insights</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/cloudwatch-log-insights/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/cloudwatch-log-insights/</guid>
       <description>
         
         
@@ -253,10 +443,10 @@ commandLineRunner run...&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Blog: AWS EKS Devops</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</link>
       <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</guid>
       <description>
         
         
@@ -295,10 +485,10 @@ kubectl version --short --client
     
     <item>
       <title>Blog: AppMesh Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/appmesh-landscape/</guid>
       <description>
         
         
@@ -325,10 +515,10 @@ kubectl port-forward -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/
     
     <item>
       <title>Blog: Dapr 设计思路</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</guid>
       <description>
         
         
@@ -345,10 +535,10 @@ kubectl port-forward -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/
     
     <item>
       <title>Blog: Dubbo Invoke流程</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/</guid>
       <description>
         
         
@@ -585,10 +775,10 @@ kubectl port-forward -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/
     
     <item>
       <title>Blog: Dubbo Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dubbo-landscape/</guid>
       <description>
         
         
@@ -611,10 +801,10 @@ kubectl port-forward -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/
     
     <item>
       <title>Blog: Femas Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/femas-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/femas-landscape/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/femas-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/femas-landscape/</guid>
       <description>
         
         
@@ -628,10 +818,10 @@ kubectl port-forward -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/
     
     <item>
       <title>Blog: Layotto 启动流程分析</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/</guid>
       <description>
         
         
@@ -648,10 +838,10 @@ kubectl port-forward -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/
     
     <item>
       <title>Blog: Nginx Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/22/nginx-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/nginx-landscape/</link>
       <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/22/nginx-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/nginx-landscape/</guid>
       <description>
         
         
@@ -727,10 +917,10 @@ kubectl port-forward -n &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/
     
     <item>
       <title>Blog: Envoy Gateway</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/21/envoy-gateway/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/21/envoy-gateway/</link>
       <pubDate>Sat, 21 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/21/envoy-gateway/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/21/envoy-gateway/</guid>
       <description>
         
         
@@ -5293,10 +5483,10 @@ server.initialization_time_ms: P0(nan,220.00000000000003) P25(nan,222.5000000000
     
     <item>
       <title>Blog: Mosn Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/mosn-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/20/mosn-landscape/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/mosn-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/20/mosn-landscape/</guid>
       <description>
         
         
@@ -5422,10 +5612,10 @@ server.initialization_time_ms: P0(nan,220.00000000000003) P25(nan,222.5000000000
     
     <item>
       <title>Blog: Netty Channel设计</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/</guid>
       <description>
         
         
@@ -5632,10 +5822,10 @@ doregister: 委托底层实现&lt;/p&gt;
     
     <item>
       <title>Blog: Netty Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/netty-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/20/netty-landscape/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/netty-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/20/netty-landscape/</guid>
       <description>
         
         
@@ -5655,10 +5845,10 @@ doregister: 委托底层实现&lt;/p&gt;
     
     <item>
       <title>Blog: Reactive Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/20/reactive-landscape/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/20/reactive-landscape/</guid>
       <description>
         
         
@@ -5679,10 +5869,10 @@ doregister: 委托底层实现&lt;/p&gt;
     
     <item>
       <title>Blog: Reactive模式在Trip.com消息推送平台上的实践</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/</guid>
       <description>
         
         
@@ -5693,10 +5883,10 @@ doregister: 委托底层实现&lt;/p&gt;
     
     <item>
       <title>Blog: Reactive 数据流模型设计</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/</guid>
       <description>
         
         
@@ -6032,10 +6222,10 @@ doregister: 委托底层实现&lt;/p&gt;
     
     <item>
       <title>Blog: Envoy Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/03/envoy-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/03/envoy-landscape/</link>
       <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/03/envoy-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/03/envoy-landscape/</guid>
       <description>
         
         
@@ -6356,10 +6546,10 @@ outbound 字样。&lt;/p&gt;
     
     <item>
       <title>Blog: Istio devops</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-devops/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-devops/</link>
       <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-devops/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-devops/</guid>
       <description>
         
         
@@ -6455,10 +6645,10 @@ endpoints:&lt;/li&gt;
     
     <item>
       <title>Blog: Istio Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-landscape/</link>
       <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/03/09/istio-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-landscape/</guid>
       <description>
         
         
@@ -6928,10 +7118,10 @@ COMMIT
     
     <item>
       <title>Blog: gRPC Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/01/21/grpc-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/01/21/grpc-landscape/</link>
       <pubDate>Fri, 21 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/01/21/grpc-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/01/21/grpc-landscape/</guid>
       <description>
         
         

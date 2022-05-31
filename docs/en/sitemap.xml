@@ -2,40 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://reactivegroup.github.io/capa.io/en/</loc>
+    <loc>https://capa-cloud.github.io/capa.io/en/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/"
+                href="https://capa-cloud.github.io/capa.io/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/en/"
+                href="https://capa-cloud.github.io/capa.io/en/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/en/categories/</loc>
+    <loc>https://capa-cloud.github.io/capa.io/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/categories/"
+                href="https://capa-cloud.github.io/capa.io/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/en/categories/"
+                href="https://capa-cloud.github.io/capa.io/en/categories/"
                 />
   </url><url>
-    <loc>https://reactivegroup.github.io/capa.io/en/tags/</loc>
+    <loc>https://capa-cloud.github.io/capa.io/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://reactivegroup.github.io/capa.io/tags/"
+                href="https://capa-cloud.github.io/capa.io/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://reactivegroup.github.io/capa.io/en/tags/"
+                href="https://capa-cloud.github.io/capa.io/en/tags/"
                 />
   </url>
 </urlset>

@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – SDK管理实践</title>
-    <link>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/</link>
+    <link>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/</link>
     <description>Recent content in SDK管理实践 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 15 May 2022 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/tasks/sdk/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/docs/tasks/sdk/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: SDK-Java管理实践</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/sdk-java/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/sdk-java/</link>
       <pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/sdk-java/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/sdk-java/</guid>
       <description>
         
         

@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – CAPA文档</title>
-    <link>https://reactivegroup.github.io/capa.io/docs/</link>
+    <link>https://capa-cloud.github.io/capa.io/docs/</link>
     <description>Recent content in CAPA文档 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: 使用Configuration API</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/</link>
       <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/</guid>
       <description>
         
         
@@ -117,10 +117,10 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
     
     <item>
       <title>Docs: 贡献者指南</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/contributor-guide/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/contributor-guide/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/contributor-guide/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/contributor-guide/</guid>
       <description>
         
         
@@ -209,10 +209,10 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
     
     <item>
       <title>Docs: 使用RPC API</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/gettingstarted/rpc-usage/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/gettingstarted/rpc-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/gettingstarted/rpc-usage/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/gettingstarted/rpc-usage/</guid>
       <description>
         
         
@@ -246,10 +246,10 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
     
     <item>
       <title>Docs: SDK-Java管理实践</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/sdk-java/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/sdk-java/</link>
       <pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/sdk/sdk-java/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/sdk-java/</guid>
       <description>
         
         
@@ -341,10 +341,10 @@ A -&amp;gt; C -&amp;gt; X(2.0)&lt;/p&gt;
     
     <item>
       <title>Docs: 文档贡献指南</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/document-contribution/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/document-contribution/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/contributionguidelines/document-contribution/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/document-contribution/</guid>
       <description>
         
         
@@ -387,10 +387,10 @@ A -&amp;gt; C -&amp;gt; X(2.0)&lt;/p&gt;
     
     <item>
       <title>Docs: Bed and Chair Metrics</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/tasks/beds/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/tasks/beds/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/beds/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/tasks/beds/</guid>
       <description>
         
         
@@ -700,10 +700,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuring Ponycopters</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/configuring-ponycopters/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/tasks/ponycopters/configuring-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/configuring-ponycopters/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/tasks/ponycopters/configuring-ponycopters/</guid>
       <description>
         
         
@@ -1013,10 +1013,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Launching Ponycopters</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/launching-ponycopters/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/tasks/ponycopters/launching-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/ponycopters/launching-ponycopters/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/tasks/ponycopters/launching-ponycopters/</guid>
       <description>
         
         
@@ -1326,10 +1326,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Porridge Assessment</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/tasks/porridge/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/tasks/porridge/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/porridge/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/tasks/porridge/</guid>
       <description>
         
         
@@ -1639,10 +1639,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Another Task</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/tasks/task/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/tasks/task/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/tasks/task/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/tasks/task/</guid>
       <description>
         
         
@@ -1952,10 +1952,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: RPC Actuator可观测性</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/actuator-rpc/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/concepts/actuator/actuator-rpc/</link>
       <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/actuator/actuator-rpc/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/concepts/actuator/actuator-rpc/</guid>
       <description>
         
         
@@ -1968,10 +1968,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuration AWS-App Config示例</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/examples/configuration/configuration-aws-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/examples/configuration/configuration-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/examples/configuration/configuration-aws-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/examples/configuration/configuration-aws-example/</guid>
       <description>
         
         
@@ -2239,10 +2239,10 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
     
     <item>
       <title>Docs: Configuration Ctrip-Qconfig示例</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/examples/configuration/configuration-ctrip-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/examples/configuration/configuration-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/examples/configuration/configuration-ctrip-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/examples/configuration/configuration-ctrip-example/</guid>
       <description>
         
         
@@ -2425,10 +2425,10 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
     
     <item>
       <title>Docs: Configuration服务调用</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/configuration-design/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/configuration-design/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/</guid>
       <description>
         
         
@@ -2505,10 +2505,10 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
     
     <item>
       <title>Docs: RPC AWS-App Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/examples/rpc/rpc-aws-example/</guid>
       <description>
         
         
@@ -2578,10 +2578,10 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
     
     <item>
       <title>Docs: RPC AWS技术方案</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-aws/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-aws/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-aws/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-aws/</guid>
       <description>
         
         
@@ -2595,10 +2595,10 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
     
     <item>
       <title>Docs: RPC Ctrip-Service Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/examples/rpc/rpc-ctrip-example/</guid>
       <description>
         
         
@@ -2668,10 +2668,10 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
     
     <item>
       <title>Docs: RPC Ctrip技术方案</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</guid>
       <description>
         
         
@@ -2741,10 +2741,10 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
     
     <item>
       <title>Docs: Parameter Reference</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/reference/parameter-reference/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/reference/parameter-reference/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/reference/parameter-reference/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/reference/parameter-reference/</guid>
       <description>
         
         

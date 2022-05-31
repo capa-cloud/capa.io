@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – 参考手册</title>
-    <link>https://reactivegroup.github.io/capa.io/docs/reference/</link>
+    <link>https://capa-cloud.github.io/capa.io/docs/reference/</link>
     <description>Recent content in 参考手册 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/docs/reference/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/docs/reference/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: Parameter Reference</title>
-      <link>https://reactivegroup.github.io/capa.io/docs/reference/parameter-reference/</link>
+      <link>https://capa-cloud.github.io/capa.io/docs/reference/parameter-reference/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/docs/reference/parameter-reference/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/docs/reference/parameter-reference/</guid>
       <description>
         
         

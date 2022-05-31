@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Cloud Java Stack</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/javastack/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/javastack/</link>
     <description>Recent content in Cloud Java Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/javastack/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/javastack/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: Dubbo Stack</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/javastack/dubbo/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/javastack/dubbo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/javastack/dubbo/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/javastack/dubbo/</guid>
       <description>
         
         
@@ -28,10 +28,10 @@
     
     <item>
       <title>Blog: Java Web Stack</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/javastack/javaweb/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/javastack/javaweb/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/javastack/javaweb/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/javastack/javaweb/</guid>
       <description>
         
         
@@ -41,10 +41,10 @@
     
     <item>
       <title>Blog: Netty Stack</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/javastack/netty/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/javastack/netty/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/javastack/netty/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/javastack/netty/</guid>
       <description>
         
         
@@ -54,10 +54,10 @@
     
     <item>
       <title>Blog: Reactive Stack</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/javastack/reactive/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/javastack/reactive/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/javastack/reactive/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/javastack/reactive/</guid>
       <description>
         
         

@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Java Web Stack</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/javastack/javaweb/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/javastack/javaweb/</link>
     <description>Recent content in Java Web Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/javastack/javaweb/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/javastack/javaweb/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: Java Servlet</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-servlet/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-servlet/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-servlet/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-servlet/</guid>
       <description>
         
         
@@ -34,10 +34,10 @@
     
     <item>
       <title>Blog: Java Spring</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-spring/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-spring/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/2022/05/30/java-spring/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-spring/</guid>
       <description>
         
         

@@ -1,38 +1,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – DevOps Stack</title>
-    <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/</link>
+    <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/</link>
     <description>Recent content in DevOps Stack on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/blog/devopsstack/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/devopsstack/index.xml" rel="self" type="application/rss+xml" />
     
     
       
         
       
     
-    
-    <item>
-      <title>Blog: Cloud Ops</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/ops/</link>
-      <pubDate>Tue, 31 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/ops/</guid>
-      <description>
-        
-        
-        &lt;p&gt;本目录主要为对云原生运维的学习和实践。&lt;/p&gt;
-
-      </description>
-    </item>
     
     <item>
       <title>Blog: Cloud CICD</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/cicd/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/cicd/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/cicd/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/cicd/</guid>
       <description>
         
         
@@ -42,11 +28,25 @@
     </item>
     
     <item>
-      <title>Blog: Cloud Security</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/security/</link>
+      <title>Blog: Cloud Ops</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/ops/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/security/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/ops/</guid>
+      <description>
+        
+        
+        &lt;p&gt;本目录主要为对云原生运维的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: Cloud Security</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/security/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/security/</guid>
       <description>
         
         
@@ -57,10 +57,10 @@
     
     <item>
       <title>Blog: Cloud SRE</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/sre/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/</guid>
       <description>
         
         
@@ -71,10 +71,10 @@
     
     <item>
       <title>Blog: Chaos 混沌工程</title>
-      <link>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/</link>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/blog/devopsstack/chaos/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/</guid>
       <description>
         
         
