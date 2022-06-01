@@ -20,59 +20,25 @@
 <title>Capa: Mecha SDK of Cloud Application Api | Capa</title>
 
 
-  
-  <meta name="description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁
-&ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
-
-作者简介：
-KevinTen，携程后端开发工 …">
+  <meta name="description" content="Capa: Mecha SDK of Cloud Application Api.
+">
 <meta property="og:title" content="Capa: Mecha SDK of Cloud Application Api" />
-<meta property="og:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
- 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
- 在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
-ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
-不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
-本文主要对 ServiceMesh 进行回顾总结，并分享业界基于 ServiceMesh 这种 Sidecar 模式解决混合云应用开发的解决方案，最后是关于混合云应用开发模式的探讨。
-一、Service Mesh 回顾与总结 A、Service Mesh 的初衷  在微服务架构下，基础架构团队一般会为应用提供一个封装了各种服务治理能力的 SDK，这种做法虽然保障了应用的正常运行，但缺点也非常明显，每次基础架构团队迭代一个新功能都需要业务方参与升级才能使用，尤其是 bugfix 版本，往往需要强推业务方升级，这里面的痛苦程度每一个基础架构团队成员都深有体会。
- 伴随着升级的困难，随之而来的就是应用使用的 SDK 版本差别非常大，生产环境同时跑着各种版本的 SDK，这种现象又会让新功能的迭代必须考虑各种兼容，就好像带着枷锁前进一般，这样随着不断迭代，会让代码维护非常困难，有些祖传逻辑更是一不小心就会掉坑里。
-同时这种“重”SDK 的开发模式，导致异构语言的治理能力非常薄弱，如果想为各种编程语言都提供一个功能完整且能持续迭代的 SDK 其中的成本可想而知。
-18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
-B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
-  探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。" />
+<meta property="og:description" content="Capa: Mecha SDK of Cloud Application Api.
+" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://reactivegroup.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" /><meta property="article:section" content="blog" />
+<meta property="og:url" content="https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-01-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-05-27T14:11:17+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2022-01-18T00:00:00+00:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Capa: Mecha SDK of Cloud Application Api">
-<meta itemprop="description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
- 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
- 在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
-ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
-不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
-本文主要对 ServiceMesh 进行回顾总结，并分享业界基于 ServiceMesh 这种 Sidecar 模式解决混合云应用开发的解决方案，最后是关于混合云应用开发模式的探讨。
-一、Service Mesh 回顾与总结 A、Service Mesh 的初衷  在微服务架构下，基础架构团队一般会为应用提供一个封装了各种服务治理能力的 SDK，这种做法虽然保障了应用的正常运行，但缺点也非常明显，每次基础架构团队迭代一个新功能都需要业务方参与升级才能使用，尤其是 bugfix 版本，往往需要强推业务方升级，这里面的痛苦程度每一个基础架构团队成员都深有体会。
- 伴随着升级的困难，随之而来的就是应用使用的 SDK 版本差别非常大，生产环境同时跑着各种版本的 SDK，这种现象又会让新功能的迭代必须考虑各种兼容，就好像带着枷锁前进一般，这样随着不断迭代，会让代码维护非常困难，有些祖传逻辑更是一不小心就会掉坑里。
-同时这种“重”SDK 的开发模式，导致异构语言的治理能力非常薄弱，如果想为各种编程语言都提供一个功能完整且能持续迭代的 SDK 其中的成本可想而知。
-18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
-B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
-  探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。"><meta itemprop="datePublished" content="2022-01-18T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-05-27T14:11:17+08:00" />
+<meta itemprop="description" content="Capa: Mecha SDK of Cloud Application Api.
+"><meta itemprop="datePublished" content="2022-01-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-18T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1522">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Capa: Mecha SDK of Cloud Application Api"/>
-<meta name="twitter:description" content="Capa(Cloud-Application-API)：架起混合云应用开发的桥梁 &ldquo;让代码实现&quot;一次编写，随处运行&rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&quot;
- 作者简介： KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。 Capa官方GitHub地址:https://github.com/capa-cloud/capa-java
- 在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。
-ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。
-不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
-本文主要对 ServiceMesh 进行回顾总结，并分享业界基于 ServiceMesh 这种 Sidecar 模式解决混合云应用开发的解决方案，最后是关于混合云应用开发模式的探讨。
-一、Service Mesh 回顾与总结 A、Service Mesh 的初衷  在微服务架构下，基础架构团队一般会为应用提供一个封装了各种服务治理能力的 SDK，这种做法虽然保障了应用的正常运行，但缺点也非常明显，每次基础架构团队迭代一个新功能都需要业务方参与升级才能使用，尤其是 bugfix 版本，往往需要强推业务方升级，这里面的痛苦程度每一个基础架构团队成员都深有体会。
- 伴随着升级的困难，随之而来的就是应用使用的 SDK 版本差别非常大，生产环境同时跑着各种版本的 SDK，这种现象又会让新功能的迭代必须考虑各种兼容，就好像带着枷锁前进一般，这样随着不断迭代，会让代码维护非常困难，有些祖传逻辑更是一不小心就会掉坑里。
-同时这种“重”SDK 的开发模式，导致异构语言的治理能力非常薄弱，如果想为各种编程语言都提供一个功能完整且能持续迭代的 SDK 其中的成本可想而知。
-18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。
-B、Service Mesh 落地现状 Istio  参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww
-  探索阶段：2017 年 - 2018 年 早期采用者阶段：2019 年 - 2020 年 大规模落地及生态发展阶段：2021 年至今  如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。"/>
+<meta name="twitter:description" content="Capa: Mecha SDK of Cloud Application Api.
+"/>
 
 
 
@@ -195,7 +161,21 @@ if (!doNotTrack) {
         <div class="row flex-xl-nowrap">
           <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
             
-<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api").addClass("active"); 
+    $("#td-section-nav #m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-li span").addClass("td-sidebar-nav-active-item"); 
+    $("#td-section-nav #m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api").parents("li").addClass("active-path"); 
+    $("#td-section-nav li.active-path").addClass("show"); 
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-li").siblings("li").addClass("show");  
+    $("#td-section-nav #m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-li").children("ul").children("li").addClass("show");  
+    $("#td-sidebar-menu").toggleClass("d-none"); 
+    });
+  </script>
+  
+<div id="td-sidebar-menu" class="td-sidebar__inner d-none">
   <div id="content-mobile">
   <form class="td-sidebar__search d-flex align-items-center">
     
@@ -207,7 +187,7 @@ if (!doNotTrack) {
   </form>
   </div>
   <div id="content-desktop"></div>
-  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+  <nav class="collapse td-sidebar-nav foldable-nav" id="td-section-nav">
     <div class="nav-item dropdown d-block d-lg-none">
       
 
@@ -221,194 +201,345 @@ if (!doNotTrack) {
 </div>
     </div>
     <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblog-li">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblog-li">
   <a href="/capa.io/blog/" title="Capa Blog" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-capaioblog"><span class="">博客</span></a>
   <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastack-li">
-  <a href="/capa.io/blog/javastack/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastack"><span class="">Cloud Java Stack</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogtecktalk-li">
+  <input type="checkbox" id="m-capaioblogtecktalk-check"/>
+  <label for="m-capaioblogtecktalk-check"><a href="/capa.io/blog/tecktalk/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalk"><span class="">Teck Talk</span></a></label>
+  
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackjavaweb-li">
-  <a href="/capa.io/blog/javastack/javaweb/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackjavaweb"><span class="">Java Web Stack</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogtecktalkcapa-li">
+  <input type="checkbox" id="m-capaioblogtecktalkcapa-check"/>
+  <label for="m-capaioblogtecktalkcapa-check"><a href="/capa.io/blog/tecktalk/capa/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalkcapa"><span class="">Capa</span></a></label>
+  
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220530java-servlet-li">
-  <a href="/capa.io/blog/2022/05/30/java-servlet/" title="Java Servlet" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220530java-servlet"><span class="">Java Servlet的一些实践经验</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220530java-spring-li">
-  <a href="/capa.io/blog/2022/05/30/java-spring/" title="Java Spring" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220530java-spring"><span class="">Java Spring的一些实践经验</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220118capa-tripe890bde59cb0-li">
+  <input type="checkbox" id="m-capaioblog20220118capa-tripe890bde59cb0-check"/>
+  <label for="m-capaioblog20220118capa-tripe890bde59cb0-check"><a href="/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220118capa-tripe890bde59cb0"><span class="">Capa Trip落地</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-li">
+  <input type="checkbox" id="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-check"/>
+  <label for="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-check"><a href="/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" title="Capa: Mecha SDK of Cloud Application Api" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api"><span class="">Mecha SDK of Cloud Application Api</span></a></label>
+  
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackdubbo-li">
-  <a href="/capa.io/blog/javastack/dubbo/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackdubbo"><span class="">Dubbo Stack</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogtecktalkreferences-li">
+  <input type="checkbox" id="m-capaioblogtecktalkreferences-check"/>
+  <label for="m-capaioblogtecktalkreferences-check"><a href="/capa.io/blog/tecktalk/references/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalkreferences"><span class="">References and Thinking</span></a></label>
+  
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522dubbo-invokee6b581e7a88b-li">
-  <a href="/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dubbo-invokee6b581e7a88b"><span class="">Dubbo Invoke流程</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522dubbo-landscape-li">
-  <a href="/capa.io/blog/2022/05/22/dubbo-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dubbo-landscape"><span class="">Dubbo Landscape</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastacknetty-li">
-  <a href="/capa.io/blog/javastack/netty/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastacknetty"><span class="">Netty Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520netty-channele8aebee8aea1-li">
-  <a href="/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520netty-channele8aebee8aea1"><span class="">Netty Channel设计</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520netty-landscape-li">
-  <a href="/capa.io/blog/2022/05/20/netty-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520netty-landscape"><span class="">Netty Landscape</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackreactive-li">
-  <a href="/capa.io/blog/javastack/reactive/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackreactive"><span class="">Reactive Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactive-landscape-li">
-  <a href="/capa.io/blog/2022/05/20/reactive-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactive-landscape"><span class="">Reactive Landscape</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5-li">
-  <a href="/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5"><span class="">Reactive模式在Trip.com消息推送平台上的实践</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactive-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1-li">
-  <a href="/capa.io/blog/2022/05/20/reactive-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/" title="Reactive 数据流模型设计" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactive-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1"><span class="">reactor-core 数据流模型设计</span></a>
-</li>
-  </ul>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstack-li">
-  <a href="/capa.io/blog/devopsstack/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstack"><span class="">DevOps Stack</span></a>
-  <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstackcicd-li">
-  <a href="/capa.io/blog/devopsstack/cicd/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackcicd"><span class="">Cloud CICD</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblogdevopsstackcicdterraform-li">
-  <a href="/capa.io/blog/devopsstack/cicd/terraform/" title="Terraform" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackcicdterraform"><span class="">Terraform - Infra as a code</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstacksecurity-li">
-  <a href="/capa.io/blog/devopsstack/security/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstacksecurity"><span class="">Cloud Security</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblogdevopsstacksecurityaws-iam-li">
-  <a href="/capa.io/blog/devopsstack/security/aws-iam/" title="AWS Security - IAM" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstacksecurityaws-iam"><span class="">AWS Security - IAM使用经验</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstacksre-li">
-  <a href="/capa.io/blog/devopsstack/sre/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstacksre"><span class="">Cloud SRE</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblogdevopsstacksresre-li">
-  <a href="/capa.io/blog/devopsstack/sre/sre/" title="SRE" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstacksresre"><span class="">SRE - 思考</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblogdevopsstacksreaws-cloudwatch-li">
-  <a href="/capa.io/blog/devopsstack/sre/aws-cloudwatch/" title="AWS SRE - CloudWatch" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstacksreaws-cloudwatch"><span class="">AWS SRE - CloudWatch使用经验</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstackchaos-li">
-  <a href="/capa.io/blog/devopsstack/chaos/" title="Chaos 混沌工程" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackchaos"><span class="">云原生 Chaos混沌工程</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblogdevopsstackchaosaws-fis-li">
-  <a href="/capa.io/blog/devopsstack/chaos/aws-fis/" title="AWS故障注入模拟器" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackchaosaws-fis"><span class="">AWS故障注入模拟器 实践经验</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstackchaoschaos-mesh-li">
-  <a href="/capa.io/blog/devopsstack/chaos/chaos-mesh/" title="Chaos Mesh" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackchaoschaos-mesh"><span class="">Chaos Mesh云原生混沌工程平台</span></a>
-  <ul class="ul-4 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220530chaos-mesh-k8se5ae9ee9aa8c-li">
-  <a href="/capa.io/blog/2022/05/30/chaos-mesh-k8s%E5%AE%9E%E9%AA%8C/" title="Chaos Mesh - K8S实验" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220530chaos-mesh-k8se5ae9ee9aa8c"><span class="">Chaos Mesh云原生混沌工程平台</span></a>
-</li>
-  </ul>
-</li>
-  </ul>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstack-li">
-  <a href="/capa.io/blog/cloudstack/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstack"><span class="">Cloud Native Stack</span></a>
-  <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackappmesh-li">
-  <a href="/capa.io/blog/cloudstack/appmesh/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackappmesh"><span class="">AppMesh Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522appmesh-landscape-li">
-  <a href="/capa.io/blog/2022/05/22/appmesh-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522appmesh-landscape"><span class="">AppMesh Landscape</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackenvoy-li">
-  <a href="/capa.io/blog/cloudstack/envoy/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackenvoy"><span class="">Envoy Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220521envoy-gateway-li">
-  <a href="/capa.io/blog/2022/05/21/envoy-gateway/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220521envoy-gateway"><span class="">Envoy Gateway</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220503envoy-landscape-li">
-  <a href="/capa.io/blog/2022/05/03/envoy-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220503envoy-landscape"><span class="">Envoy Landscape</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackgrpc-li">
-  <a href="/capa.io/blog/cloudstack/grpc/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackgrpc"><span class="">gRPC Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220121grpc-landscape-li">
-  <a href="/capa.io/blog/2022/01/21/grpc-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220121grpc-landscape"><span class="">gRPC Landscape</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackistio-li">
-  <a href="/capa.io/blog/cloudstack/istio/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackistio"><span class="">Istio Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-devops-li">
-  <a href="/capa.io/blog/2022/03/09/istio-devops/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-devops"><span class="">Istio devops</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-landscape-li">
-  <a href="/capa.io/blog/2022/03/09/istio-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-landscape"><span class="">Istio Landscape</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackk8s-li">
-  <a href="/capa.io/blog/cloudstack/k8s/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackk8s"><span class="">K8S Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220524aws-eks-devops-li">
-  <a href="/capa.io/blog/2022/05/24/aws-eks-devops/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220524aws-eks-devops"><span class="">AWS EKS Devops</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackmosn-li">
-  <a href="/capa.io/blog/cloudstack/mosn/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackmosn"><span class="">Mosn Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520mosn-landscape-li">
-  <a href="/capa.io/blog/2022/05/20/mosn-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520mosn-landscape"><span class="">Mosn Landscape</span></a>
-</li>
-  </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstacknginx-li">
-  <a href="/capa.io/blog/cloudstack/nginx/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstacknginx"><span class="">Nginx Stack</span></a>
-  <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220526nginx-devops-li">
-  <a href="/capa.io/blog/2022/05/26/nginx-devops/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220526nginx-devops"><span class="">Nginx Devops</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522nginx-landscape-li">
-  <a href="/capa.io/blog/2022/05/22/nginx-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522nginx-landscape"><span class="">Nginx Landscape</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220118multi-cloud-e5a49ae4ba91e6b7b7e59088e4ba91e69eb6e69e84-li">
+  <input type="checkbox" id="m-capaioblog20220118multi-cloud-e5a49ae4ba91e6b7b7e59088e4ba91e69eb6e69e84-check"/>
+  <label for="m-capaioblog20220118multi-cloud-e5a49ae4ba91e6b7b7e59088e4ba91e69eb6e69e84-check"><a href="/capa.io/blog/2022/01/18/multi-cloud-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88%E4%BA%91%E6%9E%B6%E6%9E%84/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220118multi-cloud-e5a49ae4ba91e6b7b7e59088e4ba91e69eb6e69e84"><span class="">Multi Cloud 多云混合云架构</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220118multi-mesh-e59084e9a286e59f9fmeshe69eb6e69e84-li">
+  <input type="checkbox" id="m-capaioblog20220118multi-mesh-e59084e9a286e59f9fmeshe69eb6e69e84-check"/>
+  <label for="m-capaioblog20220118multi-mesh-e59084e9a286e59f9fmeshe69eb6e69e84-check"><a href="/capa.io/blog/2022/01/18/multi-mesh-%E5%90%84%E9%A2%86%E5%9F%9Fmesh%E6%9E%B6%E6%9E%84/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220118multi-mesh-e59084e9a286e59f9fmeshe69eb6e69e84"><span class="">Multi Mesh 各领域Mesh架构</span></a></label>
+  
 </li>
   </ul>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogmechastack-li">
-  <a href="/capa.io/blog/mechastack/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastack"><span class="">Mecha Runtime Stack</span></a>
+  <input type="checkbox" id="m-capaioblogmechastack-check"/>
+  <label for="m-capaioblogmechastack-check"><a href="/capa.io/blog/mechastack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastack"><span class="">Mecha Runtime Stack</span></a></label>
+  
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogmechastackdapr-li">
-  <a href="/capa.io/blog/mechastack/dapr/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastackdapr"><span class="">Dapr Stack</span></a>
+  <input type="checkbox" id="m-capaioblogmechastackdapr-check"/>
+  <label for="m-capaioblogmechastackdapr-check"><a href="/capa.io/blog/mechastack/dapr/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastackdapr"><span class="">Dapr Stack</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522dapr-e8aebee8aea1e6809de8b7af-li">
-  <a href="/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dapr-e8aebee8aea1e6809de8b7af"><span class="">Dapr 设计思路</span></a>
+  <input type="checkbox" id="m-capaioblog20220522dapr-e8aebee8aea1e6809de8b7af-check"/>
+  <label for="m-capaioblog20220522dapr-e8aebee8aea1e6809de8b7af-check"><a href="/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dapr-e8aebee8aea1e6809de8b7af"><span class="">Dapr 设计思路</span></a></label>
+  
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogmechastackfemas-li">
-  <a href="/capa.io/blog/mechastack/femas/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastackfemas"><span class="">Femas Stack</span></a>
+  <input type="checkbox" id="m-capaioblogmechastackfemas-check"/>
+  <label for="m-capaioblogmechastackfemas-check"><a href="/capa.io/blog/mechastack/femas/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastackfemas"><span class="">Femas Stack</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522femas-landscape-li">
-  <a href="/capa.io/blog/2022/05/22/femas-landscape/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522femas-landscape"><span class="">Femas Landscape</span></a>
+  <input type="checkbox" id="m-capaioblog20220522femas-landscape-check"/>
+  <label for="m-capaioblog20220522femas-landscape-check"><a href="/capa.io/blog/2022/05/22/femas-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522femas-landscape"><span class="">Femas Landscape</span></a></label>
+  
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogmechastacklayotto-li">
-  <a href="/capa.io/blog/mechastack/layotto/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastacklayotto"><span class="">Layotto Stack</span></a>
+  <input type="checkbox" id="m-capaioblogmechastacklayotto-check"/>
+  <label for="m-capaioblogmechastacklayotto-check"><a href="/capa.io/blog/mechastack/layotto/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogmechastacklayotto"><span class="">Layotto Stack</span></a></label>
+  
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522layotto-e590afe58aa8e6b581e7a88be58886e69e90-li">
-  <a href="/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522layotto-e590afe58aa8e6b581e7a88be58886e69e90"><span class="">Layotto 启动流程分析</span></a>
+  <input type="checkbox" id="m-capaioblog20220522layotto-e590afe58aa8e6b581e7a88be58886e69e90-check"/>
+  <label for="m-capaioblog20220522layotto-e590afe58aa8e6b581e7a88be58886e69e90-check"><a href="/capa.io/blog/2022/05/22/layotto-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522layotto-e590afe58aa8e6b581e7a88be58886e69e90"><span class="">Layotto 启动流程分析</span></a></label>
+  
 </li>
   </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220601mecha-runtime-stack-li">
+  <input type="checkbox" id="m-capaioblog20220601mecha-runtime-stack-check"/>
+  <label for="m-capaioblog20220601mecha-runtime-stack-check"><a href="/capa.io/blog/2022/06/01/mecha-runtime-stack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220601mecha-runtime-stack"><span class="">Mecha Runtime Stack</span></a></label>
+  
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-capaioblogtecktalk-li">
-  <a href="/capa.io/blog/tecktalk/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalk"><span class="">Teck Talk</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstack-li">
+  <input type="checkbox" id="m-capaioblogcloudstack-check"/>
+  <label for="m-capaioblogcloudstack-check"><a href="/capa.io/blog/cloudstack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstack"><span class="">Cloud Native Stack</span></a></label>
+  
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogtecktalkreferences-li">
-  <a href="/capa.io/blog/tecktalk/references/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalkreferences"><span class="">References and Thinking</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackappmesh-li">
+  <input type="checkbox" id="m-capaioblogcloudstackappmesh-check"/>
+  <label for="m-capaioblogcloudstackappmesh-check"><a href="/capa.io/blog/cloudstack/appmesh/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackappmesh"><span class="">AppMesh Stack</span></a></label>
+  
   <ul class="ul-3 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblogtecktalkreferencesmulti-cloud-li">
-  <a href="/capa.io/blog/tecktalk/references/multi-cloud/" title="Multi Cloud 多云混合云架构" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalkreferencesmulti-cloud"><span class="">Multi Cloud 多云混合云架构 - 业界参考资料与思考</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblogtecktalkreferencesmulti-mesh-li">
-  <a href="/capa.io/blog/tecktalk/references/multi-mesh/" title="Multi Mesh 各领域Mesh架构" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-capaioblogtecktalkreferencesmulti-mesh"><span class="">Multi Mesh 各领域Mesh架构 - 业界参考资料与思考</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522appmesh-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220522appmesh-landscape-check"/>
+  <label for="m-capaioblog20220522appmesh-landscape-check"><a href="/capa.io/blog/2022/05/22/appmesh-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522appmesh-landscape"><span class="">AppMesh Landscape</span></a></label>
+  
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api-li">
-  <a href="/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" title="Capa: Mecha SDK of Cloud Application Api" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220118capa-mecha-sdk-of-cloud-application-api"><span class="td-sidebar-nav-active-item">Mecha SDK of Cloud Application Api</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackenvoy-li">
+  <input type="checkbox" id="m-capaioblogcloudstackenvoy-check"/>
+  <label for="m-capaioblogcloudstackenvoy-check"><a href="/capa.io/blog/cloudstack/envoy/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackenvoy"><span class="">Envoy Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220521envoy-gateway-li">
+  <input type="checkbox" id="m-capaioblog20220521envoy-gateway-check"/>
+  <label for="m-capaioblog20220521envoy-gateway-check"><a href="/capa.io/blog/2022/05/21/envoy-gateway/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220521envoy-gateway"><span class="">Envoy Gateway</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220503envoy-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220503envoy-landscape-check"/>
+  <label for="m-capaioblog20220503envoy-landscape-check"><a href="/capa.io/blog/2022/05/03/envoy-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220503envoy-landscape"><span class="">Envoy Landscape</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackgrpc-li">
+  <input type="checkbox" id="m-capaioblogcloudstackgrpc-check"/>
+  <label for="m-capaioblogcloudstackgrpc-check"><a href="/capa.io/blog/cloudstack/grpc/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackgrpc"><span class="">gRPC Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220121grpc-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220121grpc-landscape-check"/>
+  <label for="m-capaioblog20220121grpc-landscape-check"><a href="/capa.io/blog/2022/01/21/grpc-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220121grpc-landscape"><span class="">gRPC Landscape</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackistio-li">
+  <input type="checkbox" id="m-capaioblogcloudstackistio-check"/>
+  <label for="m-capaioblogcloudstackistio-check"><a href="/capa.io/blog/cloudstack/istio/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackistio"><span class="">Istio Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-devops-li">
+  <input type="checkbox" id="m-capaioblog20220309istio-devops-check"/>
+  <label for="m-capaioblog20220309istio-devops-check"><a href="/capa.io/blog/2022/03/09/istio-devops/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-devops"><span class="">Istio devops</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220309istio-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220309istio-landscape-check"/>
+  <label for="m-capaioblog20220309istio-landscape-check"><a href="/capa.io/blog/2022/03/09/istio-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220309istio-landscape"><span class="">Istio Landscape</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackk8s-li">
+  <input type="checkbox" id="m-capaioblogcloudstackk8s-check"/>
+  <label for="m-capaioblogcloudstackk8s-check"><a href="/capa.io/blog/cloudstack/k8s/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackk8s"><span class="">K8S Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220524aws-eks-devops-li">
+  <input type="checkbox" id="m-capaioblog20220524aws-eks-devops-check"/>
+  <label for="m-capaioblog20220524aws-eks-devops-check"><a href="/capa.io/blog/2022/05/24/aws-eks-devops/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220524aws-eks-devops"><span class="">AWS EKS Devops</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220524k8s-devops-li">
+  <input type="checkbox" id="m-capaioblog20220524k8s-devops-check"/>
+  <label for="m-capaioblog20220524k8s-devops-check"><a href="/capa.io/blog/2022/05/24/k8s-devops/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220524k8s-devops"><span class="">K8S Devops</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstackmosn-li">
+  <input type="checkbox" id="m-capaioblogcloudstackmosn-check"/>
+  <label for="m-capaioblogcloudstackmosn-check"><a href="/capa.io/blog/cloudstack/mosn/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstackmosn"><span class="">Mosn Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520mosn-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220520mosn-landscape-check"/>
+  <label for="m-capaioblog20220520mosn-landscape-check"><a href="/capa.io/blog/2022/05/20/mosn-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520mosn-landscape"><span class="">Mosn Landscape</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogcloudstacknginx-li">
+  <input type="checkbox" id="m-capaioblogcloudstacknginx-check"/>
+  <label for="m-capaioblogcloudstacknginx-check"><a href="/capa.io/blog/cloudstack/nginx/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogcloudstacknginx"><span class="">Nginx Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220526nginx-devops-li">
+  <input type="checkbox" id="m-capaioblog20220526nginx-devops-check"/>
+  <label for="m-capaioblog20220526nginx-devops-check"><a href="/capa.io/blog/2022/05/26/nginx-devops/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220526nginx-devops"><span class="">Nginx Devops</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522nginx-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220522nginx-landscape-check"/>
+  <label for="m-capaioblog20220522nginx-landscape-check"><a href="/capa.io/blog/2022/05/22/nginx-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522nginx-landscape"><span class="">Nginx Landscape</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220601cloud-native-stack-li">
+  <input type="checkbox" id="m-capaioblog20220601cloud-native-stack-check"/>
+  <label for="m-capaioblog20220601cloud-native-stack-check"><a href="/capa.io/blog/2022/06/01/cloud-native-stack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220601cloud-native-stack"><span class="">Cloud Native Stack</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstack-li">
+  <input type="checkbox" id="m-capaioblogdevopsstack-check"/>
+  <label for="m-capaioblogdevopsstack-check"><a href="/capa.io/blog/devopsstack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstack"><span class="">DevOps Stack</span></a></label>
+  
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstackchaos-li">
+  <input type="checkbox" id="m-capaioblogdevopsstackchaos-check"/>
+  <label for="m-capaioblogdevopsstackchaos-check"><a href="/capa.io/blog/devopsstack/chaos/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackchaos"><span class="">Chaos混沌工程</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220530chaos-mesh-k8s-li">
+  <input type="checkbox" id="m-capaioblog20220530chaos-mesh-k8s-check"/>
+  <label for="m-capaioblog20220530chaos-mesh-k8s-check"><a href="/capa.io/blog/2022/05/30/chaos-mesh-k8s/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220530chaos-mesh-k8s"><span class="">Chaos Mesh - K8S</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220525aws-fis-li">
+  <input type="checkbox" id="m-capaioblog20220525aws-fis-check"/>
+  <label for="m-capaioblog20220525aws-fis-check"><a href="/capa.io/blog/2022/05/25/aws-fis/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220525aws-fis"><span class="">AWS FIS</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220525chaos-mesh-li">
+  <input type="checkbox" id="m-capaioblog20220525chaos-mesh-check"/>
+  <label for="m-capaioblog20220525chaos-mesh-check"><a href="/capa.io/blog/2022/05/25/chaos-mesh/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220525chaos-mesh"><span class="">Chaos Mesh</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstackcicd-li">
+  <input type="checkbox" id="m-capaioblogdevopsstackcicd-check"/>
+  <label for="m-capaioblogdevopsstackcicd-check"><a href="/capa.io/blog/devopsstack/cicd/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackcicd"><span class="">Cloud CICD</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220527terraform-li">
+  <input type="checkbox" id="m-capaioblog20220527terraform-check"/>
+  <label for="m-capaioblog20220527terraform-check"><a href="/capa.io/blog/2022/05/27/terraform/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220527terraform"><span class="">Terraform</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstackops-li">
+  <input type="checkbox" id="m-capaioblogdevopsstackops-check"/>
+  <label for="m-capaioblogdevopsstackops-check"><a href="/capa.io/blog/devopsstack/ops/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstackops"><span class="">Cloud Ops</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220531traffic-ops-li">
+  <input type="checkbox" id="m-capaioblog20220531traffic-ops-check"/>
+  <label for="m-capaioblog20220531traffic-ops-check"><a href="/capa.io/blog/2022/05/31/traffic-ops/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220531traffic-ops"><span class="">Traffic Ops</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstacksecurity-li">
+  <input type="checkbox" id="m-capaioblogdevopsstacksecurity-check"/>
+  <label for="m-capaioblogdevopsstacksecurity-check"><a href="/capa.io/blog/devopsstack/security/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstacksecurity"><span class="">Cloud Security</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220525aws-iam-li">
+  <input type="checkbox" id="m-capaioblog20220525aws-iam-check"/>
+  <label for="m-capaioblog20220525aws-iam-check"><a href="/capa.io/blog/2022/05/25/aws-iam/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220525aws-iam"><span class="">AWS IAM</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogdevopsstacksre-li">
+  <input type="checkbox" id="m-capaioblogdevopsstacksre-check"/>
+  <label for="m-capaioblogdevopsstacksre-check"><a href="/capa.io/blog/devopsstack/sre/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogdevopsstacksre"><span class="">Cloud SRE</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220525aws-cloudwatch-li">
+  <input type="checkbox" id="m-capaioblog20220525aws-cloudwatch-check"/>
+  <label for="m-capaioblog20220525aws-cloudwatch-check"><a href="/capa.io/blog/2022/05/25/aws-cloudwatch/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220525aws-cloudwatch"><span class="">AWS CloudWatch</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220525aws-cloudwatch-log-insights-li">
+  <input type="checkbox" id="m-capaioblog20220525aws-cloudwatch-log-insights-check"/>
+  <label for="m-capaioblog20220525aws-cloudwatch-log-insights-check"><a href="/capa.io/blog/2022/05/25/aws-cloudwatch-log-insights/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220525aws-cloudwatch-log-insights"><span class="">AWS CloudWatch - Log Insights</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220601devops-stack-li">
+  <input type="checkbox" id="m-capaioblog20220601devops-stack-check"/>
+  <label for="m-capaioblog20220601devops-stack-check"><a href="/capa.io/blog/2022/06/01/devops-stack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220601devops-stack"><span class="">DevOps Stack</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastack-li">
+  <input type="checkbox" id="m-capaioblogjavastack-check"/>
+  <label for="m-capaioblogjavastack-check"><a href="/capa.io/blog/javastack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastack"><span class="">Cloud Java Stack</span></a></label>
+  
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackdubbo-li">
+  <input type="checkbox" id="m-capaioblogjavastackdubbo-check"/>
+  <label for="m-capaioblogjavastackdubbo-check"><a href="/capa.io/blog/javastack/dubbo/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackdubbo"><span class="">Dubbo Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522dubbo-invokee6b581e7a88b-li">
+  <input type="checkbox" id="m-capaioblog20220522dubbo-invokee6b581e7a88b-check"/>
+  <label for="m-capaioblog20220522dubbo-invokee6b581e7a88b-check"><a href="/capa.io/blog/2022/05/22/dubbo-invoke%E6%B5%81%E7%A8%8B/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dubbo-invokee6b581e7a88b"><span class="">Dubbo Invoke流程</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220522dubbo-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220522dubbo-landscape-check"/>
+  <label for="m-capaioblog20220522dubbo-landscape-check"><a href="/capa.io/blog/2022/05/22/dubbo-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220522dubbo-landscape"><span class="">Dubbo Landscape</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackjavaweb-li">
+  <input type="checkbox" id="m-capaioblogjavastackjavaweb-check"/>
+  <label for="m-capaioblogjavastackjavaweb-check"><a href="/capa.io/blog/javastack/javaweb/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackjavaweb"><span class="">Java Web Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220530java-servlet-li">
+  <input type="checkbox" id="m-capaioblog20220530java-servlet-check"/>
+  <label for="m-capaioblog20220530java-servlet-check"><a href="/capa.io/blog/2022/05/30/java-servlet/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220530java-servlet"><span class="">Java Servlet</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220530java-spring-li">
+  <input type="checkbox" id="m-capaioblog20220530java-spring-check"/>
+  <label for="m-capaioblog20220530java-spring-check"><a href="/capa.io/blog/2022/05/30/java-spring/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220530java-spring"><span class="">Java Spring</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastacknetty-li">
+  <input type="checkbox" id="m-capaioblogjavastacknetty-check"/>
+  <label for="m-capaioblogjavastacknetty-check"><a href="/capa.io/blog/javastack/netty/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastacknetty"><span class="">Netty Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520netty-channele8aebee8aea1-li">
+  <input type="checkbox" id="m-capaioblog20220520netty-channele8aebee8aea1-check"/>
+  <label for="m-capaioblog20220520netty-channele8aebee8aea1-check"><a href="/capa.io/blog/2022/05/20/netty-channel%E8%AE%BE%E8%AE%A1/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520netty-channele8aebee8aea1"><span class="">Netty Channel设计</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520netty-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220520netty-landscape-check"/>
+  <label for="m-capaioblog20220520netty-landscape-check"><a href="/capa.io/blog/2022/05/20/netty-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520netty-landscape"><span class="">Netty Landscape</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-capaioblogjavastackreactive-li">
+  <input type="checkbox" id="m-capaioblogjavastackreactive-check"/>
+  <label for="m-capaioblogjavastackreactive-check"><a href="/capa.io/blog/javastack/reactive/" class="align-left pl-0  td-sidebar-link td-sidebar-link__section" id="m-capaioblogjavastackreactive"><span class="">Reactive Stack</span></a></label>
+  
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactive-landscape-li">
+  <input type="checkbox" id="m-capaioblog20220520reactive-landscape-check"/>
+  <label for="m-capaioblog20220520reactive-landscape-check"><a href="/capa.io/blog/2022/05/20/reactive-landscape/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactive-landscape"><span class="">Reactive Landscape</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5-li">
+  <input type="checkbox" id="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5-check"/>
+  <label for="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5-check"><a href="/capa.io/blog/2022/05/20/reactive%E6%A8%A1%E5%BC%8F%E5%9C%A8trip.com%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactivee6a8a1e5bc8fe59ca8tripcome6b688e681afe68ea8e98081e5b9b3e58fb0e4b88ae79a84e5ae9ee8b7b5"><span class="">Reactive模式在Trip.com消息推送平台上的实践</span></a></label>
+  
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220520reactor-core-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1-li">
+  <input type="checkbox" id="m-capaioblog20220520reactor-core-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1-check"/>
+  <label for="m-capaioblog20220520reactor-core-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1-check"><a href="/capa.io/blog/2022/05/20/reactor-core-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220520reactor-core-e695b0e68daee6b581e6a8a1e59e8be8aebee8aea1"><span class="">Reactor-Core 数据流模型设计</span></a></label>
+  
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-capaioblog20220601cloud-java-stack-li">
+  <input type="checkbox" id="m-capaioblog20220601cloud-java-stack-check"/>
+  <label for="m-capaioblog20220601cloud-java-stack-check"><a href="/capa.io/blog/2022/06/01/cloud-java-stack/" class="align-left pl-0  td-sidebar-link td-sidebar-link__page" id="m-capaioblog20220601cloud-java-stack"><span class="">Cloud Java Stack</span></a></label>
+  
 </li>
   </ul>
 </li>
@@ -417,6 +548,7 @@ if (!doNotTrack) {
     </ul>
   </nav>
 </div>
+
 
           </aside>
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
@@ -440,17 +572,17 @@ if (!doNotTrack) {
     
     
 
-    <a href="https://github.com/reactivegroup/capa/edit/master/content/zh/blog/tecktalk/capa/index.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-    <a href="https://github.com/reactivegroup/capa/new/master/content/zh/blog/tecktalk/capa/index.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-    <a href="https://github.com/reactivegroup/capa/issues/new?title=Capa:%20Mecha%20SDK%20of%20Cloud%20Application%20Api" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+    <a href="https://github.com/capa-cloud/capa/edit/master/content/zh/blog/tecktalk/capa/capa.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+    <a href="https://github.com/capa-cloud/capa/new/master/content/zh/blog/tecktalk/capa/capa.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+    <a href="https://github.com/capa-cloud/capa/issues/new?title=Capa:%20Mecha%20SDK%20of%20Cloud%20Application%20Api" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
     
       
-      <a href="https://github.com/reactivegroup/capa/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
+      <a href="https://github.com/capa-cloud/capa/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
     
 
   
   
-    <a id="print" href="https://reactivegroup.github.io/capa.io/blog/tecktalk/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
+    <a id="print" href="https://capa-cloud.github.io/capa.io/blog/tecktalk/capa/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
   
   </div>
 
@@ -561,13 +693,13 @@ if (!doNotTrack) {
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://reactivegroup.github.io/capa.io/blog/tecktalk/index.xml" target="_blank">
+            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://capa-cloud.github.io/capa.io/blog/tecktalk/capa/index.xml" target="_blank">
               RSS <i class="fa fa-rss ml-2 "></i>
             </a>
             
 <div class="td-content">
 	<h1>Capa: Mecha SDK of Cloud Application Api</h1>
-	
+	<div class="lead">Capa: Mecha SDK of Cloud Application Api.</div>
 	<div class="td-byline mb-4">
 		
 		<time datetime="2022-01-18" class="text-muted">18.01.2022</time>
@@ -1289,6 +1421,7 @@ RPC 的能力大家不会陌生，这可能是微服务架构下最最基础的�
 </tbody>
 </table>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/capa-rpc-crose.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/rpc-cross.png" alt=""></p>
 <h4 id="mq跨云">MQ跨云</h4>
 <p>使用周边系统：MQ同步工具，进行跨云消息传输。</p>
 <p>按需申请，消息格式转换，失败重试。</p>
@@ -1471,7 +1604,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
   <li>
     <a class="btn btn-primary disabled"><span class="mr-1">←</span>上一页</a>
   </li>
-    <a class="btn btn-primary disabled">下一页<span class="ml-1">→</span></a>
+    <a href="/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/" aria-label="下一页 - Capa Trip落地" class="btn btn-primary">下一页<span class="ml-1">→</span></a>
   </li>
 </ul>
 
@@ -1492,7 +1625,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="User mailing list">
       <i class="fa fa-envelope"></i>
     </a>
   </li>
@@ -1509,7 +1642,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="GitHub">
       <i class="fab fa-github"></i>
     </a>
   </li>
@@ -1557,7 +1690,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 
 
 
-<script src="/capa.io/js/main.min.c30c86b73d90a0180556503734816437e56f9d02c4939409d2766a99c0d89b4c.js" integrity="sha256-wwyGtz2QoBgFVlA3NIFkN&#43;VvnQLEk5QJ0nZqmcDYm0w=" crossorigin="anonymous"></script>
+<script src="/capa.io/js/main.min.ee950676387eab97235d899be7f8fdf5f1cd0751e479d20dd3f3bcb825c7fd46.js" integrity="sha256-7pUGdjh&#43;q5cjXYmb5/j99fHNB1HkedIN0/O8uCXH/UY=" crossorigin="anonymous"></script>
 
 
 
