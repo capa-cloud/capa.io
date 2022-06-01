@@ -14,6 +14,23 @@
     
     
     <item>
+      <title>Blog: Cloud Native Stack</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-native-stack/</link>
+      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-native-stack/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。&lt;/p&gt;
+&lt;p&gt;Capa本身不提供功能，而是由底层的各种云原生的能力来提供。&lt;/p&gt;
+&lt;p&gt;所以了解云原生中常用中间件的设计是很有必要的。&lt;/p&gt;
+&lt;p&gt;本目录主要为对云原生生态中中间件的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: AppMesh Stack</title>
       <link>https://capa-cloud.github.io/capa.io/blog/cloudstack/appmesh/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -101,23 +118,6 @@
         
         
         
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: Cloud Native Stack</title>
-      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-native-stack/</link>
-      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-native-stack/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。&lt;/p&gt;
-&lt;p&gt;Capa本身不提供功能，而是由底层的各种云原生的能力来提供。&lt;/p&gt;
-&lt;p&gt;所以了解云原生中常用中间件的设计是很有必要的。&lt;/p&gt;
-&lt;p&gt;本目录主要为对云原生生态中中间件的学习和实践。&lt;/p&gt;
-
       </description>
     </item>
     

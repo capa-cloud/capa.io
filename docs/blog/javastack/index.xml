@@ -14,6 +14,23 @@
     
     
     <item>
+      <title>Blog: Cloud Java Stack</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-java-stack/</link>
+      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-java-stack/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Capa主要面向Java语言进行设计。&lt;/p&gt;
+&lt;p&gt;Capa本身不提供功能，而是由底层的各种中间件的Java SDK来提供。&lt;/p&gt;
+&lt;p&gt;所以了解Java中常用中间件的设计是很有必要的。&lt;/p&gt;
+&lt;p&gt;本目录主要为对Java生态中中间件的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Dubbo Stack</title>
       <link>https://capa-cloud.github.io/capa.io/blog/javastack/dubbo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -62,23 +79,6 @@
         
         
         
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: Cloud Java Stack</title>
-      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-java-stack/</link>
-      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-java-stack/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Capa主要面向Java语言进行设计。&lt;/p&gt;
-&lt;p&gt;Capa本身不提供功能，而是由底层的各种中间件的Java SDK来提供。&lt;/p&gt;
-&lt;p&gt;所以了解Java中常用中间件的设计是很有必要的。&lt;/p&gt;
-&lt;p&gt;本目录主要为对Java生态中中间件的学习和实践。&lt;/p&gt;
-
       </description>
     </item>
     

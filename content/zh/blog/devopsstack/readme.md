@@ -4,6 +4,7 @@ linkTitle: "DevOps Stack"
 date: 2022-06-01
 description: >
     DevOps Stack.
+weight: 1
 ---
 
 Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。

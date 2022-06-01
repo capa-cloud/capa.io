@@ -14,6 +14,23 @@
     
     
     <item>
+      <title>Blog: Mecha Runtime Stack</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/mecha-runtime-stack/</link>
+      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/mecha-runtime-stack/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Capa主要解决应用的混合云问题，依据理论主要为Mecha Runtime设计理念。&lt;/p&gt;
+&lt;p&gt;Mecha Runtime目前有几个项目比较成熟。&lt;/p&gt;
+&lt;p&gt;所以了解其他Mecha Runtime项目的设计是很有必要的。&lt;/p&gt;
+&lt;p&gt;本目录主要为对Mecha Runtime项目的学习和实践。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Dapr Stack</title>
       <link>https://capa-cloud.github.io/capa.io/blog/mechastack/dapr/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -49,23 +66,6 @@
         
         
         
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: Mecha Runtime Stack</title>
-      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/mecha-runtime-stack/</link>
-      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/mecha-runtime-stack/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Capa主要解决应用的混合云问题，依据理论主要为Mecha Runtime设计理念。&lt;/p&gt;
-&lt;p&gt;Mecha Runtime目前有几个项目比较成熟。&lt;/p&gt;
-&lt;p&gt;所以了解其他Mecha Runtime项目的设计是很有必要的。&lt;/p&gt;
-&lt;p&gt;本目录主要为对Mecha Runtime项目的学习和实践。&lt;/p&gt;
-
       </description>
     </item>
     

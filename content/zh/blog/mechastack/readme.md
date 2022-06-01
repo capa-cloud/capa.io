@@ -4,6 +4,7 @@ linkTitle: "Mecha Runtime Stack"
 date: 2022-06-01
 description: >
     Mecha Runtime Stack.
+weight: 1
 ---
 
 Capa主要解决应用的混合云问题，依据理论主要为Mecha Runtime设计理念。
