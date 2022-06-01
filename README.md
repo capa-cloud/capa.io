@@ -6,7 +6,7 @@ Let the code achieve "write once, run anywhere".
 
 With the help of the Capa project, your Java applications have the ability to run across clouds and hybrid clouds with small changes.
 
-[中文文档](https://github.com/capa-cloud/capa-java/raw/master/README_ZH.md)
+[中文文档](https://github.com/capa-cloud/capa-java/blob/master/README_ZH.md)
 
 ## Motivation
 
