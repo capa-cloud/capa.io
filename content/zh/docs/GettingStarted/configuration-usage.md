@@ -9,7 +9,7 @@ description: >
 
 ## 简介
 
-1. CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承[CapaConfigStoreSpi](https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java)抽象类)，如示例[DemoCapaConfigStore](https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java)
+1. CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承[CapaConfigStoreSpi](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java)抽象类)，如示例[DemoCapaConfigStore](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java)
 
 2. 通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component-configuration.properties文件。
 
@@ -25,7 +25,7 @@ description: >
 
 ## API使用步骤
 
-[Demo示例](https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java)
+[Demo示例](https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java)
 
 ### 第一步：构建单例Configuration Client
 
@@ -110,4 +110,4 @@ Mono<Void> configFlux = client.saveConfiguration(new SaveConfigurationRequest())
 Mono<Void> configFlux = client.deleteConfiguration(new ConfigurationRequestItem());
 ```
 
-**ps:以上api存在重载方法，[点击此处](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/client/DefaultCloudRuntimesClient.java)查询全部api列表**
+**ps:以上api存在重载方法，[点击此处](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/client/DefaultCloudRuntimesClient.java)查询全部api列表**

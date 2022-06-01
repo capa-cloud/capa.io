@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.83.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/zh/docs/">
-<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/zh/docs/index.xml">
+<meta name="generator" content="Hugo 0.83.1" /><link rel="canonical" type="text/html" href="https://capa-cloud.github.io/capa.io/zh/docs/">
+<link rel="alternate" type="application/rss&#43;xml" href="https://capa-cloud.github.io/capa.io/zh/docs/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
 
@@ -26,7 +26,7 @@
   <meta name="description" content="
 
 
-加入Capa，共建社区：https://github.com/reactivegroup/sigs
+加入Capa，共建社区：https://github.com/capa-cloud/sigs
 
 
 
@@ -35,7 +35,7 @@
 <meta property="og:title" content="CAPA文档" />
 <meta property="og:description" content="Cloud Runtimes API" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://reactivegroup.github.io/capa.io/zh/docs/" /><meta property="og:site_name" content="Capa" />
+<meta property="og:url" content="https://capa-cloud.github.io/capa.io/zh/docs/" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="CAPA文档">
 <meta itemprop="description" content="Cloud Runtimes API"><meta name="twitter:card" content="summary"/>
@@ -515,7 +515,7 @@ if (!doNotTrack) {
       
 
 <div class="pageinfo pageinfo-primary">
-<p>加入Capa，共建社区：https://github.com/reactivegroup/sigs</p>
+<p>加入Capa，共建社区：https://github.com/capa-cloud/sigs</p>
 
 </div>
 
@@ -577,7 +577,7 @@ if (!doNotTrack) {
 <p><strong>参考资料：</strong> <a href="https://github.com/dapr/dapr/issues/2817">https://github.com/dapr/dapr/issues/2817</a></p>
 <h2 id="api-design">API Design</h2>
 <p>API设计和社区保持同步，请参考Dapr/Layotto等开源项目的设计。</p>
-<p>目前API定义在: <a href="https://github.com/reactivegroup/cloud-runtimes-jvm">cloud-runtimes</a> 中</p>
+<p>目前API定义在: <a href="https://github.com/capa-cloud/cloud-runtimes-jvm">cloud-runtimes</a> 中</p>
 <h4 id="sdk层次设计">SDK层次设计</h4>
 <p>module划分主要为以下几个部分：</p>
 <ul>
@@ -625,9 +625,9 @@ if (!doNotTrack) {
 </code></pre></div><h4 id="running-the-examples">Running the examples</h4>
 <p>Try the following examples to learn more about Capa&rsquo;s Java SDK:</p>
 <ul>
-<li><a href="https://github.com/reactivegroup/capa/tree/master/sdk-spi-demo">capa-demo</a></li>
-<li><a href="https://github.com/reactivegroup/capa-aws">capa-aws</a></li>
-<li><a href="https://github.com/reactivegroup/capa-alibaba">capa-alibaba</a></li>
+<li><a href="https://github.com/capa-cloud/capa-java/tree/master/sdk-spi-demo">capa-demo</a></li>
+<li><a href="https://github.com/capa-cloud/capa-java-aws">capa-aws</a></li>
+<li><a href="https://github.com/capa-cloud/capa-java-alibaba">capa-alibaba</a></li>
 </ul>
 <h4 id="reactor-api">Reactor API</h4>
 <p>The Java SDK for Capa is built using <a href="https://projectreactor.io/">Project Reactor</a>. It provides an asynchronous API for Java. When consuming a result is consumed synchronously, as in the examples referenced above, the <code>block()</code> method is used.</p>
@@ -700,7 +700,7 @@ if (!doNotTrack) {
 	<h1 id="pg-c0e7e60120879b149b7a44c21f0cd940">2.1 - 使用RPC API</h1>
     <div class="lead">使用RPC API进行远程调用.</div>
 	<h2 id="步骤">步骤</h2>
-<p><a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">示例</a></p>
+<p><a href="https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">示例</a></p>
 <ol>
 <li>构建 RPC Client</li>
 </ol>
@@ -1027,7 +1027,7 @@ if (!doNotTrack) {
 <p>Capa的 api 设计参照了社区的规范</p>
 <p><a href="https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto">Dapr API</a></p>
 <p><a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API</a></p>
-<p><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
+<p><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
 <p>具体参数含义如下：</p>
 <table>
 <thead>
@@ -1051,7 +1051,7 @@ if (!doNotTrack) {
 </tr>
 <tr>
 <td>httpExtension</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
 </tr>
 <tr>
 <td>metadata</td>
@@ -1063,11 +1063,11 @@ if (!doNotTrack) {
 </tr>
 <tr>
 <td>type</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
 </tr>
 <tr>
 <td>invokeMethodRequest</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
 </tr>
 </tbody>
 </table>
@@ -3235,14 +3235,14 @@ bar := &quot;foo&quot;;
 	
 
 <div class="pageinfo pageinfo-primary">
-<p>本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 <a href="https://github.com/reactivegroup/capa.io">reactivegroup/capa.io</a>。</p>
+<p>本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 <a href="https://github.com/capa-cloud/capa-java.io">capa-cloud/capa-java.io</a>。</p>
 
 </div>
 
 <h2 id="先决条件">先决条件</h2>
 <p>Capa 文档库使用 Hugo 的 Docsy 主题构建。</p>
-<p><a href="https://github.com/reactivegroup/capa.io/issues/3">文档搭建步骤</a></p>
-<p><a href="https://github.com/reactivegroup/capa.io/issues/4">文档开发步骤</a></p>
+<p><a href="https://github.com/capa-cloud/capa-java.io/issues/3">文档搭建步骤</a></p>
+<p><a href="https://github.com/capa-cloud/capa-java.io/issues/4">文档开发步骤</a></p>
 <h2 id="规范约定">规范约定</h2>
 <ol>
 <li>确保你所贡献文件在层次结构中的位置是正确的。</li>
@@ -3294,7 +3294,7 @@ bar := &quot;foo&quot;;
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="User mailing list">
       <i class="fa fa-envelope"></i>
     </a>
   </li>
@@ -3311,7 +3311,7 @@ bar := &quot;foo&quot;;
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="GitHub">
       <i class="fab fa-github"></i>
     </a>
   </li>

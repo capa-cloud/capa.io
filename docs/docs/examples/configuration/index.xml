@@ -61,7 +61,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ps:后续会统一放入capa-framework-dependencies bom中进行管理&lt;/p&gt;
 &lt;p&gt;step2.代码改动&lt;/p&gt;
 &lt;h3 id=&#34;非携程接入方不使用adaptor包使用流程&#34;&gt;非携程接入方(不使用adaptor包)使用流程&lt;/h3&gt;
-&lt;p&gt;参照&lt;a href=&#34;https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/&#34;&gt;快速开始-使用Configuration API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参照&lt;a href=&#34;https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/&#34;&gt;快速开始-使用Configuration API&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;创建单例单例Configuration Client&lt;/li&gt;
 &lt;/ul&gt;
@@ -256,7 +256,7 @@
 &lt;p&gt;针对AWS云的设施基础现状下，选型AWS AppConfig为应用级别配置管理组件&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对appconfig的封装，实现相应的Configuration API&lt;/p&gt;
+&lt;p&gt;继承&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对appconfig的封装，实现相应的Configuration API&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过SPI机制引入相关实现类。具体流程为:&lt;/p&gt;
@@ -444,7 +444,7 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
 &lt;p&gt;针对携程全家桶的设施基础现状下，选型Qconfig为应用级别配置管理组件&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对Qconfig的封装，实现相应的Configuration API&lt;/p&gt;
+&lt;p&gt;继承&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对Qconfig的封装，实现相应的Configuration API&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过SPI机制引入相关实现类。具体流程为:&lt;/p&gt;

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/en/docs/examples/">
-<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/en/docs/examples/index.xml">
+<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://capa-cloud.github.io/capa.io/en/docs/examples/">
+<link rel="alternate" type="application/rss&#43;xml" href="https://capa-cloud.github.io/capa.io/en/docs/examples/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
 
@@ -28,7 +28,7 @@
 <meta property="og:description" content="Demo示例
 " />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/docs/examples/" /><meta property="og:site_name" content="Capa" />
+<meta property="og:url" content="https://capa-cloud.github.io/capa.io/en/docs/examples/" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Demo示例">
 <meta itemprop="description" content="Demo示例
@@ -298,8 +298,8 @@ This the multi-page printable view of this section.
 	<h1 id="pg-3ab25b4f59302ad988083efa46ffa338">1 - Configuration API示例</h1>
     <div class="lead">Configuration API 的Demo示例</div>
 	<p>Configuration API的实现类Demo示例</p>
-<p><a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java">实现类Demo</a></p>
-<p><a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/resources/capa-component.properties">配置文件Demo</a></p>
+<p><a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java">实现类Demo</a></p>
+<p><a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/resources/capa-component.properties">配置文件Demo</a></p>
 <p>ps:其中配置文件Demo中仅“group.rxcloud.capa.component.configstore.CapaConfigStore”和Configuration相关，其他property可以忽略</p>
 
 </div>
@@ -364,7 +364,7 @@ This the multi-page printable view of this section.
 </code></pre></div><p>ps:后续会统一放入capa-framework-dependencies bom中进行管理</p>
 <p>step2.代码改动</p>
 <h3 id="非携程接入方不使用adaptor包使用流程">非携程接入方(不使用adaptor包)使用流程</h3>
-<p>参照<a href="https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/">快速开始-使用Configuration API</a></p>
+<p>参照<a href="https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/">快速开始-使用Configuration API</a></p>
 <ul>
 <li>创建单例单例Configuration Client</li>
 </ul>
@@ -559,7 +559,7 @@ This the multi-page printable view of this section.
 <p>针对AWS云的设施基础现状下，选型AWS AppConfig为应用级别配置管理组件</p>
 </li>
 <li>
-<p>继承<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类，底层通过对appconfig的封装，实现相应的Configuration API</p>
+<p>继承<a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类，底层通过对appconfig的封装，实现相应的Configuration API</p>
 </li>
 <li>
 <p>通过SPI机制引入相关实现类。具体流程为:</p>
@@ -751,7 +751,7 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
 <p>针对携程全家桶的设施基础现状下，选型Qconfig为应用级别配置管理组件</p>
 </li>
 <li>
-<p>继承<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类，底层通过对Qconfig的封装，实现相应的Configuration API</p>
+<p>继承<a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类，底层通过对Qconfig的封装，实现相应的Configuration API</p>
 </li>
 <li>
 <p>通过SPI机制引入相关实现类。具体流程为:</p>
@@ -795,7 +795,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
     
 	<h1 id="pg-0f4cb3b4a54198f9a0fcf456b9fdb03e">2 - RPC API示例</h1>
     <div class="lead">RPC API 的Demo示例</div>
-	<p><a href="https://reactivegroup.github.io/capa.io/docs/concepts/rpc-design/">RPC API 设计文档</a></p>
+	<p><a href="https://capa-cloud.github.io/capa.io/docs/concepts/rpc-design/">RPC API 设计文档</a></p>
 
 </div>
 
@@ -867,11 +867,11 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 <h2 id="实现步骤">实现步骤</h2>
 <ol>
 <li>
-<p>实现 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
+<p>实现 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
 <p>例如 AwsRpcServiceOptions 和 AwsSpiOptionsLoader</p>
 </li>
 <li>
-<p>继承 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
+<p>继承 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
 <p>例如 AwsCapaHttp</p>
 </li>
 <li>
@@ -944,11 +944,11 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 <h2 id="实现步骤">实现步骤</h2>
 <ol>
 <li>
-<p>实现 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
+<p>实现 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
 <p>例如 CtripRpcServiceOptions 和 CtripSpiOptionsLoader</p>
 </li>
 <li>
-<p>继承 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
+<p>继承 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
 <p>例如 CtripCapaHttp</p>
 </li>
 <li>
@@ -987,7 +987,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="User mailing list">
       <i class="fa fa-envelope"></i>
     </a>
   </li>
@@ -1004,7 +1004,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=com.ctrip.ibu.capa.spi.
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="GitHub">
       <i class="fab fa-github"></i>
     </a>
   </li>

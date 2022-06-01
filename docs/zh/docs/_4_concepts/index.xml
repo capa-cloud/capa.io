@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – 设计文档</title>
-    <link>https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/</link>
+    <link>https://capa-cloud.github.io/capa.io/zh/docs/_4_concepts/</link>
     <description>Recent content in 设计文档 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/zh/docs/_4_concepts/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: RPC设计文档</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/_4_concepts/rpc-design/</guid>
       <description>
         
         

@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Capa Blog</title>
-    <link>https://reactivegroup.github.io/capa.io/en/blog/</link>
+    <link>https://capa-cloud.github.io/capa.io/en/blog/</link>
     <description>Recent content in Capa Blog on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/en/blog/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/en/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Blog: Istio Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/en/blog/2022/03/09/istio-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/en/blog/2022/03/09/istio-landscape/</link>
       <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/en/blog/2022/03/09/istio-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/en/blog/2022/03/09/istio-landscape/</guid>
       <description>
         
         
@@ -466,10 +466,10 @@ COMMIT
     
     <item>
       <title>Blog: gRPC Landscape</title>
-      <link>https://reactivegroup.github.io/capa.io/en/blog/2022/01/21/grpc-landscape/</link>
+      <link>https://capa-cloud.github.io/capa.io/en/blog/2022/01/21/grpc-landscape/</link>
       <pubDate>Fri, 21 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/en/blog/2022/01/21/grpc-landscape/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/en/blog/2022/01/21/grpc-landscape/</guid>
       <description>
         
         
@@ -718,10 +718,10 @@ COMMIT
     
     <item>
       <title>Blog: Capa: Mecha SDK of Cloud Application Api</title>
-      <link>https://reactivegroup.github.io/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</link>
+      <link>https://capa-cloud.github.io/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</link>
       <pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/en/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</guid>
       <description>
         
         
@@ -730,7 +730,7 @@ COMMIT
 &lt;blockquote&gt;
 &lt;p&gt;作者简介： 
 KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha混合云中间件有深度实践经验。 
-Capa官方GitHub地址:&lt;a href=&#34;https://github.com/reactivegroup/capa&#34;&gt;https://github.com/reactivegroup/capa&lt;/a&gt;&lt;/p&gt;
+Capa官方GitHub地址:&lt;a href=&#34;https://github.com/capa-cloud/capa-java&#34;&gt;https://github.com/capa-cloud/capa-java&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。
 以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。&lt;/p&gt;
@@ -900,7 +900,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 &lt;p&gt;最后 Layotto 目前虽然是构建在 MOSN 之上，未来我们希望 Layotto 可以跑在 envoy 上，这样只要应用接入了 Service Mesh，无论数据面使用的是 MOSN 还是 envoy，都可以在上面增加 Runtime能力。&lt;/p&gt;
 &lt;h3 id=&#34;ccapa&#34;&gt;C、Capa&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;p&gt;github: &lt;a href=&#34;https://github.com/reactivegroup/capa&#34;&gt;https://github.com/reactivegroup/capa&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;github: &lt;a href=&#34;https://github.com/capa-cloud/capa-java&#34;&gt;https://github.com/capa-cloud/capa-java&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Capa项目基于Mecha架构的设计理念，使用 富SDK模式 提供Multi-Runtime的标准API。&lt;/p&gt;
 &lt;p&gt;您可以简单的将Capa项目理解为 Dapr / Layotto 等Sidecar模式项目的SDK实现版本。&lt;/p&gt;
@@ -1176,10 +1176,10 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
     
     <item>
       <title>Blog: </title>
-      <link>https://reactivegroup.github.io/capa.io/en/blog/1/01/01/</link>
+      <link>https://capa-cloud.github.io/capa.io/en/blog/1/01/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/en/blog/1/01/01/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/en/blog/1/01/01/</guid>
       <description>
         
         

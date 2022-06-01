@@ -517,7 +517,7 @@ if (!doNotTrack) {
 	<h2 id="简介">简介</h2>
 <ol>
 <li>
-<p>CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类)，如示例<a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java">DemoCapaConfigStore</a></p>
+<p>CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承<a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java">CapaConfigStoreSpi</a>抽象类)，如示例<a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java">DemoCapaConfigStore</a></p>
 </li>
 <li>
 <p>通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component-configuration.properties文件。</p>
@@ -531,7 +531,7 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
 </li>
 </ol>
 <h2 id="api使用步骤">API使用步骤</h2>
-<p><a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java">Demo示例</a></p>
+<p><a href="https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java">Demo示例</a></p>
 <h3 id="第一步构建单例configuration-client">第一步：构建单例Configuration Client</h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">public</span> <span style="color:#204a87;font-weight:bold">final</span> <span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CapaConfigStoreClientProvider</span> <span style="color:#ce5c00;font-weight:bold">{</span>
 
@@ -602,7 +602,7 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
 <li>删除配置操作()</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Mono</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Void</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">configFlux</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">client</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">deleteConfiguration</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">new</span> <span style="color:#000">ConfigurationRequestItem</span><span style="color:#ce5c00;font-weight:bold">());</span>
-</code></pre></div><p><strong>ps:以上api存在重载方法，<a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/client/DefaultCloudRuntimesClient.java">点击此处</a>查询全部api列表</strong></p>
+</code></pre></div><p><strong>ps:以上api存在重载方法，<a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/client/DefaultCloudRuntimesClient.java">点击此处</a>查询全部api列表</strong></p>
 
 	
 		<style>

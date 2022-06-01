@@ -29,7 +29,7 @@ Capa的 api 设计参照了社区的规范
 
 [Layotto API](https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto)
 
-[Capa API](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java)
+[Capa API](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java)
 
 
 具体参数含义如下：
@@ -38,9 +38,9 @@ Capa的 api 设计参照了社区的规范
 | appId                 | 同一命名空间内的服务唯一ID   |
 | methodName            | 被调用服务的方法名        |
 | request               | 要发送调用的服务请求        |
-| httpExtension         | [HTTP请求方式](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java)       |
+| httpExtension         | [HTTP请求方式](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java)       |
 | metadata              | 发送请求的元数据（GRPC）或者请求头（HTTP）        |
 | clazz                 | 请求响应的类型        |
-| type                  | [请求响应的类型](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java)       |
-| invokeMethodRequest   | [请求对象](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java)        |
+| type                  | [请求响应的类型](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java)       |
+| invokeMethodRequest   | [请求对象](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java)        |
 

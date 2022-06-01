@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Configuration API示例</title>
-    <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/</link>
+    <link>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/</link>
     <description>Recent content in Configuration API示例 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: Configuration AWS-App Config示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</guid>
       <description>
         
         
@@ -37,10 +37,10 @@
     
     <item>
       <title>Docs: Configuration Ctrip-Qconfig示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</guid>
       <description>
         
         

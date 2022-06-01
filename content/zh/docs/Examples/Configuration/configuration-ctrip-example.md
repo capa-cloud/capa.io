@@ -193,7 +193,7 @@ ps:Service(appid:123)为举例，表示一个应用id为123的服务，下面直
 
 1. 针对携程全家桶的设施基础现状下，选型Qconfig为应用级别配置管理组件
 
-2. 继承[CapaConfigStoreSpi](https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java)抽象类，底层通过对Qconfig的封装，实现相应的Configuration API
+2. 继承[CapaConfigStoreSpi](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java)抽象类，底层通过对Qconfig的封装，实现相应的Configuration API
 
 3. 通过SPI机制引入相关实现类。具体流程为:
 

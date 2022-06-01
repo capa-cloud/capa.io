@@ -70,7 +70,7 @@ step2.代码改动
 
 ### 非携程接入方(不使用adaptor包)使用流程
 
-参照[快速开始-使用Configuration API](https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/)
+参照[快速开始-使用Configuration API](https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/)
 
 - 创建单例单例Configuration Client
 
@@ -293,7 +293,7 @@ Mono<Void> deleteConfiguration(ConfigurationRequestItem configurationRequestItem
 
 1. 针对AWS云的设施基础现状下，选型AWS AppConfig为应用级别配置管理组件
 
-2. 继承[CapaConfigStoreSpi](https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java)抽象类，底层通过对appconfig的封装，实现相应的Configuration API
+2. 继承[CapaConfigStoreSpi](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java)抽象类，底层通过对appconfig的封装，实现相应的Configuration API
 
 3. 通过SPI机制引入相关实现类。具体流程为:
 

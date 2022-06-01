@@ -28,7 +28,7 @@ Capa Configuration API的设计参考了社区的规范
 
 [Layotto API](https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto)
 
-[Capa Configuration API](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java)
+[Capa Configuration API](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java)
 
 具体参数含义如下:
 
@@ -41,7 +41,7 @@ Capa Configuration API的设计参考了社区的规范
 | group                                                        | 配置组(Optional)                   |
 | label                                                        | 配置标签(Optional)                 |
 | type                                                         | 请求响应对象中的泛型对应的具体类型 |
-| [ConfigurationRequestItem](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java) | 请求对象                           |
-| [ConfigurationItem](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java) | 获取配置的响应对象                 |
-| [SubConfigurationResp](https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java) | 订阅配置的响应对象                 |
+| [ConfigurationRequestItem](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java) | 请求对象                           |
+| [ConfigurationItem](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java) | 获取配置的响应对象                 |
+| [SubConfigurationResp](https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java) | 订阅配置的响应对象                 |
 

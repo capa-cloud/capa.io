@@ -10,7 +10,7 @@ menu:
 
 
 {{% pageinfo %}}
-加入Capa，共建社区：https://github.com/reactivegroup/sigs
+加入Capa，共建社区：https://github.com/capa-cloud/sigs
 {{% /pageinfo %}}
 
 

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/en/docs/examples/rpc/">
-<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/en/docs/examples/rpc/index.xml">
+<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://capa-cloud.github.io/capa.io/en/docs/examples/rpc/">
+<link rel="alternate" type="application/rss&#43;xml" href="https://capa-cloud.github.io/capa.io/en/docs/examples/rpc/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
 
@@ -28,7 +28,7 @@
 <meta property="og:description" content="RPC API 的Demo示例
 " />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/docs/examples/rpc/" /><meta property="og:site_name" content="Capa" />
+<meta property="og:url" content="https://capa-cloud.github.io/capa.io/en/docs/examples/rpc/" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="RPC API示例">
 <meta itemprop="description" content="RPC API 的Demo示例
@@ -213,7 +213,7 @@ This the multi-page printable view of this section.
 
 
 <div class="content">
-      <p><a href="https://reactivegroup.github.io/capa.io/docs/concepts/rpc-design/">RPC API 设计文档</a></p>
+      <p><a href="https://capa-cloud.github.io/capa.io/docs/concepts/rpc-design/">RPC API 设计文档</a></p>
 
 </div>
 </div>
@@ -283,11 +283,11 @@ This the multi-page printable view of this section.
 <h2 id="实现步骤">实现步骤</h2>
 <ol>
 <li>
-<p>实现 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
+<p>实现 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
 <p>例如 AwsRpcServiceOptions 和 AwsSpiOptionsLoader</p>
 </li>
 <li>
-<p>继承 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
+<p>继承 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
 <p>例如 AwsCapaHttp</p>
 </li>
 <li>
@@ -360,11 +360,11 @@ This the multi-page printable view of this section.
 <h2 id="实现步骤">实现步骤</h2>
 <ol>
 <li>
-<p>实现 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
+<p>实现 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
 <p>例如 CtripRpcServiceOptions 和 CtripSpiOptionsLoader</p>
 </li>
 <li>
-<p>继承 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
+<p>继承 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
 <p>例如 CtripCapaHttp</p>
 </li>
 <li>
@@ -399,7 +399,7 @@ This the multi-page printable view of this section.
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="User mailing list">
       <i class="fa fa-envelope"></i>
     </a>
   </li>
@@ -416,7 +416,7 @@ This the multi-page printable view of this section.
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="GitHub">
       <i class="fab fa-github"></i>
     </a>
   </li>

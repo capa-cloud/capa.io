@@ -560,9 +560,9 @@ if (!doNotTrack) {
 <p>Capa API设计follow社区标准，请参考 Dapr / Layotto 等开源项目的API定义。</p>
 <p>API定义放置于以下独立仓库中，与Capa项目解绑，希望发展成为社区的API标准定义：</p>
 <ul>
-<li>java: <a href="https://github.com/reactivegroup/cloud-runtimes-jvm">cloud-runtimes-jvm</a></li>
-<li>python(alpha): <a href="https://github.com/reactivegroup/cloud-runtimes-python">cloud-runtimes-python</a></li>
-<li>golang(alpha): <a href="https://github.com/reactivegroup/cloud-runtimes-golang">cloud-runtimes-golang</a></li>
+<li>java: <a href="https://github.com/capa-cloud/cloud-runtimes-jvm">cloud-runtimes-jvm</a></li>
+<li>python(alpha): <a href="https://github.com/capa-cloud/cloud-runtimes-python">cloud-runtimes-python</a></li>
+<li>golang(alpha): <a href="https://github.com/capa-cloud/cloud-runtimes-golang">cloud-runtimes-golang</a></li>
 </ul>
 <h4 id="为什么不直接使用dapr-api">为什么不直接使用Dapr API？</h4>
 <p>由于目前Dapr API和Dapr项目强绑定，但我们希望这套API能够成为整个社区的标准，所以Capa将API定义放在独立仓库中，并时刻和上游社区标准保持同步。</p>
@@ -636,9 +636,9 @@ if (!doNotTrack) {
 </code></pre></div><h3 id="running-the-examples">Running the examples</h3>
 <p>Try the following examples to learn more about Capa&rsquo;s Java SDK:</p>
 <ul>
-<li><a href="https://github.com/reactivegroup/capa/tree/master/sdk-spi-demo">capa-demo</a></li>
-<li><a href="https://github.com/reactivegroup/capa-aws">capa-aws</a></li>
-<li><a href="https://github.com/reactivegroup/capa-alibaba">capa-alibaba</a></li>
+<li><a href="https://github.com/capa-cloud/capa/tree/master/sdk-spi-demo">capa-demo</a></li>
+<li><a href="https://github.com/capa-cloud/capa-aws">capa-aws</a></li>
+<li><a href="https://github.com/capa-cloud/capa-alibaba">capa-alibaba</a></li>
 </ul>
 <h3 id="低改造成本迁移">低改造成本迁移</h3>
 <p>如果要使用原生的Capa API，您的遗留系统需要面对较大的重构工作量。</p>
@@ -647,8 +647,8 @@ if (!doNotTrack) {
 <p>如此一来，应用程序只需要更改很少的代码(例如更换注解/接口的路径名)即可迁移到Capa架构。</p>
 <p>关于该问题的讨论，请查看：</p>
 <p><a href="https://github.com/mosn/layotto/issues/206">Java sdk design 调研：能否复用业界已有的事实标准</a></p>
-<p><a href="https://github.com/reactivegroup/sigs/issues/16">Capa API adapted to spring annotation.</a></p>
-<p><a href="https://github.com/reactivegroup/sigs/issues/18">遗留中间件SDK无感迁移到Capa.</a></p>
+<p><a href="https://github.com/capa-cloud/sigs/issues/16">Capa API adapted to spring annotation.</a></p>
+<p><a href="https://github.com/capa-cloud/sigs/issues/18">遗留中间件SDK无感迁移到Capa.</a></p>
 <h2 id="开发">开发</h2>
 <h4 id="reactor-api">Reactor API</h4>
 <p>考虑到异步调用模式，以及非阻塞IO的使用，我们原生提供Reactor的编程模型，您也可以通过其<code>block()</code>方法使用同步调用的功能。</p>

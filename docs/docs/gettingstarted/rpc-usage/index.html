@@ -503,7 +503,7 @@ if (!doNotTrack) {
 		
 	</header>    
 	<h2 id="步骤">步骤</h2>
-<p><a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">示例</a></p>
+<p><a href="https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">示例</a></p>
 <ol>
 <li>构建 RPC Client</li>
 </ol>
@@ -523,8 +523,8 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#204a87;font-weight:bold">byte</span><span style="color:#ce5c00;font-weight:bold">[]</span> <span style="color:#000">response</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">responseMono</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">block</span><span style="color:#ce5c00;font-weight:bold">();</span>
 </code></pre></div><h2 id="解释">解释</h2>
 <ol>
-<li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 <a href="https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">DemoCapaHttp</a> 。</li>
-<li>实现后的DemoCapaHttp，需要在 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/resources/capa-component-rpc.properties">capa-component-rpc.properties</a> 中进行配置，通过SPI机制实现加载。</li>
+<li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 <a href="https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">DemoCapaHttp</a> 。</li>
+<li>实现后的DemoCapaHttp，需要在 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/resources/capa-component-rpc.properties">capa-component-rpc.properties</a> 中进行配置，通过SPI机制实现加载。</li>
 </ol>
 
 	

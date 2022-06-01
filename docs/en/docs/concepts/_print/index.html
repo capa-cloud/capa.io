@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://reactivegroup.github.io/capa.io/en/docs/concepts/">
-<link rel="alternate" type="application/rss&#43;xml" href="https://reactivegroup.github.io/capa.io/en/docs/concepts/index.xml">
+<meta name="generator" content="Hugo 0.88.1" /><link rel="canonical" type="text/html" href="https://capa-cloud.github.io/capa.io/en/docs/concepts/">
+<link rel="alternate" type="application/rss&#43;xml" href="https://capa-cloud.github.io/capa.io/en/docs/concepts/index.xml">
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
 
@@ -28,7 +28,7 @@
 <meta property="og:description" content="Capa设计概述
 " />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://reactivegroup.github.io/capa.io/en/docs/concepts/" /><meta property="og:site_name" content="Capa" />
+<meta property="og:url" content="https://capa-cloud.github.io/capa.io/en/docs/concepts/" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="设计文档">
 <meta itemprop="description" content="Capa设计概述
@@ -597,7 +597,7 @@ This the multi-page printable view of this section.
 <h2 id="api设计">API设计</h2>
 <p>Capa Configuration API的设计参考了社区的规范</p>
 <p><a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API</a></p>
-<p><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java">Capa Configuration API</a></p>
+<p><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java">Capa Configuration API</a></p>
 <p>具体参数含义如下:</p>
 <table>
 <thead>
@@ -636,15 +636,15 @@ This the multi-page printable view of this section.
 <td>请求响应对象中的泛型对应的具体类型</td>
 </tr>
 <tr>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java">ConfigurationRequestItem</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java">ConfigurationRequestItem</a></td>
 <td>请求对象</td>
 </tr>
 <tr>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java">ConfigurationItem</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java">ConfigurationItem</a></td>
 <td>获取配置的响应对象</td>
 </tr>
 <tr>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java">SubConfigurationResp</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java">SubConfigurationResp</a></td>
 <td>订阅配置的响应对象</td>
 </tr>
 </tbody>
@@ -681,7 +681,7 @@ This the multi-page printable view of this section.
 <p>Capa的 api 设计参照了社区的规范</p>
 <p><a href="https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto">Dapr API</a></p>
 <p><a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API</a></p>
-<p><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
+<p><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
 <p>具体参数含义如下：</p>
 <table>
 <thead>
@@ -705,7 +705,7 @@ This the multi-page printable view of this section.
 </tr>
 <tr>
 <td>httpExtension</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
 </tr>
 <tr>
 <td>metadata</td>
@@ -717,11 +717,11 @@ This the multi-page printable view of this section.
 </tr>
 <tr>
 <td>type</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
 </tr>
 <tr>
 <td>invokeMethodRequest</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
 </tr>
 </tbody>
 </table>
@@ -787,7 +787,7 @@ This the multi-page printable view of this section.
 <p>Capa的 api 设计参照了社区的规范</p>
 <p><a href="https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto">Dapr API</a></p>
 <p><a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API</a></p>
-<p><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
+<p><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API</a></p>
 <p>具体参数含义如下：</p>
 <table>
 <thead>
@@ -811,7 +811,7 @@ This the multi-page printable view of this section.
 </tr>
 <tr>
 <td>httpExtension</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式</a></td>
 </tr>
 <tr>
 <td>metadata</td>
@@ -823,11 +823,11 @@ This the multi-page printable view of this section.
 </tr>
 <tr>
 <td>type</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型</a></td>
 </tr>
 <tr>
 <td>invokeMethodRequest</td>
-<td><a href="https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
+<td><a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象</a></td>
 </tr>
 </tbody>
 </table>
@@ -860,7 +860,7 @@ This the multi-page printable view of this section.
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="User mailing list" aria-label="User mailing list">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="User mailing list">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="User mailing list">
       <i class="fa fa-envelope"></i>
     </a>
   </li>
@@ -877,7 +877,7 @@ This the multi-page printable view of this section.
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/reactivegroup" aria-label="GitHub">
+    <a class="text-white" target="_blank" rel="noopener" href="https://github.com/capa-cloud" aria-label="GitHub">
       <i class="fab fa-github"></i>
     </a>
   </li>

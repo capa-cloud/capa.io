@@ -57,11 +57,11 @@ description: >
 
 
 ## 实现步骤
-1. 实现 [RpcServiceOptions](https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java) （实际 RPC 调用需要的参数） 和 [CtripSpiOptionsLoader](https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java) （加载 RpcServiceOptions 的实现类） 接口。
+1. 实现 [RpcServiceOptions](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java) （实际 RPC 调用需要的参数） 和 [CtripSpiOptionsLoader](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java) （加载 RpcServiceOptions 的实现类） 接口。
 
      例如 CtripRpcServiceOptions 和 CtripSpiOptionsLoader  
 
-2. 继承 [CapaSerializeHttpSpi](https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java) ， 实现在携程 Service Mesh 的 RPC 调用。
+2. 继承 [CapaSerializeHttpSpi](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java) ， 实现在携程 Service Mesh 的 RPC 调用。
 
      例如 CtripCapaHttp
 

@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – Configuration API示例</title>
-    <link>https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/</link>
+    <link>https://capa-cloud.github.io/capa.io/en/docs/examples/configuration/</link>
     <description>Recent content in Configuration API示例 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/en/docs/examples/configuration/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: Configuration AWS-App Config示例</title>
-      <link>https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/configuration-aws-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/en/docs/examples/configuration/configuration-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/configuration-aws-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/en/docs/examples/configuration/configuration-aws-example/</guid>
       <description>
         
         
@@ -61,7 +61,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ps:后续会统一放入capa-framework-dependencies bom中进行管理&lt;/p&gt;
 &lt;p&gt;step2.代码改动&lt;/p&gt;
 &lt;h3 id=&#34;非携程接入方不使用adaptor包使用流程&#34;&gt;非携程接入方(不使用adaptor包)使用流程&lt;/h3&gt;
-&lt;p&gt;参照&lt;a href=&#34;https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/&#34;&gt;快速开始-使用Configuration API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参照&lt;a href=&#34;https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/&#34;&gt;快速开始-使用Configuration API&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;创建单例单例Configuration Client&lt;/li&gt;
 &lt;/ul&gt;
@@ -256,7 +256,7 @@
 &lt;p&gt;针对AWS云的设施基础现状下，选型AWS AppConfig为应用级别配置管理组件&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对appconfig的封装，实现相应的Configuration API&lt;/p&gt;
+&lt;p&gt;继承&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对appconfig的封装，实现相应的Configuration API&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过SPI机制引入相关实现类。具体流程为:&lt;/p&gt;
@@ -287,10 +287,10 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
     
     <item>
       <title>Docs: Configuration Ctrip-Qconfig示例</title>
-      <link>https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/configuration-ctrip-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/en/docs/examples/configuration/configuration-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/en/docs/examples/configuration/configuration-ctrip-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/en/docs/examples/configuration/configuration-ctrip-example/</guid>
       <description>
         
         
@@ -444,7 +444,7 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
 &lt;p&gt;针对携程全家桶的设施基础现状下，选型Qconfig为应用级别配置管理组件&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对Qconfig的封装，实现相应的Configuration API&lt;/p&gt;
+&lt;p&gt;继承&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对Qconfig的封装，实现相应的Configuration API&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过SPI机制引入相关实现类。具体流程为:&lt;/p&gt;

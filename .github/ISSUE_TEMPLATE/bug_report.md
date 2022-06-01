@@ -6,7 +6,7 @@ labels: kind/bug
 assignees: ''
 ---
 
-- [ ] I have searched the [issues](https://github.com/reactivegroup/capa.io/issues) of this repository and believe that this is not a duplicate.
+- [ ] I have searched the [issues](https://github.com/capa-cloud/capa.io/issues) of this repository and believe that this is not a duplicate.
 
 ## Expected Behavior
 

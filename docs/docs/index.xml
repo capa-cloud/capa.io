@@ -25,7 +25,7 @@
         &lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类)，如示例&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java&#34;&gt;DemoCapaConfigStore&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CapaConfigurationClient提供的配置能力，需要实现具体的实现类来适配不同的平台(通过继承&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类)，如示例&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java&#34;&gt;DemoCapaConfigStore&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过spi机制实现对具体实现类的加载。具体配置过程为:在项目resources路径下，新增capa-component-configuration.properties文件。&lt;/p&gt;
@@ -39,7 +39,7 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;api使用步骤&#34;&gt;API使用步骤&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java&#34;&gt;Demo示例&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/configuration/DemoConfigurationClient.java&#34;&gt;Demo示例&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;第一步构建单例configuration-client&#34;&gt;第一步：构建单例Configuration Client&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;CapaConfigStoreClientProvider&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;{&lt;/span&gt;
 
@@ -110,7 +110,7 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
 &lt;li&gt;删除配置操作()&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;Mono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Void&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;configFlux&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;deleteConfiguration&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ConfigurationRequestItem&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;());&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;ps:以上api存在重载方法，&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/client/DefaultCloudRuntimesClient.java&#34;&gt;点击此处&lt;/a&gt;查询全部api列表&lt;/strong&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;ps:以上api存在重载方法，&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/client/DefaultCloudRuntimesClient.java&#34;&gt;点击此处&lt;/a&gt;查询全部api列表&lt;/strong&gt;&lt;/p&gt;
 
       </description>
     </item>
@@ -217,7 +217,7 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
         
         
         &lt;h2 id=&#34;步骤&#34;&gt;步骤&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java&#34;&gt;示例&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java&#34;&gt;示例&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;构建 RPC Client&lt;/li&gt;
 &lt;/ol&gt;
@@ -237,8 +237,8 @@ CONFIGURATION_COMPONENT_STORE_NAME=DEMO CONFIG
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;byte&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;response&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;responseMono&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#c4a000&#34;&gt;block&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解释&#34;&gt;解释&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java&#34;&gt;DemoCapaHttp&lt;/a&gt; 。&lt;/li&gt;
-&lt;li&gt;实现后的DemoCapaHttp，需要在 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/resources/capa-component-rpc.properties&#34;&gt;capa-component-rpc.properties&lt;/a&gt; 中进行配置，通过SPI机制实现加载。&lt;/li&gt;
+&lt;li&gt;CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java&#34;&gt;DemoCapaHttp&lt;/a&gt; 。&lt;/li&gt;
+&lt;li&gt;实现后的DemoCapaHttp，需要在 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/resources/capa-component-rpc.properties&#34;&gt;capa-component-rpc.properties&lt;/a&gt; 中进行配置，通过SPI机制实现加载。&lt;/li&gt;
 &lt;/ol&gt;
 
       </description>
@@ -351,14 +351,14 @@ A -&amp;gt; C -&amp;gt; X(2.0)&lt;/p&gt;
         
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 &lt;a href=&#34;https://github.com/reactivegroup/capa.io&#34;&gt;reactivegroup/capa.io&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 &lt;a href=&#34;https://github.com/capa-cloud/capa.io&#34;&gt;capa-cloud/capa.io&lt;/a&gt;。&lt;/p&gt;
 
 &lt;/div&gt;
 
 &lt;h2 id=&#34;先决条件&#34;&gt;先决条件&lt;/h2&gt;
 &lt;p&gt;Capa 文档库使用 Hugo 的 Docsy 主题构建。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa.io/issues/3&#34;&gt;文档搭建步骤&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa.io/issues/4&#34;&gt;文档开发步骤&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa.io/issues/3&#34;&gt;文档搭建步骤&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa.io/issues/4&#34;&gt;文档开发步骤&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;规范约定&#34;&gt;规范约定&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;确保你所贡献文件在层次结构中的位置是正确的。&lt;/li&gt;
@@ -2013,7 +2013,7 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ps:后续会统一放入capa-framework-dependencies bom中进行管理&lt;/p&gt;
 &lt;p&gt;step2.代码改动&lt;/p&gt;
 &lt;h3 id=&#34;非携程接入方不使用adaptor包使用流程&#34;&gt;非携程接入方(不使用adaptor包)使用流程&lt;/h3&gt;
-&lt;p&gt;参照&lt;a href=&#34;https://reactivegroup.github.io/capa.io/docs/gettingstarted/configuration-usage/&#34;&gt;快速开始-使用Configuration API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参照&lt;a href=&#34;https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/&#34;&gt;快速开始-使用Configuration API&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;创建单例单例Configuration Client&lt;/li&gt;
 &lt;/ul&gt;
@@ -2208,7 +2208,7 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;p&gt;针对AWS云的设施基础现状下，选型AWS AppConfig为应用级别配置管理组件&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对appconfig的封装，实现相应的Configuration API&lt;/p&gt;
+&lt;p&gt;继承&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对appconfig的封装，实现相应的Configuration API&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过SPI机制引入相关实现类。具体流程为:&lt;/p&gt;
@@ -2396,7 +2396,7 @@ CONFIG_AWS_APP_CONFIG_ENV=ENV
 &lt;p&gt;针对携程全家桶的设施基础现状下，选型Qconfig为应用级别配置管理组件&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对Qconfig的封装，实现相应的Configuration API&lt;/p&gt;
+&lt;p&gt;继承&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/configstore/CapaConfigStoreSpi.java&#34;&gt;CapaConfigStoreSpi&lt;/a&gt;抽象类，底层通过对Qconfig的封装，实现相应的Configuration API&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过SPI机制引入相关实现类。具体流程为:&lt;/p&gt;
@@ -2447,7 +2447,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 &lt;h2 id=&#34;api设计&#34;&gt;API设计&lt;/h2&gt;
 &lt;p&gt;Capa Configuration API的设计参考了社区的规范&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto&#34;&gt;Layotto API&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java&#34;&gt;Capa Configuration API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java&#34;&gt;Capa Configuration API&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;具体参数含义如下:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -2486,15 +2486,15 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 &lt;td&gt;请求响应对象中的泛型对应的具体类型&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java&#34;&gt;ConfigurationRequestItem&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java&#34;&gt;ConfigurationRequestItem&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;请求对象&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java&#34;&gt;ConfigurationItem&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java&#34;&gt;ConfigurationItem&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;获取配置的响应对象&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java&#34;&gt;SubConfigurationResp&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java&#34;&gt;SubConfigurationResp&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;订阅配置的响应对象&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -2558,11 +2558,11 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 &lt;h2 id=&#34;实现步骤&#34;&gt;实现步骤&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;实现 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java&#34;&gt;RpcServiceOptions&lt;/a&gt; （实际 RPC 调用需要的参数） 和 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java&#34;&gt;CtripSpiOptionsLoader&lt;/a&gt; （加载 RpcServiceOptions 的实现类） 接口。&lt;/p&gt;
+&lt;p&gt;实现 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java&#34;&gt;RpcServiceOptions&lt;/a&gt; （实际 RPC 调用需要的参数） 和 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java&#34;&gt;CtripSpiOptionsLoader&lt;/a&gt; （加载 RpcServiceOptions 的实现类） 接口。&lt;/p&gt;
 &lt;p&gt;例如 AwsRpcServiceOptions 和 AwsSpiOptionsLoader&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java&#34;&gt;CapaSerializeHttpSpi&lt;/a&gt; ， 实现在携程 Service Mesh 的 RPC 调用。&lt;/p&gt;
+&lt;p&gt;继承 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java&#34;&gt;CapaSerializeHttpSpi&lt;/a&gt; ， 实现在携程 Service Mesh 的 RPC 调用。&lt;/p&gt;
 &lt;p&gt;例如 AwsCapaHttp&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -2648,11 +2648,11 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 &lt;h2 id=&#34;实现步骤&#34;&gt;实现步骤&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;实现 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java&#34;&gt;RpcServiceOptions&lt;/a&gt; （实际 RPC 调用需要的参数） 和 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java&#34;&gt;CtripSpiOptionsLoader&lt;/a&gt; （加载 RpcServiceOptions 的实现类） 接口。&lt;/p&gt;
+&lt;p&gt;实现 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java&#34;&gt;RpcServiceOptions&lt;/a&gt; （实际 RPC 调用需要的参数） 和 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java&#34;&gt;CtripSpiOptionsLoader&lt;/a&gt; （加载 RpcServiceOptions 的实现类） 接口。&lt;/p&gt;
 &lt;p&gt;例如 CtripRpcServiceOptions 和 CtripSpiOptionsLoader&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;继承 &lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java&#34;&gt;CapaSerializeHttpSpi&lt;/a&gt; ， 实现在携程 Service Mesh 的 RPC 调用。&lt;/p&gt;
+&lt;p&gt;继承 &lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java&#34;&gt;CapaSerializeHttpSpi&lt;/a&gt; ， 实现在携程 Service Mesh 的 RPC 调用。&lt;/p&gt;
 &lt;p&gt;例如 CtripCapaHttp&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -2691,7 +2691,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 &lt;p&gt;Capa的 api 设计参照了社区的规范&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto&#34;&gt;Dapr API&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto&#34;&gt;Layotto API&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java&#34;&gt;Capa API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java&#34;&gt;Capa API&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;具体参数含义如下：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -2715,7 +2715,7 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;httpExtension&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java&#34;&gt;HTTP请求方式&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java&#34;&gt;HTTP请求方式&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;metadata&lt;/td&gt;
@@ -2727,11 +2727,11 @@ group.rxcloud.capa.component.configstore.CapaConfigStore=group.rxcloud.capa.spi.
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;type&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java&#34;&gt;请求响应的类型&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java&#34;&gt;请求响应的类型&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;invokeMethodRequest&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java&#34;&gt;请求对象&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java&#34;&gt;请求对象&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

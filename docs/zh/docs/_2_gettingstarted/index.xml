@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – 快速开始</title>
-    <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/</link>
+    <link>https://capa-cloud.github.io/capa.io/zh/docs/_2_gettingstarted/</link>
     <description>Recent content in 快速开始 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/zh/docs/_2_gettingstarted/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: 使用Configuration API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/_2_gettingstarted/configuration-usage/</guid>
       <description>
         
         
@@ -36,10 +36,10 @@
     
     <item>
       <title>Docs: 使用RPC API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/_2_gettingstarted/rpc-usage/</guid>
       <description>
         
         

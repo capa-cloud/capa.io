@@ -1,11 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capa – CAPA文档</title>
-    <link>https://reactivegroup.github.io/capa.io/zh/docs/</link>
+    <link>https://capa-cloud.github.io/capa.io/zh/docs/</link>
     <description>Recent content in CAPA文档 on Capa</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	  <atom:link href="https://reactivegroup.github.io/capa.io/zh/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://capa-cloud.github.io/capa.io/zh/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -15,10 +15,10 @@
     
     <item>
       <title>Docs: 贡献者指南</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/contributor-guide/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/contributionguidelines/contributor-guide/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/contributor-guide/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/contributionguidelines/contributor-guide/</guid>
       <description>
         
         
@@ -107,15 +107,15 @@
     
     <item>
       <title>Docs: 使用RPC API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/gettingstarted/rpc-usage/</guid>
       <description>
         
         
         &lt;h2 id=&#34;步骤&#34;&gt;步骤&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java&#34;&gt;示例&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java&#34;&gt;示例&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;构建 RPC Client&lt;/li&gt;
 &lt;/ol&gt;
@@ -144,24 +144,24 @@
     
     <item>
       <title>Docs: 文档贡献指南</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/contributionguidelines/document-contribution/</guid>
       <description>
         
         
         
 
 &lt;div class=&#34;pageinfo pageinfo-primary&#34;&gt;
-&lt;p&gt;本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 &lt;a href=&#34;https://github.com/reactivegroup/capa.io&#34;&gt;reactivegroup/capa.io&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 &lt;a href=&#34;https://github.com/capa-cloud/capa-java.io&#34;&gt;capa-cloud/capa-java.io&lt;/a&gt;。&lt;/p&gt;
 
 &lt;/div&gt;
 
 &lt;h2 id=&#34;先决条件&#34;&gt;先决条件&lt;/h2&gt;
 &lt;p&gt;Capa 文档库使用 Hugo 的 Docsy 主题构建。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa.io/issues/3&#34;&gt;文档搭建步骤&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa.io/issues/4&#34;&gt;文档开发步骤&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa-java.io/issues/3&#34;&gt;文档搭建步骤&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa-java.io/issues/4&#34;&gt;文档开发步骤&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;规范约定&#34;&gt;规范约定&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;确保你所贡献文件在层次结构中的位置是正确的。&lt;/li&gt;
@@ -190,10 +190,10 @@
     
     <item>
       <title>Docs: 使用Configuration API</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/gettingstarted/configuration-usage/</guid>
       <description>
         
         
@@ -211,10 +211,10 @@
     
     <item>
       <title>Docs: Bed and Chair Metrics</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/beds/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/tasks/beds/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/beds/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/tasks/beds/</guid>
       <description>
         
         
@@ -524,10 +524,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuring Ponycopters</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/configuring-ponycopters/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/tasks/ponycopters/configuring-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/configuring-ponycopters/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/tasks/ponycopters/configuring-ponycopters/</guid>
       <description>
         
         
@@ -837,10 +837,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Launching Ponycopters</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/launching-ponycopters/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/tasks/ponycopters/launching-ponycopters/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/ponycopters/launching-ponycopters/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/tasks/ponycopters/launching-ponycopters/</guid>
       <description>
         
         
@@ -1150,10 +1150,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Porridge Assessment</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/porridge/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/tasks/porridge/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/porridge/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/tasks/porridge/</guid>
       <description>
         
         
@@ -1463,10 +1463,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Another Task</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/tasks/task/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/tasks/task/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/tasks/task/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/tasks/task/</guid>
       <description>
         
         
@@ -1776,10 +1776,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuration AWS-App Config示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-aws-example/</guid>
       <description>
         
         
@@ -1797,10 +1797,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Configuration Ctrip-Qconfig示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/examples/configuration/configuration-ctrip-example/</guid>
       <description>
         
         
@@ -1818,10 +1818,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: RPC AWS-App Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/examples/rpc/rpc-aws-example/</guid>
       <description>
         
         
@@ -1839,10 +1839,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: RPC Ctrip-Service Mesh示例</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/examples/rpc/rpc-ctrip-example/</guid>
       <description>
         
         
@@ -1860,10 +1860,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: RPC服务调用</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/concepts/rpc-design/</link>
       <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/concepts/rpc-design/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/concepts/rpc-design/</guid>
       <description>
         
         
@@ -1882,7 +1882,7 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;p&gt;Capa的 api 设计参照了社区的规范&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto&#34;&gt;Dapr API&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto&#34;&gt;Layotto API&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java&#34;&gt;Capa API&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java&#34;&gt;Capa API&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;具体参数含义如下：&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1906,7 +1906,7 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;httpExtension&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java&#34;&gt;HTTP请求方式&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java&#34;&gt;HTTP请求方式&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;metadata&lt;/td&gt;
@@ -1918,11 +1918,11 @@ bar := &amp;quot;foo&amp;quot;;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;type&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java&#34;&gt;请求响应的类型&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java&#34;&gt;请求响应的类型&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;invokeMethodRequest&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://github.com/reactivegroup/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java&#34;&gt;请求对象&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java&#34;&gt;请求对象&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1932,10 +1932,10 @@ bar := &amp;quot;foo&amp;quot;;
     
     <item>
       <title>Docs: Parameter Reference</title>
-      <link>https://reactivegroup.github.io/capa.io/zh/docs/reference/parameter-reference/</link>
+      <link>https://capa-cloud.github.io/capa.io/zh/docs/reference/parameter-reference/</link>
       <pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://reactivegroup.github.io/capa.io/zh/docs/reference/parameter-reference/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/zh/docs/reference/parameter-reference/</guid>
       <description>
         
         

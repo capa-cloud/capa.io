@@ -566,11 +566,11 @@ if (!doNotTrack) {
 <h2 id="实现步骤">实现步骤</h2>
 <ol>
 <li>
-<p>实现 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
+<p>实现 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java">RpcServiceOptions</a> （实际 RPC 调用需要的参数） 和 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java">CtripSpiOptionsLoader</a> （加载 RpcServiceOptions 的实现类） 接口。</p>
 <p>例如 AwsRpcServiceOptions 和 AwsSpiOptionsLoader</p>
 </li>
 <li>
-<p>继承 <a href="https://github.com/reactivegroup/capa/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
+<p>继承 <a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/CapaSerializeHttpSpi.java">CapaSerializeHttpSpi</a> ， 实现在携程 Service Mesh 的 RPC 调用。</p>
 <p>例如 AwsCapaHttp</p>
 </li>
 <li>

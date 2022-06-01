@@ -24,8 +24,8 @@
         
         
         &lt;p&gt;Configuration API的实现类Demo示例&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java&#34;&gt;实现类Demo&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/reactivegroup/capa/blob/master/sdk-spi-demo/src/main/resources/capa-component.properties&#34;&gt;配置文件Demo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/java/group/rxcloud/capa/spi/demo/configstore/DemoCapaConfigStore.java&#34;&gt;实现类Demo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/resources/capa-component.properties&#34;&gt;配置文件Demo&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;ps:其中配置文件Demo中仅“group.rxcloud.capa.component.configstore.CapaConfigStore”和Configuration相关，其他property可以忽略&lt;/p&gt;
 
       </description>
@@ -40,7 +40,7 @@
       <description>
         
         
-        &lt;p&gt;&lt;a href=&#34;https://reactivegroup.github.io/capa.io/docs/concepts/rpc-design/&#34;&gt;RPC API 设计文档&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;a href=&#34;https://capa-cloud.github.io/capa.io/docs/concepts/rpc-design/&#34;&gt;RPC API 设计文档&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
