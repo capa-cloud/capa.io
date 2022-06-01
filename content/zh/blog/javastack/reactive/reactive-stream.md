@@ -1,6 +1,6 @@
 ---
-title: "Reactive 数据流模型设计"
-linkTitle: "reactor-core 数据流模型设计"
+title: "Reactor-Core 数据流模型设计"
+linkTitle: "Reactor-Core 数据流模型设计"
 date: 2022-05-20
 description: >
     reactor-core 数据流模型设计.

@@ -14,26 +14,11 @@
     
     
     <item>
-      <title>Blog: SRE</title>
-      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/sre/</link>
-      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/sre/</guid>
-      <description>
-        
-        
-        &lt;h1 id=&#34;sre&#34;&gt;SRE&lt;/h1&gt;
-&lt;h2 id=&#34;一目标和职责&#34;&gt;一、目标和职责&lt;/h2&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Blog: AWS SRE - CloudWatch</title>
-      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</link>
+      <title>Blog: AWS CloudWatch</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch/</link>
       <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/aws-cloudwatch/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch/</guid>
       <description>
         
         
@@ -53,6 +38,53 @@
 &lt;h3 id=&#34;b日志组&#34;&gt;B、日志组&lt;/h3&gt;
 &lt;h4 id=&#34;aws原生日志组&#34;&gt;AWS原生日志组&lt;/h4&gt;
 
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: AWS CloudWatch - Log Insights</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch-log-insights/</link>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch-log-insights/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;一网关搜索&#34;&gt;一、网关搜索&lt;/h2&gt;
+&lt;h3 id=&#34;a查询接口以及响应码&#34;&gt;A、查询接口以及响应码&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fields @timestamp, @message
+| filter @message like /(?i)(queryData)/
+| filter @message like /(?i)(&amp;quot;500&amp;quot;)/
+| sort @timestamp desc
+| limit 100
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;二应用搜索&#34;&gt;二、应用搜索&lt;/h2&gt;
+&lt;h3 id=&#34;atraceid检索&#34;&gt;A、TraceId检索&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fields @timestamp, @message
+| filter log._trace_id = &#39;12345&#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;b应用检索&#34;&gt;B、应用检索&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fields @timestamp, @message
+| filter kubernetes.labels.appid = &#39;12345&#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;cpod检索&#34;&gt;C、POD检索&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fields @timestamp, @message
+| filter kubernetes.pod_name = &#39;12345-fb5f75b84-k5kgv&#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;d日志级别检索&#34;&gt;D、日志级别检索&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fields @timestamp, @message
+| filter log._log_level = &#39;INFO&#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;e异常模糊匹配&#34;&gt;E、异常模糊匹配&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;fields @timestamp, @message
+| filter @message like &#39;HttpMediaTypeNotSupportedException&#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code&gt;&lt;/pre&gt;
       </description>
     </item>
     

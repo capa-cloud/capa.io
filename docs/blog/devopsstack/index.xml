@@ -14,6 +14,19 @@
     
     
     <item>
+      <title>Blog: Chaos混沌工程</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
       <title>Blog: Cloud CICD</title>
       <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/cicd/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -22,8 +35,7 @@
       <description>
         
         
-        &lt;p&gt;本目录主要为对云原生CICD的学习和实践。&lt;/p&gt;
-
+        
       </description>
     </item>
     
@@ -36,8 +48,7 @@
       <description>
         
         
-        &lt;p&gt;本目录主要为对云原生运维的学习和实践。&lt;/p&gt;
-
+        
       </description>
     </item>
     
@@ -50,8 +61,7 @@
       <description>
         
         
-        &lt;p&gt;本目录主要为对云原生安全策略的学习和实践。&lt;/p&gt;
-
+        
       </description>
     </item>
     
@@ -64,21 +74,24 @@
       <description>
         
         
-        &lt;p&gt;本目录主要为对云原生SRE的学习和实践。&lt;/p&gt;
-
+        
       </description>
     </item>
     
     <item>
-      <title>Blog: Chaos 混沌工程</title>
-      <link>https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Blog: DevOps Stack</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/devops-stack/</link>
+      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/</guid>
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/devops-stack/</guid>
       <description>
         
         
-        &lt;p&gt;本目录主要为对云原生生态中Chaos混沌工程的学习和实践。&lt;/p&gt;
+        &lt;p&gt;Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。&lt;/p&gt;
+&lt;p&gt;Capa本身不提供功能，而是由底层的各种云原生的能力来提供。&lt;/p&gt;
+&lt;p&gt;对于Capa的运维工作，更多的精力是在同底层的云原生能力打交道。&lt;/p&gt;
+&lt;p&gt;所以了解云原生中底层组件的DevOps是很有必要的。&lt;/p&gt;
+&lt;p&gt;本目录主要为对云原生生态中DevOps的学习和实践。&lt;/p&gt;
 
       </description>
     </item>

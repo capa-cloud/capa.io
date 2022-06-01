@@ -1,6 +1,6 @@
 ---
 title: "Java Servlet"
-linkTitle: "Java Servlet的一些实践经验"
+linkTitle: "Java Servlet"
 date: 2022-05-30
 description: >
     Java Servlet的一些实践经验.

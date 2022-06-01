@@ -23,11 +23,7 @@
 
 
   
-  <meta name="description" content="Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。
-Capa本身不提供功能，而是由底层的各种云原生的能力来提供。
-所以了解云原生中常用中间件的设计是很有必要的。
-本目录主要为对云原生生态中中间件的学习和实践。
-">
+  <meta name="description" content="">
 <meta property="og:title" content="Cloud Native Stack" />
 <meta property="og:description" content="Cloud Runtimes API" />
 <meta property="og:type" content="website" />
@@ -364,6 +360,16 @@ if (!doNotTrack) {
 
     
   
+    
+    
+	
+
+    <li><a href="#pg-87dec14a96f169649436876f6faea05d">K8S Devops</a></li>
+
+
+
+    
+  
 
     </ul>
     
@@ -440,16 +446,22 @@ if (!doNotTrack) {
     </ul>
     
   
+    
+    
+	
+
+    <li><a href="#pg-c12c4df99ce3ca83f89964704b66c1c5">Cloud Native Stack</a></li>
+
+
+
+    
+  
 
     </ul>
 
 
 <div class="content">
-      <p>Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。</p>
-<p>Capa本身不提供功能，而是由底层的各种云原生的能力来提供。</p>
-<p>所以了解云原生中常用中间件的设计是很有必要的。</p>
-<p>本目录主要为对云原生生态中中间件的学习和实践。</p>
-
+      
 </div>
 </div>
 
@@ -471,7 +483,7 @@ if (!doNotTrack) {
 
   
 
-<div class="td-content" style="page-break-before: always">
+<div class="td-content" style="">
     <h1 id="pg-16ce7c0e151cc3f247f9db27606370e1">AppMesh Stack</h1>
 	
 	<div class="td-byline mb-4">
@@ -6451,29 +6463,7 @@ COMMIT
 		
         
 	</div>
-	<h1 id="k8s">K8S</h1>
-<h2 id="一常用操作命令">一、常用操作命令</h2>
-<h3 id="a调试pod">A、调试POD</h3>
-<h4 id="1-kubectl-exec">1. kubectl exec</h4>
-<p>登录命令</p>
-<ul>
-<li>nodejs: sh</li>
-<li>java: /bin/bash</li>
-<li>nginx: /bin/bash</li>
-</ul>
-<h4 id="2-busybox">2. busybox</h4>
-<pre><code>kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
-</code></pre>
-<h4 id="3-pod调试">3. pod调试</h4>
-<ul>
-<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/</a></li>
-<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods</a></li>
-</ul>
-<hr>
-<h3 id="b动态伸缩">B、动态伸缩</h3>
-<h4 id="1-动态伸缩deployment副本数量">1. 动态伸缩deployment副本数量</h4>
-<pre><code>kubectl scale deployment/nginx-proxy-deployment --replicas=2</code></pre>
-
+	
 </div>
 
 
@@ -6499,7 +6489,7 @@ COMMIT
 
   
 
-<div class="td-content" style="page-break-before: always">
+<div class="td-content" style="">
     <h1 id="pg-01b531c0677c94230fe461c0bededeaf">AWS EKS Devops</h1>
 	<div class="lead">AWS EKS Devops.</div>
 	<div class="td-byline mb-4">
@@ -6537,6 +6527,56 @@ kubectl version --short --client
 <h3 id="c权限">C、权限</h3>
 <p>默认使用的是客户端 用户/角色 的权限。</p>
 <p>AWS IAM权限映射到EKS的RBCA权限上。</p>
+
+</div>
+
+
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-87dec14a96f169649436876f6faea05d">K8S Devops</h1>
+	<div class="lead">K8S Devops.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-05-24" class="text-muted">24.05.2022</time>
+        
+	</div>
+	<h1 id="k8s">K8S</h1>
+<h2 id="一常用操作命令">一、常用操作命令</h2>
+<h3 id="a调试pod">A、调试POD</h3>
+<h4 id="1-kubectl-exec">1. kubectl exec</h4>
+<p>登录命令</p>
+<ul>
+<li>nodejs: sh</li>
+<li>java: /bin/bash</li>
+<li>nginx: /bin/bash</li>
+</ul>
+<h4 id="2-busybox">2. busybox</h4>
+<pre><code>kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
+</code></pre>
+<h4 id="3-pod调试">3. pod调试</h4>
+<ul>
+<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/</a></li>
+<li><a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods</a></li>
+</ul>
+<hr>
+<h3 id="b动态伸缩">B、动态伸缩</h3>
+<h4 id="1-动态伸缩deployment副本数量">1. 动态伸缩deployment副本数量</h4>
+<pre><code>kubectl scale deployment/nginx-proxy-deployment --replicas=2
+</code></pre>
 
 </div>
 
@@ -6892,6 +6932,37 @@ kubectl version --short --client
     
 	
   
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-c12c4df99ce3ca83f89964704b66c1c5">Cloud Native Stack</h1>
+	<div class="lead">Cloud Native Stack.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-06-01" class="text-muted">01.06.2022</time>
+        
+	</div>
+	<p>Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。</p>
+<p>Capa本身不提供功能，而是由底层的各种云原生的能力来提供。</p>
+<p>所以了解云原生中常用中间件的设计是很有必要的。</p>
+<p>本目录主要为对云原生生态中中间件的学习和实践。</p>
+
+</div>
+
+
+
+
 
     
 	

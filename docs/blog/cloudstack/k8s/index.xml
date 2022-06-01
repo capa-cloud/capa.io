@@ -55,5 +55,41 @@ kubectl version --short --client
       </description>
     </item>
     
+    <item>
+      <title>Blog: K8S Devops</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/05/24/k8s-devops/</link>
+      <pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/05/24/k8s-devops/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;k8s&#34;&gt;K8S&lt;/h1&gt;
+&lt;h2 id=&#34;一常用操作命令&#34;&gt;一、常用操作命令&lt;/h2&gt;
+&lt;h3 id=&#34;a调试pod&#34;&gt;A、调试POD&lt;/h3&gt;
+&lt;h4 id=&#34;1-kubectl-exec&#34;&gt;1. kubectl exec&lt;/h4&gt;
+&lt;p&gt;登录命令&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nodejs: sh&lt;/li&gt;
+&lt;li&gt;java: /bin/bash&lt;/li&gt;
+&lt;li&gt;nginx: /bin/bash&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-busybox&#34;&gt;2. busybox&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;3-pod调试&#34;&gt;3. pod调试&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&#34;&gt;https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;b动态伸缩&#34;&gt;B、动态伸缩&lt;/h3&gt;
+&lt;h4 id=&#34;1-动态伸缩deployment副本数量&#34;&gt;1. 动态伸缩deployment副本数量&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;kubectl scale deployment/nginx-proxy-deployment --replicas=2
+&lt;/code&gt;&lt;/pre&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>

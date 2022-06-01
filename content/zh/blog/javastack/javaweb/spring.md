@@ -1,6 +1,6 @@
 ---
 title: "Java Spring"
-linkTitle: "Java Spring的一些实践经验"
+linkTitle: "Java Spring"
 date: 2022-05-30
 description: >
     Java Spring的一些实践经验.
