@@ -16,15 +16,26 @@ menu:
 {{< /blocks/cover >}}
 
 {{% blocks/lead %}}
-Goldydocs is a sample site using the <a href="https://github.com/google/docsy">Docsy</a> Hugo theme that shows what it can do and provides you with a template site structure. It’s designed for you to clone and edit as much as you like. See the different sections of the documentation and site for more ideas.
+Let the code achieve "write once, run anywhere".
+
+With the help of the Capa project, your Java applications have the ability to run across clouds and hybrid clouds with small changes.
 {{% /blocks/lead %}}
 
 
 {{< blocks/section >}}
 <div class="col-12">
-<h1 class="text-center">This is another section</h1>
+<h1 class="text-center">Mecha architecture</h1>
 </div>
 
+The Capa project is based on the design concept of the Mecha architecture and uses rich SDK mode to provide Multi-Runtime standard API.
+
+You can simply understand the Capa project as the SDK implementation of Dapr / Layotto Sidecar mode projects.
+
+To understand the design ideas of Mecha architecture, please read the following articles:
+
+死生之地不可不察：论API标准化对Dapr的重要性
+
+MOSN子项目Layotto：开启服务网格+应用运行时新篇章
 {{< /blocks/section >}}
 
 
@@ -32,7 +43,22 @@ Goldydocs is a sample site using the <a href="https://github.com/google/docsy">D
 {{< blocks/section >}}
 
 <div class="col-12">
-<h1 class="text-center">This is another section</h1>
+<h1 class="text-center">Sidecar or SDK</h1>
 </div>
 
+Based on the Mecha architecture concept, Multi-Runtime provides standard API functions in a Sidecar manner, which seems to be the most reasonable choice.
+
+So why not use Dapr/Layotto and other projects directly, but choose to develop the Capa project of Rich SDK Mode instead.
+
+Summary: The Sidecar architecture represented by Dapr is the future, but it is difficult for many existing enterprises and systems to upgrade to the Sidecar architecture in one step. The rich SDK architecture will exist for a long time.
+
+Extension: Faced with the huge Java systems, the Capa project will use the rich SDK model to support the transition from the Java system to the Mecha architecture. After Dapr and other projects mature, they can also be seamlessly connected to the Sidecar architecture.
+
+For specific discussions on this issue, please refer to:
+
+SDK模型的Dapr API
+
+Dapr API的未来计划
+
+Java SDK的设计讨论
 {{< /blocks/section >}}

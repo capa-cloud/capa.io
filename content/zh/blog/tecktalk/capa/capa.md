@@ -1,6 +1,6 @@
 ---
 title: "Capa: Mecha SDK of Cloud Application Api"
-linkTitle: "Mecha SDK of Cloud Application Api"
+linkTitle: "Capa: Mecha SDK of Cloud Application Api"
 date: 2022-01-18
 description: >
     Capa: Mecha SDK of Cloud Application Api.

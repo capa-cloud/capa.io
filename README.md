@@ -1,109 +1,212 @@
-# Docsy Example
+![logo](https://github.com/capa-cloud/capa-java/raw/master/docs/logo.png)
 
-[Docsy](https://github.com/google/docsy) is a Hugo theme for technical documentation sites, providing easy site navigation, structure, and more. This **Docsy Example Project** uses the Docsy theme, as well as providing a skeleton documentation structure for you to use. You can either copy this project and edit it with your own content, or use the theme in your projects like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/).
+# Capa(cloud application api): To be the high-level api layer for all application runtime.
 
-The theme is included in this project as a Git submodule:
+Let the code achieve "write once, run anywhere".
 
-```bash
-▶ git submodule
- a053131a4ebf6a59e4e8834a42368e248d98c01d themes/docsy (heads/master)
+With the help of the Capa project, your Java applications have the ability to run across clouds and hybrid clouds with small changes.
+
+[中文文档](https://github.com/capa-cloud/capa-java/raw/master/README_ZH.md)
+
+## Motivation
+
+### Mecha architecture
+
+The Capa project is based on the design concept of the Mecha architecture and uses **rich SDK mode** to provide Multi-Runtime standard API.
+
+You can simply understand the Capa project as the SDK implementation of [Dapr](https://github.com/dapr/dapr) / [Layotto](https://github.com/mosn/layotto) Sidecar mode projects.
+
+To understand the design ideas of Mecha architecture, please read the following articles:
+
+[死生之地不可不察：论API标准化对Dapr的重要性](https://www.infoq.cn/article/wjkNGoGaaHyKs7xIyTSB)
+
+[MOSN子项目Layotto：开启服务网格+应用运行时新篇章](http://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index)
+
+### Sidecar or SDK
+
+Based on the Mecha architecture concept, Multi-Runtime provides standard API functions in a Sidecar manner, which seems to be the most reasonable choice.
+
+So why not use Dapr/Layotto and other projects directly, but choose to develop the Capa project of **Rich SDK Mode** instead.
+
+Summary: _The Sidecar architecture represented by Dapr is the future, but it is difficult for many existing enterprises and systems to upgrade to the Sidecar architecture in one step. The rich SDK architecture will exist for a long time._
+
+Extension: _Faced with the huge Java systems, the Capa project will use the rich SDK model to support the transition from the Java system to the Mecha architecture. After Dapr and other projects mature, they can also be seamlessly connected to the Sidecar architecture._
+
+For specific discussions on this issue, please refer to:
+
+[SDK模型的Dapr API](https://github.com/dapr/dapr/issues/3261)
+
+[Dapr API的未来计划](https://github.com/dapr/dapr/issues/2817)
+
+[Java SDK的设计讨论](https://github.com/mosn/layotto/issues/188)
+
+## Feature
+
+### API definition
+
+Capa API design follow community standards, please refer to the API definitions of open source projects such as Dapr / Layotto.
+
+The API definition is placed in the following independent warehouse, unbound from the Capa project, and hopes to develop into the community's API standard definition:
+
++ java: [cloud-runtimes-jvm](https://github.com/capa-cloud/cloud-runtimes-jvm)
++ python(alpha): [cloud-runtimes-python](https://github.com/capa-cloud/cloud-runtimes-python)
++ golang(alpha): [cloud-runtimes-golang](https://github.com/capa-cloud/cloud-runtimes-golang)
+
+#### Why not use Dapr API directly?
+
+Due to the current strong binding between Dapr API and Dapr project, we hope that this set of API can become the standard of the entire community, so Capa puts the API definition in an independent warehouse and keeps it synchronized with upstream community standards at all times.
+
+We hope that Dapr can deploy its API independently, decouple it from the Dapr project, and become a standard for the entire community.
+
+For the discussion of this item, please see:
+
+[Future plans for dapr api](https://github.com/dapr/dapr/issues/2817)
+
+### Capa features
+
+Capa (Java SDK) is an SDK solution that implements Mecha architecture for Java applications. It currently supports features in the following areas:
+
++ Service Invocation (RPC)
++ Configuration Centor (Configuration)
++ Publish/Subscribe (Pub/Sub)
++ State Management (State)
++ Application Log/Metrics/Traces (Telemetry)
++ Database (SQL) -alpha
++ Schedule (Schedule) -alpha
++ ...
+
+## Design
+
+### Capa design
+
+Design idea: **Standard API + pluggable and replaceable SDK components** mode
+
+In different distributed middleware fields, Capa provides a unified standard programming API without relying on specific middleware APIs. Therefore, the application does not need to rely on any specific middleware API when programming with Capa, but only needs to rely on Capa's standard programming API.
+
+When deployed to different target environments, Capa will load different implementation classes of the standard API into the application. When calling a unified programming API, the underlying runtime will be adapted to different specific middleware SDK implementations.
+
+The middleware team needs to develop the implementation classes of the standard API in the target environment for different target environments; and the application code can have a "write once, run anywhere" development experience.
+
+### SDK design
+
+The Capa module is divided into the following parts:
+
+* sdk
+* sdk-component
+* sdk-spi
+* sdk-spi-demo/...
+
+![capa-design](https://github.com/capa-cloud/capa-java/raw/master/docs/capa-design/capa-layer.PNG)
+
+Application programming only needs to rely on the SDK, and use the unified programming API defined in the SDK module.
+
+Before running, the specific SPI implementation package will be introduced as a specific implementation of the unified programming API.
+
+## Usage
+
+### Getting Started
+
+#### Importing Capa's Java SDK
+
+For a Maven project, add the following to your pom.xml file:
+
+```xml
+
+<project>
+    ...
+    <dependencies>
+        ...
+        <!-- Capa's core SDK with all features. -->
+        <dependency>
+            <groupId>group.rxcloud</groupId>
+            <artifactId>capa-sdk</artifactId>
+            <version>1.0.7.RELEASE</version>
+        </dependency>
+        ...
+    </dependencies>
+    ...
+</project>
 ```
 
-This Docsy Example Project is hosted at [https://example.docsy.dev/](https://example.docsy.dev/).
+Sample implementation library:
 
-You can find detailed theme instructions in the Docsy user guide: https://docsy.dev/docs/
+```xml
 
-This is not an officially supported Google product. This project is currently maintained.
-
-## Using the Docsy Example Project as a template
-
-A simple way to get started is to use this project as a template, which gives you a site project that is set up and ready to use. To do this: 
-
-1. Click **Use this template**.
-
-2. Select a name for your new project and click **Create repository from template**.
-
-3. Make your own local working copy of your new repo using git clone, replacing https://github.com/my/example.git with your repo’s web URL:
-
-```bash
-git clone --recurse-submodules --depth 1 https://github.com/my/example.git
+<project>
+    ...
+    <dependencies>
+        ...
+        <!-- Capa's core SDK with all features. -->
+        <dependency>
+            <groupId>group.rxcloud</groupId>
+            <artifactId>capa-sdk-spi-demo</artifactId>
+            <version>1.0.7.RELEASE</version>
+        </dependency>
+        ...
+    </dependencies>
+    ...
+</project>
 ```
 
-You can now edit your own versions of the site’s source files.
+### Running the examples
 
-If you want to do SCSS edits and want to publish these, you need to install `PostCSS`
+Try the following examples to learn more about Capa's Java SDK:
 
-```bash
-npm install
+* [capa-demo](https://github.com/capa-cloud/capa-java/tree/master/sdk-spi-demo)
+* [capa-aws](https://github.com/capa-cloud/capa-java-aws)
+* [capa-alibaba](https://github.com/capa-cloud/capa-java-alibaba)
+
+### Low retrofit cost migration
+
+If you want to use the native Capa API, your legacy system needs to face a large refactoring workload.
+
+In order to make the migration low-cost, we can reuse the middleware API currently used.
+
+By developing an adaptation layer project (providing the same annotation/interface call method), the implementation of the original middleware API is changed to Capa API.
+
+In this way, the application only needs to change a few code (such as changing the path name of the annotation/interface) to migrate to the Capa architecture.
+
+For discussion of this issue, please see:
+
+[Java sdk design 调研：能否复用业界已有的事实标准](https://github.com/mosn/layotto/issues/206)
+
+[Capa API adapted to spring annotation.](https://github.com/capa-cloud/sigs/issues/16)
+
+[遗留中间件SDK无感迁移到Capa.](https://github.com/capa-cloud/sigs/issues/18)
+
+## Develop
+
+#### Reactor API
+
+Taking into account the asynchronous call mode and the use of non-blocking IO, we provide the Reactor programming model natively. You can also use the synchronous call function through its `block()` method.
+
+The Java SDK for Capa is built using [Project Reactor](https://projectreactor.io/). It provides an asynchronous API for
+Java. When consuming a result is consumed synchronously, as in the examples referenced above, the `block()` method is
+used.
+
+The code below does not make any API call, it simply returns
+the [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html) publisher object. Nothing
+happens until the application subscribes or blocks on the result:
+
+```java
+Mono<String> result=capaRpcClient.invokeMethod(SERVICE_APP_ID,"say","hello",HttpExtension.POST,null,TypeRef.STRING);
 ```
 
-## Running the website locally
+To start execution and receive the result object synchronously, use `block()`. The code below shows how to execute the
+call and consume an empty response:
 
-Building and running the site locally requires a recent `extended` version of [Hugo](https://gohugo.io).
-You can find out more about how to install Hugo for your environment in our
-[Getting started](https://www.docsy.dev/docs/getting-started/#prerequisites-and-installation) guide.
-
-Once you've made your working copy of the site repo, from the repo root folder, run:
-
-```
-hugo server
+```java
+Mono<String> result=capaRpcClient.invokeMethod(SERVICE_APP_ID,"say","hello",HttpExtension.POST,null,TypeRef.STRING);
+        String response=result.block();
 ```
 
-## Running a container locally
+#### Exception handling
 
-You can run docsy-example inside a [Docker](https://docs.docker.com/)
-container, the container runs with a volume bound to the `docsy-example`
-folder. This approach doesn't require you to install any dependencies other
-than [Docker Desktop](https://www.docker.com/products/docker-desktop) on
-Windows and Mac, and [Docker Compose](https://docs.docker.com/compose/install/)
-on Linux.
+Most exceptions thrown from the SDK are instances of `CapaException`. `CapaException` extends from `RuntimeException`,
+making it compatible with Project Reactor.
 
-1. Build the docker image 
+## Future
 
-   ```bash
-   docker-compose build
-   ```
+### Multi-Runtime
 
-1. Run the built image
-
-   ```bash
-   docker-compose up
-   ```
-
-   > NOTE: You can run both commands at once with `docker-compose up --build`.
-
-1. Verify that the service is working. 
-
-   Open your web browser and type `http://localhost:1313` in your navigation bar,
-   This opens a local instance of the docsy-example homepage. You can now make
-   changes to the docsy example and those changes will immediately show up in your
-   browser after you save.
-
-### Cleanup
-
-To stop Docker Compose, on your terminal window, press **Ctrl + C**. 
-
-To remove the produced images run:
-
-```console
-docker-compose rm
-```
-For more information see the [Docker Compose
-documentation](https://docs.docker.com/compose/gettingstarted/).
-
-## Troubleshooting
-
-As you run the website locally, you may run into the following error:
-
-```
-➜ hugo server
-
-INFO 2021/01/21 21:07:55 Using config file: 
-Building sites … INFO 2021/01/21 21:07:55 syncing static files to /
-Built in 288 ms
-Error: Error building site: TOCSS: failed to transform "scss/main.scss" (text/x-scss): resource "scss/scss/main.scss_9fadf33d895a46083cdd64396b57ef68" not found in file cache
-```
-
-This error occurs if you have not installed the extended version of Hugo.
-See our [user guide](https://www.docsy.dev/docs/getting-started/) for instructions on how to install Hugo.
-
+[Multi-Runtime 2022：待解决的问题](https://zhuanlan.zhihu.com/p/435012312?utm_source=wechat_session&utm_medium=social&utm_oi=618742049890111488&utm_content=group2_article&utm_campaign=shareopn)
