@@ -1,0 +1,62 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capa – Tomcat Stack</title>
+    <link>https://capa-cloud.github.io/capa.io/blog/javastack/tomcat/</link>
+    <description>Recent content in Tomcat Stack on Capa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 08 Jun 2022 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://capa-cloud.github.io/capa.io/blog/javastack/tomcat/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: Tomcat Devops</title>
+      <link>https://capa-cloud.github.io/capa.io/blog/2022/06/08/tomcat-devops/</link>
+      <pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://capa-cloud.github.io/capa.io/blog/2022/06/08/tomcat-devops/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;atomcat关闭&#34;&gt;A、Tomcat关闭&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;start: INFO [Thread-7] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler [\&amp;quot;http-nio-8080\&amp;quot;]
+
+start: INFO [Thread-6] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+
+end:   INFO [Thread-6] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler [\&amp;quot;http-nio-8080\&amp;quot;]
+
+end:   INFO [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler [\&amp;quot;http-nio-8080\&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;0-非正常关闭&#34;&gt;0. 非正常关闭&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;start: INFO [Thread-7] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler [\&amp;quot;http-nio-8080\&amp;quot;]
+
+start: INFO [Thread-6] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这是非正常关闭&lt;/p&gt;
+&lt;h4 id=&#34;1-tomcat通过脚本正常关闭viaport-即通过8005端口发送shutdown指令&#34;&gt;1. tomcat通过脚本正常关闭(viaport: 即通过8005端口发送shutdown指令)&lt;/h4&gt;
+&lt;p&gt;正常关闭(viaport)的话会在 pause 之前有这样的一句warn日志：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;org.apache.catalina.core.StandardServer await
+A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后才是 pause -&amp;gt; stop -&amp;gt; destory&lt;/p&gt;
+&lt;h4 id=&#34;2-tomcat的shutdownhook被触发执行了销毁逻辑&#34;&gt;2. tomcat的shutdownhook被触发，执行了销毁逻辑&lt;/h4&gt;
+&lt;p&gt;而这又有两种情况:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;应用代码里有地方用System.exit来退出jvm&lt;/li&gt;
+&lt;li&gt;系统发的信号(kill -9除外，SIGKILL信号JVM不会有机会执行shutdownhook)
+&lt;ol&gt;
+&lt;li&gt;ssh会话退出&lt;/li&gt;
+&lt;li&gt;健康检查失败，POD触发信号&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
