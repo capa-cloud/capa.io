@@ -203,37 +203,6 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-ef36e4905bad7bfd0b6225b445f98ad7">Tomcat Stack</a></li>
-
-
-
-    
-    <ul>
-        
-  
-  
-  
-  
-
-  
-    
-    
-	
-
-    <li><a href="#pg-6fe206257a283d70a7fe94a021c8fcbd">Tomcat Devops</a></li>
-
-
-
-    
-  
-
-    </ul>
-    
-  
-    
-    
-	
-
     <li><a href="#pg-261f22b6a4e2fdb44edd3dd2f14c62ee">Dubbo Stack</a></li>
 
 
@@ -404,6 +373,37 @@ if (!doNotTrack) {
     </ul>
     
   
+    
+    
+	
+
+    <li><a href="#pg-ef36e4905bad7bfd0b6225b445f98ad7">Tomcat Stack</a></li>
+
+
+
+    
+    <ul>
+        
+  
+  
+  
+  
+
+  
+    
+    
+	
+
+    <li><a href="#pg-6fe206257a283d70a7fe94a021c8fcbd">Tomcat Devops</a></li>
+
+
+
+    
+  
+
+    </ul>
+    
+  
 
     </ul>
 
@@ -450,103 +450,6 @@ if (!doNotTrack) {
 
 
 
-
-    
-	
-  
-    
-    
-	
-    
-
-
-  
-
-<div class="td-content" style="page-break-before: always">
-    <h1 id="pg-ef36e4905bad7bfd0b6225b445f98ad7">Tomcat Stack</h1>
-	
-	<div class="td-byline mb-4">
-		
-        
-		<time datetime="2022-06-08" class="text-muted">08.06.2022</time>
-        
-	</div>
-	
-</div>
-
-
-
-
-
-    
-      
-  
-  
-  
-  
-
-  
-  
-
-  
-    
-    
-	
-    
-
-
-  
-
-<div class="td-content" style="">
-    <h1 id="pg-6fe206257a283d70a7fe94a021c8fcbd">Tomcat Devops</h1>
-	<div class="lead">Tomcat Devops的一些运维排障经验.</div>
-	<div class="td-byline mb-4">
-		
-        
-		<time datetime="2022-06-08" class="text-muted">08.06.2022</time>
-        
-	</div>
-	<h3 id="atomcat关闭">A、Tomcat关闭</h3>
-<pre tabindex="0"><code>start: INFO [Thread-7] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler [\&quot;http-nio-8080\&quot;]
-
-start: INFO [Thread-6] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
-
-end:   INFO [Thread-6] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler [\&quot;http-nio-8080\&quot;]
-
-end:   INFO [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler [\&quot;http-nio-8080\&quot;]
-</code></pre><h4 id="0-非正常关闭">0. 非正常关闭</h4>
-<pre><code>start: INFO [Thread-7] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler [\&quot;http-nio-8080\&quot;]
-
-start: INFO [Thread-6] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
-</code></pre>
-<p>这是非正常关闭</p>
-<h4 id="1-tomcat通过脚本正常关闭viaport-即通过8005端口发送shutdown指令">1. tomcat通过脚本正常关闭(viaport: 即通过8005端口发送shutdown指令)</h4>
-<p>正常关闭(viaport)的话会在 pause 之前有这样的一句warn日志：</p>
-<pre><code>org.apache.catalina.core.StandardServer await
-A valid shutdown command was received via the shutdown port. Stopping the Server instance.
-</code></pre>
-<p>然后才是 pause -&gt; stop -&gt; destory</p>
-<h4 id="2-tomcat的shutdownhook被触发执行了销毁逻辑">2. tomcat的shutdownhook被触发，执行了销毁逻辑</h4>
-<p>而这又有两种情况:</p>
-<ol>
-<li>应用代码里有地方用System.exit来退出jvm</li>
-<li>系统发的信号(kill -9除外，SIGKILL信号JVM不会有机会执行shutdownhook)
-<ol>
-<li>ssh会话退出</li>
-<li>健康检查失败，POD触发信号</li>
-</ol>
-</li>
-</ol>
-
-</div>
-
-
-
-
-
-    
-	
-  
 
     
 	
@@ -1746,6 +1649,101 @@ doregister: 委托底层实现</p>
 </ul>
 </li>
 </ul>
+
+</div>
+
+
+
+
+
+    
+	
+  
+
+    
+	
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="page-break-before: always">
+    <h1 id="pg-ef36e4905bad7bfd0b6225b445f98ad7">Tomcat Stack</h1>
+	
+	<div class="td-byline mb-4">
+		
+        
+	</div>
+	
+</div>
+
+
+
+
+
+    
+      
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+
+  
+
+<div class="td-content" style="">
+    <h1 id="pg-6fe206257a283d70a7fe94a021c8fcbd">Tomcat Devops</h1>
+	<div class="lead">Tomcat Devops的一些运维排障经验.</div>
+	<div class="td-byline mb-4">
+		
+        
+		<time datetime="2022-06-08" class="text-muted">08.06.2022</time>
+        
+	</div>
+	<h3 id="atomcat关闭">A、Tomcat关闭</h3>
+<pre tabindex="0"><code>start: INFO [Thread-7] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler [\&quot;http-nio-8080\&quot;]
+
+start: INFO [Thread-6] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+
+end:   INFO [Thread-6] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler [\&quot;http-nio-8080\&quot;]
+
+end:   INFO [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler [\&quot;http-nio-8080\&quot;]
+</code></pre><h4 id="0-非正常关闭">0. 非正常关闭</h4>
+<pre><code>start: INFO [Thread-7] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler [\&quot;http-nio-8080\&quot;]
+
+start: INFO [Thread-6] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+</code></pre>
+<p>这是非正常关闭</p>
+<h4 id="1-tomcat通过脚本正常关闭viaport-即通过8005端口发送shutdown指令">1. tomcat通过脚本正常关闭(viaport: 即通过8005端口发送shutdown指令)</h4>
+<p>正常关闭(viaport)的话会在 pause 之前有这样的一句warn日志：</p>
+<pre><code>org.apache.catalina.core.StandardServer await
+A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+</code></pre>
+<p>然后才是 pause -&gt; stop -&gt; destory</p>
+<h4 id="2-tomcat的shutdownhook被触发执行了销毁逻辑">2. tomcat的shutdownhook被触发，执行了销毁逻辑</h4>
+<p>而这又有两种情况:</p>
+<ol>
+<li>应用代码里有地方用System.exit来退出jvm</li>
+<li>系统发的信号(kill -9除外，SIGKILL信号JVM不会有机会执行shutdownhook)
+<ol>
+<li>ssh会话退出</li>
+<li>健康检查失败，POD触发信号</li>
+</ol>
+</li>
+</ol>
 
 </div>
 
