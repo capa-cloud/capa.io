@@ -1831,7 +1831,7 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>Configuration(Nacos/&hellip;)</li>
 </ul>
 <hr>
-<h2 id="三sidecar功能">三、Sidecar功能</h2>
+<h2 id="三sidecar交互">三、Sidecar交互</h2>
 <blockquote>
 <p>参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y</p>
 </blockquote>
@@ -1849,10 +1849,8 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <p>在所有的 Init 容器没有成功之前，Pod 将不会变成 Ready 状态。Init 容器的端口将不会在 Service中进行聚集。 正在初始化中的 Pod 处于 Pending 状态，但应该会将 Initializing 状态设置为 true。Init 容器运行完成以后就会自动终止。</p>
 <p><img src="https://pic1.zhimg.com/80/v2-4aa36ede4332a0b2d99005188c8056d4_1440w.jpg" alt=""></p>
 <p><img src="https://static001.geekbang.org/infoq/76/76ccf68fae62443f9a59e93efa017101.png" alt=""></p>
-<h3 id="aistio-sidecar-结构">A、istio sidecar 结构</h3>
-<h3 id="istio-init容器">istio-init容器</h3>
+<h3 id="aistio-init容器">A、istio-init容器</h3>
 <p>该容器存在的意义就是让 sidecar 代理可以拦截所有的进出 pod 的流量，15090 端口（Mixer 使用）和 15092 端口（Ingress Gateway）除外的所有入站（inbound）流量重定向到 15006 端口（sidecar），再拦截应用容器的出站（outbound）流量经过 sidecar 处理（通过 15001 端口监听）后再出站。</p>
-<h4 id="1-istio-iptables-进程">1. istio-iptables 进程</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">istio-iptables <span style="color:#ce5c00;font-weight:bold">[</span>flags<span style="color:#ce5c00;font-weight:bold">]</span>
   -p: 指定重定向所有 TCP 流量的 sidecar 端口（默认为 <span style="color:#000">$ENVOY_PORT</span> <span style="color:#ce5c00;font-weight:bold">=</span> 15001）
   -m: 指定入站连接重定向到 sidecar 的模式，“REDIRECT” 或 “TPROXY”（默认为 <span style="color:#000">$ISTIO_INBOUND_INTERCEPTION_MODE</span><span style="color:#ce5c00;font-weight:bold">)</span>
@@ -1865,7 +1863,30 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
   -g：指定不应用重定向的用户的 GID。<span style="color:#ce5c00;font-weight:bold">(</span>默认值与 -u param 相同<span style="color:#ce5c00;font-weight:bold">)</span>
   -u：指定不应用重定向的用户的 UID。通常情况下，这是代理容器的 UID（默认值是 1337，即 istio-proxy 的 UID）。
   -z: 所有进入 pod/VM 的 TCP 流量应被重定向到的端口（默认 <span style="color:#000">$INBOUND_CAPTURE_PORT</span> <span style="color:#ce5c00;font-weight:bold">=</span> 15006）。
-</code></pre></div><h3 id="istio-proxy容器">istio-proxy容器</h3>
+</code></pre></div><h4 id="自定义init容器">自定义init容器</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8f5902;font-style:italic">#!/bin/bash
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#8f5902;font-style:italic"># Forward TCP traffic on port 80 to port 8000 on the eth0 interface.</span>
+iptables -t nat -A PREROUTING -p tcp -i eth0 --dport <span style="color:#0000cf;font-weight:bold">80</span> -j REDIRECT --to-port <span style="color:#0000cf;font-weight:bold">8000</span>
+
+<span style="color:#8f5902;font-style:italic"># List all iptables rules.</span>
+iptables -t nat --list
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#8f5902;font-style:italic"># Use the latest Ubuntu image for the base.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">FROM</span><span style="color:#4e9a06"> ubuntu:latest</span><span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Install the iptables command.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">RUN</span> apt-get update <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>    apt-get install -y iptables<span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Copy the initialization script into the container.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">COPY</span> init.sh /usr/local/bin/<span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Mark the initialization script as executable.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">RUN</span> chmod +x /usr/local/bin/init.sh<span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Start the initialization script on container startup.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">ENTRYPOINT</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;init.sh&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#a40000">
+</span></code></pre></div><h3 id="bistio-proxy容器">B、istio-proxy容器</h3>
 <p><img src="https://i.loli.net/2018/09/09/5b94b1c621c56.png" alt=""></p>
 <p>使用单容器多进程模型。</p>
 <h4 id="1-pilot-agent进程">1. pilot agent进程</h4>
@@ -1902,14 +1923,14 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <h4 id="启动envoy">启动Envoy</h4>
 <p>[/pilot-agent/main/istio_agent.NewAgent]</p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_1.png" alt=""></p>
-<h3 id="sidecar多进程设计模式">sidecar多进程设计模式</h3>
+<h3 id="csidecar多进程设计模式">C、sidecar多进程设计模式</h3>
 <h4 id="1-开源集成">1. 开源集成</h4>
 <p>代理属于第三方提供，istio是对其进行了管理和拓展。</p>
 <p>如果代理本身属于istio，是可以实现单进程模型。</p>
 <h4 id="2-agent设计思想">2. agent设计思想</h4>
 <p>由agent负责配置监听和下发。</p>
 <p>解耦配置管理和运行时，同时可以对proxy进程进行热重启。</p>
-<h3 id="b流量拦截">B、流量拦截</h3>
+<h3 id="d流量拦截">D、流量拦截</h3>
 <h4 id="iptables">iptables</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">ip netns exec cni-bf783dac-fe05-cb35-4d5a-848449119b19 iptables -L -t nat
 
@@ -1937,6 +1958,10 @@ COMMIT
 <p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png" alt=""></p>
 <p><img src="https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg" alt=""></p>
 <p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg" alt=""></p>
+<h3 id="e自定义流量拦截sidecar">E、自定义流量拦截sidecar</h3>
+<blockquote>
+<p>capa</p>
+</blockquote>
 <hr>
 <h2 id="四sidecar-发展">四、Sidecar 发展</h2>
 <h3 id="asidecar-流量交互">A、sidecar 流量交互</h3>
@@ -1989,6 +2014,15 @@ COMMIT
 <h4 id="wasm和java字节码非常相似">WASM和Java字节码非常相似</h4>
 <p>WASM 字节码不能直接在任何 CPU 架构上执行，但由于它与机器码非常相近，因此能够以非常快的速度被 WASM 引擎（或者也可以称之为 WASM 虚拟机）翻译为对应架构的机器码，获得和机器码相近的性能。</p>
 <p>WASM 本身是为 Web 而设计，因此天然具有跨平台支持；同时，通过 WASM 虚拟机的沙箱隔离，也使得执行 WASM 字节码相比于直接执行机器码有更高的安全性。</p>
+<h4 id="abi">ABI</h4>
+<p><img src="https://user-images.githubusercontent.com/28104581/170482236-1fbadd8b-fb83-4f38-acc7-cbe3b7f73825.png" alt=""></p>
+<p>它是扩展提供的网络代理设计的，目标是支持通过 wasm envoy 的功能。</p>
+<p>API 是这样一个函数，如果想要接收一个 http 请求，它需要实现开发三个接口：</p>
+<ol>
+<li>OnHttpRequestHeaders</li>
+<li>OnHttpRequestBody</li>
+<li>OnHttpRequestTrailers</li>
+</ol>
 <h4 id="envoy-wasm">Envoy Wasm</h4>
 <p>Envoy 在可拓展性方面做了两方面的工作：</p>
 <p>第一，提供了名为 lua 的特殊扩展，允许控制面通过 xDS 协议动态下发 Lua 脚本并由 Envoy 解释执行。</p>

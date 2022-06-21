@@ -518,7 +518,7 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;li&gt;Configuration(Nacos/&amp;hellip;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;三sidecar功能&#34;&gt;三、Sidecar功能&lt;/h2&gt;
+&lt;h2 id=&#34;三sidecar交互&#34;&gt;三、Sidecar交互&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -536,10 +536,8 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;p&gt;在所有的 Init 容器没有成功之前，Pod 将不会变成 Ready 状态。Init 容器的端口将不会在 Service中进行聚集。 正在初始化中的 Pod 处于 Pending 状态，但应该会将 Initializing 状态设置为 true。Init 容器运行完成以后就会自动终止。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://pic1.zhimg.com/80/v2-4aa36ede4332a0b2d99005188c8056d4_1440w.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/infoq/76/76ccf68fae62443f9a59e93efa017101.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;aistio-sidecar-结构&#34;&gt;A、istio sidecar 结构&lt;/h3&gt;
-&lt;h3 id=&#34;istio-init容器&#34;&gt;istio-init容器&lt;/h3&gt;
+&lt;h3 id=&#34;aistio-init容器&#34;&gt;A、istio-init容器&lt;/h3&gt;
 &lt;p&gt;该容器存在的意义就是让 sidecar 代理可以拦截所有的进出 pod 的流量，15090 端口（Mixer 使用）和 15092 端口（Ingress Gateway）除外的所有入站（inbound）流量重定向到 15006 端口（sidecar），再拦截应用容器的出站（outbound）流量经过 sidecar 处理（通过 15001 端口监听）后再出站。&lt;/p&gt;
-&lt;h4 id=&#34;1-istio-iptables-进程&#34;&gt;1. istio-iptables 进程&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;istio-iptables &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
   -p: 指定重定向所有 TCP 流量的 sidecar 端口（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ENVOY_PORT&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; 15001）
   -m: 指定入站连接重定向到 sidecar 的模式，“REDIRECT” 或 “TPROXY”（默认为 &lt;span style=&#34;color:#000&#34;&gt;$ISTIO_INBOUND_INTERCEPTION_MODE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
@@ -552,7 +550,30 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
   -g：指定不应用重定向的用户的 GID。&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;默认值与 -u param 相同&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;
   -u：指定不应用重定向的用户的 UID。通常情况下，这是代理容器的 UID（默认值是 1337，即 istio-proxy 的 UID）。
   -z: 所有进入 pod/VM 的 TCP 流量应被重定向到的端口（默认 &lt;span style=&#34;color:#000&#34;&gt;$INBOUND_CAPTURE_PORT&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt; 15006）。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;istio-proxy容器&#34;&gt;istio-proxy容器&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;自定义init容器&#34;&gt;自定义init容器&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Forward TCP traffic on port 80 to port 8000 on the eth0 interface.&lt;/span&gt;
+iptables -t nat -A PREROUTING -p tcp -i eth0 --dport &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;80&lt;/span&gt; -j REDIRECT --to-port &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;8000&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# List all iptables rules.&lt;/span&gt;
+iptables -t nat --list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-dockerfile&#34; data-lang=&#34;dockerfile&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Use the latest Ubuntu image for the base.&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt; ubuntu:latest&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Install the iptables command.&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;RUN&lt;/span&gt; apt-get update &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    apt-get install -y iptables&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Copy the initialization script into the container.&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;COPY&lt;/span&gt; init.sh /usr/local/bin/&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Mark the initialization script as executable.&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;RUN&lt;/span&gt; chmod +x /usr/local/bin/init.sh&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Start the initialization script on container startup.&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ENTRYPOINT&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;init.sh&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;bistio-proxy容器&#34;&gt;B、istio-proxy容器&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://i.loli.net/2018/09/09/5b94b1c621c56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;使用单容器多进程模型。&lt;/p&gt;
 &lt;h4 id=&#34;1-pilot-agent进程&#34;&gt;1. pilot agent进程&lt;/h4&gt;
@@ -589,14 +610,14 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;h4 id=&#34;启动envoy&#34;&gt;启动Envoy&lt;/h4&gt;
 &lt;p&gt;[/pilot-agent/main/istio_agent.NewAgent]&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;sidecar多进程设计模式&#34;&gt;sidecar多进程设计模式&lt;/h3&gt;
+&lt;h3 id=&#34;csidecar多进程设计模式&#34;&gt;C、sidecar多进程设计模式&lt;/h3&gt;
 &lt;h4 id=&#34;1-开源集成&#34;&gt;1. 开源集成&lt;/h4&gt;
 &lt;p&gt;代理属于第三方提供，istio是对其进行了管理和拓展。&lt;/p&gt;
 &lt;p&gt;如果代理本身属于istio，是可以实现单进程模型。&lt;/p&gt;
 &lt;h4 id=&#34;2-agent设计思想&#34;&gt;2. agent设计思想&lt;/h4&gt;
 &lt;p&gt;由agent负责配置监听和下发。&lt;/p&gt;
 &lt;p&gt;解耦配置管理和运行时，同时可以对proxy进程进行热重启。&lt;/p&gt;
-&lt;h3 id=&#34;b流量拦截&#34;&gt;B、流量拦截&lt;/h3&gt;
+&lt;h3 id=&#34;d流量拦截&#34;&gt;D、流量拦截&lt;/h3&gt;
 &lt;h4 id=&#34;iptables&#34;&gt;iptables&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;ip netns exec cni-bf783dac-fe05-cb35-4d5a-848449119b19 iptables -L -t nat
 
@@ -624,6 +645,10 @@ COMMIT
 &lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;e自定义流量拦截sidecar&#34;&gt;E、自定义流量拦截sidecar&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;capa&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;四sidecar-发展&#34;&gt;四、Sidecar 发展&lt;/h2&gt;
 &lt;h3 id=&#34;asidecar-流量交互&#34;&gt;A、sidecar 流量交互&lt;/h3&gt;
@@ -676,6 +701,15 @@ COMMIT
 &lt;h4 id=&#34;wasm和java字节码非常相似&#34;&gt;WASM和Java字节码非常相似&lt;/h4&gt;
 &lt;p&gt;WASM 字节码不能直接在任何 CPU 架构上执行，但由于它与机器码非常相近，因此能够以非常快的速度被 WASM 引擎（或者也可以称之为 WASM 虚拟机）翻译为对应架构的机器码，获得和机器码相近的性能。&lt;/p&gt;
 &lt;p&gt;WASM 本身是为 Web 而设计，因此天然具有跨平台支持；同时，通过 WASM 虚拟机的沙箱隔离，也使得执行 WASM 字节码相比于直接执行机器码有更高的安全性。&lt;/p&gt;
+&lt;h4 id=&#34;abi&#34;&gt;ABI&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/28104581/170482236-1fbadd8b-fb83-4f38-acc7-cbe3b7f73825.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;它是扩展提供的网络代理设计的，目标是支持通过 wasm envoy 的功能。&lt;/p&gt;
+&lt;p&gt;API 是这样一个函数，如果想要接收一个 http 请求，它需要实现开发三个接口：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;OnHttpRequestHeaders&lt;/li&gt;
+&lt;li&gt;OnHttpRequestBody&lt;/li&gt;
+&lt;li&gt;OnHttpRequestTrailers&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h4 id=&#34;envoy-wasm&#34;&gt;Envoy Wasm&lt;/h4&gt;
 &lt;p&gt;Envoy 在可拓展性方面做了两方面的工作：&lt;/p&gt;
 &lt;p&gt;第一，提供了名为 lua 的特殊扩展，允许控制面通过 xDS 协议动态下发 Lua 脚本并由 Envoy 解释执行。&lt;/p&gt;

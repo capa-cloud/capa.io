@@ -552,7 +552,7 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 
 ------
 
-## 三、Sidecar功能
+## 三、Sidecar交互
 
 > 参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y
 
@@ -580,13 +580,9 @@ Init 容器使用 Linux Namespace，所以相对应用程序容器来说具有�
 
 ![](https://static001.geekbang.org/infoq/76/76ccf68fae62443f9a59e93efa017101.png)
 
-### A、istio sidecar 结构
-
-### istio-init容器 
+### A、istio-init容器 
 
 该容器存在的意义就是让 sidecar 代理可以拦截所有的进出 pod 的流量，15090 端口（Mixer 使用）和 15092 端口（Ingress Gateway）除外的所有入站（inbound）流量重定向到 15006 端口（sidecar），再拦截应用容器的出站（outbound）流量经过 sidecar 处理（通过 15001 端口监听）后再出站。
-
-#### 1. istio-iptables 进程
 
 ```shell
 istio-iptables [flags]
@@ -603,7 +599,37 @@ istio-iptables [flags]
   -z: 所有进入 pod/VM 的 TCP 流量应被重定向到的端口（默认 $INBOUND_CAPTURE_PORT = 15006）。
 ```
 
-### istio-proxy容器
+#### 自定义init容器
+
+```shell
+#!/bin/bash
+
+# Forward TCP traffic on port 80 to port 8000 on the eth0 interface.
+iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 80 -j REDIRECT --to-port 8000
+
+# List all iptables rules.
+iptables -t nat --list
+```
+
+```dockerfile
+# Use the latest Ubuntu image for the base.
+FROM ubuntu:latest
+
+# Install the iptables command.
+RUN apt-get update && \
+    apt-get install -y iptables
+
+# Copy the initialization script into the container.
+COPY init.sh /usr/local/bin/
+
+# Mark the initialization script as executable.
+RUN chmod +x /usr/local/bin/init.sh
+
+# Start the initialization script on container startup.
+ENTRYPOINT ["init.sh"]
+```
+
+### B、istio-proxy容器
 
 ![](https://i.loli.net/2018/09/09/5b94b1c621c56.png)
 
@@ -653,7 +679,7 @@ istio-iptables [flags]
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_1.png)
 
-### sidecar多进程设计模式
+### C、sidecar多进程设计模式
 
 #### 1. 开源集成
 
@@ -667,7 +693,7 @@ istio-iptables [flags]
 
 解耦配置管理和运行时，同时可以对proxy进程进行热重启。
 
-### B、流量拦截
+### D、流量拦截
 
 #### iptables
 
@@ -704,6 +730,10 @@ COMMIT
 ![](https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg)
 
 ![](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg)
+
+### E、自定义流量拦截sidecar
+
+> capa
 
 ------
 
@@ -796,6 +826,18 @@ Mecha 和 Micrologic 之间的交互是开放而有 API 标准的，Mecha 和 Mi
 WASM 字节码不能直接在任何 CPU 架构上执行，但由于它与机器码非常相近，因此能够以非常快的速度被 WASM 引擎（或者也可以称之为 WASM 虚拟机）翻译为对应架构的机器码，获得和机器码相近的性能。
 
 WASM 本身是为 Web 而设计，因此天然具有跨平台支持；同时，通过 WASM 虚拟机的沙箱隔离，也使得执行 WASM 字节码相比于直接执行机器码有更高的安全性。
+
+#### ABI
+
+![](https://user-images.githubusercontent.com/28104581/170482236-1fbadd8b-fb83-4f38-acc7-cbe3b7f73825.png)
+
+它是扩展提供的网络代理设计的，目标是支持通过 wasm envoy 的功能。
+
+API 是这样一个函数，如果想要接收一个 http 请求，它需要实现开发三个接口：
+
+1. OnHttpRequestHeaders
+2. OnHttpRequestBody
+3. OnHttpRequestTrailers
 
 #### Envoy Wasm
 
