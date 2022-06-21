@@ -526,7 +526,7 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;li&gt;Init 容器 istio-init：用于 pod 中设置 iptables 端口转发&lt;/li&gt;
 &lt;li&gt;Sidecar 容器 istio-proxy：运行 sidecar 代理，如 Envoy 或 MOSN。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;!%5B%5D(https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_5.png)&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://static001.geekbang.org/infoq/aa/aaa64c2c86541cb77d671f5cbcd8e77b.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;init&#34;&gt;init&lt;/h4&gt;
 &lt;p&gt;Init 容器是一种专用容器，它在应用程序容器启动之前运行，用来包含一些应用镜像中不存在的实用工具或安装脚本。&lt;/p&gt;
@@ -641,10 +641,11 @@ iptables -t nat --list
 -A ISTIO_REDIRECT -p tcp -j REDIRECT --to-ports 15001          # 转达到15001 outbond
 COMMIT
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/&#34;&gt;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;e自定义流量拦截sidecar&#34;&gt;E、自定义流量拦截sidecar&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;capa&lt;/p&gt;

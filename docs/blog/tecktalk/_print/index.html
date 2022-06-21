@@ -1839,7 +1839,7 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>Init 容器 istio-init：用于 pod 中设置 iptables 端口转发</li>
 <li>Sidecar 容器 istio-proxy：运行 sidecar 代理，如 Envoy 或 MOSN。</li>
 </ul>
-<p><img src="!%5B%5D(https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_5.png)" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_5.png" alt=""></p>
 <p><img src="https://static001.geekbang.org/infoq/aa/aaa64c2c86541cb77d671f5cbcd8e77b.png" alt=""></p>
 <h4 id="init">init</h4>
 <p>Init 容器是一种专用容器，它在应用程序容器启动之前运行，用来包含一些应用镜像中不存在的实用工具或安装脚本。</p>
@@ -1954,10 +1954,11 @@ iptables -t nat --list
 -A ISTIO_REDIRECT -p tcp -j REDIRECT --to-ports 15001          # 转达到15001 outbond
 COMMIT
 </code></pre></div><p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_4.png" alt=""></p>
-<p><img src="https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt=""></p>
-<p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png" alt=""></p>
 <p><img src="https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg" alt=""></p>
-<p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg" alt=""></p>
+<p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh.jpg" alt=""></p>
+<blockquote>
+<p><a href="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/">https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/</a></p>
+</blockquote>
 <h3 id="e自定义流量拦截sidecar">E、自定义流量拦截sidecar</h3>
 <blockquote>
 <p>capa</p>

@@ -559,8 +559,7 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 + Init 容器 istio-init：用于 pod 中设置 iptables 端口转发
 + Sidecar 容器 istio-proxy：运行 sidecar 代理，如 Envoy 或 MOSN。
 
-![](![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_5.png)
-)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_5.png)
 
 ![](https://static001.geekbang.org/infoq/aa/aaa64c2c86541cb77d671f5cbcd8e77b.png)
 
@@ -723,13 +722,11 @@ COMMIT
 
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_4.png)
 
-![](https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=)
-
-![](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png)
-
 ![](https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg)
 
-![](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg)
+![](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh.jpg)
+
+> https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/
 
 ### E、自定义流量拦截sidecar
 
