@@ -724,7 +724,7 @@ COMMIT
 
 ![](https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg)
 
-![](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh.jpg)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_6.png)
 
 > https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/
 
@@ -760,13 +760,13 @@ COMMIT
 
 #### eBPF
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48iaibekyLCc7BRPdN5wia28fe7SzrOGGzdlTzAuYOYHPXepdNYM1neIlOxA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_7.png)
 
 几乎没有开销是来自代理本身的逻辑。开销是通过注入代理，将网络流量重定向到它，终止连接和启动新的连接而增加的。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48iafV5EjtlibK6up9icGHXubrYicVWBeWsHTgL3wdWWFVqq6icIrR5fAEA5jw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_8.png)
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48ianSOrK1RicmJy8CmThERZC9m6Qch9QjP50Kp1dA0n9y2jSwegErrV07Q/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_9.png)
 
 #### 2. 流量明确指向 proxyless sidecar
 
@@ -782,7 +782,7 @@ COMMIT
 
 gRPC 项目对 xDS API 有很好的支持，也就是说你可以管理 gRPC 工作负载，而不需要同时部署 Envoy sidecar。
 
-![](https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGkFicB5CmUgMOuzpRGeOaPMSlYdnSibQFZkFD4TTbGYfJQq4bEuDBb2sl9zpR3771SXnjegj8khDq4A/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_10.png)
 
 ### B、multi sidecar
 
@@ -790,7 +790,7 @@ ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始�
 
 不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。
 
-![](https://skyao.io/talk/202103-dapr-from-servicemesh-to-cloudnative/images/ant-more-mesh_hu56c375bdd66e5b8ec5c7446e085ec97c_227360_1200x1200_fit_lanczos_3.png)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_11.png)
 
 与其依靠多个代理来实现不同的目的（例如网络代理，缓存代理，绑定代理），不如使用一个 Mecha 提供所有这些能力。
 
@@ -798,7 +798,7 @@ Mecha 强调是“提供能力”，而不是通讯代理。
 
 Mecha 和 Micrologic 之间的交互是开放而有 API 标准的，Mecha 和 Micrologic 之间的“协议”体现在 API 上，而不是 TCP 通讯协议。这提供了一个契机：一个统一 Micrologic 和 Mecha 之间通讯方式的契机。
 
-![](https://mmbiz.qpic.cn/mmbiz_png/Pz6fSfK82D54JicV1tMvpmkrUqzsNfAKTxWChX3hiacPB5ohAWGhlxGocQ9kEoZAc3tFQfV26xKC0TDJiaToLnASw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_12.png)
 
 ### C、sidecar 拓展性
 
