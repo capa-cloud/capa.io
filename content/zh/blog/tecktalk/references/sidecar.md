@@ -1,6 +1,6 @@
 ---
-title: "Sidecar模式: 从Istio Sidecar开始"
-linkTitle: "Sidecar模式: 从Istio Sidecar开始"
+title: "Sidecar模式 - 从Istio Sidecar开始"
+linkTitle: "Sidecar模式 - 从Istio Sidecar开始"
 date: 2022-03-09
 description: >
     Sidecar模式: 从Istio Sidecar开始.
@@ -36,27 +36,44 @@ Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。
 
 借助于K8S良好的可拓展性，使用sidecar模式可以享受到分布式系统中的规模化效率红利。相比于这种效率提升，我们可以容许性能上的开销。
 
+#### 要不要使用sidecar模式
+
+* 在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。
+    * tcp
+    * http
+    * grpc
+* 在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。
+    * 进程内 or 跨进程
+* 此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。
+    * 跨语言
+    * 升级频率
+    * 性能敏感度
+
 ----------------------
 
 ### B、Sidecar模式的模型
 
 #### Pod容器级
 
-#### Node节点级
+#### Pod容器+Node节点级
 
 > 相关文档：https://www.infoq.cn/news/58j970hvYSx2QSEvCESh
 
 ![](https://static001.geekbang.org/infoq/dc/dc52cbb89a14fbb66d224413c310322c.png)
 
+#### Node节点级
+
+DaemonSet
+
 ----------------------
 
 ## 二、Sidecar实现
 
-#### 该如何实现一个sidecar
+#### 怎么实现一个sidecar
 
-* 在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。
-* 在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。
-* 此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。
+sidecar的代码很简单，与写一个webserver类似。
+
+但与 vm/k8s 的自动化集成比较复杂。
 
 ```golang
 func main() {
@@ -67,7 +84,11 @@ func main() {
 }
 ```
 
+### 1. Sidecar自动化集成
+
 ### A、Sidecar VM
+
+手动/脚本 操作：
 
 1. 创建虚拟机
 2. 设置环境变量
@@ -80,58 +101,12 @@ func main() {
 借助 docker-compose.yml 文件，开发人员可定义一组相关服务，通过部署命令将其部署为组合应用程序。 它还配置其依赖项关系和运行时配置。多个容器使用同一个network。
 
 1. dockerfile -> image 
-2. imges      -> docker-compose
-3. docker-compose -> image
+2. images     -> docker-compose
+3. docker-compose -> new image
 
 ![](https://osswangxining.github.io/images/envoy-front-proxy-topology.png)
 
-```yaml
-version: '3.4'
-
-services:
-
-  webmvc:
-    image: eshop/web
-    environment:
-      - CatalogUrl=http://catalog-api
-      - OrderingUrl=http://ordering-api
-    ports:
-      - "80:80"
-    depends_on:
-      - catalog-api
-      - ordering-api
-
-  catalog-api:
-    image: eshop/catalog-api
-    environment:
-      - ConnectionString=Server=sqldata;Port=1433;Database=CatalogDB;…
-    ports:
-      - "81:80"
-    depends_on:
-      - sqldata
-
-  ordering-api:
-    image: eshop/ordering-api
-    environment:
-      - ConnectionString=Server=sqldata;Database=OrderingDb;…
-    ports:
-      - "82:80"
-    extra_hosts:
-      - "CESARDLBOOKVHD:10.0.75.1"
-    depends_on:
-      - sqldata
-
-  sqldata:
-    image: mcr.microsoft.com/mssql/server:latest
-    environment:
-      - SA_PASSWORD=Pass@word
-      - ACCEPT_EULA=Y
-    ports:
-      - "5433:1433"
-```
-
-#### istio dockerfile
-
+istio dockerfile:
 ```shell
 # BASE_DISTRIBUTION is used to switch between the old base distribution and distroless base images
 ARG BASE_DISTRIBUTION=debug
@@ -182,20 +157,61 @@ COPY metadata-exchange-filter.compiled.wasm /etc/istio/extensions/metadata-excha
 
 # The pilot-agent will bootstrap Envoy.
 ENTRYPOINT ["/usr/local/bin/pilot-agent"]
-
 ```
 
-------------------
+docker-compose:
+```yaml
+version: '3.4'
 
-## 四、Sidecar注入
+services:
 
-### A、基于 docker 进行注入
+  webmvc:
+    image: eshop/web
+    environment:
+      - CatalogUrl=http://catalog-api
+      - OrderingUrl=http://ordering-api
+    ports:
+      - "80:80"
+    depends_on:
+      - catalog-api
+      - ordering-api
+
+  catalog-api:
+    image: eshop/catalog-api
+    environment:
+      - ConnectionString=Server=sqldata;Port=1433;Database=CatalogDB;…
+    ports:
+      - "81:80"
+    depends_on:
+      - sqldata
+
+  ordering-api:
+    image: eshop/ordering-api
+    environment:
+      - ConnectionString=Server=sqldata;Database=OrderingDb;…
+    ports:
+      - "82:80"
+    extra_hosts:
+      - "CESARDLBOOKVHD:10.0.75.1"
+    depends_on:
+      - sqldata
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5433:1433"
+```
+
+### C、基于 docker 进行 k8s 注入
 
 Kompose是个转换工具，可将 compose（即 Docker Compose）所组装的所有内容 转换成容器编排器（Kubernetes 或 OpenShift）可识别的形式。
 
 要将 docker-compose.yml 转换为 kubectl 可用的文件，请运行 kompose convert 命令进行转换，然后运行 kubectl create -f <output file> 进行创建。
 
-### B、k8s 控制面进行注入 
+### D、k8s 控制面进行注入 
 
 #### k8s 控制面拓展机制
 
@@ -203,9 +219,13 @@ Kompose是个转换工具，可将 compose（即 Docker Compose）所组装的�
 
 K8S作为云原生操作系统的定位，其设计理念是"微内核"架构。
 
-+ 单体进程，往往采用Filter机制。
+#### 可拓展机制：
+
++ 单体进程，往往采用Filter机制。实现进程内可拓展。
 + 分布式系统，通过webhook机制将自定义插件注入到分布式集群中。
 + in-proxy模式，通过沙箱+远程脚本，实现非侵入性的单体进程内filter机制。
+
+#### k8s webhook
 
 Kubernetes 的 apiserver 一开始就有 AdmissionController 的设计，这个设计和各类 Web 框架中的 Filter 很像，就是一个插件化的责任链，责任链中的每个插件针对 apiserver 收到的请求做一些操作或校验。分类
 
@@ -213,6 +233,8 @@ Kubernetes 的 apiserver 一开始就有 AdmissionController 的设计，这个�
 + ValidatingWebhookConfiguration，校验 api 对象的, 比如校验Pod副本数必须大于2。（无副作用）
 
 Kubernetes 中的许多高级功能需要启用准入控制器才能正确支持该功能。
+
+> 对于在数据持久化之前，拦截到 Kubernetes API server 的请求
 
 ![](https://qiankunli.github.io/public/upload/kubernetes/admission_controller.png)
 
@@ -231,13 +253,38 @@ Kubernetes 中的许多高级功能需要启用准入控制器才能正确支持
 
 #### 1. 编写 Webhook server
 
-> capa-injector: https://github.com/capa-cloud/capa-injector
+```golang
+sidecarConfig, err := loadConfig(parameters.sidecarCfgFile)
+pair, err := tls.LoadX509KeyPair(parameters.certFile, parameters.keyFile)
+
+whsvr := &WebhookServer {
+    sidecarConfig:    sidecarConfig,
+    server:           &http.Server {
+        Addr:        fmt.Sprintf(":%v", 443),
+        TLSConfig:   &tls.Config{Certificates: []tls.Certificate{pair}},
+    },
+}
+	
+// define http server and server handler
+mux := http.NewServeMux()
+mux.HandleFunc("/mutate", whsvr.serve)
+whsvr.server.Handler = mux
+
+// start webhook server in new rountine
+go func() {
+    if err := whsvr.server.ListenAndServeTLS("", ""); err != nil {
+        glog.Errorf("Filed to listen and serve webhook server: %v", err)
+    }
+}()
+```
 
 1. https server: 443
 2. tls: certificate
    1. k8s configmap
 3. api: '/mutate' 
    1. patch
+
+> capa-injector: https://github.com/capa-cloud/capa-injector
 
 #### 2. 编写 Dockerfile 并构建
 
@@ -247,33 +294,146 @@ Kubernetes 中的许多高级功能需要启用准入控制器才能正确支持
 
 #### 3. 编写 Sidecar 注入配置
 
-
-
+1. 创建 configmap
 
 ```yaml
-apiVersion: admissionregistration.k8s.io/v1
-kind: ValidatingWebhookConfiguration
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: "pod-policy.example.com"
-webhooks:
-- name: "pod-policy.example.com"
-  rules:
-  - apiGroups:   [""]
-    apiVersions: ["v1"]
-    operations:  ["CREATE"]
-    resources:   ["pods"]
-    scope:       "Namespaced"
-  clientConfig:
-    service:
-      namespace: "example-namespace"
-      name: "example-service"
-    caBundle: "Ci0tLS0tQk...<base64-encoded PEM bundle containing the CA that signed the webhook's serving certificate>...tLS0K"
-  admissionReviewVersions: ["v1", "v1beta1"]
-  sideEffects: None
-  timeoutSeconds: 5
+   name: sidecar-injector-webhook-configmap
+data:
+   sidecarconfig.yaml: |
+      containers:
+        - name: sidecar-nginx
+          image: nginx:1.12.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-configmap
 ```
 
-### C、自动化和规模化
+#### 4. 创建包含秘钥对的 Secret
+
+由于准入控制是一个高安全性操作，所以对外在的 webhook server 提供 TLS 是必须的。作为流程的一部分，我们需要创建由 Kubernetes CA 签名的 TLS 证书，以确保 webhook server 和 apiserver 之间通信的安全性。
+
+1. 创建CA证书
+2. k8s签发证书
+3. 创建secret
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sidecar-injector
+  namespace: sidecar-injector
+data:
+  tls.crt: |
+    LS0tLS1CRUdJTi...
+  tls.key: |
+    LS0tLS1CRUdJTiBSU0...
+```
+
+#### 5. 创建 Sidecar 注入器的 Deployment 和 Service
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sidecar-injector-webhook-deployment
+  labels:
+    app: sidecar-injector
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sidecar-injector
+    spec:
+      containers:
+        - name: sidecar-injector
+          image: morvencao/sidecar-injector:v1
+          imagePullPolicy: IfNotPresent
+          args:
+            - -sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml
+            - -tlsCertFile=/etc/webhook/certs/cert.pem
+            - -tlsKeyFile=/etc/webhook/certs/key.pem
+            - -alsologtostderr
+            - -v=4
+            - 2>&1
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: /etc/webhook/certs
+              readOnly: true
+            - name: webhook-config
+              mountPath: /etc/webhook/config
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: sidecar-injector-webhook-certs
+        - name: webhook-config
+          configMap:
+            name: sidecar-injector-webhook-configmap
+```
+
++ sidecarCfgFile 指的是 sidecar 注入器的配置文件，挂载自上面创建的 ConfigMap sidecar-injector-webhook-configmap。
++ tlsCertFile 和 tlsKeyFile 是秘钥对，挂载自 Secret injector-webhook-certs。
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+   name: sidecar-injector-webhook-svc
+   labels:
+      app: sidecar-injector
+spec:
+   ports:
+      - port: 443
+        targetPort: 443
+   selector:
+      app: sidecar-injector
+```
+
+这个 Service 会被 MutatingWebhookConfiguration 中定义的 clientConfig 部分访问，默认的端口 spec.ports.port 需要设置为 443。
+
+#### 6. 动态配置 webhook 准入控制器
+
+```yaml
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+   name: sidecar-injector-webhook-cfg
+   labels:
+      app: sidecar-injector
+webhooks:
+   - name: sidecar-injector.morven.me
+     clientConfig:
+        service:
+           name: sidecar-injector-webhook-svc
+           namespace: default
+           path: "/mutate"
+        caBundle: ${CA_BUNDLE}
+     rules:
+        - operations: [ "CREATE" ]
+          apiGroups: [""]
+          apiVersions: ["v1"]
+          resources: ["pods"]
+     namespaceSelector:
+        matchLabels:
+           sidecar-injector: enabled
+```
+
++ ${CA_BUNDLE} - 从k8s apiserver中获取：
+  + > kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}
++ rules - 描述了 webhook server 处理的资源和操作。在我们的例子中，只拦截创建 pods 的请求；
++ namespaceSelector - namespaceSelector 根据资源对象是否匹配 selector 决定了是否针对该资源向 webhook server 发送准入请求。
+
+### E、云原生自动化和规模化
 
 Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulSet、DeamonSet、Job等，还有多种基础资源封装例如ConfigMap、Secret、Serivce等，但是一个应用往往有多个服务，有的可能还要依赖持久化存储，当这些服务之间直接互相依赖，需要有一定的组合的情况下，使用YAML文件的方式配置应用往往十分繁琐还容易出错，这时候就需要服务编排工具。
 
@@ -284,7 +444,9 @@ Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulS
 3. 上传到镜像仓库
 4. 通过k8s包管理工具helm进行安装
 
-### D、Sidecar istio
+> $ helm install istio-base istio/base -n istio-system
+
+### F、Istio 注入
 
 #### sidecar injector 准入控制器
 
@@ -373,11 +535,12 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 * cmd params
 * env variables
 
-##### 2. 静态自定义配置
+##### 2. 自定义配置
 
-可以使用K8S的静态配置进行配置：
+可以使用K8S的配置进行管理：
 
-* k8s config
+* k8s configmap
+  * 热更新
 * k8s crd
 
 ##### 3. 灵活的动态配置
@@ -389,7 +552,7 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 
 ------
 
-## 三、POD/Sidecar
+## 三、Sidecar功能
 
 > 参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y
 
@@ -544,7 +707,7 @@ COMMIT
 
 ------
 
-## 三、Sidecar 发展
+## 四、Sidecar 发展
 
 ### A、sidecar 流量交互
 

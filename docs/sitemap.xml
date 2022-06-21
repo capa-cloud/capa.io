@@ -2,14 +2,14 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <sitemap>
-    <loc>https://capa-cloud.github.io/capa.io/zh/sitemap.xml</loc>
-    
-      <lastmod>2022-06-19T22:42:43+08:00</lastmod>
+    <loc>https://capa-cloud.github.io/capa.io/en/sitemap.xml</loc>
     
   </sitemap>
   
   <sitemap>
-    <loc>https://capa-cloud.github.io/capa.io/en/sitemap.xml</loc>
+    <loc>https://capa-cloud.github.io/capa.io/zh/sitemap.xml</loc>
+    
+      <lastmod>2022-06-21T07:26:15+08:00</lastmod>
     
   </sitemap>
   

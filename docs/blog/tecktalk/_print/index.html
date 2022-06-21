@@ -251,7 +251,7 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar模式: 从Istio Sidecar开始</a></li>
+    <li><a href="#pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar模式 - 从Istio Sidecar开始</a></li>
 
 
 
@@ -1327,7 +1327,7 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
   
 
 <div class="td-content" style="">
-    <h1 id="pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar模式: 从Istio Sidecar开始</h1>
+    <h1 id="pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar模式 - 从Istio Sidecar开始</h1>
 	<div class="lead">Sidecar模式: 从Istio Sidecar开始.</div>
 	<div class="td-byline mb-4">
 		
@@ -1358,29 +1358,52 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
 Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。</li>
 </ul>
 <p>借助于K8S良好的可拓展性，使用sidecar模式可以享受到分布式系统中的规模化效率红利。相比于这种效率提升，我们可以容许性能上的开销。</p>
+<h4 id="要不要使用sidecar模式">要不要使用sidecar模式</h4>
+<ul>
+<li>在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。
+<ul>
+<li>tcp</li>
+<li>http</li>
+<li>grpc</li>
+</ul>
+</li>
+<li>在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。
+<ul>
+<li>进程内 or 跨进程</li>
+</ul>
+</li>
+<li>此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。
+<ul>
+<li>跨语言</li>
+<li>升级频率</li>
+<li>性能敏感度</li>
+</ul>
+</li>
+</ul>
 <hr>
 <h3 id="bsidecar模式的模型">B、Sidecar模式的模型</h3>
 <h4 id="pod容器级">Pod容器级</h4>
-<h4 id="node节点级">Node节点级</h4>
+<h4 id="pod容器node节点级">Pod容器+Node节点级</h4>
 <blockquote>
 <p>相关文档：https://www.infoq.cn/news/58j970hvYSx2QSEvCESh</p>
 </blockquote>
 <p><img src="https://static001.geekbang.org/infoq/dc/dc52cbb89a14fbb66d224413c310322c.png" alt=""></p>
+<h4 id="node节点级">Node节点级</h4>
+<p>DaemonSet</p>
 <hr>
 <h2 id="二sidecar实现">二、Sidecar实现</h2>
-<h4 id="该如何实现一个sidecar">该如何实现一个sidecar</h4>
-<ul>
-<li>在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。</li>
-<li>在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。</li>
-<li>此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。</li>
-</ul>
+<h4 id="怎么实现一个sidecar">怎么实现一个sidecar</h4>
+<p>sidecar的代码很简单，与写一个webserver类似。</p>
+<p>但与 vm/k8s 的自动化集成比较复杂。</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">rootCmd</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Execute</span><span style="color:#000;font-weight:bold">();</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Error</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 		<span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Exit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
 	<span style="color:#000;font-weight:bold">}</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><h3 id="asidecar-vm">A、Sidecar VM</h3>
+</code></pre></div><h3 id="1-sidecar自动化集成">1. Sidecar自动化集成</h3>
+<h3 id="asidecar-vm">A、Sidecar VM</h3>
+<p>手动/脚本 操作：</p>
 <ol>
 <li>创建虚拟机</li>
 <li>设置环境变量</li>
@@ -1392,53 +1415,11 @@ Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。
 <p>借助 docker-compose.yml 文件，开发人员可定义一组相关服务，通过部署命令将其部署为组合应用程序。 它还配置其依赖项关系和运行时配置。多个容器使用同一个network。</p>
 <ol>
 <li>dockerfile -&gt; image</li>
-<li>imges      -&gt; docker-compose</li>
-<li>docker-compose -&gt; image</li>
+<li>images     -&gt; docker-compose</li>
+<li>docker-compose -&gt; new image</li>
 </ol>
 <p><img src="https://osswangxining.github.io/images/envoy-front-proxy-topology.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;3.4&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">services</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">webmvc</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/web</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">CatalogUrl=http://catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">OrderingUrl=http://ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;80:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">catalog-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Port=1433;Database=CatalogDB;…</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;81:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ordering-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Database=OrderingDb;…</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;82:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">extra_hosts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;CESARDLBOOKVHD:10.0.75.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sqldata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">mcr.microsoft.com/mssql/server:latest</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">SA_PASSWORD=Pass@word</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ACCEPT_EULA=Y</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;5433:1433&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><h4 id="istio-dockerfile">istio dockerfile</h4>
+<p>istio dockerfile:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8f5902;font-style:italic"># BASE_DISTRIBUTION is used to switch between the old base distribution and distroless base images</span>
 ARG <span style="color:#000">BASE_DISTRIBUTION</span><span style="color:#ce5c00;font-weight:bold">=</span>debug
 
@@ -1488,29 +1469,74 @@ COPY metadata-exchange-filter.compiled.wasm /etc/istio/extensions/metadata-excha
 
 <span style="color:#8f5902;font-style:italic"># The pilot-agent will bootstrap Envoy.</span>
 ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="color:#4e9a06">&#34;/usr/local/bin/pilot-agent&#34;</span><span style="color:#ce5c00;font-weight:bold">]</span>
-
-</code></pre></div><hr>
-<h2 id="四sidecar注入">四、Sidecar注入</h2>
-<h3 id="a基于-docker-进行注入">A、基于 docker 进行注入</h3>
+</code></pre></div><p>docker-compose:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;3.4&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">services</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">webmvc</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/web</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">CatalogUrl=http://catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">OrderingUrl=http://ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;80:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">catalog-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Port=1433;Database=CatalogDB;…</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;81:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ordering-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Database=OrderingDb;…</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;82:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">extra_hosts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;CESARDLBOOKVHD:10.0.75.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sqldata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">mcr.microsoft.com/mssql/server:latest</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">SA_PASSWORD=Pass@word</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ACCEPT_EULA=Y</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;5433:1433&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><h3 id="c基于-docker-进行-k8s-注入">C、基于 docker 进行 k8s 注入</h3>
 <p>Kompose是个转换工具，可将 compose（即 Docker Compose）所组装的所有内容 转换成容器编排器（Kubernetes 或 OpenShift）可识别的形式。</p>
 <p>要将 docker-compose.yml 转换为 kubectl 可用的文件，请运行 kompose convert 命令进行转换，然后运行 kubectl create -f <output file> 进行创建。</p>
-<h3 id="bk8s-控制面进行注入">B、k8s 控制面进行注入</h3>
+<h3 id="dk8s-控制面进行注入">D、k8s 控制面进行注入</h3>
 <h4 id="k8s-控制面拓展机制">k8s 控制面拓展机制</h4>
 <blockquote>
 <p>参考文章：https://blog.hdls.me/15564491070483.html</p>
 </blockquote>
 <p>K8S作为云原生操作系统的定位，其设计理念是&quot;微内核&quot;架构。</p>
+<h4 id="可拓展机制">可拓展机制：</h4>
 <ul>
-<li>单体进程，往往采用Filter机制。</li>
+<li>单体进程，往往采用Filter机制。实现进程内可拓展。</li>
 <li>分布式系统，通过webhook机制将自定义插件注入到分布式集群中。</li>
 <li>in-proxy模式，通过沙箱+远程脚本，实现非侵入性的单体进程内filter机制。</li>
 </ul>
+<h4 id="k8s-webhook">k8s webhook</h4>
 <p>Kubernetes 的 apiserver 一开始就有 AdmissionController 的设计，这个设计和各类 Web 框架中的 Filter 很像，就是一个插件化的责任链，责任链中的每个插件针对 apiserver 收到的请求做一些操作或校验。分类</p>
 <ul>
 <li>MutatingWebhookConfiguration，操作 api 对象的， 会对request的resource，进行转换，比如填充默认的request/limit（有副作用）</li>
 <li>ValidatingWebhookConfiguration，校验 api 对象的, 比如校验Pod副本数必须大于2。（无副作用）</li>
 </ul>
 <p>Kubernetes 中的许多高级功能需要启用准入控制器才能正确支持该功能。</p>
+<blockquote>
+<p>对于在数据持久化之前，拦截到 Kubernetes API server 的请求</p>
+</blockquote>
 <p><img src="https://qiankunli.github.io/public/upload/kubernetes/admission_controller.png" alt=""></p>
 <h4 id="k8s准入控制器">K8S准入控制器</h4>
 <p>通过创建webhook资源，利用k8s的webhook能力实现pod的自动注入。</p>
@@ -1522,10 +1548,29 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 </ol>
 <h3 id="实现一个k8s-sidecar注入控制器">实现一个K8S Sidecar注入控制器</h3>
 <h4 id="1-编写-webhook-server">1. 编写 Webhook server</h4>
-<blockquote>
-<p>capa-injector: <a href="https://github.com/capa-cloud/capa-injector">https://github.com/capa-cloud/capa-injector</a></p>
-</blockquote>
-<ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000">sidecarConfig</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">loadConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">parameters</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">sidecarCfgFile</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">pair</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">tls</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadX509KeyPair</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">parameters</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">certFile</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">parameters</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">keyFile</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">whsvr</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">WebhookServer</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">sidecarConfig</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">sidecarConfig</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#000">server</span><span style="color:#000;font-weight:bold">:</span>           <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">http</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Server</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">Addr</span><span style="color:#000;font-weight:bold">:</span>        <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Sprintf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;:%v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">443</span><span style="color:#000;font-weight:bold">),</span>
+        <span style="color:#000">TLSConfig</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">tls</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Config</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Certificates</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[]</span><span style="color:#000">tls</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Certificate</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">pair</span><span style="color:#000;font-weight:bold">}},</span>
+    <span style="color:#000;font-weight:bold">},</span>
+<span style="color:#000;font-weight:bold">}</span>
+	
+<span style="color:#8f5902;font-style:italic">// define http server and server handler
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">mux</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">http</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewServeMux</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#000">mux</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;/mutate&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">whsvr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">serve</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">whsvr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">server</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Handler</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">mux</span>
+
+<span style="color:#8f5902;font-style:italic">// start webhook server in new rountine
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">go</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">whsvr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">server</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListenAndServeTLS</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">glog</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Filed to listen and serve webhook server: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}()</span>
+</code></pre></div><ol>
 <li>https server: 443</li>
 <li>tls: certificate
 <ol>
@@ -1538,6 +1583,9 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 </ol>
 </li>
 </ol>
+<blockquote>
+<p>capa-injector: <a href="https://github.com/capa-cloud/capa-injector">https://github.com/capa-cloud/capa-injector</a></p>
+</blockquote>
 <h4 id="2-编写-dockerfile-并构建">2. 编写 Dockerfile 并构建</h4>
 <ol>
 <li>创建dockerfile镜像文件</li>
@@ -1545,27 +1593,137 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>上传镜像到dockerhub</li>
 </ol>
 <h4 id="3-编写-sidecar-注入配置">3. 编写 Sidecar 注入配置</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">admissionregistration.k8s.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ValidatingWebhookConfiguration</span><span style="color:#f8f8f8;text-decoration:underline">
+<ol>
+<li>创建 configmap</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;pod-policy.example.com&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-configmap</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">sidecarconfig.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span><span style="color:#8f5902;font-style:italic">      containers:
+</span><span style="color:#8f5902;font-style:italic">        - name: sidecar-nginx
+</span><span style="color:#8f5902;font-style:italic">          image: nginx:1.12.2
+</span><span style="color:#8f5902;font-style:italic">          imagePullPolicy: IfNotPresent
+</span><span style="color:#8f5902;font-style:italic">          ports:
+</span><span style="color:#8f5902;font-style:italic">            - containerPort: 80
+</span><span style="color:#8f5902;font-style:italic">          volumeMounts:
+</span><span style="color:#8f5902;font-style:italic">            - name: nginx-conf
+</span><span style="color:#8f5902;font-style:italic">              mountPath: /etc/nginx
+</span><span style="color:#8f5902;font-style:italic">      volumes:
+</span><span style="color:#8f5902;font-style:italic">        - name: nginx-conf
+</span><span style="color:#8f5902;font-style:italic">          configMap:
+</span><span style="color:#8f5902;font-style:italic">            name: nginx-configmap</span><span style="color:#f8f8f8;text-decoration:underline">      
+</span></code></pre></div><h4 id="4-创建包含秘钥对的-secret">4. 创建包含秘钥对的 Secret</h4>
+<p>由于准入控制是一个高安全性操作，所以对外在的 webhook server 提供 TLS 是必须的。作为流程的一部分，我们需要创建由 Kubernetes CA 签名的 TLS 证书，以确保 webhook server 和 apiserver 之间通信的安全性。</p>
+<ol>
+<li>创建CA证书</li>
+<li>k8s签发证书</li>
+<li>创建secret</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tls.crt</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span><span style="color:#8f5902;font-style:italic">    </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">LS0tLS1CRUdJTi...</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tls.key</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span><span style="color:#8f5902;font-style:italic">    </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">LS0tLS1CRUdJTiBSU0...</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><h4 id="5-创建-sidecar-注入器的-deployment-和-service">5. 创建 Sidecar 注入器的 Deployment 和 Service</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">extensions/v1beta1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Deployment</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-deployment</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">template</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">containers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">morvencao/sidecar-injector:v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">imagePullPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">IfNotPresent</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">args</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">tlsCertFile=/etc/webhook/certs/cert.pem</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">tlsKeyFile=/etc/webhook/certs/key.pem</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">alsologtostderr</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">v=4</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000">&gt;&amp;1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">volumeMounts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span><span style="color:#204a87;font-weight:bold">mountPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/webhook/certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span><span style="color:#204a87;font-weight:bold">readOnly</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-config</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span><span style="color:#204a87;font-weight:bold">mountPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/webhook/config</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">secret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">secretName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-config</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">configMap</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-configmap</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><ul>
+<li>sidecarCfgFile 指的是 sidecar 注入器的配置文件，挂载自上面创建的 ConfigMap sidecar-injector-webhook-configmap。</li>
+<li>tlsCertFile 和 tlsKeyFile 是秘钥对，挂载自 Secret injector-webhook-certs。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-svc</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">targetPort</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">selector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>这个 Service 会被 MutatingWebhookConfiguration 中定义的 clientConfig 部分访问，默认的端口 spec.ports.port 需要设置为 443。</p>
+<h4 id="6-动态配置-webhook-准入控制器">6. 动态配置 webhook 准入控制器</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">admissionregistration.k8s.io/v1beta1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MutatingWebhookConfiguration</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-cfg</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">webhooks</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;pod-policy.example.com&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">rules</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">apiGroups</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">apiVersions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;v1&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">operations</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;CREATE&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;pods&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">scope</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#4e9a06">&#34;Namespaced&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">clientConfig</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">service</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;example-namespace&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;example-service&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">caBundle</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Ci0tLS0tQk...&lt;base64-encoded PEM bundle containing the CA that signed the webhook&#39;s serving certificate&gt;...tLS0K&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">admissionReviewVersions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;v1&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;v1beta1&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sideEffects</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">None</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">timeoutSeconds</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">5</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><h3 id="c自动化和规模化">C、自动化和规模化</h3>
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector.morven.me</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">clientConfig</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">service</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-svc</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">default</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/mutate&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">caBundle</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">${CA_BUNDLE}</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">rules</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">operations</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;CREATE&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">apiGroups</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">apiVersions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;v1&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;pods&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">namespaceSelector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">matchLabels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">sidecar-injector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">enabled</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><ul>
+<li>${CA_BUNDLE} - 从k8s apiserver中获取：
+<ul>
+<li>
+<blockquote>
+<p>kubectl config view &ndash;raw &ndash;minify &ndash;flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>rules - 描述了 webhook server 处理的资源和操作。在我们的例子中，只拦截创建 pods 的请求；</li>
+<li>namespaceSelector - namespaceSelector 根据资源对象是否匹配 selector 决定了是否针对该资源向 webhook server 发送准入请求。</li>
+</ul>
+<h3 id="e云原生自动化和规模化">E、云原生自动化和规模化</h3>
 <p>Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulSet、DeamonSet、Job等，还有多种基础资源封装例如ConfigMap、Secret、Serivce等，但是一个应用往往有多个服务，有的可能还要依赖持久化存储，当这些服务之间直接互相依赖，需要有一定的组合的情况下，使用YAML文件的方式配置应用往往十分繁琐还容易出错，这时候就需要服务编排工具。</p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_2.png" alt=""></p>
 <ol>
@@ -1574,7 +1732,10 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>上传到镜像仓库</li>
 <li>通过k8s包管理工具helm进行安装</li>
 </ol>
-<h3 id="dsidecar-istio">D、Sidecar istio</h3>
+<blockquote>
+<p>$ helm install istio-base istio/base -n istio-system</p>
+</blockquote>
+<h3 id="fistio-注入">F、Istio 注入</h3>
 <h4 id="sidecar-injector-准入控制器">sidecar injector 准入控制器</h4>
 <p>Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAdmissionWebhooks 自动将 Sidecar 代理注入至用户 Pod。</p>
 <p>它使用 MutatingWebhook 机制在 pod 创建的时候将 sidecar 的容器和卷添加到每个 pod 的模版里。</p>
@@ -1653,10 +1814,14 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>cmd params</li>
 <li>env variables</li>
 </ul>
-<h5 id="2-静态自定义配置">2. 静态自定义配置</h5>
-<p>可以使用K8S的静态配置进行配置：</p>
+<h5 id="2-自定义配置">2. 自定义配置</h5>
+<p>可以使用K8S的配置进行管理：</p>
 <ul>
-<li>k8s config</li>
+<li>k8s configmap
+<ul>
+<li>热更新</li>
+</ul>
+</li>
 <li>k8s crd</li>
 </ul>
 <h5 id="3-灵活的动态配置">3. 灵活的动态配置</h5>
@@ -1666,7 +1831,7 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>Configuration(Nacos/&hellip;)</li>
 </ul>
 <hr>
-<h2 id="三podsidecar">三、POD/Sidecar</h2>
+<h2 id="三sidecar功能">三、Sidecar功能</h2>
 <blockquote>
 <p>参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y</p>
 </blockquote>
@@ -1773,7 +1938,7 @@ COMMIT
 <p><img src="https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg" alt=""></p>
 <p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg" alt=""></p>
 <hr>
-<h2 id="三sidecar-发展">三、Sidecar 发展</h2>
+<h2 id="四sidecar-发展">四、Sidecar 发展</h2>
 <h3 id="asidecar-流量交互">A、sidecar 流量交互</h3>
 <p>要实现 应用容器(进程) 和 Sidecar容器(进程) 之间的交互。需要完成流量交互的功能。</p>
 <h3 id="流量交互模式">流量交互模式</h3>
