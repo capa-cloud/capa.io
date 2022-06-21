@@ -78,7 +78,7 @@ Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。
 &lt;h4 id=&#34;node节点级&#34;&gt;Node节点级&lt;/h4&gt;
 &lt;p&gt;DaemonSet&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;二sidecar实现&#34;&gt;二、Sidecar实现&lt;/h2&gt;
+&lt;h2 id=&#34;二sidecar集成&#34;&gt;二、Sidecar集成&lt;/h2&gt;
 &lt;h4 id=&#34;怎么实现一个sidecar&#34;&gt;怎么实现一个sidecar&lt;/h4&gt;
 &lt;p&gt;sidecar的代码很简单，与写一个webserver类似。&lt;/p&gt;
 &lt;p&gt;但与 vm/k8s 的自动化集成比较复杂。&lt;/p&gt;
@@ -518,7 +518,7 @@ ENTRYPOINT &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span
 &lt;li&gt;Configuration(Nacos/&amp;hellip;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;三sidecar交互&#34;&gt;三、Sidecar交互&lt;/h2&gt;
+&lt;h2 id=&#34;三sidecar架构&#34;&gt;三、Sidecar架构&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -573,7 +573,11 @@ iptables -t nat --list
 &lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Start the initialization script on container startup.&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ENTRYPOINT&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;init.sh&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#a40000&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;bistio-proxy容器&#34;&gt;B、istio-proxy容器&lt;/h3&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;自定义流量拦截sidecar&#34;&gt;自定义流量拦截sidecar&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;capa&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;bistio-proxy容器&#34;&gt;B、istio-proxy容器&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://i.loli.net/2018/09/09/5b94b1c621c56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;使用单容器多进程模型。&lt;/p&gt;
 &lt;h4 id=&#34;1-pilot-agent进程&#34;&gt;1. pilot agent进程&lt;/h4&gt;
@@ -645,10 +649,6 @@ COMMIT
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/&#34;&gt;https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;e自定义流量拦截sidecar&#34;&gt;E、自定义流量拦截sidecar&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;capa&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;四sidecar-发展&#34;&gt;四、Sidecar 发展&lt;/h2&gt;

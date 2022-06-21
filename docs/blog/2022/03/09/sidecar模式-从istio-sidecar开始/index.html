@@ -28,12 +28,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://capa-cloud.github.io/capa.io/blog/2022/03/09/sidecar%E6%A8%A1%E5%BC%8F-%E4%BB%8Eistio-sidecar%E5%BC%80%E5%A7%8B/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-03-09T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-06-21T11:37:31+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2022-06-21T12:24:45+08:00" /><meta property="og:site_name" content="Capa" />
 
 <meta itemprop="name" content="Sidecar模式 - 从Istio Sidecar开始">
 <meta itemprop="description" content="Sidecar模式: 从Istio Sidecar开始.
 "><meta itemprop="datePublished" content="2022-03-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-06-21T11:37:31+08:00" />
+<meta itemprop="dateModified" content="2022-06-21T12:24:45+08:00" />
 <meta itemprop="wordCount" content="1500">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Sidecar模式 - 从Istio Sidecar开始"/>
@@ -613,7 +613,7 @@ if (!doNotTrack) {
         <li><a href="#bsidecar模式的模型">B、Sidecar模式的模型</a></li>
       </ul>
     </li>
-    <li><a href="#二sidecar实现">二、Sidecar实现</a>
+    <li><a href="#二sidecar集成">二、Sidecar集成</a>
       <ul>
         <li></li>
         <li><a href="#1-sidecar自动化集成">1. Sidecar自动化集成</a></li>
@@ -626,14 +626,13 @@ if (!doNotTrack) {
         <li><a href="#fistio-注入">F、Istio 注入</a></li>
       </ul>
     </li>
-    <li><a href="#三sidecar交互">三、Sidecar交互</a>
+    <li><a href="#三sidecar架构">三、Sidecar架构</a>
       <ul>
         <li></li>
         <li><a href="#aistio-init容器">A、istio-init容器</a></li>
         <li><a href="#bistio-proxy容器">B、istio-proxy容器</a></li>
         <li><a href="#csidecar多进程设计模式">C、sidecar多进程设计模式</a></li>
         <li><a href="#d流量拦截">D、流量拦截</a></li>
-        <li><a href="#e自定义流量拦截sidecar">E、自定义流量拦截sidecar</a></li>
       </ul>
     </li>
     <li><a href="#四sidecar-发展">四、Sidecar 发展</a>
@@ -760,7 +759,7 @@ Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。
 <h4 id="node节点级">Node节点级</h4>
 <p>DaemonSet</p>
 <hr>
-<h2 id="二sidecar实现">二、Sidecar实现</h2>
+<h2 id="二sidecar集成">二、Sidecar集成</h2>
 <h4 id="怎么实现一个sidecar">怎么实现一个sidecar</h4>
 <p>sidecar的代码很简单，与写一个webserver类似。</p>
 <p>但与 vm/k8s 的自动化集成比较复杂。</p>
@@ -1200,7 +1199,7 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>Configuration(Nacos/&hellip;)</li>
 </ul>
 <hr>
-<h2 id="三sidecar交互">三、Sidecar交互</h2>
+<h2 id="三sidecar架构">三、Sidecar架构</h2>
 <blockquote>
 <p>参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y</p>
 </blockquote>
@@ -1255,7 +1254,11 @@ iptables -t nat --list
 </span><span style="color:#a40000">
 </span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Start the initialization script on container startup.</span><span style="color:#a40000">
 </span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">ENTRYPOINT</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;init.sh&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#a40000">
-</span></code></pre></div><h3 id="bistio-proxy容器">B、istio-proxy容器</h3>
+</span></code></pre></div><h4 id="自定义流量拦截sidecar">自定义流量拦截sidecar</h4>
+<blockquote>
+<p>capa</p>
+</blockquote>
+<h3 id="bistio-proxy容器">B、istio-proxy容器</h3>
 <p><img src="https://i.loli.net/2018/09/09/5b94b1c621c56.png" alt=""></p>
 <p>使用单容器多进程模型。</p>
 <h4 id="1-pilot-agent进程">1. pilot agent进程</h4>
@@ -1327,10 +1330,6 @@ COMMIT
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_6.png" alt=""></p>
 <blockquote>
 <p><a href="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/">https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/</a></p>
-</blockquote>
-<h3 id="e自定义流量拦截sidecar">E、自定义流量拦截sidecar</h3>
-<blockquote>
-<p>capa</p>
 </blockquote>
 <hr>
 <h2 id="四sidecar-发展">四、Sidecar 发展</h2>

@@ -67,7 +67,7 @@ DaemonSet
 
 ----------------------
 
-## 二、Sidecar实现
+## 二、Sidecar集成
 
 #### 怎么实现一个sidecar
 
@@ -552,7 +552,7 @@ Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAd
 
 ------
 
-## 三、Sidecar交互
+## 三、Sidecar架构
 
 > 参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y
 
@@ -627,6 +627,10 @@ RUN chmod +x /usr/local/bin/init.sh
 # Start the initialization script on container startup.
 ENTRYPOINT ["init.sh"]
 ```
+
+#### 自定义流量拦截sidecar
+
+> capa
 
 ### B、istio-proxy容器
 
@@ -727,10 +731,6 @@ COMMIT
 ![](https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_6.png)
 
 > https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/
-
-### E、自定义流量拦截sidecar
-
-> capa
 
 ------
 
