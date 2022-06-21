@@ -17,27 +17,27 @@
 <link rel="icon" type="image/png" href="/capa.io/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/capa.io/favicons/android-192x192.png" sizes="192x192">
 
-<title>Istio Landscape | Capa</title>
+<title>Sidecar设计模式 - 参考Istio Sidecar | Capa</title>
 
 
-  <meta name="description" content="Istio Landscape.
+  <meta name="description" content="Sidecar设计模式: 参考Istio Sidecar.
 ">
-<meta property="og:title" content="Istio Landscape" />
-<meta property="og:description" content="Istio Landscape.
+<meta property="og:title" content="Sidecar设计模式 - 参考Istio Sidecar" />
+<meta property="og:description" content="Sidecar设计模式: 参考Istio Sidecar.
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-landscape/" /><meta property="article:section" content="blog" />
+<meta property="og:url" content="https://capa-cloud.github.io/capa.io/blog/2022/03/09/sidecar%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8F%82%E8%80%83istio-sidecar/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-03-09T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-05-21T23:15:12+08:00" /><meta property="og:site_name" content="Capa" />
+<meta property="article:modified_time" content="2022-06-21T13:48:35+08:00" /><meta property="og:site_name" content="Capa" />
 
-<meta itemprop="name" content="Istio Landscape">
-<meta itemprop="description" content="Istio Landscape.
+<meta itemprop="name" content="Sidecar设计模式 - 参考Istio Sidecar">
+<meta itemprop="description" content="Sidecar设计模式: 参考Istio Sidecar.
 "><meta itemprop="datePublished" content="2022-03-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-05-21T23:15:12+08:00" />
-<meta itemprop="wordCount" content="1142">
+<meta itemprop="dateModified" content="2022-06-21T13:48:35+08:00" />
+<meta itemprop="wordCount" content="1539">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Istio Landscape"/>
-<meta name="twitter:description" content="Istio Landscape.
+<meta name="twitter:title" content="Sidecar设计模式 - 参考Istio Sidecar"/>
+<meta name="twitter:description" content="Sidecar设计模式: 参考Istio Sidecar.
 "/>
 
 
@@ -164,13 +164,13 @@ if (!doNotTrack) {
   <script>
     $(function() {
     $("#td-section-nav a").removeClass("active");
-    $("#td-section-nav #m-capaioblog20220309istio-landscape").addClass("active"); 
-    $("#td-section-nav #m-capaioblog20220309istio-landscape-li span").addClass("td-sidebar-nav-active-item"); 
-    $("#td-section-nav #m-capaioblog20220309istio-landscape").parents("li").addClass("active-path"); 
+    $("#td-section-nav #m-capaioblog20220309sidecare8aebee8aea1e6a8a1e5bc8f-e58f82e88083istio-sidecar").addClass("active"); 
+    $("#td-section-nav #m-capaioblog20220309sidecare8aebee8aea1e6a8a1e5bc8f-e58f82e88083istio-sidecar-li span").addClass("td-sidebar-nav-active-item"); 
+    $("#td-section-nav #m-capaioblog20220309sidecare8aebee8aea1e6a8a1e5bc8f-e58f82e88083istio-sidecar").parents("li").addClass("active-path"); 
     $("#td-section-nav li.active-path").addClass("show"); 
     $("#td-section-nav li.active-path").children("input").prop('checked', true);
-    $("#td-section-nav #m-capaioblog20220309istio-landscape-li").siblings("li").addClass("show");  
-    $("#td-section-nav #m-capaioblog20220309istio-landscape-li").children("ul").children("li").addClass("show");  
+    $("#td-section-nav #m-capaioblog20220309sidecare8aebee8aea1e6a8a1e5bc8f-e58f82e88083istio-sidecar-li").siblings("li").addClass("show");  
+    $("#td-section-nav #m-capaioblog20220309sidecare8aebee8aea1e6a8a1e5bc8f-e58f82e88083istio-sidecar-li").children("ul").children("li").addClass("show");  
     $("#td-sidebar-menu").toggleClass("d-none"); 
     });
   </script>
@@ -587,9 +587,9 @@ if (!doNotTrack) {
     
     
 
-    <a href="https://github.com/capa-cloud/capa/edit/master/content/zh/blog/cloudstack/istio/istio-landscape.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
-    <a href="https://github.com/capa-cloud/capa/new/master/content/zh/blog/cloudstack/istio/istio-landscape.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
-    <a href="https://github.com/capa-cloud/capa/issues/new?title=Istio%20Landscape" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
+    <a href="https://github.com/capa-cloud/capa/edit/master/content/zh/blog/tecktalk/references/sidecar.md" target="_blank"><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+    <a href="https://github.com/capa-cloud/capa/new/master/content/zh/blog/tecktalk/references/sidecar.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
+    <a href="https://github.com/capa-cloud/capa/issues/new?title=Sidecar%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f%20-%20%e5%8f%82%e8%80%83Istio%20Sidecar" target="_blank"><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
     
       
       <a href="https://github.com/capa-cloud/capa/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
@@ -597,7 +597,7 @@ if (!doNotTrack) {
 
   
   
-    <a id="print" href="https://capa-cloud.github.io/capa.io/blog/cloudstack/istio/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
+    <a id="print" href="https://capa-cloud.github.io/capa.io/blog/tecktalk/references/_print/"><i class="fa fa-print fa-fw"></i> 整节打印</a>
   
   </div>
 
@@ -607,33 +607,48 @@ if (!doNotTrack) {
 
 <div class="td-toc"><nav id="TableOfContents">
   <ul>
-    <li><a href="#一istio-sidecar">一、Istio Sidecar</a>
+    <li><a href="#一sidecar模式介绍">一、Sidecar模式介绍</a>
+      <ul>
+        <li><a href="#asidecar模式是什么">A、Sidecar模式是什么</a></li>
+        <li><a href="#bsidecar模式的模型">B、Sidecar模式的模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#二sidecar集成">二、Sidecar集成</a>
       <ul>
         <li></li>
-        <li><a href="#sidecar实现">Sidecar实现</a></li>
+        <li><a href="#1-sidecar自动化集成">1. Sidecar自动化集成</a></li>
         <li><a href="#asidecar-vm">A、Sidecar VM</a></li>
         <li><a href="#bsidecar-docker">B、Sidecar docker</a></li>
-        <li><a href="#csidecar-k8s">C、Sidecar k8s</a></li>
-        <li><a href="#dsidecar-istio">D、Sidecar istio</a></li>
+        <li><a href="#c基于-docker-进行-k8s-注入">C、基于 docker 进行 k8s 注入</a></li>
+        <li><a href="#dk8s-控制面进行注入">D、k8s 控制面进行注入</a></li>
+        <li><a href="#实现一个k8s-sidecar注入控制器">实现一个K8S Sidecar注入控制器</a></li>
+        <li><a href="#e云原生自动化和规模化">E、云原生自动化和规模化</a></li>
+        <li><a href="#fistio-注入">F、Istio 注入</a></li>
       </ul>
     </li>
-    <li><a href="#二istio-polit-agent">二、Istio polit-agent</a>
+    <li><a href="#三sidecar架构">三、Sidecar架构</a>
       <ul>
         <li></li>
-        <li><a href="#aistio-sidecar-结构">A、istio sidecar 结构</a></li>
-        <li><a href="#istio-init容器">istio-init容器</a></li>
-        <li><a href="#istio-proxy容器">istio-proxy容器</a></li>
-        <li><a href="#sidecar多进程设计模式">sidecar多进程设计模式</a></li>
-        <li><a href="#b流量拦截">B、流量拦截</a></li>
+        <li><a href="#aistio-init容器">A、istio-init容器</a></li>
+        <li><a href="#bistio-proxy容器">B、istio-proxy容器</a></li>
+        <li><a href="#csidecar多进程设计模式">C、sidecar多进程设计模式</a></li>
+        <li><a href="#d流量拦截">D、流量拦截</a></li>
       </ul>
     </li>
-    <li><a href="#三sidecar-发展">三、Sidecar 发展</a>
+    <li><a href="#四sidecar-发展">四、Sidecar 发展</a>
       <ul>
         <li><a href="#asidecar-流量交互">A、sidecar 流量交互</a></li>
         <li><a href="#流量交互模式">流量交互模式</a></li>
         <li><a href="#bmulti-sidecar">B、multi sidecar</a></li>
         <li><a href="#csidecar-拓展性">C、sidecar 拓展性</a></li>
         <li><a href="#e其他">E、其他</a></li>
+      </ul>
+    </li>
+    <li><a href="#五capa-sidecar">五、Capa Sidecar</a>
+      <ul>
+        <li><a href="#afeature">A、Feature</a></li>
+        <li><a href="#b控制面设计">B、控制面设计</a></li>
+        <li><a href="#c交互形态">C、交互形态</a></li>
       </ul>
     </li>
   </ul>
@@ -669,13 +684,13 @@ if (!doNotTrack) {
 
           </aside>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
-            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://capa-cloud.github.io/capa.io/blog/cloudstack/istio/index.xml" target="_blank">
+            <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href="https://capa-cloud.github.io/capa.io/blog/tecktalk/references/index.xml" target="_blank">
               RSS <i class="fa fa-rss ml-2 "></i>
             </a>
             
 <div class="td-content">
-	<h1>Istio Landscape</h1>
-	<div class="lead">Istio Landscape.</div>
+	<h1>Sidecar设计模式 - 参考Istio Sidecar</h1>
+	<div class="lead">Sidecar设计模式: 参考Istio Sidecar.</div>
 	<div class="td-byline mb-4">
 		
 		<time datetime="2022-03-09" class="text-muted">09.03.2022</time>
@@ -698,8 +713,8 @@ if (!doNotTrack) {
 	<blockquote>
 <p>参考文档：https://www.servicemesher.com/istio-handbook/concepts/sidecar-injection.html</p>
 </blockquote>
-<h2 id="一istio-sidecar">一、Istio Sidecar</h2>
-<h4 id="sidecar模式是什么">Sidecar模式是什么</h4>
+<h2 id="一sidecar模式介绍">一、Sidecar模式介绍</h2>
+<h3 id="asidecar模式是什么">A、Sidecar模式是什么</h3>
 <p>Sidecar模式是一种<strong>单节点、多容器</strong>的应用设计形式。Sidecar主张以额外的容器来扩展或增强主容器,而这个额外的容器被称为Sidecar容器</p>
 <p>sidecar 模式也符合当前微服务的以下特点:</p>
 <ul>
@@ -717,22 +732,53 @@ if (!doNotTrack) {
 <li>因为不再需要编写相同的第三方组件配置文件和代码，所以能够降低微服务架构中的代码重复度。
 Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。</li>
 </ul>
-<h4 id="sidecar模式">Sidecar模式</h4>
 <p>借助于K8S良好的可拓展性，使用sidecar模式可以享受到分布式系统中的规模化效率红利。相比于这种效率提升，我们可以容许性能上的开销。</p>
-<h3 id="sidecar实现">Sidecar实现</h3>
-<h4 id="该如何实现一个sidecar">该如何实现一个sidecar</h4>
+<h4 id="要不要使用sidecar模式">要不要使用sidecar模式</h4>
 <ul>
-<li>在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。</li>
-<li>在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。</li>
-<li>此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。</li>
+<li>在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。
+<ul>
+<li>tcp</li>
+<li>http</li>
+<li>grpc</li>
 </ul>
+</li>
+<li>在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。
+<ul>
+<li>进程内 or 跨进程</li>
+</ul>
+</li>
+<li>此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。
+<ul>
+<li>跨语言</li>
+<li>升级频率</li>
+<li>性能敏感度</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="bsidecar模式的模型">B、Sidecar模式的模型</h3>
+<h4 id="pod容器级">Pod容器级</h4>
+<h4 id="pod容器node节点级">Pod容器+Node节点级</h4>
+<blockquote>
+<p>相关文档：https://www.infoq.cn/news/58j970hvYSx2QSEvCESh</p>
+</blockquote>
+<p><img src="https://static001.geekbang.org/infoq/dc/dc52cbb89a14fbb66d224413c310322c.png" alt=""></p>
+<h4 id="node节点级">Node节点级</h4>
+<p>DaemonSet</p>
+<hr>
+<h2 id="二sidecar集成">二、Sidecar集成</h2>
+<h4 id="怎么实现一个sidecar">怎么实现一个sidecar</h4>
+<p>sidecar的代码很简单，与写一个webserver类似。</p>
+<p>但与 vm/k8s 的自动化集成比较复杂。</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">rootCmd</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Execute</span><span style="color:#000;font-weight:bold">();</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Error</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 		<span style="color:#000">os</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Exit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">)</span>
 	<span style="color:#000;font-weight:bold">}</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><h3 id="asidecar-vm">A、Sidecar VM</h3>
+</code></pre></div><h3 id="1-sidecar自动化集成">1. Sidecar自动化集成</h3>
+<h3 id="asidecar-vm">A、Sidecar VM</h3>
+<p>手动/脚本 操作：</p>
 <ol>
 <li>创建虚拟机</li>
 <li>设置环境变量</li>
@@ -744,53 +790,11 @@ Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。
 <p>借助 docker-compose.yml 文件，开发人员可定义一组相关服务，通过部署命令将其部署为组合应用程序。 它还配置其依赖项关系和运行时配置。多个容器使用同一个network。</p>
 <ol>
 <li>dockerfile -&gt; image</li>
-<li>imges      -&gt; docker-compose</li>
-<li>docker-compose -&gt; image</li>
+<li>images     -&gt; docker-compose</li>
+<li>docker-compose -&gt; new image</li>
 </ol>
 <p><img src="https://osswangxining.github.io/images/envoy-front-proxy-topology.png" alt=""></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;3.4&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">services</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">webmvc</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/web</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">CatalogUrl=http://catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">OrderingUrl=http://ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;80:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">catalog-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Port=1433;Database=CatalogDB;…</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;81:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ordering-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Database=OrderingDb;…</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;82:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">extra_hosts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;CESARDLBOOKVHD:10.0.75.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sqldata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">mcr.microsoft.com/mssql/server:latest</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">SA_PASSWORD=Pass@word</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ACCEPT_EULA=Y</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;5433:1433&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><h4 id="istio-dockerfile">istio dockerfile</h4>
+<p>istio dockerfile:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8f5902;font-style:italic"># BASE_DISTRIBUTION is used to switch between the old base distribution and distroless base images</span>
 ARG <span style="color:#000">BASE_DISTRIBUTION</span><span style="color:#ce5c00;font-weight:bold">=</span>debug
 
@@ -840,25 +844,74 @@ COPY metadata-exchange-filter.compiled.wasm /etc/istio/extensions/metadata-excha
 
 <span style="color:#8f5902;font-style:italic"># The pilot-agent will bootstrap Envoy.</span>
 ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="color:#4e9a06">&#34;/usr/local/bin/pilot-agent&#34;</span><span style="color:#ce5c00;font-weight:bold">]</span>
-
-</code></pre></div><h3 id="csidecar-k8s">C、Sidecar k8s</h3>
-<h4 id="1基于docker进行注入">1、基于docker进行注入</h4>
+</code></pre></div><p>docker-compose:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">version</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;3.4&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">services</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">webmvc</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/web</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">CatalogUrl=http://catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">OrderingUrl=http://ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;80:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">catalog-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/catalog-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Port=1433;Database=CatalogDB;…</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;81:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ordering-api</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">eshop/ordering-api</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ConnectionString=Server=sqldata;Database=OrderingDb;…</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;82:80&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">extra_hosts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;CESARDLBOOKVHD:10.0.75.1&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">depends_on</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">sqldata</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sqldata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">mcr.microsoft.com/mssql/server:latest</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">environment</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">SA_PASSWORD=Pass@word</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#000">ACCEPT_EULA=Y</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#4e9a06">&#34;5433:1433&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><h3 id="c基于-docker-进行-k8s-注入">C、基于 docker 进行 k8s 注入</h3>
 <p>Kompose是个转换工具，可将 compose（即 Docker Compose）所组装的所有内容 转换成容器编排器（Kubernetes 或 OpenShift）可识别的形式。</p>
 <p>要将 docker-compose.yml 转换为 kubectl 可用的文件，请运行 kompose convert 命令进行转换，然后运行 kubectl create -f <output file> 进行创建。</p>
-<h4 id="2控制面进行注入">2、控制面进行注入</h4>
-<h4 id="实现机制">实现机制</h4>
+<h3 id="dk8s-控制面进行注入">D、k8s 控制面进行注入</h3>
+<h4 id="k8s-控制面拓展机制">k8s 控制面拓展机制</h4>
+<blockquote>
+<p>参考文章：https://blog.hdls.me/15564491070483.html</p>
+</blockquote>
 <p>K8S作为云原生操作系统的定位，其设计理念是&quot;微内核&quot;架构。</p>
+<h4 id="可拓展机制">可拓展机制：</h4>
 <ul>
-<li>单体进程，往往采用Filter机制。</li>
+<li>单体进程，往往采用Filter机制。实现进程内可拓展。</li>
 <li>分布式系统，通过webhook机制将自定义插件注入到分布式集群中。</li>
 <li>in-proxy模式，通过沙箱+远程脚本，实现非侵入性的单体进程内filter机制。</li>
 </ul>
+<h4 id="k8s-webhook">k8s webhook</h4>
 <p>Kubernetes 的 apiserver 一开始就有 AdmissionController 的设计，这个设计和各类 Web 框架中的 Filter 很像，就是一个插件化的责任链，责任链中的每个插件针对 apiserver 收到的请求做一些操作或校验。分类</p>
 <ul>
 <li>MutatingWebhookConfiguration，操作 api 对象的， 会对request的resource，进行转换，比如填充默认的request/limit（有副作用）</li>
 <li>ValidatingWebhookConfiguration，校验 api 对象的, 比如校验Pod副本数必须大于2。（无副作用）</li>
 </ul>
 <p>Kubernetes 中的许多高级功能需要启用准入控制器才能正确支持该功能。</p>
+<blockquote>
+<p>对于在数据持久化之前，拦截到 Kubernetes API server 的请求</p>
+</blockquote>
 <p><img src="https://qiankunli.github.io/public/upload/kubernetes/admission_controller.png" alt=""></p>
 <h4 id="k8s准入控制器">K8S准入控制器</h4>
 <p>通过创建webhook资源，利用k8s的webhook能力实现pod的自动注入。</p>
@@ -868,27 +921,184 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>定义webhook监听pod(node)</li>
 <li>注册到webhook(master)</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">admissionregistration.k8s.io/v1</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ValidatingWebhookConfiguration</span><span style="color:#f8f8f8;text-decoration:underline">
+<h3 id="实现一个k8s-sidecar注入控制器">实现一个K8S Sidecar注入控制器</h3>
+<h4 id="1-编写-webhook-server">1. 编写 Webhook server</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000">sidecarConfig</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">loadConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">parameters</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">sidecarCfgFile</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">pair</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">tls</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadX509KeyPair</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">parameters</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">certFile</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">parameters</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">keyFile</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#000">whsvr</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">WebhookServer</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">sidecarConfig</span><span style="color:#000;font-weight:bold">:</span>    <span style="color:#000">sidecarConfig</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#000">server</span><span style="color:#000;font-weight:bold">:</span>           <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">http</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Server</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">Addr</span><span style="color:#000;font-weight:bold">:</span>        <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Sprintf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;:%v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">443</span><span style="color:#000;font-weight:bold">),</span>
+        <span style="color:#000">TLSConfig</span><span style="color:#000;font-weight:bold">:</span>   <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">tls</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Config</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Certificates</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[]</span><span style="color:#000">tls</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Certificate</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">pair</span><span style="color:#000;font-weight:bold">}},</span>
+    <span style="color:#000;font-weight:bold">},</span>
+<span style="color:#000;font-weight:bold">}</span>
+	
+<span style="color:#8f5902;font-style:italic">// define http server and server handler
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">mux</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">http</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewServeMux</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#000">mux</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;/mutate&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">whsvr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">serve</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000">whsvr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">server</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Handler</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">mux</span>
+
+<span style="color:#8f5902;font-style:italic">// start webhook server in new rountine
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">go</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">whsvr</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">server</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListenAndServeTLS</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">);</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">glog</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Errorf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Filed to listen and serve webhook server: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}()</span>
+</code></pre></div><ol>
+<li>https server: 443</li>
+<li>tls: certificate
+<ol>
+<li>k8s configmap</li>
+</ol>
+</li>
+<li>api: &lsquo;/mutate&rsquo;
+<ol>
+<li>patch</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>capa-injector: <a href="https://github.com/capa-cloud/capa-injector">https://github.com/capa-cloud/capa-injector</a></p>
+</blockquote>
+<h4 id="2-编写-dockerfile-并构建">2. 编写 Dockerfile 并构建</h4>
+<ol>
+<li>创建dockerfile镜像文件</li>
+<li>创建docker账号</li>
+<li>上传镜像到dockerhub</li>
+</ol>
+<h4 id="3-编写-sidecar-注入配置">3. 编写 Sidecar 注入配置</h4>
+<ol>
+<li>创建 configmap</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">ConfigMap</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;pod-policy.example.com&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-configmap</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">sidecarconfig.yaml</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span><span style="color:#8f5902;font-style:italic">      containers:
+</span><span style="color:#8f5902;font-style:italic">        - name: sidecar-nginx
+</span><span style="color:#8f5902;font-style:italic">          image: nginx:1.12.2
+</span><span style="color:#8f5902;font-style:italic">          imagePullPolicy: IfNotPresent
+</span><span style="color:#8f5902;font-style:italic">          ports:
+</span><span style="color:#8f5902;font-style:italic">            - containerPort: 80
+</span><span style="color:#8f5902;font-style:italic">          volumeMounts:
+</span><span style="color:#8f5902;font-style:italic">            - name: nginx-conf
+</span><span style="color:#8f5902;font-style:italic">              mountPath: /etc/nginx
+</span><span style="color:#8f5902;font-style:italic">      volumes:
+</span><span style="color:#8f5902;font-style:italic">        - name: nginx-conf
+</span><span style="color:#8f5902;font-style:italic">          configMap:
+</span><span style="color:#8f5902;font-style:italic">            name: nginx-configmap</span><span style="color:#f8f8f8;text-decoration:underline">      
+</span></code></pre></div><h4 id="4-创建包含秘钥对的-secret">4. 创建包含秘钥对的 Secret</h4>
+<p>由于准入控制是一个高安全性操作，所以对外在的 webhook server 提供 TLS 是必须的。作为流程的一部分，我们需要创建由 Kubernetes CA 签名的 TLS 证书，以确保 webhook server 和 apiserver 之间通信的安全性。</p>
+<ol>
+<li>创建CA证书</li>
+<li>k8s签发证书</li>
+<li>创建secret</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Secret</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">data</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tls.crt</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span><span style="color:#8f5902;font-style:italic">    </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">LS0tLS1CRUdJTi...</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">tls.key</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">|</span><span style="color:#8f5902;font-style:italic">
+</span><span style="color:#8f5902;font-style:italic">    </span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#000">LS0tLS1CRUdJTiBSU0...</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><h4 id="5-创建-sidecar-注入器的-deployment-和-service">5. 创建 Sidecar 注入器的 Deployment 和 Service</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">extensions/v1beta1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Deployment</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-deployment</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">replicas</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">template</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">containers</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">image</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">morvencao/sidecar-injector:v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">imagePullPolicy</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">IfNotPresent</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">args</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">tlsCertFile=/etc/webhook/certs/cert.pem</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">tlsKeyFile=/etc/webhook/certs/key.pem</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">alsologtostderr</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- -<span style="color:#000">v=4</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000">&gt;&amp;1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">volumeMounts</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span><span style="color:#204a87;font-weight:bold">mountPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/webhook/certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span><span style="color:#204a87;font-weight:bold">readOnly</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">true</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-config</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span><span style="color:#204a87;font-weight:bold">mountPath</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">/etc/webhook/config</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">volumes</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">secret</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">secretName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-certs</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">webhook-config</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">configMap</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-configmap</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><ul>
+<li>sidecarCfgFile 指的是 sidecar 注入器的配置文件，挂载自上面创建的 ConfigMap sidecar-injector-webhook-configmap。</li>
+<li>tlsCertFile 和 tlsKeyFile 是秘钥对，挂载自 Secret injector-webhook-certs。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Service</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-svc</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>- <span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">targetPort</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">443</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">selector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><p>这个 Service 会被 MutatingWebhookConfiguration 中定义的 clientConfig 部分访问，默认的端口 spec.ports.port 需要设置为 443。</p>
+<h4 id="6-动态配置-webhook-准入控制器">6. 动态配置 webhook 准入控制器</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">admissionregistration.k8s.io/v1beta1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">MutatingWebhookConfiguration</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-cfg</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#204a87;font-weight:bold">labels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">app</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">webhooks</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline"></span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;pod-policy.example.com&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">rules</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">apiGroups</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">apiVersions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;v1&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">operations</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;CREATE&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">   </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;pods&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">scope</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">       </span><span style="color:#4e9a06">&#34;Namespaced&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">clientConfig</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">service</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;example-namespace&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;example-service&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">caBundle</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;Ci0tLS0tQk...&lt;base64-encoded PEM bundle containing the CA that signed the webhook&#39;s serving certificate&gt;...tLS0K&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">admissionReviewVersions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;v1&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;v1beta1&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">sideEffects</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">None</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">timeoutSeconds</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">5</span><span style="color:#f8f8f8;text-decoration:underline">
-</span></code></pre></div><h4 id="自动化和规模化">自动化和规模化</h4>
+</span><span style="color:#f8f8f8;text-decoration:underline">   </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector.morven.me</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">clientConfig</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">service</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">sidecar-injector-webhook-svc</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">default</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">path</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;/mutate&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">caBundle</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">${CA_BUNDLE}</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">rules</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span>- <span style="color:#204a87;font-weight:bold">operations</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;CREATE&#34;</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">apiGroups</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">apiVersions</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;v1&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#204a87;font-weight:bold">resources</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;pods&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">     </span><span style="color:#204a87;font-weight:bold">namespaceSelector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">        </span><span style="color:#204a87;font-weight:bold">matchLabels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">           </span><span style="color:#204a87;font-weight:bold">sidecar-injector</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">enabled</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></code></pre></div><ul>
+<li>${CA_BUNDLE} - 从k8s apiserver中获取：
+<ul>
+<li>
+<blockquote>
+<p>kubectl config view &ndash;raw &ndash;minify &ndash;flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>rules - 描述了 webhook server 处理的资源和操作。在我们的例子中，只拦截创建 pods 的请求；</li>
+<li>namespaceSelector - namespaceSelector 根据资源对象是否匹配 selector 决定了是否针对该资源向 webhook server 发送准入请求。</li>
+</ul>
+<h3 id="e云原生自动化和规模化">E、云原生自动化和规模化</h3>
 <p>Kubernetes虽然提供了多种容器编排对象，例如Deployment、StatefulSet、DeamonSet、Job等，还有多种基础资源封装例如ConfigMap、Secret、Serivce等，但是一个应用往往有多个服务，有的可能还要依赖持久化存储，当这些服务之间直接互相依赖，需要有一定的组合的情况下，使用YAML文件的方式配置应用往往十分繁琐还容易出错，这时候就需要服务编排工具。</p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_2.png" alt=""></p>
 <ol>
@@ -897,7 +1107,10 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <li>上传到镜像仓库</li>
 <li>通过k8s包管理工具helm进行安装</li>
 </ol>
-<h3 id="dsidecar-istio">D、Sidecar istio</h3>
+<blockquote>
+<p>$ helm install istio-base istio/base -n istio-system</p>
+</blockquote>
+<h3 id="fistio-注入">F、Istio 注入</h3>
 <h4 id="sidecar-injector-准入控制器">sidecar injector 准入控制器</h4>
 <p>Istio 使用 ValidatingAdmissionWebhooks 验证 Istio 配置，使用 MutatingAdmissionWebhooks 自动将 Sidecar 代理注入至用户 Pod。</p>
 <p>它使用 MutatingWebhook 机制在 pod 创建的时候将 sidecar 的容器和卷添加到每个 pod 的模版里。</p>
@@ -972,24 +1185,37 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 </span></code></pre></div><h4 id="配置管理设计">配置管理设计</h4>
 <h5 id="1-启动静态配置">1. 启动静态配置</h5>
 <p>启动的最小配置集，可以和镜像集成在一起。</p>
-<h5 id="2-静态自定义配置">2. 静态自定义配置</h5>
-<p>可以使用K8S的静态配置进行配置：</p>
 <ul>
-<li>k8s config</li>
+<li>cmd params</li>
+<li>env variables</li>
+</ul>
+<h5 id="2-自定义配置">2. 自定义配置</h5>
+<p>可以使用K8S的配置进行管理：</p>
+<ul>
+<li>k8s configmap
+<ul>
+<li>热更新</li>
+</ul>
+</li>
 <li>k8s crd</li>
 </ul>
 <h5 id="3-灵活的动态配置">3. 灵活的动态配置</h5>
 <p>控制面下发，全量/增量推送：</p>
 <ul>
 <li>xDS</li>
+<li>Configuration(Nacos/&hellip;)</li>
 </ul>
 <hr>
-<h2 id="二istio-polit-agent">二、Istio polit-agent</h2>
+<h2 id="三sidecar架构">三、Sidecar架构</h2>
+<blockquote>
+<p>参考文档：https://www.infoq.cn/article/jTJGTtu2AgX74GkGif8Y</p>
+</blockquote>
 <ul>
 <li>Init 容器 istio-init：用于 pod 中设置 iptables 端口转发</li>
 <li>Sidecar 容器 istio-proxy：运行 sidecar 代理，如 Envoy 或 MOSN。</li>
 </ul>
-<p><img src="https://ucc.alicdn.com/pic/developer-ecology/99530825860d4c3aa80b58ac8e68d61b.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_5.png" alt=""></p>
+<p><img src="https://static001.geekbang.org/infoq/aa/aaa64c2c86541cb77d671f5cbcd8e77b.png" alt=""></p>
 <h4 id="init">init</h4>
 <p>Init 容器是一种专用容器，它在应用程序容器启动之前运行，用来包含一些应用镜像中不存在的实用工具或安装脚本。</p>
 <p>一个 Pod 中可以指定多个 Init 容器，如果指定了多个，那么 Init 容器将会按顺序依次运行。只有当前面的 Init 容器必须运行成功后，才可以运行下一个 Init 容器。当所有的 Init 容器运行完成后，Kubernetes 才初始化 Pod 和运行应用容器。</p>
@@ -997,10 +1223,9 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <p>在 Pod 启动过程中，Init 容器会按顺序在网络和数据卷初始化之后启动。每个容器必须在下一个容器启动之前成功退出。如果由于运行时或失败退出，将导致容器启动失败，它会根据 Pod 的 restartPolicy 指定的策略进行重试。然而，如果 Pod 的 restartPolicy 设置为 Always，Init 容器失败时会使用 RestartPolicy 策略。</p>
 <p>在所有的 Init 容器没有成功之前，Pod 将不会变成 Ready 状态。Init 容器的端口将不会在 Service中进行聚集。 正在初始化中的 Pod 处于 Pending 状态，但应该会将 Initializing 状态设置为 true。Init 容器运行完成以后就会自动终止。</p>
 <p><img src="https://pic1.zhimg.com/80/v2-4aa36ede4332a0b2d99005188c8056d4_1440w.jpg" alt=""></p>
-<h3 id="aistio-sidecar-结构">A、istio sidecar 结构</h3>
-<h3 id="istio-init容器">istio-init容器</h3>
+<p><img src="https://static001.geekbang.org/infoq/76/76ccf68fae62443f9a59e93efa017101.png" alt=""></p>
+<h3 id="aistio-init容器">A、istio-init容器</h3>
 <p>该容器存在的意义就是让 sidecar 代理可以拦截所有的进出 pod 的流量，15090 端口（Mixer 使用）和 15092 端口（Ingress Gateway）除外的所有入站（inbound）流量重定向到 15006 端口（sidecar），再拦截应用容器的出站（outbound）流量经过 sidecar 处理（通过 15001 端口监听）后再出站。</p>
-<h4 id="1-istio-iptables-进程">1. istio-iptables 进程</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">istio-iptables <span style="color:#ce5c00;font-weight:bold">[</span>flags<span style="color:#ce5c00;font-weight:bold">]</span>
   -p: 指定重定向所有 TCP 流量的 sidecar 端口（默认为 <span style="color:#000">$ENVOY_PORT</span> <span style="color:#ce5c00;font-weight:bold">=</span> 15001）
   -m: 指定入站连接重定向到 sidecar 的模式，“REDIRECT” 或 “TPROXY”（默认为 <span style="color:#000">$ISTIO_INBOUND_INTERCEPTION_MODE</span><span style="color:#ce5c00;font-weight:bold">)</span>
@@ -1013,7 +1238,34 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
   -g：指定不应用重定向的用户的 GID。<span style="color:#ce5c00;font-weight:bold">(</span>默认值与 -u param 相同<span style="color:#ce5c00;font-weight:bold">)</span>
   -u：指定不应用重定向的用户的 UID。通常情况下，这是代理容器的 UID（默认值是 1337，即 istio-proxy 的 UID）。
   -z: 所有进入 pod/VM 的 TCP 流量应被重定向到的端口（默认 <span style="color:#000">$INBOUND_CAPTURE_PORT</span> <span style="color:#ce5c00;font-weight:bold">=</span> 15006）。
-</code></pre></div><h3 id="istio-proxy容器">istio-proxy容器</h3>
+</code></pre></div><h4 id="自定义init容器">自定义init容器</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8f5902;font-style:italic">#!/bin/bash
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#8f5902;font-style:italic"># Forward TCP traffic on port 80 to port 8000 on the eth0 interface.</span>
+iptables -t nat -A PREROUTING -p tcp -i eth0 --dport <span style="color:#0000cf;font-weight:bold">80</span> -j REDIRECT --to-port <span style="color:#0000cf;font-weight:bold">8000</span>
+
+<span style="color:#8f5902;font-style:italic"># List all iptables rules.</span>
+iptables -t nat --list
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#8f5902;font-style:italic"># Use the latest Ubuntu image for the base.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">FROM</span><span style="color:#4e9a06"> ubuntu:latest</span><span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Install the iptables command.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">RUN</span> apt-get update <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#4e9a06">\
+</span><span style="color:#4e9a06"></span>    apt-get install -y iptables<span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Copy the initialization script into the container.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">COPY</span> init.sh /usr/local/bin/<span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Mark the initialization script as executable.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">RUN</span> chmod +x /usr/local/bin/init.sh<span style="color:#a40000">
+</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#8f5902;font-style:italic"># Start the initialization script on container startup.</span><span style="color:#a40000">
+</span><span style="color:#a40000"></span><span style="color:#204a87;font-weight:bold">ENTRYPOINT</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;init.sh&#34;</span><span style="color:#000;font-weight:bold">]</span><span style="color:#a40000">
+</span></code></pre></div><h4 id="自定义流量拦截sidecar">自定义流量拦截sidecar</h4>
+<blockquote>
+<p>capa</p>
+</blockquote>
+<h3 id="bistio-proxy容器">B、istio-proxy容器</h3>
 <p><img src="https://i.loli.net/2018/09/09/5b94b1c621c56.png" alt=""></p>
 <p>使用单容器多进程模型。</p>
 <h4 id="1-pilot-agent进程">1. pilot agent进程</h4>
@@ -1050,14 +1302,14 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 <h4 id="启动envoy">启动Envoy</h4>
 <p>[/pilot-agent/main/istio_agent.NewAgent]</p>
 <p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_1.png" alt=""></p>
-<h3 id="sidecar多进程设计模式">sidecar多进程设计模式</h3>
+<h3 id="csidecar多进程设计模式">C、sidecar多进程设计模式</h3>
 <h4 id="1-开源集成">1. 开源集成</h4>
 <p>代理属于第三方提供，istio是对其进行了管理和拓展。</p>
 <p>如果代理本身属于istio，是可以实现单进程模型。</p>
 <h4 id="2-agent设计思想">2. agent设计思想</h4>
 <p>由agent负责配置监听和下发。</p>
 <p>解耦配置管理和运行时，同时可以对proxy进程进行热重启。</p>
-<h3 id="b流量拦截">B、流量拦截</h3>
+<h3 id="d流量拦截">D、流量拦截</h3>
 <h4 id="iptables">iptables</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">ip netns exec cni-bf783dac-fe05-cb35-4d5a-848449119b19 iptables -L -t nat
 
@@ -1081,12 +1333,13 @@ ENTRYPOINT <span style="color:#ce5c00;font-weight:bold">[</span><span style="col
 -A ISTIO_REDIRECT -p tcp -j REDIRECT --to-ports 15001          # 转达到15001 outbond
 COMMIT
 </code></pre></div><p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_4.png" alt=""></p>
-<p><img src="https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt=""></p>
-<p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png" alt=""></p>
 <p><img src="https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg" alt=""></p>
-<p><img src="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_6.png" alt=""></p>
+<blockquote>
+<p><a href="https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/">https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/</a></p>
+</blockquote>
 <hr>
-<h2 id="三sidecar-发展">三、Sidecar 发展</h2>
+<h2 id="四sidecar-发展">四、Sidecar 发展</h2>
 <h3 id="asidecar-流量交互">A、sidecar 流量交互</h3>
 <p>要实现 应用容器(进程) 和 Sidecar容器(进程) 之间的交互。需要完成流量交互的功能。</p>
 <h3 id="流量交互模式">流量交互模式</h3>
@@ -1103,10 +1356,10 @@ COMMIT
 <p>应用场景：envoy流量代理</p>
 <p>发展方向：内核高性能（eBPF）</p>
 <h4 id="ebpf">eBPF</h4>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48iaibekyLCc7BRPdN5wia28fe7SzrOGGzdlTzAuYOYHPXepdNYM1neIlOxA/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_7.png" alt=""></p>
 <p>几乎没有开销是来自代理本身的逻辑。开销是通过注入代理，将网络流量重定向到它，终止连接和启动新的连接而增加的。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48iafV5EjtlibK6up9icGHXubrYicVWBeWsHTgL3wdWWFVqq6icIrR5fAEA5jw/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGnQGqr9ibU4uKLE7x8a0L48ianSOrK1RicmJy8CmThERZC9m6Qch9QjP50Kp1dA0n9y2jSwegErrV07Q/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_8.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_9.png" alt=""></p>
 <h4 id="2-流量明确指向-proxyless-sidecar">2. 流量明确指向 proxyless sidecar</h4>
 <p>应用进程明确转发，协议自由切换，更丰富的应用层语义。往往使用grpc建立跨进程的链接。</p>
 <p>适合异构协议栈，支持更丰富的功能，支持协议之上应用层语义的控制。</p>
@@ -1114,15 +1367,15 @@ COMMIT
 <p>发展方向：grpc proxyless sidecar</p>
 <h4 id="proxyless-sidecar">proxyless sidecar</h4>
 <p>gRPC 项目对 xDS API 有很好的支持，也就是说你可以管理 gRPC 工作负载，而不需要同时部署 Envoy sidecar。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/06ULcDvaIGkFicB5CmUgMOuzpRGeOaPMSlYdnSibQFZkFD4TTbGYfJQq4bEuDBb2sl9zpR3771SXnjegj8khDq4A/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_10.png" alt=""></p>
 <h3 id="bmulti-sidecar">B、multi sidecar</h3>
 <p>ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。</p>
 <p>不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。</p>
-<p><img src="https://skyao.io/talk/202103-dapr-from-servicemesh-to-cloudnative/images/ant-more-mesh_hu56c375bdd66e5b8ec5c7446e085ec97c_227360_1200x1200_fit_lanczos_3.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_11.png" alt=""></p>
 <p>与其依靠多个代理来实现不同的目的（例如网络代理，缓存代理，绑定代理），不如使用一个 Mecha 提供所有这些能力。</p>
 <p>Mecha 强调是“提供能力”，而不是通讯代理。</p>
 <p>Mecha 和 Micrologic 之间的交互是开放而有 API 标准的，Mecha 和 Micrologic 之间的“协议”体现在 API 上，而不是 TCP 通讯协议。这提供了一个契机：一个统一 Micrologic 和 Mecha 之间通讯方式的契机。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Pz6fSfK82D54JicV1tMvpmkrUqzsNfAKTxWChX3hiacPB5ohAWGhlxGocQ9kEoZAc3tFQfV26xKC0TDJiaToLnASw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/istio/img_12.png" alt=""></p>
 <h3 id="csidecar-拓展性">C、sidecar 拓展性</h3>
 <p>面对千变万化的需求和复杂的应用环境，期望 Sidecar 本身的控制面和数据面来覆盖所有的场景显然是不现实的。强大、全面往往是因为<strong>易扩展</strong>。</p>
 <h4 id="1-控制面拓展">1. 控制面拓展</h4>
@@ -1137,6 +1390,15 @@ COMMIT
 <h4 id="wasm和java字节码非常相似">WASM和Java字节码非常相似</h4>
 <p>WASM 字节码不能直接在任何 CPU 架构上执行，但由于它与机器码非常相近，因此能够以非常快的速度被 WASM 引擎（或者也可以称之为 WASM 虚拟机）翻译为对应架构的机器码，获得和机器码相近的性能。</p>
 <p>WASM 本身是为 Web 而设计，因此天然具有跨平台支持；同时，通过 WASM 虚拟机的沙箱隔离，也使得执行 WASM 字节码相比于直接执行机器码有更高的安全性。</p>
+<h4 id="abi">ABI</h4>
+<p><img src="https://user-images.githubusercontent.com/28104581/170482236-1fbadd8b-fb83-4f38-acc7-cbe3b7f73825.png" alt=""></p>
+<p>它是扩展提供的网络代理设计的，目标是支持通过 wasm envoy 的功能。</p>
+<p>API 是这样一个函数，如果想要接收一个 http 请求，它需要实现开发三个接口：</p>
+<ol>
+<li>OnHttpRequestHeaders</li>
+<li>OnHttpRequestBody</li>
+<li>OnHttpRequestTrailers</li>
+</ol>
 <h4 id="envoy-wasm">Envoy Wasm</h4>
 <p>Envoy 在可拓展性方面做了两方面的工作：</p>
 <p>第一，提供了名为 lua 的特殊扩展，允许控制面通过 xDS 协议动态下发 Lua 脚本并由 Envoy 解释执行。</p>
@@ -1155,14 +1417,39 @@ COMMIT
 <p>Mesh: dns拦截(udp)</p>
 <p><img src="http://img.rocdu.top/20201117/role-of-dns-today.png" alt=""></p>
 <p><img src="http://img.rocdu.top/20201117/dns-interception-in-istio.png" alt=""></p>
+<hr>
+<h2 id="五capa-sidecar">五、Capa Sidecar</h2>
+<h3 id="afeature">A、Feature</h3>
+<h4 id="7层http流量拦截">7层HTTP流量拦截</h4>
+<p>基于Iptables，拦截http流量。</p>
+<blockquote>
+<p>多个iptables怎么注入？顺序？</p>
+</blockquote>
+<p>实验性质功能，会有影响主链路的风险。</p>
+<h4 id="actor-api">Actor API</h4>
+<p>参考 dapr 的 actor 设计。</p>
+<p>actor 并不适合集成到SDK中运行，故通过runtime提供actor api。</p>
+<h4 id="binding-api">Binding API</h4>
+<p>参考 dapr 的 binding 设计。</p>
+<p>binding 作为拓展性质的同外部系统的交互方式，可基于runtime提供弱依赖的交互。</p>
+<h4 id="saas-api">SaaS API</h4>
+<p>SaaS api 可以作为实验性质，在runtime中进行提供</p>
+<h3 id="b控制面设计">B、控制面设计</h3>
+<p>尽可能少的引入依赖项，Capa作为基础能力的聚合层，不再引入额外的控制面。</p>
+<p>使用 configuration 组件作为控制面配置下发方式。</p>
+<h3 id="c交互形态">C、交互形态</h3>
+<ul>
+<li>iptables流量拦截</li>
+<li>grpc交互</li>
+</ul>
 
 	
 
 	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
   <li>
-    <a class="btn btn-primary disabled"><span class="mr-1">←</span>上一页</a>
+    <a href="/capa.io/blog/2022/01/18/multi-cloud-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88%E4%BA%91%E6%9E%B6%E6%9E%84/" aria-label="上一页 - Multi Cloud 多云混合云架构" class="btn btn-primary"><span class="mr-1">←</span>上一页</a>
   </li>
-    <a href="/capa.io/blog/2022/03/09/istio-devops/" aria-label="下一页 - Istio devops" class="btn btn-primary">下一页<span class="ml-1">→</span></a>
+    <a class="btn btn-primary disabled">下一页<span class="ml-1">→</span></a>
   </li>
 </ul>
 

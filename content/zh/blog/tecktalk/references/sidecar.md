@@ -1,9 +1,9 @@
 ---
-title: "Sidecar模式 - 从Istio Sidecar开始"
-linkTitle: "Sidecar模式 - 从Istio Sidecar开始"
+title: "Sidecar设计模式 - 参考Istio Sidecar"
+linkTitle: "Sidecar设计模式 - 参考Istio Sidecar"
 date: 2022-03-09
 description: >
-    Sidecar模式: 从Istio Sidecar开始.
+    Sidecar设计模式: 参考Istio Sidecar.
 ---
 
 > 参考文档：https://www.servicemesher.com/istio-handbook/concepts/sidecar-injection.html
@@ -865,3 +865,44 @@ Mesh: dns拦截(udp)
 ![](http://img.rocdu.top/20201117/role-of-dns-today.png)
 
 ![](http://img.rocdu.top/20201117/dns-interception-in-istio.png)
+
+------
+
+## 五、Capa Sidecar 
+
+### A、Feature
+
+#### 7层HTTP流量拦截
+
+基于Iptables，拦截http流量。
+
+> 多个iptables怎么注入？顺序？
+
+实验性质功能，会有影响主链路的风险。
+
+#### Actor API
+
+参考 dapr 的 actor 设计。
+
+actor 并不适合集成到SDK中运行，故通过runtime提供actor api。
+
+#### Binding API
+
+参考 dapr 的 binding 设计。
+
+binding 作为拓展性质的同外部系统的交互方式，可基于runtime提供弱依赖的交互。
+
+#### SaaS API
+
+SaaS api 可以作为实验性质，在runtime中进行提供
+
+### B、控制面设计
+
+尽可能少的引入依赖项，Capa作为基础能力的聚合层，不再引入额外的控制面。
+
+使用 configuration 组件作为控制面配置下发方式。
+
+### C、交互形态
+
++ iptables流量拦截
++ grpc交互

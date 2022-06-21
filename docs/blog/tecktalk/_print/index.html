@@ -251,7 +251,7 @@ if (!doNotTrack) {
     
 	
 
-    <li><a href="#pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar模式 - 从Istio Sidecar开始</a></li>
+    <li><a href="#pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar设计模式 - 参考Istio Sidecar</a></li>
 
 
 
@@ -1327,8 +1327,8 @@ WebAssembly，简称 WASM，是一个二进制指令集，最初是跑在浏览�
   
 
 <div class="td-content" style="">
-    <h1 id="pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar模式 - 从Istio Sidecar开始</h1>
-	<div class="lead">Sidecar模式: 从Istio Sidecar开始.</div>
+    <h1 id="pg-fdce35f89403bcf02c2b2aa896df67a9">Sidecar设计模式 - 参考Istio Sidecar</h1>
+	<div class="lead">Sidecar设计模式: 参考Istio Sidecar.</div>
 	<div class="td-byline mb-4">
 		
         
@@ -2042,6 +2042,31 @@ COMMIT
 <p>Mesh: dns拦截(udp)</p>
 <p><img src="http://img.rocdu.top/20201117/role-of-dns-today.png" alt=""></p>
 <p><img src="http://img.rocdu.top/20201117/dns-interception-in-istio.png" alt=""></p>
+<hr>
+<h2 id="五capa-sidecar">五、Capa Sidecar</h2>
+<h3 id="afeature">A、Feature</h3>
+<h4 id="7层http流量拦截">7层HTTP流量拦截</h4>
+<p>基于Iptables，拦截http流量。</p>
+<blockquote>
+<p>多个iptables怎么注入？顺序？</p>
+</blockquote>
+<p>实验性质功能，会有影响主链路的风险。</p>
+<h4 id="actor-api">Actor API</h4>
+<p>参考 dapr 的 actor 设计。</p>
+<p>actor 并不适合集成到SDK中运行，故通过runtime提供actor api。</p>
+<h4 id="binding-api">Binding API</h4>
+<p>参考 dapr 的 binding 设计。</p>
+<p>binding 作为拓展性质的同外部系统的交互方式，可基于runtime提供弱依赖的交互。</p>
+<h4 id="saas-api">SaaS API</h4>
+<p>SaaS api 可以作为实验性质，在runtime中进行提供</p>
+<h3 id="b控制面设计">B、控制面设计</h3>
+<p>尽可能少的引入依赖项，Capa作为基础能力的聚合层，不再引入额外的控制面。</p>
+<p>使用 configuration 组件作为控制面配置下发方式。</p>
+<h3 id="c交互形态">C、交互形态</h3>
+<ul>
+<li>iptables流量拦截</li>
+<li>grpc交互</li>
+</ul>
 
 </div>
 
