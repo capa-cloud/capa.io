@@ -14,6 +14,12 @@ theme = ["docsy"]
 # Will give values to .Lastmod etc.
 enableGitInfo = true
 
+# Enable Emoji
+enableEmoji = true
+
+# Enable canonical URLs
+canonifyURLs = true
+
 # Language settings
 contentDir = "content/zh"
 defaultContentLanguage = "zh"
@@ -66,6 +72,12 @@ resampleFilter = "CatmullRom"
 quality = 75
 anchor = "smart"
 
+# Sitemap configuration
+[sitemap]
+changefreq = "monthly"
+filename = "sitemap.xml"
+priority = 0.5
+
 [services]
 [services.googleAnalytics]
 # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].
@@ -74,20 +86,23 @@ id = "UA-00000000-0"
 # Language configuration
 
 [languages]
-[languages.en]
-title = "Capa"
-description = "Cloud Runtimes API"
-languageName ="English"
-# Weight used for sorting.
-weight = 1
-
 [languages.zh]
 title = "Capa"
-description = "Cloud Runtimes API"
+description = "Cloud Application API - Mecha架构多运行时SDK"
 languageName ="简体中文"
 contentDir = "content/zh"
-time_format_default = "02.01.2006"
-time_format_blog = "02.01.2006"
+weight = 1
+time_format_default = "2006-01-02"
+time_format_blog = "2006-01-02"
+
+[languages.en]
+title = "Capa"
+description = "Cloud Application API - Mecha Architecture Multi-Runtime SDK"
+languageName ="English"
+contentDir = "content/en"
+weight = 2
+time_format_default = "2006-01-02"
+time_format_blog = "2006-01-02"
 
 [markup]
   [markup.goldmark]
@@ -149,7 +164,9 @@ gcs_engine_id = "d72aa9b2712488cc3"
 algolia_docsearch = false
 
 # Enable Lunr.js offline search
-offlineSearch = false
+offlineSearch = true
+offlineSearchSummaryLength = 200
+offlineSearchMaxResults = 25
 
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = false
@@ -161,7 +178,7 @@ breadcrumb_disable = false
 # Set to true to disable the About link in the site footer
 footer_about_disable = false
 # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
-navbar_logo = false
+navbar_logo = true
 # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like on the homepage.
 navbar_translucent_over_cover_disable = false
 # Enable to show the side bar menu in its compact state.
@@ -170,7 +187,7 @@ ul_show = 1
 sidebar_menu_foldable = true
 sidebar_cache_limit = 100
 # Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
-sidebar_search_disable = true
+sidebar_search_disable = false
 
 # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
 # This feature depends on [services.googleAnalytics] and will be disabled if "services.googleAnalytics.id" is not set.
@@ -187,6 +204,27 @@ no = 'Sorry to hear that. Please <a href="https://github.com/capa-cloud/capa-jav
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
+
+# Main menu configuration
+[[menu.main]]
+name = "文档"
+url = "/docs/"
+weight = 10
+
+[[menu.main]]
+name = "博客"
+url = "/blog/"
+weight = 20
+
+[[menu.main]]
+name = "社区"
+url = "/community/"
+weight = 30
+
+[[menu.main]]
+name = "GitHub"
+url = "https://github.com/capa-cloud/capa"
+weight = 40
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.

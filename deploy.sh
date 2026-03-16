@@ -1,17 +1,21 @@
-#Copyright 2018 Google LLC
+#!/bin/bash
+# Copyright 2018 Google LLC
 #
-#Licensed under the Apache License, Version 2.0 (the "License");
-#you may not use this file except in compliance with the License.
-#You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-#    https://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
-#Unless required by applicable law or agreed to in writing, software
-#distributed under the License is distributed on an "AS IS" BASIS,
-#WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#See the License for the specific language governing permissions and
-#limitations under the License.
-#
-rm -rf public/
-HUGO_ENV="production" hugo --gc || exit 1
-s3deploy -source=public/ -region=eu-west-1 -bucket=bep.is -distribution-id=E8OKNT7W9ZYZ2 -path temp/td
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Build for GitHub Pages (outputs to docs/ directory)
+rm -rf docs/
+HUGO_ENV="production" hugo --gc --minify || exit 1
+
+echo "Build complete. Output is in docs/ directory."
+echo "To deploy, commit and push the docs/ folder to the repository."

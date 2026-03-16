@@ -4,3 +4,73 @@ Add styles or override variables from the theme here.
 
 */
 
+// Capa Project Custom Variables
+// Brand Color System
+
+// Primary Colors - Tech Blue
+$primary: #0066FF;
+$primary-light: #4D94FF;
+$primary-dark: #0047B3;
+
+// Secondary Colors - Teal Green
+$secondary: #00C2A0;
+$secondary-light: #4DD4B8;
+$secondary-dark: #008B73;
+
+// Accent Colors - Orange
+$accent: #FF6B35;
+$accent-light: #FF8F6B;
+$accent-dark: #CC4A1A;
+
+// Neutral Colors
+$dark: #1A1A2E;
+$light: #F8F9FA;
+$gray-100: #F8F9FA;
+$gray-200: #E9ECEF;
+$gray-300: #DEE2E6;
+$gray-400: #CED4DA;
+$gray-500: #ADB5BD;
+$gray-600: #6C757D;
+$gray-700: #495057;
+$gray-800: #343A40;
+$gray-900: #212529;
+
+// Semantic Colors
+$success: #28A745;
+$warning: #FFC107;
+$error: #DC3545;
+$info: #17A2B8;
+
+// Navigation
+$navbar-dark-color: rgba(255, 255, 255, 0.9);
+$navbar-dark-hover-color: #fff;
+$navbar-dark-active-color: #fff;
+
+// Typography
+$font-family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// Headings
+$h1-font-size: 2.5rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.5rem;
+$h5-font-size: 1.25rem;
+$h6-font-size: 1rem;
+
+// Spacing
+$spacer: 1rem;
+
+// Border radius
+$border-radius: 0.375rem;
+$border-radius-lg: 0.5rem;
+$border-radius-sm: 0.25rem;
+
+// Box shadow
+$box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+
+// Docsy overrides
+$google_font_name: "Inter";
+$google_font_family: "Inter:300,400,500,600,700";

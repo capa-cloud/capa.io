@@ -1,5 +1,5 @@
 ---
-title: About Goldydocs
+title: About Capa
 linkTitle: About
 menu:
   main:
@@ -8,23 +8,34 @@ menu:
 ---
 
 
-{{< blocks/cover title="About Goldydocs" image_anchor="bottom" height="min" >}}
+{{< blocks/cover title="About Capa" image_anchor="bottom" height="min" >}}
 
-<p class="lead mt-5">A sample site using the Docsy Hugo theme.
+<p class="lead mt-5">Capa (Cloud Application API): To be the high-level API layer for all application runtimes.
 </p>
 
 {{< /blocks/cover >}}
 
 {{% blocks/lead %}}
-Goldydocs is a sample site using the <a href="https://github.com/google/docsy">Docsy</a> Hugo theme that shows what it can do and provides you with a template site structure. It’s designed for you to clone and edit as much as you like. See the different sections of the documentation and site for more ideas.
+Let the code achieve "write once, run anywhere".
+<br>
+With the help of the Capa project, your Java applications have the ability to run across clouds and hybrid clouds with small changes.
 {{% /blocks/lead %}}
 
 
 {{< blocks/section >}}
 <div class="col-12">
-<h1 class="text-center">This is another section</h1>
+<h1 class="text-center">Mecha Architecture</h1>
 </div>
 
+The Capa project is based on the design concept of the Mecha architecture and uses rich SDK mode to provide Multi-Runtime standard API.
+<br>
+You can simply understand the Capa project as the SDK implementation of Dapr / Layotto Sidecar mode projects.
+<br>
+To understand the design ideas of Mecha architecture, please read the following articles:
+<br>
+1. <a href="https://www.infoq.cn/article/wjkNGoGaaHyKs7xIyTSB">The Importance of API Standardization for Dapr</a>
+<br>
+2. <a href="http://mosn.io/layotto/#/zh/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/index">Layotto: A New Chapter in Service Mesh + Application Runtime</a>
 {{< /blocks/section >}}
 
 
@@ -32,7 +43,21 @@ Goldydocs is a sample site using the <a href="https://github.com/google/docsy">D
 {{< blocks/section >}}
 
 <div class="col-12">
-<h1 class="text-center">This is another section</h1>
+<h1 class="text-center">Sidecar or SDK</h1>
 </div>
-
+Based on the Mecha architecture concept, Multi-Runtime provides standard API functions in a Sidecar manner, which seems to be the most reasonable choice.
+<br>
+So why not use Dapr/Layotto and other projects directly, but choose to develop the Capa project of Rich SDK Mode instead.
+<br>
+Summary: The Sidecar architecture represented by Dapr is the future, but it is difficult for many existing enterprises and systems to upgrade to the Sidecar architecture in one step. The rich SDK architecture will exist for a long time.
+<br>
+Extension: Faced with the huge Java systems, the Capa project will use the rich SDK model to support the transition from the Java system to the Mecha architecture. After Dapr and other projects mature, they can also be seamlessly connected to the Sidecar architecture.
+<br>
+For specific discussions on this issue, please refer to:
+<br>
+1. <a href="https://github.com/dapr/dapr/issues/3261">SDK Model for Dapr API</a>
+<br>
+2. <a href="https://github.com/dapr/dapr/issues/2817">Future Plans for Dapr API</a>
+<br>
+3. <a href="https://github.com/mosn/layotto/issues/188">Java SDK Design Discussion</a>
 {{< /blocks/section >}}
