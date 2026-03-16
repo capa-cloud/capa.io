@@ -1,90 +1,168 @@
 +++
 title = "Capa"
 linkTitle = "Capa"
-
 +++
 
-
-<!-- home page -->
-{{< blocks/cover title="Welcome to Capa: Cloud Application API Project!" image_anchor="top" height="full" color="orange" >}}
+<!-- Hero Section - 首屏 -->
+{{< blocks/cover title="Capa: 云应用 API 层" image_anchor="top" height="full" color="primary" >}}
 <div class="mx-auto">
-    <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
-    Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+    <p class="lead mt-3 mb-4">
+        <strong>一次编写，随处运行</strong><br>
+        <span style="font-size: 1.1rem; opacity: 0.9;">基于 Mecha 架构的多运行时 SDK，让 Java 应用轻松实现跨云部署</span>
+    </p>
+    <a class="btn btn-lg btn-light mr-3 mb-3" href="/blog/tecktalk/capa/capa/">
+        <i class="fas fa-book-open mr-2"></i> 核心文章
     </a>
-    <a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/capa-cloud/capa-java">
-        Download <i class="fab fa-github ml-2 "></i>
+    <a class="btn btn-lg btn-primary mr-3 mb-3" href="/docs/gettingstarted/">
+        快速开始 <i class="fas fa-arrow-alt-circle-right ml-2"></i>
     </a>
-    <!-- <p class="lead mt-5">Porridge temperature assessment - in the cloud!</p> -->
-    <!-- {{< blocks/link-down color="info" >}} -->
+    <a class="btn btn-lg btn-secondary mb-3" href="https://github.com/capa-cloud/capa-java">
+        <i class="fab fa-github mr-2"></i> GitHub
+    </a>
 </div>
 {{< /blocks/cover >}}
 
-
-<!-- block 1 -->
+<!-- 核心价值主张 -->
 {{% blocks/lead color="primary" %}}
-Capa(cloud application api): To be the high-level api layer for all application runtime.
+<h2 style="margin-bottom: 1rem;">为什么选择 Capa？</h2>
+<p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+Capa (Cloud Application API) 是面向 Java 应用的 Mecha 架构实现，<br>
+提供统一的 API 层，让应用与基础设施解耦，实现真正的云原生可移植性。
+</p>
 {{% /blocks/lead %}}
 
-<!-- block 2-1 -->
-<!-- {{< blocks/section color="dark" >}} -->
-<!-- {{% blocks/feature icon="fa-lightbulb" title="New chair metrics!" %}}
-The Goldydocs UI now shows chair size metrics by default.
+<!-- 核心特性 - 3列展示 -->
+{{< blocks/section color="white" >}}
 
-Please follow this space for updates!
-{{% /blocks/feature %}} -->
-
-
-<!-- block 2-2 -->
-<!-- {{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/google/docsy-example" %}}
-We do a [Pull Request](https://github.com/google/docsy-example/pulls) contributions workflow on **GitHub**. New users are always welcome!
-{{% /blocks/feature %}} -->
-
-
-<!-- block 2-3 -->
-<!-- {{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/docsydocs" %}}
-For announcement of latest features etc.
-{{% /blocks/feature %}} -->
-
-
-<!-- {{< /blocks/section >}} -->
-
-
-<!-- block 3 -->
-<!-- {{< blocks/section >}}
-<div class="col">
-    <h1 class="text-center">This is the second Section</h1>
-</div>
-
-{{< /blocks/section >}} -->
-
-
-<!-- block 3-1 -->
-{{< blocks/section >}}
-{{% blocks/feature icon="fab fa-github" title="Give us your feedback!" url="https://github.com/capa-cloud/capa-java" %}}
-We hope to hear from you [here](https://github.com/capa-cloud/capa-java/issues)!
+{{% blocks/feature icon="fa-cloud" title="跨云部署" %}}
+一套代码，同时部署到阿里云、AWS、腾讯云等多个云平台，无需修改业务代码。
 {{% /blocks/feature %}}
 
-
-<!-- block 3-2 -->
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/capa-cloud/capa-java" %}}
-We do a [Pull Request](https://github.com/capa-cloud/capa-java/pulls) contributions workflow on **GitHub**. New users are always welcome!
+{{% blocks/feature icon="fa-layer-group" title="Mecha 架构" %}}
+基于 Service Mesh 理念，将基础设施能力下沉到 Sidecar/SDK，应用只需关注业务逻辑。
 {{% /blocks/feature %}}
 
-
-<!-- block 3-3 -->
-{{% blocks/feature icon="fab fa-github" title="Follow us on Github!" url="https://github.com/capa-cloud/capa-java" %}}
-For announcement of latest features etc.
+{{% blocks/feature icon="fa-code" title="标准 API" %}
+统一的标准 API 层，支持 RPC、Configuration、Pub/Sub、State 等多种分布式能力。
 {{% /blocks/feature %}}
-
 
 {{< /blocks/section >}}
 
-<!-- {{< blocks/section >}} -->
+<!-- 推荐阅读 - 核心文章 -->
+{{< blocks/section color="dark" >}}
+<div class="col-12">
+    <h2 class="text-center mb-5">📚 推荐阅读</h2>
+</div>
 
+<div class="col-lg-4 mb-4">
+    <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/blog/tecktalk/capa/capa/" class="text-decoration-none">
+                    <i class="fas fa-star text-warning mr-2"></i>Capa: 架起混合云应用开发的桥梁
+                </a>
+            </h5>
+            <p class="card-text text-muted">深入解析 Capa 的设计哲学、Mecha 架构实践，以及如何实现跨云部署。</p>
+            <a href="/blog/tecktalk/capa/capa/" class="btn btn-outline-primary btn-sm">阅读全文</a>
+        </div>
+    </div>
+</div>
 
-<!-- block 4 -->
-<!-- <div class="col-12">
-    <h1 class="text-center">This is another Section</h1>
-</div> -->
+<div class="col-lg-4 mb-4">
+    <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/docs/overview/" class="text-decoration-none">
+                    <i class="fas fa-book text-info mr-2"></i>项目概览
+                </a>
+            </h5>
+            <p class="card-text text-muted">了解 Capa 的核心概念、设计目标和快速入门指南。</p>
+            <a href="/docs/overview/" class="btn btn-outline-primary btn-sm">查看文档</a>
+        </div>
+    </div>
+</div>
 
-<!-- {{< /blocks/section >}} -->
+<div class="col-lg-4 mb-4">
+    <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/docs/gettingstarted/rpc-usage/" class="text-decoration-none">
+                    <i class="fas fa-rocket text-success mr-2"></i>RPC 快速开始
+                </a>
+            </h5>
+            <p class="card-text text-muted">5 分钟上手 Capa RPC 功能，实现服务间调用。</p>
+            <a href="/docs/gettingstarted/rpc-usage/" class="btn btn-outline-primary btn-sm">开始实践</a>
+        </div>
+    </div>
+</div>
+
+{{< /blocks/section >}}
+
+<!-- 支持的云平台 -->
+{{< blocks/section color="white" >}}
+<div class="col-12 text-center">
+    <h3 class="mb-4">支持的主流云平台</h3>
+    <div class="d-flex justify-content-center flex-wrap">
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fas fa-cloud mr-1"></i> 阿里云
+        </span>
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fab fa-aws mr-1"></i> AWS
+        </span>
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fas fa-cloud mr-1"></i> 腾讯云
+        </span>
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fas fa-server mr-1"></i> 私有云
+        </span>
+    </div>
+</div>
+{{< /blocks/section >}}
+
+<!-- 代码示例预览 -->
+{{< blocks/section color="primary" >}}
+<div class="col-lg-6 mb-4">
+    <h3 class="text-white mb-3">简洁的 API 设计</h3>
+    <pre class="bg-dark text-light p-3 rounded"><code>// 构建 RPC 客户端
+CapaRpcClient client = new CapaRpcClientBuilder().build();
+
+// 调用远程服务
+Mono<String> result = client.invokeMethod(
+    "service-app-id",
+    "hello",
+    "request",
+    HttpExtension.POST,
+    null,
+    TypeRef.STRING
+);
+
+// 获取结果
+String response = result.block();</code></pre>
+</div>
+<div class="col-lg-6 mb-4">
+    <h3 class="text-white mb-3">丰富的功能支持</h3>
+    <ul class="list-unstyled text-white">
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>服务调用 (RPC)</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>配置中心 (Configuration)</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>消息发布订阅 (Pub/Sub)</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>状态管理 (State)</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>可观测性 (Telemetry)</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>数据库访问 (SQL) - Alpha</li>
+    </ul>
+</div>
+{{< /blocks/section >}}
+
+<!-- 社区参与 -->
+{{< blocks/section color="white" >}}
+{{% blocks/feature icon="fab fa-github" title="开源社区" url="https://github.com/capa-cloud/capa-java" %}}
+欢迎参与 Capa 项目建设，提交 Issue 或 Pull Request。
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fa-comments" title="技术交流" url="/community/" %}}
+加入社区讨论，与开发者一起探讨 Mecha 架构和云原生技术。
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fa-envelope" title="联系我们" url="https://github.com/capa-cloud/capa-java/issues" %}}
+有任何问题或建议？随时在 GitHub 上联系我们。
+{{% /blocks/feature %}}
+{{< /blocks/section >}}

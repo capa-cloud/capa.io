@@ -3,37 +3,167 @@ title = "Capa"
 linkTitle = "Capa"
 +++
 
-<!-- home page -->
-{{< blocks/cover title="Welcome to Capa: Cloud Application API Project!" image_anchor="top" height="full" >}}
+<!-- Hero Section -->
+{{< blocks/cover title="Capa: Cloud Application API" image_anchor="top" height="full" color="primary" >}}
 <div class="mx-auto">
-    <a class="btn btn-lg btn-primary mr-3 mb-4" href="{{< relref "/docs" >}}">
-    Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+    <p class="lead mt-3 mb-4">
+        <strong>Write Once, Run Anywhere</strong><br>
+        <span style="font-size: 1.1rem; opacity: 0.9;">Mecha Architecture-based Multi-Runtime SDK for Java applications</span>
+    </p>
+    <a class="btn btn-lg btn-light mr-3 mb-3" href="/docs/overview/">
+        <i class="fas fa-book-open mr-2"></i> Overview
     </a>
-    <a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/capa-cloud/capa-java">
-        Download <i class="fab fa-github ml-2 "></i>
+    <a class="btn btn-lg btn-primary mr-3 mb-3" href="/docs/gettingstarted/">
+        Get Started <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+    </a>
+    <a class="btn btn-lg btn-secondary mb-3" href="https://github.com/capa-cloud/capa-java">
+        <i class="fab fa-github mr-2"></i> GitHub
     </a>
 </div>
 {{< /blocks/cover >}}
 
-<!-- block 1 -->
+<!-- Value Proposition -->
 {{% blocks/lead color="primary" %}}
-Capa (Cloud Application API): To be the high-level API layer for all application runtimes.
+<h2 style="margin-bottom: 1rem;">Why Capa?</h2>
+<p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+Capa (Cloud Application API) is a Mecha Architecture implementation for Java applications,<br>
+providing a unified API layer that decouples applications from infrastructure, enabling true cloud-native portability.
+</p>
 {{% /blocks/lead %}}
 
-<!-- block 3-1 -->
-{{< blocks/section >}}
-{{% blocks/feature icon="fab fa-github" title="Give us your feedback!" url="https://github.com/capa-cloud/capa-java" %}}
-We hope to hear from you [here](https://github.com/capa-cloud/capa-java/issues)!
+<!-- Core Features -->
+{{< blocks/section color="white" >}}
+
+{{% blocks/feature icon="fa-cloud" title="Cross-Cloud Deployment" %}}
+One codebase, deploy to multiple cloud platforms like Alibaba Cloud, AWS, Tencent Cloud without modifying business logic.
 {{% /blocks/feature %}}
 
-<!-- block 3-2 -->
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/capa-cloud/capa-java" %}}
-We do a [Pull Request](https://github.com/capa-cloud/capa-java/pulls) contributions workflow on **GitHub**. New users are always welcome!
+{{% blocks/feature icon="fa-layer-group" title="Mecha Architecture" %}}
+Based on Service Mesh concepts,下沉 infrastructure capabilities to Sidecar/SDK, letting applications focus only on business logic.
 {{% /blocks/feature %}}
 
-<!-- block 3-3 -->
-{{% blocks/feature icon="fab fa-github" title="Follow us on Github!" url="https://github.com/capa-cloud/capa-java" %}}
-For announcement of latest features etc.
-{{% /blocks/feature %}}
+{{% blocks/feature icon="fa-code" title="Standard APIs" %}}
+Unified standard API layer supporting RPC, Configuration, Pub/Sub, State Management and more distributed capabilities.
+{{% /blocks/feature %}
 
 {{< /blocks/section >}}
+
+<!-- Quick Start -->
+{{< blocks/section color="dark" >}}
+<div class="col-12">
+    <h2 class="text-center mb-5">🚀 Quick Start</h2>
+</div>
+
+<div class="col-lg-4 mb-4">
+    <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/docs/overview/" class="text-decoration-none">
+                    <i class="fas fa-book text-info mr-2"></i>Project Overview
+                </a>
+            </h5>
+            <p class="card-text text-muted">Learn about Capa's core concepts, design goals, and quick start guide.</p>
+            <a href="/docs/overview/" class="btn btn-outline-primary btn-sm">Read Docs</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 mb-4">
+    <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/docs/gettingstarted/rpc-usage/" class="text-decoration-none">
+                    <i class="fas fa-rocket text-success mr-2"></i>RPC Quick Start
+                </a>
+            </h5>
+            <p class="card-text text-muted">Get started with Capa RPC in 5 minutes, implementing service-to-service calls.</p>
+            <a href="/docs/gettingstarted/rpc-usage/" class="btn btn-outline-primary btn-sm">Start Tutorial</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4 mb-4">
+    <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/docs/gettingstarted/configuration-usage/" class="text-decoration-none">
+                    <i class="fas fa-cog text-warning mr-2"></i>Configuration Guide
+                </a>
+            </h5>
+            <p class="card-text text-muted">Learn how to use Capa Configuration for dynamic configuration management.</p>
+            <a href="/docs/gettingstarted/configuration-usage/" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+    </div>
+</div>
+
+{{< /blocks/section >}}
+
+<!-- Supported Clouds -->
+{{< blocks/section color="white" >}}
+<div class="col-12 text-center">
+    <h3 class="mb-4">Supported Cloud Platforms</h3>
+    <div class="d-flex justify-content-center flex-wrap">
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fas fa-cloud mr-1"></i> Alibaba Cloud
+        </span>
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fab fa-aws mr-1"></i> AWS
+        </span>
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fas fa-cloud mr-1"></i> Tencent Cloud
+        </span>
+        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
+            <i class="fas fa-server mr-1"></i> Private Cloud
+        </span>
+    </div>
+</div>
+{{< /blocks/section >}}
+
+<!-- Code Example -->
+{{< blocks/section color="primary" >}}
+<div class="col-lg-6 mb-4">
+    <h3 class="text-white mb-3">Clean API Design</h3>
+    <pre class="bg-dark text-light p-3 rounded"><code>// Build RPC client
+CapaRpcClient client = new CapaRpcClientBuilder().build();
+
+// Invoke remote service
+Mono<String> result = client.invokeMethod(
+    "service-app-id",
+    "hello",
+    "request",
+    HttpExtension.POST,
+    null,
+    TypeRef.STRING
+);
+
+// Get result
+String response = result.block();</code></pre>
+</div>
+<div class="col-lg-6 mb-4">
+    <h3 class="text-white mb-3">Rich Feature Set</h3>
+    <ul class="list-unstyled text-white">
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Service Invocation (RPC)</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Configuration Center</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Pub/Sub Messaging</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>State Management</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Telemetry (Logs/Metrics/Traces)</li>
+        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Database Access (SQL) - Alpha</li>
+    </ul>
+</div>
+{{< /blocks/section >}}
+
+<!-- Community -->
+{{< blocks/section color="white" >}}
+{{% blocks/feature icon="fab fa-github" title="Open Source" url="https://github.com/capa-cloud/capa-java" %}}
+Welcome to contribute to Capa by submitting Issues or Pull Requests.
+{{% /blocks/feature %}
+
+{{% blocks/feature icon="fa-comments" title="Discussion" url="/community/" %}}
+Join community discussions about Mecha architecture and cloud-native technologies.
+{{% /blocks/feature %}
+
+{{% blocks/feature icon="fa-envelope" title="Contact" url="https://github.com/capa-cloud/capa-java/issues" %}
+Have questions or suggestions? Contact us on GitHub anytime.
+{{% /blocks/feature %}
+{{< /blocks/section >}}
+</function_results>
