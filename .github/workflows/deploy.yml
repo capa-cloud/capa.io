@@ -37,8 +37,12 @@ jobs:
       - name: "Build"
         run: hugo --gc --minify
 
+      - name: "Build"
+        run: hugo --gc --minify --destination docs
+
       - name: "Deploy"
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }} # Deploy in master branch only
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
