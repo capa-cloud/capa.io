@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud SRE on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/</link><description>Recent content in Cloud SRE on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CloudWatch</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch/</guid><description>&lt;h1 id="aws-sre---cloudwatch使用经验">AWS SRE - CloudWatch使用经验&lt;/h1>
+&lt;p>日志、指标、告警等功能&lt;/p>
+&lt;h2 id="一日志查询">一、日志查询&lt;/h2>
+&lt;h3 id="a全局日志搜索logs-insights">A、全局日志搜索：Logs Insights&lt;/h3>
+&lt;p>使用 CloudWatch 查询语法进行 日志组 维度的全局日志搜索。&lt;/p>
+&lt;h4 id="常用查询语法">常用查询语法&lt;/h4>
+&lt;pre tabindex="0">&lt;code>fields @timestamp, @message
+| sort @timestamp desc
+| limit 20
+&lt;/code>&lt;/pre>&lt;h4 id="或语法">&amp;ldquo;或&amp;quot;语法：|&lt;/h4>
+&lt;p>使用 &amp;lsquo;|&amp;rsquo; 来作为 &amp;ldquo;或&amp;rdquo; 语义的分隔符，使用多个查询条件&lt;/p>
+&lt;h4 id="注释">&amp;ldquo;注释&amp;rdquo;&lt;/h4>
+&lt;p>使用 &amp;lsquo;#&amp;rsquo; 在开头，作为该行查询语句的注释，可使用快捷键 &amp;ldquo;ctrl + /&amp;rdquo;&lt;/p>
+&lt;h3 id="b日志组">B、日志组&lt;/h3>
+&lt;h4 id="aws原生日志组">AWS原生日志组&lt;/h4></description></item><item><title>AWS CloudWatch - Log Insights</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch-log-insights/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch-log-insights/</guid><description>&lt;h2 id="一网关搜索">一、网关搜索&lt;/h2>
+&lt;h3 id="a查询接口以及响应码">A、查询接口以及响应码&lt;/h3>
+&lt;pre tabindex="0">&lt;code>fields @timestamp, @message
+| filter @message like /(?i)(queryData)/
+| filter @message like /(?i)(&amp;#34;500&amp;#34;)/
+| sort @timestamp desc
+| limit 100
+&lt;/code>&lt;/pre>&lt;hr>
+&lt;h2 id="二应用搜索">二、应用搜索&lt;/h2>
+&lt;h3 id="atraceid检索">A、TraceId检索&lt;/h3>
+&lt;pre tabindex="0">&lt;code>fields @timestamp, @message
+| filter log._trace_id = &amp;#39;12345&amp;#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code>&lt;/pre>&lt;h3 id="b应用检索">B、应用检索&lt;/h3>
+&lt;pre tabindex="0">&lt;code>fields @timestamp, @message
+| filter kubernetes.labels.appid = &amp;#39;12345&amp;#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code>&lt;/pre>&lt;h3 id="cpod检索">C、POD检索&lt;/h3>
+&lt;pre tabindex="0">&lt;code>fields @timestamp, @message
+| filter kubernetes.pod_name = &amp;#39;12345-fb5f75b84-k5kgv&amp;#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code>&lt;/pre>&lt;h3 id="d日志级别检索">D、日志级别检索&lt;/h3>
+&lt;pre tabindex="0">&lt;code>fields @timestamp, @message
+| filter log._log_level = &amp;#39;INFO&amp;#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code>&lt;/pre>&lt;h3 id="e异常模糊匹配">E、异常模糊匹配&lt;/h3>
+&lt;pre tabindex="0">&lt;code>fields @timestamp, @message
+| filter @message like &amp;#39;HttpMediaTypeNotSupportedException&amp;#39;
+| sort @timestamp desc
+| limit 20
+&lt;/code>&lt;/pre></description></item></channel></rss>

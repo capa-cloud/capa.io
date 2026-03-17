@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>K8S Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/cloudstack/k8s/</link><description>Recent content in K8S Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/k8s/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS EKS Devops</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</link><pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</guid><description>&lt;h1 id="eks-devops">EKS Devops&lt;/h1>
+&lt;h2 id="一eks集群">一、EKS集群&lt;/h2>
+&lt;h3 id="a安装相关命令行工具">A、安装相关命令行工具&lt;/h3>
+&lt;h4 id="awsctl">awsctl&lt;/h4>
+&lt;pre>&lt;code>pip install awscli
+&lt;/code>&lt;/pre>
+&lt;h4 id="eksctl">eksctl&lt;/h4>
+&lt;pre>&lt;code>curl --silent --location &amp;quot;https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz&amp;quot; | tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
+&lt;/code>&lt;/pre>
+&lt;h4 id="kubectl">kubectl&lt;/h4>
+&lt;pre>&lt;code>curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+
+chmod +x ./kubectl
+mkdir -p $HOME/bin &amp;amp;&amp;amp; cp ./kubectl $HOME/bin/kubectl &amp;amp;&amp;amp; export PATH=$PATH:$HOME/bin
+echo 'export PATH=$PATH:$HOME/bin' &amp;gt;&amp;gt; ~/.bashrc
+
+kubectl version --short --client
+&lt;/code>&lt;/pre>
+&lt;h3 id="b连接">B、连接&lt;/h3>
+&lt;pre>&lt;code> aws eks update-kubeconfig --region ap-southeast-1 --name xxx-eks-cluster
+&lt;/code>&lt;/pre>
+&lt;p>更新kube的config文件&lt;/p>
+&lt;h3 id="c权限">C、权限&lt;/h3>
+&lt;p>默认使用的是客户端 用户/角色 的权限。&lt;/p></description></item><item><title>K8S Devops</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/24/k8s-devops/</link><pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/24/k8s-devops/</guid><description>&lt;h1 id="k8s">K8S&lt;/h1>
+&lt;h2 id="一常用操作命令">一、常用操作命令&lt;/h2>
+&lt;h3 id="a调试pod">A、调试POD&lt;/h3>
+&lt;h4 id="1-kubectl-exec">1. kubectl exec&lt;/h4>
+&lt;p>登录命令&lt;/p>
+&lt;ul>
+&lt;li>nodejs: sh&lt;/li>
+&lt;li>java: /bin/bash&lt;/li>
+&lt;li>nginx: /bin/bash&lt;/li>
+&lt;/ul>
+&lt;h4 id="2-busybox">2. busybox&lt;/h4>
+&lt;pre>&lt;code>kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox sh
+&lt;/code>&lt;/pre>
+&lt;h4 id="3-pod调试">3. pod调试&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods">https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="b动态伸缩">B、动态伸缩&lt;/h3>
+&lt;h4 id="1-动态伸缩deployment副本数量">1. 动态伸缩deployment副本数量&lt;/h4>
+&lt;pre>&lt;code>kubectl scale deployment/nginx-proxy-deployment --replicas=2
+&lt;/code>&lt;/pre></description></item></channel></rss>

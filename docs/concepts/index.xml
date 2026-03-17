@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>设计文档 on Capa</title><link>https://capa-cloud.github.io/capa.io/docs/concepts/</link><description>Recent content in 设计文档 on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/docs/concepts/index.xml" rel="self" type="application/rss+xml"/><item><title>Configuration服务调用</title><link>https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/docs/concepts/configuration-design/</guid><description>&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>通过调用Capa SDK API的方式，管理应用级配置。底层通过SPI的方式注册适配各平台的实现类。&lt;/p>
+&lt;h2 id="调用逻辑">调用逻辑&lt;/h2>
+&lt;p>下图为Capa的Configuration服务调用逻辑&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png" alt="Configuration">&lt;/p>
+&lt;ul>
+&lt;li>Service(appid:A):服务调用方，CloudX Configuration Service为服务被调用方，服务被调用方可以是任意云厂商的配置服务&lt;/li>
+&lt;li>Service(appid:A)通过Capa SDK发起对Cloud Configuration Service的服务调用&lt;/li>
+&lt;li>Capa Configuration API是统一的API规范&lt;/li>
+&lt;li>Capa-CloudX Configuration Adaptor SDK为Capa的适配器实现类，通过spi的形式注册&lt;/li>
+&lt;li>CloudX Configuration Service提供实际的配置服务&lt;/li>
+&lt;/ul>
+&lt;h2 id="api设计">API设计&lt;/h2>
+&lt;p>Capa Configuration API的设计参考了社区的规范&lt;/p>
+&lt;p>&lt;a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/ConfigurationRuntimes.java">Capa Configuration API&lt;/a>&lt;/p>
+&lt;p>具体参数含义如下:&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>参数&lt;/th>
+ &lt;th>含义&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>storeName&lt;/td>
+ &lt;td>存储名称&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>appId&lt;/td>
+ &lt;td>同一命名空间内的服务唯一ID&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>keys&lt;/td>
+ &lt;td>配置key列表&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>metadata&lt;/td>
+ &lt;td>发送配置请求的元信息&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>group&lt;/td>
+ &lt;td>配置组(Optional)&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>label&lt;/td>
+ &lt;td>配置标签(Optional)&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>type&lt;/td>
+ &lt;td>请求响应对象中的泛型对应的具体类型&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationRequestItem.java">ConfigurationRequestItem&lt;/a>&lt;/td>
+ &lt;td>请求对象&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/ConfigurationItem.java">ConfigurationItem&lt;/a>&lt;/td>
+ &lt;td>获取配置的响应对象&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/configuration/SubConfigurationResp.java">SubConfigurationResp&lt;/a>&lt;/td>
+ &lt;td>订阅配置的响应对象&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item></channel></rss>

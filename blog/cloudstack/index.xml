@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud Native Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/cloudstack/</link><description>Recent content in Cloud Native Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/index.xml" rel="self" type="application/rss+xml"/><item><title>Cloud Native Stack</title><link>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-native-stack/</link><pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/06/01/cloud-native-stack/</guid><description>&lt;p>Capa主要解决应用的混合云问题，涉及到对接适配多种云的底层实现。&lt;/p>
+&lt;p>Capa本身不提供功能，而是由底层的各种云原生的能力来提供。&lt;/p>
+&lt;p>所以了解云原生中常用中间件的设计是很有必要的。&lt;/p>
+&lt;p>本目录主要为对云原生生态中中间件的学习和实践。&lt;/p></description></item></channel></rss>

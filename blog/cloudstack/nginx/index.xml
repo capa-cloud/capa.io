@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nginx Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/cloudstack/nginx/</link><description>Recent content in Nginx Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>Nginx Devops</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/26/nginx-devops/</link><pubDate>Thu, 26 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/26/nginx-devops/</guid><description>&lt;h2 id="一nginx-devops">一、Nginx Devops&lt;/h2>
+&lt;h3 id="a499">A、499&lt;/h3>
+&lt;h4 id="作为aws网关-同elb配合使用">作为AWS网关, 同ELB配合使用&lt;/h4>
+&lt;p>当ELB的IP变化时，DNS刷新不及时，导致499超时问题。&lt;/p>
+&lt;p>&lt;a href="https://blog.microideation.com/2020/04/06/nginx-proxy-with-aws-elb-critical-handling-for-intermittent-gateway-timeout-499-or-502/">带有 AWS ELB 的 Nginx 代理：间歇性网关超时（499 或 502）的关键处理&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h3 id="b502">B、502&lt;/h3>
+&lt;p>往往是Nginx服务有问题&lt;/p></description></item><item><title>Nginx Landscape</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/nginx-landscape/</link><pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/nginx-landscape/</guid><description>&lt;h2 id="一nginx-功能">一、Nginx 功能&lt;/h2>
+&lt;h3 id="a跨域问题">A、跨域问题&lt;/h3>
+&lt;h4 id="关键字">关键字：&lt;/h4>
+&lt;ul>
+&lt;li>OPTIONS预检请求&lt;/li>
+&lt;li>CORS跨域校验&lt;/li>
+&lt;/ul>
+&lt;h4 id="资料">资料：&lt;/h4>
+&lt;p>跨域中一些ngxin的配置：https://juejin.cn/post/6995374680114741279&lt;/p>
+&lt;p>跨域的解释：https://juejin.cn/post/6844903938232156167#heading-46&lt;/p>
+&lt;p>CORS：https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS&lt;/p>
+&lt;h2 id="二nginx-运维">二、Nginx 运维&lt;/h2>
+&lt;h4 id="快速部署">快速部署&lt;/h4>
+&lt;p>&lt;a href="https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/">https://kubernetes.io/zh/docs/tasks/run-application/run-stateless-application-deployment/&lt;/a>&lt;/p>
+&lt;h4 id="常用目录">常用目录&lt;/h4>
+&lt;p>配置文件 /etc/nginx/conf.d&lt;/p>
+&lt;p>默认日志 /var/logs/nginx&lt;/p>
+&lt;p>配置日志 /etc/nginx/logs/&lt;/p>
+&lt;h4 id="常用命令">常用命令&lt;/h4>
+&lt;p>测试：nginx -t&lt;/p>
+&lt;p>重启：nginx -s reload&lt;/p>
+&lt;p>查看日志：&lt;/p>
+&lt;ul>
+&lt;li>tail -n 10 xxx.log&lt;/li>
+&lt;li>head -n 10 xxx.log&lt;/li>
+&lt;/ul>
+&lt;p>域名解析：&lt;/p>
+&lt;ul>
+&lt;li>/etc/resov.conf&lt;/li>
+&lt;li>nslookup
+&lt;ul>
+&lt;li>apt-get install dnsutils&lt;/li>
+&lt;li>nslookup &lt;a href="https://www.baidu.com">www.baidu.com&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="配置">配置&lt;/h3>
+&lt;h4 id="日志">日志&lt;/h4>
+&lt;p>error_log logs/error_&lt;a href="https://www.abc.com.log">www.abc.com.log&lt;/a> error;&lt;/p>
+&lt;h4 id="proxy">proxy&lt;/h4>
+&lt;p>如果proxy_pass中hostname使用了占位符，需要指定resovler的dns服务器ip&lt;/p>
+&lt;h4 id="参数">参数&lt;/h4>
+&lt;ul>
+&lt;li>使用$arg_xxx来获取get中的参数&lt;/li>
+&lt;li>使用$http_xxx来获取header中的参数&lt;/li>
+&lt;/ul>
+&lt;h4 id="header">header&lt;/h4>
+&lt;ul>
+&lt;li>add_header 是当请求从 server 端回来时，Nginx 再往这个 response 里添加一些额外的 reponse header 然后发送给 客户端。&lt;/li>
+&lt;li>proxy_set_header 是当请求从客户端发出时，Nginx接收到 request 再往请求里添加一些额外的 request header 然后发送给 服务端。
+&lt;ul>
+&lt;li>常见的一些需要设置 proxy_set_header 的场景，比如说，有些 server 可能需要验证 Host，这个时候，就可以使用 proxy_set_header 伪造一个 Host 来骗过服务端。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="经验">经验&lt;/h3>
+&lt;h4 id="proxy-1">proxy&lt;/h4>
+&lt;p>使用resolver指定dns服务器时，hostname要带上 .svc.cluster.local&lt;/p></description></item></channel></rss>

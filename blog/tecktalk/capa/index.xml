@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Capa: Cloud Application Api on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/tecktalk/capa/</link><description>Recent content in Capa: Cloud Application Api on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/tecktalk/capa/index.xml" rel="self" type="application/rss+xml"/><item><title>Capa Trip落地</title><link>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</guid><description>&lt;h2 id="capa-落地情况">Capa 落地情况&lt;/h2>
+&lt;h3 id="a混合云支持">A、混合云支持&lt;/h3>
+&lt;p>目前支持：&lt;/p>
+&lt;ul>
+&lt;li>Trip私有云&lt;/li>
+&lt;li>AWS公有云&lt;/li>
+&lt;/ul>
+&lt;p>调研开发中:&lt;/p>
+&lt;ul>
+&lt;li>阿里云&lt;/li>
+&lt;/ul>
+&lt;h3 id="b应用接入情况">B、应用接入情况&lt;/h3>
+&lt;h4 id="trip私有云">Trip私有云&lt;/h4>
+&lt;p>生产xx+应用，不断接入中&lt;/p>
+&lt;h4 id="aws公有云">AWS公有云&lt;/h4>
+&lt;p>生产xx+应用，不断接入中&lt;/p></description></item><item><title>Capa: Mecha SDK of Cloud Application Api</title><link>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</guid><description>&lt;h1 id="capacloud-application-api架起混合云应用开发的桥梁">Capa(Cloud-Application-API)：架起混合云应用开发的桥梁&lt;/h1>
+&lt;p>&amp;ldquo;让代码实现&amp;quot;一次编写，随处运行&amp;rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&amp;quot;&lt;/p>
+&lt;blockquote>
+&lt;p>作者简介：
+KevinTen，携程后端开发工程师，关注Reactive、RPC和云原生领域，对Mecha架构混合云中间件有深度实践经验。
+Capa官方GitHub地址:&lt;a href="https://github.com/capa-cloud/capa-java">https://github.com/capa-cloud/capa-java&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>在过去微服务的发展历程中，各大厂商基于SDK模式已经有相对完善的中间件体系。但在业务全球化、混合多云架构场景下，业务应用对基础设施的标准化和解耦、可迁移性以及拥抱开源成为新的诉求。
+以当前的业界实践及趋势来看，ServiceMesh 这种 Sidecar 架构与体系是满足上述诉求的最佳实践。&lt;/p>
+&lt;p>ServiceMesh 在微服务领域已经非常流行，越来越多的公司开始在内部落地，ServiceMesh 带来的业务解耦，平滑升级等优势大大提高了中间件的迭代效率。&lt;/p>
+&lt;p>不过 ServiceMesh 只解决了服务间通讯的需求，而现实中的分布式应用存在更多的需求。而效仿 ServiceMesh 将应用需要的其他分布式能力外移到各种 Sidecar Runtime，这逐渐演变成了一个趋势。&lt;/p>
+&lt;p>本文主要对 ServiceMesh 进行回顾总结，并分享业界基于 ServiceMesh 这种 Sidecar 模式解决混合云应用开发的解决方案，最后是关于混合云应用开发模式的探讨。&lt;/p>
+&lt;h2 id="一service-mesh-回顾与总结">一、Service Mesh 回顾与总结&lt;/h2>
+&lt;h3 id="aservice-mesh-的初衷">A、Service Mesh 的初衷&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*p8tGTbpLRegAAAAAAAAAAAAAARQnAQ" alt="">
+在微服务架构下，基础架构团队一般会为应用提供一个封装了各种服务治理能力的 SDK，这种做法虽然保障了应用的正常运行，但缺点也非常明显，每次基础架构团队迭代一个新功能都需要业务方参与升级才能使用，尤其是 bugfix 版本，往往需要强推业务方升级，这里面的痛苦程度每一个基础架构团队成员都深有体会。&lt;/p>&lt;/blockquote>
+&lt;p>伴随着升级的困难，随之而来的就是应用使用的 SDK 版本差别非常大，生产环境同时跑着各种版本的 SDK，这种现象又会让新功能的迭代必须考虑各种兼容，就好像带着枷锁前进一般，这样随着不断迭代，会让代码维护非常困难，有些祖传逻辑更是一不小心就会掉坑里。&lt;/p>
+&lt;p>同时这种“重”SDK 的开发模式，导致异构语言的治理能力非常薄弱，如果想为各种编程语言都提供一个功能完整且能持续迭代的 SDK 其中的成本可想而知。&lt;/p>
+&lt;p>18 年的时候，Service Mesh 在国内持续火爆，这种架构理念旨在把服务治理能力跟业务解耦，让两者通过进程级别的通信方式进行交互。在这种架构模式下，服务治理能力从应用中剥离，运行在独立的进程中，迭代升级跟业务进程无关，这就可以让各种服务治理能力快速迭代，并且由于升级成本低，因此每个版本都可以全部升级，解决了历史包袱问题，同时 SDK 变“轻”直接降低了异构语言的治理门槛，再也不用为需要给各个语言开发相同服务治理能力的 SDK 头疼了。&lt;/p>
+&lt;h3 id="bservice-mesh-落地现状">B、Service Mesh 落地现状&lt;/h3>
+&lt;h4 id="istio">Istio&lt;/h4>
+&lt;blockquote>
+&lt;p>参考资料：https://mp.weixin.qq.com/s/xokpWwTItyEW2YN4Iklmww&lt;/p>&lt;/blockquote>
+&lt;ul>
+&lt;li>探索阶段：2017 年 - 2018 年&lt;/li>
+&lt;li>早期采用者阶段：2019 年 - 2020 年&lt;/li>
+&lt;li>大规模落地及生态发展阶段：2021 年至今&lt;/li>
+&lt;/ul>
+&lt;p>如果根据 “跨越鸿沟” 理论，服务网格已经跨越了 “鸿沟”，处于 “早期大众” 和 “晚期大众” 阶段之间。根据《Istio 大咖说》 观众中的反馈来看，用户已不再盲从于新技术，开始辩证的考虑 是否真的需要引入服务网格。&lt;/p></description></item></channel></rss>

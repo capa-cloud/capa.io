@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dapr Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/mechastack/dapr/</link><description>Recent content in Dapr Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/mechastack/dapr/index.xml" rel="self" type="application/rss+xml"/><item><title>Dapr 设计思路</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</link><pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/22/dapr-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</guid><description>&lt;blockquote>
+&lt;p>参考文档：https://docs.dapr.io/&lt;/p>&lt;/blockquote>
+&lt;h3 id="apipeline设计">A、pipeline设计&lt;/h3>
+&lt;h4 id="中间件管道链式中间件组件的自定义处理管道">中间件管道：链式中间件组件的自定义处理管道&lt;/h4>
+&lt;p>Dapr 允许通过链接一系列中间件组件来定义自定义处理管道。 请求在路由到用户代码之前经过所有已定义的中间件组件，然后在返回到客户机之前，按相反顺序经过已定义的中间件，如下图中所示。&lt;/p>
+&lt;p>&lt;img src="https://docs.dapr.io/images/middleware.png" alt="">&lt;/p></description></item></channel></rss>

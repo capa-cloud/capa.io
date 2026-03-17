@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Design Documents on Capa</title><link>https://capa-cloud.github.io/capa.io/en/docs/concepts/</link><description>Recent content in Design Documents on Capa</description><generator>Hugo</generator><language>en</language><atom:link href="https://capa-cloud.github.io/capa.io/en/docs/concepts/index.xml" rel="self" type="application/rss+xml"/><item><title>Configuration Service Invocation</title><link>https://capa-cloud.github.io/capa.io/en/docs/concepts/configuration-design/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/en/docs/concepts/configuration-design/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Manage application-level configuration by calling the Capa SDK API. The underlying implementation uses SPI to register adapter implementations for various platforms.&lt;/p>
+&lt;h2 id="invocation-logic">Invocation Logic&lt;/h2>
+&lt;p>The following diagram shows the Capa Configuration service invocation logic:&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/Configuration/configuration.png" alt="Configuration">&lt;/p>
+&lt;ul>
+&lt;li>Service (appid:A): the service invoker, CloudX Configuration Service is the service being invoked, which can be any cloud vendor&amp;rsquo;s configuration service&lt;/li>
+&lt;li>Service (appid:A) initiates a service call to the Cloud Configuration Service through the Capa SDK&lt;/li>
+&lt;li>Capa Configuration API is a unified API specification&lt;/li>
+&lt;li>Capa-CloudX Configuration Adaptor SDK is Capa&amp;rsquo;s adapter implementation class, registered via SPI&lt;/li>
+&lt;li>CloudX Configuration Service provides the actual configuration service&lt;/li>
+&lt;/ul>
+&lt;h2 id="api-design">API Design&lt;/h2>
+&lt;p>The design of the Capa Configuration API follows community standards:&lt;/p></description></item></channel></rss>

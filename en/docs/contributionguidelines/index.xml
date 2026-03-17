@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Contribution Guidelines on Capa</title><link>https://capa-cloud.github.io/capa.io/en/docs/contributionguidelines/</link><description>Recent content in Contribution Guidelines on Capa</description><generator>Hugo</generator><language>en</language><atom:link href="https://capa-cloud.github.io/capa.io/en/docs/contributionguidelines/index.xml" rel="self" type="application/rss+xml"/><item><title>Contributor Guide</title><link>https://capa-cloud.github.io/capa.io/en/docs/contributionguidelines/contributor-guide/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/en/docs/contributionguidelines/contributor-guide/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Capa is released under the Apache 2.0 license and follows the standard GitHub development process. This document describes how to contribute to Capa using GitHub Issues and Pull Requests.&lt;/p>
+
+&lt;/div>
+
+&lt;h2 id="issue-conventions">Issue Conventions&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Question&lt;/strong>: Ask a question about Capa&lt;/li>
+&lt;li>&lt;strong>Feature Request&lt;/strong>: Request a new feature for Capa&lt;/li>
+&lt;li>&lt;strong>Bug Report&lt;/strong>: Report a bug in Capa&lt;/li>
+&lt;li>&lt;strong>Discussion&lt;/strong>: Discuss Capa-related topics&lt;/li>
+&lt;li>&lt;strong>Proposal&lt;/strong>: Propose changes or enhancements to Capa&lt;/li>
+&lt;/ol>
+&lt;h2 id="coding-standards">Coding Standards&lt;/h2>
+&lt;ol>
+&lt;li>All submitted code must include the Apache License (can be detected via checkstyle plugin)&lt;/li>
+&lt;li>Only one commit is allowed per submission; if there are multiple, rebase them into a single commit locally&lt;/li>
+&lt;li>It is recommended that one commit should only resolve one issue&lt;/li>
+&lt;li>Commits must include detailed descriptions, all written in English&lt;/li>
+&lt;li>Code that fails the CI Pipeline build will not enter the Code Review stage&lt;/li>
+&lt;li>The repository has only one main branch (master branch)&lt;/li>
+&lt;li>Code on the main branch can only be advanced through Merge PR (MR)&lt;/li>
+&lt;li>All implemented features must have complete usage documentation&lt;/li>
+&lt;li>Packages referenced only in UT must have test scope&lt;/li>
+&lt;li>Each issue must first have an Issue submitted&lt;/li>
+&lt;/ol>
+&lt;h2 id="unit-testing-standards">Unit Testing Standards&lt;/h2>
+&lt;ol>
+&lt;li>Unit tests should use JUnit and Mockito&lt;/li>
+&lt;li>Follow the AIR principles:
+&lt;ul>
+&lt;li>&lt;strong>Automatic&lt;/strong>: Unit tests should be fully automated and non-interactive. Test cases are usually executed regularly and must be completely automated.&lt;/li>
+&lt;li>&lt;strong>Independent&lt;/strong>: Keep unit tests independent. To ensure unit tests are stable, reliable, and easy to maintain, unit test cases must never call each other or depend on execution order.&lt;/li>
+&lt;li>&lt;strong>Repeatable&lt;/strong>: Unit tests should be repeatable and not affected by external environments.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Keep unit test cases running fast; don&amp;rsquo;t put large integration test cases in unit tests&lt;/li>
+&lt;li>UT class naming convention: &lt;code>BeTestedClassTest&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> Example:
+ Source class full name: com.api.Matching
+ Source file path: src/main/java/com/api/Matching.java
+ UT file path: src/test/java/com/api/MatchingTest.java
+&lt;/code>&lt;/pre>&lt;ol start="6">
+&lt;li>UT method naming convention:&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> Example:
+ Source method name: matching()
+ UT method name: testMatching_Success() / testMatching_SuccessWhenResultGreaterThanZero() / testMatching_FailWhenThrowException()
+&lt;/code>&lt;/pre>&lt;h2 id="commit-conventions">Commit Conventions&lt;/h2>
+&lt;ol>
+&lt;li>Commit style:&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code> &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;
+ &amp;lt;BLANK LINE&amp;gt;
+ &amp;lt;body&amp;gt;
+ &amp;lt;BLANK LINE&amp;gt;
+ &amp;lt;footer&amp;gt;
+&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;li>Commit type:
+&lt;ul>
+&lt;li>&lt;strong>feat&lt;/strong>: New feature&lt;/li>
+&lt;li>&lt;strong>fix&lt;/strong>: Bug fix&lt;/li>
+&lt;li>&lt;strong>docs&lt;/strong>: Documentation changes only, such as README, CHANGELOG, CONTRIBUTE, etc.&lt;/li>
+&lt;li>&lt;strong>style&lt;/strong>: Formatting changes only, such as spaces, indentation, commas, etc., without changing code logic&lt;/li>
+&lt;li>&lt;strong>refactor&lt;/strong>: Code refactoring, without adding new features or fixing bugs&lt;/li>
+&lt;li>&lt;strong>perf&lt;/strong>: Performance optimization, such as improving performance or experience&lt;/li>
+&lt;li>&lt;strong>test&lt;/strong>: Test cases, including unit tests, integration tests, etc.&lt;/li>
+&lt;li>&lt;strong>chore&lt;/strong>: Changes to build process, or adding dependencies, tools, etc.&lt;/li>
+&lt;li>&lt;strong>revert&lt;/strong>: Revert to the previous version&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Commit scope&lt;/strong>: The scope of the submitted code (optional)&lt;/li>
+&lt;li>&lt;strong>Commit subject&lt;/strong>: Within 50 characters, describing the main changes (required)&lt;/li>
+&lt;li>&lt;strong>Commit body&lt;/strong>: More detailed description, recommended within 72 characters (required)&lt;/li>
+&lt;li>&lt;strong>Commit footer&lt;/strong>: If needed, can add a link to the issue address or other documents, or close an issue (optional)&lt;/li>
+&lt;/ol></description></item><item><title>Document Contribution Guide</title><link>https://capa-cloud.github.io/capa.io/en/docs/contributionguidelines/document-contribution/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/en/docs/contributionguidelines/document-contribution/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>This document describes how to contribute to the Capa documentation repository. The documentation is written in Markdown syntax and published to &lt;a href="https://github.com/capa-cloud/capa.io">capa-cloud/capa.io&lt;/a>.&lt;/p>
+
+&lt;/div>
+
+&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
+&lt;p>The Capa documentation repository is built using Hugo with the Docsy theme.&lt;/p>
+&lt;p>&lt;a href="https://github.com/capa-cloud/capa.io/issues/3">Documentation Setup Steps&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/capa-cloud/capa.io/issues/4">Documentation Development Steps&lt;/a>&lt;/p>
+&lt;h2 id="standards-and-conventions">Standards and Conventions&lt;/h2>
+&lt;ol>
+&lt;li>Ensure that the files you contribute are in the correct position in the hierarchy.&lt;/li>
+&lt;li>Ensure that your contributed content is consistent in terms of names, parameters, and terminology.&lt;/li>
+&lt;li>Ensure that any contributed content can be successfully built on the website.&lt;/li>
+&lt;li>Ensure that readers can understand why they should care about the contributed content and what problems it can solve for them.&lt;/li>
+&lt;/ol>
+&lt;h2 id="document-path-instructions">Document Path Instructions&lt;/h2>
+&lt;h3 id="file-path-instructions">File Path Instructions&lt;/h3>
+&lt;p>Files are uniformly placed in the &lt;code>content/&lt;/code> directory, with Chinese documents stored in &lt;code>content/zh&lt;/code> and English documents stored in &lt;code>content/en&lt;/code>.&lt;/p></description></item></channel></rss>

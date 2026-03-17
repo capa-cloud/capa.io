@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud Security on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/devopsstack/security/</link><description>Recent content in Cloud Security on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/devopsstack/security/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS IAM</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-iam/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-iam/</guid><description>&lt;h1 id="aws-security---iam使用经验">AWS Security - IAM使用经验&lt;/h1>
+&lt;h2 id="一iam相关概念">一、IAM相关概念&lt;/h2>
+&lt;h3 id="a用户">A、用户&lt;/h3>
+&lt;p>用户和角色类似，也是一组权限的集合，但是用户应该更多的面向 人/客户端？&lt;/p>
+&lt;ul>
+&lt;li>人 是某个用户，通过密钥进行认证，然后具有对应的权限&lt;/li>
+&lt;li>机器 是某个用户，通过secretkey进行认证，然后具有对应的权限&lt;/li>
+&lt;/ul>
+&lt;h3 id="b角色">B、角色&lt;/h3>
+&lt;p>角色可以理解为，一组权限的集合代表，当需要权限进行操作时，往往是基于 角色 这个实体进行赋予。&lt;/p>
+&lt;ul>
+&lt;li>对某个应用赋予某个角色&lt;/li>
+&lt;li>对某项操作赋予某个角色&lt;/li>
+&lt;/ul>
+&lt;h3 id="c策略">C、策略&lt;/h3>
+&lt;p>就是一组权限，或者单个权限。可以赋给 用户、角色。&lt;/p>
+&lt;hr>
+&lt;h2 id="二权限认证实践">二、权限认证实践&lt;/h2>
+&lt;h3 id="a开放的访问环境sandbox">A、开放的访问环境（sandbox）&lt;/h3>
+&lt;p>由于本身网络环境是开放的，所以仅需进行IAM认证即可连接到其中。&lt;/p>
+&lt;p>以下为一种示例流程：&lt;/p>
+&lt;h4 id="1-设置-用户-访问密钥">1. 设置 用户 访问密钥&lt;/h4>
+&lt;ol>
+&lt;li>添加到系统文件&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>[aws]
+aws_access_key_id=
+aws_secret_access_key=
+aws_session_token=
+&lt;/code>&lt;/pre>&lt;ol start="2">
+&lt;li>会话级别参数&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_SESSION_TOKEN=
+&lt;/code>&lt;/pre>&lt;h4 id="2-访问目标环境">2. 访问目标环境&lt;/h4>
+&lt;p>这时，作为客户端，需要使用的是 用户 这个概念，然后具有 用户 上面对应的权限。&lt;/p>
+&lt;h3 id="b隔离的访问环境">B、隔离的访问环境&lt;/h3>
+&lt;h4 id="1-通过会话管理器进行访问">1. 通过会话管理器进行访问&lt;/h4>
+&lt;p>这时，作为客户端，需要使用的是 用户 这个概念，然后具有 用户 上面对应的权限。&lt;/p>
+&lt;h4 id="2-通过vpn进行访问">2. 通过VPN进行访问&lt;/h4>
+&lt;p>连接VPN后，操作步骤同A中所示。&lt;/p></description></item></channel></rss>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chaos混沌工程 on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/</link><description>Recent content in Chaos混沌工程 on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/devopsstack/chaos/index.xml" rel="self" type="application/rss+xml"/><item><title>Chaos Mesh - K8S</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/chaos-mesh-k8s/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/chaos-mesh-k8s/</guid><description>&lt;h1 id="chaos-mesh">Chaos Mesh&lt;/h1>
+&lt;h2 id="一故障注入场景">一、故障注入场景&lt;/h2>
+&lt;h3 id="arpc服务通讯层演练">A、RPC服务通讯层演练&lt;/h3>
+&lt;h4 id="1-rpc演练-服务延时性能-监控告警">1. RPC演练-服务延时/性能 监控告警&lt;/h4>
+&lt;p>&lt;strong>演练目标：&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>演练手段：&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>演练：&lt;/strong>&lt;/p>
+&lt;h4 id="2-rpc演练-服务弹性伸缩高可用">2. RPC演练-服务弹性伸缩高可用&lt;/h4>
+&lt;h4 id="3-rpc演练-服务恢复">3. RPC演练-服务恢复&lt;/h4>
+&lt;hr>
+&lt;h2 id="二k8s混沌实验">二、K8S混沌实验&lt;/h2>
+&lt;p>见 &lt;a href="https://chaos-mesh.org/zh/docs/simulate-pod-chaos-on-kubernetes/">Kubernetes&lt;/a>&lt;/p>
+&lt;h4 id="故障注入暂停">故障注入暂停&lt;/h4>
+&lt;pre>&lt;code># kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause=true
+kubectl annotate {networkchaos} {network-delay} experiment.chaos-mesh.org/pause=true
+&lt;/code>&lt;/pre>
+&lt;h4 id="故障注入恢复">故障注入恢复&lt;/h4>
+&lt;pre>&lt;code># kubectl annotate {kind} {name} experiment.chaos-mesh.org/pause-
+kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
+&lt;/code>&lt;/pre>
+&lt;h4 id="故障注入删除">故障注入删除&lt;/h4>
+&lt;pre>&lt;code>kubectl delete -f network-delay.yaml
+# or delete the chaos object directly
+kubectl delete {networkchaos} {network-delay}
+&lt;/code>&lt;/pre>
+&lt;hr>
+&lt;h3 id="apod故障">A、POD故障&lt;/h3>
+&lt;h4 id="1-pod-failure">1. Pod Failure&lt;/h4>
+&lt;p>向指定的 Pod 中注入故障，使得该 Pod 在一段时间内处于不可用的状态。&lt;/p>
+&lt;p>&lt;strong>配置：&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">chaos-mesh.org/v1alpha1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">PodChaos&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">metadata&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">pod-failure-example&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">namespace&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">chaos-testing&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">action&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">pod-failure&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">mode&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">one&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">duration&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;30s&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">selector&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">labelSelectors&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#39;app.kubernetes.io/component&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;tikv&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>实践：&lt;/strong>&lt;/p></description></item><item><title>AWS FIS</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-fis/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-fis/</guid><description>&lt;h1 id="aws-fault-injection-simulator-aws-fis">AWS Fault Injection Simulator (AWS FIS)&lt;/h1>
+&lt;h2 id="一重要概念">一、重要概念&lt;/h2>
+&lt;p>要运行实验，您首先要创建一个&lt;strong>实验模板&lt;/strong>。实验模板是实验的蓝图。它包含实验的 &lt;strong>操作&lt;/strong>、&lt;strong>目标&lt;/strong>和&lt;strong>停止条件&lt;/strong>。&lt;/p>
+&lt;p>&lt;img src="https://docs.aws.amazon.com/fis/latest/userguide/images/experiment-components.png" alt="">&lt;/p>
+&lt;h3 id="aaws-fis-操作和支持的-aws-服务">A、AWS FIS 操作和支持的 AWS 服务&lt;/h3>
+&lt;p>AWS FIS 支持针对以下 AWS 服务的目标资源的操作：&lt;/p>
+&lt;ul>
+&lt;li>Amazon 弹性计算云 (Amazon EC2)&lt;/li>
+&lt;li>亚马逊弹性容器服务 (Amazon ECS)&lt;/li>
+&lt;li>Amazon 弹性 Kubernetes 服务 (Amazon EKS)
+&lt;ul>
+&lt;li>Node(EC2)维度&lt;/li>
+&lt;li>不支持到POD维度&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Amazon 关系数据库服务 (Amazon RDS)&lt;/li>
+&lt;/ul>
+&lt;h3 id="b基本原则和指导方针">B、基本原则和指导方针&lt;/h3>
+&lt;p>在开始使用 AWS FIS 进行实验之前，请执行以下步骤：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>确定实验的目标部署&lt;/strong>——首先确定目标部署。如果这是您的第一次实验，我们建议您从预生产或测试环境开始。&lt;/li>
+&lt;li>&lt;strong>审查应用程序架构&lt;/strong>——您必须确保您已确定所有应用程序组件、依赖项和每个组件的恢复过程。首先查看应用程序架构。根据应用程序，请参阅AWS 架构完善的框架。&lt;/li>
+&lt;li>&lt;strong>定义稳态行为&lt;/strong>——根据重要的技术和业务指标定义系统的稳态行为，例如延迟、CPU 负载、每分钟登录失败、重试次数或页面加载速度。&lt;/li>
+&lt;li>&lt;strong>形成一个假设&lt;/strong>——形成一个假设，说明您期望系统行为在实验期间如何变化。假设定义遵循以下格式：如果fault injection action执行，则business or technical metric impact不应超过value. 身份验证服务的假设可能如下所示：如果网络延迟增加 10%，则登录失败的增加不到 1%。实验完成后，您将评估应用程序弹性是否符合您的业务和技术预期。&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="二实验步骤">二、实验步骤&lt;/h2>
+&lt;h3 id="a创建角色权限">A、创建角色权限&lt;/h3>
+&lt;blockquote>
+&lt;p>参考: &lt;a href="https://docs.aws.amazon.com/fis/latest/userguide/getting-started-iam-service-role.html">https://docs.aws.amazon.com/fis/latest/userguide/getting-started-iam-service-role.html&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;h3 id="b创建实验">B、创建实验&lt;/h3>
+&lt;h3 id="ctodo">C、TODO&lt;/h3></description></item><item><title>Chaos Mesh</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/chaos-mesh/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/chaos-mesh/</guid><description>&lt;h1 id="chaos-mesh">Chaos Mesh&lt;/h1>
+&lt;h2 id="一安装到k8s集群">一、安装到K8S集群&lt;/h2>
+&lt;h3 id="helm">Helm&lt;/h3>
+&lt;h3 id="a有哪些pod">A、有哪些POD&lt;/h3>
+&lt;pre tabindex="0">&lt;code>chaos-testing chaos-controller-manager-7788488bbd-dq8k8 1/1 Running 0 45h
+chaos-testing chaos-controller-manager-7788488bbd-dvqdj 1/1 Running 1 (34h ago) 45h
+chaos-testing chaos-controller-manager-7788488bbd-ffwss 1/1 Running 0 45h
+chaos-testing chaos-daemon-4cqnm 1/1 Running 0 44h
+chaos-testing chaos-daemon-djrth 1/1 Running 0 44h
+chaos-testing chaos-daemon-hpc59 0/1 Pending 0 44h
+chaos-testing chaos-daemon-jppg9 1/1 Running 0 44h
+chaos-testing chaos-daemon-kgdwb 1/1 Running 0 44h
+chaos-testing chaos-daemon-mqh5k 1/1 Running 0 44h
+chaos-testing chaos-daemon-qw5cn 1/1 Running 0 44h
+chaos-testing chaos-daemon-v8ptz 1/1 Running 0 44h
+chaos-testing chaos-daemon-xzkm4 1/1 Running 0 44h
+chaos-testing chaos-daemon-zlt67 1/1 Running 0 44h
+chaos-testing chaos-dashboard-84ffc4bb9-4nxf9 1/1 Running 0 45h
+&lt;/code>&lt;/pre>&lt;p>chaos-daemon每个node一个，以daemonset方式运行。&lt;/p></description></item></channel></rss>

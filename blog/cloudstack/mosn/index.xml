@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mosn Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/cloudstack/mosn/</link><description>Recent content in Mosn Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/mosn/index.xml" rel="self" type="application/rss+xml"/><item><title>Mosn Landscape</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/20/mosn-landscape/</link><pubDate>Fri, 20 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/20/mosn-landscape/</guid><description>&lt;h2 id="一mosn-常用概念">一、Mosn 常用概念&lt;/h2>
+&lt;h3 id="a流量劫持">A、流量劫持&lt;/h3>
+&lt;blockquote>
+&lt;p>MOSN 作为 Sidecar 使用时的流量劫持方案。&lt;/p>&lt;/blockquote>
+&lt;p>MOSN 作为 Sidecar 和业务容器部署在同一个 Pod 中时，需要使得业务应用的 Inbound 和 Outbound 服务请求都能够经过 Sidecar 处理。&lt;strong>区别于 Istio 社区使用 iptables 做流量透明劫持&lt;/strong>，MOSN 目前使用的是流量接管方案，并在积极探索适用于大规模流量下的透明劫持方案&lt;/p>
+&lt;h4 id="流量接管">流量接管&lt;/h4>
+&lt;p>区别于 Istio 社区的 iptables 流量劫持方案，MOSN 使用的流量接管的方案如下：&lt;/p>
+&lt;ol>
+&lt;li>假设服务端运行在 1.2.3.4 这台机器上，监听 20880 端口，首先服务端会向自己的 Sidecar 发起服务注册请求，告知 Sidecar 需要注册的服务以及 IP + 端口（1.2.3.4:20880）&lt;/li>
+&lt;li>服务端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务注册请求，告知需要注册的服务以及 IP + 端口，不过这里需要注意的是注册上去的并不是业务应用的端口（20880），而是 Sidecar 自己监听的一个端口（例如：20881）&lt;/li>
+&lt;li>调用端向自己的 Sidecar 发起服务订阅请求，告知需要订阅的服务信息&lt;/li>
+&lt;li>调用端的 Sidecar 向调用端推送服务地址，这里需要注意的是推送的 IP 是本机，端口是调用端的 Sidecar 监听的端口（例如 20882）&lt;/li>
+&lt;li>调用端的 Sidecar 会向服务注册中心（如 SOFA Registry）发起服务订阅请求，告知需要订阅的服务信息；&lt;/li>
+&lt;li>服务注册中心（如 SOFA Registry）向调用端的 Sidecar 推送服务地址（1.2.3.4:20881）&lt;/li>
+&lt;/ol>
+&lt;h4 id="服务调用过程">服务调用过程&lt;/h4>
+&lt;p>经过上述的服务发现过程，流量转发过程就显得非常自然了：&lt;/p></description></item></channel></rss>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gRPC Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/cloudstack/grpc/</link><description>Recent content in gRPC Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/grpc/index.xml" rel="self" type="application/rss+xml"/><item><title>gRPC Landscape</title><link>https://capa-cloud.github.io/capa.io/blog/2022/01/21/grpc-landscape/</link><pubDate>Fri, 21 Jan 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/01/21/grpc-landscape/</guid><description>&lt;h2 id="一why-grpc">一、Why gRPC?&lt;/h2>
+&lt;h3 id="cloud-native-interactive-landscape">Cloud Native Interactive Landscape&lt;/h3>
+&lt;p>CNCF 云原生景观全景图：https://landscape.cncf.io/?zoom=400&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/grpc/cloud-native.png" alt="">&lt;/p>
+&lt;p>面对庞大的技术栈，有选择性的进行研究：&lt;/p>
+&lt;ul>
+&lt;li>使用上了解&lt;/li>
+&lt;li>原理上了解&lt;/li>
+&lt;li>设计上了解&lt;/li>
+&lt;li>源码级了解&lt;/li>
+&lt;li>参与贡献&lt;/li>
+&lt;/ul>
+&lt;h3 id="application-layer">Application layer&lt;/h3>
+&lt;p>偏向 应用层 的技术栈：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/capa/cloud-native-stack.png" alt="">&lt;/p>
+&lt;h4 id="messaging">messaging&lt;/h4>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/grpc/messaging.png" alt="">&lt;/p>
+&lt;h4 id="mesh">mesh&lt;/h4>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/grpc/mesh.png" alt="">&lt;/p>
+&lt;h4 id="rpc">rpc&lt;/h4>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/grpc/rpc.png" alt="">&lt;/p>
+&lt;h4 id="serverless-framework">serverless framework&lt;/h4>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/blog/news/grpc/serverless.png" alt="">&lt;/p>
+&lt;h3 id="grpc">gRPC&lt;/h3>
+&lt;p>云原生 应用层 技术栈，大量使用了gRPC作为网络通讯的协议/框架&lt;/p>
+&lt;h4 id="grpc-go">gRPC-go&lt;/h4>
+&lt;p>尤其是go-sdk，在大量sidecar模式架构中进行使用。&lt;/p>
+&lt;p>Go语言gRPC技术栈&lt;/p>
+&lt;p>&lt;img src="https://chai2010.gitbooks.io/advanced-go-programming-book/content/images/ch4-1-grpc-go-stack.png" alt="">&lt;/p>
+&lt;h3 id="why-grpc">Why gRPC?&lt;/h3>
+&lt;p>鉴于 gRPC 在应用层技术栈的广泛使用和重要性，对其有源码级了解是有价值的。&lt;/p>
+&lt;h2 id="二grpc协议">二、gRPC协议&lt;/h2>
+&lt;h3 id="设计原则">设计原则&lt;/h3>
+&lt;p>● 服务非对象、消息非引用 —— 促进微服务的系统间粗粒度消息交互设计理念，同时避免分布式对象的陷阱和分布式计算的谬误。&lt;/p>
+&lt;blockquote>
+&lt;p>和 DCOM 及 EJB 完全相反的。只有数据，不包含逻辑&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>分布式计算谬误&lt;/p>
+&lt;ul>
+&lt;li>网络可靠；&lt;/li>
+&lt;li>延迟为零；&lt;/li>
+&lt;li>带宽是无限的；&lt;/li>
+&lt;li>网络安全；&lt;/li>
+&lt;li>拓扑不变；&lt;/li>
+&lt;li>有一名管理员；&lt;/li>
+&lt;li>运输成本为零；&lt;/li>
+&lt;li>网络是同质的。&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;p>● 普遍并且简单 —— 该基础框架应该在任何流行的开发平台上适用，并且易于被个人在自己的平台上构建。它在CPU和内存有限的设备上也应该切实可行。&lt;/p>
+&lt;blockquote>
+&lt;p>协议的设计应考虑全面的应用场景：边缘节点、serverless等&lt;/p></description></item></channel></rss>

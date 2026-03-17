@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Istio Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/cloudstack/istio/</link><description>Recent content in Istio Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/istio/index.xml" rel="self" type="application/rss+xml"/><item><title>Istio devops</title><link>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-devops/</link><pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-devops/</guid><description>&lt;h3 id="请求的生命周期">请求的生命周期&lt;/h3>
+&lt;p>在这些示例中，我们将介绍应用程序运行时会发生什么curl example.com。虽然在curl这里使用，但同样适用于几乎所有客户端。&lt;/p>
+&lt;p>当您向域发送请求时，客户端将执行 DNS 解析以将其解析为 IP 地址。无论 Istio 设置如何，都会发生这种情况，因为 Istio 只拦截网络流量；它不能改变您的应用程序的行为或发送 DNS 请求的决定。在下面的示例中，example.com解析为192.0.2.0.&lt;/p>
+&lt;p>$ curl example.com -v&lt;/p>
+&lt;ul>
+&lt;li>Trying 192.0.2.0:80&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>接下来，请求将被 Istio 拦截。此时，Istio 将同时看到主机名（来自Host: example.com标头）和目标地址 ( 192.0.2.0:80)。Istio 使用此信息来确定预期目的地。 了解流量路由可以深入了解此行为的工作原理。&lt;/p>
+&lt;p>如果客户端无法解析 DNS 请求，请求将在 Istio 收到之前终止。这意味着如果将请求发送到 Istio 已知的主机名（例如 a VirtualService）但不发送到 DNS 服务器，则请求将失败。Istio DNS 代理可以改变这种行为。&lt;/p>
+&lt;p>一旦 Istio 确定了预期的目的地，它必须选择要发送到的地址。由于 Istio 的高级负载均衡功能，这通常不是客户端发送的原始 IP 地址。根据服务配置，Istio 有几种不同的方式来执行此操作。&lt;/p>
+&lt;p>使用客户端的原始 IP 地址（192.0.2.0在上面的示例中）。这是ServiceEntrytype resolution: NONE（默认）和headlessServices的情况。
+在一组静态 IP 地址上进行负载平衡。这是ServiceEntrytype的情况，将使用resolution: STATICall ，或 standard ，将使用 all 。spec.endpointsServicesEndpoints
+使用 DNS 定期解析地址，并对所有结果进行负载平衡。这是ServiceEntrytype的情况resolution: DNS。
+请注意，在所有情况下，Istio 代理中的 DNS 解析都与用户应用程序中的 DNS 解析正交。即使客户端进行 DNS 解析，代理也可能会忽略解析的 IP 地址并使用自己的 IP 地址，这可能来自静态 IP 列表或通过自己的 DNS 解析（可能是相同的主机名或不同的主机名）。&lt;/p></description></item><item><title>Istio Landscape</title><link>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-landscape/</link><pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/03/09/istio-landscape/</guid><description>&lt;blockquote>
+&lt;p>参考文档：https://www.servicemesher.com/istio-handbook/concepts/sidecar-injection.html&lt;/p>&lt;/blockquote>
+&lt;h2 id="一istio-sidecar">一、Istio Sidecar&lt;/h2>
+&lt;h4 id="sidecar模式是什么">Sidecar模式是什么&lt;/h4>
+&lt;p>Sidecar模式是一种&lt;strong>单节点、多容器&lt;/strong>的应用设计形式。Sidecar主张以额外的容器来扩展或增强主容器,而这个额外的容器被称为Sidecar容器&lt;/p>
+&lt;p>sidecar 模式也符合当前微服务的以下特点:&lt;/p>
+&lt;ul>
+&lt;li>隔离(separation of concerns):让每个容器环境不需要相互依赖而独立运行,也就意味着sidecar程序可以和任何语言的应用服务一起运行。&lt;/li>
+&lt;li>单一责任原则(single responsibility principle),各个容器负责自己的处理逻辑,各司其职&lt;/li>
+&lt;li>内聚性/可重用性(Cohesiveness/Reusability)&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://www.servicemesher.com/istio-handbook/images/sidecar-pattern.jpg" alt="">&lt;/p>
+&lt;p>在软件架构中， Sidecar 连接到父应用并且为其添加扩展或者增强功能。Sidecar 应用与主应用程序松散耦合。它可以屏蔽不同编程语言的差异，统一实现微服务的可观察性、监控、日志记录、配置、断路器等功能。&lt;/p>
+&lt;h4 id="使用-sidecar-模式的优势">使用 Sidecar 模式的优势&lt;/h4>
+&lt;p>使用 sidecar 模式部署服务网格时，无需在节点上运行代理，但是集群中将运行多个相同的 sidecar 副本。在 sidecar 部署方式中，&lt;strong>每个应用的容器旁都会部署一个伴生容器（如 Envoy 或 MOSN），这个容器称之为 sidecar 容器&lt;/strong>。Sidecar 接管进出应用容器的所有流量。&lt;strong>在 Kubernetes 的 Pod 中，在原有的应用容器旁边注入一个 Sidecar 容器，两个容器共享存储、网络等资源&lt;/strong>，可以广义的将这个包含了 sidecar 容器的 Pod 理解为一台主机，两个容器共享主机资源。&lt;/p>
+&lt;p>因其独特的部署结构，使得 sidecar 模式具有以下优势：&lt;/p>
+&lt;ul>
+&lt;li>将与应用业务逻辑无关的功能抽象到共同基础设施，降低了微服务代码的复杂度。&lt;/li>
+&lt;li>因为不再需要编写相同的第三方组件配置文件和代码，所以能够降低微服务架构中的代码重复度。
+Sidecar 可独立升级，降低应用程序代码和底层平台的耦合度。&lt;/li>
+&lt;/ul>
+&lt;h4 id="sidecar模式">Sidecar模式&lt;/h4>
+&lt;p>借助于K8S良好的可拓展性，使用sidecar模式可以享受到分布式系统中的规模化效率红利。相比于这种效率提升，我们可以容许性能上的开销。&lt;/p>
+&lt;h3 id="sidecar实现">Sidecar实现&lt;/h3>
+&lt;h4 id="该如何实现一个sidecar">该如何实现一个sidecar&lt;/h4>
+&lt;ul>
+&lt;li>在设计sidecar服务时,请慎重决定进程间通信机制。除非达不到性能要求,否则请尽量使用不区分语言或框架的技术。&lt;/li>
+&lt;li>在将功能放入sidecar之前,请考虑该功能是作为独立的服务还是更传统的守护程序运行更有利。&lt;/li>
+&lt;li>此外,请考虑是否能够以库的形式或使用传统扩展机制实现功能.特定于语言的库可能提供更深度的集成和更少的网络开销。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-golang" data-lang="golang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">func&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000">err&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">rootCmd&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Execute&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span> &lt;span style="color:#000">err&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">!=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">nil&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#000">log&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Error&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">err&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#000">os&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Exit&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="asidecar-vm">A、Sidecar VM&lt;/h3>
+&lt;ol>
+&lt;li>创建虚拟机&lt;/li>
+&lt;li>设置环境变量&lt;/li>
+&lt;li>安装依赖包&lt;/li>
+&lt;li>上传脚本到虚拟机&lt;/li>
+&lt;li>命令行启动多个可执行文件&lt;/li>
+&lt;/ol>
+&lt;h3 id="bsidecar-docker">B、Sidecar docker&lt;/h3>
+&lt;p>借助 docker-compose.yml 文件，开发人员可定义一组相关服务，通过部署命令将其部署为组合应用程序。 它还配置其依赖项关系和运行时配置。多个容器使用同一个network。&lt;/p></description></item></channel></rss>

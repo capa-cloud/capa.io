@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SDK管理实践 on Capa</title><link>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/</link><description>Recent content in SDK管理实践 on Capa</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Tue, 17 May 2022 22:58:21 +0800</lastBuildDate><atom:link href="https://capa-cloud.github.io/capa.io/docs/tasks/sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>SDK-Java管理实践</title><link>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/sdk-java/</link><pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/docs/tasks/sdk/sdk-java/</guid><description>&lt;p>Java SDK主要使用Maven进行管理，故以下内容主要基于Maven进行实践。&lt;/p>
+&lt;h1 id="动态加载不同的sdk实现包">动态加载不同的SDK实现包&lt;/h1>
+&lt;p>根据Capa设计，接入层面向API层的SDK进行编程，然后在运行时动态调用不同的实现层SDK。&lt;/p>
+&lt;h2 id="实现包如何加载到运行时空间">实现包如何加载到运行时空间？&lt;/h2>
+&lt;h3 id="思路一打包时包含了所有实现层sdk运行时仅加载对应的实现包">思路一：打包时包含了所有实现层SDK，运行时仅加载对应的实现包。&lt;/h3>
+&lt;p>问题：&lt;/p>
+&lt;p>若包含所有的实现层SDK，则面对依赖冲突的可能性大增。&lt;/p>
+&lt;p>有的实现层SDK在初始化时执行了操作，若将A云的实现层jar打包到B云的包中，可能有未知的问题出现。&lt;/p>
+&lt;p>综上，不使用该方案。&lt;/p>
+&lt;h3 id="思路二将不同云的实现打包成不同的包镜像">思路二：将不同云的实现，打包成不同的包/镜像。&lt;/h3>
+&lt;p>基于Maven提供的profile机制，可以将不同云的实现打包到不同的包中，最终生成不同的镜像。&lt;/p>
+&lt;p>可以避免不同云SDK之间的冲突，以及可以针对性的添加个性化的配置。&lt;/p>
+&lt;p>具体实现主要有以下思路：&lt;/p>
+&lt;h4 id="1-使用maven插件自动化该步骤">1. 使用maven插件自动化该步骤&lt;/h4>
+&lt;p>但动态修改 pom 文件本身并不推荐。&lt;/p>
+&lt;p>maven 官方建议直接指定需要的依赖：&lt;/p>
+&lt;ul>
+&lt;li>可以更方便的解决依赖冲突的问题&lt;/li>
+&lt;li>为项目提供了更容易阅读的文档，只需要阅读项目中的 pom 文件或者执行 mvn dependency: tree 即可了解更多信息&lt;/li>
+&lt;/ul>
+&lt;p>综上，不使用该方案。&lt;/p>
+&lt;h4 id="2-手动指定profile">2. 手动指定profile&lt;/h4>
+&lt;p>面对的问题：&lt;/p>
+&lt;ul>
+&lt;li>接入方需要编写额外的pom内容。&lt;/li>
+&lt;li>需要生成不同的包/镜像，需要改动原有的CI流程。&lt;/li>
+&lt;li>profile在查看依赖冲突等问题时，IDE支持的不如直接引用的方式。&lt;/li>
+&lt;/ul>
+&lt;p>但以上问题，提高了复杂度，但减少了面对未知问题的可能性，更有利于生产的稳定性。&lt;/p>
+&lt;p>&lt;strong>所以使用该种方式。&lt;/strong>&lt;/p>
+&lt;hr>
+&lt;h2 id="实现包加载到运行时空间实践">实现包加载到运行时空间实践&lt;/h2>
+&lt;h3>&lt;/h3>
+&lt;hr>
+&lt;h1 id="依赖冲突管理">依赖冲突管理&lt;/h1>
+&lt;p>本文介绍在SDK-Java中的依赖管理实践经验。&lt;/p>
+&lt;h2 id="maven依赖管理">Maven依赖管理&lt;/h2>
+&lt;h3 id="依赖版本传递">依赖版本传递&lt;/h3>
+&lt;p>因为有了依赖传递，我们就不需要考虑依赖的依赖如何管理了，maven都会把他们加载进来，但是这么多依赖都进来到底用哪个，会不会冲突呢？&lt;/p>
+&lt;p>maven在解析pom时，会使用依赖调解，具体原则有：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>第一原则 路径最近者优先&lt;/p>
+&lt;p>A -&amp;gt; B -&amp;gt; X(1.0)
+A -&amp;gt; C -&amp;gt; D -&amp;gt; X(2.0)&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>X（1.0） 路径长度为2，X（2.0）路径长度3，所以 X（1.0） 会被真正的使用&lt;/p>
+&lt;ol start="2">
+&lt;li>
+&lt;p>第二原则 第一声明者优先&lt;/p>
+&lt;p>A -&amp;gt; B -&amp;gt; X(1.0)
+A -&amp;gt; C -&amp;gt; X(2.0)&lt;/p></description></item></channel></rss>

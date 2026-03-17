@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java Web Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/javastack/javaweb/</link><description>Recent content in Java Web Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/javastack/javaweb/index.xml" rel="self" type="application/rss+xml"/><item><title>Java Servlet</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-servlet/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-servlet/</guid><description>&lt;h3 id="a初始化">A、初始化&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;a href="https://www.codetd.com/en/article/13249666#ServletContextListener_27">https://www.codetd.com/en/article/13249666#ServletContextListener_27&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;h4 id="servletcontextlistener">ServletContextListener&lt;/h4>
+&lt;p>ServletContextListener 接口，它能够监听 ServletContext 对象的生命周期，当Servlet 容器启动或终止Web 应用时，会触发ServletContextEvent 事件，该事件由ServletContextListener 来处理。&lt;/p></description></item><item><title>Java Spring</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-spring/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/30/java-spring/</guid><description>&lt;h3 id="a初始化">A、初始化&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;a href="https://www.codetd.com/en/article/13249666#ServletContextListener_27">https://www.codetd.com/en/article/13249666#ServletContextListener_27&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;h4 id="beanpostprocessor">BeanPostProcessor&lt;/h4>
+&lt;p>Spring容器的创建Bean前后执行&lt;/p>
+&lt;h4 id="initializingbean">InitializingBean&lt;/h4>
+&lt;p>InitializingBean接口为bean提供了属性初始化后的处理方法，在bean的属性初始化后都会执行该方法。&lt;/p>
+&lt;h4 id="postconstruct">PostConstruct&lt;/h4>
+&lt;p>使用@PostConstruct注解一个方法来完成初始化，@PostConstruct注解的方法将会在依赖注入完成后被自动调用。&lt;/p>
+&lt;h4 id="applicationrunner和commandlinerunner">ApplicationRunner和CommandLineRunner&lt;/h4>
+&lt;p>项目启动后执行，CommandLineRunner和ApplicationRunner的作用是相同的，不同在于参数的封装和没封装。可以创建多个实现CommandLineRunner和ApplicationRunner接口的类。为了使他们按一定顺序执行，可以使用@Order注解或实现Ordered接口。&lt;/p>
+&lt;h4 id="执行顺序结果">执行顺序结果&lt;/h4>
+&lt;pre>&lt;code>. ____ _ __ _ _
+/\\ / ___'_ __ _ _(_)_ __ __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+\\/ ___)| |_)| | | | | || (_| | ) ) ) )
+' |____| .__|_| |_|_| |_\__, | / / / /
+=========|_|==============|___/=/_/_/_/
+:: Spring Boot :: (v1.5.9.RELEASE)
+
+beanPostProcessor run...
+servletContextListener run...
+initializingBean run...
+postConstruct run...
+applicationRunner run...
+commandLineRunner run...
+&lt;/code>&lt;/pre></description></item></channel></rss>

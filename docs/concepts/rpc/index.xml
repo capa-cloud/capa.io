@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RPC服务调用 on Capa</title><link>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/</link><description>Recent content in RPC服务调用 on Capa</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Wed, 01 Jun 2022 13:10:30 +0800</lastBuildDate><atom:link href="https://capa-cloud.github.io/capa.io/docs/concepts/rpc/index.xml" rel="self" type="application/rss+xml"/><item><title>RPC AWS技术方案</title><link>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-aws/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-aws/</guid><description>&lt;h2 id="aws-rpc技术选型">AWS RPC技术选型&lt;/h2>
+&lt;p>经过调研，发现AWS在RPC上&lt;/p>
+&lt;h2 id="client技术选型">Client技术选型&lt;/h2>
+&lt;h2 id="server技术选型">Server技术选型&lt;/h2></description></item><item><title>RPC Ctrip技术方案</title><link>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/docs/concepts/rpc/rpc-ctrip/</guid><description>&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>通过服务调用，应用程序可以使用 &lt;a href="https://www.w3.org/Protocols/">HTTP&lt;/a> 这样的标准协议来发现并可靠地与其他应用程序通信。&lt;/p>
+&lt;h2 id="调用逻辑">调用逻辑&lt;/h2>
+&lt;p>下图为 Capa 的 RPC 服务调用逻辑&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/Concepts/rpc_invoke.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>Service A 为服务调用方， Service B 为服务被调用方&lt;/li>
+&lt;li>Service A 通过 Capa SDK 发起对 Service B 的服务调用&lt;/li>
+&lt;li>Capa RPC API 是统一的 API 规范&lt;/li>
+&lt;li>通过 SPI 机制可以找到 Capa RPC API 的具体 RPC 实现 RPC Impl&lt;/li>
+&lt;li>获取 Service B 的返回数据，并返回给服务调用方 Service A&lt;/li>
+&lt;/ul>
+&lt;h2 id="api-设计">API 设计&lt;/h2>
+&lt;p>Capa的 api 设计参照了社区的规范&lt;/p>
+&lt;p>&lt;a href="https://github.com/dapr/dapr/blob/master/dapr/proto/runtime/v1/dapr.proto">Dapr API&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/mosn/layotto/blob/main/spec/proto/runtime/v1/runtime.proto">Layotto API&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/InvocationRuntimes.java">Capa API&lt;/a>&lt;/p>
+&lt;p>具体参数含义如下：&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>参数&lt;/th>
+ &lt;th>含义&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>appId&lt;/td>
+ &lt;td>同一命名空间内的服务唯一ID&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>methodName&lt;/td>
+ &lt;td>被调用服务的方法名&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>request&lt;/td>
+ &lt;td>要发送调用的服务请求&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>httpExtension&lt;/td>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/HttpExtension.java">HTTP请求方式&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>metadata&lt;/td>
+ &lt;td>发送请求的元数据（GRPC）或者请求头（HTTP）&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>clazz&lt;/td>
+ &lt;td>请求响应的类型&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>type&lt;/td>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/utils/TypeRef.java">请求响应的类型&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>invokeMethodRequest&lt;/td>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象&lt;/a>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item></channel></rss>
