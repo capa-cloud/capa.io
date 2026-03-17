@@ -6,6 +6,7 @@ linkTitle = "Capa"
 <!-- ==================== HERO ==================== -->
 <section class="capa-hero">
   <div class="capa-hero__bg"></div>
+  <div class="capa-hero__grid"></div>
   <div class="capa-hero__overlay"></div>
   <div class="capa-hero__content">
     <div class="capa-hero__badge">Cloud Application API</div>
@@ -33,34 +34,37 @@ linkTitle = "Capa"
 
 <!-- ==================== ARCHITECTURE ==================== -->
 <section class="capa-arch">
-  <div class="capa-section-label">Architecture</div>
-  <h2 class="capa-section-title">为什么选择 Capa？</h2>
-  <p class="capa-section-desc">
-    统一的 API 层，让应用与基础设施解耦，通过 SPI 插件机制适配不同云平台。
-  </p>
-  <div class="capa-arch__img">
+  <div class="capa-reveal">
+    <div class="capa-section-label">Architecture</div>
+    <h2 class="capa-section-title">为什么选择 Capa？</h2>
+    <p class="capa-section-desc">
+      统一的 API 层，让应用与基础设施解耦，通过 SPI 插件机制适配不同云平台。
+    </p>
+  </div>
+  <div class="capa-arch__img capa-reveal capa-reveal-delay-1">
     <img src="/images/homepage/architecture.png" alt="Capa 分层架构：应用 → Standard API → SPI Plugin → 多云实现" loading="lazy">
   </div>
 </section>
 
 <!-- ==================== FEATURES ==================== -->
 <section class="capa-features">
+  <div class="capa-divider"></div>
   <div class="capa-features__grid">
-    <div class="capa-feature">
+    <div class="capa-feature capa-reveal">
       <div class="capa-feature__icon" style="background: #e3f2fd; color: #1565c0;">
         <i class="fas fa-cloud"></i>
       </div>
       <h3 class="capa-feature__title">跨云部署</h3>
       <p class="capa-feature__desc">一套代码，同时部署到阿里云、AWS、腾讯云等多个云平台，无需修改业务逻辑。</p>
     </div>
-    <div class="capa-feature">
+    <div class="capa-feature capa-reveal capa-reveal-delay-1">
       <div class="capa-feature__icon" style="background: #ede7f6; color: #6a1b9a;">
         <i class="fas fa-layer-group"></i>
       </div>
       <h3 class="capa-feature__title">Mecha 架构</h3>
       <p class="capa-feature__desc">基于 Service Mesh 理念演进，将基础设施能力下沉到 SDK，应用只需关注业务逻辑。</p>
     </div>
-    <div class="capa-feature">
+    <div class="capa-feature capa-reveal capa-reveal-delay-2">
       <div class="capa-feature__icon" style="background: #e8f5e9; color: #2e7d32;">
         <i class="fas fa-code"></i>
       </div>
@@ -72,12 +76,14 @@ linkTitle = "Capa"
 
 <!-- ==================== FEATURED ARTICLE ==================== -->
 <section class="capa-article">
-  <div class="capa-section-label" style="color: var(--capa-cyan); text-align: center;">Deep Dive</div>
-  <h2 class="capa-section-title" style="color: #fff; text-align: center;">深度阅读</h2>
-  <p class="capa-section-desc" style="color: rgba(255,255,255,0.5); text-align: center;">
-    了解 Capa 的设计哲学、架构实践与未来方向
-  </p>
-  <div class="capa-article__card">
+  <div class="capa-reveal" style="text-align: center;">
+    <div class="capa-section-label" style="color: var(--capa-cyan);">Deep Dive</div>
+    <h2 class="capa-section-title" style="color: #fff;">深度阅读</h2>
+    <p class="capa-section-desc" style="color: rgba(255,255,255,0.45);">
+      了解 Capa 的设计哲学、架构实践与未来方向
+    </p>
+  </div>
+  <div class="capa-article__card capa-reveal capa-reveal-delay-1">
     <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/">
       <img class="capa-article__cover" src="/images/homepage/article-cover.png" alt="Capa 架起混合云应用开发的桥梁" loading="lazy">
     </a>
@@ -105,12 +111,12 @@ linkTitle = "Capa"
 
 <!-- ==================== CODE EXAMPLE ==================== -->
 <section class="capa-code">
-  <div style="text-align: center; margin-bottom: 2.5rem;">
+  <div class="capa-reveal" style="text-align: center; margin-bottom: 2.8rem;">
     <div class="capa-section-label">Quick Start</div>
     <h2 class="capa-section-title">简洁的 API 设计</h2>
   </div>
   <div class="capa-code__grid">
-    <div class="capa-code__block">
+    <div class="capa-code__block capa-reveal">
       <div class="capa-code__header">
         <span class="capa-code__dot" style="background: #ff5f57;"></span>
         <span class="capa-code__dot" style="background: #febc2e;"></span>
@@ -133,10 +139,8 @@ Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMet
 <span style="color:#8b949e;">// 获取结果</span>
 <span style="color:#ff7b72;">String</span> response = result.block();</code></pre>
     </div>
-    <div>
-      <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--capa-navy); margin-bottom: 1.5rem;">
-        丰富的分布式能力
-      </h3>
+    <div class="capa-reveal capa-reveal-delay-1">
+      <h3 class="capa-code__right-title">丰富的分布式能力</h3>
       <ul class="capa-code__list">
         <li><span class="check"><i class="fas fa-check-circle"></i></span> 服务调用 (RPC)</li>
         <li><span class="check"><i class="fas fa-check-circle"></i></span> 配置中心 (Configuration)</li>
@@ -151,24 +155,43 @@ Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMet
 
 <!-- ==================== COMMUNITY ==================== -->
 <section class="capa-community">
-  <div class="capa-section-label">Community</div>
-  <h2 class="capa-section-title">加入社区</h2>
-  <p class="capa-section-desc">与开发者一起探讨 Mecha 架构和云原生技术</p>
+  <div class="capa-reveal">
+    <div class="capa-section-label">Community</div>
+    <h2 class="capa-section-title">加入社区</h2>
+    <p class="capa-section-desc">与开发者一起探讨 Mecha 架构和云原生技术</p>
+  </div>
   <div class="capa-community__grid">
-    <a class="capa-community__card" href="https://github.com/capa-cloud/capa-java" target="_blank" rel="noopener">
+    <a class="capa-community__card capa-reveal" href="https://github.com/capa-cloud/capa-java" target="_blank" rel="noopener">
       <div class="capa-community__icon"><i class="fab fa-github"></i></div>
       <h4>开源社区</h4>
       <p>参与项目建设，提交 Issue 或 PR</p>
     </a>
-    <a class="capa-community__card" href="/community/">
+    <a class="capa-community__card capa-reveal capa-reveal-delay-1" href="/community/">
       <div class="capa-community__icon"><i class="fas fa-comments"></i></div>
       <h4>技术交流</h4>
       <p>加入社区讨论，分享最佳实践</p>
     </a>
-    <a class="capa-community__card" href="https://github.com/capa-cloud/capa-java/issues" target="_blank" rel="noopener">
+    <a class="capa-community__card capa-reveal capa-reveal-delay-2" href="https://github.com/capa-cloud/capa-java/issues" target="_blank" rel="noopener">
       <div class="capa-community__icon"><i class="fas fa-envelope"></i></div>
       <h4>联系我们</h4>
       <p>有任何问题或建议？随时联系</p>
     </a>
   </div>
 </section>
+
+<!-- Scroll reveal script -->
+<script>
+(function() {
+  var els = document.querySelectorAll('.capa-reveal');
+  if (!els.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el) { observer.observe(el); });
+})();
+</script>
