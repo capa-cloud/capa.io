@@ -34,6 +34,9 @@ jobs:
       - name: "Install dependencies"
         run: npm ci
 
+      - name: "Create Hugo module directories for Docsy"
+        run: node themes/docsy/tools/mkdirp-hugo-mod.js themes
+
       - name: "Build"
         run: hugo --gc --minify --destination docs
 
