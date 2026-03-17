@@ -685,7 +685,7 @@ Capa SDK本身不具有丰富的功能，更像是一个包装适配层，具体
 | |AWS|AWS AppMesh|重试、熔断、超时等全部从SDK中下沉到Mesh层处理|
 |Configuration|Trip|Apollo / [QConfig](https://github.com/qunarcorp/qconfig)||
 | |AWS|AWS AppConfig|功能较为简陋，需要在SDK中进行弥补|
-|MQ|Trip|[QMQ]((https://github.com/qunarcorp/qmq))||
+|MQ|Trip|[QMQ](https://github.com/qunarcorp/qmq)||
 | |AWS|AWS MSK Kafka|缺少如延时消息等功能，需要借助周边系统进行弥补|
 |Redis|Trip|CRedis||
 | |AWS|AWS ElasticCache||
