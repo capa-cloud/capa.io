@@ -31,8 +31,11 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: "Install dependencies"
+      - name: "Install project dependencies"
         run: npm ci
+
+      - name: "Install Docsy theme dependencies"
+        run: cd themes/docsy && npm install
 
       - name: "Create Hugo module directories for Docsy"
         run: node themes/docsy/tools/mkdirp-hugo-mod.js themes
