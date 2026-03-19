@@ -338,6 +338,33 @@ body.td-home .td-navbar .td-search__icon::before {
   display: block;
 }
 
+/* ---------- Video ---------- */
+.capa-video {
+  padding: 100px 24px 60px;
+  background: #fff;
+  text-align: center;
+}
+
+.capa-video__player {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.06);
+  transition: transform 0.6s var(--apple-ease), box-shadow 0.6s var(--apple-ease);
+}
+.capa-video__player:hover {
+  transform: scale(1.01);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.18), 0 0 0 0.5px rgba(0,0,0,0.08);
+}
+
+.capa-video__player video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ---------- Features ---------- */
 .capa-features {
   padding: 40px 24px 100px;
