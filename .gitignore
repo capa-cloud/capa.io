@@ -10,6 +10,7 @@ static/videos/02-*.mp4
 static/videos/03-*.mp4
 static/videos/music_*.mp3
 static/videos/tts_*.mp3
+static/videos/storyboard/
 
 # Screenshots and temp images
 *.png
