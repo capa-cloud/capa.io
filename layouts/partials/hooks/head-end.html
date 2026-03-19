@@ -38,6 +38,67 @@ body.td-home {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ---------- Navbar — glassmorphic over hero ---------- */
+body.td-home .td-navbar {
+  background: rgba(8, 12, 31, 0.55) !important;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.12);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+body.td-home .td-navbar .navbar-brand__name {
+  font-family: var(--capa-font);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #fff !important;
+  letter-spacing: -0.3px;
+}
+body.td-home .td-navbar .navbar-brand__logo svg {
+  width: 24px;
+  height: 24px;
+  color: var(--capa-cyan);
+}
+body.td-home .td-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-family: var(--capa-font);
+  font-weight: 500;
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
+}
+body.td-home .td-navbar .nav-link:hover,
+body.td-home .td-navbar .nav-link.active {
+  color: #fff !important;
+}
+body.td-home .td-navbar .dropdown-toggle {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+body.td-home .td-navbar .dropdown-toggle:hover {
+  color: #fff !important;
+}
+/* Search box styling in navbar */
+body.td-home .td-navbar .td-search__input {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-family: var(--capa-font);
+  transition: all 0.25s ease;
+}
+body.td-home .td-navbar .td-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+body.td-home .td-navbar .td-search__input:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(79, 108, 255, 0.4) !important;
+  box-shadow: 0 0 0 3px rgba(79, 108, 255, 0.12);
+  outline: none;
+}
+body.td-home .td-navbar .td-search__icon::before {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 /* ---------- Scroll Reveal ---------- */
 .capa-reveal {
   opacity: 0;
