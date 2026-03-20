@@ -3,167 +3,233 @@ title = "Capa"
 linkTitle = "Capa"
 +++
 
-<!-- Hero Section -->
-{{< blocks/cover title="Capa: Cloud Application API" image_anchor="top" height="full" color="primary" >}}
-<div class="mx-auto">
-    <p class="lead mt-3 mb-4">
-        <strong>Write Once, Run Anywhere</strong><br>
-        <span style="font-size: 1.1rem; opacity: 0.9;">Mecha Architecture-based Multi-Runtime SDK for Java applications</span>
+<!-- ==================== HERO ==================== -->
+<section class="capa-hero">
+  <div class="capa-hero__bg"></div>
+  <div class="capa-hero__overlay"></div>
+  <div class="capa-hero__content">
+    <p class="capa-hero__eyebrow">Cloud Application API</p>
+    <h1 class="capa-hero__title">
+      Capa.<br><em>The Cloud API Layer.</em>
+    </h1>
+    <p class="capa-hero__subtitle">
+      Multi-runtime SDK based on Mecha Architecture.<br>
+      Write once, run anywhere.
     </p>
-    <a class="btn btn-lg btn-light mr-3 mb-3" href="/docs/overview/">
-        <i class="fas fa-book-open mr-2"></i> Overview
+    <div class="capa-hero__actions">
+      <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" class="capa-btn capa-btn--primary">
+        Read Core Article
+      </a>
+      <a href="/docs/gettingstarted/" class="capa-btn capa-btn--outline">
+        Get Started
+      </a>
+    </div>
+  </div>
+  <div class="capa-hero__scroll"></div>
+</section>
+
+<!-- ==================== ARCHITECTURE ==================== -->
+<section class="capa-arch">
+  <div class="capa-reveal">
+    <div class="capa-section-label">Architecture</div>
+    <h2 class="capa-section-title">Unified API. Decoupled infrastructure.</h2>
+    <p class="capa-section-desc">
+      Standard API + SPI plugin mechanism to fully decouple applications from cloud platforms.
+    </p>
+  </div>
+  <div class="capa-arch__img capa-reveal capa-reveal-delay-1">
+    <img src="/images/homepage/architecture.png" alt="Capa layered architecture: App → Standard API → SPI Plugin → Multi-cloud" loading="lazy">
+  </div>
+</section>
+
+<!-- ==================== DEMO VIDEO ==================== -->
+<section class="capa-video">
+  <div class="capa-reveal" style="text-align: center;">
+    <div class="capa-section-label">Demo</div>
+    <h2 class="capa-section-title">Seeing is believing.</h2>
+    <p class="capa-section-desc">
+      Understand Capa's core concepts and cross-cloud capabilities in one minute.
+    </p>
+  </div>
+  <div class="capa-video__player capa-reveal capa-reveal-delay-1">
+    <video id="capaVideo" autoplay muted loop playsinline preload="metadata">
+      <source src="/videos/capa-demo-final.mp4" type="video/mp4">
+    </video>
+    <button class="capa-video__sound" id="soundToggle" aria-label="Enable sound">
+      <i class="fas fa-volume-mute" id="soundIcon"></i>
+      <span id="soundLabel">Click to enable sound</span>
+    </button>
+  </div>
+</section>
+
+<!-- ==================== FEATURES ==================== -->
+<section class="capa-features">
+  <div class="capa-features__grid">
+    <div class="capa-feature capa-reveal">
+      <div class="capa-feature__icon" style="background: #e3f2fd; color: #1565c0;">
+        <i class="fas fa-cloud"></i>
+      </div>
+      <h3 class="capa-feature__title">Cross-Cloud Deploy</h3>
+      <p class="capa-feature__desc">One codebase, deploy to Alibaba Cloud, AWS, Tencent Cloud simultaneously — no business logic changes needed.</p>
+    </div>
+    <div class="capa-feature capa-reveal capa-reveal-delay-1">
+      <div class="capa-feature__icon" style="background: #ede7f6; color: #6a1b9a;">
+        <i class="fas fa-layer-group"></i>
+      </div>
+      <h3 class="capa-feature__title">Mecha Architecture</h3>
+      <p class="capa-feature__desc">Evolved from Service Mesh — offloads infrastructure capabilities to the SDK, so apps focus purely on business.</p>
+    </div>
+    <div class="capa-feature capa-reveal capa-reveal-delay-2">
+      <div class="capa-feature__icon" style="background: #e8f5e9; color: #2e7d32;">
+        <i class="fas fa-code"></i>
+      </div>
+      <h3 class="capa-feature__title">Standard API</h3>
+      <p class="capa-feature__desc">Unified API layer supporting RPC, Configuration, Pub/Sub, State, and more capabilities.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURED ARTICLE ==================== -->
+<section class="capa-article">
+  <div class="capa-reveal" style="text-align: center;">
+    <div class="capa-section-label" style="color: #2997ff;">Deep Dive</div>
+    <h2 class="capa-section-title" style="color: #f5f5f7;">Design philosophy & production practice.</h2>
+    <p class="capa-section-desc" style="color: var(--apple-gray);">
+      Explore Capa's architecture design and future direction.
+    </p>
+  </div>
+  <div class="capa-article__card capa-reveal capa-reveal-delay-1">
+    <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/">
+      <img class="capa-article__cover" src="/images/homepage/article-cover.png" alt="Capa: Bridging Hybrid Cloud Application Development" loading="lazy">
     </a>
-    <a class="btn btn-lg btn-primary mr-3 mb-3" href="/docs/gettingstarted/">
-        Get Started <i class="fas fa-arrow-alt-circle-right ml-2"></i>
-    </a>
-    <a class="btn btn-lg btn-secondary mb-3" href="https://github.com/capa-cloud/capa-java">
-        <i class="fab fa-github mr-2"></i> GitHub
-    </a>
-</div>
-{{< /blocks/cover >}}
-
-<!-- Value Proposition -->
-{{% blocks/lead color="primary" %}}
-<h2 style="margin-bottom: 1rem;">Why Capa?</h2>
-<p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
-Capa (Cloud Application API) is a Mecha Architecture implementation for Java applications,<br>
-providing a unified API layer that decouples applications from infrastructure, enabling true cloud-native portability.
-</p>
-{{% /blocks/lead %}}
-
-<!-- Core Features -->
-{{< blocks/section color="white" >}}
-
-{{% blocks/feature icon="fa-cloud" title="Cross-Cloud Deployment" %}}
-One codebase, deploy to multiple cloud platforms like Alibaba Cloud, AWS, Tencent Cloud without modifying business logic.
-{{% /blocks/feature %}}
-
-{{% blocks/feature icon="fa-layer-group" title="Mecha Architecture" %}}
-Based on Service Mesh concepts,下沉 infrastructure capabilities to Sidecar/SDK, letting applications focus only on business logic.
-{{% /blocks/feature %}}
-
-{{% blocks/feature icon="fa-code" title="Standard APIs" %}}
-Unified standard API layer supporting RPC, Configuration, Pub/Sub, State Management and more distributed capabilities.
-{{% /blocks/feature %}}
-
-{{< /blocks/section >}}
-
-<!-- Quick Start -->
-{{< blocks/section color="dark" >}}
-<div class="col-12">
-    <h2 class="text-center mb-5">🚀 Quick Start</h2>
-</div>
-
-<div class="col-lg-4 mb-4">
-    <div class="card h-100 border-0 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title">
-                <a href="/docs/overview/" class="text-decoration-none">
-                    <i class="fas fa-book text-info mr-2"></i>Project Overview
-                </a>
-            </h5>
-            <p class="card-text text-muted">Learn about Capa's core concepts, design goals, and quick start guide.</p>
-            <a href="/docs/overview/" class="btn btn-outline-primary btn-sm">Read Docs</a>
-        </div>
+    <div class="capa-article__body">
+      <h3 class="capa-article__title">
+        <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/">Capa: Bridging Hybrid Cloud App Development</a>
+      </h3>
+      <p class="capa-article__excerpt">
+        From Service Mesh to Multi-Runtime — a deep dive into Mecha architecture's design philosophy. Learn how Capa achieves
+        cross-cloud deployment through Standard API + SPI plugins. Covering RPC, config center, messaging, observability and more.
+      </p>
+      <div class="capa-article__tags">
+        <span class="capa-article__tag">Mecha Architecture</span>
+        <span class="capa-article__tag">Cross-Cloud</span>
+        <span class="capa-article__tag">API Design</span>
+        <span class="capa-article__tag">Service Mesh</span>
+        <span class="capa-article__tag">Production</span>
+      </div>
+      <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" class="capa-btn capa-btn--primary">
+        Read Full Article <i class="fas fa-arrow-right"></i>
+      </a>
     </div>
-</div>
+  </div>
+</section>
 
-<div class="col-lg-4 mb-4">
-    <div class="card h-100 border-0 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title">
-                <a href="/docs/gettingstarted/rpc-usage/" class="text-decoration-none">
-                    <i class="fas fa-rocket text-success mr-2"></i>RPC Quick Start
-                </a>
-            </h5>
-            <p class="card-text text-muted">Get started with Capa RPC in 5 minutes, implementing service-to-service calls.</p>
-            <a href="/docs/gettingstarted/rpc-usage/" class="btn btn-outline-primary btn-sm">Start Tutorial</a>
-        </div>
-    </div>
-</div>
+<!-- ==================== CODE EXAMPLE ==================== -->
+<section class="capa-code">
+  <div class="capa-reveal" style="text-align: center; margin-bottom: 48px;">
+    <div class="capa-section-label">Quick Start</div>
+    <h2 class="capa-section-title">Simple. Intuitive. Powerful.</h2>
+  </div>
+  <div class="capa-code__grid">
+    <div class="capa-code__block capa-reveal">
+      <div class="capa-code__header">
+        <span class="capa-code__dot" style="background: #ff5f57;"></span>
+        <span class="capa-code__dot" style="background: #febc2e;"></span>
+        <span class="capa-code__dot" style="background: #28c840;"></span>
+      </div>
+      <pre class="capa-code__pre"><code><span style="color:#8b949e;">// Build RPC client</span>
+<span style="color:#ff7b72;">CapaRpcClient</span> client = <span style="color:#79c0ff;">new</span> CapaRpcClientBuilder()
+    .build();
 
-<div class="col-lg-4 mb-4">
-    <div class="card h-100 border-0 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title">
-                <a href="/docs/gettingstarted/configuration-usage/" class="text-decoration-none">
-                    <i class="fas fa-cog text-warning mr-2"></i>Configuration Guide
-                </a>
-            </h5>
-            <p class="card-text text-muted">Learn how to use Capa Configuration for dynamic configuration management.</p>
-            <a href="/docs/gettingstarted/configuration-usage/" class="btn btn-outline-primary btn-sm">Learn More</a>
-        </div>
-    </div>
-</div>
-
-{{< /blocks/section >}}
-
-<!-- Supported Clouds -->
-{{< blocks/section color="white" >}}
-<div class="col-12 text-center">
-    <h3 class="mb-4">Supported Cloud Platforms</h3>
-    <div class="d-flex justify-content-center flex-wrap">
-        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
-            <i class="fas fa-cloud mr-1"></i> Alibaba Cloud
-        </span>
-        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
-            <i class="fab fa-aws mr-1"></i> AWS
-        </span>
-        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
-            <i class="fas fa-cloud mr-1"></i> Tencent Cloud
-        </span>
-        <span class="badge badge-light m-2 p-3" style="font-size: 1rem;">
-            <i class="fas fa-server mr-1"></i> Private Cloud
-        </span>
-    </div>
-</div>
-{{< /blocks/section >}}
-
-<!-- Code Example -->
-{{< blocks/section color="primary" >}}
-<div class="col-lg-6 mb-4">
-    <h3 class="text-white mb-3">Clean API Design</h3>
-    <pre class="bg-dark text-light p-3 rounded"><code>// Build RPC client
-CapaRpcClient client = new CapaRpcClientBuilder().build();
-
-// Invoke remote service
-Mono<String> result = client.invokeMethod(
-    "service-app-id",
-    "hello",
-    "request",
-    HttpExtension.POST,
-    null,
-    TypeRef.STRING
+<span style="color:#8b949e;">// Invoke remote service — auto-adapts to cloud</span>
+Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMethod(
+    <span style="color:#a5d6ff;">"service-app-id"</span>,
+    <span style="color:#a5d6ff;">"hello"</span>,
+    <span style="color:#a5d6ff;">"request"</span>,
+    HttpExtension.<span style="color:#79c0ff;">POST</span>,
+    <span style="color:#d2a8ff;">null</span>,
+    TypeRef.<span style="color:#79c0ff;">STRING</span>
 );
 
-// Get result
-String response = result.block();</code></pre>
-</div>
-<div class="col-lg-6 mb-4">
-    <h3 class="text-white mb-3">Rich Feature Set</h3>
-    <ul class="list-unstyled text-white">
-        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Service Invocation (RPC)</li>
-        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Configuration Center</li>
-        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Pub/Sub Messaging</li>
-        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>State Management</li>
-        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Telemetry (Logs/Metrics/Traces)</li>
-        <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>Database Access (SQL) - Alpha</li>
-    </ul>
-</div>
-{{< /blocks/section >}}
+<span style="color:#8b949e;">// Get result</span>
+<span style="color:#ff7b72;">String</span> response = result.block();</code></pre>
+    </div>
+    <div class="capa-reveal capa-reveal-delay-1">
+      <h3 class="capa-code__right-title">Rich Distributed Capabilities</h3>
+      <ul class="capa-code__list">
+        <li><span class="check"><i class="fas fa-check-circle"></i></span> Service Invocation (RPC)</li>
+        <li><span class="check"><i class="fas fa-check-circle"></i></span> Configuration Center</li>
+        <li><span class="check"><i class="fas fa-check-circle"></i></span> Pub/Sub Messaging</li>
+        <li><span class="check"><i class="fas fa-check-circle"></i></span> State Management</li>
+        <li><span class="check"><i class="fas fa-check-circle"></i></span> Observability (Telemetry)</li>
+        <li><span class="check"><i class="fas fa-check-circle"></i></span> Database Access (SQL)</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-<!-- Community -->
-{{< blocks/section color="white" >}}
-{{% blocks/feature icon="fab fa-github" title="Open Source" url="https://github.com/capa-cloud/capa-java" %}}
-Welcome to contribute to Capa by submitting Issues or Pull Requests.
-{{% /blocks/feature %}}
+<!-- ==================== COMMUNITY ==================== -->
+<section class="capa-community">
+  <div class="capa-reveal">
+    <div class="capa-section-label">Community</div>
+    <h2 class="capa-section-title">Explore the future of cloud-native.</h2>
+    <p class="capa-section-desc">Discuss Mecha architecture and cloud-native technologies with developers.</p>
+  </div>
+  <div class="capa-community__grid">
+    <a class="capa-community__card capa-reveal" href="https://github.com/capa-cloud/capa-java" target="_blank" rel="noopener">
+      <div class="capa-community__icon"><i class="fab fa-github"></i></div>
+      <h4>Open Source</h4>
+      <p>Contribute by submitting Issues or PRs</p>
+    </a>
+    <a class="capa-community__card capa-reveal capa-reveal-delay-1" href="/community/">
+      <div class="capa-community__icon"><i class="fas fa-comments"></i></div>
+      <h4>Discussion</h4>
+      <p>Join community conversations and share best practices</p>
+    </a>
+    <a class="capa-community__card capa-reveal capa-reveal-delay-2" href="https://github.com/capa-cloud/capa-java/issues" target="_blank" rel="noopener">
+      <div class="capa-community__icon"><i class="fas fa-envelope"></i></div>
+      <h4>Contact Us</h4>
+      <p>Questions or suggestions? Reach out anytime</p>
+    </a>
+  </div>
+</section>
 
-{{% blocks/feature icon="fa-comments" title="Discussion" url="/community/" %}}
-Join community discussions about Mecha architecture and cloud-native technologies.
-{{% /blocks/feature %}}
+<!-- Scroll reveal -->
+<script>
+(function() {
+  var els = document.querySelectorAll('.capa-reveal');
+  if (!els.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(function(el) { observer.observe(el); });
+})();
 
-{{% blocks/feature icon="fa-envelope" title="Contact" url="https://github.com/capa-cloud/capa-java/issues" %}}
-Have questions or suggestions? Contact us on GitHub anytime.
-{{% /blocks/feature %}}
-{{< /blocks/section >}}
-</function_results>
+// Video sound toggle
+(function() {
+  var video = document.getElementById('capaVideo');
+  var btn = document.getElementById('soundToggle');
+  var icon = document.getElementById('soundIcon');
+  var label = document.getElementById('soundLabel');
+  if (!video || !btn) return;
+  btn.addEventListener('click', function() {
+    if (video.muted) {
+      video.muted = false;
+      video.currentTime = 0;
+      icon.className = 'fas fa-volume-up';
+      label.textContent = 'Sound on';
+      btn.classList.add('is-unmuted');
+    } else {
+      video.muted = true;
+      icon.className = 'fas fa-volume-mute';
+      label.textContent = 'Click to enable sound';
+      btn.classList.remove('is-unmuted');
+    }
+  });
+})();
+</script>

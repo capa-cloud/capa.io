@@ -205,23 +205,43 @@ no = 'Sorry to hear that. Please <a href="https://github.com/capa-cloud/capa-jav
 [params.ui.readingtime]
 enable = false
 
-# Main menu configuration
-[[menu.main]]
+# Language-specific menus
+[[languages.zh.menu.main]]
 name = "文档"
 url = "/docs/"
 weight = 10
 
-[[menu.main]]
+[[languages.zh.menu.main]]
 name = "博客"
 url = "/blog/"
 weight = 20
 
-[[menu.main]]
+[[languages.zh.menu.main]]
 name = "社区"
 url = "/community/"
 weight = 30
 
-[[menu.main]]
+[[languages.zh.menu.main]]
+name = "GitHub"
+url = "https://github.com/capa-cloud/capa"
+weight = 40
+
+[[languages.en.menu.main]]
+name = "Docs"
+url = "/docs/"
+weight = 10
+
+[[languages.en.menu.main]]
+name = "Blog"
+url = "/blog/"
+weight = 20
+
+[[languages.en.menu.main]]
+name = "Community"
+url = "/community/"
+weight = 30
+
+[[languages.en.menu.main]]
 name = "GitHub"
 url = "https://github.com/capa-cloud/capa"
 weight = 40
