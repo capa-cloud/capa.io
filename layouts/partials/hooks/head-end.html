@@ -40,11 +40,8 @@ body.td-home .td-main main {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
-/* Remove Docsy's td-block-padding and first-section padding from homepage sections */
+/* Override Docsy's td-block-padding on homepage sections — each section sets its own padding */
 body.td-home .td-default main > section:first-of-type {
-  padding-top: 0 !important;
-}
-body.td-home .td-default main section {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
@@ -336,7 +333,7 @@ body.td-home .td-navbar .td-search__icon::before {
 
 /* ---------- Architecture ---------- */
 .capa-arch {
-  padding: 100px 24px 60px;
+  padding: 100px 24px 60px !important;
   background: var(--apple-bg);
   text-align: center;
 }
@@ -362,7 +359,7 @@ body.td-home .td-navbar .td-search__icon::before {
 
 /* ---------- Video ---------- */
 .capa-video {
-  padding: 100px 24px 60px;
+  padding: 100px 24px 60px !important;
   background: #fff;
   text-align: center;
 }
@@ -423,7 +420,7 @@ body.td-home .td-navbar .td-search__icon::before {
 
 /* ---------- Features ---------- */
 .capa-features {
-  padding: 40px 24px 100px;
+  padding: 40px 24px 100px !important;
   background: var(--apple-bg);
 }
 
@@ -475,7 +472,7 @@ body.td-home .td-navbar .td-search__icon::before {
 
 /* ---------- Article ---------- */
 .capa-article {
-  padding: 100px 24px;
+  padding: 100px 24px !important;
   background: var(--apple-dark);
   position: relative;
   overflow: hidden;
@@ -548,7 +545,7 @@ body.td-home .td-navbar .td-search__icon::before {
 
 /* ---------- Code Section ---------- */
 .capa-code {
-  padding: 100px 24px;
+  padding: 100px 24px !important;
   background: #fff;
 }
 
@@ -634,7 +631,7 @@ body.td-home .td-navbar .td-search__icon::before {
 
 /* ---------- Community ---------- */
 .capa-community {
-  padding: 100px 24px;
+  padding: 100px 24px !important;
   background: var(--apple-bg);
   text-align: center;
 }
