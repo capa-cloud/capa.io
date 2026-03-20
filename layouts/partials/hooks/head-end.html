@@ -26,7 +26,28 @@
 }
 
 /* ---------- Resets ---------- */
-.td-home .td-main { padding-top: 0 !important; }
+/* Remove Docsy/Bootstrap container padding to allow full-bleed sections */
+body.td-home .container-fluid.td-outer {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: 100% !important;
+}
+body.td-home .td-main {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+body.td-home .td-main main {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* Remove Docsy's td-block-padding and first-section padding from homepage sections */
+body.td-home .td-default main > section:first-of-type {
+  padding-top: 0 !important;
+}
+body.td-home .td-default main section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 body.td-home .td-outer { padding-top: 0 !important; }
 body.td-home .td-cover-block { display: none !important; }
 body.td-home {
@@ -34,6 +55,7 @@ body.td-home {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--apple-black);
+  background: var(--apple-dark);
 }
 
 /* ---------- Navbar ---------- */
@@ -660,9 +682,12 @@ body.td-home .td-navbar .td-search__icon::before {
 }
 
 /* ---------- Footer ---------- */
-footer.td-footer {
+body.td-home footer.td-footer {
   background: var(--apple-dark) !important;
   border-top: 0.5px solid #424245;
+  margin: 0 !important;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 /* ---------- Animations ---------- */
