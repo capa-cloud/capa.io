@@ -52,9 +52,13 @@ linkTitle = "Capa"
     </p>
   </div>
   <div class="capa-video__player capa-reveal capa-reveal-delay-1">
-    <video autoplay muted loop playsinline preload="metadata">
+    <video id="capaVideo" autoplay muted loop playsinline preload="metadata">
       <source src="/videos/capa-demo-final.mp4" type="video/mp4">
     </video>
+    <button class="capa-video__sound" id="soundToggle" aria-label="开启声音">
+      <i class="fas fa-volume-mute" id="soundIcon"></i>
+      <span id="soundLabel">点击开启声音</span>
+    </button>
   </div>
 </section>
 
@@ -204,5 +208,28 @@ Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMet
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   els.forEach(function(el) { observer.observe(el); });
+})();
+
+// Video sound toggle
+(function() {
+  var video = document.getElementById('capaVideo');
+  var btn = document.getElementById('soundToggle');
+  var icon = document.getElementById('soundIcon');
+  var label = document.getElementById('soundLabel');
+  if (!video || !btn) return;
+  btn.addEventListener('click', function() {
+    if (video.muted) {
+      video.muted = false;
+      video.currentTime = 0;
+      icon.className = 'fas fa-volume-up';
+      label.textContent = '声音已开启';
+      btn.classList.add('is-unmuted');
+    } else {
+      video.muted = true;
+      icon.className = 'fas fa-volume-mute';
+      label.textContent = '点击开启声音';
+      btn.classList.remove('is-unmuted');
+    }
+  });
 })();
 </script>
