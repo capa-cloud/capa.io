@@ -1,8 +1,5 @@
 ---
 title: Community
-menu:
-  main:
-    weight: 40
 ---
 
 {{% blocks/lead color="primary" %}}
