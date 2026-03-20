@@ -1,7 +1,7 @@
 title = "Capa"
 
 # copy from github pages
-baseURL = "https://capa-cloud.github.io/capa.io/"
+baseURL = "https://capa.rxcloud.group/"
 
 # use '/docs' github pages mode
 publishDir = "docs"
