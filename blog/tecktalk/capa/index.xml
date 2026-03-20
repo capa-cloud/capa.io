@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Capa: Cloud Application Api on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/tecktalk/capa/</link><description>Recent content in Capa: Cloud Application Api on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/tecktalk/capa/index.xml" rel="self" type="application/rss+xml"/><item><title>Capa Trip落地</title><link>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</guid><description>&lt;h2 id="capa-落地情况">Capa 落地情况&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Capa: Cloud Application Api on Capa</title><link>https://capa.rxcloud.group/blog/tecktalk/capa/</link><description>Recent content in Capa: Cloud Application Api on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa.rxcloud.group/blog/tecktalk/capa/index.xml" rel="self" type="application/rss+xml"/><item><title>Capa Trip落地</title><link>https://capa.rxcloud.group/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2022/01/18/capa-trip%E8%90%BD%E5%9C%B0/</guid><description>&lt;h2 id="capa-落地情况">Capa 落地情况&lt;/h2>
 &lt;h3 id="a混合云支持">A、混合云支持&lt;/h3>
 &lt;p>目前支持：&lt;/p>
 &lt;ul>
@@ -13,7 +13,7 @@
 &lt;h4 id="trip私有云">Trip私有云&lt;/h4>
 &lt;p>生产xx+应用，不断接入中&lt;/p>
 &lt;h4 id="aws公有云">AWS公有云&lt;/h4>
-&lt;p>生产xx+应用，不断接入中&lt;/p></description></item><item><title>Capa: Mecha SDK of Cloud Application Api</title><link>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</guid><description>&lt;h1 id="capacloud-application-api架起混合云应用开发的桥梁">Capa(Cloud-Application-API)：架起混合云应用开发的桥梁&lt;/h1>
+&lt;p>生产xx+应用，不断接入中&lt;/p></description></item><item><title>Capa: Mecha SDK of Cloud Application Api</title><link>https://capa.rxcloud.group/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/</guid><description>&lt;h1 id="capacloud-application-api架起混合云应用开发的桥梁">Capa(Cloud-Application-API)：架起混合云应用开发的桥梁&lt;/h1>
 &lt;p>&amp;ldquo;让代码实现&amp;quot;一次编写，随处运行&amp;rdquo;。 借助Capa体系，使你的Java应用在改动量较小的情况下，拥有跨云、混合云运行的能力。&amp;quot;&lt;/p>
 &lt;blockquote>
 &lt;p>作者简介：

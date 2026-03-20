@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>参与贡献 on Capa</title><link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/</link><description>Recent content in 参与贡献 on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/docs/contributionguidelines/index.xml" rel="self" type="application/rss+xml"/><item><title>贡献者指南</title><link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/contributor-guide/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/contributor-guide/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>参与贡献 on Capa</title><link>https://capa.rxcloud.group/docs/contributionguidelines/</link><description>Recent content in 参与贡献 on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa.rxcloud.group/docs/contributionguidelines/index.xml" rel="self" type="application/rss+xml"/><item><title>贡献者指南</title><link>https://capa.rxcloud.group/docs/contributionguidelines/contributor-guide/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/contributionguidelines/contributor-guide/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>Capa 基于 Apache 2.0 许可发布，遵循标准的 Github 开发流程。 本文档描述了如何使用 Github Issue 和 Pull Request 对Capa做出贡献。&lt;/p>
 
 &lt;/div>
@@ -74,7 +74,7 @@
 &lt;li>Commit subject：50个字符以内，描述主要变更内容（必填）&lt;/li>
 &lt;li>Commit body：更详细的说明文本，建议72个字符以内（必填）&lt;/li>
 &lt;li>Commit footer：如果需要的化可以添加一个链接到issue地址或者其它文档，或者关闭某个issue（选填）&lt;/li>
-&lt;/ol></description></item><item><title>文档贡献指南</title><link>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/document-contribution/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/docs/contributionguidelines/document-contribution/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;/ol></description></item><item><title>文档贡献指南</title><link>https://capa.rxcloud.group/docs/contributionguidelines/document-contribution/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/contributionguidelines/document-contribution/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>本文档描述了如何为 Capa 文档库做出贡献。文档库使用 Markdown 语法编写。已发布到 &lt;a href="https://github.com/capa-cloud/capa.io">capa-cloud/capa.io&lt;/a>。&lt;/p>
 
 &lt;/div>

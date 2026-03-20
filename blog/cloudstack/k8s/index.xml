@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>K8S Stack on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/cloudstack/k8s/</link><description>Recent content in K8S Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/cloudstack/k8s/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS EKS Devops</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</link><pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/24/aws-eks-devops/</guid><description>&lt;h1 id="eks-devops">EKS Devops&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>K8S Stack on Capa</title><link>https://capa.rxcloud.group/blog/cloudstack/k8s/</link><description>Recent content in K8S Stack on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa.rxcloud.group/blog/cloudstack/k8s/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS EKS Devops</title><link>https://capa.rxcloud.group/blog/2022/05/24/aws-eks-devops/</link><pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2022/05/24/aws-eks-devops/</guid><description>&lt;h1 id="eks-devops">EKS Devops&lt;/h1>
 &lt;h2 id="一eks集群">一、EKS集群&lt;/h2>
 &lt;h3 id="a安装相关命令行工具">A、安装相关命令行工具&lt;/h3>
 &lt;h4 id="awsctl">awsctl&lt;/h4>
@@ -25,7 +25,7 @@ kubectl version --short --client
 &lt;/code>&lt;/pre>
 &lt;p>更新kube的config文件&lt;/p>
 &lt;h3 id="c权限">C、权限&lt;/h3>
-&lt;p>默认使用的是客户端 用户/角色 的权限。&lt;/p></description></item><item><title>K8S Devops</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/24/k8s-devops/</link><pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/24/k8s-devops/</guid><description>&lt;h1 id="k8s">K8S&lt;/h1>
+&lt;p>默认使用的是客户端 用户/角色 的权限。&lt;/p></description></item><item><title>K8S Devops</title><link>https://capa.rxcloud.group/blog/2022/05/24/k8s-devops/</link><pubDate>Tue, 24 May 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2022/05/24/k8s-devops/</guid><description>&lt;h1 id="k8s">K8S&lt;/h1>
 &lt;h2 id="一常用操作命令">一、常用操作命令&lt;/h2>
 &lt;h3 id="a调试pod">A、调试POD&lt;/h3>
 &lt;h4 id="1-kubectl-exec">1. kubectl exec&lt;/h4>

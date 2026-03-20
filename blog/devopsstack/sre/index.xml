@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud SRE on Capa</title><link>https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/</link><description>Recent content in Cloud SRE on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa-cloud.github.io/capa.io/blog/devopsstack/sre/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CloudWatch</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch/</guid><description>&lt;h1 id="aws-sre---cloudwatch使用经验">AWS SRE - CloudWatch使用经验&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud SRE on Capa</title><link>https://capa.rxcloud.group/blog/devopsstack/sre/</link><description>Recent content in Cloud SRE on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa.rxcloud.group/blog/devopsstack/sre/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CloudWatch</title><link>https://capa.rxcloud.group/blog/2022/05/25/aws-cloudwatch/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2022/05/25/aws-cloudwatch/</guid><description>&lt;h1 id="aws-sre---cloudwatch使用经验">AWS SRE - CloudWatch使用经验&lt;/h1>
 &lt;p>日志、指标、告警等功能&lt;/p>
 &lt;h2 id="一日志查询">一、日志查询&lt;/h2>
 &lt;h3 id="a全局日志搜索logs-insights">A、全局日志搜索：Logs Insights&lt;/h3>
@@ -12,7 +12,7 @@
 &lt;h4 id="注释">&amp;ldquo;注释&amp;rdquo;&lt;/h4>
 &lt;p>使用 &amp;lsquo;#&amp;rsquo; 在开头，作为该行查询语句的注释，可使用快捷键 &amp;ldquo;ctrl + /&amp;rdquo;&lt;/p>
 &lt;h3 id="b日志组">B、日志组&lt;/h3>
-&lt;h4 id="aws原生日志组">AWS原生日志组&lt;/h4></description></item><item><title>AWS CloudWatch - Log Insights</title><link>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch-log-insights/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa-cloud.github.io/capa.io/blog/2022/05/25/aws-cloudwatch-log-insights/</guid><description>&lt;h2 id="一网关搜索">一、网关搜索&lt;/h2>
+&lt;h4 id="aws原生日志组">AWS原生日志组&lt;/h4></description></item><item><title>AWS CloudWatch - Log Insights</title><link>https://capa.rxcloud.group/blog/2022/05/25/aws-cloudwatch-log-insights/</link><pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2022/05/25/aws-cloudwatch-log-insights/</guid><description>&lt;h2 id="一网关搜索">一、网关搜索&lt;/h2>
 &lt;h3 id="a查询接口以及响应码">A、查询接口以及响应码&lt;/h3>
 &lt;pre tabindex="0">&lt;code>fields @timestamp, @message
 | filter @message like /(?i)(queryData)/
