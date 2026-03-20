@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the documentation website for **Capa** (Cloud Application API) - a Mecha architecture-based multi-runtime SDK for Java applications. The site is built with Hugo using the Docsy theme and published to GitHub Pages.
 
-- **Live site**: https://capa-cloud.github.io/capa.io/
+- **Live site**: https://capa.rxcloud.group/
 - **Repository**: https://github.com/capa-cloud/capa.io
 - **Default language**: Chinese (zh), with English support
 
@@ -97,7 +97,7 @@ content/
 
 ### Key Configuration Details
 
-- **Base URL**: `https://capa-cloud.github.io/capa.io/`
+- **Base URL**: `https://capa.rxcloud.group/`
 - **GitHub repo links**: Point to `https://github.com/capa-cloud/capa`
 - **Search**: Uses Google Custom Search Engine (gcs_engine_id)
 - **Syntax highlighting**: Uses Chroma with "tango" style
@@ -111,13 +111,12 @@ content/
 
 ### Deployment
 
-The site is deployed to GitHub Pages:
+The site is deployed to GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`):
 
-1. The `docs/` directory is the published output (configured via `publishDir`)
-2. The `docs/` directory is committed to the repository
-3. GitHub Pages serves from the `docs/` folder on the master branch
-
-The `deploy.sh` script shows the legacy S3 deployment method but is no longer used.
+1. Push to `master` triggers the workflow
+2. Hugo builds the site with `--gc --minify --destination docs`
+3. `peaceiris/actions-gh-pages@v3` deploys to the `gh-pages` branch
+4. Custom domain: `capa.rxcloud.group` (configured via `static/CNAME`)
 
 ## Common Tasks
 
