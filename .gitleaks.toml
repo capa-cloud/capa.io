@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Ignore vendored Docsy submodule contents"
+paths = ['''^themes/docsy/''']

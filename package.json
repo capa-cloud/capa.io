@@ -4,18 +4,21 @@
   "description": "Hugo theme for technical documentation.",
   "main": "none.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "make dev",
+    "build": "make build",
+    "lint": "make build",
+    "test": "make build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google/docsy-example.git"
+    "url": "git+https://github.com/capa-cloud/capa.io.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/google/docsy-example/issues"
+    "url": "https://github.com/capa-cloud/capa.io/issues"
   },
-  "homepage": "https://github.com/google/docsy-example#readme",
+  "homepage": "https://capa.rxcloud.group/",
   "devDependencies": {
     "autoprefixer": "^10.4.8",
     "postcss": "^8.3.7",
