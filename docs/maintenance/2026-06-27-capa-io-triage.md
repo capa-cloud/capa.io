@@ -16,6 +16,8 @@
 - Migrated deprecated Docsy settings, removed the fake Universal Analytics ID, and removed a duplicate blog menu declaration.
 - Scoped gitleaks away from the pinned Docsy submodule, whose upstream search documentation contains example keys.
 - Updated checkout, Node setup, Hugo, and Pages actions to their current Node 24-based major versions; the build runtime now uses Node 22 to satisfy Docsy's engine requirement.
+- Replaced the unmaintained Hugo-on-Alpine image with the version-pinned official Hugo image and documented the working container mount path.
+- Added a local Hugo wrapper so validation falls back to a read-only container when Hugo is not installed.
 
 ## Validation
 

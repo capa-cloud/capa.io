@@ -6,15 +6,15 @@
   "scripts": {
     "dev": "make dev",
     "build": "make build",
-    "lint": "make build",
-    "test": "make build"
+    "lint": "make check",
+    "test": "make check"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/capa-cloud/capa.io.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/capa-cloud/capa.io/issues"
   },

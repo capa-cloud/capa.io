@@ -1,3 +1,5 @@
-FROM klakegg/hugo:ext-alpine
+ARG HUGO_VERSION=0.145.0
+FROM ghcr.io/gohugoio/hugo:v${HUGO_VERSION}
 
-RUN apk add git
+WORKDIR /project
+EXPOSE 1313

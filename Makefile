@@ -1,7 +1,7 @@
 # Capa.io Makefile
 # Simplified build commands for Hugo documentation site
 
-.PHONY: dev build clean deploy help submodule
+.PHONY: dev build check clean deploy help submodule
 
 # Default target
 .DEFAULT_GOAL := help
@@ -12,15 +12,19 @@ submodule:
 
 # Development server with drafts
 dev:
-	hugo server -D
+	./scripts/hugo.sh server -D
 
 # Development server binding to all interfaces
 dev-all:
-	hugo server -D --bind 0.0.0.0
+	./scripts/hugo.sh server -D --bind 0.0.0.0
 
 # Production build
 build:
-	HUGO_ENV="production" hugo --gc --minify
+	HUGO_ENV="production" ./scripts/hugo.sh --gc --minify
+
+# Validate all pages without changing generated site files
+check:
+	HUGO_ENV="production" HUGO_READ_ONLY=1 ./scripts/hugo.sh --gc --minify --renderToMemory --noBuildLock
 
 # Clean build artifacts
 clean:
@@ -49,6 +53,7 @@ help:
 	@echo "  make dev        - Run development server with drafts"
 	@echo "  make dev-all    - Run dev server binding to all interfaces"
 	@echo "  make build      - Build production site (outputs to docs/)"
+	@echo "  make check      - Validate the production site without writing output"
 	@echo "  make clean      - Remove build artifacts"
 	@echo "  make deploy     - Build and deploy to GitHub Pages"
 	@echo "  make link-check - Check for broken links"

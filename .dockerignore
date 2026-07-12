@@ -1,0 +1,9 @@
+.git
+.github
+.idea
+.superpowers
+docs
+node_modules
+public
+resources
+themes/docsy/node_modules

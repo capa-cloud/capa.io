@@ -51,15 +51,20 @@ hugo --gc
 HUGO_ENV="production" hugo --gc
 ```
 
+The Makefile and npm scripts automatically use the pinned official Hugo
+container when `hugo` is not installed locally.
+
 ### Docker (Alternative)
 
 ```bash
-# Run using Docker Compose
-docker-compose up
+# Build the pinned official Hugo image
+docker build --build-arg HUGO_VERSION=0.145.0 -t capa-docs .
 
-# Or build and run manually
-docker build -t capa-docs .
-docker run -p 1313:1313 -v $(pwd):/src capa-docs server
+# Serve the local checkout (install npm dependencies first)
+npm ci
+npm --prefix themes/docsy install
+docker run --rm -p 1313:1313 -v "$(pwd):/project" capa-docs \
+  server -D --bind 0.0.0.0
 ```
 
 ## Architecture
