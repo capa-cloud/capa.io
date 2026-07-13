@@ -7,7 +7,7 @@ weight: 20
 
 
 {{% pageinfo %}}
-加入Capa，共建社区：https://github.com/capa-cloud/sigs
+加入 Capa，共建社区：https://github.com/capa-cloud/capa-java/issues
 {{% /pageinfo %}}
 
 

@@ -155,9 +155,9 @@ Sample implementation library:
 
 Try the following examples to learn more about Capa's Java SDK:
 
-- [capa-demo](https://github.com/capa-cloud/capa/tree/master/sdk-spi-demo)
-- [capa-aws](https://github.com/capa-cloud/capa-aws)
-- [capa-alibaba](https://github.com/capa-cloud/capa-alibaba)
+- [capa-demo](https://github.com/capa-cloud/capa-java/tree/master/sdk-spi-demo)
+- [capa-java-aws](https://github.com/capa-cloud/capa-java-aws)
+- [capa-java-alibaba](https://github.com/capa-cloud/capa-java-alibaba)
 
 ### Low-cost Migration
 
@@ -172,8 +172,7 @@ In this way, the application only needs to change a small amount of code (such a
 For discussions on this issue, please see:
 
 - [Java SDK Design Research: Can We Reuse Existing Industry De Facto Standards?](https://github.com/mosn/layotto/issues/206)
-- [Capa API Adapted to Spring Annotation](https://github.com/capa-cloud/sigs/issues/16)
-- [Legacy Middleware SDK Seamless Migration to Capa](https://github.com/capa-cloud/sigs/issues/18)
+- Historical proposals also covered adapting Capa APIs to Spring annotations and seamlessly migrating legacy middleware SDKs. The original SIG issue links are no longer available; continue current design discussions in [capa-java Issues](https://github.com/capa-cloud/capa-java/issues).
 
 ## Development
 

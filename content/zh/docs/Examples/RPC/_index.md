@@ -7,5 +7,4 @@ description: >
   RPC API 的Demo示例
 ---
 
-[RPC API 设计文档](https://capa-cloud.github.io/capa.io/docs/concepts/rpc-design/)
-
+[RPC API 设计文档](/docs/concepts/rpc/)

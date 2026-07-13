@@ -170,9 +170,10 @@ For discussion of this issue, please see:
 
 [Java sdk design 调研：能否复用业界已有的事实标准](https://github.com/mosn/layotto/issues/206)
 
-[Capa API adapted to spring annotation.](https://github.com/capa-cloud/sigs/issues/16)
-
-[遗留中间件SDK无感迁移到Capa.](https://github.com/capa-cloud/sigs/issues/18)
+Historical proposals also covered adapting Capa APIs to Spring annotations and
+seamlessly migrating legacy middleware SDKs. The original SIG issue links are no
+longer available; continue current design discussions in
+[capa-java Issues](https://github.com/capa-cloud/capa-java/issues).
 
 ## Develop
 

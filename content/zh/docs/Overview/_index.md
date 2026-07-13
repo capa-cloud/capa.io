@@ -160,9 +160,9 @@ Sample implementation library:
 
 Try the following examples to learn more about Capa's Java SDK:
 
-* [capa-demo](https://github.com/capa-cloud/capa/tree/master/sdk-spi-demo)
-* [capa-aws](https://github.com/capa-cloud/capa-aws)
-* [capa-alibaba](https://github.com/capa-cloud/capa-alibaba)
+* [capa-demo](https://github.com/capa-cloud/capa-java/tree/master/sdk-spi-demo)
+* [capa-java-aws](https://github.com/capa-cloud/capa-java-aws)
+* [capa-java-alibaba](https://github.com/capa-cloud/capa-java-alibaba)
 
 ### 低改造成本迁移
 
@@ -178,9 +178,7 @@ Try the following examples to learn more about Capa's Java SDK:
 
 [Java sdk design 调研：能否复用业界已有的事实标准](https://github.com/mosn/layotto/issues/206)
 
-[Capa API adapted to spring annotation.](https://github.com/capa-cloud/sigs/issues/16)
-
-[遗留中间件SDK无感迁移到Capa.](https://github.com/capa-cloud/sigs/issues/18)
+历史提案还讨论过将 Capa API 适配到 Spring 注解，以及遗留中间件 SDK 的无感迁移。原 SIG 议题链接已不可用，后续设计讨论请移步 [capa-java Issues](https://github.com/capa-cloud/capa-java/issues)。
 
 ## 开发
 

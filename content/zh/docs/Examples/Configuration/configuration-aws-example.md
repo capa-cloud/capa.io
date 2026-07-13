@@ -70,7 +70,7 @@ step2.代码改动
 
 ### 非携程接入方(不使用adaptor包)使用流程
 
-参照[快速开始-使用Configuration API](https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/)
+参照[快速开始-使用 Configuration API](/docs/gettingstarted/configuration-usage/)
 
 - 创建单例单例Configuration Client
 
