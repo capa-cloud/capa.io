@@ -5746,7 +5746,7 @@ Capa官方GitHub地址:&lt;a href="https://github.com/capa-cloud/capa-java">http
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ps:后续会统一放入capa-framework-dependencies bom中进行管理&lt;/p>
 &lt;p>step2.代码改动&lt;/p>
 &lt;h3 id="非携程接入方不使用adaptor包使用流程">非携程接入方(不使用adaptor包)使用流程&lt;/h3>
-&lt;p>参照&lt;a href="https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/">快速开始-使用Configuration API&lt;/a>&lt;/p>
+&lt;p>参照&lt;a href="https://capa.rxcloud.group/docs/gettingstarted/configuration-usage/">快速开始-使用 Configuration API&lt;/a>&lt;/p>
 &lt;ul>
 &lt;li>创建单例单例Configuration Client&lt;/li>
 &lt;/ul>

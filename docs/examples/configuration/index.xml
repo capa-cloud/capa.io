@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Configuration API示例 on Capa</title><link>https://capa.rxcloud.group/docs/examples/configuration/</link><description>Recent content in Configuration API示例 on Capa</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Wed, 01 Jun 2022 13:10:30 +0800</lastBuildDate><atom:link href="https://capa.rxcloud.group/docs/examples/configuration/index.xml" rel="self" type="application/rss+xml"/><item><title>Configuration AWS-App Config示例</title><link>https://capa.rxcloud.group/docs/examples/configuration/configuration-aws-example/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/examples/configuration/configuration-aws-example/</guid><description>&lt;h2 id="文档更新时间">文档更新时间&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Configuration API示例 on Capa</title><link>https://capa.rxcloud.group/docs/examples/configuration/</link><description>Recent content in Configuration API示例 on Capa</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Mon, 13 Jul 2026 09:33:12 +0800</lastBuildDate><atom:link href="https://capa.rxcloud.group/docs/examples/configuration/index.xml" rel="self" type="application/rss+xml"/><item><title>Configuration AWS-App Config示例</title><link>https://capa.rxcloud.group/docs/examples/configuration/configuration-aws-example/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/examples/configuration/configuration-aws-example/</guid><description>&lt;h2 id="文档更新时间">文档更新时间&lt;/h2>
 &lt;p>&lt;strong>由于当前处于高速迭代中，代码和版本都很不稳定，文档可能不是最新版本，接入jar包版本和流程都可能会有较大改动，请查看最后更新时间，若和当前时间超过一周请咨询相关开发询问是否有较大改动！！！&lt;/strong>&lt;/p>
 &lt;p>**last updated on 2021/12/06&lt;/p>
 &lt;h2 id="接入使用流程">接入使用流程&lt;/h2>
@@ -36,7 +36,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ps:后续会统一放入capa-framework-dependencies bom中进行管理&lt;/p>
 &lt;p>step2.代码改动&lt;/p>
 &lt;h3 id="非携程接入方不使用adaptor包使用流程">非携程接入方(不使用adaptor包)使用流程&lt;/h3>
-&lt;p>参照&lt;a href="https://capa-cloud.github.io/capa.io/docs/gettingstarted/configuration-usage/">快速开始-使用Configuration API&lt;/a>&lt;/p>
+&lt;p>参照&lt;a href="https://capa.rxcloud.group/docs/gettingstarted/configuration-usage/">快速开始-使用 Configuration API&lt;/a>&lt;/p>
 &lt;ul>
 &lt;li>创建单例单例Configuration Client&lt;/li>
 &lt;/ul>
