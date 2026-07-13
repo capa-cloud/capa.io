@@ -40,8 +40,11 @@ jobs:
       - name: "Create Hugo module directories for Docsy"
         run: node themes/docsy/tools/mkdirp-hugo-mod.js themes
 
+      - name: "Validate"
+        run: npm test
+
       - name: "Build"
-        run: hugo --gc --minify --destination docs
+        run: hugo --gc --minify --cleanDestinationDir --destination docs
 
       - name: "Deploy"
         uses: peaceiris/actions-gh-pages@v4

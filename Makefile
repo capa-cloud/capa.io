@@ -20,11 +20,11 @@ dev-all:
 
 # Production build
 build:
-	HUGO_ENV="production" ./scripts/hugo.sh --gc --minify
+	HUGO_ENV="production" ./scripts/hugo.sh --gc --minify --cleanDestinationDir
 
 # Validate all pages without changing generated site files
 check:
-	node --test scripts/homepage-reveal.test.mjs
+	node --test scripts/*.test.mjs
 	HUGO_ENV="production" HUGO_READ_ONLY=1 ./scripts/hugo.sh --gc --minify --renderToMemory --noBuildLock
 
 # Clean build artifacts
