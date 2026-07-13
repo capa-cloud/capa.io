@@ -33,10 +33,8 @@ clean:
 	rm -rf public/
 	rm -rf resources/
 
-# Deploy to GitHub Pages (builds and commits docs folder)
-deploy: build
-	git add docs/
-	git commit -m "Update documentation - $(shell date +%Y-%m-%d-%H:%M:%S)"
+# Deploy to GitHub Pages through the workflow triggered by master
+deploy: check
 	git push origin master
 
 # Check for broken links
@@ -53,7 +51,7 @@ help:
 	@echo "  make submodule  - Initialize git submodules (Docsy theme)"
 	@echo "  make dev        - Run development server with drafts"
 	@echo "  make dev-all    - Run dev server binding to all interfaces"
-	@echo "  make build      - Build production site (outputs to docs/)"
+	@echo "  make build      - Build production site (outputs to ignored docs/)"
 	@echo "  make check      - Validate the production site without writing output"
 	@echo "  make clean      - Remove build artifacts"
 	@echo "  make deploy     - Build and deploy to GitHub Pages"
