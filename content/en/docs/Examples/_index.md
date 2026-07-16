@@ -9,9 +9,14 @@ description: >
 ---
 
 {{% pageinfo %}}
-This is a placeholder page that shows you how to use this template site.
+Examples connect the Capa API definitions to concrete SDK and cloud adapter implementations.
 {{% /pageinfo %}}
 
-Do you have any example **applications** or **code** for your users in your repo or elsewhere? Link to your examples here.
+The most complete examples currently live with their implementation repositories:
 
+- [Capa Java SPI demo](https://github.com/capa-cloud/capa-java/tree/master/sdk-spi-demo)
+- [Capa Java examples](https://github.com/capa-cloud/capa-java/tree/master/examples)
+- [AWS adapter example](https://github.com/capa-cloud/capa-java-aws/tree/master/example)
+
+Use the dependency versions documented in those repositories. API definition packages do not provide a working runtime adapter by themselves.
 

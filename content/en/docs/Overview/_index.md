@@ -101,7 +101,7 @@ Capa module division mainly consists of the following parts:
 - sdk-spi
 - sdk-spi-demo/...
 
-![capa-design](./docs/capa-design/capa-layer.PNG)
+![Capa SDK layers](https://raw.githubusercontent.com/capa-cloud/capa-java/master/docs/capa-design/capa-layer.PNG)
 
 When programming applications, you only need to depend on the sdk and use the unified programming APIs defined in the SDK module.
 
@@ -124,7 +124,7 @@ For a Maven project, add the following to your pom.xml file:
         <dependency>
             <groupId>group.rxcloud</groupId>
             <artifactId>capa-sdk</artifactId>
-            <version>1.0.7.RELEASE</version>
+            <version>1.11.13.2.RELEASE</version>
         </dependency>
         ...
     </dependencies>
@@ -143,7 +143,7 @@ Sample implementation library:
         <dependency>
             <groupId>group.rxcloud</groupId>
             <artifactId>capa-sdk-spi-demo</artifactId>
-            <version>1.0.7.RELEASE</version>
+            <version>1.11.13.2.RELEASE</version>
         </dependency>
         ...
     </dependencies>
@@ -172,7 +172,8 @@ In this way, the application only needs to change a small amount of code (such a
 For discussions on this issue, please see:
 
 - [Java SDK Design Research: Can We Reuse Existing Industry De Facto Standards?](https://github.com/mosn/layotto/issues/206)
-- Historical proposals also covered adapting Capa APIs to Spring annotations and seamlessly migrating legacy middleware SDKs. The original SIG issue links are no longer available; continue current design discussions in [capa-java Issues](https://github.com/capa-cloud/capa-java/issues).
+- [Adapt Capa APIs to Spring annotations](https://github.com/reactivegroup/sigs/issues/16)
+- [Migrate legacy middleware SDKs to Capa](https://github.com/reactivegroup/sigs/issues/18)
 
 ## Development
 
@@ -180,9 +181,9 @@ For discussions on this issue, please see:
 
 Considering asynchronous calling modes and the use of non-blocking IO, we natively provide the Reactor programming model. You can also use the `block()` method to use synchronous calling functionality.
 
-The Java SDK for Capa is built using [Project Reactor](https://projectreactor.io/). It provides an asynchronous API for Java. When consuming a result synchronously, as in the examples referenced above, the `block()` method is used.
+The Java SDK for Capa is built using [Project Reactor](https://github.com/reactor/reactor-core). It provides an asynchronous API for Java. When consuming a result synchronously, as in the examples referenced above, the `block()` method is used.
 
-The code below does not make any API call; it simply returns the [Mono](https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html) publisher object. Nothing happens until the application subscribes or blocks on the result:
+The code below does not make any API call; it simply returns the [Mono](https://github.com/reactor/reactor-core/blob/main/docs/modules/ROOT/pages/coreFeatures/mono.adoc) publisher object. Nothing happens until the application subscribes or blocks on the result:
 
 ```java
 Mono<String> result = capaRpcClient.invokeMethod(SERVICE_APP_ID, "say", "hello", HttpExtension.POST, null, TypeRef.STRING);

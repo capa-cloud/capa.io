@@ -40,7 +40,7 @@ If you need to add new documents, you must create new folders and .md files acco
 
 Images are uniformly placed in the `content/images/` directory, with the image directory structure consistent with the directory of the referenced md file. Choose clear images that are compatible with the background.
 
-The document uniformly uses full paths to reference images, with the URL prefix `https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images`.
+Browse shared images under the [`content/images` directory](https://github.com/capa-cloud/capa.io/tree/master/content/images). Use the full raw file URL when embedding an image.
 
 For example, to include the image below (contribution_file.png), the Markdown syntax is as follows:
 

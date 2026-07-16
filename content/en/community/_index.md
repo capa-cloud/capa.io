@@ -1,5 +1,6 @@
 ---
 title: Community
+contributingUrl: /en/docs/contributionguidelines/
 ---
 
 {{% blocks/lead color="primary" %}}

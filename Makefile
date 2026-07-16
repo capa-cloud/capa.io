@@ -39,10 +39,12 @@ deploy: check
 
 # Check for broken links
 link-check:
-	hugo server &
-	sleep 3
-	npx linkinator http://localhost:1313 --recurse --timeout 10000 || true
-	pkill -f "hugo server"
+	@./scripts/hugo.sh server --bind 127.0.0.1 --port 1313 >/tmp/capa-hugo.log 2>&1 & \
+	pid=$$!; \
+	trap 'kill $$pid 2>/dev/null || true' EXIT; \
+	sleep 3; \
+	npx --yes linkinator http://localhost:1313 --recurse --timeout 10000 \
+	  --skip '^https?://(?!(localhost|127\\.0\\.0\\.1):1313)'
 
 # Show help
 help:
@@ -54,6 +56,6 @@ help:
 	@echo "  make build      - Build production site (outputs to ignored docs/)"
 	@echo "  make check      - Validate the production site without writing output"
 	@echo "  make clean      - Remove build artifacts"
-	@echo "  make deploy     - Build and deploy to GitHub Pages"
-	@echo "  make link-check - Check for broken links"
+	@echo "  make deploy     - Validate and push master; CI builds and deploys Pages"
+	@echo "  make link-check - Crawl the local site and fail on broken links"
 	@echo "  make help       - Show this help message"

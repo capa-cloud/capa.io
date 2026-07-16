@@ -1,28 +1,48 @@
-# How to Contribute
+# Contributing to Capa Documentation
 
-We'd love to accept your patches and contributions to this project. There are
-just a few small guidelines you need to follow.
+Thank you for improving the Capa website and documentation. Contributions are reviewed through GitHub pull requests in [capa-cloud/capa.io](https://github.com/capa-cloud/capa.io).
 
-## Contributor License Agreement
+## Set up the site
 
-Contributions to this project must be accompanied by a Contributor License
-Agreement. You (or your employer) retain the copyright to your contribution;
-this simply gives us permission to use and redistribute your contributions as
-part of the project. Head over to <https://cla.developers.google.com/> to see
-your current agreements on file or to sign a new one.
+```bash
+git clone --recurse-submodules https://github.com/capa-cloud/capa.io.git
+cd capa.io
+npm ci
+npm --prefix themes/docsy install
+make dev
+```
 
-You generally only need to submit a CLA once, so if you've already submitted one
-(even if it was for a different project), you probably don't need to do it
-again.
+Hugo Extended `0.145.0` is preferred. If it is not installed, `scripts/hugo.sh` uses the pinned Docker image.
 
-## Code reviews
+## Make a documentation change
 
-All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-[GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
-information on using pull requests.
+1. Create a branch from `master`.
+2. Edit the appropriate file under `content/zh/` or `content/en/`.
+3. Add the corresponding translation when the same workflow is available in both languages.
+4. Put unfinished pages behind `draft: true`; never publish Docsy template content.
+5. Use repository-relative links for files in this repository and canonical HTTPS links for external resources.
+6. Run `make check` before opening a pull request.
 
-## Community Guidelines
+For website code or build changes, also run:
 
-This project follows
-[Google's Open Source Community Guidelines](https://opensource.google.com/conduct/).
+```bash
+npm test
+make build
+```
+
+## Pull request checklist
+
+- The page explains what the reader can accomplish and includes prerequisites where needed.
+- Commands and dependency versions match the source repositories.
+- All links and images resolve.
+- Chinese and English navigation remain usable.
+- Examples contain no credentials, private endpoints, customer data, or personal identifiers.
+- Generated `docs/`, `public/`, and `resources/` files are not committed.
+
+## Reporting problems
+
+Use [GitHub Issues](https://github.com/capa-cloud/capa.io/issues) for broken pages, incorrect examples, translation gaps, and build failures. Security-sensitive reports should not include secrets or exploit data in a public issue.
+
+## License
+
+By contributing, you agree that your contribution is licensed under the repository's [Apache License 2.0](LICENSE).

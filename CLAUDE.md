@@ -14,8 +14,8 @@ This is the documentation website for **Capa** (Cloud Application API) - a Mecha
 
 ### Prerequisites
 
-- [Hugo](https://gohugo.io/installation/) (extended version, v0.88.1+ recommended)
-- [Node.js](https://nodejs.org/) and npm (for PostCSS/Autoprefixer)
+- [Hugo](https://gohugo.io/installation/) Extended `0.145.0`, or Docker
+- [Node.js](https://nodejs.org/) 22 and npm (for PostCSS/Autoprefixer)
 - Git submodules (for Docsy theme)
 
 ### Setup
@@ -25,30 +25,31 @@ This is the documentation website for **Capa** (Cloud Application API) - a Mecha
 git submodule update --init --recursive
 
 # Install npm dependencies
-npm install
+npm ci
+npm --prefix themes/docsy install
 ```
 
 ### Local Development
 
 ```bash
 # Run Hugo development server
-hugo server
+make dev
 
 # Run with draft content included
-hugo server -D
+./scripts/hugo.sh server -D
 
 # Run with live reload (default binds to localhost:1313)
-hugo server --bind 0.0.0.0
+make dev-all
 ```
 
 ### Build
 
 ```bash
 # Build the site (output goes to the ignored docs/ directory)
-hugo --gc
+make build
 
 # Build for production
-HUGO_ENV="production" hugo --gc
+make check
 ```
 
 The Makefile and npm scripts automatically use the pinned official Hugo
@@ -103,15 +104,16 @@ content/
 ### Key Configuration Details
 
 - **Base URL**: `https://capa.rxcloud.group/`
-- **GitHub repo links**: Point to `https://github.com/capa-cloud/capa`
-- **Search**: Uses Google Custom Search Engine (gcs_engine_id)
+- **Documentation source links**: Point to `https://github.com/capa-cloud/capa.io` on `master`
+- **Related product repository**: `https://github.com/capa-cloud/capa`
+- **Search**: Uses Docsy's offline Lunr index
 - **Syntax highlighting**: Uses Chroma with "tango" style
 - **Markdown engine**: Goldmark with unsafe HTML enabled
 
 ### Static Assets
 
 - **Images**: `content/images/` or page bundles
-- **Logo**: Configure in `assets/icons/logo.svg` (navbar_logo is currently false)
+- **Logo**: Configure in `assets/icons/logo.svg` (`navbar_logo` is enabled)
 - **Featured background**: `content/zh/featured-background.jpg`
 
 ### Deployment
@@ -119,8 +121,8 @@ content/
 The site is deployed to GitHub Pages via GitHub Actions (`.github/workflows/deploy.yml`):
 
 1. Push to `master` triggers the workflow
-2. Hugo builds the site with `--gc --minify --destination docs`
-3. `peaceiris/actions-gh-pages@v3` deploys to the `gh-pages` branch
+2. Hugo builds the site with `--gc --minify --cleanDestinationDir --destination docs`
+3. `peaceiris/actions-gh-pages@v4` deploys to the `gh-pages` branch
 4. Custom domain: `capa.rxcloud.group` (configured via `static/CNAME`)
 
 ## Common Tasks

@@ -1,5 +1,6 @@
 ---
 title: 社区
+contributingUrl: /docs/contributionguidelines/
 ---
 
 {{% blocks/lead color="primary" %}}

@@ -56,7 +56,7 @@ description: >
 
 
 ## 实现步骤
-1. 实现 [RpcServiceOptions](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/RpcServiceOptions.java) （实际 RPC 调用需要的参数） 和 [CtripSpiOptionsLoader](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/config/CapaSpiOptionsLoader.java) （加载 RpcServiceOptions 的实现类） 接口。
+1. 实现 [RpcServiceOptions](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/config/RpcServiceOptions.java)（实际 RPC 调用需要的参数）和 [CapaSpiOptionsLoader](https://github.com/capa-cloud/capa-java/blob/master/sdk-spi/src/main/java/group/rxcloud/capa/spi/http/config/CapaSpiOptionsLoader.java)（加载 `RpcServiceOptions` 的接口）。
 
    例如 AwsRpcServiceOptions 和 AwsSpiOptionsLoader
 

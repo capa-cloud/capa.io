@@ -117,7 +117,6 @@ section = ["HTML", "print", "RSS"]
 
 [params]
 copyright = "The Capa Authors"
-privacy_policy = "https://policies.google.com/privacy"
 
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]
@@ -141,16 +140,15 @@ version = "0.0"
 url_latest_version = "https://github.com/capa-cloud/capa.io"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/capa-cloud/capa"
+github_repo = "https://github.com/capa-cloud/capa.io"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
 github_project_repo = "https://github.com/capa-cloud/capa"
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
 
-# Uncomment this if you have a newer GitHub repo with "main" as the default branch,
-# or specify a new value if you want to reference another branch in your GitHub links
-# github_branch= "main"
+# Branch containing the documentation source used by the edit and history links.
+github_branch = "master"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "d72aa9b2712488cc3"
@@ -188,8 +186,8 @@ sidebar_search_disable = false
 [params.ui.feedback]
 enable = false
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-yes = 'Glad to hear it! Please <a href="https://github.com/capa-cloud/capa-java/issues">tell us how we can improve</a>.'
-no = 'Sorry to hear that. Please <a href="https://github.com/capa-cloud/capa-java/issues">tell us how we can improve</a>.'
+yes = 'Glad to hear it! Please <a href="https://github.com/capa-cloud/capa.io/issues">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/capa-cloud/capa.io/issues">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page, 
@@ -224,8 +222,8 @@ url = "/docs/"
 weight = 10
 
 [[languages.en.menu.main]]
-name = "Blog"
-url = "/blog/"
+name = "Blog (中文)"
+url = "https://capa.rxcloud.group/blog/"
 weight = 20
 
 [[languages.en.menu.main]]

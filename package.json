@@ -1,7 +1,7 @@
 {
-  "name": "tech-doc-hugo",
+  "name": "capa-documentation",
   "version": "0.0.1",
-  "description": "Hugo theme for technical documentation.",
+  "description": "Source and build tooling for the Capa documentation site.",
   "main": "none.js",
   "scripts": {
     "dev": "make dev",
