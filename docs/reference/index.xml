@@ -1,7 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>参考手册 on Capa</title><link>https://capa.rxcloud.group/docs/reference/</link><description>Recent content in 参考手册 on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa.rxcloud.group/docs/reference/index.xml" rel="self" type="application/rss+xml"/><item><title>Parameter Reference</title><link>https://capa.rxcloud.group/docs/reference/parameter-reference/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/reference/parameter-reference/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>参考手册 on Capa</title><link>https://capa.rxcloud.group/docs/reference/</link><description>Recent content in 参考手册 on Capa</description><generator>Hugo</generator><language>zh</language><atom:link href="https://capa.rxcloud.group/docs/reference/index.xml" rel="self" type="application/rss+xml"/><item><title>版本与兼容性</title><link>https://capa.rxcloud.group/docs/reference/parameter-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/reference/parameter-reference/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Capa API 契约、SDK、运行时和云适配器分别发布。集成时应明确匹配版本，不要假设所有仓库共享同一个版本号。&lt;/p>
 
 &lt;/div>
 
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item></channel></rss>
+&lt;h2 id="当前文档版本">当前文档版本&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>组件&lt;/th>
+ &lt;th>版本或状态&lt;/th>
+ &lt;th>用途&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm">cloud-runtimes-jvm&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.19.RELEASE&lt;/code>&lt;/td>
+ &lt;td>JVM API 契约和部分运行时 adapter&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa-java">capa-java&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.11.13.2.RELEASE&lt;/code>&lt;/td>
+ &lt;td>Java 富 SDK&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa-java-aws">capa-java-aws&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.11.13.5.RELEASE&lt;/code>&lt;/td>
+ &lt;td>Capa Java 的 AWS SPI 模块&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-golang">cloud-runtimes-golang&lt;/a>&lt;/td>
+ &lt;td>接口规范&lt;/td>
+ &lt;td>Go API 契约，不包含运行时实现&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-python">cloud-runtimes-python&lt;/a>&lt;/td>
+ &lt;td>Alpha 源码 API&lt;/td>
+ &lt;td>修正后的制品发布前使用源码安装&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa">capa&lt;/a>&lt;/td>
+ &lt;td>实验性&lt;/td>
+ &lt;td>独立演进的 Go Sidecar/运行时&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="兼容规则">兼容规则&lt;/h2>
+&lt;ol>
+&lt;li>SDK 与 adapter 使用 adapter 仓库明确记录的版本组合。&lt;/li>
+&lt;li>确认所选 adapter 已实现应用实际调用的每个操作。&lt;/li>
+&lt;li>API 存在只表示契约已定义，不代表运行时已经支持。&lt;/li>
+&lt;li>上生产前针对目标中间件或云服务运行集成测试。&lt;/li>
+&lt;li>跨 minor 或 &lt;code>RELEASE&lt;/code> 后缀版本升级前检查发布说明和源码差异。&lt;/li>
+&lt;/ol>
+&lt;p>Java API 类型可从 &lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/tree/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes">&lt;code>cloud-runtimes-api&lt;/code> 源码&lt;/a>开始查阅；Java SDK 用法请参考 &lt;a href="https://github.com/capa-cloud/capa-java/tree/master/examples">capa-java examples&lt;/a>。&lt;/p></description></item></channel></rss>

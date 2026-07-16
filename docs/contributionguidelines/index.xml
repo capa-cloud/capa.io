@@ -97,7 +97,7 @@
 &lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt="">&lt;/p>
 &lt;h3 id="图片路径说明">图片路径说明&lt;/h3>
 &lt;p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。&lt;/p>
-&lt;p>文档中统一使用全路径来引用图片，Url前缀 &lt;a href="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images">https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images&lt;/a> 。&lt;/p>
+&lt;p>共享图片位于 &lt;a href="https://github.com/capa-cloud/capa.io/tree/master/content/images">&lt;code>content/images&lt;/code> 目录&lt;/a>。嵌入图片时请使用指向具体文件的完整 raw URL。&lt;/p>
 &lt;p>例如，引入下图的图片（contribution_file.png），Markdown写法如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span> ![&lt;span style="color:#204a87;font-weight:bold">Architecture&lt;/span>](&lt;span style="color:#c4a000">https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&lt;/span>)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>

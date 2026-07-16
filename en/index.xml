@@ -104,7 +104,62 @@
 &lt;ol>
 &lt;li>The RPC capabilities provided by CapaRpcClient require concrete implementation, as shown in the example &lt;a href="https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">DemoCapaHttp&lt;/a>.&lt;/li>
 &lt;li>After implementing DemoCapaHttp, it needs to be configured in &lt;a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/resources/capa-component-rpc.properties">capa-component-rpc.properties&lt;/a>, and loaded through the SPI mechanism.&lt;/li>
-&lt;/ol></description></item><item><title>Document Contribution Guide</title><link>https://capa.rxcloud.group/en/docs/contributionguidelines/document-contribution/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/en/docs/contributionguidelines/document-contribution/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;/ol></description></item><item><title>Versions and Compatibility</title><link>https://capa.rxcloud.group/en/docs/reference/parameter-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/en/docs/reference/parameter-reference/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Capa API contracts, SDKs, runtimes, and cloud adapters are released independently. Match versions at the integration boundary instead of assuming that every repository shares one version.&lt;/p>
+
+&lt;/div>
+
+&lt;h2 id="current-documented-versions">Current documented versions&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Component&lt;/th>
+ &lt;th>Version or status&lt;/th>
+ &lt;th>Purpose&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm">cloud-runtimes-jvm&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.19.RELEASE&lt;/code>&lt;/td>
+ &lt;td>JVM API contracts and partial runtime adapters&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa-java">capa-java&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.11.13.2.RELEASE&lt;/code>&lt;/td>
+ &lt;td>Java rich SDK&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa-java-aws">capa-java-aws&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.11.13.5.RELEASE&lt;/code>&lt;/td>
+ &lt;td>AWS SPI modules for Capa Java&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-golang">cloud-runtimes-golang&lt;/a>&lt;/td>
+ &lt;td>Interface specification&lt;/td>
+ &lt;td>Go API contracts; no bundled runtime implementation&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-python">cloud-runtimes-python&lt;/a>&lt;/td>
+ &lt;td>Alpha source API&lt;/td>
+ &lt;td>Install from source until a corrected package is published&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa">capa&lt;/a>&lt;/td>
+ &lt;td>Experimental&lt;/td>
+ &lt;td>Go sidecar/runtime with a separate implementation roadmap&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="compatibility-rules">Compatibility rules&lt;/h2>
+&lt;ol>
+&lt;li>Use the exact SDK and adapter versions documented by the adapter repository.&lt;/li>
+&lt;li>Confirm that the selected adapter implements every operation used by the application.&lt;/li>
+&lt;li>Treat API presence as a contract definition, not proof of runtime support.&lt;/li>
+&lt;li>Run integration tests against the target middleware or cloud service before production deployment.&lt;/li>
+&lt;li>Review release notes and source changes before upgrading across minor or release-suffix versions.&lt;/li>
+&lt;/ol>
+&lt;p>For Java API types, start with the &lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/tree/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes">&lt;code>cloud-runtimes-api&lt;/code> source&lt;/a>. For Java SDK usage, use the &lt;a href="https://github.com/capa-cloud/capa-java/tree/master/examples">capa-java examples&lt;/a>.&lt;/p></description></item><item><title>Document Contribution Guide</title><link>https://capa.rxcloud.group/en/docs/contributionguidelines/document-contribution/</link><pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/en/docs/contributionguidelines/document-contribution/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>This document describes how to contribute to the Capa documentation repository. The documentation is written in Markdown syntax and published to &lt;a href="https://github.com/capa-cloud/capa.io">capa-cloud/capa.io&lt;/a>.&lt;/p>
 
 &lt;/div>
@@ -135,10 +190,4 @@
 &lt;li>CloudX Configuration Service provides the actual configuration service&lt;/li>
 &lt;/ul>
 &lt;h2 id="api-design">API Design&lt;/h2>
-&lt;p>The design of the Capa Configuration API follows community standards:&lt;/p></description></item><item><title>Parameter Reference</title><link>https://capa.rxcloud.group/en/docs/reference/parameter-reference/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/en/docs/reference/parameter-reference/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-
-&lt;/div>
-
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Search Results</title><link>https://capa.rxcloud.group/en/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/en/search/</guid><description/></item></channel></rss>
+&lt;p>The design of the Capa Configuration API follows community standards:&lt;/p></description></item><item><title>Search Results</title><link>https://capa.rxcloud.group/en/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/en/search/</guid><description/></item></channel></rss>

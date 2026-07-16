@@ -201,7 +201,62 @@
 &lt;ol>
 &lt;li>CapaRpcClient 提供的 RPC 能力，需要具体实现，如示例 &lt;a href="https://github.com/capa-cloud/capa-java/blob/master/examples/src/main/java/group/rxcloud/capa/examples/rpc/DemoRpcClient.java">DemoCapaHttp&lt;/a> 。&lt;/li>
 &lt;li>实现后的DemoCapaHttp，需要在 &lt;a href="https://github.com/capa-cloud/capa-java/blob/master/sdk-spi-demo/src/main/resources/capa-component-rpc.properties">capa-component-rpc.properties&lt;/a> 中进行配置，通过SPI机制实现加载。&lt;/li>
-&lt;/ol></description></item><item><title>SDK-Java管理实践</title><link>https://capa.rxcloud.group/docs/tasks/sdk/sdk-java/</link><pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/tasks/sdk/sdk-java/</guid><description>&lt;p>Java SDK主要使用Maven进行管理，故以下内容主要基于Maven进行实践。&lt;/p>
+&lt;/ol></description></item><item><title>版本与兼容性</title><link>https://capa.rxcloud.group/docs/reference/parameter-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/reference/parameter-reference/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Capa API 契约、SDK、运行时和云适配器分别发布。集成时应明确匹配版本，不要假设所有仓库共享同一个版本号。&lt;/p>
+
+&lt;/div>
+
+&lt;h2 id="当前文档版本">当前文档版本&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>组件&lt;/th>
+ &lt;th>版本或状态&lt;/th>
+ &lt;th>用途&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm">cloud-runtimes-jvm&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.19.RELEASE&lt;/code>&lt;/td>
+ &lt;td>JVM API 契约和部分运行时 adapter&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa-java">capa-java&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.11.13.2.RELEASE&lt;/code>&lt;/td>
+ &lt;td>Java 富 SDK&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa-java-aws">capa-java-aws&lt;/a>&lt;/td>
+ &lt;td>&lt;code>1.11.13.5.RELEASE&lt;/code>&lt;/td>
+ &lt;td>Capa Java 的 AWS SPI 模块&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-golang">cloud-runtimes-golang&lt;/a>&lt;/td>
+ &lt;td>接口规范&lt;/td>
+ &lt;td>Go API 契约，不包含运行时实现&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-python">cloud-runtimes-python&lt;/a>&lt;/td>
+ &lt;td>Alpha 源码 API&lt;/td>
+ &lt;td>修正后的制品发布前使用源码安装&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://github.com/capa-cloud/capa">capa&lt;/a>&lt;/td>
+ &lt;td>实验性&lt;/td>
+ &lt;td>独立演进的 Go Sidecar/运行时&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="兼容规则">兼容规则&lt;/h2>
+&lt;ol>
+&lt;li>SDK 与 adapter 使用 adapter 仓库明确记录的版本组合。&lt;/li>
+&lt;li>确认所选 adapter 已实现应用实际调用的每个操作。&lt;/li>
+&lt;li>API 存在只表示契约已定义，不代表运行时已经支持。&lt;/li>
+&lt;li>上生产前针对目标中间件或云服务运行集成测试。&lt;/li>
+&lt;li>跨 minor 或 &lt;code>RELEASE&lt;/code> 后缀版本升级前检查发布说明和源码差异。&lt;/li>
+&lt;/ol>
+&lt;p>Java API 类型可从 &lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/tree/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes">&lt;code>cloud-runtimes-api&lt;/code> 源码&lt;/a>开始查阅；Java SDK 用法请参考 &lt;a href="https://github.com/capa-cloud/capa-java/tree/master/examples">capa-java examples&lt;/a>。&lt;/p></description></item><item><title>SDK-Java管理实践</title><link>https://capa.rxcloud.group/docs/tasks/sdk/sdk-java/</link><pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/tasks/sdk/sdk-java/</guid><description>&lt;p>Java SDK主要使用Maven进行管理，故以下内容主要基于Maven进行实践。&lt;/p>
 &lt;h1 id="动态加载不同的sdk实现包">动态加载不同的SDK实现包&lt;/h1>
 &lt;p>根据Capa设计，接入层面向API层的SDK进行编程，然后在运行时动态调用不同的实现层SDK。&lt;/p>
 &lt;h2 id="实现包如何加载到运行时空间">实现包如何加载到运行时空间？&lt;/h2>
@@ -276,44 +331,14 @@ A -&amp;gt; C -&amp;gt; X(2.0)&lt;/p></description></item><item><title>文档贡
 &lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png" alt="">&lt;/p>
 &lt;h3 id="图片路径说明">图片路径说明&lt;/h3>
 &lt;p>图片统一放在 content/images/ 目录下，其中图片目录结构与所引用的 md 文件的目录保持一致。需要选用清晰且与背景适配的图片。&lt;/p>
-&lt;p>文档中统一使用全路径来引用图片，Url前缀 &lt;a href="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images">https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images&lt;/a> 。&lt;/p>
+&lt;p>共享图片位于 &lt;a href="https://github.com/capa-cloud/capa.io/tree/master/content/images">&lt;code>content/images&lt;/code> 目录&lt;/a>。嵌入图片时请使用指向具体文件的完整 raw URL。&lt;/p>
 &lt;p>例如，引入下图的图片（contribution_file.png），Markdown写法如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span> ![&lt;span style="color:#204a87;font-weight:bold">Architecture&lt;/span>](&lt;span style="color:#c4a000">https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_file.png&lt;/span>)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>master 表示分支名&lt;/li>
 &lt;li>content/images/zh/docs/ContributionGuidelines/contribution_file.png 表示图片的相对路径&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt="">&lt;/p></description></item><item><title>Bed and Chair Metrics</title><link>https://capa.rxcloud.group/docs/tasks/beds/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/tasks/beds/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-
-&lt;/div>
-
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Configuring Ponycopters</title><link>https://capa.rxcloud.group/docs/tasks/ponycopters/configuring-ponycopters/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/tasks/ponycopters/configuring-ponycopters/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-
-&lt;/div>
-
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Launching Ponycopters</title><link>https://capa.rxcloud.group/docs/tasks/ponycopters/launching-ponycopters/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/tasks/ponycopters/launching-ponycopters/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-
-&lt;/div>
-
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Porridge Assessment</title><link>https://capa.rxcloud.group/docs/tasks/porridge/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/tasks/porridge/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-
-&lt;/div>
-
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Another Task</title><link>https://capa.rxcloud.group/docs/tasks/task/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/tasks/task/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-
-&lt;/div>
-
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>可视化</title><link>https://capa.rxcloud.group/blog/2024/11/11/%E5%8F%AF%E8%A7%86%E5%8C%96/</link><pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2024/11/11/%E5%8F%AF%E8%A7%86%E5%8C%96/</guid><description>&lt;h3 id="可视化重要吗">可视化重要吗？&lt;/h3>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/capa-cloud/capa.io/master/content/images/zh/docs/ContributionGuidelines/contribution_image.png" alt="">&lt;/p></description></item><item><title>可视化</title><link>https://capa.rxcloud.group/blog/2024/11/11/%E5%8F%AF%E8%A7%86%E5%8C%96/</link><pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/blog/2024/11/11/%E5%8F%AF%E8%A7%86%E5%8C%96/</guid><description>&lt;h3 id="可视化重要吗">可视化重要吗？&lt;/h3>
 &lt;p>可视化呈现方式对可观测性建设和维护尤为重要。&lt;/p>
 &lt;p>基于以往的经验，如果可视化系统使用费力度高，往往会导致开发人员维护意愿下降，恶性循环最终导致可观测性失去敏感度和荒废。&lt;/p>
 &lt;h3 id="可视化工具应该支持到什么程度">可视化工具应该支持到什么程度&lt;/h3>
@@ -6119,10 +6144,4 @@ Capa官方GitHub地址:&lt;a href="https://github.com/capa-cloud/capa-java">http
  &lt;td>&lt;a href="https://github.com/capa-cloud/cloud-runtimes-jvm/blob/master/cloud-runtimes-api/src/main/java/group/rxcloud/cloudruntimes/domain/core/invocation/InvokeMethodRequest.java">请求对象&lt;/a>&lt;/td>
  &lt;/tr>
  &lt;/tbody>
-&lt;/table></description></item><item><title>Parameter Reference</title><link>https://capa.rxcloud.group/docs/reference/parameter-reference/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/docs/reference/parameter-reference/</guid><description>&lt;div class="pageinfo pageinfo-primary">
-&lt;p>This is a placeholder page. Replace it with your own content.&lt;/p>
-
-&lt;/div>
-
-&lt;p>Text can be &lt;strong>bold&lt;/strong>, &lt;em>italic&lt;/em>, or &lt;del>strikethrough&lt;/del>. &lt;a href="https://gohugo.io">Links&lt;/a> should be blue with no underlines (unless hovered over).&lt;/p>
-&lt;p>There should be whitespace between paragraphs. Vape migas chillwave sriracha poutine try-hard distillery. Tattooed shabby chic small batch, pabst art party heirloom letterpress air plant pop-up. Sustainable chia skateboard art party banjo cardigan normcore affogato vexillologist quinoa meggings man bun master cleanse shoreditch readymade. Yuccie prism four dollar toast tbh cardigan iPhone, tumblr listicle live-edge VHS. Pug lyft normcore hot chicken biodiesel, actually keffiyeh thundercats photo booth pour-over twee fam food truck microdosing banh mi. Vice activated charcoal raclette unicorn live-edge post-ironic. Heirloom vexillologist coloring book, beard deep v letterpress echo park humblebrag tilde.&lt;/p></description></item><item><title>Search Results</title><link>https://capa.rxcloud.group/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/search/</guid><description/></item></channel></rss>
+&lt;/table></description></item><item><title>Search Results</title><link>https://capa.rxcloud.group/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://capa.rxcloud.group/search/</guid><description/></item></channel></rss>
