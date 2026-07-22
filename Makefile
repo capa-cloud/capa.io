@@ -39,7 +39,7 @@ deploy: check
 
 # Check for broken links
 link-check:
-	@./scripts/hugo.sh server --bind 127.0.0.1 --port 1313 >/tmp/capa-hugo.log 2>&1 & \
+	@./scripts/hugo.sh server --port 1313 >/tmp/capa-hugo.log 2>&1 & \
 	pid=$$!; \
 	trap 'kill $$pid 2>/dev/null || true' EXIT; \
 	sleep 3; \
