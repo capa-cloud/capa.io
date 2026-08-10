@@ -164,7 +164,7 @@ dapr 是社区中一款知名的 Runtime 实现产品，活跃度也比较高。
 
 #### 和Service Mesh共存
 
-> 参考资料：https://docs.dapr.io/concepts/service-mesh/#using-dapr-with-a-service-mesh
+> 参考资料：[Dapr 与 Service Mesh](https://docs.dapr.io/concepts/faq/service-mesh/)
 
 ![](https://docs.dapr.io/images/service-mesh.png)
 

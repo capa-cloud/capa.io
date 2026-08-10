@@ -8,7 +8,7 @@ description: >
 
 ### A、初始化
 
-> https://www.codetd.com/en/article/13249666#ServletContextListener_27
+> 参考：[ServletContextListener API](https://docs.oracle.com/javaee/7/api/javax/servlet/ServletContextListener.html)
 
 #### BeanPostProcessor
 

@@ -289,7 +289,7 @@ public interface Result extends Serializable {
 
 关键Invoker的逻辑：
 
-`AbstractInvoker`: 3个步骤，（PR：https://github.com/apache/dubbo/pull/7952）
+`AbstractInvoker`：3 个步骤（[PR #7952](https://github.com/apache/dubbo/pull/7952)）。
 
 具体逻辑在`doInvoke`中
 

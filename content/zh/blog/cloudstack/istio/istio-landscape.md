@@ -410,8 +410,6 @@ istio-iptables [flags]
    3. envoy配置变更后reload envoy
    4. envoy优雅退出
 
-![](https://i1.wp.com/www.do1618.com/wp-content/uploads/2019/02/pilot-agent-arch.png?w=625&ssl=1)
-
 #### status server
 
 [/pilot-agent/main/initStatusServer]
@@ -486,11 +484,7 @@ COMMIT
 
 ![](https://s3.51cto.com/images/blog/202107/05/0a6870bdc35c1961ccb914fa63751dfc.jpeg?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=)
 
-![](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/envoy-sidecar-traffic-interception-zh-20210818.png)
-
 ![](https://www.servicemesher.com/istio-handbook/images/envoy-traffic-route.jpg)
-
-![](https://jimmysong.io/blog/sidecar-injection-iptables-and-traffic-routing/iptables.jpg)
 
 ------
 
