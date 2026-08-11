@@ -13,8 +13,8 @@ linkTitle = "Capa"
       Capa.<br><em>The Cloud API Layer.</em>
     </h1>
     <p class="capa-hero__subtitle">
-      Multi-runtime SDK based on Mecha Architecture.<br>
-      Write once, run anywhere.
+      Standard APIs and replaceable SPIs isolate apps from infrastructure.<br>
+      Select and verify adapters for each target environment.
     </p>
     <div class="capa-hero__actions">
       <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" class="capa-btn capa-btn--primary">
@@ -32,13 +32,13 @@ linkTitle = "Capa"
 <section class="capa-arch">
   <div class="capa-reveal">
     <div class="capa-section-label">Architecture</div>
-    <h2 class="capa-section-title">Unified API. Decoupled infrastructure.</h2>
+    <h2 class="capa-section-title">Unified APIs. Isolated infrastructure differences.</h2>
     <p class="capa-section-desc">
-      Standard API + SPI plugin mechanism to fully decouple applications from cloud platforms.
+      Standard APIs and SPI plugins reduce direct application dependencies on specific cloud platforms.
     </p>
   </div>
   <div class="capa-arch__img capa-reveal capa-reveal-delay-1">
-    <img src="/images/homepage/architecture.png" alt="Capa layered architecture: App → Standard API → SPI Plugin → Multi-cloud" loading="lazy">
+    <img src="/images/homepage/architecture.png" alt="Capa layered architecture concept: apps, Standard API, SPI plugins, and target environments" loading="lazy">
   </div>
 </section>
 
@@ -48,7 +48,7 @@ linkTitle = "Capa"
     <div class="capa-section-label">Demo</div>
     <h2 class="capa-section-title">Seeing is believing.</h2>
     <p class="capa-section-desc">
-      Understand Capa's core concepts and cross-cloud capabilities in one minute.
+      Understand Capa's core concepts and current demo in one minute.
     </p>
   </div>
   <div class="capa-video__player capa-reveal capa-reveal-delay-1">
@@ -69,22 +69,22 @@ linkTitle = "Capa"
       <div class="capa-feature__icon" style="background: #e3f2fd; color: #1565c0;">
         <i class="fas fa-cloud"></i>
       </div>
-      <h3 class="capa-feature__title">Cross-Cloud Deploy</h3>
-      <p class="capa-feature__desc">One codebase, deploy to Alibaba Cloud, AWS, Tencent Cloud simultaneously — no business logic changes needed.</p>
+      <h3 class="capa-feature__title">Environment Adapters</h3>
+      <p class="capa-feature__desc">Applications target common APIs and select compatible SPIs per environment; actual support follows each adapter's documentation.</p>
     </div>
     <div class="capa-feature capa-reveal capa-reveal-delay-1">
       <div class="capa-feature__icon" style="background: #ede7f6; color: #6a1b9a;">
         <i class="fas fa-layer-group"></i>
       </div>
       <h3 class="capa-feature__title">Mecha Architecture</h3>
-      <p class="capa-feature__desc">Evolved from Service Mesh — offloads infrastructure capabilities to the SDK, so apps focus purely on business.</p>
+      <p class="capa-feature__desc">Replaceable SDK components isolate selected infrastructure differences while keeping an explicit in-process boundary.</p>
     </div>
     <div class="capa-feature capa-reveal capa-reveal-delay-2">
       <div class="capa-feature__icon" style="background: #e8f5e9; color: #2e7d32;">
         <i class="fas fa-code"></i>
       </div>
       <h3 class="capa-feature__title">Standard API</h3>
-      <p class="capa-feature__desc">Unified API layer supporting RPC, Configuration, Pub/Sub, State, and more capabilities.</p>
+      <p class="capa-feature__desc">Defines APIs for RPC, Configuration, Pub/Sub, State, and more; availability depends on the selected SDK and adapter.</p>
     </div>
   </div>
 </section>
@@ -93,7 +93,7 @@ linkTitle = "Capa"
 <section class="capa-article">
   <div class="capa-reveal" style="text-align: center;">
     <div class="capa-section-label" style="color: #2997ff;">Deep Dive</div>
-    <h2 class="capa-section-title" style="color: #f5f5f7;">Design philosophy & production practice.</h2>
+    <h2 class="capa-section-title" style="color: #f5f5f7;">Design philosophy & implementation boundaries.</h2>
     <p class="capa-section-desc" style="color: var(--apple-gray);">
       Explore Capa's architecture design and future direction.
     </p>
@@ -107,15 +107,15 @@ linkTitle = "Capa"
         <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/">Capa: Bridging Hybrid Cloud App Development</a>
       </h3>
       <p class="capa-article__excerpt">
-        From Service Mesh to Multi-Runtime — a deep dive into Mecha architecture's design philosophy. Learn how Capa achieves
-        cross-cloud deployment through Standard API + SPI plugins. Covering RPC, config center, messaging, observability and more.
+        From Service Mesh to Multi-Runtime, explore Capa's Standard API + SPI plugin mechanism and the implementation
+        boundaries around RPC, configuration, messaging, observability, and related capabilities.
       </p>
       <div class="capa-article__tags">
         <span class="capa-article__tag">Mecha Architecture</span>
         <span class="capa-article__tag">Cross-Cloud</span>
         <span class="capa-article__tag">API Design</span>
         <span class="capa-article__tag">Service Mesh</span>
-        <span class="capa-article__tag">Production</span>
+        <span class="capa-article__tag">Adapter Boundaries</span>
       </div>
       <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" class="capa-btn capa-btn--primary">
         Read Full Article <i class="fas fa-arrow-right"></i>
@@ -141,7 +141,7 @@ linkTitle = "Capa"
 <span style="color:#ff7b72;">CapaRpcClient</span> client = <span style="color:#79c0ff;">new</span> CapaRpcClientBuilder()
     .build();
 
-<span style="color:#8b949e;">// Invoke remote service — auto-adapts to cloud</span>
+<span style="color:#8b949e;">// Invoke remote service — selected SPI handles the target environment</span>
 Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMethod(
     <span style="color:#a5d6ff;">"service-app-id"</span>,
     <span style="color:#a5d6ff;">"hello"</span>,
@@ -155,7 +155,7 @@ Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMet
 <span style="color:#ff7b72;">String</span> response = result.block();</code></pre>
     </div>
     <div class="capa-reveal capa-reveal-delay-1">
-      <h3 class="capa-code__right-title">Rich Distributed Capabilities</h3>
+      <h3 class="capa-code__right-title">Designed API Areas</h3>
       <ul class="capa-code__list">
         <li><span class="check"><i class="fas fa-check-circle"></i></span> Service Invocation (RPC)</li>
         <li><span class="check"><i class="fas fa-check-circle"></i></span> Configuration Center</li>

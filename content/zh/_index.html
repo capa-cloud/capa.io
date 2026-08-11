@@ -13,8 +13,8 @@ linkTitle = "Capa"
       Capa.<br><em>云应用 API 层。</em>
     </h1>
     <p class="capa-hero__subtitle">
-      基于 Mecha 架构的多运行时 SDK。<br>
-      一次编写，随处运行。
+      以标准 API 和可替换 SPI 隔离应用与基础设施。<br>
+      按目标环境选择并验证适配实现。
     </p>
     <div class="capa-hero__actions">
       <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" class="capa-btn capa-btn--primary">
@@ -32,13 +32,13 @@ linkTitle = "Capa"
 <section class="capa-arch">
   <div class="capa-reveal">
     <div class="capa-section-label">架构</div>
-    <h2 class="capa-section-title">统一 API，解耦基础设施。</h2>
+    <h2 class="capa-section-title">统一 API，隔离基础设施差异。</h2>
     <p class="capa-section-desc">
-      通过标准 API + SPI 插件机制，让应用与云平台彻底解耦。
+      通过标准 API + SPI 插件机制，减少应用对具体云平台的直接依赖。
     </p>
   </div>
   <div class="capa-arch__img capa-reveal capa-reveal-delay-1">
-    <img src="/images/homepage/architecture.png" alt="Capa 分层架构：应用 → Standard API → SPI Plugin → 多云实现" loading="lazy">
+    <img src="/images/homepage/architecture.png" alt="Capa 分层架构示意：应用、Standard API、SPI Plugin 与目标环境" loading="lazy">
   </div>
 </section>
 
@@ -48,7 +48,7 @@ linkTitle = "Capa"
     <div class="capa-section-label">演示</div>
     <h2 class="capa-section-title">眼见为实。</h2>
     <p class="capa-section-desc">
-      一分钟了解 Capa 的核心理念与跨云能力。
+      一分钟了解 Capa 的核心理念与现有演示。
     </p>
   </div>
   <div class="capa-video__player capa-reveal capa-reveal-delay-1">
@@ -69,22 +69,22 @@ linkTitle = "Capa"
       <div class="capa-feature__icon" style="background: #e3f2fd; color: #1565c0;">
         <i class="fas fa-cloud"></i>
       </div>
-      <h3 class="capa-feature__title">跨云部署</h3>
-      <p class="capa-feature__desc">一套代码，同时部署到阿里云、AWS、腾讯云，无需修改业务逻辑。</p>
+      <h3 class="capa-feature__title">环境适配</h3>
+      <p class="capa-feature__desc">应用面向统一 API 编程，并按目标环境选择兼容的 SPI；实际能力以适配器说明为准。</p>
     </div>
     <div class="capa-feature capa-reveal capa-reveal-delay-1">
       <div class="capa-feature__icon" style="background: #ede7f6; color: #6a1b9a;">
         <i class="fas fa-layer-group"></i>
       </div>
       <h3 class="capa-feature__title">Mecha 架构</h3>
-      <p class="capa-feature__desc">基于 Service Mesh 演进，将基础设施能力下沉到 SDK，应用只需关注业务。</p>
+      <p class="capa-feature__desc">通过可替换 SDK 组件隔离部分基础设施差异，并保留清晰的应用内运行边界。</p>
     </div>
     <div class="capa-feature capa-reveal capa-reveal-delay-2">
       <div class="capa-feature__icon" style="background: #e8f5e9; color: #2e7d32;">
         <i class="fas fa-code"></i>
       </div>
       <h3 class="capa-feature__title">标准 API</h3>
-      <p class="capa-feature__desc">统一的 API 层，支持 RPC、Configuration、Pub/Sub、State 等能力。</p>
+      <p class="capa-feature__desc">定义 RPC、Configuration、Pub/Sub、State 等 API；可用性取决于所选 SDK 与适配器。</p>
     </div>
   </div>
 </section>
@@ -93,7 +93,7 @@ linkTitle = "Capa"
 <section class="capa-article">
   <div class="capa-reveal" style="text-align: center;">
     <div class="capa-section-label" style="color: #2997ff;">深度阅读</div>
-    <h2 class="capa-section-title" style="color: #f5f5f7;">设计哲学与生产实践。</h2>
+    <h2 class="capa-section-title" style="color: #f5f5f7;">设计哲学与实现边界。</h2>
     <p class="capa-section-desc" style="color: var(--apple-gray);">
       了解 Capa 的架构设计与未来方向。
     </p>
@@ -107,15 +107,15 @@ linkTitle = "Capa"
         <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/">Capa: 架起混合云应用开发的桥梁</a>
       </h3>
       <p class="capa-article__excerpt">
-        从 Service Mesh 到 Multi-Runtime，深入解析 Mecha 架构的设计哲学。了解 Capa 如何通过标准 API + SPI 插件机制，
-        实现一套代码跨云部署。涵盖 RPC、配置中心、消息队列、可观测性等核心能力设计。
+        从 Service Mesh 到 Multi-Runtime，了解 Capa 的标准 API + SPI 插件机制，
+        以及 RPC、配置中心、消息队列和可观测性等能力的设计与适配边界。
       </p>
       <div class="capa-article__tags">
         <span class="capa-article__tag">Mecha 架构</span>
         <span class="capa-article__tag">跨云部署</span>
         <span class="capa-article__tag">API 设计</span>
         <span class="capa-article__tag">Service Mesh</span>
-        <span class="capa-article__tag">生产实践</span>
+        <span class="capa-article__tag">适配边界</span>
       </div>
       <a href="/blog/2022/01/18/capa-mecha-sdk-of-cloud-application-api/" class="capa-btn capa-btn--primary">
         阅读全文 <i class="fas fa-arrow-right"></i>
@@ -141,7 +141,7 @@ linkTitle = "Capa"
 <span style="color:#ff7b72;">CapaRpcClient</span> client = <span style="color:#79c0ff;">new</span> CapaRpcClientBuilder()
     .build();
 
-<span style="color:#8b949e;">// 调用远程服务 — 自动适配云平台</span>
+<span style="color:#8b949e;">// 调用远程服务 — 由所选 SPI 处理目标环境</span>
 Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMethod(
     <span style="color:#a5d6ff;">"service-app-id"</span>,
     <span style="color:#a5d6ff;">"hello"</span>,
@@ -155,7 +155,7 @@ Mono&lt;<span style="color:#ff7b72;">String</span>&gt; result = client.invokeMet
 <span style="color:#ff7b72;">String</span> response = result.block();</code></pre>
     </div>
     <div class="capa-reveal capa-reveal-delay-1">
-      <h3 class="capa-code__right-title">丰富的分布式能力</h3>
+      <h3 class="capa-code__right-title">接口设计范围</h3>
       <ul class="capa-code__list">
         <li><span class="check"><i class="fas fa-check-circle"></i></span> 服务调用 (RPC)</li>
         <li><span class="check"><i class="fas fa-check-circle"></i></span> 配置中心 (Configuration)</li>
