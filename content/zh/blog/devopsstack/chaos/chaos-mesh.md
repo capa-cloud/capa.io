@@ -72,7 +72,7 @@ A：降级kubectl到和k8s server匹配的版本上
 
 ### C、ChaosMesh支持K8s的版本
 
-见 [各版本支持情况与版本时间表​](https://chaos-mesh.org/zh/docs/supported-releases/)
+见 [各版本支持情况与版本时间表](https://chaos-mesh.org/supported-releases/)。
 
 ---
 

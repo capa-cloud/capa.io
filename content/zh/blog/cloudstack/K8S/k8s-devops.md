@@ -26,8 +26,8 @@ description: >
 
 #### 3. pod调试
 
-+ https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-running-pod/
-+ https://kubernetes.io/zh/docs/tasks/debug-application-cluster/debug-application/#debugging-pods
++ https://kubernetes.io/zh-cn/docs/tasks/debug/debug-application/debug-running-pod/
++ https://kubernetes.io/zh-cn/docs/tasks/debug/debug-application/debug-pods/
 ---------
 
 ### B、动态伸缩

@@ -6,7 +6,6 @@ description: >
     Femas Landscape.
 ---
 
-> 参考文档：http://femas.io/doc/
+> 历史项目参考：[Tencent/Femas](https://github.com/Tencent/Femas)
 
 ## API设计启发
-
